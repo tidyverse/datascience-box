@@ -1,0 +1,63 @@
+---
+title: "01 - Welcome to Data Science"
+author: "Mine Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta112-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+
+class: center, middle
+
+# What is Data Science?
+
+---
+
+class: center, middle
+
+# Examples
+
+---
+
+## Trump tweets
+
+Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
+
+[Blog post](http://varianceexplained.org/r/trump-tweets/)
+
+---
+
+## Mapping Harvey
+
+Map of current weather alerts for Texas Gulf Coast area, made with R pkgs leaflet & weatherAlerts
+
+[Source code](https://gist.github.com/ianmcook/c75bb81011276c23441b9048656e2e76)
+
+---
+
+## Wearables
+
+[add wearables post]
+
+---
+
+class: center, middle
+
+# Activity
+
+---
+
+## How would you assess this claim?
+
+[Use article headline -- think through how to collect data, what to do with it, what questions to ask, etc.]
