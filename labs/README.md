@@ -1,6 +1,5 @@
 # Labs
 
-Lab 00: Logistics
 Lab 01: Hello R!
 Lab 02: Data wrangling and visualization
 Lab 03: Visualizing data over space and time
