@@ -1,10 +1,11 @@
 ---
-title: "01 - Welcome to Data Science"
-author: "Mine Çetinkaya-Rundel"
+title: "Welcome to Data Science"
+author: "Dr. Çetinkaya-Rundel"
+date: "2018-01-10"
 output:
   xaringan::moon_reader:
     css: "../slides.css"
-    logo: img/sta112-hex.png
+    logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -13,51 +14,353 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+library(knitr)
+opts_chunk$set(fig.height = 2.65, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+# For nonsese...
+library(emo)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+class: center, middle
+
+# Hello world!
+
+---
+
+## What is data science?
+
+- <i class="fa fa-database fa-10x"></i> + <i class="fa fa-flask fa-10x"></i> = data science?
+
+--
+
+- <i class="fa fa-database fa-10x"></i> + <i class="fa fa-code fa-10x"></i> = data science?
+
+--
+
+- <i class="fa fa-database fa-10x"></i> + <i class="fa fa-user fa-10x"></i> + <i class="fa fa-code fa-10x"></i> = data science?
+
+--
+
+- <i class="fa fa-database fa-10x"></i> + <i class="fa fa-users fa-10x"></i> + <i class="fa fa-code fa-10x"></i> = data science?
+
+--
+
+<br>
+
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. We're going to learn to do this in a `tidy` way -- more on that later!
+
+---
+
+## Who am I?
+
+Mine Çetinkaya-Rundel
+
+<i class="fa fa-envelope"></i> &nbsp; [mine@stat.duke.edu](mailto:mine@stat.duke.edu) <br>
+<i class="fa fa-home"></i> &nbsp; [stat.duke.edu/~mc301](http://www2.stat.duke.edu/courses/Spring18/Sta199/) <br>
+<i class="fa fa-university"></i> &nbsp; [213 Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tue 11:00 - 12:30 and Thur 10:00 - 11:30
+
+---
+
+## Who else is involved?
+
+.pull-left[
+[Peter Hase](https://www.linkedin.com/in/peter-hase-8092a6b9/) 
+
+<i class="fa fa-envelope"></i> &nbsp; [peter.hase@duke.edu](mailto:peter.hase@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tue Sun 1:00 - 3:00
+
+<br><br>
+
+[Walker Harrison](https://www.linkedin.com/in/walker-harrison-11a36b6b/)
+
+<i class="fa fa-envelope"></i> &nbsp; [walker.harrison@duke.edu](mailto:walker.harrison@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Tue 10:00 - 11:00 and 1:30-2:30
+]
+
+.pull-right[
+[Gary Larson](http://garylarson.weebly.com/)
+
+<i class="fa fa-envelope"></i> &nbsp; [gary.larson@duke.edu](mailto:gary.larson@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Mon 12:00 - 2:00
+
+<br><br>
+
+[Sarah Sibley](https://www.linkedin.com/in/sarah-sibley-3bb171ba/)
+
+<i class="fa fa-envelope"></i> &nbsp; [sarah.sibley@duke.edu](mailto:sarah.sibley@duke.edu) <br>
+<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
+<i class="fa fa-calendar"></i> &nbsp; Sat 12:00 - 2:00
+]
+
+---
+
+# What is this course?
+
+Everything you want to know about the course, and everything you will need for the course will be posted at
+
+[bit.ly/sta199-s18](http://bit.ly/sta199-s18)
+
+--
+
+- Will we be doing computing? Yes.
+
+--
+
+- Is this an intro CS course? No, but many themes are shared.
+
+--
+
+- Is this an intro stat course? Yes, but it's not your high school statistics course.
+
+--
+
+- What computing language will we learn? R.
+
+--
+
+- Why not language X? We can discuss that over `r emo::ji("coffee")`.
+
+
 ---
 
 class: center, middle
 
-# What is Data Science?
+# Data in the wild
+
+---
+
+# A year as told by fitbit
+
+by Nick Strayer
+
+http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
+
+---
+
+# R-Ladies global tour
+
+by Maelle Salmon
+
+http://www.masalmon.eu/2017/10/06/globalrladiestour/
+
+---
+
+# Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
+
+by David Robinson (Stack Overflow)
+
+http://varianceexplained.org/r/trump-tweets/
 
 ---
 
 class: center, middle
 
-# Examples
+# Your turn!
 
 ---
 
-## Trump tweets
+## Create a GitHub account
 
-Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
+Go to https://github.com/, and create an account (unless you already have one). Tips for selecting a username:<sup>1</sup>
 
-[Blog post](http://varianceexplained.org/r/trump-tweets/)
+- Incorporate your actual name! People like to know who they’re dealing with. Also makes your username easier for people to guess or remember.
+- Reuse your username from other contexts if you can, e.g., Twitter or Slack.
+- Pick a username you will be comfortable revealing to your future boss.
+- Shorter is better than longer.
+- Be as unique as possible in as few characters as possible. In some settings GitHub auto-completes or suggests usernames.
+- Make it timeless. Don’t highlight your current university, employer, or place of residence.
+- Avoid words laden with special meaning in programming, like `NA`.
+
+.footnote[ [1] Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan.]
+
+<font color="#E34132">
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+</font>
 
 ---
 
-## Mapping Harvey
+## Join RStudio.cloud
 
-Map of current weather alerts for Texas Gulf Coast area, made with R pkgs leaflet & weatherAlerts
+Go to [bit.ly/sta199-f18-rstudio-join](http://bit.ly/sta199-f18-rstudio-join), and log in with your GitHub credentials.
 
-[Source code](https://gist.github.com/ianmcook/c75bb81011276c23441b9048656e2e76)
-
+<font color="#E34132">
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+</font>
 ---
 
-## Wearables
+## Create your first data visualization
 
-[add wearables post]
+- Once you log on to RStudio Cloud, click on this course's workspace "STA 199 - Spring 18"
+- You should see a project called UN Votes, fork it by clicking on the <i class="fa fa-fork"></i> icon. This will create your copy of the project and launch it.
+- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
+- Then change the country names to those you're interested in. Your spelling and capitalization should match the data so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
 
+<font color="#E34132">
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+</font>
 ---
 
 class: center, middle
 
-# Activity
+# Course structure and policies
 
 ---
 
-## How would you assess this claim?
+## Class meetings
 
-[Use article headline -- think through how to collect data, what to do with it, what questions to ask, etc.]
+- Interactive
+
+- Some lectures, lots of learn-by-doing
+
+- Bring your laptop to class every day
+
+---
+
+## Diversity & Inclusiveness:
+
+- Intent: Students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
+
+- If you have a name and/or set of pronouns that differ from those that appear in your official Duke records, please let me know!
+
+- If you feel like your performance in the class is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
+
+- I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
+
+---
+
+## How to get help
+
+- Course content, logistics, etc. discussion via GitHub on the [Sta199-S18/community](https://github.com/Sta199-S18/community) repository. Note that this is a public discussion forum, which means others outside of the course can stumble upon it and help you as well.
+    - See course syllabus for tips on posting questions.
+
+- For personal and grade related questions, use email.
+
+---
+
+## Academic integrity
+
+> To uphold the Duke Community Standard:
+
+> - I will not lie, cheat, or steal in my academic endeavors;
+> - I will conduct myself honorably in all my endeavors; and
+> - I will act if the Standard is compromised.
+
+- Only work that is clearly assigned as team work can be completed collaboratively.
+
+- Use of disallowed materials during the take home exam will not be tolerated.
+
+---
+
+## Sharing/reusing code
+
+- I am well aware that a huge volume of code is available on the web to solve any number of problems.
+- Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). 
+- Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. 
+- On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. 
+- Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team. 
+- On the take home exams all communication with classmates is explicitly forbidden.
+
+---
+
+## Course components:
+
+- Teams: 3-4 person teams, based on survey and pretest results, consistent throughout the semester
+- Application exercises: Usually start in class and finish in teams by the next class period, check/no check
+- Homework: Individual, lowest score dropped
+- Lab: Team, lowest score dropped
+- Exams: Individual, two take home midterms
+- Final project: Team, presentations during scheduled final exam time (last day of finals!), you must participate in the project and be in class to present to pass this class
+- Self paced tutorials: Individual, check/no check, extra credit
+
+---
+
+## Grading
+
+Component             | Weight
+----------------------|----------------
+Participation & application exercises       | 10%
+Peer evaluation       | 5%
+Homework              | 20%
+Labs                  | 15%
+Midterm 1             | 17.5%
+Midterm 2             | 17.5%
+Final project         | 15%
+
+- Class attendance is a firm expectation; frequent absences or tardiness 
+will be considered a legitimate cause for grade reduction.
+
+- Exact ranges for letter grades will be curved and cutoffs will be 
+determined after the final exam.
+
+- The more evidence there is that the class has mastered the material, the 
+more generous the curve will be.
+
+---
+
+## Excused absences
+
+- Students who miss class due to a scheduled varsity trip, religious 
+holiday or short-term illness should fill out an online NOVAP, RHoliday or 
+short-term illness form respectively.
+    - Excused absences do not excuse you from assigned homework, it is your responsibility to make alternative arrangements to turn in any assignments in a timely fashion.
+
+- If you cannot complete an assignment on the due date due to a short-term 
+illness, you have until noon the following day to complete it at no 
+penalty, then the regular late work policy kicks in.
+
+- If you are faced with a personal or family emergency or a long-range or 
+chronic health condition that interferes with your ability to attend or 
+complete classes, you should contact your academic dean’s office. See more 
+information on policies surrounding these conditions 
+at https://trinity.duke.edu/undergraduate/academic-policies/personal-emergencies. 
+Your academic dean can also provide more information.
+
+---
+
+## Late/missed work policy
+
+- Late work policy for homework assignments:
+    - late, but within 24 hours of due date/time: -20%
+    - any later: no credit
+    
+- Late work will not be accepted for take home midterms and the final project.
+
+- Exam dates cannot be changed and no make-up exams will be given. If a midterm exam must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the final exam score. This policy only applies to the midterms.
+
+- You must complete the final project and be in class to present it in order to pass this course.
+
+---
+
+## Other policies
+
+- Please refrain from texting or using your computer for anything other than coursework during class.
+
+- You must be in class on a day when you're scheduled to present, there are no make ups for presentations.
+
+- Regrade requests must be made within 3 days of when the assignment is returned, and must be submitted via the linked form on the course syllabus.

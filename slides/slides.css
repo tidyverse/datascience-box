@@ -4,14 +4,17 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
-body { font-family: 'Lato', sans-serif; }
+body { 
+  font-family: 'Lato', sans-serif; 
+  color: #333333;
+}
 h1, h2, h3 {
   font-family: 'Lato';
   font-weight: bold;
-  color: #425460;
+  color: #6CA0DC;
 }
 a, a > code {
-  color: #425460;
+  color: #6CA0DC;
   text-decoration: none;
 }
 
@@ -28,7 +31,7 @@ a, a > code {
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {
-  background-color: #425460;
+  background-color: #6CA0DC;
   color: #ffffff;
   /* text-shadow: 0 0 20px #333; */
 }
@@ -68,7 +71,7 @@ li{
   margin: 10px 0;
 }
 .question {
-    background-color: #e6eff4;
+    background-color: #E1ECF8;
     padding: 10px;
 }
 .large { font-size: 130% }
@@ -98,4 +101,16 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     top: 0 !important;
     left: 0 !important;
   }
+}
+
+.remark-slide-content:after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    right: 810px;
+    height: 70px;
+    width: 81px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("img/sta199-logo-hex.png");
 }
