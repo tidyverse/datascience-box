@@ -1,6 +1,5 @@
 ---
 title: "Lab 01 - Hello R!"
-date: "2018-01-18"
 output: 
   tint::tintHtml:
     highlight: pygments

@@ -1,6 +1,5 @@
 ---
 title: "Lab 02 - Data wrangling and visualization"
-date: "2018-01-18"
 output: 
   tint::tintHtml:
     highlight: pygments
