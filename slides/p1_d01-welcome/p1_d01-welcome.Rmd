@@ -1,11 +1,9 @@
 ---
 title: "Welcome to Data Science"
-author: "Dr. Çetinkaya-Rundel"
-date: "2018-01-10"
+author: ""
 output:
   xaringan::moon_reader:
-    css: "../slides.css"
-    logo: img/sta199-logo-hex.png
+    css: slides.css
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -39,7 +37,6 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(rvest)
 ```
 
 class: center, middle

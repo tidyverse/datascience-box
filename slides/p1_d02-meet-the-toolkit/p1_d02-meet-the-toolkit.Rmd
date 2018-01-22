@@ -1,11 +1,9 @@
 ---
 title: "Meet the toolkit"
-author: "Dr. Çetinkaya-Rundel"
-date: "2018-01-17"
+author: ""
 output:
   xaringan::moon_reader:
     css: "slides.css"
-    logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
       highlightStyle: github

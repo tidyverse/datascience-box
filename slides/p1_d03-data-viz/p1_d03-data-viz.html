@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visualizing data</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualizing data
+
+---
+
+
+
+
+
+
+## Catch up
+
+- Any questions on material from last time?
+
+- Any questions on the lab?
+
+- Any questions on workflow / course structure?
+    
+- Catch up on informal "requirements":
+    + Add your name (first and last) to your GitHub profile, ideally add your 
+    photo as well
+    + Similarly, add your name (first and last) to your RStudio.Cloud profile 
+    as well
+    
+- Tips for asking questions via GitHub issues
+
+---
+
+## Agenda
+
+- Exploratory data analysis
+- Data visualization
+- Visualizing Star Wars
+- Aesthetics
+- Faceting
+- Identifying variables
+- Visualizing numerical data
+- Visualizing categorical data
+
+---
+
+class: center, middle
+
+# Exploratory data analysis
+
+---
+
+## What is EDA?
+
+- Exploratory data analysis (EDA) is an aproach to analyzing data sets to summarize its main characteristics.
+
+- Often, this is visual. That's what we're focusing on today.
+
+- But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the 
+analysis. That's what we'll focus on on Thursday.
+
+---
+
+class: center, middle
+
+# Data visualization
+
+---
+
+## Data visualization
+
+&gt; *"The simple graph has brought more information to the data analyst’s mind than any other device." — John Tukey*
+
+- Data visualization is the creation and study of the visual representation of data.
+
+- There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations (**ggplot2** is one of them, and that's the one we're going to use).
+
+---
+
+## ggplot2, part of the tidyverse
+
+- ggplot2 is a data visualization package, that is part of the tidyverse 
+suite of packages
+
+- To use ggplot2 functions, first load tidyverse
+
+```r
+library(tidyverse)
+```
+
+- In ggplot2 the structure of the code for plots can often be summarized as
+
+```r
+ggplot + 
+  geom_xxx
+```
+
+or, more precisely
+.small[
+
+```r
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+]
+
+- Geoms, short for geometric objects, describe the type of plot you will produce
+
+---
+
+## About ggplot2
+
+- ggplot2 is the name of the package
+- The `gg` in "ggplot2" stands for Grammar of Graphics
+- Inspired by the book **Grammar of Graphics** by Leland Wilkinson
+- `ggplot()` is the main function in ggplot2
+- For help with the ggplot2, see http://ggplot2.tidyverse.org/
+
+---
+
+class: center, middle
+
+# Visualizing Star Wars
+
+---
+
+## Dataset terminology
+
+&lt;div class="question"&gt;
+What does each row represent? What does each column represent?
+&lt;/div&gt;
+
+
+```r
+starwars
+```
+
+```
+## # A tibble: 87 x 13
+##                  name height  mass    hair_color  skin_color eye_color
+##                 &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;         &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;
+##  1     Luke Skywalker    172    77         blond        fair      blue
+##  2              C-3PO    167    75          &lt;NA&gt;        gold    yellow
+##  3              R2-D2     96    32          &lt;NA&gt; white, blue       red
+##  4        Darth Vader    202   136          none       white    yellow
+##  5        Leia Organa    150    49         brown       light     brown
+##  6          Owen Lars    178   120   brown, grey       light      blue
+##  7 Beru Whitesun lars    165    75         brown       light      blue
+##  8              R5-D4     97    32          &lt;NA&gt;  white, red       red
+##  9  Biggs Darklighter    183    84         black       light     brown
+## 10     Obi-Wan Kenobi    182    77 auburn, white        fair blue-gray
+## # ... with 77 more rows, and 7 more variables: birth_year &lt;dbl&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+---
+
+## Luke Skywalker
+
+![luke-skywalker](img/luke-skywalker.png)
+
+---
+
+## What's in the Star Wars data?
+
+Take a `glimpse` at the data: 
+
+```r
+glimpse(starwars)
+```
+
+```
+## Observations: 87
+## Variables: 13
+## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", ...
+## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188...
+## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 8...
+## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "b...
+## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "l...
+## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue",...
+## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0...
+## $ gender     &lt;chr&gt; "male", NA, NA, "male", "female", "male", "female",...
+## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alder...
+## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human...
+## $ films      &lt;list&gt; [&lt;"Revenge of the Sith", "Return of the Jedi", "Th...
+## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;,...
+## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Adva...
+```
+
+---
+
+## What's in the Star Wars data?
+
+Run the following **in the Console** to view the help
+
+```r
+?starwars
+```
+
+![starwars-help](img/starwars-help.png)
+
+&lt;div class="question"&gt;
+How many rows and columns does this dataset have? What does each row represent? What does each column represent?
+&lt;/div&gt;
+
+
+&lt;div class="question"&gt;
+Make a prediction: What relationship do you expect to see between height and mass?
+&lt;/div&gt;
+
+---
+
+## Mass vs. height
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point()
+```
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+## What's that warning?
+
+- Not all characters have height and mass information (hence 28 of them not plotted)
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
+- Going forward I'll supress the warning to save room on slides, but it's important to note it
+
+---
+
+## Mass vs. height
+
+&lt;div class="question"&gt;
+How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby character?
+&lt;/div&gt;
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+## Jabba!
+
+&lt;img src="img/jabbaplot.png" width="768" /&gt;
+
+---
+
+## Additional variables
+
+Can display additional variables with
+
+- aesthetics (like shape, colour, size), or
+
+- faceting (small multiples displaying different subsets)
+
+---
+
+class: center, middle
+
+# Aesthetics
+
+---
+
+## Aesthetics options
+
+Visual characteristics of plotting characters that can be **mapped to data** are
+
+- `color`
+
+- `size`
+
+- `shape`
+
+- `alpha` (transparency)
+
+---
+
+## Mass vs. height + gender
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
+  geom_point()
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Aesthetics summary
+
+- Continuous variable are measured on a continuous scale
+- Discrete variables are measured (or often counted) on a discrete scale
+
+aesthetics    | discrete     | continuous
+------------- | ------------ | ------------
+color         | rainbow of colors | gradient
+size          | discrete steps    | linear mapping between radius and value
+shape         | different shape for each | shouldn't (and doesn't) work
+
+---
+
+class: center, middle
+
+# Faceting
+
+---
+
+## Faceting options
+
+- Smaller plots that display different subsets of the data
+
+- Useful for exploring conditional relationships and large data
+
+---
+
+## Mass vs. height by gender
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  facet_grid(. ~ gender) +
+  geom_point()
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Dive further...
+
+&lt;div class="question"&gt;
+In the next few slides describe what each plot displays. Think about
+how the code relates to the output.
+&lt;/div&gt;
+
+---
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_grid(gender ~ .)
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_grid(. ~ gender)
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_wrap(~ eye_color)
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+## Facet summary
+
+- `facet_grid()`: 2d grid, `rows ~ cols`, `.` for no split
+
+- `facet_wrap()`: 1d ribbon wrapped into 2d
+
+---
+
+## Height vs. mass, take 2
+
+&lt;div class="question"&gt;
+How are these plots similar? How are they different?
+&lt;/div&gt;
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+## `geom_smooth`
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_smooth(se = FALSE) +
+  xlim(80, 250) +
+  ylim(0, 1400)
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+# Identifying variables
+
+---
+
+## Number of variables involved
+
+* Univariate data analysis - distribution of single variable
+
+* Bivariate data analysis - relationship between two variables
+
+* Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
+
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: center, middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+* shape:
+    * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    * modality: unimodal, bimodal, multimodal, uniform
+* center: mean (`mean`), median (`median`), mode (not always useful)
+* spead: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+* unusal observations
+
+---
+
+## Histograms
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_histogram(binwidth = 10)
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_bin).
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Density plots
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_density()
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_density).
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Side-by-side box plots
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+]
+
+---
+
+class: center, middle
+
+# Visualizing categorical data
+
+---
+
+## Bar plots
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = gender)) +
+  geom_bar()
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Segmented bar plots, counts
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar()
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Segmented bar plots, proportions
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar(position = "fill") +
+  labs(y = "proportion")
+```
+
+![](p1_d03-data-viz_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Which bar plot is more appropriate?
+
+&lt;div class="question"&gt;
+Which of the previous two bar plots is a more useful representation for visualizing the relationship between gender and hair color?
+&lt;/div&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
