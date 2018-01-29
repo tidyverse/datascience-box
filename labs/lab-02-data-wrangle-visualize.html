@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+<meta name="date" content="2018-01-18" />
 
 <title>Lab 02 - Data wrangling and visualization</title>
 
@@ -67,9 +68,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Lab 02 - Data wrangling and visualization</h1>
+<h4 class="date">2018-01-18</h4>
 
 
 
+<style>
+pre { 
+  width: 100%;
+  overflow-x: auto; 
+}
+</style>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>A note on expectations: </strong> For each exercise and on your own question you answer include any relevant output (tables, summary statistics, plots) in your answer. Doing this is easy! Just place any relevant R code in a code chunk, and hit Knit HTML.</span></span></p>
@@ -80,10 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="getting-started" class="section level1">
 <h1>Getting started</h1>
 <ul>
-<li><p>Make sure that you have a team name.</p></li>
-<li><p>Pick one team member to be the first person to click on the assignment link. This person will enter your team name as they accept the invitation.</p></li>
-<li><p>Once their repo is set up, the remaining team members can also accept their assignments and join their team. This gives everyone in a given team the right to push to that single repo.</p></li>
-<li><p>On GitHub, click on the green <strong>Clone or download</strong> button, select <strong>Use HTTPS</strong> (this might already be selected by default, and if it is, you’ll see the text <strong>Clone with HTTPS</strong> as in the image below). Click on the clipboard icon to copy the repo URL.</p></li>
+<li><p>Go to the course organization on GitHub: <a href="https://github.com/Sta199-S18" class="uri">https://github.com/Sta199-S18</a>.</p></li>
+<li><p>Find the repo starting with <code>lab-02</code> and that has your team name at the end (this should be the only <code>lab-02</code> repo available to you).</p></li>
+<li><p>In the repo, click on the green <strong>Clone or download</strong> button, select <strong>Use HTTPS</strong> (this might already be selected by default, and if it is, you’ll see the text <strong>Clone with HTTPS</strong> as in the image below). Click on the clipboard icon to copy the repo URL.</p></li>
 <li><p>Go to RStudio Cloud and into the course workspace. Create a <strong>New Project from Git Repo</strong>. You will need to click on the down arrow next to the <strong>New Project</strong> button to see this option.</p></li>
 <li><p>Copy and paste the URL of your assignment repo into the dialog box:</p></li>
 <li><p>Hit OK, and you’re good to go!</p></li>
@@ -257,8 +264,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>In the next section we aim to answer these questions.</p>
 </div>
-<div id="data-wranling-and-visualization" class="section level1">
-<h1>Data wranling and visualization</h1>
+<div id="data-wrangling-and-visualization" class="section level1">
+<h1>Data wrangling and visualization</h1>
 <div id="which-major-has-the-lowest-unemployment-rate" class="section level2">
 <h2>Which major has the lowest unemployment rate?</h2>
 <p>In order to answer this question all we need to do is sort the data. We use the <code>arrange</code> function to do this, and sort it by the <code>unemployment_rate</code> variable. By default <code>arrange</code> sorts in ascending order, which is what we want here – we’re interested in the major with the <em>lowest</em> unemployment rate.</p>
