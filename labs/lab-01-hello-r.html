@@ -70,6 +70,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
+<style>
+pre { 
+  width: 100%;
+  overflow-x: auto; 
+}
+.ex {
+  color: #878787;
+}
+h1, h2, h3 {
+  color: #6CA0DC;
+}
+</style>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">R is the name of the programming language itself and RStudio is a convenient interface.</span></span></p>
@@ -209,21 +221,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">count</span>(dataset) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">print</span>(<span class="dv">13</span>)</code></pre></div>
 <pre><code>## # A tibble: 13 x 2
-##       dataset     n
-##         &lt;chr&gt; &lt;int&gt;
-##  1       away   142
-##  2   bullseye   142
-##  3     circle   142
-##  4       dino   142
-##  5       dots   142
-##  6    h_lines   142
+##    dataset        n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 away         142
+##  2 bullseye     142
+##  3 circle       142
+##  4 dino         142
+##  5 dots         142
+##  6 h_lines      142
 ##  7 high_lines   142
 ##  8 slant_down   142
-##  9   slant_up   142
-## 10       star   142
-## 11    v_lines   142
+##  9 slant_up     142
+## 10 star         142
+## 11 v_lines      142
 ## 12 wide_lines   142
-## 13    x_shape   142</code></pre>
+## 13 x_shape      142</code></pre>
 <p><label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle"><span class="marginnote"><span style="display: block;">Matejka, Justin, and George Fitzmaurice. “Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing.” Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.</span></span></p>
 <p>The original Datasaurus (<code>dino</code>) was created by Alberto Cairo in <a href="http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html">this great blog post</a>. The other Dozen were generated using simulated annealing and the process is described in the paper <em>Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics</em> through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets that the same summary statistics to the Datasaurus but have very different distributions.</p>
 </div>
@@ -252,9 +264,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dino_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">r =</span> <span class="kw">cor</span>(x, y))</code></pre></div>
 <pre><code>## # A tibble: 1 x 1
-##             r
-##         &lt;dbl&gt;
-## 1 -0.06447185</code></pre>
+##         r
+##     &lt;dbl&gt;
+## 1 -0.0645</code></pre>
 <p><em>This is a good place to pause, commit changes with the commit message “Added answer for Ex 2”, and push.</em></p>
 <p><strong>Exercise 3:</strong> Plot <code>y</code> vs. <code>x</code> for the <code>star</code> dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between <code>x</code> and <code>y</code> for this dataset. How does this value compare to the <code>r</code> of <code>dino</code>?</p>
 <p><em>This is another good place to pause, commit changes with the commit message “Added answer for Ex 3”, and push.</em></p>

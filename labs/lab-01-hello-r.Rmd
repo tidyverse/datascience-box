@@ -6,6 +6,19 @@ output:
 link-citations: yes
 ---
 
+<style>
+pre { 
+  width: 100%;
+  overflow-x: auto; 
+}
+.ex {
+  color: #878787;
+}
+h1, h2, h3 {
+  color: #6CA0DC;
+}
+</style>
+
 ```{r include=FALSE}
 library(tidyverse)
 library(datasauRus)
