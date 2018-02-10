@@ -1,28 +1,15 @@
 ---
 title: "Lab 02 - Data wrangling and visualization"
-date: "2018-01-18"
 output: 
-  tint::tintHtml:
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
     highlight: pygments
+    css: lab.css
 link-citations: yes
 ---
 
-<style>
-pre { 
-  width: 100%;
-  overflow-x: auto; 
-}
-.ex {
-  color: #878787;
-}
-h1, h2, h3 {
-  color: #6CA0DC;
-}
-</style>
-
 ```{r include=FALSE}
 library(tidyverse)
-library(tint)
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
@@ -265,7 +252,7 @@ consistent?", you're right...
 You don't need to do both of these, that would be redundant. The next exercise 
 asks you to choose one.
 
-**Exercise 1:** Which of these options, changing the input data or altering the 
+1. Which of these options, changing the input data or altering the 
 number of digits displayed without touching the input data, is the better option? 
 Explain your reasoning. Then, implement the option you chose.
 
@@ -285,7 +272,7 @@ college_recent_grads %>%
   select(rank, major, unemployment_rate)
 ```
 
-**Exercise 2:** Using what you've learned so far, arrange the data in descending order with respect to proportion of women in a major, and display only the major,
+2. Using what you've learned so far, arrange the data in descending order with respect to proportion of women in a major, and display only the major,
 the total number of people with major, and proportion of women. Show only the 
 top 3 majors by adding `head(3)` at the end of the pipeline.
 
@@ -299,7 +286,7 @@ There are three types of incomes reported in this data frame: `p25th`, `median`,
 and `p75th`. These correspond to the 25th, 50th, and 75th percentiles of the 
 income distribution of sampled individuals for a given major.
 
-**Exercise 3:** Why do we often choose the median, rather than the mean, to 
+3. Why do we often choose the median, rather than the mean, to 
 describe the typical income of a group of people?
 
 The question we want to answer "How do the distributions of median income compare across major categories?". We need to do a few things to answer this question: First, we need to group the data by `major_category`. Then, we need a way to summarize the 
@@ -330,7 +317,7 @@ to always thing in the context of the data and try out a few binwidths before
 settling on a binwidth. You might ask yourself: "What would be a meaningful 
 difference in median incomes?" $1 is obviously too little, $10000 might be too high.
 
-**Exercise 4:** Try binwidths of $1000 and $5000 and choose one. Explain your reasoning for your choice. Note that the binwidth is an argument for the `geom_histogram` function. So to specify a binwidth of $1000, you would use 
+4. Try binwidths of $1000 and $5000 and choose one. Explain your reasoning for your choice. Note that the binwidth is an argument for the `geom_histogram` function. So to specify a binwidth of $1000, you would use 
 `geom_histogram(binwidth = 1000)`.
 
 We can also calculate summary statistics for this distribution using the 
@@ -345,7 +332,7 @@ college_recent_grads %>%
             q3 = quantile(median, probs = 0.75))
 ```
 
-**Exercise 5:** Based on the shape of the histogram you created in the 
+5. Based on the shape of the histogram you created in the 
 previous exercise, determine which of these summary statistics is useful 
 for describing the distribution. Write up your description (remember 
 shape, center, spread, any unusual observations) and include the summary 
@@ -359,7 +346,7 @@ ggplot(data = college_recent_grads, mapping = aes(x = median)) +
   facet_wrap( ~ major_category, ncol = 4)
 ```
 
-**Exercise 6:** Plot the distribution of `median` income using a histogram, 
+6. Plot the distribution of `median` income using a histogram, 
 faceted by `major_category`. Use the `binwidth` you chose in the earlier 
 exercise.
 
@@ -367,7 +354,7 @@ Now that we've seen the shapes of the distributions of
 median incomes for each major category, we should have a better idea for 
 which summary statistic to use to quantify the typical median income.
 
-**Exercise 7:** Which major category has the highest typical (you'll need 
+7. Which major category has the highest typical (you'll need 
 to decide what this means) median income? Use the partial code below, 
 filling it in with the appropriate statistic and function. Also note that we 
 are looking for the highest statistic, so make sure to arrange in the correct 
@@ -380,7 +367,7 @@ college_recent_grads %>%
   arrange(___)
 ```
 
-**Exercise 8:** Which major category is the least popular in this sample? 
+8. Which major category is the least popular in this sample? 
 To answer this question we use a new function called `count`, which first 
 groups the data and then counts the number of observations in each category (see below). Add to the pipeline appropriately to arrange the results so 
 that the major with the lowest observations is on top.
@@ -446,12 +433,12 @@ college_recent_grads %>%
   )
 ```
 
-**Exercise 9:** Which STEM majors have median salaries equal to or less than the median for all majors's median earnings? Your output should only show 
+9. Which STEM majors have median salaries equal to or less than the median for all majors's median earnings? Your output should only show 
 the major name and median, 25th percentile, and 75th percentile earning for 
 that major as and should be sorted such that the major with the highest 
 median earning is on top.
 
 ## What types of majors do women tend to major in?
 
-**Exercise 10:** Create a scatterplot of median income vs. proportion of 
+10. Create a scatterplot of median income vs. proportion of 
 women in that major, colored by whether the major is in a STEM field or not. Describe the association between these three variables.

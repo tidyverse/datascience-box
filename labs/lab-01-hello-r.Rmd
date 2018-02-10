@@ -1,28 +1,16 @@
 ---
 title: "Lab 01 - Hello R!"
 output: 
-  tint::tintHtml:
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
     highlight: pygments
+    css: lab.css
 link-citations: yes
 ---
-
-<style>
-pre { 
-  width: 100%;
-  overflow-x: auto; 
-}
-.ex {
-  color: #878787;
-}
-h1, h2, h3 {
-  color: #6CA0DC;
-}
-</style>
 
 ```{r include=FALSE}
 library(tidyverse)
 library(datasauRus)
-library(tint)
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE     # for regression output
@@ -194,7 +182,7 @@ The data frame we will be working with today is called `datasaurus_dozen` and it
 
 To find out more about the dataset, type the following in your Console: `?datasaurus_dozen`. A question mark before the name of an object will always bring up its help file. This command must be ran in the Console.
 
-**Exercise 1:** Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report. When you're done, commit your changes with the commit message "Added answer for Ex 1", and push.
+1. Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report. When you're done, commit your changes with the commit message "Added answer for Ex 1", and push.
 
 Let's take a look at what these datasets are. To do so we can make a *frequency table* of the dataset variable:
 
@@ -212,7 +200,7 @@ The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blo
 
 # Data visualization and summary
 
-**Exercise 2:** Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
+2. Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
 
 Below is the code you will need to complete this exercise. Basically, the answer is already given, but you need to include relevant bits in your Rmd document and successfully knit it and view the results.
 
@@ -253,11 +241,11 @@ dino_data %>%
 
 *This is a good place to pause, commit changes with the commit message "Added answer for Ex 2", and push.*
 
-**Exercise 3:** Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
+3. Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
 
 *This is another good place to pause, commit changes with the commit message "Added answer for Ex 3", and push.*
 
-**Exercise 4:** Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
+4. Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
 
 *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push.*
 
@@ -265,7 +253,7 @@ dino_data %>%
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-**Exercise 5:** Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
+5. Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
 
 ```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
@@ -289,7 +277,7 @@ You're done with the data analysis exercises, but we'd like you to do two more t
 knitr::include_graphics("img/01-hello-r/fig-resize-global.png")
 ```
 
-1. **Resize your figures:** 
+- **Resize your figures:** 
 
 Click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu. In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done. Then, knit your document and see how you like the new sizes. Change and knit again and again until you're happy with the figure sizes. Note that these values get saved in the YAML.
 
@@ -303,7 +291,7 @@ You can also use different figure sizes for differen figures. To do so click on 
 knitr::include_graphics("img/01-hello-r/theme-highlight.png")
 ```
 
-2. **Change the look of your report:** 
+- **Change the look of your report:** 
 
 Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu. In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options. Hit OK and knit your document to see how it looks. Play around with these until you're happy with the look.
 
