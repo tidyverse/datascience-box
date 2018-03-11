@@ -1,10 +1,8 @@
 ---
 title: "Tidy data and data wrangling"
-author: "Dr. Çetinkaya-Rundel"
-date: "2018-01-24"
 output:
   xaringan::moon_reader:
-    css:  slides.css
+    css:  "../slides.css"
     logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
@@ -15,8 +13,6 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(magick)
-library(knitr)
 library(emo)
 library(mosaicData)
 library(openintro)
@@ -28,10 +24,10 @@ library(DT)
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
-  warm = 1
+  warn = 1
   )
 # Set dpi and height for images
-opts_chunk$set(fig.height = 2.65, dpi = 300) 
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
 # ggplot2 color palette with gray
 color_palette <- list(gray = "#999999", 
                       salmon = "#E69F00", 
@@ -41,12 +37,13 @@ color_palette <- list(gray = "#999999",
                       darkblue = "#0072B2", 
                       red = "#D55E00", 
                       purple = "#CC79A7")
-# For nonsese...
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 # For magick
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 
@@ -179,8 +176,7 @@ class: center, middle
 From https://opendurham.nc.gov
 
 ```{r load-data}
-bike <- read_csv2("https://stat.duke.edu/~mc301/data/nc_bike_crash.csv", 
-                  na = c("NA", "", "."))
+bike <- read_csv2("data/nc_bike_crash.csv", na = c("NA", "", "."))
 ```
 
 ---
