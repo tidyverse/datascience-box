@@ -1,19 +1,25 @@
-@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Lato);
 
 body { 
-  font-family: 'Lato', sans-serif; 
+  font-family: 'Source Sans Pro'; sans-serif;
+  font-weight: 400;
   color: #333333;
 }
-h1, h2, h3 {
-  font-family: 'Lato';
+h2 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  color: #6CA0DC;
+  font-size: 12px;
+  margin: 0.25em 0 0.5em 0;
+}
+h1, h3 {
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
   color: #6CA0DC;
 }
 a, a > code {
+  font-family: 'Source Sans Pro', sans-serif;
   color: #6CA0DC;
   text-decoration: none;
 }
@@ -26,7 +32,6 @@ a, a > code {
 }
 .remark-code, .remark-inline-code { 
   font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
-  font-size: 90%;
 }
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
@@ -53,6 +58,9 @@ a, a > code {
   float: right;
   padding-top: 1em;
 }
+.center {
+  text-align:center;
+}
 .pull-left {
   float: left;
   width: 47%;
@@ -64,17 +72,18 @@ a, a > code {
 .pull-right ~ * {
   clear: both;
 }
+.question {
+  background-color: #E1ECF8;
+  padding: 0.25px;
+}
 ul {
   list-style-type: square;
 }
 li{
   margin: 10px 0;
 }
-.question {
-    background-color: #E1ECF8;
-    padding: 10px;
-}
 .large { font-size: 130% }
+.midi { font-size: 90% }
 .small { font-size: 70% }
 img, video, iframe {
   max-width: 100%;
@@ -103,6 +112,10 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
   }
 }
 
+.remark-slide-content{
+  font-size: 24px;
+}
+
 .remark-slide-content:after {
     content: "";
     position: absolute;
@@ -113,4 +126,12 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url("img/sta199-logo-hex.png");
+}
+
+.element.style {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 685px;
+    width: 700px;
 }
