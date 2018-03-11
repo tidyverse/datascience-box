@@ -3,7 +3,7 @@ title: "Welcome to Data Science"
 author: ""
 output:
   xaringan::moon_reader:
-    css: slides.css
+    css: "../slides.css"
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -11,16 +11,19 @@ output:
       countIncrementalSlides: false
 ---
 
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
 ```{r setup, include=FALSE}
 # R options
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
-  warm = 1
+  warn = 1
   )
 # Set dpi and height for images
-library(knitr)
-opts_chunk$set(fig.height = 2.65, dpi = 300) 
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
 # ggplot2 color palette with gray
 color_palette <- list(gray = "#999999", 
                       salmon = "#E69F00", 
@@ -30,13 +33,13 @@ color_palette <- list(gray = "#999999",
                       darkblue = "#0072B2", 
                       red = "#D55E00", 
                       purple = "#CC79A7")
-# For nonsese...
-library(emo)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 class: center, middle
@@ -69,78 +72,39 @@ Data science is an exciting discipline that allows you to turn raw data into und
 
 ---
 
-## Who am I?
-
-Mine Çetinkaya-Rundel
-
-<i class="fa fa-envelope"></i> &nbsp; [mine@stat.duke.edu](mailto:mine@stat.duke.edu) <br>
-<i class="fa fa-home"></i> &nbsp; [stat.duke.edu/~mc301](http://www2.stat.duke.edu/courses/Spring18/Sta199/) <br>
-<i class="fa fa-university"></i> &nbsp; [213 Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Tue 11:00 - 12:30 and Thur 10:00 - 11:30
-
----
-
-## Who else is involved?
-
-.pull-left[
-[Peter Hase](https://www.linkedin.com/in/peter-hase-8092a6b9/) 
-
-<i class="fa fa-envelope"></i> &nbsp; [peter.hase@duke.edu](mailto:peter.hase@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Tue Sun 1:00 - 3:00
-
-<br><br>
-
-[Walker Harrison](https://www.linkedin.com/in/walker-harrison-11a36b6b/)
-
-<i class="fa fa-envelope"></i> &nbsp; [walker.harrison@duke.edu](mailto:walker.harrison@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Tue 10:00 - 11:00 and 1:30-2:30
-]
-
-.pull-right[
-[Gary Larson](http://garylarson.weebly.com/)
-
-<i class="fa fa-envelope"></i> &nbsp; [gary.larson@duke.edu](mailto:gary.larson@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Mon 12:00 - 2:00
-
-<br><br>
-
-[Sarah Sibley](https://www.linkedin.com/in/sarah-sibley-3bb171ba/)
-
-<i class="fa fa-envelope"></i> &nbsp; [sarah.sibley@duke.edu](mailto:sarah.sibley@duke.edu) <br>
-<i class="fa fa-university"></i> &nbsp; [211A Old Chem](http://maps.duke.edu/map/?id=21#!s/key=old chemistry?m/2766) <br>
-<i class="fa fa-calendar"></i> &nbsp; Sat 12:00 - 2:00
-]
-
----
-
 # What is this course?
 
-Everything you want to know about the course, and everything you will need for the course will be posted at
-
-[bit.ly/sta199-s18](http://bit.ly/sta199-s18)
+This is a course on introduction to data science, with an emphasis on statistical thinking.
 
 --
 
-- Will we be doing computing? Yes.
+**Q - What data science background does this course assume?**  
+A - None.
 
 --
 
-- Is this an intro CS course? No, but many themes are shared.
+**Q - Is this an intro stat course?**  
+A - While statistics $\ne$ data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is **not** your typical high school statistics course.
 
 --
 
-- Is this an intro stat course? Yes, but it's not your high school statistics course.
+**Q - Will we be doing computing?**   
+A - Yes.
 
 --
 
-- What computing language will we learn? R.
+**Q - Is this an intro CS course?**  
+A - No, but many themes are shared.
 
 --
 
-- Why not language X? We can discuss that over `r emo::ji("coffee")`.
+**Q - What computing language will we learn?**  
+A - R.
+
+--
+
+**Q: Why not language X?**  
+A: We can discuss that over `r emo::ji("coffee")`.
 
 
 ---
@@ -153,25 +117,42 @@ class: center, middle
 
 # A year as told by fitbit
 
+.pull-left[
 by Nick Strayer
 
 http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
-
+]
+.pull-right[
+![A year as told by fitbit](img/nick-strayer-fitbit.png)
+]
 ---
 
 # R-Ladies global tour
 
+.pull-left[
 by Maelle Salmon
 
 http://www.masalmon.eu/2017/10/06/globalrladiestour/
+]
+.pull-right[
+![R Ladies Global Tour](img/maelle-salmon-rladies.png)
+]
+
+
+
 
 ---
 
 # Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
 
+.pull-left[
 by David Robinson (Stack Overflow)
 
 http://varianceexplained.org/r/trump-tweets/
+]
+.pull-right[
+![Trump tweets](img/david-robinson-trump-tweets.png)
+]
 
 ---
 
@@ -185,19 +166,23 @@ class: center, middle
 
 Go to https://github.com/, and create an account (unless you already have one). Tips for selecting a username:<sup>1</sup>
 
-- Incorporate your actual name! People like to know who they’re dealing with. Also makes your username easier for people to guess or remember.
-- Reuse your username from other contexts if you can, e.g., Twitter or Slack.
+.small[
+- Incorporate your actual name so that people can remember your GitHub handle easily.
+- Reuse username from other contexts if you can, e.g., Twitter or Slack.
 - Pick a username you will be comfortable revealing to your future boss.
 - Shorter is better than longer.
-- Be as unique as possible in as few characters as possible. In some settings GitHub auto-completes or suggests usernames.
+- Be as unique as possible in as few characters as possible.
 - Make it timeless. Don’t highlight your current university, employer, or place of residence.
 - Avoid words laden with special meaning in programming, like `NA`.
+]
 
-.footnote[ [1] Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan.]
+.footnote[ 
+[1] Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan
+]
 
-<font color="#E34132">
+.instructions[
 Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
-</font>
+]
 
 ---
 
@@ -205,9 +190,10 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 
 Go to [bit.ly/sta199-f18-rstudio-join](http://bit.ly/sta199-f18-rstudio-join), and log in with your GitHub credentials.
 
-<font color="#E34132">
+.instructions[
 Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
-</font>
+]
+
 ---
 
 ## Create your first data visualization
@@ -218,9 +204,10 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
 - Then change the country names to those you're interested in. Your spelling and capitalization should match the data so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
 
-<font color="#E34132">
+.instructions[
 Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
-</font>
+]
+
 ---
 
 class: center, middle
@@ -253,20 +240,31 @@ class: center, middle
 
 ## How to get help
 
-- Course content, logistics, etc. discussion via GitHub on the [Sta199-S18/community](https://github.com/Sta199-S18/community) repository. Note that this is a public discussion forum, which means others outside of the course can stumble upon it and help you as well.
-    - See course syllabus for tips on posting questions.
+- Course content, logistics, etc. discussion on course Slack.
+        
+- Often it's a lot more pleasant an experience to get your questions answered in person. Make use of the teaching team's office hours, we're here to help!
 
 - For personal and grade related questions, use email.
 
 ---
 
+## Tips for asking questions:
+
+- First search existing discussion for answers. If the question has already been answered, you're done! If it has already been asked but you're not satisfied with the answer, add to the thread. 
+- Give your question context from course concepts not couse assignments.
+    - Good context: "I have a question on filtering"
+    - Bad context: "I have a question on HW 1 question 4"
+- Be precise in your description:
+    - Good description: "I am getting the following error and I'm not sure how to resilve it - `Error: could not find function "ggplot"`"
+    - Bad description: "R giving errors, help me! Aaaarrrrrgh!” 
+- Note that you can edit a question after posting it.
+- Format your questions nicely using markdown and code formatting.
+- Where appropriate, provide links to specific files, or even lines within them, in the body of your issue. This will help your helper understand your question. Note that only the teaching team will have access to private repos.
+- (Optional) Tag someone or some group of people. Start by typing the @ symbol and Slack will generate some good suggestions. 
+    
+---
+
 ## Academic integrity
-
-> To uphold the Duke Community Standard:
-
-> - I will not lie, cheat, or steal in my academic endeavors;
-> - I will conduct myself honorably in all my endeavors; and
-> - I will act if the Standard is compromised.
 
 - Only work that is clearly assigned as team work can be completed collaboratively.
 
@@ -277,9 +275,13 @@ class: center, middle
 ## Sharing/reusing code
 
 - I am well aware that a huge volume of code is available on the web to solve any number of problems.
+
 - Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). 
+
 - Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. 
+
 - On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. 
+
 - Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team. 
 - On the take home exams all communication with classmates is explicitly forbidden.
 
@@ -299,15 +301,7 @@ class: center, middle
 
 ## Grading
 
-Component             | Weight
-----------------------|----------------
-Participation & application exercises       | 10%
-Peer evaluation       | 5%
-Homework              | 20%
-Labs                  | 15%
-Midterm 1             | 17.5%
-Midterm 2             | 17.5%
-Final project         | 15%
+- Weights of each component are given in the syllabus.
 
 - Class attendance is a firm expectation; frequent absences or tardiness 
 will be considered a legitimate cause for grade reduction.
@@ -320,44 +314,8 @@ more generous the curve will be.
 
 ---
 
-## Excused absences
-
-- Students who miss class due to a scheduled varsity trip, religious 
-holiday or short-term illness should fill out an online NOVAP, RHoliday or 
-short-term illness form respectively.
-    - Excused absences do not excuse you from assigned homework, it is your responsibility to make alternative arrangements to turn in any assignments in a timely fashion.
-
-- If you cannot complete an assignment on the due date due to a short-term 
-illness, you have until noon the following day to complete it at no 
-penalty, then the regular late work policy kicks in.
-
-- If you are faced with a personal or family emergency or a long-range or 
-chronic health condition that interferes with your ability to attend or 
-complete classes, you should contact your academic dean’s office. See more 
-information on policies surrounding these conditions 
-at https://trinity.duke.edu/undergraduate/academic-policies/personal-emergencies. 
-Your academic dean can also provide more information.
-
----
-
-## Late/missed work policy
-
-- Late work policy for homework assignments:
-    - late, but within 24 hours of due date/time: -20%
-    - any later: no credit
-    
-- Late work will not be accepted for take home midterms and the final project.
-
-- Exam dates cannot be changed and no make-up exams will be given. If a midterm exam must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the final exam score. This policy only applies to the midterms.
-
-- You must complete the final project and be in class to present it in order to pass this course.
-
----
-
 ## Other policies
 
 - Please refrain from texting or using your computer for anything other than coursework during class.
 
 - You must be in class on a day when you're scheduled to present, there are no make ups for presentations.
-
-- Regrade requests must be made within 3 days of when the assignment is returned, and must be submitted via the linked form on the course syllabus.
