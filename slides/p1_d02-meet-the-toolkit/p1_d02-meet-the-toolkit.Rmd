@@ -3,7 +3,7 @@ title: "Meet the toolkit"
 author: ""
 output:
   xaringan::moon_reader:
-    css: "slides.css"
+    css: "../slides.css"
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -11,16 +11,19 @@ output:
       countIncrementalSlides: false
 ---
 
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
 ```{r setup, include=FALSE}
 # R options
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
-  warm = 1
+  warn = 1
   )
 # Set dpi and height for images
-library(knitr)
-opts_chunk$set(fig.height = 2.65, dpi = 300) 
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
 # ggplot2 color palette with gray
 color_palette <- list(gray = "#999999", 
                       salmon = "#E69F00", 
@@ -30,14 +33,13 @@ color_palette <- list(gray = "#999999",
                       darkblue = "#0072B2", 
                       red = "#D55E00", 
                       purple = "#CC79A7")
-# For nonsese...
-library(emo)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(rvest)
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 ## Agenda
@@ -218,7 +220,9 @@ class: center, middle
 
 Before we move on...
 
-.question[<i class="fa fa-user" aria-hidden="true"></i> &nbsp; What is the Bechdel test?]
+.question[
+What is the Bechdel test?
+]
 
 --
 
@@ -356,13 +360,3 @@ Can you answer these questions?
 - What is version control, and why do we care?
 - What is R vs RStudio?
 - What is git vs GitHub (and do I need to care)?
-
----
-
-## Before next class
-
-- Readings for next Monday posted
-
-- Tomorrow in lab you'll get to really sink your teeth into everything we demoed today
-
-- Having difficulty? Ask on GitHub or come to office hours!
