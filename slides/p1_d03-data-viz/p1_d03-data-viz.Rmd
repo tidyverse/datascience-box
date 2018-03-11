@@ -3,7 +3,7 @@ title: "Visualizing data"
 author: ""
 output:
   xaringan::moon_reader:
-    css: "slides.css"
+    css: "../slides.css"
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -14,7 +14,6 @@ output:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(magick)
-library(knitr)
 library(emo)
 ```
 
@@ -23,10 +22,10 @@ library(emo)
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
-  warm = 1
+  warn = 1
   )
 # Set dpi and height for images
-opts_chunk$set(fig.height = 2.65, dpi = 300) 
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
 # ggplot2 color palette with gray
 color_palette <- list(gray = "#999999", 
                       salmon = "#E69F00", 
@@ -36,44 +35,14 @@ color_palette <- list(gray = "#999999",
                       darkblue = "#0072B2", 
                       red = "#D55E00", 
                       purple = "#CC79A7")
-# For nonsese...
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 # For magick
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
 ```
-
-## Catch up
-
-- Any questions on material from last time?
-
-- Any questions on the lab?
-
-- Any questions on workflow / course structure?
-    
-- Catch up on informal "requirements":
-    + Add your name (first and last) to your GitHub profile, ideally add your 
-    photo as well
-    + Similarly, add your name (first and last) to your RStudio.Cloud profile 
-    as well
-    
-- Tips for asking questions via GitHub issues
-
----
-
-## Agenda
-
-- Exploratory data analysis
-- Data visualization
-- Visualizing Star Wars
-- Aesthetics
-- Faceting
-- Identifying variables
-- Visualizing numerical data
-- Visualizing categorical data
-
----
 
 class: center, middle
 
@@ -110,8 +79,7 @@ class: center, middle
 
 ## ggplot2, part of the tidyverse
 
-- ggplot2 is a data visualization package, that is part of the tidyverse 
-suite of packages
+- ggplot2 is a data visualization package, that is part of the tidyverse
 
 - To use ggplot2 functions, first load tidyverse
 ```{r}
@@ -133,8 +101,6 @@ ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
 ```
 ]
 
-- Geoms, short for geometric objects, describe the type of plot you will produce
-
 ---
 
 ## About ggplot2
@@ -155,9 +121,9 @@ class: center, middle
 
 ## Dataset terminology
 
-<div class="question">
+.question[
 What does each row represent? What does each column represent?
-</div>
+]
 
 ```{r message=FALSE}
 starwars
@@ -189,14 +155,13 @@ Run the following **in the Console** to view the help
 
 ![starwars-help](img/starwars-help.png)
 
-<div class="question">
+.question[
 How many rows and columns does this dataset have? What does each row represent? What does each column represent?
-</div>
+]
 
-
-<div class="question">
+.question[
 Make a prediction: What relationship do you expect to see between height and mass?
-</div>
+]
 
 ---
 
@@ -223,9 +188,8 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Mass vs. height
 
-<div class="question">
-How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby character?
-</div>
+.question[
+How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby ]
 
 ```{r fig.width = 6, fig.height=3, echo=FALSE, warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -332,10 +296,10 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Dive further...
 
-<div class="question">
+.question[
 In the next few slides describe what each plot displays. Think about
 how the code relates to the output.
-</div>
+]
 
 ---
 
@@ -373,9 +337,9 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Height vs. mass, take 2
 
-<div class="question">
+.question[
 How are these plots similar? How are they different?
-</div>
+]
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE}
 p1 <- ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -519,6 +483,6 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
 
 ## Which bar plot is more appropriate?
 
-<div class="question">
+.question[
 Which of the previous two bar plots is a more useful representation for visualizing the relationship between gender and hair color?
-</div>
+]

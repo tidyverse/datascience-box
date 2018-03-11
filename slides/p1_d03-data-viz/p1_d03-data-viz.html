@@ -4,7 +4,7 @@
     <title>Visualizing data</title>
     <meta charset="utf-8">
     <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="slides.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -18,37 +18,6 @@ class: center, middle, inverse, title-slide
 
 
 
-
-## Catch up
-
-- Any questions on material from last time?
-
-- Any questions on the lab?
-
-- Any questions on workflow / course structure?
-    
-- Catch up on informal "requirements":
-    + Add your name (first and last) to your GitHub profile, ideally add your 
-    photo as well
-    + Similarly, add your name (first and last) to your RStudio.Cloud profile 
-    as well
-    
-- Tips for asking questions via GitHub issues
-
----
-
-## Agenda
-
-- Exploratory data analysis
-- Data visualization
-- Visualizing Star Wars
-- Aesthetics
-- Faceting
-- Identifying variables
-- Visualizing numerical data
-- Visualizing categorical data
-
----
 
 class: center, middle
 
@@ -85,8 +54,7 @@ class: center, middle
 
 ## ggplot2, part of the tidyverse
 
-- ggplot2 is a data visualization package, that is part of the tidyverse 
-suite of packages
+- ggplot2 is a data visualization package, that is part of the tidyverse
 
 - To use ggplot2 functions, first load tidyverse
 
@@ -111,8 +79,6 @@ ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
 ```
 ]
 
-- Geoms, short for geometric objects, describe the type of plot you will produce
-
 ---
 
 ## About ggplot2
@@ -133,9 +99,9 @@ class: center, middle
 
 ## Dataset terminology
 
-&lt;div class="question"&gt;
+.question[
 What does each row represent? What does each column represent?
-&lt;/div&gt;
+]
 
 
 ```r
@@ -146,16 +112,16 @@ starwars
 ## # A tibble: 87 x 13
 ##    name     height  mass hair_color skin_color eye_color birth_year gender
 ##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; 
-##  1 Luke Sk…    172  77.0 blond      fair       blue            19.0 male  
-##  2 C-3PO       167  75.0 &lt;NA&gt;       gold       yellow         112   &lt;NA&gt;  
-##  3 R2-D2        96  32.0 &lt;NA&gt;       white, bl… red             33.0 &lt;NA&gt;  
-##  4 Darth V…    202 136   none       white      yellow          41.9 male  
-##  5 Leia Or…    150  49.0 brown      light      brown           19.0 female
-##  6 Owen La…    178 120   brown, gr… light      blue            52.0 male  
-##  7 Beru Wh…    165  75.0 brown      light      blue            47.0 female
-##  8 R5-D4        97  32.0 &lt;NA&gt;       white, red red             NA   &lt;NA&gt;  
-##  9 Biggs D…    183  84.0 black      light      brown           24.0 male  
-## 10 Obi-Wan…    182  77.0 auburn, w… fair       blue-gray       57.0 male  
+##  1 Luke Sk…    172   77. blond      fair       blue            19.0 male  
+##  2 C-3PO       167   75. &lt;NA&gt;       gold       yellow         112.  &lt;NA&gt;  
+##  3 R2-D2        96   32. &lt;NA&gt;       white, bl… red             33.0 &lt;NA&gt;  
+##  4 Darth V…    202  136. none       white      yellow          41.9 male  
+##  5 Leia Or…    150   49. brown      light      brown           19.0 female
+##  6 Owen La…    178  120. brown, gr… light      blue            52.0 male  
+##  7 Beru Wh…    165   75. brown      light      blue            47.0 female
+##  8 R5-D4        97   32. &lt;NA&gt;       white, red red             NA   &lt;NA&gt;  
+##  9 Biggs D…    183   84. black      light      brown           24.0 male  
+## 10 Obi-Wan…    182   77. auburn, w… fair       blue-gray       57.0 male  
 ## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;,
 ## #   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -206,14 +172,13 @@ Run the following **in the Console** to view the help
 
 ![starwars-help](img/starwars-help.png)
 
-&lt;div class="question"&gt;
+.question[
 How many rows and columns does this dataset have? What does each row represent? What does each column represent?
-&lt;/div&gt;
+]
 
-
-&lt;div class="question"&gt;
+.question[
 Make a prediction: What relationship do you expect to see between height and mass?
-&lt;/div&gt;
+]
 
 ---
 
@@ -247,9 +212,8 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Mass vs. height
 
-&lt;div class="question"&gt;
-How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby character?
-&lt;/div&gt;
+.question[
+How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby ]
 
 ![](p1_d03-data-viz_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
@@ -347,10 +311,10 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Dive further...
 
-&lt;div class="question"&gt;
+.question[
 In the next few slides describe what each plot displays. Think about
 how the code relates to the output.
-&lt;/div&gt;
+]
 
 ---
 
@@ -397,9 +361,9 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Height vs. mass, take 2
 
-&lt;div class="question"&gt;
+.question[
 How are these plots similar? How are they different?
-&lt;/div&gt;
+]
 
 ![](p1_d03-data-viz_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
@@ -565,9 +529,9 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
 
 ## Which bar plot is more appropriate?
 
-&lt;div class="question"&gt;
+.question[
 Which of the previous two bar plots is a more useful representation for visualizing the relationship between gender and hair color?
-&lt;/div&gt;
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
@@ -575,8 +539,15 @@ Which of the previous two bar plots is a more useful representation for visualiz
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
