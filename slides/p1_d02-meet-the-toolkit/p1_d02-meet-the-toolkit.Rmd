@@ -42,16 +42,6 @@ dev.off <- function(){
 ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
-## Agenda
-
-- Demo: A reproducible data analysis
-- R and RStudio
-- R Markdown
-- Git and GitHub
-- Recap
-
----
-
 class: center, middle
 
 # A reproducible data analysis
