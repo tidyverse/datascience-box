@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Lab 07 - Modelling course evaluations, Pt 2</title>
+
+<link href="data:text/css;charset=utf-8,%0A%40charset%20%22UTF%2D8%22%3B%0A%0Ahtml%20%7B%20font%2Dsize%3A%2015px%3B%20%7D%0Abody%20%7B%20width%3A%2087%2E5%25%3B%0Amargin%2Dleft%3A%20auto%3B%0Amargin%2Dright%3A%20auto%3B%0Apadding%2Dleft%3A%2012%2E5%25%3B%0Acolor%3A%20%23111%3B%0Amax%2Dwidth%3A%201400px%3B%0Acounter%2Dreset%3A%20sidenote%2Dcounter%3B%20%7D%0Ah1%2Etitle%20%7B%20font%2Dweight%3A%20400%3B%0Afont%2Dstyle%3A%20normal%3B%0Amargin%2Dtop%3A%204rem%3B%0Amargin%2Dbottom%3A%201%2E5rem%3B%0Afont%2Dsize%3A%203%2E2rem%3B%0Aline%2Dheight%3A%201%3B%20%7D%0Ah1%20%7B%0Afont%2Dweight%3A%20400%3B%0Amargin%2Dtop%3A%202%2E1rem%3B%0Amargin%2Dbottom%3A%200%3B%0Afont%2Dsize%3A%202%2E2rem%3B%0Aline%2Dheight%3A%201%3B%20%7D%0Ah2%20%7B%0Afont%2Dweight%3A%20400%3B%0Afont%2Dsize%3A%201%2E7rem%3B%0Amargin%2Dtop%3A%202rem%3B%0Amargin%2Dbottom%3A%200%3B%0Aline%2Dheight%3A%201%3B%20%7D%0Ah3%2Esubtitle%20%7B%0Afont%2Dweight%3A%20400%3B%0Amargin%2Dtop%3A%201rem%3B%0Amargin%2Dbottom%3A%201rem%3B%0Afont%2Dsize%3A%201%2E8rem%3B%0Adisplay%3A%20block%3B%0Aline%2Dheight%3A%201%3B%20%7D%0Ah4%2Eauthor%2C%20h4%2Edate%20%7B%0Afont%2Dsize%3A%201%2E4rem%3B%0Afont%2Dweight%3A%20400%3B%0Amargin%3A%201rem%20auto%3B%0Aline%2Dheight%3A%201%3B%0A%7D%0A%2Edanger%20%7B%20color%3A%20red%3B%20%7D%0Aarticle%20%7B%20position%3A%20relative%3B%0Apadding%3A%205rem%200rem%3B%20%7D%0Asection%20%7B%20padding%2Dtop%3A%201rem%3B%0Apadding%2Dbottom%3A%201rem%3B%20%7D%0Ap%2C%20ol%2C%20ul%20%7B%20font%2Dsize%3A%201%2E4rem%3B%20%7D%0Ap%20%7B%20line%2Dheight%3A%202rem%3B%0Amargin%2Dtop%3A%201%2E4rem%3B%0Amargin%2Dbottom%3A%201%2E4rem%3B%0Apadding%2Dright%3A%200%3B%0Avertical%2Dalign%3A%20baseline%3B%20%7D%0Ablockquote%20%7B%20font%2Dsize%3A%201%2E4rem%3B%20%7D%0Ablockquote%20p%20%7B%20width%3A%2050%25%3B%20%7D%0Ablockquote%20footer%20%7B%20width%3A%2050%25%3B%0Afont%2Dsize%3A%201%2E1rem%3B%0Atext%2Dalign%3A%20right%3B%20%7D%0Aol%2C%20ul%20%7B%20width%3A%2045%25%3B%0A%2Dwebkit%2Dpadding%2Dstart%3A%205%25%3B%0A%2Dwebkit%2Dpadding%2Dend%3A%205%25%3B%20%7D%0Ali%20%7B%20padding%3A%200%2E5rem%200%3B%20%7D%0Atable%20%7B%0Aborder%2Dtop%3A%202px%20solid%20%23111%3B%0Aborder%2Dbottom%3A%202px%20solid%20%23111%3B%0Afont%2Dsize%3A%201%2E1rem%3B%0A%7D%0Ath%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23111%3B%0A%7D%0Adiv%2Efigure%20%7B%0Apadding%3A%200%3B%0Aborder%3A%200%3B%0Afont%2Dsize%3A%20100%25%3B%0Afont%3A%20inherit%3B%0Avertical%2Dalign%3A%20baseline%3B%0Amax%2Dwidth%3A%2055%25%3B%0A%2Dwebkit%2Dmargin%2Dstart%3A%200%3B%0A%2Dwebkit%2Dmargin%2Dend%3A%200%3B%0Amargin%3A%200%200%203em%200%3B%0A%7D%0A%0Aa%3Alink%2C%20a%3Avisited%20%7B%20color%3A%20inherit%3B%20%7D%0Aa%3Alink%20%7B%20text%2Ddecoration%3A%20none%3B%0Abackground%3A%20%2Dwebkit%2Dlinear%2Dgradient%28%23fffff8%2C%20%23fffff8%29%2C%20%2Dwebkit%2Dlinear%2Dgradient%28%23fffff8%2C%20%23fffff8%29%2C%20%2Dwebkit%2Dlinear%2Dgradient%28%23333%2C%20%23333%29%3B%0Abackground%3A%20linear%2Dgradient%28%23fffff8%2C%20%23fffff8%29%2C%20linear%2Dgradient%28%23fffff8%2C%20%23fffff8%29%2C%20linear%2Dgradient%28%23333%2C%20%23333%29%3B%0A%2Dwebkit%2Dbackground%2Dsize%3A%200%2E05em%201px%2C%200%2E05em%201px%2C%201px%201px%3B%0A%2Dmoz%2Dbackground%2Dsize%3A%200%2E05em%201px%2C%200%2E05em%201px%2C%201px%201px%3B%0Abackground%2Dsize%3A%200%2E05em%201px%2C%200%2E05em%201px%2C%201px%201px%3B%0Abackground%2Drepeat%3A%20no%2Drepeat%2C%20no%2Drepeat%2C%20repeat%2Dx%3B%0Atext%2Dshadow%3A%200%2E03em%200%20%23fffff8%2C%20%2D0%2E03em%200%20%23fffff8%2C%200%200%2E03em%20%23fffff8%2C%200%20%2D0%2E03em%20%23fffff8%2C%200%2E06em%200%20%23fffff8%2C%20%2D0%2E06em%200%20%23fffff8%2C%200%2E09em%200%20%23fffff8%2C%20%2D0%2E09em%200%20%23fffff8%2C%200%2E12em%200%20%23fffff8%2C%20%2D0%2E12em%200%20%23fffff8%2C%200%2E15em%200%20%23fffff8%2C%20%2D0%2E15em%200%20%23fffff8%3B%0Abackground%2Dposition%3A%200%25%2093%25%2C%20100%25%2093%25%2C%200%25%2093%25%3B%20%7D%0A%40media%20screen%20and%20%28%2Dwebkit%2Dmin%2Ddevice%2Dpixel%2Dratio%3A%200%29%20%7B%20a%3Alink%20%7B%20background%2Dposition%2Dy%3A%2087%25%2C%2087%25%2C%2087%25%3B%20%7D%20%7D%0Aa%3Alink%3A%3Aselection%20%7B%20text%2Dshadow%3A%200%2E03em%200%20%23b4d5fe%2C%20%2D0%2E03em%200%20%23b4d5fe%2C%200%200%2E03em%20%23b4d5fe%2C%200%20%2D0%2E03em%20%23b4d5fe%2C%200%2E06em%200%20%23b4d5fe%2C%20%2D0%2E06em%200%20%23b4d5fe%2C%200%2E09em%200%20%23b4d5fe%2C%20%2D0%2E09em%200%20%23b4d5fe%2C%200%2E12em%200%20%23b4d5fe%2C%20%2D0%2E12em%200%20%23b4d5fe%2C%200%2E15em%200%20%23b4d5fe%2C%20%2D0%2E15em%200%20%23b4d5fe%3B%0Abackground%3A%20%23b4d5fe%3B%20%7D%0Aa%3Alink%3A%3A%2Dmoz%2Dselection%20%7B%20text%2Dshadow%3A%200%2E03em%200%20%23b4d5fe%2C%20%2D0%2E03em%200%20%23b4d5fe%2C%200%200%2E03em%20%23b4d5fe%2C%200%20%2D0%2E03em%20%23b4d5fe%2C%200%2E06em%200%20%23b4d5fe%2C%20%2D0%2E06em%200%20%23b4d5fe%2C%200%2E09em%200%20%23b4d5fe%2C%20%2D0%2E09em%200%20%23b4d5fe%2C%200%2E12em%200%20%23b4d5fe%2C%20%2D0%2E12em%200%20%23b4d5fe%2C%200%2E15em%200%20%23b4d5fe%2C%20%2D0%2E15em%200%20%23b4d5fe%3B%0Abackground%3A%20%23b4d5fe%3B%20%7D%0A%0Aimg%20%7Bmax%2Dwidth%3A%20100%25%3B%7D%0A%2Emarginnote%20img%20%7B%20display%3A%20block%3B%20%7D%0A%2Esidenote%2C%20%2Emarginnote%20%7B%20float%3A%20right%3B%0Aclear%3A%20right%3B%0Amargin%2Dright%3A%20%2D60%25%3B%0Awidth%3A%2050%25%3B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%201rem%3B%0Afont%2Dsize%3A%201%2E1rem%3B%0Aline%2Dheight%3A%201%2E3%3B%0Avertical%2Dalign%3A%20baseline%3B%0Aposition%3A%20relative%3B%20%7D%0A%2Esidenote%2Dnumber%20%7B%0Aposition%3A%20relative%3B%0Avertical%2Dalign%3A%20baseline%3B%20%7D%0A%2Esidenote%2Dnumber%20%7B%20font%2Dsize%3A%201rem%3B%0Atop%3A%20%2D0%2E5rem%3B%0Aleft%3A%200%2E1rem%3B%20%7D%0Ap%2C%20footer%2C%20table%2C%20hr%20%7B%20width%3A%2055%25%3B%20%7D%0Ahr%20%7B%20margin%2Dleft%3A%200%3B%20%7D%0Atable%20table%2C%20li%20p%2C%20li%20pre%20%7B%20width%3A%20auto%3B%20%7D%0Ali%20p%2C%20li%20pre%20%7Bmargin%2Dtop%3A%20auto%3B%20%7D%0Adiv%2Efullwidth%2C%20table%2Efullwidth%20%7B%20max%2Dwidth%3A%2090%25%3B%20%7D%0A%23TOC%2C%20h1%2Etitle%20%7B%20max%2Dwidth%3A%2090%25%3B%20%7D%0A%23TOC%20ol%2C%20%23TOC%20ul%20%7B%20width%3A%20auto%3B%20%7D%0Adiv%2Efullwidth%20p%2Ecaption%20%7B%0Amargin%2Dright%3A%200%3B%0Amax%2Dwidth%3A%2033%25%3B%0A%7D%0Ap%2Ecaption%20%7B%20text%2Dalign%3A%20left%3B%20%7D%0A%40media%20screen%20and%20%28max%2Dwidth%3A%20760px%29%20%7B%20p%2C%20footer%2C%20ol%2C%20ul%2C%20table%2C%20hr%20%7B%20width%3A%2090%25%3B%20%7D%0Apre%20%7B%20width%3A%2087%2E5%25%3B%20%7D%0Aul%20%7B%20width%3A%2085%25%3B%20%7D%0Afigure%20%7B%20max%2Dwidth%3A%2090%25%3B%20%7D%0Adiv%2Efullwidth%20p%2Ecaption%20%7B%20max%2Dwidth%3A%20none%3B%20%7D%0Ablockquote%20p%2C%20blockquote%20footer%20%7B%20width%3A%2090%25%3B%20%7D%7D%0A%2Esans%20%7B%20font%2Dfamily%3A%20%22Gill%20Sans%22%2C%20%22Gill%20Sans%20MT%22%2C%20Calibri%2C%20sans%2Dserif%3B%0Aletter%2Dspacing%3A%20%2E03em%3B%20%7D%0Acode%20%7B%20font%2Dfamily%3A%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Afont%2Dsize%3A%201%2E125rem%3B%0Aline%2Dheight%3A%201%2E6%3B%20%7D%0Apre%20code%20%7B%20font%2Dsize%3A%201rem%3B%20%7D%0Ap%20code%20%7B%20white%2Dspace%3A%20inherit%3B%20%7D%0Ah1%20code%2C%20h2%20code%2C%20h3%20code%20%7B%20font%2Dsize%3A%200%2E80em%3B%20%7D%0A%2Emarginnote%20code%2C%20%2Esidenote%20code%20%7B%20font%2Dsize%3A%201rem%3B%20%7D%0Apre%20%7B%20width%3A%2052%2E5%25%3B%0Aoverflow%2Dx%3A%20auto%3B%20%7D%0A%2Efullwidth%20%7B%20max%2Dwidth%3A%2090%25%3B%0Aclear%3Aboth%3B%20%7D%0Aspan%2Enewthought%20%7B%20font%2Dvariant%3A%20small%2Dcaps%3B%0Afont%2Dsize%3A%201%2E2em%3B%20%7D%0Ainput%2Emargin%2Dtoggle%20%7B%20display%3A%20none%3B%20%7D%0Alabel%2Esidenote%2Dnumber%20%7B%20display%3A%20inline%3B%20%7D%0Alabel%2Emargin%2Dtoggle%3Anot%28%2Esidenote%2Dnumber%29%20%7B%20display%3A%20none%3B%20%7D%0A%40media%20%28max%2Dwidth%3A%20760px%29%20%7B%20label%2Emargin%2Dtoggle%3Anot%28%2Esidenote%2Dnumber%29%20%7B%20display%3A%20inline%3B%20%7D%0A%2Esidenote%2C%20%2Emarginnote%20%7B%20display%3A%20none%3B%20%7D%0A%2Eshownote%2C%0A%2Emargin%2Dtoggle%3Achecked%20%2B%20%2Esidenote%2C%0A%2Emargin%2Dtoggle%3Achecked%20%2B%20%2Emarginnote%20%7B%0Adisplay%3A%20block%3B%0Afloat%3A%20left%3B%0Aleft%3A%201rem%3B%0Aclear%3A%20both%3B%0Awidth%3A%2095%25%3B%0Amargin%3A%201rem%202%2E5%25%3B%0Avertical%2Dalign%3A%20baseline%3B%0Aposition%3A%20relative%3B%0A%7D%0Alabel%20%7B%20cursor%3A%20pointer%3B%20%7D%0Adiv%2Efigure%20%7B%20max%2Dwidth%3A%2090%25%3B%20%7D%0Apre%20%7B%20width%3A%2090%25%3B%0Apadding%3A%200%3B%20%7D%0A%7D%0A" rel="stylesheet" />
+<link href="data:text/css;charset=utf-8,%40import%20%27https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss%3Ffamily%3DRoboto%2BCondensed%27%3B%0Abody%20%7B%0Afont%2Dfamily%3A%20%27Roboto%20Condensed%27%2C%20Arial%2C%20Helvetica%2C%20sans%2Dserif%3B%0Abackground%2Dcolor%3A%20%23fefefe%3B%0Acolor%3A%20%23222%3B%0A%7D%0A%2Enumeral%2C%20%2Esidenote%2Dnumber%20%7B%20font%2Dfamily%3A%20%22Roboto%20Condensed%22%3B%20%7D%0A" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,%0A%40import%20%27https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss%3Ffamily%3DSource%2BSans%2BPro%3A300%2C400%2C600%2C700%27%3B%0A%40import%20%27https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss%3Ffamily%3DSource%2BCode%2BPro%27%3B%0A%40charset%20%22UTF%2D8%22%3B%0A%0Ahtml%20%7B%0Afont%2Dsize%3A%2012px%3B%0A%7D%0Abody%20%7B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Afont%2Dweight%3A%20300%3B%0Abackground%2Dcolor%3A%20%23fefefe%3B%0Acolor%3A%20%23222%3B%0Acounter%2Dreset%3A%20li%3B%0A%7D%0Ah1%2Etitle%20%7B%0Afont%2Dweight%3A%20700%3B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Acolor%3A%20%236CA0DC%3B%0A%7D%0Ah1%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Acolor%3A%20%236CA0DC%3B%0A%7D%0Ah2%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Afont%2Dweight%3A%20400%3B%0Acolor%3A%20%236CA0DC%3B%0A%7D%0Ah3%2Esubtitle%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Acolor%3A%20%236CA0DC%3B%0A%7D%0Ah4%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dweight%3A%20400%3B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Amargin%2Dtop%3A%201%2E5rem%3B%0Amargin%2Dbottom%3A%200%3B%0Aline%2Dheight%3A%201%3B%0A%7D%0Ah4%2Eauthor%2C%0Ah4%2Edate%20%7B%0Afont%2Dfamily%3A%20%27Source%20Sans%20Pro%27%2C%20sans%2Dserif%3B%0Afont%2Dweight%3A%20300%3B%0A%7D%0A%2Enumeral%20%7B%0Afont%2Dfamily%3A%20%22Source%20Sans%20Pro%22%3B%0Afont%2Dweight%3A%20300%3B%0A%7D%0Aem%20%7B%0Afont%2Dstyle%3A%20italic%3B%0Afont%2Dweight%3A%20300%3B%0Afont%2Dfamily%3A%20%22Source%20Sans%20Pro%22%3B%0A%7D%0Astrong%20%7B%0Afont%2Dstyle%3A%20bold%3B%0Afont%2Dweight%3A%20600%3B%0Afont%2Dfamily%3A%20%22Source%20Sans%20Pro%22%3B%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Dwidth%3A%20760px%29%20%7B%0Apre%20%7B%0Awidth%3A%20100%25%3B%0Afont%2Dsize%3A%2016px%3B%0A%7D%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20%27Source%20Code%20Pro%27%2C%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Afont%2Dsize%3A%2015px%3B%0Aline%2Dheight%3A%201%2E6%3B%0A%7D%0Apre%20code%20%7B%0Afont%2Dsize%3A%2015px%3B%0A%7D%0A%2Emarginnote%20code%2C%0A%2Esidenote%20code%20%7B%0Afont%2Dsize%3A%201rem%3B%0A%7D%0Apre%20%7B%0Awidth%3A%20100%25%3B%0Afont%2Dsize%3A%2016px%3B%0Aoverflow%2Dx%3A%20auto%3B%0A%7D%0A%0Aol%20%7B%0A%0Apadding%2Dleft%3A%200%3B%0A%7D%0Aol%3Eli%20%7B%0A%0Aposition%3A%20relative%3B%0A%0Alist%2Dstyle%3A%20none%3B%0Awidth%3A%2090%25%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%2010px%3B%0Apadding%2Dright%3A%200%3B%0Apadding%2Dleft%3A%2090px%3B%0A%7D%0Aol%3Eli%3Abefore%20%7B%0A%0Acontent%3A%20%22Exercise%20%22%20counter%28li%29%22%2E%22%3B%0A%0Acounter%2Dincrement%3A%20li%3B%0Aposition%3A%20absolute%3B%0Acolor%3A%20%236CA0DC%3B%0Aleft%3A%20%2D0%2E5px%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aol%20ol%20%7B%0Acounter%2Dreset%3A%20subitem%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Lab 07 - Modelling course evaluations, Pt 2</h1>
+<h3 class="subtitle"><em>Multiple predictors</em></h3>
+
+
+
+<p><strong>Due:</strong> 2018-03-08 at noon</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this lab we revisit the professor evaluations data we modeled in the previous lab. In the last lab we modeled evaluation scores using a single predictor at a time. However this time we use multiple predictors to model evaluation scores.</p>
+<p>If you don’t remember the data, review the previous lab’s introduction before continuing to the exercises.</p>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<ul>
+<li><p>Go to the course organization on GitHub: <a href="https://github.com/Sta199-S18" class="uri">https://github.com/Sta199-S18</a>.</p></li>
+<li><p>Find the repo starting with <code>lab-07</code> and that has your team name at the end (this should be the only <code>lab-07</code> repo available to you).</p></li>
+<li><p>In the repo, click on the green <strong>Clone or download</strong> button, select <strong>Use HTTPS</strong> (this might already be selected by default, and if it is, you’ll see the text <strong>Clone with HTTPS</strong> as in the image below). Click on the clipboard icon to copy the repo URL.</p></li>
+<li><p>Go to RStudio Cloud and into the course workspace. Create a <strong>New Project from Git Repo</strong>. You will need to click on the down arrow next to the <strong>New Project</strong> button to see this option.</p></li>
+<li><p>Copy and paste the URL of your assignment repo into the dialog box:</p></li>
+<li><p>Hit OK, and you’re good to go!</p></li>
+</ul>
+</div>
+<div id="packages" class="section level1">
+<h1>Packages</h1>
+<p>In this lab we will work with the <code>tidyverse</code> and <code>broom</code> packages. We can install and load them with the following:</p>
+<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">When you install the tidyverse package, a long list of packages get installed with it. However when you load it (with the <code>library</code> function) only a few of them get loaded, e.g. <code>dplyr</code>, <code>ggplot2</code>, and <code>forcats</code>. The broom package is installed with the tidyverse, but we need to load it separately in order to make use of it.</span></span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)
+<span class="kw">library</span>(tidyverse) 
+<span class="kw">library</span>(broom)</code></pre></div>
+</div>
+<div id="housekeeping" class="section level1">
+<h1>Housekeeping</h1>
+<div id="git-configuration-password-caching" class="section level2">
+<h2>Git configuration / password caching</h2>
+<p>Configure your Git user name and email. If you cannot remember the instructions, refer to an earlier lab. Also remember that you can cache your password for a limited amount of time.</p>
+</div>
+<div id="project-name" class="section level2">
+<h2>Project name:</h2>
+<p>Update the name of your project to match the lab’s title.</p>
+</div>
+</div>
+<div id="warm-up" class="section level1">
+<h1>Warm up</h1>
+<p><strong>Pick one team member to complete the steps in this section while the others contribute to the discussion but do not actually touch the files on their computer.</strong></p>
+<p>Before we introduce the data, let’s warm up with some simple exercises.</p>
+<div id="yaml" class="section level2">
+<h2>YAML:</h2>
+<p>Open the R Markdown (Rmd) file in your project, change the author name to your <strong>team</strong> name, and knit the document.</p>
+</div>
+<div id="commiting-and-pushing-changes" class="section level2">
+<h2>Commiting and pushing changes:</h2>
+<ul>
+<li>Go to the <strong>Git</strong> pane in your RStudio.</li>
+<li>View the <strong>Diff</strong> and confirm that you are happy with the changes.</li>
+<li>Add a commit message like “Update team name” in the <strong>Commit message</strong> box and hit <strong>Commit</strong>.</li>
+<li>Click on <strong>Push</strong>. This will prompt a dialogue box where you first need to enter your user name, and then your password.</li>
+</ul>
+</div>
+<div id="pulling-changes" class="section level2">
+<h2>Pulling changes:</h2>
+<p>Now, the remaining team members who have not been concurrently making these changes on their projects should click on the <strong>Pull</strong> button in their Git pane and observe that the changes are now reflected on their projects as well.</p>
+</div>
+</div>
+<div id="the-data" class="section level1">
+<h1>The data</h1>
+<p>In this lab you will first download the data, then upload it to the <code>data/</code> folder in your RStudio Cloud project.</p>
+<ul>
+<li>Click <a href="http://www2.stat.duke.edu/courses/Spring18/Sta199/labs/data/evals-mod.csv">here</a> to download the data. The file is called <code>evals-mod.csv</code>.</li>
+<li>Navigate to the data folder in your project and upload the <code>evals-mod.csv</code> file.</li>
+</ul>
+</div>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+<ol style="list-style-type: decimal">
+<li>Load the data by including the appropriate code in your R Markdown file.</li>
+</ol>
+<div id="part-1-simple-linear-regression" class="section level2">
+<h2>Part 1: Simple linear regression</h2>
+<ol start="2" style="list-style-type: decimal">
+<li>Fit a linear model (one you have fit before): <code>m_bty</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) only. Write the linear model, and note the <span class="math inline">\(R^2\)</span> and the adjusted <span class="math inline">\(R^2\)</span>.</li>
+</ol>
+</div>
+<div id="part-2-multiple-linear-regression" class="section level2">
+<h2>Part 2: Multiple linear regression</h2>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Fit a linear model (one you have fit before): <code>m_bty_gen</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) and <code>gender</code>. Write the linear model, and note the <span class="math inline">\(R^2\)</span> and the adjusted <span class="math inline">\(R^2\)</span>.</p></li>
+<li><p>Interpret the slope and intercept of <code>m_bty_gen</code> in context of the data.</p></li>
+<li><p>What percent of the variability in <code>score</code> is explained by the model <code>m_bty_gen</code>.</p></li>
+<li><p>What is the equation of the line corresponding to <em>just</em> male professors?</p></li>
+<li><p>For two professors who received the same beauty rating, which gender tends to have the higher course evaluation score?</p></li>
+<li><p>How does the relationship between beauty and evaluation score vary between male and female professors?</p></li>
+<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen</code> and <code>m_bty</code> compare? What does this tell us about how useful <code>gender</code> is in explaining the variability in evaluation scores when we already have information on the beaty score of the professor.</p></li>
+<li><p>Compare the slopes of <code>bty_avg</code> under the two models (<code>m_bty</code> and <code>m_bty_gen</code>). Has the addition of <code>gender</code> to the model changed the parameter estimate (slope) for <code>bty_avg</code>?</p></li>
+<li><p>Create a new model called <code>m_bty_rank</code> with <code>gender</code> removed and <code>rank</code> added in. Write the equation of the linear model and interpret the slopes and intercept in context of the data.</p></li>
+</ol>
+</div>
+<div id="part-5-the-search-for-the-best-model" class="section level2">
+<h2>Part 5: The search for the best model</h2>
+<p>Going forward, only consider the following variables as potential predictors: <code>rank</code>, <code>ethnicity</code>, <code>gender</code>, <code>language</code>, <code>age</code>, <code>cls_perc_eval</code>, <code>cls_did_eval</code>, <code>cls_students</code>, <code>cls_level</code>, <code>cls_profs</code>, <code>cls_credits</code>, <code>bty_avg</code>.</p>
+<ol start="11" style="list-style-type: decimal">
+<li><p>Which variable, on its own, would you expect to be the worst predictor of evaluation scores? Why? <em>Hint:</em> Think about which variable would you expect to not have any association with the professor’s score.</p></li>
+<li><p>Check your suspicions from the previous exercise. Include the model output for that variable in your response.</p></li>
+<li><p>Suppose you wanted to fit a full model with the variables listed above. If you are already going to include <code>cls_perc_eval</code> and <code>cls_students</code>, which variable should you not include as an additional predictor? Why?</p></li>
+<li><p>Fit a full model with all predictors listed above (except for the one you decided to exclude) in the previous question.</p></li>
+<li><p>Using backward-selection with adjusted R-squared as the selection criterion, determine the <em>best</em> model. You do not need to show all steps in your answer, just the output for the final model. Also, write out the linear model for predicting score based on the final model you settle on.</p></li>
+<li><p>Interpret the slopes of one numerical and one categorical predictor based on your final model.</p></li>
+<li><p>Based on your final model, describe the characteristics of a professor and course at University of Texas at Austin that would be associated with a high evaluation score.</p></li>
+<li><p>Would you be comfortable generalizing your conclusions to apply to professors generally (at any university)? Why or why not?</p></li>
+</ol>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
