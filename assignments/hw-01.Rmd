@@ -1,96 +1,32 @@
 ---
-title: "HW 01 - Gotta catch 'em all"
+title: "HW 01 - Ugly charts"
+date: "Due: Jan 31 in class"
 output: 
   html_document: 
-    theme: yeti
     css: hw.css
-    toc: yes
-    toc_float: yes
-    fig_caption: false
+    theme: yeti
+    toc: true
+    toc_float: true
+    fig_caption: true
 ---
 
-```{r include=FALSE}
-library(tidyverse)
-pokemon <- read_csv("data/pokemon.csv")
-```
+## Assignment
 
-<div style= "float:right;position: relative; top: -50px;">
+<div style= "float:right;position: relative; margin-left: 20px">
 ```{r setup, echo=FALSE, fig.align="right"}
-knitr::include_graphics("img/hw-01-pikachu.png")
+knitr::include_graphics("img/hw-01-ugly-chart.png")
 ```
 </div>
 
-A key part of [Pokémon Go](http://www.pokemongo.com/) is using evolutions to get stronger Pokémon, and a deeper understanding of evolutions is key to being the greatest Pokémon Go player of all time. The data set you will be working with for this assignment covers 75 Pokémon evolutions spread across four species. A wide set of variables are provided, allowing a deeper dive into what characteristics are important in predicting a Pokémon's final combat power (CP).
+Use any software you like to improve the data visualization assigned to you in class.
 
-## Getting started
+Assignments and final product collection via [this Google doc](https://docs.google.com/spreadsheets/d/19lrD-FuXzu6Jp4kvUtH2G_DrHzQ-mdV3SWzF6U-kn5A/edit#gid=0).
 
-Here are the steps for getting started:
+## Want to see more ugly charts?
 
-- Start with an assignment link that creates a repo on GitHub with starter documents: [UPDATE INSTRUCTIONS WHEN `ghclass` CAN CREATE INDIVIDUAL ASSIGNMENTS]
-- Clone this repo in RStudio
-- Make any changes needed as outlined by the tasks you need to complete for the assignment
-- Make sure all your code chunks are informatively named, and these labels re not repeated
-- Periodically commit changes (the more often the better, for example, once per each new task)
-- Push all your changes back to your GitHub repo
-
-and voila, you're done! Once you push your changes back you do not need to do anything else to "submit" your work. And you can of course push multiple times throughout the assignment. At the time of the deadline we will take whatever is in your repo and consider it your final submission, and grade the state of your work at that time (which means even if you made mistakes before then, you wouldn't be penalized for them as long as the final state of your work is correct).
-
-## Data
-
-Go to the [codebook](https://www.openintro.org/stat/data/?data=pokemon) and find out which variabkes are included in this dataset, and what they represent.
-
-## Questions
-
-For each exercise, write down an interpretation of your visualization (and what it reveals about the data) in 1-2 sentences max.
-
-1. Load the data from the csv file provided: `pokemon.csv`.
-
-2. Calculate the diference in heights pre and post evolution and save this as a new variable. Calculate the percentage of pokemon that grew during evolution. Also visualize the distribution of change in height by species and provide a discussion of how change in height varies across species.
-
-3. Recreate the following plot.
-
-![recreate](img/hw-01-recreate.png)
-
-4. Calculate the relative frequency of `attack_strong_new` becased on levels of `attack_strong`. That is, the relative frequency of post-evolution stronger attack based on the pre-evolution stronger attack. Do Pokemon tend to change their strong attack post-evolution?
-
-5. Pick two categorical variables and make a bar plot that depicts the relationship between them. These can be variables from the original data or ones that you create based on the given data.
-
-6. Pick a numerical and a categorical variable, and construct side-by-side box plots depicting the relationship between them.
-
-7. Learn something new: violin plots! Read about them at http://ggplot2.tidyverse.org/reference/geom_violin.html, and convert your side-by-side box plots from the previous task to violin plots. What, do the violin plots reveal that box plots do not? What features are apparent in the box plots but not in the violin plots?
-
-8. What characteristics correspond to an evolved Pokémon with a high combat power? You do not need to come up with an exhaustive list, but you should walk us through your reasoning for answering this question and include all relevant summary statistics and visualizations.
-
-When you're done, review the .md document on GitHub to make sure you're happy with the final state of your work. Then go get some rest!
-
-## Getting help
-
-If your question is about an error, make sure to state the code that resulted in the error and clearly explain your goal.
-
-You are also welcomed to discuss the homework with each others broadly (no sharing code!) as well as ask questions at office hours.
-
-## Continuous integration and badges
-
-Each time you push to GitHub a continuous integration tool (called wercker) will check to make sure your Rmd knits successfully. If it does, you'll be able to see a badge on the README of your repo that says "build passing" (in green). If it fails, it'll say "build failing" (in orange). If the build is failing you will need to fix your Rmd so that it knits without any errors and then push again. Some tips:
-
-- You should avoid leaving your repo in a failing stage. 
-- You can click on the "build failing" badge to get more information.
-- A "build passing" badge is not guarantee that your work is correct, but instead just that your Rmd file knits.
-
-## Academic integrity
-
-This is an **individual** assignment. You are welcomed to exchange ideas with classmates and ask questions on the getting help channels discussed above however you may not share your text or code answers directly with classmates.
-
-**A note on sharing / reusing code:** I am well aware that a huge volume of code is available on the web to solve any number of problems. Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On individual assignments you may not directly share code with another student in this class. You are welcome to discuss the problems with class mates and ask for advice, but you may not send or make use of code from others.
+- [Flowing Data - Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/)
+- [Reddit - Data is ugly](https://www.reddit.com/r/dataisugly/)
 
 ## Grading
 
-Total                                                   | 100 pts
---------------------------------------------------------|--------
-Questions 1-7                                           | 60 pts
-Question 8                                              | 20 pts
-Informatively named code chunks                         | 5 pts
-Commit after each question (at a minimum, more commits ok)  | 2 pts
-Informative commit messages                             | 3 pts
-Document organization                                   | 4 pts
-Quality of writing and grammar                          | 6 pts
+Check / no check
