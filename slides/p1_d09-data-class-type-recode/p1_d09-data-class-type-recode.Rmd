@@ -215,7 +215,7 @@ A survey asked respondents their name and number of cats. The instructions said 
 
 .small[
 ```{r message=FALSE}
-cat_lovers <- read_csv("data/cat-lovers.csv")
+cat_lovers <- read_csv("../../data/cat-lovers.csv")
 ```
 
 ```{r echo=FALSE}

@@ -176,7 +176,7 @@ class: center, middle
 From https://opendurham.nc.gov
 
 ```{r load-data}
-bike <- read_csv2("data/nc_bike_crash.csv", na = c("NA", "", "."))
+bike <- read_csv2("../../data/nc-bike-crash.csv", na = c("NA", "", "."))
 ```
 
 ---
