@@ -50,7 +50,6 @@ When you install the tidyverse package, a long list of packages get installed wi
 ```
 
 ```{r eval = FALSE}
-install.packages("tidyverse")
 library(tidyverse) 
 library(broom)
 ```
