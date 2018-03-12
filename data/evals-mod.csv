@@ -1,0 +1,464 @@
+score,rank,ethnicity,gender,language,age,cls_perc_eval,cls_did_eval,cls_students,cls_level,cls_profs,cls_credits,bty_f1lower,bty_f1upper,bty_f2upper,bty_m1lower,bty_m1upper,bty_m2upper
+4.7,tenure track,minority,female,english,36,55.81395,24,43,upper,single,multi credit,5,7,6,2,4,6
+4.1,tenure track,minority,female,english,36,68.8,86,125,upper,single,multi credit,5,7,6,2,4,6
+3.9,tenure track,minority,female,english,36,60.8,76,125,upper,single,multi credit,5,7,6,2,4,6
+4.8,tenure track,minority,female,english,36,62.60163,77,123,upper,single,multi credit,5,7,6,2,4,6
+4.6,tenured,not minority,male,english,59,85,17,20,upper,multiple,multi credit,4,4,2,2,3,3
+4.3,tenured,not minority,male,english,59,87.5,35,40,upper,multiple,multi credit,4,4,2,2,3,3
+2.8,tenured,not minority,male,english,59,88.63636,39,44,upper,multiple,multi credit,4,4,2,2,3,3
+4.1,tenured,not minority,male,english,51,100,55,55,upper,single,multi credit,5,2,5,2,3,3
+3.4,tenured,not minority,male,english,51,56.92308,111,195,upper,single,multi credit,5,2,5,2,3,3
+4.5,tenured,not minority,female,english,40,86.95652,40,46,upper,single,multi credit,2,5,4,3,3,2
+3.8,tenured,not minority,female,english,40,88.88889,24,27,upper,single,multi credit,2,5,4,3,3,2
+4.5,tenured,not minority,female,english,40,96,24,25,upper,multiple,multi credit,2,5,4,3,3,2
+4.6,tenured,not minority,female,english,40,85,17,20,upper,single,multi credit,2,5,4,3,3,2
+3.9,tenured,not minority,female,english,40,56,14,25,upper,single,multi credit,2,5,4,3,3,2
+3.9,tenured,not minority,female,english,40,88.09524,37,42,upper,single,multi credit,2,5,4,3,3,2
+4.3,tenured,not minority,female,english,40,90,18,20,upper,multiple,multi credit,2,5,4,3,3,2
+4.5,tenured,not minority,female,english,40,83.33334,15,18,upper,multiple,multi credit,2,5,4,3,3,2
+4.8,tenure track,not minority,female,english,31,87.5,42,48,upper,multiple,multi credit,7,9,9,7,6,6
+4.6,tenure track,not minority,female,english,31,90.90909,40,44,upper,multiple,multi credit,7,9,9,7,6,6
+4.6,tenure track,not minority,female,english,31,79.16666,38,48,upper,multiple,multi credit,7,9,9,7,6,6
+4.9,tenure track,not minority,female,english,31,88.88889,40,45,upper,multiple,multi credit,7,9,9,7,6,6
+4.6,tenure track,not minority,female,english,31,88.13559,52,59,upper,multiple,multi credit,7,9,9,7,6,6
+4.5,tenure track,not minority,female,english,31,56.32184,49,87,upper,single,multi credit,7,9,9,7,6,6
+4.4,tenured,not minority,male,english,62,64.53901,182,282,upper,multiple,multi credit,6,6,5,5,5,6
+4.6,tenured,not minority,male,english,62,54.79452,160,292,upper,multiple,multi credit,6,6,5,5,5,6
+4.7,tenured,not minority,male,english,62,60.76923,79,130,upper,multiple,multi credit,6,6,5,5,5,6
+4.5,tenured,not minority,male,english,62,61.75439,176,285,upper,single,multi credit,6,6,5,5,5,6
+4.8,tenured,not minority,male,english,62,56.98529,155,272,upper,multiple,multi credit,6,6,5,5,5,6
+4.9,tenured,not minority,male,english,62,58.04196,166,286,upper,multiple,multi credit,6,6,5,5,5,6
+4.5,tenured,not minority,male,english,62,61.58941,186,302,upper,single,multi credit,6,6,5,5,5,6
+4.4,tenure track,not minority,female,english,33,80.48781,33,41,upper,single,multi credit,4,4,5,4,4,4
+4.3,tenure track,not minority,female,english,33,85.29412,29,34,upper,single,multi credit,4,4,5,4,4,4
+4.1,tenure track,not minority,female,english,33,90.2439,37,41,upper,single,multi credit,4,4,5,4,4,4
+4.2,tenure track,not minority,female,english,33,70.7317,29,41,upper,single,multi credit,4,4,5,4,4,4
+3.5,tenure track,not minority,female,english,33,82.35294,28,34,upper,single,multi credit,4,4,5,4,4,4
+3.4,tenured,not minority,female,english,51,60.97561,25,41,upper,multiple,multi credit,4,6,6,2,3,3
+4.5,tenured,not minority,female,english,51,95.45454,21,22,upper,multiple,multi credit,4,6,6,2,3,3
+4.4,tenured,not minority,female,english,51,61.90476,13,21,upper,multiple,multi credit,4,6,6,2,3,3
+4.4,tenured,not minority,female,english,51,94.11765,16,17,upper,multiple,multi credit,4,6,6,2,3,3
+2.5,tenured,not minority,female,english,51,80,24,30,lower,multiple,multi credit,4,6,6,2,3,3
+4.3,tenured,not minority,female,english,51,100,23,23,upper,multiple,multi credit,4,6,6,2,3,3
+4.5,tenured,not minority,female,english,51,100,20,20,upper,multiple,multi credit,4,6,6,2,3,3
+4.8,tenure track,not minority,female,english,33,80,48,60,upper,multiple,multi credit,3,7,5,5,3,5
+4.8,tenure track,not minority,female,english,33,87.87878,29,33,upper,single,multi credit,3,7,5,5,3,5
+4.4,tenure track,not minority,female,english,33,25,11,44,upper,multiple,multi credit,3,7,5,5,3,5
+4.7,tenure track,not minority,female,english,33,59.18367,29,49,upper,single,multi credit,3,7,5,5,3,5
+4.4,tenure track,not minority,female,english,33,86.20689,25,29,upper,single,multi credit,3,7,5,5,3,5
+4.7,tenure track,not minority,female,english,33,87.5,42,48,upper,multiple,multi credit,3,7,5,5,3,5
+4.5,tenure track,not minority,female,english,33,85,34,40,upper,multiple,multi credit,3,7,5,5,3,5
+4,teaching,not minority,male,english,47,84.21053,16,19,upper,single,multi credit,5,7,6,3,6,6
+4.3,teaching,not minority,male,english,47,75,12,16,upper,multiple,multi credit,5,7,6,3,6,6
+4.4,teaching,not minority,male,english,47,93.33334,14,15,upper,single,multi credit,5,7,6,3,6,6
+4.5,teaching,not minority,male,english,47,95.65218,22,23,upper,single,multi credit,5,7,6,3,6,6
+5,teaching,not minority,male,english,47,90.90909,10,11,lower,multiple,multi credit,5,7,6,3,6,6
+4.9,teaching,not minority,male,english,47,58.62069,17,29,lower,multiple,multi credit,5,7,6,3,6,6
+4.6,teaching,not minority,male,english,47,76.19048,16,21,upper,multiple,multi credit,5,7,6,3,6,6
+5,teaching,not minority,male,english,47,83.33334,15,18,lower,multiple,multi credit,5,7,6,3,6,6
+4.7,teaching,not minority,male,english,47,84.21053,16,19,upper,single,multi credit,5,7,6,3,6,6
+5,teaching,not minority,male,english,47,80,16,20,lower,multiple,multi credit,5,7,6,3,6,6
+3.6,tenure track,minority,male,non-english,35,72,18,25,upper,single,multi credit,5,7,4,2,4,7
+3.7,tenure track,minority,male,non-english,35,90.90909,30,33,upper,single,multi credit,5,7,4,2,4,7
+4.3,tenure track,minority,male,non-english,35,95.83334,23,24,upper,single,multi credit,5,7,4,2,4,7
+4.1,teaching,not minority,male,english,37,88.23529,30,34,upper,multiple,multi credit,4,5,5,3,5,4
+4.2,teaching,not minority,male,english,37,61.90476,13,21,upper,single,multi credit,4,5,5,3,5,4
+4.7,teaching,not minority,male,english,37,80,24,30,upper,multiple,multi credit,4,5,5,3,5,4
+4.7,teaching,not minority,male,english,37,96,24,25,upper,multiple,multi credit,4,5,5,3,5,4
+3.5,teaching,not minority,male,english,37,71.42857,25,35,upper,multiple,multi credit,4,5,5,3,5,4
+4.1,tenured,not minority,male,english,42,70,28,40,upper,multiple,multi credit,4,7,5,4,4,5
+4.2,tenured,not minority,male,english,42,60,18,30,upper,multiple,multi credit,4,7,5,4,4,5
+4,tenured,not minority,male,english,42,66.66666,28,42,upper,multiple,multi credit,4,7,5,4,4,5
+4,tenured,not minority,male,english,42,43.85965,25,57,upper,single,multi credit,4,7,5,4,4,5
+3.9,tenured,not minority,male,english,42,70.17544,40,57,upper,single,multi credit,4,7,5,4,4,5
+4.4,tenured,not minority,male,english,42,78.43137,40,51,upper,single,multi credit,4,7,5,4,4,5
+3.8,tenured,not minority,male,english,42,60,18,30,upper,multiple,multi credit,4,7,5,4,4,5
+3.5,tenured,not minority,male,non-english,49,83.33334,30,36,upper,multiple,multi credit,3,3,5,1,7,5
+4.2,tenured,not minority,male,non-english,49,83.78378,31,37,upper,single,multi credit,3,3,5,1,7,5
+3.5,tenured,not minority,male,non-english,49,51.72414,15,29,upper,multiple,multi credit,3,3,5,1,7,5
+3.6,tenured,not minority,male,non-english,49,85.18519,23,27,upper,single,multi credit,3,3,5,1,7,5
+2.9,tenure track,not minority,female,english,37,82.14286,23,28,upper,single,multi credit,6,7,7,5,4,4
+3.3,tenure track,not minority,female,english,37,65.38461,34,52,upper,multiple,multi credit,6,7,7,5,4,4
+3.3,tenure track,not minority,female,english,37,80.76923,21,26,upper,single,multi credit,6,7,7,5,4,4
+3.2,tenure track,not minority,female,english,37,96.66666,29,30,upper,single,multi credit,6,7,7,5,4,4
+4.6,tenured,not minority,male,english,45,69.69697,23,33,upper,single,multi credit,2,4,3,5,4,7
+4.2,tenured,not minority,male,english,45,25.42373,45,177,lower,single,multi credit,2,4,3,5,4,7
+4.3,tenured,not minority,male,english,45,45.22613,90,199,lower,single,multi credit,2,4,3,5,4,7
+4.4,tenured,not minority,male,english,45,84.375,27,32,upper,single,multi credit,2,4,3,5,4,7
+4.1,tenured,not minority,male,english,45,94.5946,35,37,upper,single,multi credit,2,4,3,5,4,7
+4.6,tenured,not minority,male,english,45,74.53416,120,161,lower,single,multi credit,2,4,3,5,4,7
+4.4,teaching,not minority,female,english,56,65.85366,27,41,upper,single,multi credit,3,4,1,2,2,3
+4.8,teaching,not minority,female,english,56,88.63636,39,44,upper,single,multi credit,3,4,1,2,2,3
+4.3,teaching,not minority,female,english,56,66.03773,35,53,upper,multiple,multi credit,3,4,1,2,2,3
+3.6,teaching,not minority,female,english,56,69.38776,34,49,upper,multiple,multi credit,3,4,1,2,2,3
+4.3,teaching,not minority,female,english,56,84.375,27,32,upper,single,multi credit,3,4,1,2,2,3
+4,teaching,not minority,male,english,48,74.07407,100,135,lower,multiple,multi credit,3,5,6,4,4,4
+4.2,teaching,not minority,male,english,48,60.60606,20,33,upper,multiple,multi credit,3,5,6,4,4,4
+4.1,teaching,not minority,male,english,48,73.68421,14,19,upper,multiple,multi credit,3,5,6,4,4,4
+4.1,teaching,not minority,male,english,48,58.55856,65,111,lower,multiple,multi credit,3,5,6,4,4,4
+4.4,teaching,not minority,male,english,48,63.75839,95,149,lower,multiple,multi credit,3,5,6,4,4,4
+4.3,teaching,not minority,male,english,48,66.66666,18,27,upper,multiple,multi credit,3,5,6,4,4,4
+4.4,teaching,not minority,male,english,48,62.5,85,136,lower,multiple,multi credit,3,5,6,4,4,4
+4.4,teaching,not minority,male,english,48,80.71429,113,140,lower,multiple,multi credit,3,5,6,4,4,4
+4.9,tenured,not minority,female,english,46,80.64516,25,31,upper,multiple,multi credit,4,4,5,2,6,5
+5,tenured,not minority,female,english,46,93.33334,14,15,lower,multiple,multi credit,4,4,5,2,6,5
+4.4,tenured,not minority,female,english,46,79.31035,23,29,upper,multiple,multi credit,4,4,5,2,6,5
+4.8,tenured,not minority,female,english,46,92,23,25,upper,multiple,multi credit,4,4,5,2,6,5
+4.9,tenured,not minority,female,english,46,50,9,18,upper,multiple,multi credit,4,4,5,2,6,5
+4.3,tenured,not minority,female,english,46,66.66666,30,45,upper,multiple,multi credit,4,4,5,2,6,5
+5,tenured,not minority,female,english,46,100,15,15,lower,multiple,multi credit,4,4,5,2,6,5
+4.7,tenured,not minority,female,english,46,81.57895,31,38,upper,multiple,multi credit,4,4,5,2,6,5
+4.5,tenured,not minority,female,english,46,80,12,15,lower,multiple,multi credit,4,4,5,2,6,5
+3.5,teaching,not minority,female,english,57,60.71429,17,28,upper,multiple,multi credit,5,4,4,5,2,6
+3.9,teaching,not minority,female,english,57,43.47826,10,23,upper,multiple,multi credit,5,4,4,5,2,6
+4,teaching,not minority,female,english,57,78.94736,15,19,upper,multiple,multi credit,5,4,4,5,2,6
+4,teaching,not minority,female,english,57,30.43478,7,23,upper,multiple,multi credit,5,4,4,5,2,6
+3.7,teaching,not minority,female,english,57,31.81818,7,22,upper,multiple,multi credit,5,4,4,5,2,6
+3.4,teaching,not minority,female,english,57,70,14,20,upper,multiple,multi credit,5,4,4,5,2,6
+3.3,teaching,not minority,female,english,57,42.10526,8,19,upper,multiple,multi credit,5,4,4,5,2,6
+3.8,teaching,not minority,female,english,57,73.91304,17,23,upper,multiple,multi credit,5,4,4,5,2,6
+3.9,teaching,not minority,female,english,57,45.45454,10,22,upper,multiple,multi credit,5,4,4,5,2,6
+3.4,teaching,not minority,female,english,57,80,12,15,upper,multiple,multi credit,5,4,4,5,2,6
+3.7,teaching,not minority,female,english,52,86.36364,19,22,upper,single,multi credit,6,6,4,2,4,7
+4.1,teaching,not minority,female,english,52,87.09677,27,31,upper,multiple,multi credit,6,6,4,2,4,7
+3.7,teaching,not minority,female,english,52,95.2381,20,21,upper,multiple,multi credit,6,6,4,2,4,7
+3.5,teaching,not minority,female,english,52,86.11111,31,36,upper,multiple,multi credit,6,6,4,2,4,7
+3.5,teaching,not minority,female,english,52,89.47369,17,19,upper,multiple,one credit,6,6,4,2,4,7
+4.4,teaching,not minority,female,english,52,62.16216,23,37,upper,single,multi credit,6,6,4,2,4,7
+3.4,tenure track,minority,female,non-english,29,73.07692,19,26,upper,single,multi credit,3,3,4,2,3,2
+4.3,tenured,not minority,male,english,62,76.92308,30,39,upper,single,multi credit,4,3,4,1,2,4
+3.7,tenured,not minority,male,english,62,51.08696,94,184,lower,single,multi credit,4,3,4,1,2,4
+4.7,tenured,not minority,male,english,62,92,46,50,upper,single,multi credit,4,3,4,1,2,4
+3.9,tenured,not minority,male,english,62,50.95541,80,157,lower,single,multi credit,4,3,4,1,2,4
+3.6,tenured,not minority,male,english,62,37.19512,61,164,lower,single,multi credit,4,3,4,1,2,4
+4.5,tenured,not minority,male,english,64,62.5,15,24,upper,multiple,multi credit,5,4,5,3,3,5
+4.5,tenured,not minority,male,english,64,75,51,68,upper,multiple,multi credit,5,4,5,3,3,5
+4.8,tenured,not minority,male,english,64,46.80851,22,47,upper,multiple,multi credit,5,4,5,3,3,5
+4.8,tenured,not minority,male,english,64,71.42857,10,14,upper,multiple,multi credit,5,4,5,3,3,5
+4.7,tenured,not minority,male,english,64,73.33334,11,15,upper,multiple,multi credit,5,4,5,3,3,5
+4.5,tenured,not minority,male,english,64,62.5,15,24,upper,multiple,multi credit,5,4,5,3,3,5
+4.3,tenured,not minority,male,english,64,53.84615,21,39,upper,multiple,multi credit,5,4,5,3,3,5
+4.8,tenure track,not minority,female,english,34,76.92308,20,26,upper,multiple,multi credit,8,9,8,6,8,8
+4.1,tenure track,not minority,female,english,34,82.5,33,40,upper,multiple,multi credit,8,9,8,6,8,8
+4.4,tenured,not minority,male,english,58,52.83019,84,159,upper,single,multi credit,4,4,5,2,4,4
+4.3,tenured,not minority,male,english,58,47.01987,71,151,upper,single,multi credit,4,4,5,2,4,4
+3.6,tenured,not minority,male,english,58,76.59574,36,47,lower,single,multi credit,4,4,5,2,4,4
+4.5,tenured,not minority,male,english,58,59.83607,73,122,upper,single,multi credit,4,4,5,2,4,4
+4.3,tenured,not minority,male,english,58,68.88889,31,45,lower,single,multi credit,4,4,5,2,4,4
+4.4,tenured,minority,male,non-english,52,81.25,13,16,upper,single,multi credit,4,5,7,5,4,4
+4.7,tenured,minority,male,non-english,52,100,23,23,upper,single,multi credit,4,5,7,5,4,4
+4.8,tenured,minority,male,non-english,52,75,12,16,upper,single,multi credit,4,5,7,5,4,4
+3.5,tenured,minority,male,non-english,52,83.33334,15,18,upper,single,multi credit,4,5,7,5,4,4
+3.8,tenured,minority,male,non-english,52,68.75,11,16,upper,single,multi credit,4,5,7,5,4,4
+3.6,tenured,minority,male,non-english,52,80,12,15,upper,single,multi credit,4,5,7,5,4,4
+4.2,tenured,minority,male,non-english,52,64.28571,18,28,upper,multiple,multi credit,4,5,7,5,4,4
+3.6,tenured,not minority,male,english,73,70.58823,12,17,upper,single,multi credit,1,3,6,2,1,5
+4.4,tenured,not minority,male,english,73,76.92308,10,13,upper,single,multi credit,1,3,6,2,1,5
+3.7,tenured,not minority,male,english,73,76.19048,16,21,upper,multiple,multi credit,1,3,6,2,1,5
+4.3,tenured,not minority,male,english,73,76.47059,13,17,upper,single,multi credit,1,3,6,2,1,5
+4.6,tenured,not minority,male,english,70,35.07463,47,134,upper,single,multi credit,5,3,2,3,3,2
+4.6,tenured,not minority,male,english,70,10.41667,5,48,upper,single,multi credit,5,3,2,3,3,2
+4.1,tenured,not minority,male,english,70,53.125,34,64,upper,single,multi credit,5,3,2,3,3,2
+3.6,tenured,not minority,male,english,70,34.78261,24,69,upper,single,multi credit,5,3,2,3,3,2
+2.3,tenure track,not minority,female,english,41,83.33334,10,12,upper,single,multi credit,3,6,7,4,4,7
+4.3,teaching,not minority,male,english,63,65.11628,28,43,upper,single,multi credit,5,4,6,4,2,5
+4.4,teaching,not minority,male,english,63,78.57143,11,14,upper,multiple,multi credit,5,4,6,4,2,5
+3.6,teaching,not minority,male,english,63,66.66666,10,15,upper,single,multi credit,5,4,6,4,2,5
+4.4,teaching,not minority,male,english,63,77.77778,14,18,upper,multiple,multi credit,5,4,6,4,2,5
+3.9,teaching,not minority,male,english,63,75,12,16,upper,multiple,multi credit,5,4,6,4,2,5
+3.8,teaching,not minority,male,english,63,80,8,10,upper,multiple,multi credit,5,4,6,4,2,5
+3.4,teaching,not minority,male,english,63,48.93617,23,47,upper,multiple,multi credit,5,4,6,4,2,5
+4.9,tenured,not minority,male,english,47,66.66666,10,15,upper,multiple,multi credit,1,4,3,2,3,3
+4.1,tenured,not minority,male,english,47,71.42857,10,14,upper,multiple,multi credit,1,4,3,2,3,3
+3.2,tenured,not minority,male,english,47,83.33334,10,12,upper,single,multi credit,1,4,3,2,3,3
+4.2,tenured,not minority,male,english,39,34.95935,86,246,lower,multiple,multi credit,5,6,6,6,5,5
+3.9,tenured,not minority,male,english,39,48.73418,154,316,lower,multiple,multi credit,5,6,6,6,5,5
+4.9,tenured,not minority,male,english,39,80,12,15,upper,multiple,multi credit,5,6,6,6,5,5
+4.7,tenured,not minority,male,english,39,93.33334,14,15,upper,multiple,multi credit,5,6,6,6,5,5
+4.4,tenured,not minority,male,english,39,93.10345,27,29,upper,single,multi credit,5,6,6,6,5,5
+4.2,tenure track,minority,female,english,47,100,21,21,lower,single,multi credit,2,6,6,3,5,4
+4,tenure track,minority,female,english,47,100,8,8,upper,multiple,multi credit,2,6,6,3,5,4
+4.4,tenure track,minority,female,english,47,100,16,16,lower,single,one credit,2,6,6,3,5,4
+3.9,tenure track,minority,female,english,47,92.30769,24,26,lower,single,multi credit,2,6,6,3,5,4
+4.4,tenure track,minority,female,english,47,70,7,10,upper,multiple,multi credit,2,6,6,3,5,4
+3,tenure track,minority,female,english,47,96.15385,25,26,lower,single,multi credit,2,6,6,3,5,4
+3.5,tenure track,minority,female,english,47,92.30769,24,26,lower,single,multi credit,2,6,6,3,5,4
+2.8,tenure track,minority,female,english,47,92.30769,24,26,lower,single,multi credit,2,6,6,3,5,4
+4.6,tenure track,minority,female,english,47,95.2381,20,21,lower,single,one credit,2,6,6,3,5,4
+4.3,tenure track,minority,female,english,47,100,12,12,lower,single,multi credit,2,6,6,3,5,4
+3.4,tenure track,minority,female,english,47,92.59259,25,27,lower,single,multi credit,2,6,6,3,5,4
+3,tenure track,minority,female,english,47,96.2963,26,27,lower,single,multi credit,2,6,6,3,5,4
+4.2,tenure track,minority,female,english,47,96,24,25,lower,single,multi credit,2,6,6,3,5,4
+4.3,tenured,not minority,male,english,54,100,15,15,upper,single,multi credit,1,2,4,1,2,4
+4.1,tenured,not minority,male,english,54,66.66666,10,15,upper,single,multi credit,1,2,4,1,2,4
+4.6,tenured,not minority,male,english,54,94.11765,16,17,upper,single,multi credit,1,2,4,1,2,4
+3.9,tenured,minority,female,english,44,54.54546,30,55,upper,multiple,multi credit,6,8,8,5,7,5
+3.5,tenured,minority,female,english,44,72.91666,35,48,upper,single,multi credit,6,8,8,5,7,5
+4,tenured,minority,female,english,44,100,21,21,upper,multiple,multi credit,6,8,8,5,7,5
+4,tenured,minority,female,english,44,89.74359,35,39,upper,multiple,multi credit,6,8,8,5,7,5
+3.9,tenured,minority,male,english,47,74.07407,20,27,upper,single,multi credit,2,2,2,2,2,4
+3.3,tenured,minority,male,english,47,64.28571,9,14,upper,single,multi credit,2,2,2,2,2,4
+4,tenured,minority,male,english,47,80.76923,21,26,upper,single,multi credit,2,2,2,2,2,4
+3.8,tenured,minority,male,english,47,81.25,13,16,upper,multiple,multi credit,2,2,2,2,2,4
+4.2,tenured,minority,male,english,47,81.25,13,16,upper,multiple,multi credit,2,2,2,2,2,4
+4,tenured,minority,male,english,47,92.30769,12,13,upper,multiple,multi credit,2,2,2,2,2,4
+3.8,tenured,minority,male,english,47,100,14,14,upper,single,multi credit,2,2,2,2,2,4
+3.3,tenured,minority,male,english,47,88.23529,15,17,upper,multiple,multi credit,2,2,2,2,2,4
+4.1,tenured,not minority,male,english,62,92.30769,12,13,upper,multiple,multi credit,3,2,5,3,2,3
+4.7,tenured,not minority,male,english,62,86.66666,13,15,upper,single,multi credit,3,2,5,3,2,3
+4.4,tenured,not minority,male,english,62,70,7,10,upper,multiple,multi credit,3,2,5,3,2,3
+4.8,tenured,not minority,male,english,60,73.52941,25,34,upper,multiple,multi credit,4,4,6,2,2,4
+4.8,tenured,not minority,male,english,60,75,12,16,upper,single,multi credit,4,4,6,2,2,4
+4.6,tenured,not minority,male,english,60,78.57143,11,14,upper,single,multi credit,4,4,6,2,2,4
+4.6,tenured,not minority,male,english,60,66.66666,8,12,upper,single,multi credit,4,4,6,2,2,4
+4.8,tenured,not minority,male,english,60,61.53846,24,39,upper,single,multi credit,4,4,6,2,2,4
+4.4,tenured,not minority,male,english,60,42.85714,15,35,upper,single,multi credit,4,4,6,2,2,4
+4.7,tenured,not minority,male,english,60,68.88889,31,45,upper,multiple,multi credit,4,4,6,2,2,4
+4.7,tenured,not minority,male,english,60,80,36,45,lower,multiple,multi credit,4,4,6,2,2,4
+3.3,tenure track,not minority,male,english,37,88.23529,15,17,upper,single,multi credit,4,8,7,5,5,8
+4.4,tenure track,not minority,male,english,42,92.85714,13,14,upper,multiple,multi credit,3,5,3,3,6,4
+4.3,tenure track,not minority,male,english,42,100,14,14,upper,multiple,multi credit,3,5,3,3,6,4
+4.9,tenure track,not minority,male,english,42,92.85714,13,14,upper,multiple,multi credit,3,5,3,3,6,4
+4.4,tenure track,not minority,male,english,42,100,12,12,upper,multiple,multi credit,3,5,3,3,6,4
+4.7,tenure track,not minority,male,english,42,86.66666,13,15,upper,multiple,multi credit,3,5,3,3,6,4
+4.3,tenured,not minority,male,english,35,82.35294,42,51,upper,single,multi credit,4,7,2,6,4,6
+4.8,tenured,not minority,male,english,35,91.30434,21,23,lower,multiple,multi credit,4,7,2,6,4,6
+4.5,tenured,not minority,male,english,35,85.96491,49,57,upper,single,multi credit,4,7,2,6,4,6
+4.7,tenured,not minority,male,english,35,88,44,50,lower,multiple,multi credit,4,7,2,6,4,6
+3.3,teaching,not minority,female,english,39,91.66666,22,24,lower,single,multi credit,8,8,8,7,9,9
+4.7,teaching,not minority,female,english,39,78.26087,18,23,upper,multiple,multi credit,8,8,8,7,9,9
+4.6,teaching,not minority,female,english,39,86.95652,20,23,upper,multiple,multi credit,8,8,8,7,9,9
+3.6,teaching,not minority,female,english,39,96.42857,27,28,lower,single,multi credit,8,8,8,7,9,9
+4,tenured,not minority,male,english,49,62.22222,28,45,upper,single,multi credit,6,6,7,6,9,5
+4.1,tenured,not minority,male,english,49,64.28571,27,42,upper,single,multi credit,6,6,7,6,9,5
+4,tenured,not minority,male,english,49,85.96491,49,57,upper,single,multi credit,6,6,7,6,9,5
+4.5,tenured,not minority,male,english,61,81.48148,22,27,lower,single,multi credit,5,5,4,4,5,6
+4.6,tenured,not minority,male,english,61,81.57895,31,38,upper,multiple,multi credit,5,5,4,4,5,6
+4.8,tenured,not minority,male,english,61,86.36364,19,22,lower,single,multi credit,5,5,4,4,5,6
+4.6,tenured,not minority,male,english,61,62.7907,27,43,upper,multiple,multi credit,5,5,4,4,5,6
+4.9,tenure track,not minority,male,english,33,96.77419,30,31,upper,single,multi credit,7,8,7,6,7,7
+3.1,tenure track,not minority,male,english,33,92.30769,12,13,upper,single,multi credit,7,8,7,6,7,7
+3.7,tenure track,not minority,male,english,33,86.66666,13,15,upper,single,multi credit,7,8,7,6,7,7
+3.7,tenured,not minority,female,english,58,76.47059,26,34,upper,single,multi credit,3,6,7,2,4,6
+3.9,tenured,not minority,female,english,56,63.15789,12,19,upper,single,multi credit,2,4,4,4,3,6
+3.9,tenured,not minority,female,english,56,80,16,20,upper,single,multi credit,2,4,4,4,3,6
+3.2,tenured,not minority,female,english,56,73.91304,17,23,upper,single,multi credit,2,4,4,4,3,6
+4.4,teaching,not minority,female,english,50,81.48148,22,27,lower,single,multi credit,2,3,5,2,3,4
+4.2,teaching,not minority,female,english,50,75,24,32,lower,single,one credit,2,3,5,2,3,4
+4.7,teaching,not minority,female,english,50,66.66666,14,21,lower,single,one credit,2,3,5,2,3,4
+3.9,teaching,not minority,female,english,50,95.83334,23,24,upper,multiple,multi credit,2,3,5,2,3,4
+3.6,teaching,not minority,female,english,50,90.47619,19,21,upper,multiple,multi credit,2,3,5,2,3,4
+3.4,teaching,not minority,female,english,50,64.28571,18,28,upper,multiple,multi credit,2,3,5,2,3,4
+4.4,teaching,not minority,female,english,50,79.31035,23,29,upper,multiple,multi credit,2,3,5,2,3,4
+4.4,tenured,not minority,male,english,52,85.07462,57,67,upper,multiple,multi credit,4,3,5,2,2,3
+4.1,tenured,not minority,male,english,52,91.01124,81,89,upper,multiple,multi credit,4,3,5,2,2,3
+3.6,tenured,not minority,male,english,52,90.2439,74,82,upper,multiple,multi credit,4,3,5,2,2,3
+3.5,tenured,not minority,male,english,52,83.60656,102,122,upper,multiple,multi credit,4,3,5,2,2,3
+4.1,tenured,not minority,male,english,52,71.75572,94,131,upper,multiple,multi credit,4,3,5,2,2,3
+3.8,tenured,not minority,male,english,52,78.07018,89,114,upper,multiple,multi credit,4,3,5,2,2,3
+4,tenured,not minority,male,english,52,89.26174,133,149,upper,multiple,multi credit,4,3,5,2,2,3
+4.8,tenured,not minority,male,english,52,95.65218,22,23,upper,single,multi credit,4,3,5,2,2,3
+4.2,tenured,not minority,male,english,52,79.59184,78,98,upper,multiple,multi credit,4,3,5,2,2,3
+4.6,tenured,not minority,male,english,52,81.48148,22,27,upper,single,multi credit,4,3,5,2,2,3
+4.3,tenured,not minority,male,english,52,90,27,30,upper,single,multi credit,4,3,5,2,2,3
+4.8,tenured,not minority,male,english,52,90,27,30,upper,single,multi credit,4,3,5,2,2,3
+3.8,tenured,not minority,male,english,52,86.95652,60,69,upper,multiple,multi credit,4,3,5,2,2,3
+4.5,tenure track,not minority,female,english,33,66.66666,10,15,upper,multiple,multi credit,3,7,9,4,5,7
+4.9,tenure track,not minority,female,english,33,100,10,10,upper,multiple,multi credit,3,7,9,4,5,7
+4.9,tenure track,not minority,female,english,33,90.90909,10,11,upper,multiple,multi credit,3,7,9,4,5,7
+4.8,tenure track,not minority,female,english,33,71.42857,10,14,upper,multiple,multi credit,3,7,9,4,5,7
+4.7,tenure track,not minority,female,english,33,63.63636,7,11,upper,multiple,multi credit,3,7,9,4,5,7
+4.6,tenure track,not minority,female,english,33,100,14,14,upper,multiple,multi credit,3,7,9,4,5,7
+4.3,tenured,not minority,male,english,57,89.61039,69,77,upper,multiple,multi credit,5,6,6,5,7,5
+4.4,tenured,not minority,male,english,57,87.80488,36,41,upper,single,multi credit,5,6,6,5,7,5
+4.5,tenured,not minority,male,english,57,81.81818,72,88,upper,multiple,multi credit,5,6,6,5,7,5
+4.2,tenured,not minority,male,english,57,80.76923,63,78,upper,multiple,multi credit,5,6,6,5,7,5
+4.8,tenured,not minority,female,english,38,70.76923,46,65,upper,single,multi credit,6,8,9,4,5,7
+4.6,tenured,not minority,female,english,38,69.42675,109,157,lower,multiple,multi credit,6,8,9,4,5,7
+4.9,tenured,not minority,female,english,38,79.41177,54,68,upper,single,multi credit,6,8,9,4,5,7
+4.8,tenured,not minority,female,english,38,76.1194,51,67,upper,single,multi credit,6,8,9,4,5,7
+4.8,tenured,not minority,female,english,38,76.25,61,80,upper,single,multi credit,6,8,9,4,5,7
+4.6,tenured,not minority,female,english,38,74.45255,102,137,lower,multiple,multi credit,6,8,9,4,5,7
+4.7,tenured,not minority,female,english,38,84.05797,58,69,upper,multiple,multi credit,6,8,9,4,5,7
+4.1,tenure track,not minority,female,english,34,59.34066,54,91,lower,multiple,multi credit,2,1,4,1,1,1
+3.8,tenure track,not minority,female,english,34,57.5,46,80,lower,multiple,multi credit,2,1,4,1,1,1
+4,tenure track,not minority,female,english,34,58.88889,53,90,lower,multiple,multi credit,2,1,4,1,1,1
+4.1,tenure track,not minority,female,english,34,55.88235,19,34,upper,multiple,multi credit,2,1,4,1,1,1
+4,tenure track,not minority,female,english,34,56.16438,41,73,upper,multiple,multi credit,2,1,4,1,1,1
+4.1,tenure track,not minority,female,english,34,56.81818,25,44,upper,multiple,multi credit,2,1,4,1,1,1
+3.5,tenure track,not minority,male,english,34,66.66666,24,36,upper,multiple,multi credit,6,7,7,6,8,6
+4.1,tenure track,not minority,male,english,34,80,16,20,upper,single,multi credit,6,7,7,6,8,6
+3.6,tenure track,not minority,male,english,34,57.14286,20,35,lower,multiple,multi credit,6,7,7,6,8,6
+4,tenure track,not minority,male,english,32,34.27419,85,248,lower,multiple,multi credit,3,7,3,3,3,3
+3.9,tenure track,not minority,male,english,32,41.07143,69,168,lower,multiple,multi credit,3,7,3,3,3,3
+3.8,tenure track,not minority,male,english,32,39.67611,98,247,lower,multiple,multi credit,3,7,3,3,3,3
+4.4,tenure track,not minority,male,english,32,90.90909,20,22,upper,single,multi credit,3,8,3,3,3,3
+4.7,tenure track,not minority,male,english,32,69.90292,72,103,upper,multiple,multi credit,3,8,3,3,3,3
+3.8,tenured,not minority,female,english,42,70.96774,44,62,lower,multiple,multi credit,5,5,8,6,8,5
+4.1,tenured,not minority,female,english,42,62.19512,51,82,upper,multiple,multi credit,5,5,8,6,8,5
+4.1,tenured,not minority,female,english,43,68.62745,35,51,lower,multiple,multi credit,2,3,5,3,3,4
+4.7,tenured,not minority,female,english,43,51.42857,18,35,upper,multiple,multi credit,2,3,5,3,3,4
+4.3,tenured,not minority,female,english,43,76.47059,26,34,lower,multiple,multi credit,2,3,5,3,3,4
+4.4,tenured,not minority,female,english,43,75.67567,28,37,lower,multiple,multi credit,2,3,5,3,3,4
+4.5,tenured,not minority,female,english,43,92.85714,13,14,lower,multiple,multi credit,2,3,5,3,3,4
+3.1,tenured,not minority,female,english,43,65.41354,174,266,lower,multiple,multi credit,2,3,5,3,3,4
+3.7,tenured,not minority,female,english,43,67.32284,171,254,lower,multiple,multi credit,2,3,5,3,3,4
+4.5,tenured,not minority,female,english,43,76.92308,10,13,upper,multiple,multi credit,2,3,5,3,3,4
+3,tenured,not minority,female,english,43,58.86525,166,282,lower,multiple,multi credit,2,3,5,3,3,4
+4.6,tenured,not minority,female,english,43,100,17,17,upper,multiple,multi credit,2,3,5,3,3,4
+3.7,tenure track,not minority,male,non-english,35,57.89474,11,19,upper,single,multi credit,4,3,3,4,3,5
+3.6,tenure track,not minority,male,non-english,35,52.38095,22,42,lower,multiple,multi credit,4,3,3,4,3,5
+3.2,tenured,not minority,female,english,62,81.48148,22,27,upper,multiple,multi credit,1,5,5,1,4,5
+3.3,tenured,not minority,female,english,62,56.25,9,16,upper,multiple,multi credit,1,5,5,1,4,5
+2.9,tenured,not minority,female,english,62,73.68421,14,19,upper,multiple,multi credit,1,5,5,1,4,5
+4.2,tenured,not minority,male,english,42,52.32558,45,86,upper,multiple,multi credit,3,1,6,1,1,4
+4.5,tenured,not minority,male,english,39,75.86207,22,29,upper,multiple,multi credit,5,8,6,4,5,6
+3.8,tenured,not minority,female,english,52,72.72727,64,88,upper,multiple,multi credit,5,7,7,3,8,6
+3.7,tenured,not minority,female,english,52,71.42857,70,98,upper,multiple,multi credit,5,7,7,3,8,6
+3.7,tenured,not minority,female,english,52,70.45454,31,44,upper,multiple,multi credit,6,7,9,5,6,6
+4,tenured,not minority,female,english,52,75.38461,49,65,upper,multiple,multi credit,6,7,9,5,6,6
+3.7,tenured,not minority,female,english,52,50.79365,32,63,upper,multiple,multi credit,6,7,9,5,6,6
+4.5,teaching,not minority,female,english,52,78.66666,59,75,upper,multiple,multi credit,2,3,4,2,1,2
+3.8,teaching,not minority,female,english,52,81.39535,35,43,upper,multiple,multi credit,2,3,4,2,1,2
+3.9,teaching,not minority,female,english,52,73.75,59,80,upper,multiple,multi credit,2,3,4,2,1,2
+4.6,teaching,not minority,female,english,52,86.53846,45,52,upper,multiple,multi credit,2,3,4,2,1,2
+4.5,teaching,not minority,female,english,52,70.83334,34,48,upper,multiple,multi credit,2,3,4,2,1,2
+4.2,teaching,not minority,female,english,52,75.75758,50,66,upper,multiple,multi credit,2,3,4,2,1,2
+4,teaching,not minority,female,english,52,67,67,100,upper,multiple,multi credit,2,3,4,2,1,2
+3.8,tenured,not minority,male,english,64,81.81818,9,11,upper,multiple,multi credit,2,3,3,2,1,3
+3.5,tenured,not minority,male,english,64,50,8,16,upper,multiple,multi credit,2,3,3,2,1,3
+2.7,tenured,not minority,male,english,64,81.81818,18,22,upper,multiple,multi credit,2,3,3,2,1,3
+4,tenured,not minority,male,english,64,45.45454,5,11,upper,multiple,multi credit,2,3,3,2,1,3
+4.6,tenured,not minority,male,english,64,50,5,10,upper,multiple,multi credit,2,3,3,2,1,3
+3.9,tenured,not minority,male,english,64,100,16,16,upper,multiple,multi credit,2,3,3,2,1,3
+4.5,tenured,not minority,male,english,50,93.75,15,16,upper,multiple,multi credit,6,7,9,6,8,7
+3.7,tenured,not minority,male,english,50,90,9,10,upper,multiple,multi credit,6,7,9,6,8,7
+2.4,tenured,not minority,male,english,60,71.875,23,32,upper,multiple,multi credit,1,1,2,2,2,2
+3.1,tenured,not minority,male,english,60,70,7,10,upper,multiple,multi credit,1,1,2,2,2,2
+2.5,tenured,not minority,male,english,60,62.5,10,16,upper,multiple,multi credit,1,1,2,2,2,2
+3,tenured,not minority,female,english,51,70.14925,47,67,upper,multiple,multi credit,4,5,7,4,5,6
+4.5,tenure track,not minority,male,english,43,86.36364,19,22,lower,multiple,multi credit,3,4,4,2,4,4
+4.8,tenure track,not minority,male,english,43,53.57143,15,28,lower,multiple,one credit,3,4,4,2,4,4
+4.9,tenure track,not minority,male,english,43,60,18,30,lower,multiple,one credit,3,4,4,2,4,4
+4.5,tenure track,not minority,male,english,43,73.33334,11,15,lower,multiple,multi credit,3,4,4,2,4,4
+4.6,tenure track,not minority,male,english,43,76.92308,10,13,lower,multiple,multi credit,3,4,4,2,4,4
+4.5,tenure track,not minority,male,english,43,94.44444,17,18,lower,multiple,one credit,3,4,4,2,4,4
+4.9,tenure track,not minority,male,english,43,84.61539,22,26,lower,multiple,one credit,3,4,4,2,4,4
+4.4,tenure track,not minority,male,english,43,60,18,30,lower,multiple,one credit,3,4,4,2,4,4
+4.6,tenure track,not minority,male,english,43,100,14,14,lower,multiple,multi credit,3,4,4,2,4,4
+4.6,teaching,minority,male,english,50,70.83334,17,24,lower,multiple,one credit,1,5,4,1,4,5
+5,teaching,minority,male,english,50,90.90909,20,22,lower,multiple,one credit,1,5,4,1,4,5
+4.9,teaching,minority,male,english,50,84,21,25,lower,multiple,one credit,1,5,4,1,4,5
+4.6,teaching,minority,male,english,50,88.46154,23,26,lower,multiple,one credit,1,5,4,1,4,5
+4.8,teaching,minority,male,english,50,86.36364,19,22,lower,multiple,one credit,1,5,4,1,4,5
+4.9,teaching,minority,male,english,50,76.92308,20,26,lower,multiple,one credit,1,5,4,1,4,5
+4.9,teaching,minority,male,english,50,85,17,20,lower,multiple,one credit,1,5,4,1,4,5
+4.9,teaching,minority,male,english,50,81.81818,18,22,lower,multiple,one credit,1,5,4,1,4,5
+5,teaching,minority,male,english,50,95.2381,20,21,lower,multiple,one credit,1,5,4,1,4,5
+4.5,teaching,minority,male,english,50,90.47619,19,21,lower,multiple,one credit,1,5,4,1,4,5
+3.5,tenured,not minority,male,english,52,66.66666,46,69,upper,multiple,multi credit,7,6,6,5,5,6
+3.8,tenured,not minority,male,english,52,70.76923,46,65,upper,multiple,multi credit,7,6,6,5,5,6
+3.9,tenured,not minority,male,english,52,62.90322,39,62,upper,multiple,multi credit,7,6,6,5,5,6
+3.9,tenured,not minority,male,english,52,50.74627,34,67,upper,multiple,multi credit,7,6,6,5,5,6
+4.2,tenured,not minority,male,english,52,72.5,29,40,upper,multiple,multi credit,7,6,6,5,5,6
+4.1,tenured,not minority,male,english,52,60,27,45,upper,multiple,multi credit,7,6,6,5,5,6
+4.8,tenured,not minority,male,english,51,60.62718,348,574,lower,multiple,multi credit,6,7,8,6,6,4
+4.8,tenured,not minority,male,english,51,64.2487,372,579,lower,multiple,multi credit,6,7,8,6,6,4
+4.8,tenured,not minority,male,english,51,63.87337,343,537,lower,multiple,multi credit,6,7,8,6,6,4
+4.8,tenured,not minority,male,english,51,65.40447,380,581,lower,multiple,multi credit,6,7,8,6,6,4
+4.9,tenured,not minority,male,english,51,61.10057,322,527,lower,multiple,multi credit,6,7,8,6,6,4
+4.2,tenured,not minority,male,english,38,50.57471,44,87,lower,multiple,multi credit,3,4,4,2,3,4
+4.5,tenured,not minority,male,english,38,78.57143,66,84,lower,multiple,multi credit,3,4,4,2,3,4
+3.9,tenured,not minority,male,english,38,50.63291,40,79,lower,multiple,multi credit,3,4,4,2,3,4
+4.4,tenured,not minority,male,english,38,65.21739,60,92,lower,multiple,multi credit,3,4,4,2,3,4
+4,tenured,not minority,female,english,47,79.16666,19,24,lower,single,multi credit,5,7,6,3,6,4
+3.6,tenured,not minority,female,english,47,56.71642,38,67,lower,single,multi credit,5,7,6,3,6,4
+3.7,tenured,minority,female,english,43,45.63107,47,103,lower,multiple,multi credit,5,6,4,2,4,4
+2.7,tenured,minority,female,english,43,48.94737,93,190,lower,multiple,multi credit,5,6,4,2,4,4
+4.5,teaching,not minority,female,english,38,48.52941,33,68,lower,multiple,multi credit,3,4,2,1,3,2
+4.4,teaching,not minority,female,english,38,60,36,60,lower,single,multi credit,3,4,2,1,3,2
+3.9,teaching,not minority,female,english,38,45.3125,29,64,lower,single,multi credit,3,4,2,1,3,2
+3.6,teaching,not minority,female,english,38,74.19355,23,31,lower,single,multi credit,3,4,2,1,3,2
+4.4,teaching,not minority,female,english,38,58.06452,36,62,lower,multiple,multi credit,3,4,2,1,3,2
+4.4,teaching,not minority,female,english,38,81.08108,30,37,lower,multiple,multi credit,3,4,2,1,3,2
+4.7,tenured,not minority,male,english,43,76.92308,10,13,lower,multiple,multi credit,4,4,5,4,4,5
+4.5,tenured,not minority,male,english,43,61.53846,8,13,lower,multiple,multi credit,4,4,5,4,4,5
+4.1,tenured,not minority,male,english,43,80,12,15,upper,single,multi credit,4,4,5,4,4,5
+3.7,tenured,not minority,male,english,43,82.27848,65,79,upper,single,multi credit,4,4,5,4,4,5
+4.3,tenured,not minority,male,english,57,53.84615,7,13,upper,multiple,multi credit,3,4,3,2,3,3
+3.5,tenured,not minority,male,english,57,54.08163,53,98,upper,multiple,multi credit,3,4,3,2,3,3
+3.7,tenured,not minority,male,english,57,59.79382,58,97,upper,multiple,multi credit,3,4,3,2,3,3
+4,tenured,not minority,female,english,51,81.81818,9,11,upper,multiple,multi credit,5,8,5,6,8,6
+4,tenured,not minority,female,english,51,85.89744,67,78,upper,multiple,multi credit,5,8,5,6,8,6
+3.1,tenured,not minority,female,english,51,64.28571,36,56,upper,multiple,multi credit,5,8,5,6,8,6
+4.5,tenured,not minority,female,english,51,85,17,20,upper,multiple,multi credit,5,8,5,6,8,6
+4.8,teaching,not minority,male,english,45,70.58823,12,17,lower,single,one credit,1,4,2,5,4,4
+4.2,teaching,not minority,male,english,45,85,17,20,lower,multiple,one credit,1,4,2,5,4,4
+4.9,teaching,not minority,male,english,45,68.42105,13,19,lower,multiple,multi credit,1,4,2,5,4,4
+4.8,teaching,not minority,male,english,45,73.07692,19,26,lower,multiple,one credit,1,4,2,5,4,4
+3.5,tenured,not minority,male,english,57,92.85714,13,14,lower,multiple,multi credit,2,3,3,2,1,6
+3.6,tenured,not minority,male,english,57,66.66666,12,18,lower,single,multi credit,2,3,3,2,1,6
+4.4,tenured,not minority,male,english,57,100,12,12,lower,single,multi credit,2,3,3,2,1,6
+3.4,tenured,not minority,male,english,57,84.21053,16,19,lower,multiple,multi credit,2,3,3,2,1,6
+3.9,tenured,not minority,male,english,57,75,12,16,lower,multiple,multi credit,2,3,3,2,1,6
+3.8,tenured,not minority,male,english,57,87.5,14,16,lower,multiple,multi credit,2,3,3,2,1,6
+4.8,tenured,not minority,male,english,57,91.66666,11,12,lower,multiple,multi credit,2,3,3,2,1,6
+4.6,tenured,not minority,male,english,57,88.23529,15,17,lower,multiple,multi credit,2,3,3,2,1,6
+5,tenured,not minority,male,english,57,40,6,15,upper,multiple,multi credit,2,3,3,2,1,6
+3.8,tenured,not minority,male,english,57,93.75,15,16,lower,multiple,multi credit,2,3,3,2,1,6
+4.2,tenured,not minority,male,english,57,70.58823,12,17,lower,multiple,multi credit,2,3,3,2,1,6
+3.3,teaching,not minority,female,english,47,76.19048,16,21,lower,multiple,multi credit,8,6,6,4,9,7
+4.7,teaching,not minority,female,english,47,88.23529,15,17,lower,multiple,one credit,8,6,6,4,9,7
+4.6,teaching,not minority,female,english,47,100,10,10,lower,multiple,one credit,8,6,6,4,9,7
+4.6,teaching,not minority,female,english,47,94.11765,16,17,lower,multiple,one credit,8,6,6,4,9,7
+4,teaching,not minority,female,english,47,88.23529,15,17,lower,multiple,multi credit,8,6,6,4,9,7
+4.2,tenured,minority,female,english,54,100,18,18,lower,single,multi credit,8,5,8,4,9,7
+4.9,tenured,minority,female,english,54,93.75,15,16,lower,single,multi credit,8,5,8,4,9,7
+4.5,tenured,minority,female,english,54,80.76923,21,26,lower,single,multi credit,8,5,8,4,9,7
+4.8,tenured,minority,female,english,54,77.77778,14,18,lower,single,multi credit,8,5,8,4,9,7
+3.8,tenured,minority,female,english,54,80,16,20,lower,single,multi credit,8,5,8,4,9,7
+4.8,teaching,not minority,male,english,58,94.11765,16,17,lower,single,multi credit,8,8,9,6,8,8
+5,teaching,not minority,male,english,58,100,21,21,lower,single,multi credit,8,8,9,6,8,8
+5,teaching,not minority,male,english,58,85.71429,18,21,lower,single,multi credit,8,8,9,6,8,8
+4.9,teaching,not minority,male,english,58,85,17,20,lower,single,multi credit,8,8,9,6,8,8
+4.6,teaching,not minority,male,english,58,95,19,20,lower,single,multi credit,8,8,9,6,8,8
+5,teaching,not minority,male,english,58,84.61539,11,13,lower,single,multi credit,8,8,9,6,8,8
+4.8,teaching,not minority,male,english,58,87.5,14,16,lower,single,multi credit,8,8,9,6,8,8
+4.9,teaching,not minority,male,english,58,94.11765,16,17,lower,multiple,multi credit,8,8,9,6,8,8
+4.9,tenured,not minority,male,english,42,83.33334,15,18,lower,multiple,multi credit,8,7,10,6,8,8
+3.9,tenured,not minority,male,english,42,91.66666,22,24,lower,multiple,multi credit,8,7,10,6,8,8
+3.9,tenured,not minority,male,english,42,85,17,20,upper,multiple,multi credit,8,7,10,6,8,8
+4.5,tenure track,not minority,male,english,33,70.83334,85,120,lower,multiple,multi credit,6,7,6,5,6,5
+4.5,tenure track,not minority,male,english,33,43.22581,67,155,lower,multiple,multi credit,6,7,6,5,6,5
+3.3,tenured,not minority,male,english,62,28.94737,11,38,lower,multiple,multi credit,1,1,1,4,1,4
+3.1,tenured,not minority,male,english,62,40,28,70,lower,multiple,multi credit,1,1,1,4,1,4
+2.8,tenured,not minority,male,english,62,40.9396,61,149,lower,multiple,multi credit,1,1,1,4,1,4
+3.1,tenured,not minority,male,english,62,35.76642,49,137,lower,multiple,multi credit,1,1,1,4,1,4
+4.2,tenured,not minority,male,english,62,44.82759,13,29,upper,multiple,multi credit,1,1,1,4,1,4
+3.4,tenured,not minority,male,english,62,50.90909,28,55,lower,multiple,multi credit,1,1,1,4,1,4
+3,tenured,not minority,male,english,62,49.26471,67,136,lower,multiple,multi credit,1,1,1,4,1,4
+3.3,tenure track,minority,female,english,35,62.5,60,96,lower,multiple,multi credit,7,9,10,6,7,8
+3.6,tenure track,minority,female,english,35,33.33333,20,60,lower,multiple,multi credit,7,9,10,6,7,8
+3.7,tenure track,minority,female,english,35,39.81482,43,108,lower,multiple,multi credit,7,9,10,6,7,8
+3.6,tenured,not minority,male,english,61,69.23077,27,39,lower,multiple,multi credit,3,2,7,1,3,4
+4.3,tenured,not minority,male,english,61,86.66666,13,15,lower,multiple,multi credit,3,2,7,1,3,4
+4.1,tenured,not minority,female,english,52,54.95496,61,111,lower,multiple,multi credit,4,8,5,3,4,3
+4.9,tenured,not minority,female,english,52,82.35294,14,17,lower,multiple,multi credit,4,8,5,3,4,3
+4.8,tenured,not minority,female,english,52,100,19,19,lower,multiple,multi credit,4,8,5,3,4,3
+3.7,tenure track,not minority,female,non-english,60,85.18519,23,27,upper,multiple,multi credit,4,6,6,2,3,5
+3.9,tenure track,not minority,female,non-english,60,94.73684,18,19,upper,multiple,multi credit,4,6,6,2,3,5
+4.5,tenure track,not minority,female,non-english,60,84.61539,11,13,upper,multiple,multi credit,4,6,6,2,3,5
+3.6,tenure track,not minority,female,non-english,60,94.73684,18,19,upper,multiple,multi credit,4,6,6,2,3,5
+4.4,tenure track,not minority,female,non-english,60,50,11,22,upper,multiple,multi credit,4,6,6,2,3,5
+3.4,tenure track,not minority,female,non-english,60,35,7,20,upper,multiple,multi credit,4,6,6,2,3,5
+4.4,tenure track,not minority,female,non-english,60,88.88889,24,27,upper,multiple,multi credit,4,6,6,2,3,5
+4.5,tenure track,not minority,male,english,32,74.24242,98,132,lower,multiple,multi credit,6,6,9,7,8,5
+4.5,tenure track,not minority,male,english,32,87.40157,111,127,lower,multiple,multi credit,6,6,9,7,8,5
+4.5,tenure track,not minority,male,english,32,72.94118,62,85,upper,multiple,multi credit,6,6,9,7,8,5
+4.6,tenure track,not minority,male,english,32,75.24753,76,101,lower,multiple,multi credit,6,6,9,7,8,5
+4.1,tenure track,not minority,male,english,32,42.85714,9,21,lower,multiple,multi credit,6,6,9,7,8,5
+4.5,tenure track,not minority,male,english,32,60.46511,52,86,upper,multiple,multi credit,6,6,9,7,8,5
+3.5,tenure track,minority,female,non-english,42,57.14286,48,84,upper,multiple,multi credit,3,8,7,4,6,4
+4.4,tenure track,minority,female,non-english,42,77.61194,52,67,upper,multiple,multi credit,3,8,7,4,6,4
+4.4,tenure track,minority,female,non-english,42,81.81818,54,66,upper,multiple,multi credit,3,8,7,4,6,4
+4.1,tenure track,minority,female,non-english,42,80,28,35,lower,multiple,one credit,3,8,7,4,6,4
