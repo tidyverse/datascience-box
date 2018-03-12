@@ -1,5 +1,5 @@
 ---
-title: "Scientific studies, confounding, and Simpson's paradox"
+title: "Coding style"
 output:
   xaringan::moon_reader:
     css: "../slides.css"
