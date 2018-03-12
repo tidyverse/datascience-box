@@ -132,7 +132,11 @@ The dataset is in a folder called `data`. We read it in with the `read_csv`
 function, and save the result as a new data frame called `college_recent_grads`.
 ```
 
-```{r load-data}
+```{r load-data-for-real, include=FALSE}
+college_recent_grads <- read_csv("../data/recent-grads.csv")
+```
+
+```{r load-data-for-show}
 college_recent_grads <- read_csv("data/recent-grads.csv")
 ```
 

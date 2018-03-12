@@ -133,7 +133,12 @@ projects as well.
 The data consist of two csv (comma separated values) files: one for 
 Denny's locations and the other for La Quinta.
 
-```{r}
+```{r load-data-for-show, include=FALSE}
+dn <- read_csv("../data/dennys.csv")
+lq <- read_csv("../data/laquinta.csv")
+```
+
+```{r load-data-for-real}
 dn <- read_csv("data/dennys.csv")
 lq <- read_csv("data/laquinta.csv")
 ```
