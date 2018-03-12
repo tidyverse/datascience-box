@@ -21,8 +21,6 @@ options(
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-**Due:** 2018-03-08 at noon
-
 ## Introduction
 
 In this lab we revisit the professor evaluations data we modeled in the previous lab. In the last lab we modeled evaluation scores using a single predictor at a time. However this time we use multiple predictors to model evaluation scores.
