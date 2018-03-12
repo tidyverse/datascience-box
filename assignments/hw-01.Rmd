@@ -1,6 +1,5 @@
 ---
 title: "HW 01 - Ugly charts"
-date: "Due: Jan 31 in class"
 output: 
   html_document: 
     css: hw.css
