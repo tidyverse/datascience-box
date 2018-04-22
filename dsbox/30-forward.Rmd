@@ -1,0 +1,5 @@
+# (PART) Looking forward {-}
+
+# Introduction {#forward-intro}
+
+This part has a bunch of independent modules, each on a different topic. Pick and choose to your liking, depending on how much time you have to cover them.

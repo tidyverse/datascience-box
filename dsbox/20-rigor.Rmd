@@ -1,0 +1,5 @@
+# (PART) Making rigorous conclusions {-}
+
+# Introduction {#rigor-intro}
+
+This is where into to part 2 goes.

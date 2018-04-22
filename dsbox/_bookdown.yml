@@ -1,0 +1,13 @@
+new_session: yes
+
+rmd_files: [
+  "00-intro.Rmd",
+  "10-explore.Rmd",
+  "20-rigor.Rmd",
+  "30-forward.Rmd",
+  "40-infrastructure.Rmd"
+]
+
+before_chapter_script: "_common.R"
+
+delete_merged_file: true

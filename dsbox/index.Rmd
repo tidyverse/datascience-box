@@ -1,0 +1,17 @@
+--- 
+title: "Data Science Course in a Box"
+author: "Mine Çetinkaya-Rundel"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is a repository of resources for teaching an introductory data science course with R, RStudio, and the tidyverse."
+---
+
+# Welcome {-}
+
+Some welcome words...
