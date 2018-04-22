@@ -92,10 +92,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="packages" class="section level1">
 <h1>Packages</h1>
-<p>In this lab we will work with the <code>tidyverse</code> package. So we need to install and load it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)
-<span class="kw">library</span>(tidyverse) </code></pre></div>
-<p>Note that this package is also loaded in your R Markdown document.</p>
+<p>In this lab we will work with the <code>tidyverse</code> and <code>fivethirtyeight</code> packages. We start by loading the package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(fivethirtyeight)</code></pre></div>
+<p>Note that these packages are also loaded in your R Markdown document.</p>
 </div>
 <div id="housekeeping" class="section level1">
 <h1>Housekeeping</h1>
@@ -141,11 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="load-the-data" class="section level1">
 <h1>Load the data</h1>
-<p>In this lab we use a new method of loading data into R – read the data in from a comma separated values (CSV) file.</p>
-<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">CSV is a delimited text file that uses a comma to separate values, though many implementations of CSV import/export tools allow other separators to be used as well. (Source: <a href="https://en.wikipedia.org/wiki/Comma-separated_values">Wikipedia</a></span></span></p>
-<p>We will use the <code>read_csv</code> function to do this:</p>
-<p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;">The dataset is in a folder called <code>data</code>. We read it in with the <code>read_csv</code> function, and save the result as a new data frame called <code>college_recent_grads</code>.</span></span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">college_recent_grads &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/recent-grads.csv&quot;</span>)</code></pre></div>
+<p>The data frame we will be working with today is called <code>college_recent_grads</code> and it’s in the <code>fivethirtyeight</code> package.</p>
+<p>To find out more about the dataset, type the following in your Console: <code>?college_recent_grads</code>. A question mark before the name of an object will always bring up its help file. This command must be ran in the Console.</p>
 <p><code>college_recent_grads</code> is a tidy <strong>data frame</strong>, with each row representing an <strong>observation</strong> and each column representing a <strong>variable</strong>.</p>
 <p>To view the data, click on the name of the data frame in the Environment tab.</p>
 <p>You can also take a quick peek at your data frame and view its dimensions with the <code>glimpse</code> function.</p>
@@ -267,7 +264,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">arrange</span>(unemployment_rate)</code></pre></div>
 <p>This gives us what we wanted, but not in an ideal form. First, the name of the major barely fits on the page. Second, some of the variables are not that useful (e.g. <code>major_code</code>, <code>major_category</code>) and some we might want front and center are not easily viewed (e.g. <code>unemployment_rate</code>).</p>
 <p>We can use the <code>select</code> function to choose which variables to display, and in which order:</p>
-<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note how easily we expanded our code with adding another step to our pipeline, with the pipe operator: <code>%&gt;%</code>.</span></span></p>
+<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note how easily we expanded our code with adding another step to our pipeline, with the pipe operator: <code>%&gt;%</code>.</span></span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">college_recent_grads <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(unemployment_rate) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(rank, major, unemployment_rate)</code></pre></div>
@@ -294,7 +291,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="which-major-has-the-highest-percentage-of-women" class="section level2">
 <h2>Which major has the highest percentage of women?</h2>
 <p>To answer such a question we need to arrange the data in descending order. For example, if earlier we were interested in the major with the highest unemployment rate, we would use the following:</p>
-<p><label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle"><span class="marginnote"><span style="display: block;">The <code>desc</code> function specifies that we want <code>unemployment_rate</code> in descending order.</span></span></p>
+<p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;">The <code>desc</code> function specifies that we want <code>unemployment_rate</code> in descending order.</span></span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">college_recent_grads <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(unemployment_rate)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(rank, major, unemployment_rate)</code></pre></div>
@@ -304,7 +301,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="how-do-the-distributions-of-median-income-compare-across-major-categories" class="section level2">
 <h2>How do the distributions of median income compare across major categories?</h2>
-<p><label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle"><span class="marginnote"><span style="display: block;">A percentile is a measure used in statistics indicating the value below which a given percentage of observations in a group of observations fall. For example, the 20th percentile is the value below which 20% of the observations may be found. (Source: <a href="https://en.wikipedia.org/wiki/Percentile">Wikipedia</a></span></span></p>
+<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;">A percentile is a measure used in statistics indicating the value below which a given percentage of observations in a group of observations fall. For example, the 20th percentile is the value below which 20% of the observations may be found. (Source: <a href="https://en.wikipedia.org/wiki/Percentile">Wikipedia</a></span></span></p>
 <p>There are three types of incomes reported in this data frame: <code>p25th</code>, <code>median</code>, and <code>p75th</code>. These correspond to the 25th, 50th, and 75th percentiles of the income distribution of sampled individuals for a given major.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Why do we often choose the median, rather than the mean, to describe the typical income of a group of people?</li>

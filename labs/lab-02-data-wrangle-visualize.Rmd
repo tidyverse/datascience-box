@@ -56,15 +56,14 @@ but they don't tell the whole story. Keep this in mind as you analyze the data.
 
 # Packages
 
-In this lab we will work with the `tidyverse` package. So we need to 
-install and load it:
+In this lab we will work with the `tidyverse` and `fivethirtyeight` packages. We start by loading the package.
 
 ```{r eval = FALSE}
-install.packages("tidyverse")
-library(tidyverse) 
+library(tidyverse)
+library(fivethirtyeight)
 ```
 
-Note that this package is also loaded in your R Markdown document.
+Note that these packages are also loaded in your R Markdown document.
 
 # Housekeeping
 
@@ -116,29 +115,9 @@ Now, the remaining team members who have not been concurrently making these chan
 
 # Load the data
 
-In this lab we use a new method of loading data into R -- read the data in from 
-a comma separated values (CSV) file. 
+The data frame we will be working with today is called `college_recent_grads` and it's in the `fivethirtyeight` package.
 
-```{marginfigure}
-CSV is a delimited text file that uses a comma to separate values, though 
-many implementations of CSV import/export tools allow other separators to 
-be used as well. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Comma-separated_values)
-```
-
-We will use the `read_csv` function to do this:
-
-```{marginfigure}
-The dataset is in a folder called `data`. We read it in with the `read_csv` 
-function, and save the result as a new data frame called `college_recent_grads`.
-```
-
-```{r load-data-for-real, include=FALSE}
-college_recent_grads <- read_csv("../data/recent-grads.csv")
-```
-
-```{r load-data-for-show}
-college_recent_grads <- read_csv("data/recent-grads.csv")
-```
+To find out more about the dataset, type the following in your Console: `?college_recent_grads`. A question mark before the name of an object will always bring up its help file. This command must be ran in the Console.
 
 `college_recent_grads` is a tidy **data frame**, with each row 
 representing an **observation** and each column representing a **variable**.

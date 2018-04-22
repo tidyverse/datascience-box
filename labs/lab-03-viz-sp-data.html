@@ -147,6 +147,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-data" class="section level1">
 <h1>The data</h1>
+<p>In this lab we use a new method of loading data into R – read the data in from a comma separated values (CSV) file.</p>
+<p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;">CSV is a delimited text file that uses a comma to separate values, though many implementations of CSV import/export tools allow other separators to be used as well. (Source: <a href="https://en.wikipedia.org/wiki/Comma-separated_values">Wikipedia</a></span></span></p>
+<p>We will use the <code>read_csv</code> function to do this:</p>
+<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">The dataset is in a folder called <code>data</code>. We read it in with the <code>read_csv</code> function, and save the result as a new data frame called <code>college_recent_grads</code>.</span></span></p>
 <p>The data consist of two csv (comma separated values) files: one for Denny’s locations and the other for La Quinta.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dn &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/dennys.csv&quot;</span>)
 lq &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/laquinta.csv&quot;</span>)</code></pre></div>
@@ -170,13 +174,13 @@ lq &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="s
 <ol start="5" style="list-style-type: decimal">
 <li>Find the Denny’s locations that are outside the US, if any. To do so, filter the Denny’s locations for observations where <code>state</code> is not in <code>states$abbreviation</code>. The code for this is given below. Note that the <code>%in%</code> operator matches the states listed in the <code>state</code> variable to those listed in <code>states$abbreviation</code>. The <code>!</code> operator means <strong>not</strong>. Are there any Denny’s locations outside the US?</li>
 </ol>
-<p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;">“Filter for <code>state</code>s that are not in <code>states$abbreviation</code>.”</span></span></p>
+<p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;">“Filter for <code>state</code>s that are not in <code>states$abbreviation</code>.”</span></span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dn <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(state <span class="op">%in%</span><span class="st"> </span>states<span class="op">$</span>abbreviation))</code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Add a country variable to the Denny’s dataset and set all observations equal to <code>&quot;United States&quot;</code>. Remember, you can use the <code>mutate</code> function for adding a variable. Make sure to save the result of this as <code>dn</code> again so that the stored data frame contains the new variable going forward.</li>
 </ol>
-<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">We don’t need to tell R how many times to repeat the character string “United States” to fill in the data for all observations, R takes care of that automatically.</span></span></p>
+<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;">We don’t need to tell R how many times to repeat the character string “United States” to fill in the data for all observations, R takes care of that automatically.</span></span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dn <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country =</span> <span class="st">&quot;United States&quot;</span>)</code></pre></div>
 <ol start="7" style="list-style-type: decimal">

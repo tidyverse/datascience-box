@@ -111,6 +111,22 @@ Now, the remaining team members who have not been concurrently making these chan
 
 # The data
 
+In this lab we use a new method of loading data into R -- read the data in from 
+a comma separated values (CSV) file. 
+
+```{marginfigure}
+CSV is a delimited text file that uses a comma to separate values, though 
+many implementations of CSV import/export tools allow other separators to 
+be used as well. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Comma-separated_values)
+```
+
+We will use the `read_csv` function to do this:
+
+```{marginfigure}
+The dataset is in a folder called `data`. We read it in with the `read_csv` 
+function, and save the result as a new data frame called `college_recent_grads`.
+```
+
 The data consist of two csv (comma separated values) files: one for Denny's locations and the other for La Quinta.
 
 ```{r load-data-for-show, include=FALSE}
