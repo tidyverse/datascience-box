@@ -4,3 +4,8 @@
 .Ruserdata
 .DS_Store
 gss2016.csv
+*_cache
+*_files
+*.md
+*.html
+bookdown*
