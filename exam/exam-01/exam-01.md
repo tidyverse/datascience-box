@@ -1,10 +1,10 @@
-# Midterm 1
+# Exam 01
 
-**THIS IS AN INDIVIDUAL ASSESSMENT, THIS DOCUMENT AND YOUR ANSWERS ARE FOR YOUR EYES ONLY. ANY VIOLATION OF THIS POLICY WILL BE IMMEDIATELY REPORTED TO THE UNDERGRADUATE CONDUCT BOARD, WILL RESULT IN A 0 GRADE FOR THE MIDTERM AND RESULT IN ADDITIONAL PENALTIES FOR THE FINAL COURSE GRADE.**
+**THIS IS AN INDIVIDUAL ASSESSMENT, THIS DOCUMENT AND YOUR ANSWERS ARE FOR YOUR EYES ONLY. ANY VIOLATION OF THIS POLICY WILL BE IMMEDIATELY REPORTED TO THE UNDERGRADUATE CONDUCT BOARD, WILL RESULT IN A 0 GRADE FOR THE EXAM AND RESULT IN ADDITIONAL PENALTIES FOR THE FINAL COURSE GRADE.**
 
 ## Rules
 
-1. Your solutions must be written up in the R Markdown (Rmd) file called `midterm-01.Rmd`. This file must include your code and write up for each task. Your "submission" will be whatever is in your exam repository at the deadline. Commit and push the Rmd and the md outputs of that file.
+1. Your solutions must be written up in the R Markdown (Rmd) file called `exam-01.Rmd`. This file must include your code and write up for each task. Your "submission" will be whatever is in your exam repository at the deadline. Commit and push the Rmd and the md outputs of that file.
 
 2. This exam is open book, open internet, closed other people. You may use any online or book based resource you would like, but you must include citations for any code that you use (directly or indirectly). You **may not** consult with anyone else about this exam other than the Professor or TA for this course. You cannot ask direct questions on the internet, or consult with each other, not even for hypothetical questions.
 
@@ -41,7 +41,7 @@ The total points for the questions add up to 90 points. The remaining 10 points 
 
 ## Logistics
 
-Answer the questions in the document called `midterm-01.Rmd`. Add your code and narrative in the spaces below each question. Add code chunks as needed. Use as many lines as you need, but keep your narrative concise.
+Answer the questions in the document called `exam-01.Rmd`. Add your code and narrative in the spaces below each question. Add code chunks as needed. Use as many lines as you need, but keep your narrative concise.
 
 Before completing, make sure to supress the code and look over your answers one more time. If the narrative seems sparse or choppy, edit as needed. Then, revert back to revealing your code.
 

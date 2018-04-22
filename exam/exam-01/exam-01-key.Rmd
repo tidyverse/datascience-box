@@ -1,5 +1,5 @@
 ---
-title: "KEY: Midterm 01"
+title: "KEY: Exam 01"
 output: 
   html_document: 
     fig_height: 4
