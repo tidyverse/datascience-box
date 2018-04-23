@@ -1,0 +1,11 @@
+# (PART) Exploring data {-}
+
+# Data visualization {#data-viz}
+
+Some words.
+
+Then embed slides: [Visualizing data](https://github.com/rstudio-education/datascience-box/tree/master/slides/p1_d01-data-viz)
+
+Link to lab: [Data wrangling and visualization](https://github.com/rstudio-education/datascience-box/blob/master/labs/lab-02-data-wrangle-visualize.Rmd)
+
+And to HW: [Gotta catch 'em all](https://github.com/rstudio-education/datascience-box/blob/master/assignments/hw-02.Rmd)

@@ -116,4 +116,6 @@ countries are being plotted, and reknit the document to view the changes.
 
 [TO DO: Find a good way to insert slides.]
 
+Link to relevant slides: https://github.com/rstudio-education/datascience-box/tree/master/slides/p0_d01-welcome
+
 
