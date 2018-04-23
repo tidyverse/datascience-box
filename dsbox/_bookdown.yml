@@ -1,7 +1,9 @@
 new_session: yes
 
 rmd_files: [
+  "index.Rmd",
   "00-intro.Rmd",
+  "01-dayone.Rmd",
   "10-explore.Rmd",
   "20-rigor.Rmd",
   "30-forward.Rmd",
