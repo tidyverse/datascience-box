@@ -1,0 +1,62 @@
+# (PART) Git {-}
+
+# Introduction {#git-intro}
+
+## Instructions for assignment getting started and "submission" via Git
+
+Here are the steps for getting started:
+
+- Go to the classroom GitHub organization and grab the link of the assignment 
+repo.
+- Start a new RStudio project from Git cloning this repository
+- Make any changes needed as outlined by the tasks you need to complete for the 
+assignment
+- Make sure all your code chunks are informatively named, and these labels are 
+not repeated
+- Periodically commit changes (the more often the better, for example, once per 
+each new task)
+- Push all your changes back to your GitHub repo
+
+and voila, you're done! Once you push your changes back you do not need to do 
+anything else to "submit" your work. And you can of course push multiple times 
+throughout the assignment. At the time of the deadline we will take whatever 
+is in your repo and consider it your final submission, and grade the state of 
+your work at that time (which means even if you made mistakes before then, 
+you wouldn't be penalized for them as long as the final state of your work is 
+correct).
+
+----
+
+## Getting help
+
+Use the #questions channels on Slack to ask questions or posting on the GitHub Communiy. If your question is about an error you're getting, make sure to clearly explain what generated the error as well as what the error says.
+
+You are also welcomed to discuss the homework with each other broadly (no sharing code!) as well as ask questions at office hours.
+
+-----
+
+## Continuous integration and badges
+
+Something new on this homework, and going forward on class assignments. Each time you push to GitHub a continuous integration tool (called wercker) will check to make sure your Rmd knits successfully. If it does, you'll be able to see a badge on the README of your repo that says "build passing" (in green). If it fails, it'll say "build failing" (in orange). If the build is failing you will need to fix your Rmd so that it knits without any errors and then push again. Some tips:
+
+- You should avoid leaving your repo in a failing stage. 
+- You can click on the "build failing" badge to get more information.
+- A "build passing" badge is not guarantee that your work is correct, but instead just that your Rmd file knits.
+
+----
+
+lab getting started
+
+# Getting started
+
+- Go to the course organization on GitHub: https://github.com/Sta199-S18.
+
+- Find the repo starting with `lab-03` and that has your team name at the end (this should be the only `lab-03` repo available to you).
+
+- In the repo, click on the green **Clone or download** button, select **Use HTTPS** (this might already be selected by default, and if it is, you'll see the text **Clone with HTTPS** as in the image below). Click on the clipboard icon to copy the repo URL.
+
+- Go to RStudio Cloud and into the course workspace. Create a **New Project from Git Repo**. You will need to click on the down arrow next to the **New Project** button to see this option.
+
+- Copy and paste the URL of your assignment repo into the dialog box:
+
+- Hit OK, and you're good to go!
