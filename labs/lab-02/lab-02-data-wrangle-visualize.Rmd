@@ -10,12 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  digits = 2
-  )
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -43,7 +37,7 @@ but they don't tell the whole story. Keep this in mind as you analyze the data.
 
 In this lab we will work with the `tidyverse` and `fivethirtyeight` packages. We start by loading the package.
 
-```{r eval = FALSE}
+```{r}
 library(tidyverse)
 library(fivethirtyeight)
 ```

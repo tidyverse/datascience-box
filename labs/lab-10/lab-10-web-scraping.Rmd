@@ -10,7 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
 library(tufte)
 library(knitr)
 library(dsbox) # devtools::install_github("rstudio-education/dsbox")

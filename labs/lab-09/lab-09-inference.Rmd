@@ -10,7 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
 library(tufte)
 library(knitr)
 options(

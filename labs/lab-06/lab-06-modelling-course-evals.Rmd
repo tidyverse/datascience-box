@@ -10,7 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
 library(tufte)
 library(knitr)
 options(
@@ -31,14 +30,13 @@ The data were gathered from end of semester student evaluations for a large samp
 
 # Packages
 
-In this lab we will work with the `tidyverse` and `broom` packages. We can install and load them with the following:
+In this lab we will work with the `tidyverse` and `broom` packages.
 
 ```{marginfigure}
 When you install the tidyverse package, a long list of packages get installed with it. However when you load it (with the `library` function) only a few of them get loaded, e.g. `dplyr`, `ggplot2`, and `forcats`. The broom package is installed with the tidyverse, but we need to load it separately in order to make use of it.
 ```
 
 ```{r eval = FALSE}
-install.packages("tidyverse")
 library(tidyverse) 
 library(broom)
 ```

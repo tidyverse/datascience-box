@@ -10,7 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
 library(tufte)
 library(knitr)
 options(
@@ -35,11 +34,9 @@ The inspiration for this lab comes from a blog post by John Reiser on his *new j
 
 # Packages
 
-In this lab we will work with the `tidyverse` package. So we need to 
-install and load it:
+In this lab we will use the `tidyverse` package.
 
 ```{r eval = FALSE}
-install.packages("tidyverse")
 library(tidyverse) 
 ```
 

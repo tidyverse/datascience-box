@@ -30,8 +30,11 @@ A study of conducted in Whickham, England recorded participants' age, smoking st
 
 # Packages
 
-In this lab we will work with the `tidyverse` and `mosaicData` packages. 
-So we need to install and load them:
+In this lab we will work with the `tidyverse` and `mosaicData` packages.
+
+This is the first time we're using the `mosaicData` package, you need to make 
+sure to install it first by running `install.packages("mosaicData")` in the 
+console.
 
 ```{r}
 library(tidyverse) 

@@ -8,15 +8,6 @@ output:
 link-citations: yes
 ---
 
-```{r include=FALSE}
-library(tidyverse)
-library(datasauRus)
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE     # for regression output
-  )
-```
-
 ```{marginfigure}
 R is the name of the programming language itself and RStudio is a convenient interface.
 ```
@@ -121,7 +112,6 @@ git config --global user.email
 git config --global user.name
 ```
 
-
 # Warm up
 
 Before we introduce the data, let's warm up with some simple exercises. The following video is an overview of some of these warmup exercises.
@@ -169,6 +159,16 @@ In order to push your changes to GitHub, click on **Push**. This will prompt a d
 ## Thought exercise:
 
 For which of the above steps (changing project name, making updates to the document, committing, and pushing changes) do you need to have an internet connection? Discuss with your classmates.
+
+# Packages
+
+In this lab we will use the `tidyverse` and `datasauRus` packages. We can load 
+them using the following:
+
+```{r load-packages}
+library(tidyverse)
+library(datasauRus)
+```
 
 # Data
 
@@ -300,4 +300,3 @@ Not sure how to use emojis on your computer? Maybe a teammate can help? Or you c
 ```
 
 *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1! `r emo::ji("muscle")`", and push. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
-
