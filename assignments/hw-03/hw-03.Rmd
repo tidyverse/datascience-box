@@ -2,21 +2,16 @@
 title: "HW 03 - Bike rentals in DC"
 output: 
   html_document: 
-    css: hw.css
+    css: ../hw.css
     theme: yeti
     toc: true
     toc_float: true
     fig_caption: false
 ---
 
-```{r include=FALSE}
-library(tidyverse)
-bike <- read_csv("../data/bikeshare-day.csv")
-```
-
 <div style= "float:right;position: relative; margin-left: 20px">
 ```{r setup, echo=FALSE, fig.align="right"}
-knitr::include_graphics("img/hw-03-bikerental.jpg")
+knitr::include_graphics("img/bikerental.jpg")
 ```
 </div>
 
@@ -26,22 +21,11 @@ Apart from interesting real world applications of bike sharing systems, the char
 
 Source: [UCI Machine Learning Repository - Bike Sharing Dataset](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset)
 
-## Getting started
-
-Here are the steps for getting started:
-
-- Start with an assignment link that creates a repo on GitHub with starter documents: https://classroom.github.com/a/gVRdjdt2
-- Clone this repo in RStudio
-- Make any changes needed as outlined by the tasks you need to complete for the assignment
-- Make sure all your code chunks are informatively named, and these labels re not repeated
-- Periodically commit changes (the more often the better, for example, once per each new task)
-- Push all your changes back to your GitHub repo
-
-and voila, you're done! Once you push your changes back you do not need to do anything else to "submit" your work. And you can of course push multiple times throughout the assignment. At the time of the deadline we will take whatever is in your repo and consider it your final submission, and grade the state of your work at that time (which means even if you made mistakes before then, you wouldn't be penalized for them as long as the final state of your work is correct).
-
 ## Data
 
-The data include daily bike rental counts (by members and casual users) of Capital Bikeshare in Washington, DC in 2011 and 2012 as well as weather information on these days.
+The data include daily bike rental counts (by members and casual users) of 
+Capital Bikeshare in Washington, DC in 2011 and 2012 as well as weather 
+information on these days.
 
 The original data sources are http://capitalbikeshare.com/system-data and http://www.freemeteo.com.
 
@@ -69,7 +53,7 @@ The codebook is below:
 | `registered`| Count of registered users
 | `cnt` 		  | Count of total rental bikes including both casual and registered
 
-## Questions
+## Exercises
 
 ### Data wrangling
 
@@ -87,22 +71,10 @@ The codebook is below:
 
 ### Exploratory data analysis
 
-7. Recreate the following visualization, and interpret it in context of the data. *Hint: You will need to use one of the variables you created above.*
+7. Recreate the following visualization, and interpret it in context of the 
+data. *Hint: You will need to use one of the variables you created above.*
 
-```{r fig.width=9, echo=FALSE}
-bike %>%
-  mutate(atemp_raw = atemp * 50) %>%
-  ggplot(mapping = aes(x = dteday, y = cnt, color = atemp_raw)) +
-    geom_point(alpha = 0.7) +
-    labs(
-      title = "Bike rentals in DC, 2011 and 2012",
-      subtitle = "Warmer temperatures associated with more bike rentals",
-      x = "Date",
-      y = "Bike renrals",
-      color = "Temperature (C)"
-    ) +
-  theme_minimal()
-```
+![recreate](img/recreate.png)
 
 8. Create a visualization displaying the relationship between bike rentals and season. Interpret the plot in context of the data.
 
@@ -120,16 +92,25 @@ bike %>%
 
 14. Based on the final model you found in the previous question, discuss what makes for a good day to bike in DC (as measured by rental bikes being more in demand).
 
-When you're done, review the .md document on GitHub to make sure you're happy with the final state of your work. Then go get some rest!
-
 ## Getting help
 
-Use the #questions channels on Slack to ask questions or posting on the GitHub Communiy. If your question is about an error you're getting, make sure to clearly explain what generated the error as well as what the error says.
+Use the #questions channel on Slack to ask questions.
 
-You are also welcomed to discuss the homework with each other broadly (no sharing code!) as well as ask questions at office hours.
+- R errors/questions: Make a [reprex](https://www.tidyverse.org/help/#reprex).
+- Git/GitHub errors/questions: Clearly outline your steps that got you to the 
+point you're in.
 
-## Academic integrity
+You are also welcomed to discuss the homework with each other broadly 
+(no sharing code!) as well as ask questions at office hours.
 
-This is an **individual** assignment. You are welcomed to exchange ideas with classmates and ask questions on the getting help channels discussed above however you may not share your text or code answers directly with classmates.
+## Grading
 
-The Duke Community Standard applies and course academic integrity policies apply. Please review them [here](http://www2.stat.duke.edu/courses/Spring18/Sta199/policies/#academic-integrity). Specifically, the note on sharing / reusing code.
+In addition to accuracy of your answers to questions, your submission will be 
+evaluated for
+
+- coding style,
+- informatively named code chunks,
+- commit after each question (at a minimum, more commits ok),
+- informative commit messages,
+- document organization, and
+- quality of writing and grammar.

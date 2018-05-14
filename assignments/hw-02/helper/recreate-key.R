@@ -1,6 +1,7 @@
 library(tidyverse)
+library(here)
 
-pokemon <- read_csv("..data/pokemon.csv")
+pokemon <- read_csv(here("data","pokemon.csv"))
 
 pokemon %>% 
   filter(species != "Weedle") %>%
@@ -12,4 +13,4 @@ pokemon %>%
          subtitle = "by species") +
     theme_minimal()
 
-ggsave("02-hw-recreate.png", dpi = 300, height=3, width=7)
+ggsave(here("assignments/hw-02/img", "recreate.png"), dpi = 300, height=3, width=7)

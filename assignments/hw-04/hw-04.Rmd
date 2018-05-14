@@ -2,7 +2,7 @@
 title: "HW 04 - You gotta pick a package or two"
 output: 
   html_document: 
-    css: hw.css
+    css: ../hw.css
     theme: yeti
     toc: true
     toc_float: true
@@ -11,7 +11,7 @@ output:
 
 <div style= "float:right;position: relative; margin-left: 20px">
 ```{r setup, echo=FALSE, fig.align="right"}
-knitr::include_graphics("img/hw-04-pkg.png")
+knitr::include_graphics("img/pkg.png")
 ```
 </div>
 
@@ -52,9 +52,6 @@ The package manuals are linked below, however developers of the packages might h
 - suncalc:
 	- R interface to 'suncalc.js' library, part of the 'SunCalc.net' project <http://suncalc.net>, for calculating sun position, sunlight phases (times for sunrise, sunset, dusk, etc.), moon position and lunar phase for the given location and time.
 	- https://cran.r-project.org/web/packages/suncalc/suncalc.pdf
-- fortunes:
-	- A collection of fortunes from the R community
-	- https://cran.r-project.org/web/packages/fortunes/fortunes.pdf
 - ttbbeer
 	- An R data package of beer statistics from U.S. Department of the Treasury, Alcohol and Tobacco Tax and Trade Bureau (TTB)
 	- https://cran.r-project.org/web/packages/ttbbeer/ttbbeer.pdf
@@ -129,19 +126,31 @@ Then, load the package. Regardless of how you installed the package you can load
 
 Finally, do something with the package. It doesn't have to be complicated. In fact, keep it simple. The goal is to try to read and understand the package documentation to be able to carry out a simple task.
 
-## Questions
+## Exercises
 
 1. Which package are you using? State the name of the package, whether it was on CRAN or GitHub, and include the code for loading it.
 2. What are you doing with the package? Give me a brief narrative including code and output.
 
 ## Getting help
 
-Ask your questions on the #questions channel on Slack. If your question is about an error you're getting, make sure to clearly explain what generated the error as well as what the error says.
+Use the #questions channel on Slack to ask questions.
 
-You are also welcomed to discuss the homework with each other broadly (no sharing code!) as well as ask questions at office hours.
+- R errors/questions: Make a [reprex](https://www.tidyverse.org/help/#reprex).
+- Git/GitHub errors/questions: Clearly outline your steps that got you to the 
+point you're in.
 
-## Academic integrity
+You are also welcomed to discuss the homework with each other broadly 
+(no sharing code!) as well as ask questions at office hours.
 
-This is an **individual** assignment. You are welcomed to exchange ideas with classmates and ask questions on the getting help channels discussed above however you may not share your text or code answers directly with classmates.
+## Grading
 
-The Duke Community Standard applies and course academic integrity policies apply. Please review them [here](http://www2.stat.duke.edu/courses/Spring18/Sta199/policies/#academic-integrity). Specifically, the note on sharing / reusing code.
+In addition to accuracy of your answers to questions, your submission will be 
+evaluated for
+
+- coding style,
+- informatively named code chunks,
+- commit after each question (at a minimum, more commits ok),
+- informative commit messages,
+- document organization, and
+- quality of writing and grammar.
+

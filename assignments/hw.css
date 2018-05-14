@@ -126,7 +126,7 @@ ol>li {
 
 ol>li:before {
 	/* Use the counter as content */
-	content: "Question " counter(li)".";
+	content: "Exercise " counter(li)".";
 	/* Increment the counter by 1 */
 	counter-increment: li;
 	position: absolute;
