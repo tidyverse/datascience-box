@@ -1,6 +1,8 @@
 # Data Science Course in a Box
 
-**Note:** This repo is currently a WIP. Materials will be based on [this Fall 2017](http://www2.stat.duke.edu/courses/Fall17/sta112.01/) course and [this Spring 2018](http://www2.stat.duke.edu/courses/Spring18/Sta199/) course. See https://www.tidyverse.org/learn/ for other learning resources as well.
+![](dsbox/sketches/dsbox-logo.png)
+
+**Note:** This repo is currently a WIP. Materials are based [this Spring 2018](http://www2.stat.duke.edu/courses/Spring18/Sta199/) course. See https://www.tidyverse.org/learn/ for other learning resources as well.
 
 ## Course description
 
