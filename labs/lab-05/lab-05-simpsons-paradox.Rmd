@@ -4,7 +4,7 @@ output:
   tufte::tufte_html:
     tufte_variant: "envisioned"
     highlight: pygments
-    css: lab.css
+    css: ../lab.css
 link-citations: yes
 ---
 
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(eval = FALSE)
 ## Introduction
 
 ```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
-include_graphics("img/05-simpsons-paradox/whickham.png")
+include_graphics("img/whickham.png")
 ```
 
 A study of conducted in Whickham, England recorded participants' age, smoking status at baseline, and then 20 years later recorded their health outcome.

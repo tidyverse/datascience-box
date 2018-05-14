@@ -5,7 +5,7 @@ output:
   tufte::tufte_html:
     tufte_variant: "envisioned"
     highlight: pygments
-    css: lab.css
+    css: ../lab.css
 link-citations: yes
 ---
 
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(eval = FALSE)
 ## Introduction
 
 ```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
-include_graphics("img/03-viz-sp-data/mitch-hedgeberg-lqd.jpg")
+include_graphics("img/mitch-hedgeberg-lqd.jpg")
 ```
 
 In this lab we revisit the Denny's and La Quinta Inn and Suites data we 
@@ -169,17 +169,17 @@ locations in Alaska. Let's take this step by step:
 **Step 1:** There are 3 Denny's and 2 La Quinta locations in Alaska. 
 (If you answered differently above, you might want to recheck your answers.)
 
-![](img/04-wrangle-sp-data/dennys-laquinta-sketches/dennys-laquinta-sketches.001.png){width=300px height=300px}
+![](img/dennys-laquinta-sketches/dennys-laquinta-sketches.001.png){width=300px height=300px}
 
 **Step 2:** Let's focus on the first Denny's location. We'll need to 
 calculate two distances for it: (1) distance between Denny's 1 and 
 La Quinta 1 and (2) distance between Denny's 1 and La Quinta (2).
 
-![](img/04-wrangle-sp-data/dennys-laquinta-sketches/dennys-laquinta-sketches.002.png){width=300px height=150px}
+![](img/dennys-laquinta-sketches/dennys-laquinta-sketches.002.png){width=300px height=150px}
 
 **Step 3:** Now let's consider all Denny's locations.
 
-![](img/04-wrangle-sp-data/dennys-laquinta-sketches/dennys-laquinta-sketches.003.png){width=300px height=450px}
+![](img/dennys-laquinta-sketches/dennys-laquinta-sketches.003.png){width=300px height=450px}
 
 3. How many pairings are there between all Denny's and all La Quinta locations
    in Alaska, i.e. how many distances do we need to calculate between the 
@@ -220,7 +220,7 @@ In practice we mostly use mutating joins. In this case we want to keep all
 rows and columns from both `dn_ak` and `lq_ak` data frames. So we will use 
 a `full_join`.
 
-![Full join of Denny's and La Quinta locations in AK](img/04-wrangle-sp-data/dennys-laquinta-sketches/dennys-laquinta-sketches.004.png){height=300px width=300px}
+![Full join of Denny's and La Quinta locations in AK](img/dennys-laquinta-sketches/dennys-laquinta-sketches.004.png){height=300px width=300px}
 
 Let's join the data on Denny's and La Quinta locations in Alaska, and take 
 a look at what it looks like:
