@@ -1,5 +1,3 @@
-# (PART) Exploring data {-}
-
 # Data visualization {#data-viz}
 
 Some words.
