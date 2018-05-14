@@ -1,0 +1,76 @@
+---
+title: "HW 06 - Scrape and analyze"
+output: 
+  html_document: 
+    css: ../hw.css
+    theme: yeti
+    toc: true
+    toc_float: true
+    fig_caption: false
+---
+
+<div style= "float:right;position: relative; margin-left: 20px">
+```{r setup, echo=FALSE, fig.align="right"}
+knitr::include_graphics("img/rvest.png")
+```
+</div>
+
+## Exercises
+
+### Part 1: Gender pay gap
+
+Go to https://en.wikipedia.org/wiki/Gender_pay_gap and scrape the table 
+underneath the header "List by OECD 2015". Save your code in an R script called 
+`paygap.R`, write the data frame out to a csv file called `paygap.csv` 
+using the `write_csv` function. Store this file in the `data` folder.
+
+For example, if your data frame is called `paygap`, you can use
+
+```{r eval=FALSE}
+write_csv(paygap, path = "data/paygap.csv")
+```
+
+1. Load `paygap.csv` in your R Markdown file.
+
+2. Create a visualization similar to, though not necessarily exactly the same as, the one shown on the [Wikipedia page](https://en.wikipedia.org/wiki/Gender_pay_gap). Interpret what the plot. (*Hint:* You will need to also look up on the OECD page what these values mean.)
+
+### Part 2: Video games
+
+Go to http://www.metacritic.com/browse/games/score/metascore/year/all/filtered and scrape the data for the all video games released in 2018. For each game grab the title, Metacritic and user score, release date, and URL to game's individual review page. (*Hint:* You will need to advance to the next page.) Save your code in an R script called `games.R`.
+
+Next, write a function that scrapes the number of Metascore critics and user score ratings, genre(s), and rating for the video game from the video game's individual webpage. Then, apply this function to the second video game on the list. Finally, use mapping to get this information for all games released in 2018. (*Hint:* You might need to slow down your code with `Sys.sleep()`.)
+
+Write the resulting data frame containing all of the information you scraped to a file called `games.csv` in the `data` folder.
+
+3. Load `games.csv` in your R Markdown file.
+
+4. Split the game title at the `(` character and create a new variable called `platform` with the information that is given in the parantheses. *(Hint:* There are functions for splitting columns. We haven't introduced them in class, so you'll need to do some digging.)
+
+5. Create an indicator variable denoting whether one of the genre's of the game is `action` or not. What percent of the games on this list are action games? (*Hint:* Functions such as `str_detect()` from the stringr package might be helpful.)
+
+6. Use visualizations and/or summary statistics to compare ratings of action vs. not action games.
+
+7. Create one other visualization based on these data exploring an aspect of interest to you and interpret your findings. If you have no interest in video games, you can focus on how score and rating are related, if at all. (*Hint:* To help your narrative you might want to look up what the rating categories mean.)
+
+## Getting help
+
+Use the #questions channel on Slack to ask questions.
+
+- R errors/questions: Make a [reprex](https://www.tidyverse.org/help/#reprex).
+- Git/GitHub errors/questions: Clearly outline your steps that got you to the 
+point you're in.
+
+You are also welcomed to discuss the homework with each other broadly 
+(no sharing code!) as well as ask questions at office hours.
+
+## Grading
+
+In addition to accuracy of your answers to questions, your submission will be 
+evaluated for
+
+- coding style,
+- informatively named code chunks,
+- commit after each question (at a minimum, more commits ok),
+- informative commit messages,
+- document organization, and
+- quality of writing and grammar.
