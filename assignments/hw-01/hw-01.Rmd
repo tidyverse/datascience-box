@@ -1,0 +1,72 @@
+---
+title: "HW 01 - Ugly charts"
+output: 
+  html_document: 
+    css: ../hw.css
+    theme: yeti
+    toc: true
+    toc_float: true
+    fig_caption: false
+---
+
+## Assignment
+
+<div style= "float:right;position: relative; margin-left: 20px">
+```{r setup, echo=FALSE, fig.align="right"}
+knitr::include_graphics("img/ugly-chart.png")
+```
+</div>
+
+Given below are two data visualizations that violate many data visualization 
+best practices. Improve these visualizations using R and the tips for effective 
+visualizations that we introduced in class. You should produce one visualization 
+per dataset. Your visualizaiton should be accompanies by a brief paragraph 
+describing the choices you made in your improvement, specifically discussing 
+what you didn't like in the original plots and why, and how you addressed them 
+in the visualization you created.
+
+On the due date you will give a brief presentation describing one of your 
+improved visualizations and the reasoning for the choices you made.
+
+### Task 1: Fisheries
+
+Fisheries and Aquaculture Department of the Food and Agriculture Organization 
+of the United Nations collects data on fisheries production of countries. 
+[This Wikipedia page](https://en.wikipedia.org/wiki/Fishing_industry_by_country) 
+lists fishery production of countries for 2005. For each country tonnage from 
+capture and aquaculture are listed. Note that countries which harvested less 
+than 100,000 tons are not included in the data.
+
+The following plots were produced based off the data given on the Wikipedia 
+page.
+
+![fisheries-plot](img/fisheries.png)
+
+The source data can be found in the `fisheries` dataset in the **dsbox** package.
+
+### Task 2: Instructional staff employee trends
+
+The American Association of University Professors (AAUP) is a nonprofit 
+membership association of faculty and other academic professionals. 
+[This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) 
+compiled by the AAUP shows trends in instructions staff employees between 1975 
+and 2011.
+
+The following plots were produced based off the data given on the Wikipedia 
+page.
+
+![fisheries-plot](img/inst_staff.png)
+
+The source data can be found in the `inst_staff` dataset in the **dsbox** package.
+
+## More ugly charts
+
+Want to see more ugly charts?
+
+- [Flowing Data - Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/)
+- [Reddit - Data is ugly](https://www.reddit.com/r/dataisugly/)
+
+## Acknowledgements
+
+These exercises were originally created by [Angela Zoss](https://library.duke.edu/about/directory/staff/6881) 
+and [Eric Monson](https://library.duke.edu/about/directory/staff/7561).
