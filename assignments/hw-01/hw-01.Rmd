@@ -49,7 +49,7 @@ The source data can be found in the `fisheries` dataset in the **dsbox** package
 The American Association of University Professors (AAUP) is a nonprofit 
 membership association of faculty and other academic professionals. 
 [This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) 
-compiled by the AAUP shows trends in instructions staff employees between 1975 
+compiled by the AAUP shows trends in instructional staff employees between 1975 
 and 2011.
 
 The following plots were produced based off the data given on the Wikipedia 
@@ -57,7 +57,7 @@ page.
 
 ![fisheries-plot](img/inst_staff.png)
 
-The source data can be found in the `inst_staff` dataset in the **dsbox** package.
+The source data can be found in the `instructors` dataset in the **dsbox** package.
 
 ## More ugly charts
 
