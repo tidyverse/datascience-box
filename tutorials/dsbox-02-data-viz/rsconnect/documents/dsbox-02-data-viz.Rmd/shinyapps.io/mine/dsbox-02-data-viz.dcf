@@ -1,0 +1,12 @@
+name: dsbox-02-data-viz
+title: dsbox-02-data-viz
+username:
+account: mine
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 338675
+bundleId: 1361728
+url: https://mine.shinyapps.io/dsbox-02-data-viz/
+when: 1525755988.05003
+asMultiple: FALSE
+asStatic: FALSE
