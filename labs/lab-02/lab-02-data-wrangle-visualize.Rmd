@@ -1,5 +1,6 @@
 ---
-title: "Lab 02 - Data wrangling and visualization"
+title: "Lab 02 - What should I major in?"
+subtitle: "Data wrangling and visualization"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -17,8 +18,6 @@ options(
   )
 knitr::opts_chunk$set(eval = FALSE)
 ```
-
-# Introduction
 
 ```{marginfigure}
 **A note on expectations: ** For each exercise and on your own question you 

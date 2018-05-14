@@ -1,5 +1,6 @@
 ---
-title: "Lab 09 - Simulation based inference"
+title: "Lab 09 - So what if you smoke when pregnant?"
+subtitle: "Simulation based inference"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -19,8 +20,6 @@ options(
   )
 knitr::opts_chunk$set(eval = TRUE)
 ```
-
-## Introduction
 
 In 2004, the state of North Carolina released a large data set containing 
 information on births recorded in this state. This data set is useful to 

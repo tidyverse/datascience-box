@@ -1,6 +1,6 @@
 ---
-title: "Lab 07 - Modelling course evaluations, Pt 2"
-subtitle: "Multiple predictors"
+title: "Lab 07 - Professor attractiveness and course evaluations, Pt. 2"
+subtitle: "Modelling with multiple predictors"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"

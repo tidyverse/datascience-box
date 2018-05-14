@@ -1,5 +1,6 @@
 ---
 title: "Lab 10 - Say cheers to web scraping!"
+subtitle: "Web scraping and iteration"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"

@@ -17,8 +17,6 @@ options(
   )
 ```
 
-# Introduction
-
 ```{marginfigure}
 R is the name of the programming language itself and RStudio is a convenient interface.
 ```

@@ -1,6 +1,6 @@
 ---
-title: "Lab 06 - Modelling course evaluations, Pt 1"
-subtitle: "Single predictor"
+title: "Lab 06 - Professor attractiveness and course evaluations, Pt 1"
+subtitle: "Modelling with a single predictor"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"

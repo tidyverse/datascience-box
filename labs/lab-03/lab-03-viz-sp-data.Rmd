@@ -1,6 +1,6 @@
 ---
-title: "Lab 03 - Visualizing spatial data"
-subtitle: "La Quinta is Spanish for *next to Denny's*"
+title: "Lab 03 - La Quinta is Spanish for *next to Denny's*, Pt. 1"
+subtitle: "Visualizing spatial data"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -20,8 +20,6 @@ options(
   )
 knitr::opts_chunk$set(eval = FALSE)
 ```
-
-## Introduction
 
 ```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
 include_graphics("img/mitch-hedgeberg-lqd.jpg")

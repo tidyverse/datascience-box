@@ -1,5 +1,6 @@
 ---
 title: "Lab 08 - Pull yourself up by your bootstraps"
+subtitle: "Bootstrap confidence intervals"
 output: 
   tufte::tufte_html:
     tufte_variant: "envisioned"
@@ -9,7 +10,6 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tidyverse)
 library(tufte)
 library(knitr)
 options(
@@ -19,8 +19,6 @@ options(
   )
 knitr::opts_chunk$set(eval = TRUE)
 ```
-
-## Introduction
 
 The GSS gathers data on contemporary American society in order to monitor and explain trends and constants in attitudes, behaviors, and attributes.  Hundreds of trends have been tracked since 1972. In addition, since the GSS adopted questions from earlier surveys, trends can be followed for up to 70 years.
 
@@ -32,41 +30,10 @@ In this lab we analyze data from the 2016 GSS, using it to estimate values of po
 
 In this lab we will work with the `tidyverse` and `infer` packages. We can install and load them with the following:
 
-```{r eval = TRUE}
+```{r}
 library(tidyverse) 
 library(infer)
 ```
-
-# Housekeeping
-
-## Git configuration / password caching
-
-Configure your Git user name and email. If you cannot remember the instructions, refer to an earlier lab. Also remember that you can cache your password for a limited amount of time.
-
-## Project name: 
-
-Update the name of your project to match the lab's title.
-
-# Warm up
-
-**Pick one team member to complete the steps in this section while the others contribute to the discussion but do not actually touch the files on their computer.**
-
-Before we introduce the data, let's warm up with some simple exercises.
-
-## YAML: 
-
-Open the R Markdown (Rmd) file in your project, change the author name to your **team** name, and knit the document.
-
-## Commiting and pushing changes:
-
-- Go to the **Git** pane in your RStudio. 
-- View the **Diff** and confirm that you are happy with the changes.
-- Add a commit message like "Update team name" in the **Commit message** box and hit **Commit**.
-- Click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your password.
-
-## Pulling changes:
-
-Now, the remaining team members who have not been concurrently making these changes on their projects should click on the **Pull** button in their Git pane and observe that the changes are now reflected on their projects as well.
 
 # Set a seed!
 
@@ -84,15 +51,7 @@ Enter `.gitignore`! The `.gitignore` file contains a list of the files you don't
 - Navigate to the data folder in your project and upload the `gss2016.csv` file.
 - Note that even though you made a change in your files by adding the data, `gss2016.csv` does not appear in your Git pane. This is because it's being ignored by git.
 
-```{r load-data-for-real, include=FALSE}
-gss <- read_csv("../data/gss2016.csv", 
-                na = c("", "Don't know",
-                       "No answer", "Not applicable"),
-                guess_max = 2867) %>%
-  select(harass5, emailmin, emailhr, educ, born, polviews, advfront)
-```
-
-```{r load-data-for-show, eval=FALSE}
+```{r load-data}
 gss <- read_csv("data/gss2016.csv", 
                 na = c("", "Don't know",
                        "No answer", "Not applicable"),
