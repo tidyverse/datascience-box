@@ -52,3 +52,6 @@ This repository serves as a "data science course in a box" containing all materi
 - RStudio Primers: https://rstudio.cloud/learn/primers
 - ...
 
+### Tools
+
+- [ghclass](https://rundel.github.io/ghclass/) (WIP)
