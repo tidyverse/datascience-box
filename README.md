@@ -12,7 +12,13 @@ This repository serves as a "data science course in a box" containing all materi
 
 ## Contents
 
-- `infrastructure`: This booklet contains information on the computing infrastructure of this course and is designed for teachers, while the remainder of the content is for teachers and learners. Specifically it covers:
+- `slides`: Course content as `xaringan` slides
+- `assignments`: Team-based and individual assignments
+- `labs`: Guided hands on exercises for students requiring minimal introduction from the instructor
+- `exams`: Sample take-home exams
+- `project`: Final project assignment
+- `tutorials`: Interactive learning exercises built with `learnr`
+- `dsbox-book`: This book contains information on the computing infrastructure of this course and is designed for teachers, while the remainder of the content is for teachers and learners. Specifically it covers:
 	- RStudio: Why to use one of the below and how to structure the course if you’re using one of the below?
 		- RStudio Server Pro
 		- RStudio Cloud
@@ -23,12 +29,6 @@ This repository serves as a "data science course in a box" containing all materi
 			- `ghclass`
 	- Creating `learnr` modules
 	- Using `blogdown` to create your course website
-- `slides`: Course content as `xaringan` slides
-- `labs`: Guided hands on exercises for students requiring minimal introduction from the instructor
-- `assignments`: Team-based and individual assignments
-- `midterms`: Sample take-home midterms
-- `projects`: Sample student final projects (maybe)
-- `learnr`: Interactive learning exercises built with `learnr`
 
 ## Resources
 
