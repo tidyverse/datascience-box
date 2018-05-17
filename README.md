@@ -12,13 +12,13 @@ This repository serves as a "data science course in a box" containing all materi
 
 ## Contents
 
-- `slides`: Course content as `xaringan` slides
-- `assignments`: Team-based and individual assignments
-- `labs`: Guided hands on exercises for students requiring minimal introduction from the instructor
-- `exams`: Sample take-home exams
+- `slides`: 25 `xaringan` slide decks, each to be covered roughly in a 75 minute class session
+- `assignments`: 6 homewoek assignments
+- `labs`: 10 guided hands on exercises for students requiring minimal introduction from the instructor
+- `exams`: 2 sample take-home exams and keys
 - `project`: Final project assignment
-- `tutorials`: Interactive learning exercises built with `learnr`
-- `dsbox-book`: This book contains information on the computing infrastructure of this course and is designed for teachers, while the remainder of the content is for teachers and learners. Specifically it covers:
+- (WIP) `tutorials`: Interactive learning exercises built with `learnr` 
+- (WIP) `dsbox-book`: This book contains information on the computing infrastructure of this course and is designed for teachers, while the remainder of the content is for teachers and learners. Specifically it covers:
 	- RStudio: Why to use one of the below and how to structure the course if you’re using one of the below?
 		- RStudio Server Pro
 		- RStudio Cloud
