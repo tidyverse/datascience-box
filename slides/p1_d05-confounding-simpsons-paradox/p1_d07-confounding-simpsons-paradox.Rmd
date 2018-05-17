@@ -272,7 +272,7 @@ class: center, middle
 ## Data
 
 ```{r message=FALSE}
-ucb_admit <- read_csv("../../data/ucb-admit.csv")
+ucb_admit <- read_csv("../../extras/data/ucb-admit.csv")
 ucb_admit
 ```
 
