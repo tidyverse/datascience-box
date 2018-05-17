@@ -29,3 +29,19 @@ This repository serves as a "data science course in a box" containing all materi
 - `midterms`: Sample take-home midterms
 - `projects`: Sample student final projects (maybe)
 - `learnr`: Interactive learning exercises built with `learnr`
+
+## Resources
+
+### Talks
+
+- SDSS 2018: [Start with Data Science](https://github.com/mine-cetinkaya-rundel/start-with-ds)
+- useR 2017: Teaching data science to new useRs
+  - [Slides](http://bit.ly/user2017)
+  - [Video](https://channel9.msdn.com/Events/useR-international-R-User-conferences/useR-International-R-User-2017-Conference/KEYNOTE-Teaching-data-science-to-new-useRs)
+
+### Teaching materials
+
+- R4DS: http://r4ds.had.co.nz/
+- RStudio Primers: https://rstudio.cloud/learn/primers
+
+
