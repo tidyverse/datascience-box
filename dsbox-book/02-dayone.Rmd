@@ -86,7 +86,7 @@ And then, we create a visualization that compares how the voting record of the
 United States changed over time on a variety of issues, and compare it to 
 another country.
 
-```{r plot-yearly-yes-issue, fig.height=7, warning=FALSE}
+```{r plot-yearly-yes-issue, fig.height=4, fig.width=7, warning=FALSE}
 un_votes %>%
   filter(country %in% c("United States of America", "Turkey")) %>%
   inner_join(un_roll_calls, by = "rcid") %>%
