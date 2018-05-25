@@ -1,0 +1,7 @@
+---
+weight: 10
+title: "Exploring data"
+output: html_document
+---
+
+This is where into to part 1 goes.
