@@ -1,0 +1,91 @@
+---
+weight: 1
+title: "Introduction"
+output: html_document
+---
+
+This is not a book per se, at least not yet. It's a place for organizing 
+materials for teaching (and learning) data science with R, RStudio, the 
+tidyverse and tidyverse friendly packages. It's called 
+__Data Science Course in a Box__, as it contains all the materials you 
+(an educator) might need to teach data science or you (a learner) might 
+find useful to learn about them.
+
+## Who is this course for?
+
+The materials in this box are designed for learners who have no background 
+in data science, statistics, or programming. However, they also assume that 
+the learners are interested in making sense of (sometimes messy) data and 
+willing to dive into the documentation of the packages we introduce.
+
+## What is in the box?
+
+- Slides
+- Labs
+- Assignments
+- Exams
+- Infrastructure guide
+
+## How is the course content organized?
+
+- Part 1: Exploring data - wrangle + visualize + collect
+- Part 2: Making rigorous conclusions - modeling + inference
+- Part 3: Looking forward - ...
+
+## Why R?
+
+Unlike most other software designed specifically for teaching statistics, R 
+is free and open source, powerful, flexible, and relevant beyond the 
+introductory statistics classroom. Arguments against using and teaching 
+R at especially the introductory statistics level generally cluster around 
+the following two points: teaching programming in addition to statistical 
+concepts is challenging and the command line is more intimidating to beginners 
+than the graphical user interface (GUI) most point-and-click type software 
+offer.
+
+One solution for these concerns is to avoid hands-on data analysis completely. 
+If we do not ask our students to start with raw data and instead always provide 
+them with small, tidy rectangles of data then there is never really a need for 
+statistical software beyond spreadsheet or graphing calculator. This is not 
+what we want in a modern statistics course and is a disservice to students.
+
+Another solution is to use traditional point-and-click software for data 
+analysis. The typical argument is that the GUI is easier for students to learn 
+and so they can spend more time on statistical concepts. However, this ignores 
+the fact that these software tools also have nontrivial learning curves. In 
+fact, teaching specific data analysis tasks using such software often requires 
+lengthy step-by-step instructions, with annotated screenshots, for navigating 
+menus and other interface elements. Also, it is not uncommon that instructions 
+for one task do not easily extend to another. Replacing such instructions with 
+just a few lines of R code actually makes the instructional materials more 
+concise and less intimidating.
+
+Many in the statistics education community are in favor of teaching R (or some 
+other programming language, like Python) in upper level statistics courses, 
+however the value of using R in introductory statistics courses is not as widely 
+accepted. We acknowledge that this addition can be burdensome, however we would 
+argue that learning a tool that is applicable beyond the introductory statistics 
+course and that enhances students' problem solving skills is a burden worth 
+bearing.
+
+## Why RStudio?
+
+The RStudio IDE includes a viewable environment, a file browser, data viewer, 
+and a plotting pane, which makes it less intimidating than the bare R shell. 
+Additionally, since it is a full fledged IDE, it also features integrated help, 
+syntax highlighting, and context-aware tab completion, which are all powerful 
+tools that help flatten the learning curve.
+
+Students access the RStudio IDE through a centralized RStudio server instance, 
+which allows us to provide students with uniform computing environments. 
+Additionally, RStudio's direct integration with other critically important tools 
+for teaching computing best practices and reproducible research also influenced 
+our decision for making it central in our toolkit.
+
+It should be noted that we do not want to completely dissuade students from 
+downloading and installing R and RStudio locally, we just do not want it to be 
+a prerequisite for getting started. We have found that teaching personal setup 
+is best done progressively throughout a semester, usually via one-on-one 
+interactions during office hours or after class. Our goal is that all students 
+will be able to continue using R even if they no longer have access to 
+departmental resources.
