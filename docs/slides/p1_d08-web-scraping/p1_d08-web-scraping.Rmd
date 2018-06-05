@@ -1,0 +1,320 @@
+---
+title: "Web scraping"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Scraping the web
+
+---
+
+## Scraping the web: what? why?
+
+- Increasing amount of data is available on the web.
+- These data are provided in an unstructured format: you can always copy&paste, but it's 
+time-consuming and prone to errors.
+- Web scraping is the process of extracting this information automatically and transform it into 
+a structured dataset.
+- Two different scenarios:
+    - Screen scraping: extract data from source code of website, with html parser (easy) or 
+    regular expression matching (less easy).
+    - Web APIs (application programming interface): website offers a set of structured http 
+    requests that return JSON or XML files.
+- Why R? It includes all tools necessary to do web scraping, familiarity, direct analysis of data... But python, perl, java are also efficient tools.
+
+---
+
+class: center, middle
+
+# Web Scraping with rvest
+
+---
+
+## Hypertext Markup Language
+
+Most of the data on the web is still largely available as HTML - while it is structured (hierarchical / tree based) it often is not available in a form useful for analysis (flat / tidy).
+
+```html
+<html>
+  <head>
+    <title>This is a title</title>
+  </head>
+  <body>
+    <p align="center">Hello world!</p>
+  </body>
+</html>
+```
+
+---
+
+## rvest
+
+`rvest` is a package that makes basic processing and manipulation of HTML data straight forward.
+
+--
+
+Core functions:
+
+* `read_html` - read HTML data from a url or character string.
+
+* `html_nodes` - select specified nodes from the HTML document using CSS selectors.
+
+* `html_table` - parse an HTML table into a data frame.
+
+* `html_text` - extract tag pairs' content.
+
+* `html_name` - extract tags' names.
+
+* `html_attrs` - extract all of each tag's attributes.
+
+* `html_attr` - extract tags' attribute value by name.
+
+---
+
+## SelectorGadget
+
+- SelectorGadget: Open source tool that eases CSS selector generation and discovery
+
+- Install the [Chrome Extension](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb) 
+
+- A box will open in the bottom right of the website. Click on a page element that you 
+would like your selector to match (it will turn green). SelectorGadget will then generate 
+a minimal CSS selector for that element, and will highlight (yellow) everything that is 
+matched by the selector. 
+- Now click on a highlighted element to remove it from the selector (red), or click on an 
+unhighlighted element to add it to the selector. Through this process of selection and 
+rejection, SelectorGadget helps you come up with the appropriate CSS selector for your needs.
+
+```{r eval=FALSE}
+vignette("selectorgadget")
+```
+
+---
+
+class: center, middle
+
+# Top 250 movies on IMDB
+
+---
+
+## Top 250 movies on IMDB
+
+Take a look at the source code, look for the tag `table` tag:
+<br>
+http://www.imdb.com/chart/top
+
+![imdb_top](img/imdb_top_250.png)
+
+---
+
+## First check to make sure you're allowed!
+
+```{r warning=FALSE}
+# install.packages("robotstxt")
+library(robotstxt)
+paths_allowed("http://www.imdb.com")
+```
+
+vs. e.g.
+
+```{r warning=FALSE}
+paths_allowed("http://www.facebook.com")
+```
+
+
+---
+
+## Demo
+
+![imdb_top](img/demo.png)
+
+Go to [rstudio.cloud](https://rstudio.cloud/) $\rightarrow$ Web scraping $\rightarrow$ Make a copy $\rightarrow$ `scrape-250.R`
+
+---
+
+## Select and format pieces
+
+.small[
+```{r message=FALSE}
+library(rvest)
+
+page <- read_html("http://www.imdb.com/chart/top")
+
+titles <- page %>%
+  html_nodes(".titleColumn a") %>%
+  html_text()
+
+years <- page %>%
+  html_nodes(".secondaryInfo") %>%
+  html_text() %>%
+  str_replace("\\(", "") %>% # remove (
+  str_replace("\\)", "") %>% # remove )
+  as.numeric()
+
+scores <- page %>%
+  html_nodes("#main strong") %>%
+  html_text() %>%
+  as.numeric()
+  
+imdb_top_250 <- tibble(
+  title = titles, 
+  year = years, 
+  score = scores
+  )
+```
+]
+
+---
+
+```{r echo=FALSE, results='asis'}
+imdb_top_250 %>% head(15)%>% rbind(rep("...", 3)) %>% kable(format = "html")
+```
+
+---
+
+## Clean up / enhance
+
+May or may not be a lot of work depending on how messy the data are
+
+- See if you like what you got:
+
+```{r}
+glimpse(imdb_top_250)
+```
+
+- Add a variable for rank
+```{r}
+imdb_top_250 <- imdb_top_250 %>%
+  mutate(
+    rank = 1:nrow(imdb_top_250)
+  )
+```
+
+---
+
+```{r echo=FALSE, results='asis'}
+imdb_top_250 %>% head(15)%>% rbind(rep("...", 3)) %>% kable(format = "html")
+```
+
+---
+
+## css selectors
+
+We will be using a tool called selector gadget to help up identify the html elements of interest - it does this by constructing a css selector which can be used to subset the html document.
+
+Selector          |  Example         |     Description
+------------      |------------------|      ------------------------------------------------
+element           |  `p`             |      Select all &lt;p&gt; elements
+element element   |  `div p`         |      Select all &lt;p&gt; elements inside a &lt;div&gt; element          
+element>element   |  `div > p`       |      Select all &lt;p&gt; elements with &lt;div&gt; as a parent
+.class            |  `.title`        |      Select all elements with class="title"
+\#id              |  `.name`         |      Select all elements with id="name"
+[attribute]       |  `[class]`       |      Select all elements with a class attribute
+[attribute=value] |  `[class=title]` |      Select all elements with class="title"
+
+---
+
+## Analyze
+
+.question[
+How would you go about answering this question: Which 1995 movies made the list?
+]
+
+---
+
+```{r}
+imdb_top_250 %>% 
+  filter(year == 1995)
+```
+
+---
+
+## Analyze
+
+.question[
+How would you go about answering this question: Which years have the most movies on the list?
+]
+
+--
+
+```{r}
+imdb_top_250 %>% 
+  group_by(year) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total)) %>%
+  head(5)
+```
+
+---
+
+## Visualize
+
+.question[
+How would you go about creating this visualization: Visualize the average yearly score for movies that made it on the top 250 list over time.
+]
+
+--
+
+.small[
+```{r echo=FALSE}
+imdb_top_250 %>% 
+  group_by(year) %>%
+  summarise(avg_score = mean(score)) %>%
+  ggplot(aes(y = avg_score, x = year)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    xlab("year")
+```
+]
+---
+
+## Potential challenges
+
+- Unreliable formatting at the source
+- Data broken into many pages
+- ...
+
+.question[
+Compare the display of information at https://raleigh.craigslist.org/search/apa to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
+]

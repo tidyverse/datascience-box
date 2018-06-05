@@ -1,0 +1,113 @@
+---
+title: "HW 05 - Simulate to infer"
+output: 
+  html_document: 
+    css: ../hw.css
+    theme: yeti
+    toc: true
+    toc_float: true
+    fig_caption: false
+---
+
+<div style= "float:right;position: relative; margin-left: 20px">
+```{r setup, echo=FALSE, fig.align="right"}
+knitr::include_graphics("img/inference.jpg")
+```
+</div>
+
+## Exercises
+
+### Part 1: Simulations for hypothesis testing
+
+Describe precisely how you would set up the simulation for the following 
+hypothesis tests. Imagine using index cards or chips to represent the data. 
+Also specify whether the null hypothesis would be independence or point and 
+whether the simulation type would be bootstrap, simulate, or permute. In each 
+of the scenarios you can assume sample size is 100 and number of simulations 
+is 15,000.
+
+1. Describe the simulation process for testing for a single population standard deviation. 
+Suppose the research question is asking whether the standard deviation is less 
+than 3, 
+and the observed sample standard deviation is 2.
+2. Describe the simulation process for testing for the difference between two 
+population proportions. Suppose the sample proportion of successes for sample A 
+is 0.3 and for 
+sample B is 0.4.
+3. Describe the simulation process for testing for a single population 
+proportion. Suppose 
+the research question is asking whether proportion of successes is majority, 
+and also that 
+the observed proportion of success is 0.6.
+4. Describe the simulation process for testing for the difference between two 
+population means. Suppose sample mean for sample A is 5 and for sample B is 3.
+
+### Part 2: Inferring from the ACS
+
+Each year since 2005, the US Census Bureau surveys about 3.5 million households 
+with The [American Community Survey](https://www.census.gov/programs-surveys/acs/) 
+(ACS). Data collected from the ACS have been crucial in government and policy 
+decisions, helping to determine the allocation of more than $400 billion in 
+federal and state funds each year. For example, funds for the Adult Education 
+and Family Literacy Act are distributed to states taking into consideration data 
+from the ACS on number of adults 16 and over without a high school diploma. 
+This act is the primary source of federal funding for adults with low basic 
+skills seeking further education or English language services, and Department of 
+Education uses ACS data to ensure the efficient distribute funds.
+
+The ACS received a surge of media attention in Spring 2012 when the House of 
+Representatives voted to eliminate the survey.  Daniel Webster, a first-term 
+Republican congressman from Florida, sponsored the legislation citing the 
+following reasons:  
+
+- "This is a program that intrudes on people's lives, just like the Environmental Protection Agency or the bank regulators" 
+- "We're spending \$70 per person to fill this out. That's just not cost effective"
+- "in the end this is not a scientific
+
+In this part we use data from the 2012 ACS to answer a few questions about 
+American adults. For each of the questions make sure to use the `infer` package 
+in your answers and interpret your results in context of the data. For 
+hypothesis tests make sure to state your hypotheses clearly. You can use 1,000 
+repetitions in your simulations for computational efficiency reasons.
+
+The dataset you will use is called `acs12` and it's in the `openintro` package.
+
+5. Do these data provide convincing evidence of a difference in median income 
+of employed Americans who do and do not speak English at home?
+
+6. Construct a 95% confidence interval for the median travel time to work of 
+Americans who are employed.
+
+7. Do these data provide convincing evidence of a difference in the proportions 
+of Americans who are employed between those who are citizens and those who are 
+not?
+
+8. Construct a 90% confidence interval for the difference in the proportions of Americans who are citizens between those who speak English at home and those who 
+do not. 
+
+9. Construct a 95% confidence interval for the difference for the difference in median incomes of employed Americans born in the first hal of the year vs. those born in the in the second half.
+
+10. Pick your own: State a question you want to answer with these data and answer it using the appropriate inference method.
+
+## Getting help
+
+Use the #questions channel on Slack to ask questions.
+
+- R errors/questions: Make a [reprex](https://www.tidyverse.org/help/#reprex).
+- Git/GitHub errors/questions: Clearly outline your steps that got you to the 
+point you're in.
+
+You are also welcomed to discuss the homework with each other broadly 
+(no sharing code!) as well as ask questions at office hours.
+
+## Grading
+
+In addition to accuracy of your answers to questions, your submission will be 
+evaluated for
+
+- coding style,
+- informatively named code chunks,
+- commit after each question (at a minimum, more commits ok),
+- informative commit messages,
+- document organization, and
+- quality of writing and grammar.

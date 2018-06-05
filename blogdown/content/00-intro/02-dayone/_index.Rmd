@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "Day one"
 output: html_document
 ---
@@ -9,17 +9,37 @@ students, teach the necessary evils later. This means getting to a meaningful,
 and hopefully interesting (for the students) data visualization as quickly 
 as possible.
 
-## What is data science?
+## Learning goals
 
-Data science is an exciting discipline that allows you to turn raw data into 
-understanding, insight, and knowledge. We're going to learn to do this in a 
-`tidy` way -- more on that later!
+- Start developing an understanding of what data science is
+- Understand course goals, structure, and expectations
+- Get motivated to learn more with current and interesting data analyses
+- Create and modify first data visualization 
 
-## What is this course?
+## Outline
 
-This is an introductory data science course designed for learners with no 
-background in data science, programming, or statistics, but a willingness to 
-learn in class and explore independently.
+- What is data science?
+- What is this course?
+- Data in the wild
+- Application exercise: Visualizing UN votes
+
+### What is data science?
+
+Start with a brief introduction to the course and to data science. It's 
+difficult to find a precise definition of data science that many in the field 
+agree on. But the following is a good one: "Data science is an exciting 
+discipline that allows you to turn raw data into understanding, insight, and 
+knowledge." We're going to learn to do this in a `tidy` way -- more on that 
+later!
+
+### What is this course?
+
+Then, spend a little bit of time describing the course content and overall 
+learning goals. It is important to emphasize that this is an introductory data 
+science course designed for learners with no background in data science, 
+programming, or statistics, but a willingness to learn in class and explore independently.
+
+A few questions students might have (and their answers) are below:
 
 - Will we be doing computing? Yes.
 - Is this an intro CS course? Not really, but many themes are shared.
@@ -28,7 +48,14 @@ statistics course.
 - What computing language will we learn? R.
 - Why not language X? We can discuss that over :coffee:.
 
-## Data in the wild
+Before moving on, give an overview of assessments -- what form will they take 
+and roughly how often will they happen. Do not spend too long going over every 
+detail in the syllabus, instead you might consider giving reading the syllabus 
+as a homework assignment and give students a mini quiz they can take online,
+which you can build with learnr or within your courses management system. I 
+usually grade such a quiz on a check / no check basis.
+
+### Data in the wild
 
 I like starting off by showing a few examples of easy to follow but not so 
 simple data analyses done in R, preferably presented along with the R code. 
@@ -41,7 +68,7 @@ following as examples:
 - [Text analysis of Trump's tweets confirms he writes only the (angrier) 
 Android half](http://varianceexplained.org/r/trump-tweets/) by David Robinson
 
-## Your turn: UN Votes
+### Application exercise: Visualizing UN votes
 
 It's now time to let the students work on their first data visualization in R. 
 
@@ -116,10 +143,12 @@ un_votes %>%
 
 At this point, instead of a formal introduction on R syntax, I recommend 
 letting students change parameters passed to these functions, such as which 
-countries are being plotted, and reknit the document to view the changes.
+countries are being plotted, and re-knit the document to view the changes.
 
-[TO DO: Find a good way to insert slides.]
+## Materials
 
-Link to relevant slides: https://github.com/rstudio-education/datascience-box/tree/master/slides/p0_d01-welcome
-
-
+- Slides: [hello](../../slides/p0_d01-welcome/p1_d01-welcome.html)
+- Syllabus quiz: [TO BE POSTED]
+- Application exercise:
+  - R Markdown template
+  - RStudio Cloud project

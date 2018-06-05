@@ -1,0 +1,211 @@
+---
+title: "Lab 08 - Pull yourself up by your bootstraps"
+subtitle: "Bootstrap confidence intervals"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../lab.css
+link-citations: yes
+---
+
+```{r include=FALSE}
+library(tufte)
+library(knitr)
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  digits = 2
+  )
+knitr::opts_chunk$set(eval = TRUE)
+```
+
+The GSS gathers data on contemporary American society in order to monitor and explain trends and constants in attitudes, behaviors, and attributes.  Hundreds of trends have been tracked since 1972. In addition, since the GSS adopted questions from earlier surveys, trends can be followed for up to 70 years.
+
+The GSS contains a standard core of demographic, behavioral, and attitudinal questions, plus topics of special interest. Among the topics covered are civil liberties, crime and violence, intergroup tolerance, morality, national spending priorities, psychological well-being, social mobility, and stress and traumatic events.
+
+In this lab we analyze data from the 2016 GSS, using it to estimate values of population parameters of intertest about US adults.[^1]
+
+# Packages
+
+In this lab we will work with the `tidyverse` and `infer` packages. We can install and load them with the following:
+
+```{r}
+library(tidyverse) 
+library(infer)
+```
+
+# Set a seed!
+
+In this lab we'll be bootstrapping, which means we'll be generating random samples. The last thing you want is those samples to change every time you knit your document. So, you should set a seed. There's an R chunk in your R Markdown file set aside for this. Locate it and add a seed. Make sure all members in a team are using the same seed so that you don't get merge conflicts and your results match up for the narratives.
+
+# The data
+
+As we mentioned above, we will work with the 2016 GSS data. The public release of this data contains 935 variables (only a few of which we will use today) and 2867 observations. This is not big data in the sense of the "big data" that everyone seems to be obsessed with nowadays. But it is a fairly large dataset that we need to consider how we handle it in our workflow.
+
+The size of the data file we're working with it 34.3 MB. For perspective, the professor evaluations data in the previous lab was 45KB, which means the GSS data is a little over 750 times the size of the evaluations data. That's a big difference! GitHub will warn you when pushing files larger than 50 MB, and you will not be allowed to push files larger than 100 MB.[^2] While our file is smaller than these limits, it's still large enough to not push to GitHub.
+
+Enter `.gitignore`! The `.gitignore` file contains a list of the files you don't want to to commit to Git or push to GitHub. If you open the `.gitignore` file in your project, you'll see that our data file, `gss2016.csv`, is already listed there.
+
+- Click [here](https://stat.duke.edu/~mc301/data/gss2016.csv) to download the data. The file is called `gss2016.csv`.
+- Navigate to the data folder in your project and upload the `gss2016.csv` file.
+- Note that even though you made a change in your files by adding the data, `gss2016.csv` does not appear in your Git pane. This is because it's being ignored by git.
+
+```{r load-data}
+gss <- read_csv("data/gss2016.csv", 
+                na = c("", "Don't know",
+                       "No answer", "Not applicable"),
+                guess_max = 2867) %>%
+  select(harass5, emailmin, emailhr, educ, born, polviews, advfront)
+```
+
+Note that we're doing two new things here:
+
+- New argument: `guess_max`. If you look in the documentation for `read_csv` you'll see that the function uses the first 1,000 observations in a data frame to determine the classes of each variable (column) in the data frame. It so turns out we have some variables in this data frame that have numeric data within the first 1,000 rows, and then something like `"8 or more"` (numeric in spirit, but character in nature) data in later rows. So without specifically asking R to scan all rows to determine the variable class, we end up with some warnings when loading the data. You could see this for yourself by removing the `guess_max` argument.
+
+- Selecting columns of interest: We know which variables we will be using from the data, so we can just select those and not load the entire dataset. This is a helpful tip for working with large data. You might be wondering -- but how would I know ahead of time which variables I'll be working with. Good question! You probably won't know. But, once you make up your mind, you can go back and add the `select()` function so that from that point onwards in your analysis you can benefit from faster computation.
+
+## Select columns of interest
+
+In this lab we will only be working with a small subset of the columns from this large dataframe. So let's create a dataframe including only the variables of interest and work with it so that 
+
+# Exercises
+
+## Part 1: Harrassment at work
+
+In 2016, the GSS added a new question on harrassment at work. The question is phrased as the following.
+
+>*Over the past five years, have you been harassed by your superiors or co-workers at your job, for example, have you experienced any bullying, physical or psychological abuse?*
+
+Answers to this question are stored in the `harass5` variable in our dataset.
+
+1. What are the possible responses to this question and how many respondents chose each of these answers?
+
+```{marginfigure}
+Hint: The `%in%` operator will be helpful here as well as in the rest of the lab.
+```
+
+2. Filter the data for only those who answered "Yes" or "No" to this question. Do not overwrite the data frame (you'll need the full data later). Instead save the resulting data frame with a new name.
+
+3. What percent of the respondents for whom this question is applicable have been harassed by their superiors or co-workers at their job.
+
+```{marginfigure}
+Ideally, you should be using 15,000 simulations (`rep = 15000`) however you might find that knitting your document over and over with 15,000 simulations for each bootstrap interval you need to construct in this lab can slow things down. Hence, you can develop your answers with a small number of simulations, like 100, and once you have everything working go back and change these numbers to 15,000.
+```
+
+4. Construct and visualize a bootstrap distribution for the proportion of Americans who have been harrassed at work. Note that since we're constructing a simulation for a proportion, we use `stat = "prop"` in the `calculate()` function. Also note that since the response variable is categorical, we need to add a new argument to the `specify()` function that specifies the level which we want to consider as `success`. In this case, since we're interested in proportion of Americans who have been harrassed, we're interested in `success = "Yes"`.
+
+5. Determine the 95% bootstrap confidence interval based on the distribution you constructed above.
+
+6. Interpret the confidence interval in context of the data.
+
+7. You (probably) mentioned in your interpretation that you are "95% confident". What does "95 confident" mean?
+
+8. Now calculate a 90% as well as a 99% confidence interval for the same population parameter. How does the width of the confidence interval change as the confidence level increases?
+
+## Part 2: Time spent on email
+
+The 2016 GSS also asked respondents how many hours and minutes they spend on email weekly. The responses to these questions are recorded in the `emailhr` and `emailmin` variables. For example, if the response is 2.5 hrs, this would be recorded as `emailhr = 2` and `emailmin = 30`.
+
+8. Create a new variable that combines these two variables to reports the number of minutes the respondents spend on email weekly.
+
+9. Filter the data for only those who have non `NA` entries for `email`. Do not overwrite the data frame (you'll need the full data later). Instead save the resulting data frame with a new name.
+
+10. Visualize the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. Is the mean or the median a better measure of the typical amoung of time Americans spend on email weekly? Why?
+
+11. Describe how bootstrapping can be used to estimate the typical amount of time all Americans spend on email weekly.
+
+12. Calculate a 90% bootstrap confidence interval for the typical amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in "humanized" units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). If you get a result that seems a bit odd, discuss why you think this might be the case.
+
+## Part 3:
+
+Another question on the 2016 GSS was how many years of schooling they completed. The distribution of responses is as follows:
+
+```{r eval=TRUE}
+ggplot(data = gss, mapping = aes(x = educ)) +
+  geom_histogram(binwidth = 1)
+```
+
+Suppose we want to estimate difference between the average numbers of years of education between those who were born in this country (`born = "Yes"`) and those who were not (`born = "No"`). To do so, we need to construct a confidence interval for the difference between the population averages of number of years of education between these two groups, i.e. for ($\mu_{Yes} - \mu_{No}$) where $\mu$ is the average number of years of education.
+
+Let's take a look at the distribution of the `born` variable first:
+
+```{r eval=TRUE}
+gss %>%
+  count(born)
+```
+
+We can see that some respondents did not answer this question, or they did not know, or thought the question was not applicable for them. Upon data import these responses were coded as `NA`s. 
+
+Similarly, we can see that some respondents did not answer the education question:
+
+```{r eval=TRUE}
+gss %>%
+  count(educ)
+```
+
+In order to make sure that we are bootstrapping observations for which we have data, we can first filter our data frame for observations that have non-NA values for these two variables. We'll save the resulting data frame with a different name so that we don't overwrite the original `gss` data.
+
+```{r eval=TRUE}
+gss_educ <- gss %>%
+  filter(
+    !is.na(educ),
+    !is.na(born)
+  )
+```
+
+So how can we produce a bootstrap interval for the difference between the average number of years of education between those born and not born in the US? 
+
+- Step 1: Take a bootstrap sample of those born in the US and a bootstrap sample of those not born in the US. These are random samples, taken with replacement, from the original samples, of the same size as the original samples.
+
+- Step 2: Calculate the bootstrap statistic - in this case we find the mean of each of the bootstrap samples and take the difference between them.
+
+- Step 3: Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap differences in means.
+
+- Step 4: Calculate the bounds of the XX% confidence interval as the middle XX% 
+of the bootstrap distribution.
+
+This new setup will change the model we `specify()` -- we will specify a `response` and an `explanatory` variable. The explanatory variable is the one to be used for splitting the data into the groups. In addition, we will also need to specify the order in which to subtract the mean numbers of years of education in Step (2) above, i.e. `born = "Yes"` - `born = "No"`, or the other way around.
+
+```{r eval=TRUE}
+boot_diffeduc_born <- gss_educ %>%
+  specify(response = educ, explanatory = born) %>%
+  generate(reps = 100, type = "bootstrap") %>%
+  calculate(stat = "diff in means", order = c("Yes", "No"))
+```
+
+13. Visualize the distribution of these bootstrap differences in medians. Find a 99% confidence interval for the difference between the population averages of number of years of education between those born and not born in the US and interpret this interval in context of the data.
+
+## Part 4: 
+
+The 2016 GSS also asked respondents whether they think of themselves as liberal or conservative (`polviews`) and whether they think science research is necessary and should be supported by the federal government (`advfront`).
+
+- The question on science research is worded as follows:
+
+>Even if it brings no immediate benefits, scientific research that advances the frontiers of knowledge is necessary and should be supported by the federal government.
+
+And possible responses to this question are Strongly agree, Agree, Disagree, Strongly disagree, Dont know, No answer, Not applicable.
+
+- The question on political views is worded as follows:
+
+> We hear a lot of talk these days about liberals and conservatives. I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal--point 1--to extremely conservative--point 7. Where would you place yourself on this scale?
+
+```{marginfigure}
+Note that the levels of this variables are spelled inconsistently: "Extremely liberal" vs. "Extrmly conservative". Since this is the spelling that shows up in the data, you need to make sure this is how you spell the levels in your code.
+```
+
+And possible responses to this question are Extremely liberal, Liberal, Slightly liberal, Moderate, Slghtly conservative, Conservative, Extrmly conservative. Responses that were originally Don't know, No answer and Not applicable are already mapped to `NA`s upon data import.
+
+14. In a new variable, recode `advfront` such that Strongly Agree and Agree are mapped to `"Yes"`, and Disagree and Strongly disagree are mapped to `"No"`. The remaining levels can be left as is.
+
+15. In a new variable, recode `polviews` such that Extremely liberal, Liberal, and Slightly liberal, are mapped to `"Liberal"`, and Slghtly conservative, Conservative, and Extrmly conservative disagree are mapped to `"Conservative"`. The remaining levels can be left as is.
+
+16. Filter the data for respondents who identified as liberal or conservative and who responded yes or no to the science research question. Save the resulting data frame with a different name so that you don't overwrite the data.
+
+17. Describe how bootstrapping can be used to estimate the difference in proportion of libreals and not liberals who think science research is necessary and should be supported by the federal government.
+
+18. Construct a 90% bootstrap confidence interval for the difference in proportion of liberals and conservatives who think science research is necessary and should be supported by the federal government. Interpret this interval in context of the data. 
+
+[^1]: Smith, Tom W, Peter Marsden, Michael Hout, and Jibum Kim. General Social Surveys, 1972-2016 [machine-readable data file] /Principal Investigator, Tom W. Smith; Co-Principal Investigator, Peter V. Marsden; Co-Principal Investigator, Michael Hout; Sponsored by National Science Foundation. -NORC ed.- Chicago: NORC at the University of Chicago [producer and distributor]. Data accessed from the GSS Data Explorer website at gssdataexplorer.norc.org.
+[^2]: [GitHub Help - Working with large files](https://help.github.com/articles/working-with-large-files/)

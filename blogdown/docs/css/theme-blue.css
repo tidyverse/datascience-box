@@ -8,11 +8,11 @@
     --MAIN-ANCHOR-color: #75AADB; /* color of anchors on titles -- changed from 1c90f3 to RStudio blue 75AADB */
 
     --MENU-HEADER-BG-color:#75AADB; /* Background color of menu  header -- changed from 1c90f3 to RStudio blue 75AADB */
-    --MENU-HEADER-BORDER-color:#33a1ff; /*Color of menu header border */ 
+    --MENU-HEADER-BORDER-color:#5a9ddb; /*Color of menu header border -- changed from 33a1ff to RStudio blue active 5a9ddb */ 
 
-    --MENU-SEARCH-BG-color:#167ad0; /* Search field background color (by default borders + icons) */
-    --MENU-SEARCH-BOX-color: #33a1ff; /* Override search field border color */
-    --MENU-SEARCH-BOX-ICONS-color: #a1d2fd; /* Override search field icons color */
+    --MENU-SEARCH-BG-color:#4c83b6; /* Search field background color (by default borders + icons) -- changed from 167ad0*/
+    --MENU-SEARCH-BOX-color: #167ad0; /* Override search field border color -- changed from 33a1ff*/
+    --MENU-SEARCH-BOX-ICONS-color: #33a1ff; /* Override search field icons color -- changed from a1d2fd*/
 
     --MENU-SECTIONS-ACTIVE-BG-color:#20272b; /* Background color of the active section and its childs */
     --MENU-SECTIONS-BG-color:#252c31; /* Background color of other sections */

@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 3
 title: "Meet the toolkit"
 output: html_document
 ---

@@ -1,4 +1,8 @@
-# Data visualization {#data-viz}
+---
+weight: 1
+title: "Data visualization"
+output: html_document
+---
 
 Some words.
 

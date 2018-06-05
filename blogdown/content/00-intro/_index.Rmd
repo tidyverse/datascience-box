@@ -4,12 +4,11 @@ title: "Introduction"
 output: html_document
 ---
 
-This is not a book per se, at least not yet. It's a place for organizing 
-materials for teaching (and learning) data science with R, RStudio, the 
-tidyverse and tidyverse friendly packages. It's called 
-__Data Science Course in a Box__, as it contains all the materials you 
-(an educator) might need to teach data science or you (a learner) might 
-find useful to learn about them.
+This is a place for organizing materials for teaching (and learning) data 
+science with R, RStudio, the tidyverse and tidyverse friendly packages. It's 
+called __Data Science Course in a Box__, as it contains all the materials you 
+(an educator) might need to teach data science or you (a learner) might find 
+useful to learn about them.
 
 ## Who is this course for?
 
@@ -20,17 +19,42 @@ willing to dive into the documentation of the packages we introduce.
 
 ## What is in the box?
 
-- Slides
-- Labs
-- Assignments
-- Exams
-- Infrastructure guide
+<i class="fas fa-tv fa-fw"></i> **slides**: 25 slide decks, each to be covered 
+roughly in a 75 minute class session.  
+<i class="fas fa-file-alt fa-fw"></i> **assignments**: 6 homewoek assignments.  
+<i class="fas fa-file-code fa-fw"></i> **labs**: 10 guided hands on exercises 
+for students requiring minimal introduction from the instructor.  
+<i class="fas fa-edit fa-fw"></i> **exams**: 2 sample take-home exams and keys.  
+<i class="fas fa-folder-open fa-fw"></i> **project**: Final project assignment.  
+<i class="fas fa-hand-point-up fa-fw"></i> **tutorials** (WIP): Interactive 
+learning exercises built with `learnr`.  
+<i class="fas fa-toolbox fa-fw"></i> **infrastructure** (WIP):information on the 
+computing infrastructure of this course and is designed for teachers, while the 
+remainder of the content is for teachers and learners. Specifically it covers:
+
+  - RStudio: Choosing between RStudio Cloud, RStudio Server Pro, or local RStudio 
+IDE and how to structure your course using each option.  
+  - Git/GitHub: How to use Git and GitHub as the learning management system for 
+your course as well as a collaborative platform for your students and how to use 
+GitHub Classroom and `ghclass` for setting up your course.  
+  - Creating `learnr` modules.  
+  - Using `blogdown` to create your course website.  
 
 ## How is the course content organized?
 
-- Part 1: Exploring data - wrangle + visualize + collect
-- Part 2: Making rigorous conclusions - modeling + inference
-- Part 3: Looking forward - ...
+The course content is organized in three parts.
+
+Part 1 - Exploring data: This part focuses on exploratory data analysis as well 
+as introducing the toolkit for the course.
+
+Part 2 - Making rigorous conclusions: In this part we introduce modeling and 
+statistical inference for making data based conclusions.
+
+Part 3 - Looking forward: In this part we present a series of modules, e.g. 
+interactive reporting and visualizaiton with Shiny, text analsis, Bayesian 
+inference, etc., that teachers can choose to include in their introductory 
+data science curriculum depending on how much time they have left in the 
+semester. 
 
 ## Why R?
 
@@ -68,24 +92,31 @@ argue that learning a tool that is applicable beyond the introductory statistics
 course and that enhances students' problem solving skills is a burden worth 
 bearing.
 
+## Why not language X?
+
+There are a number of other great programming tools out there that can also be 
+used for introducing students to data science, e.g. Python. These materials are 
+designed for teaching data science with R. A great example of a similar 
+curriculum using Python is [Data 8](http://data8.org/) designed at Universit of 
+California, Berkeley.
+
 ## Why RStudio?
 
 The RStudio IDE includes a viewable environment, a file browser, data viewer, 
 and a plotting pane, which makes it less intimidating than the bare R shell. 
 Additionally, since it is a full fledged IDE, it also features integrated help, 
 syntax highlighting, and context-aware tab completion, which are all powerful 
-tools that help flatten the learning curve.
+tools that help flatten the learning curve. RStudio also has direct integration 
+with other critically important tools for teaching computing best practices and 
+reproducible research.
 
-Students access the RStudio IDE through a centralized RStudio server instance, 
-which allows us to provide students with uniform computing environments. 
-Additionally, RStudio's direct integration with other critically important tools 
-for teaching computing best practices and reproducible research also influenced 
-our decision for making it central in our toolkit.
+Our recommendation is that students access the RStudio IDE through a centralized 
+RStudio server instance or using RStudio Cloud. We describe this in further 
+detail in the Infrasture section.
 
 It should be noted that we do not want to completely dissuade students from 
 downloading and installing R and RStudio locally, we just do not want it to be 
 a prerequisite for getting started. We have found that teaching personal setup 
 is best done progressively throughout a semester, usually via one-on-one 
 interactions during office hours or after class. Our goal is that all students 
-will be able to continue using R even if they no longer have access to 
-departmental resources.
+will be able to continue using R in any setting.

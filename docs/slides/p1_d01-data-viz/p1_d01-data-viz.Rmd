@@ -1,0 +1,488 @@
+---
+title: "Visualizing data"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(magick)
+library(emo)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Exploratory data analysis
+
+---
+
+## What is EDA?
+
+- Exploratory data analysis (EDA) is an aproach to analyzing data sets to summarize its main characteristics.
+
+- Often, this is visual. That's what we're focusing on today.
+
+- But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the 
+analysis. That's what we'll focus on on Thursday.
+
+---
+
+class: center, middle
+
+# Data visualization
+
+---
+
+## Data visualization
+
+> *"The simple graph has brought more information to the data analyst’s mind than any other device." — John Tukey*
+
+- Data visualization is the creation and study of the visual representation of data.
+
+- There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations (**ggplot2** is one of them, and that's the one we're going to use).
+
+---
+
+## ggplot2, part of the tidyverse
+
+- ggplot2 is a data visualization package, that is part of the tidyverse
+
+- To use ggplot2 functions, first load tidyverse
+```{r}
+library(tidyverse)
+```
+
+- In ggplot2 the structure of the code for plots can often be summarized as
+```{r eval = FALSE}
+ggplot + 
+  geom_xxx
+```
+
+or, more precisely
+.small[
+```{r eval = FALSE}
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+]
+
+---
+
+## About ggplot2
+
+- ggplot2 is the name of the package
+- The `gg` in "ggplot2" stands for Grammar of Graphics
+- Inspired by the book **Grammar of Graphics** by Leland Wilkinson
+- `ggplot()` is the main function in ggplot2
+- For help with the ggplot2, see http://ggplot2.tidyverse.org/
+
+---
+
+class: center, middle
+
+# Visualizing Star Wars
+
+---
+
+## Dataset terminology
+
+.question[
+What does each row represent? What does each column represent?
+]
+
+```{r message=FALSE}
+starwars
+```
+
+---
+
+## Luke Skywalker
+
+![luke-skywalker](img/luke-skywalker.png)
+
+---
+
+## What's in the Star Wars data?
+
+Take a `glimpse` at the data: 
+```{r}
+glimpse(starwars)
+```
+
+---
+
+## What's in the Star Wars data?
+
+Run the following **in the Console** to view the help
+```{r eval = FALSE}
+?starwars
+```
+
+![starwars-help](img/starwars-help.png)
+
+.question[
+How many rows and columns does this dataset have? What does each row represent? What does each column represent?
+]
+
+.question[
+Make a prediction: What relationship do you expect to see between height and mass?
+]
+
+---
+
+## Mass vs. height
+
+```{r fig.width = 6, fig.height=3}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point()
+```
+
+---
+
+## What's that warning?
+
+- Not all characters have height and mass information (hence 28 of them not plotted)
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
+- Going forward I'll supress the warning to save room on slides, but it's important to note it
+
+---
+
+## Mass vs. height
+
+.question[
+How would you describe this relationship? What other variables would help us understand data points that don't follow the overall trend? Who is the not so tall but really chubby ]
+
+```{r fig.width = 6, fig.height=3, echo=FALSE, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point()
+```
+
+---
+
+## Jabba!
+
+```{r echo=FALSE, warning=FALSE}
+jabba <- image_read("img/jabba.png")
+
+fig <- image_graph(width = 2400, height = 1200, res = 300)
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point()
+dev.off()
+
+out <- fig %>% image_composite(jabba, offset = "+1000+30")
+
+image_write(out, "img/jabbaplot.png", format = "png")
+knitr::include_graphics("img/jabbaplot.png")
+```
+
+---
+
+## Additional variables
+
+Can display additional variables with
+
+- aesthetics (like shape, colour, size), or
+
+- faceting (small multiples displaying different subsets)
+
+---
+
+class: center, middle
+
+# Aesthetics
+
+---
+
+## Aesthetics options
+
+Visual characteristics of plotting characters that can be **mapped to data** are
+
+- `color`
+
+- `size`
+
+- `shape`
+
+- `alpha` (transparency)
+
+---
+
+## Mass vs. height + gender
+
+```{r fig.width = 7, fig.height=3.5, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
+  geom_point()
+```
+
+---
+
+## Aesthetics summary
+
+- Continuous variable are measured on a continuous scale
+- Discrete variables are measured (or often counted) on a discrete scale
+
+aesthetics    | discrete     | continuous
+------------- | ------------ | ------------
+color         | rainbow of colors | gradient
+size          | discrete steps    | linear mapping between radius and value
+shape         | different shape for each | shouldn't (and doesn't) work
+
+---
+
+class: center, middle
+
+# Faceting
+
+---
+
+## Faceting options
+
+- Smaller plots that display different subsets of the data
+
+- Useful for exploring conditional relationships and large data
+
+---
+
+## Mass vs. height by gender
+
+.small[
+```{r fig.height=4, fig.width=8, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  facet_grid(. ~ gender) +
+  geom_point()
+```
+]
+
+---
+
+## Dive further...
+
+.question[
+In the next few slides describe what each plot displays. Think about
+how the code relates to the output.
+]
+
+---
+
+```{r fig.height=4.5, fig.width=7, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_grid(gender ~ .)
+```
+
+---
+
+```{r fig.width=7, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_grid(. ~ gender)
+```
+
+---
+
+```{r fig.height=4.5, fig.width=7, warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  facet_wrap(~ eye_color)
+```
+
+---
+
+## Facet summary
+
+- `facet_grid()`: 2d grid, `rows ~ cols`, `.` for no split
+
+- `facet_wrap()`: 1d ribbon wrapped into 2d
+
+---
+
+## Height vs. mass, take 2
+
+.question[
+How are these plots similar? How are they different?
+]
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+p1 <- ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  xlim(80, 250) +
+  ylim(0, 1400)
+p2 <- ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_smooth(se = FALSE) +
+  xlim(80, 250) +
+  ylim(0, 1400)
+suppressMessages(suppressWarnings(require(gridExtra)))
+grid.arrange(p1, p2, ncol = 2)
+```
+
+---
+
+## `geom_smooth`
+
+```{r message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_smooth(se = FALSE) +
+  xlim(80, 250) +
+  ylim(0, 1400)
+```
+
+---
+
+class: center, middle
+
+# Identifying variables
+
+---
+
+## Number of variables involved
+
+* Univariate data analysis - distribution of single variable
+
+* Bivariate data analysis - relationship between two variables
+
+* Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
+
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: center, middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+* shape:
+    * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    * modality: unimodal, bimodal, multimodal, uniform
+* center: mean (`mean`), median (`median`), mode (not always useful)
+* spead: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+* unusal observations
+
+---
+
+## Histograms
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_histogram(binwidth = 10)
+```
+]
+
+---
+
+## Density plots
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_density()
+```
+]
+
+---
+
+## Side-by-side box plots
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
+```
+]
+
+---
+
+class: center, middle
+
+# Visualizing categorical data
+
+---
+
+## Bar plots
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = gender)) +
+  geom_bar()
+```
+]
+
+---
+
+## Segmented bar plots, counts
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar()
+```
+]
+
+---
+
+## Segmented bar plots, proportions
+
+.small[
+```{r fig.width = 7, fig.height=4}
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar(position = "fill") +
+  labs(y = "proportion")
+```
+]
+
+---
+
+## Which bar plot is more appropriate?
+
+.question[
+Which of the previous two bar plots is a more useful representation for visualizing the relationship between gender and hair color?
+]
