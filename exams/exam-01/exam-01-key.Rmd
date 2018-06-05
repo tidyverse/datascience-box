@@ -31,6 +31,10 @@ library(nycflights13)
 
 ### Question 1
 
+```{marginfigure}
+5 points
+```
+
 **What are the ten most common destinations for flights from NYC airports in 2013? Make a table that lists these in descending order and shows the number of fligts heading to each airport.**
 
 ```{r}
