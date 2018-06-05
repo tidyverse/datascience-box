@@ -1,0 +1,466 @@
+---
+title: "Estimation via bootstrapping"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Inference
+
+---
+
+.question[
+What does inference mean?
+]
+
+--
+
+- Statistical inference is the process of using sample data to make conclusions about the underlying population the sample came from
+- Types of inference: testing and estimation
+- Today we discuss estimation, next time testing
+
+---
+
+
+class: center, middle
+
+# Confidence intervals
+
+---
+
+## Confidence intervals
+
+A plausible range of values for the population parameter is a **confidence interval**.
+
+.pull-left[
+![spear](img/spear.png)
+]
+.pull-right[
+![net](img/net.png)
+]
+
+- If we report a point estimate, we probably won’t hit the exact population parameter.
+
+- If we report a range of plausible values we have a good shot at capturing the parameter.
+
+---
+
+## Variability of sample statistics
+
+- In order to construct a confidence interval we need to quantify the variability of our sample statistic.
+
+- For example, if we want to construct a confidence interval for a population mean, we need to come up with a plausible range of values around our observsed sample mean.
+
+- This range will depend on how precise and how accurate our sample mean is as an estimate of the population mean.
+
+- Quantifying this requires a measurement of how much we would expect the sample mean to vary from sample to sample.
+    
+.question[
+`r emo::ji("bust_in_silhouette")` Suppose you randomly sample 50 students and 5 of them are left handed. If you were to take another random sample of 50 students, how many would you expect to be left handed? Would you be surprised if only 3 of them were left handed? Would you be surprised if 40 of them were left handed?
+]
+
+---
+
+## Quantifying the variability of a sample statistic
+
+We can quantify the variability of sample statistics using
+
+- simulation: via bootstrapping (today)
+
+or
+
+- theory: via Central Limit Theorem (later in the course)
+
+---
+
+class: center, middle
+
+# Bootstrapping
+
+---
+
+## Bootstrapping
+
+<img src="img/boot.png" style="float:right">
+
+- The term **bootstrapping** comes from the phrase "pulling oneself up by one’s 
+bootstraps", which is a metaphor for accomplishing an impossible task without 
+any outside help.
+
+- In this case the impossible task is estimating a population parameter, and we’ll 
+accomplish it using data from only the given sample.
+
+- Note that this notion of saying something about a population parameter using 
+only information from an observed sample is the crux of statistical inference, 
+it is not limited to bootstrapping.
+
+---
+
+## Rent in Manhattan
+
+.question[
+`r emo::ji("bust_in_silhouette")` How much do you think a typical 1 BR apartment in Manhattan rents for?
+]
+
+---
+
+## Sample
+
+On a given day, twenty 1 BR apartments were randomly selected on Craigslist Manhattan from apartments listed as "by owner".
+
+```{r message=FALSE}
+library(tidyverse)
+manhattan <- read_csv("../../data/manhattan.csv")
+```
+
+.small[
+.pull-left[
+```{r}
+manhattan %>% slice(1:10)
+```
+]
+.pull-right[
+```{r}
+manhattan %>% slice(11:20)
+```
+]
+]
+
+---
+
+## Parameter of interest
+
+.question[
+`r emo::ji("bust_in_silhouette")` Is the mean or the median a better measure of typical rent in Manhattan?
+]
+
+.small[
+```{r message=FALSE, echo=FALSE}
+ggplot(data = manhattan, mapping = aes(x = rent)) +
+  geom_histogram(binwidth = 250) +
+  labs(title = "Rent of 1 BR apartments in Manhattan")
+```
+]
+
+---
+
+## Observed sample vs. bootstrap population
+
+.pull-left[
+![rent-bootsamp](img/rent-bootsamp.png)
+Sample median = $`r manhattan %>% summarise(med_rent = median(rent)) %>% pull()` `r emo::ji("scream")`
+]
+
+--
+
+.pull-right[
+![rent-bootpop](img/rent-bootpop.png)
+Population median = `r emo::ji("question")`
+]
+
+---
+
+## Bootstrapping scheme
+
+1. Take a bootstrap sample - a random sample taken with replacement from the 
+original sample, of the same size as the original sample.
+
+2. Calculate the bootstrap statistic - a statistic such as mean, median, 
+proportion, slope, etc. computed on the bootstrap samples.
+
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap statistics.
+
+4. Calculate the bounds of the XX% confidence interval as the middle XX% 
+of the bootstrap distribution.
+
+---
+
+## Let's bootstrap
+
+
+![boot-by-hand](img/bootstrap-by-hand.png)
+
+---
+
+class: center, middle
+
+# Bootstrapping in R
+
+---
+
+## New package: `infer`
+
+The objective of this package is to perform statistical inference using an expressive statistical grammar that coheres with the tidyverse design framework.
+
+![ht-diagram](img/ht-diagram.png)
+
+```{r}
+# install.packages("infer")
+library(infer)
+```
+
+--
+
+Also, let's set a seed:
+
+```{r}
+set.seed(20180307)
+```
+
+---
+
+## Generate bootstrap medians
+
+```{r eval=FALSE}
+manhattan %>%
+  # specify the variable of interest
+  specify(response = rent)
+```
+
+---
+
+## Generate bootstrap medians
+
+```{r eval=FALSE}
+manhattan %>%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+```
+
+---
+
+## Generate bootstrap medians
+
+```{r eval=FALSE}
+manhattan %>%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+  # calculate the median of each bootstrap sample
+  calculate(stat = "median")
+```
+
+---
+
+## Generate bootstrap medians
+
+```{r}
+# save resulting bootstrap distribution
+rent_ci_med <- manhattan %>%
+  # specify the variable of interest
+  specify(response = rent) %>% 
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %>% 
+  # calculate the median of each bootstrap sample
+  calculate(stat = "median")
+```
+
+---
+
+## The bootstrap sample
+
+.question[
+`r emo::ji("bust_in_silhouette")` How many observations are there in `rent_ci_med`? What does each observation represent?
+]
+
+```{r}
+glimpse(rent_ci_med)
+```
+
+---
+
+## Visualize the bootstrap distribution
+
+```{r}
+ggplot(data = rent_ci_med, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 50) +
+  labs(title = "Bootstrap distribution of medians")
+```
+
+---
+
+## Calculate the confidence interval
+
+A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution.
+
+.small[
+```{r}
+rent_ci_med %>%
+  summarize(lower_bound = quantile(stat, 0.025),
+            upper_bound = quantile(stat, 0.975))
+```
+]
+
+---
+
+## Visualize the confidence interval
+
+```{r include=FALSE}
+# for using these values later
+lower_bound <- rent_ci_med %>% summarize(lower_bound = quantile(stat, 0.025)) %>% pull()
+upper_bound <- rent_ci_med %>% summarize(upper_bound = quantile(stat, 0.975)) %>% pull()
+```
+
+```{r echo=FALSE}
+ggplot(data = rent_ci_med, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 50) +
+  geom_vline(xintercept = c(lower_bound, upper_bound), 
+             color = color_palette$lightblue, lty = 2) +
+  labs(title = "Bootstrap distribution of medians",
+       subtitle = "and 95% confidence interval")
+```
+
+---
+
+## Interpret the confidence interval
+
+.question[
+`r emo::ji("busts_in_silhouette")` The 95% confidence interval for the median rent of one bedroom apartments in Manhattan was calculated as (`r lower_bound`, `r upper_bound`). Which of the following is the correct interpretation of this interval?
+]
+
+(a) 95% of the time the median rent one bedroom apartments in this sample is between $`r lower_bound` and $`r upper_bound`.
+
+(b) 95% of all one bedroom apartments in Manhattan have rents between $`r lower_bound` and $`r upper_bound`.
+
+(c) We are 95% confident that the median rent of all one bedroom apartments is between $`r lower_bound` and $`r upper_bound`.
+
+(d) We are 95% confident that the median rent one bedroom apartments in this sample is between $`r lower_bound` and $`r upper_bound`.
+
+---
+
+class: center, middle
+
+# Accuracy vs. precision
+
+---
+
+## Confidence level
+
+**We are 95% confident that ...**
+
+- Suppose we took many samples from the original population and built a 95% confidence interval based on each sample.
+
+- Then about 95% of those intervals would contain the true population parameter.
+
+---
+
+## Commonly used confidence levels
+
+Commonly used confidence levels in practice are 90%, 95%, and 99%
+
+--
+
+.question[
+`r emo::ji("bust_in_silhouette")` Which line (blue dash, green dot, orange dash/dot) represents which confidence level?
+]
+
+```{r echo=FALSE}
+l90 <- rent_ci_med %>% summarize(lower_bound = quantile(stat, 0.05)) %>% round(2) %>% pull()
+u90 <- rent_ci_med %>% summarize(lower_bound = quantile(stat, 0.95)) %>% round(2) %>% pull()
+
+l99 <- rent_ci_med %>% summarize(lower_bound = quantile(stat, 0.005)) %>% round(2) %>% pull()
+u99 <- rent_ci_med %>% summarize(lower_bound = quantile(stat, 0.995)) %>% round(2) %>% pull()
+
+ggplot(data = rent_ci_med, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 50) +
+  geom_vline(xintercept = c(lower_bound, upper_bound), color = color_palette$lightblue, lty = 2) +
+  geom_vline(xintercept = c(l90, u90), color = color_palette$green, lty = 3) +
+  geom_vline(xintercept = c(l99, u99), color = color_palette$salmon, lty = 6) +
+  labs(title = "Bootstrap distribution of medians",
+       subtitle = "and various confidence intervals")
+```
+
+---
+
+## Precision vs. accuracy
+
+.question[
+`r emo::ji("busts_in_silhouette")` If we want to be very certain that we capture the population parameter, should we use a wider interval or a narrower interval? What drawbacks are associated with using a wider interval?
+]
+
+--
+
+![garfield](img/garfield.png)
+
+--
+
+.question[
+`r emo::ji("bust_in_silhouette")` How can we get best of both worlds -- high precision and high accuracy?
+]
+
+---
+
+## Calculating confidence intervals at various confidence levels
+
+.question[
+`r emo::ji("busts_in_silhouette")` How would you modify the following code to calculate a 90% confidence interval? How would you modify it for a 99% confidence interval?
+]
+
+```{r eval=FALSE}
+manhattan %>%
+  specify(response = rent) %>% 
+  generate(reps = 15000, type = "bootstrap") %>% 
+  calculate(stat = "median") %>%
+  summarize(lower_bound = quantile(stat, 0.025),
+            upper_bound = quantile(stat, 0.975))
+```
+
+---
+
+## Recap
+
+- Sample statistic $\ne$ population parameter, but if the sample is good, it can be a good estimate.
+
+- We report that estimate with a confidence bound around it, and the width of this bound depends on how variable sample statistics from different samples from the population would be.
+
+- Since we can't continue sampling from the population, we instead bootstrap from the one sample we have to estimate the sampling variability.
+
+- We can do this for any sample statistic:
+  - We did it for a median today, `calculate(stat = "median")`
+  - Doing it for a mean would just take `calculate(stat = "mean")`
+  - And you'll learn about calculating bootstrap intervals for other statistics in lab tomorrow
+  

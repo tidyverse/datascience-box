@@ -1,0 +1,154 @@
+---
+weight: 2
+title: "Day one"
+output: html_document
+---
+
+You only get one first day of class, so start with something that excites 
+students, teach the necessary evils later. This means getting to a meaningful, 
+and hopefully interesting (for the students) data visualization as quickly 
+as possible.
+
+## Learning goals
+
+- Start developing an understanding of what data science is
+- Understand course goals, structure, and expectations
+- Get motivated to learn more with current and interesting data analyses
+- Create and modify first data visualization 
+
+## Outline
+
+- What is data science?
+- What is this course?
+- Data in the wild
+- Application exercise: Visualizing UN votes
+
+### What is data science?
+
+Start with a brief introduction to the course and to data science. It's 
+difficult to find a precise definition of data science that many in the field 
+agree on. But the following is a good one: "Data science is an exciting 
+discipline that allows you to turn raw data into understanding, insight, and 
+knowledge." We're going to learn to do this in a `tidy` way -- more on that 
+later!
+
+### What is this course?
+
+Then, spend a little bit of time describing the course content and overall 
+learning goals. It is important to emphasize that this is an introductory data 
+science course designed for learners with no background in data science, 
+programming, or statistics, but a willingness to learn in class and explore independently.
+
+A few questions students might have (and their answers) are below:
+
+- Will we be doing computing? Yes.
+- Is this an intro CS course? Not really, but many themes are shared.
+- Is this an intro stat course? In a way, but it's not your high school 
+statistics course.
+- What computing language will we learn? R.
+- Why not language X? We can discuss that over :coffee:.
+
+Before moving on, give an overview of assessments -- what form will they take 
+and roughly how often will they happen. Do not spend too long going over every 
+detail in the syllabus, instead you might consider giving reading the syllabus 
+as a homework assignment and give students a mini quiz they can take online,
+which you can build with learnr or within your courses management system. I 
+usually grade such a quiz on a check / no check basis.
+
+### Data in the wild
+
+I like starting off by showing a few examples of easy to follow but not so 
+simple data analyses done in R, preferably presented along with the R code. 
+This should be the type of analysis they could do for their final project. 
+Blog posts are often good examples for these. In Spring 2018 I used the 
+following as examples:
+
+- [A year as told by fitbit](http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/) by Nick Strayer
+- [R-Ladies global tour](http://www.masalmon.eu/2017/10/06/globalrladiestour/) by Maelle Salmon
+- [Text analysis of Trump's tweets confirms he writes only the (angrier) 
+Android half](http://varianceexplained.org/r/trump-tweets/) by David Robinson
+
+### Application exercise: Visualizing UN votes
+
+It's now time to let the students work on their first data visualization in R. 
+
+Using the `unvotes` package, and a pre-populated R Markdown document on RStudio 
+Cloud, they can create and modify the two multi-variate plots, visualizing the 
+voting history of countries in the United Nations General Assembly.
+
+```{r load-packages, warning=FALSE}
+library(unvotes)
+library(tidyverse)
+library(lubridate)
+```
+
+We will narrow down the analysis to four countries: United States, Russian 
+Federation, Mexico, and Turkey.
+
+```{r country-list}
+country_list <- c("United States of America", "Russian Federation", 
+                  "Mexico", "Turkey")
+```
+
+First we take a look at how often each country voted "yes" on a resolution 
+in each year.
+
+```{r plot-yearly-yes, warning=FALSE}
+un_votes %>%
+  filter(country %in% country_list) %>%
+  inner_join(un_roll_calls, by = "rcid") %>%
+  group_by(year = year(date), country) %>%
+  summarize(
+    votes = n(),
+    percent_yes = mean(vote == "yes")
+    ) %>%
+  ggplot(mapping = aes(x = year, y = percent_yes, color = country)) +
+    geom_line() +
+    labs(
+      title = "Percentage of 'Yes' votes in the UN General Assembly",
+      subtitle = "1946 to 2015",
+      y = "% Yes",
+      x = "Year",
+      color = "Country"
+    )
+```
+
+And then, we create a visualization that compares how the voting record of the 
+United States changed over time on a variety of issues, and compare it to 
+another country.
+
+```{r plot-yearly-yes-issue, fig.height=4, fig.width=7, warning=FALSE}
+un_votes %>%
+  filter(country %in% c("United States of America", "Turkey")) %>%
+  inner_join(un_roll_calls, by = "rcid") %>%
+  inner_join(un_roll_call_issues, by = "rcid") %>%
+  group_by(country, year = year(date), issue) %>%
+  summarize(
+    votes = n(),
+    percent_yes = mean(vote == "yes")
+    ) %>%
+  filter(votes > 5) %>%  # only use records where there are more than 5 votes
+  ggplot(mapping = aes(x = year, y = percent_yes, color = country)) +
+    geom_point() +
+    geom_smooth(method = "loess", se = FALSE) +
+    facet_wrap(~ issue) +
+    labs(
+      title = "Percentage of 'Yes' votes in the UN General Assembly",
+      subtitle = "1946 to 2015",
+      y = "% Yes",
+      x = "Year",
+      color = "Country"
+    )
+```
+
+At this point, instead of a formal introduction on R syntax, I recommend 
+letting students change parameters passed to these functions, such as which 
+countries are being plotted, and re-knit the document to view the changes.
+
+## Materials
+
+- Slides: [hello](../../slides/p0_d01-welcome/p1_d01-welcome.html)
+- Syllabus quiz: [TO BE POSTED]
+- Application exercise:
+  - R Markdown template
+  - RStudio Cloud project

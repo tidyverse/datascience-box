@@ -1,0 +1,386 @@
+---
+title: "Formalizing linear models"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Characterizing relationships with models
+
+---
+
+## Data & packages
+
+```{r message=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+```{r message=FALSE}
+pp <- read_csv("../../data/paris-paintings.csv", 
+               na = c("n/a", "", "NA"))
+```
+
+---
+
+## Want to follow along?
+
+Go to RStudio Cloud -> make a copy of "Modelling Paris Paintings"
+
+---
+
+## Height & width
+
+```{r}
+(m_ht_wt <- lm(Height_in ~ Width_in, data = pp))
+```
+
+--
+
+<br>
+
+$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$
+
+--
+
+- **Slope:** For each additional inch the painting is wider, the height is expected
+to be higher, on average, by 0.78 inches.
+
+--
+
+- **Intercept:** Paintings that are 0 inches wide are expected to be 3.62 inches high,
+on average.
+    - Does this make sense?
+
+---
+
+## The linear model with a single predictor
+
+- We're interested in the $\beta_0$ (population parameter for the intercept)
+and the $\beta_1$ (population parameter for the slope) in the 
+following model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x $$
+
+--
+
+- Tough luck, you can't have them...
+
+--
+
+- So we use the sample statistics to estimate them:
+
+$$ \hat{y} = b_0 + b_1~x $$
+
+---
+
+## Least squares regression
+
+The regression line minimizes the sum of squared residuals.
+
+--
+
+If $e_i = y - \hat{y}$,
+
+then, the regression line minimizes $\sum_{i = 1}^n e_i^2$.
+
+---
+
+## Visualizing residuals
+
+```{r echo=FALSE}
+d <- tibble(
+    Width_in     = m_ht_wt$model$Width_in,
+    Height_in    = m_ht_wt$model$Height_in,
+    pred         = m_ht_wt$fitted.values,
+    res          = m_ht_wt$residuals
+  )
+p <- ggplot(data = d, mapping = aes(x = Width_in, y = Height_in)) +
+  geom_point(alpha = 0.2) + 
+  theme_bw() +
+  labs(title = "Height vs. width of paintings", subtitle = "Just the data") +
+  xlim(0, 250) +
+  ylim(0, 200)
+p
+```
+
+---
+
+## Visualizing residuals (cont.)
+
+```{r echo=FALSE}
+p <- p + 
+  geom_smooth(method = "lm", color = color_palette$darkblue, se = FALSE) +
+  geom_point(mapping = aes(y = pred), color = color_palette$darkblue) +
+  labs(subtitle = "Data + least squares resgression line")
+p
+```
+
+---
+
+## Visualizing residuals (cont.)
+
+```{r echo = FALSE}
+p + 
+  geom_segment(mapping = aes(xend = Width_in, yend = pred), color = color_palette$lightblue, alpha = 0.4) +
+  labs(subtitle = "Data + least squares resgression line + residuals")
+```
+
+
+---
+
+## Properties of the least squares regression line
+
+- The regression line goes through the center of mass point, the coordinates corresponding to average $x$ and average $y$: $(\bar{x}, \bar{y})$:
+
+$$\hat{y} = b_0 + b_1 x ~ \rightarrow ~ b_0 = \hat{y} - b_1 x$$
+
+- The slope has the same sign as the correlation coefficient:
+
+$$b_1 = r \frac{s_y}{s_x}$$
+
+- The sum of the residuals is zero: 
+$$\sum_{i = 1}^n e_i = 0$$
+
+- The residuals and $x$ values are uncorrelated.
+
+---
+
+## Height & landscape features
+
+```{r}
+(m_ht_lands <- lm(Height_in ~ factor(landsALL), data = pp))
+```
+
+--
+
+<br>
+
+$$\widehat{Height_{in}} = 22.68 - 5.65~landsALL$$
+
+---
+
+## Height & landscape features (cont.)
+
+- **Slope:** Paintings with landscape features are expected, on average,
+to be 5.65 inches shorter than paintings that without landscape features.
+    - Compares baseline level (`landsALL = 0`) to other level
+    (`landsALL = 1`).
+
+- **Intercept:** Paintings that don't have landscape features are expected, on 
+average, to be 22.68 inches tall.
+
+---
+
+## Categorical predictor with 2 levels
+
+```{r echo=FALSE}
+pp %>% 
+  select(name, price, landsALL) %>% 
+  slice(1:8) %>%
+  datatable()
+```
+
+---
+
+## Relationship between height and school
+
+```{r}
+(m_ht_sch <- lm(Height_in ~ school_pntg, data = pp))
+```
+
+--
+
+- When the categorical explanatory variable has many levels, they're encoded to
+**dummy variables**.
+
+- Each coefficient describes the expected difference between heights in that 
+particular school compared to the baseline level.
+
+---
+
+## Categorical predictor with >2 levels
+
+.small[
+```{r echo=FALSE}
+pp %>% 
+  select(school_pntg) %>% 
+  group_by(school_pntg) %>% 
+  sample_n(1) %>%
+  mutate(
+    D_FL = as.integer(ifelse(school_pntg == "D/FL", 1L, 0)),
+    F    = as.integer(ifelse(school_pntg == "F", 1L, 0)),
+    G    = as.integer(ifelse(school_pntg == "G", 1L, 0)),
+    I    = as.integer(ifelse(school_pntg == "I", 1L, 0)),
+    S    = as.integer(ifelse(school_pntg == "S", 1L, 0)),
+    X    = as.integer(ifelse(school_pntg == "X", 1L, 0))
+  ) %>%
+  datatable()
+```
+]
+
+---
+
+## The linear model with multiple predictors
+
+- Population model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x_1 + \beta_2~x_2 + \cdots + \beta_k~x_k $$
+
+--
+
+- Sample model that we use to estimate the population model:
+  
+$$ \hat{y} = b_0 + b_1~x_1 + b_2~x_2 + \cdots + b_k~x_k $$
+
+---
+
+## Correlation does not imply causation!
+
+Remember this when interpreting model coefficients
+
+---
+
+class: center, middle
+
+# Prediction with models
+
+---
+
+## Predict height from width
+
+.question[
+On average, how tall are paintings that are 60 inches wide?
+$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$
+]
+
+--
+
+```{r}
+3.62 + 0.78 * 60
+```
+
+"On average, we expect paintings that are 60 inches wide to be 50.42 inches high."
+
+**Warning:** We "expect" this to happen, but there will be some variability. (We'll
+learn about measuring the variability around the prediction later.)
+
+---
+
+## Prediction vs. extrapolation
+
+.question[
+On average, how tall are paintings that are 400 inches wide?
+$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$
+]
+
+```{r extrapolate, warning = FALSE, echo=FALSE, fig.height=2.75}
+newdata <- tibble(Width_in = 400)
+newdata <- newdata %>%
+  mutate(Height_in = predict(m_ht_wt, newdata = newdata))
+
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", fullrange = TRUE, color = color_palette$darkblue, se = FALSE) +
+  xlim(0, 420) +
+  ylim(0, 320) +
+  geom_segment(data = newdata, mapping = aes(x = Width_in, y = 0, xend = Width_in, yend = Height_in), color = color_palette$salmon, lty = 2) +
+  geom_segment(data = newdata, mapping = aes(x = Width_in, y = Height_in, xend = 0, yend = Height_in), color = color_palette$salmon, lty = 2)
+```
+
+---
+
+## Watch out for extrapolation!
+
+> "When those blizzards hit the East Coast this winter, it proved to my satisfaction 
+that global warming was a fraud. That snow was freezing cold. But in an alarming 
+trend, temperatures this spring have risen. Consider this: On February 6th it was 10 
+degrees. Today it hit almost 80. At this rate, by August it will be 220 degrees. So 
+clearly folks the climate debate rages on."<sup>1</sup>  <br>
+Stephen Colbert, April 6th, 2010
+
+.footnote[
+[1] OpenIntro Statistics. "Extrapolation is treacherous." OpenIntro Statistics.
+]
+
+---
+
+class: center, middle
+
+# Measuring model fit
+
+---
+
+## Measuring the strength of the fit
+
+- The strength of the fit of a linear model is most commonly evaluated using $R^2$.
+
+- It tells us what percent of variability in the response variable is explained by 
+the model.
+
+- The remainder of the variability is explained by variables not included in the 
+model.
+
+- $R^2$ is sometimes called the coefficient of determination.
+
+---
+
+## Obtaining $R^2$ in R
+
+- Height vs. width
+.small[
+```{r}
+glance(m_ht_wt)
+glance(m_ht_wt)$r.squared # extract R-squared
+```
+]
+
+Roughly 68% of the variability in heights of paintings can be explained by their
+widths.
+
+- Height vs. lanscape features
+.small[
+```{r}
+glance(m_ht_lands)$r.squared
+```
+]
