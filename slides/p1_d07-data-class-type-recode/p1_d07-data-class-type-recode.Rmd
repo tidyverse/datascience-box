@@ -13,6 +13,7 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(DT)
 ```
 
 ```{r setup, include=FALSE}
