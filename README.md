@@ -1,4 +1,4 @@
-# Data Science Course in a Box <img src="slides/logo/dsbox-logo.png" align="right" width="350px" />
+# Data Science Course in a Box <img src="dsbox-logo.png" align="right" width="200px" />
 
 **Note:** This repo is currently a WIP. Materials are based [this Spring 2018](http://www2.stat.duke.edu/courses/Spring18/Sta199/) course. See https://www.tidyverse.org/learn/ for other learning resources as well.
 
