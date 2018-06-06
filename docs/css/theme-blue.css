@@ -3,25 +3,25 @@
     
     --MAIN-TEXT-color:#323232; /* Color of text by default */
     --MAIN-TITLES-TEXT-color: #5e5e5e; /* Color of titles h2-h3-h4-h5 */
-    --MAIN-LINK-color:#A7D5E8; /* Color of links -- changed from 1c90f3 to RStudio blue 75AADB */
-    --MAIN-LINK-HOVER-color:#1E5C65; /* Color of hovered links */
-    --MAIN-ANCHOR-color: #A7D5E8; /* color of anchors on titles -- changed from 1c90f3 to RStudio blue 75AADB */
+    --MAIN-LINK-color:#A7D5E8; /* Color of links -- light blue */
+    --MAIN-LINK-HOVER-color:#1E5C65; /* Color of hovered links -- dark teal */
+    --MAIN-ANCHOR-color: #A7D5E8; /* color of anchors on titles -- light blue */
 
-    --MENU-HEADER-BG-color:#A7D5E8; /* Background color of menu  header -- changed from 1c90f3 to RStudio blue 75AADB */
-    --MENU-HEADER-BORDER-color:#1E5C65; /*Color of menu header border -- changed from 33a1ff to RStudio blue active 5a9ddb */ 
+    --MENU-HEADER-BG-color:#F2F2F2; /* Background color of menu  header -- light gray */
+    --MENU-HEADER-BORDER-color:#A7D5E8; /*Color of menu header border -- light blue */ 
 
-    --MENU-SEARCH-BG-color:#F2F2F2; /* Search field background color (by default borders + icons) -- changed from 167ad0*/
-    --MENU-SEARCH-BOX-color: #F2D8DF; /* Override search field border color -- changed from 33a1ff*/
-    --MENU-SEARCH-BOX-ICONS-color: #A7D5E8; /* Override search field icons color -- changed from a1d2fd*/
+    --MENU-SEARCH-BG-color:#F2F2F2; /* Search field background color -- light gray*/
+    --MENU-SEARCH-BOX-color: #F2D8DF; /* Override search field border color -- light pink */
+    --MENU-SEARCH-BOX-ICONS-color: #A7D5E8; /* Override search field icons color -- light blue */
 
     --MENU-SECTIONS-ACTIVE-BG-color:#20272b; /* Background color of the active section and its childs */
     --MENU-SECTIONS-BG-color:#252c31; /* Background color of other sections */
     --MENU-SECTIONS-LINK-color: #ccc; /* Color of links in menu */
-    --MENU-SECTIONS-LINK-HOVER-color: #F2F2F2;  /* Color of links in menu, when hovered */
+    --MENU-SECTIONS-LINK-HOVER-color: #F2F2F2;  /* Color of links in menu, when hovered -- light gray */
     --MENU-SECTION-ACTIVE-CATEGORY-color: #777; /* Color of active category text */
     --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #fff; /* Color of background for the active category (only) */
 
-    --MENU-VISITED-color: #1E5C65; /* Color of 'page visited' icons in menu */
+    --MENU-VISITED-color: #1E5C65; /* Color of 'page visited' icons in menu -- dark teal */
     --MENU-SECTION-HR-color: #20272b; /* Color of <hr> separator in menu */
     
 }
