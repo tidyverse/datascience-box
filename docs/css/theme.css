@@ -139,7 +139,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 .searchbox input {
     display: inline-block;
-    color: #fff;
+    color: #a3a3a3;
     width: 100%;
     height: 30px;
     background: transparent;
@@ -149,16 +149,16 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     font-weight: 300;
 }
 .searchbox input::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: #a3a3a3;
 }
 .searchbox input::-moz-placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: #a3a3a3;
 }
 .searchbox input:-moz-placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: #a3a3a3;
 }
 .searchbox input:-ms-input-placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: #a3a3a3;
 }
 #sidebar-toggle-span {
     display: none;
