@@ -1,0 +1,159 @@
+---
+title: "Exam 01"
+subtitle: "KEY"
+output: 
+  tufte::tufte_html:
+    css: ../exam.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 4
+    fig_width: 7
+link-citations: yes
+---
+
+## Academic Honesty Statement
+
+**THIS IS AN INDIVIDUAL ASSESSMENT, THIS DOCUMENT AND YOUR ANSWERS ARE FOR YOUR 
+EYES ONLY. ANY VIOLATION OF THIS POLICY WILL BE IMMEDIATELY REPORTED TO THE 
+UNDERGRADUATE CONDUCT BOARD.**
+
+*Replace the underscores below with your name acknowledging that you have read 
+and understood the your institution's academic community standard.*
+
+I, ____________, hereby state that I have not communicated with or gained 
+information in any way from my classmates or anyone other than the Professor or 
+TA during this exam, and that all work is my own.
+
+## Packages
+
+In this exam you will use, at a minimum, the tidyverse and nycflights13 packages. 
+Load these packages on top of your document.
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(nycflights13)
+```
+
+## Questions 
+
+<!-- Question 1 -->
+
+```{marginfigure}
+5 points:  
+- 2 pts - `count` OR `group_by` + `summarise`  
+- either 1 pt - `arrange` + `desc` or `sort = TRUE` in `count` 
+- 1 pt - `slice(1:10)`
+- 1 pt narrative
+```
+
+1. What are the ten most common destinations for flights from NYC airports in 
+2013? Your answer should be a table (or a data frame) with two columns 
+(destination code and number of flights), arranged in descending order of number 
+of flights. Also look up the name of the most common destination and state it 
+in your narrative.
+
+The most common destinations for flights from NYC is Chicago. The ten most 
+common destinations are shown below.
+
+```{r}
+flights %>%
+  count(dest) %>%
+  arrange(desc(n)) %>%
+  slice(1:10)
+```
+
+<!-- Question 2 -->
+
+```{marginfigure}
+5 points:  
+- 1 pts - `count` OR `group_by` + `summarise`  
+- either 1 pt - `arrange` + `desc` or `sort = TRUE` in `count` 
+- 2 pt - `inner_join` with airlines  
+- 1 pt narrative  
+```
+
+2. What are the top three airlines with the highest numbers of flights 
+departing from NYC airports in 2013? Your answer should include a table 
+(or a data frame) with three columns: carrier code, number of flights, 
+and name of airline, and the airlines should be listed in descending order of 
+number of flights. *Hint:* The `airlines` dataset can be used to look up 
+airline names from their carrier codes.
+
+The carrier with the highest number of flights departing from NYC airports in 
+2013 is United Airlines, followed by JetBlue Airways and ExpressJet Airlines.
+
+```{r}
+flights %>%
+  count(carrier) %>%
+  arrange(desc(n)) %>%
+  inner_join(airlines, by = "carrier")
+```
+
+<!-- Question 3 -->
+
+```{marginfigure}
+10 pts:  
+- 2 pt - `filter` out `NAs` (or in `median`, `na.rm = TRUE`)  
+- 2 pts - output sorted in order of median aarival delay  
+- 2 pts - `inner_join` with `airlines`  
+- 2 pts - Frontier Airlines, 6 minutes  
+- 2 pts - Alaska Airlines, -17 minutes  
+```
+
+3. Consider only flights that have non-missing arrival delay information. 
+Which carrier has the highest median arrival delay and which carrier has the 
+lowest median arrival delay? Your answer should include a table (or a data 
+frame) with carrier code, median arrival delay, and name of airline. 
+**Hint:** First calculate the median arrival delay for all carriers, then 
+join with `airlines` to match airline names. For comupational efficienc, avoid 
+joining the large `flights` data frame directly with `airlines`.
+
+Highest median arrival delay is on Frontier Airlines with 6 minutes, and 
+lowest median arrival delay is on Alaska Airlines with -17 minutes (which means 
+arriving 17 minutes earlier than scheduled).
+
+```{r}
+flights %>%
+  filter(!is.na(arr_delay)) %>%
+  group_by(carrier) %>%
+  summarise(median_arr_delay = median(arr_delay)) %>%
+  arrange(desc(median_arr_delay)) %>%
+  inner_join(airlines, by = "carrier") %>%
+  slice(c(1, n())) # optional
+```
+
+<!-- Question 4 -->
+
+```{marginfigure}
+10 pts:  
+- 4 pts - JFK  
+- 3 pts - Jan 9  
+- 3 pts - 40.835 F  
+```
+
+4. Find the flight with the highest departure delay and determine on what day 
+this happened. What was the mean temperature on that day at the origin 
+airport of this flight? In your answer you should include carrier code and name, 
+origin airport, departure date, as well as the mean temperature on that day 
+at that airport. 
+
+First, we find the flight with the highest departure dela and take a note 
+of relevant information. The highest departure delay of 1301 minutes 
+(approx 21.7 hours) was on a flight departing from JFK on Jan 9. 
+
+```{r}
+flights %>%
+  arrange(desc(dep_delay)) %>%
+  slice(1) %>%
+  select(dep_delay, month, day, origin)
+```
+
+Then, we calculate the mean temperature on that day at the origin airport. 
+The average temperature on this day was 40.8 F. `R`
+
+```{r}
+weather %>%
+  filter(month == 1, day == 9, origin == "JFK") %>%
+  summarise(mean_temp = mean(temp))
+```
+

@@ -1,0 +1,427 @@
+---
+title: "Inference for regression"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(DT)
+library(emo)
+library(openintro)
+library(infer)
+library(gridExtra)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+
+## Announcements
+
+- Midterm due Friday at noon
+
+---
+
+class: center, middle
+
+# Inference for regression
+
+---
+
+## Riders in Florence, MA
+
+.small[
+The Pioneer Valley Planning Commission collected data in Florence, MA for 90 days from April 5 to November 15, 2005 using a laser sensor, with breaks in the laser beam recording when a rail-trail user passed the data collection station.
+
+- `hightemp` daily high temperature (in degrees Fahrenheit)
+- `volume` estimated number of trail users that day (number of breaks recorded)
+]
+
+```{r}
+library(mosaicData)
+data(RailTrail)
+```
+
+```{r echo=FALSE, fig.height=2.25}
+ggplot(data = RailTrail, mapping = aes(x = hightemp, y = volume)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  xlim(40, 100) +
+  ylim(120, 750) +
+  labs(ylab = "Volume", xlab)
+```
+
+
+---
+
+## Coefficient interpretation
+
+.question[
+`r emo::ji("bust_in_silhouette")` Interpret the coefficients of the regression model for predicting volume (estimated number of trail users that day) from hightemp (daily high temperature, in F).
+]
+
+```{r}
+m_riders <- lm(volume ~ hightemp, data = RailTrail)
+tidy(m_riders) %>%
+  select(term, estimate)
+```
+
+
+
+---
+
+## Uncertainty around the slope
+
+```{r echo=FALSE}
+ggplot(data = RailTrail, mapping = aes(x = hightemp, y = volume)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "black") +
+  xlim(40, 100) +
+  ylim(120, 750)
+```
+
+---
+
+
+## Bootstrapping the data, once
+
+```{r echo=FALSE}
+set.seed(18472)
+
+boot_samples <- RailTrail %>%
+  specify(volume ~ hightemp) %>% 
+  generate(reps = 50, type = "bootstrap")
+
+first_boot_sample <- boot_samples %>%
+  filter(replicate == 1)
+
+ggplot(first_boot_sample, aes(x = hightemp, y = volume, color = factor(replicate))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme(legend.position = "none") +
+  scale_color_manual(values = "gray") +
+  xlim(40, 100) +
+  ylim(120, 750)
+```
+
+```{r echo=FALSE}
+m_boot <- lm(volume ~ hightemp, data = first_boot_sample)
+tidy(m_boot) %>%
+  select(term, estimate)
+```
+
+---
+
+## Bootstrapping the data, once again
+
+```{r echo=FALSE}
+second_boot_sample <- boot_samples %>%
+  filter(replicate == 2)
+
+ggplot(second_boot_sample, aes(x = hightemp, y = volume, color = factor(replicate))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme(legend.position = "none") +
+  scale_color_manual(values = "gray") +
+  xlim(40, 100) +
+  ylim(120, 750)
+```
+
+```{r echo=FALSE}
+m_boot <- lm(volume ~ hightemp, data = second_boot_sample)
+tidy(m_boot) %>%
+  select(term, estimate)
+```
+
+---
+
+## Bootstrapping the data, again
+
+```{r echo=FALSE}
+third_boot_sample <- boot_samples %>%
+  filter(replicate == 3)
+
+ggplot(third_boot_sample, aes(x = hightemp, y = volume, color = factor(replicate))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme(legend.position = "none") +
+  scale_color_manual(values = "gray") +
+  xlim(40, 100) +
+  ylim(120, 750)
+```
+
+```{r echo=FALSE}
+m_boot <- lm(volume ~ hightemp, data = third_boot_sample)
+tidy(m_boot) %>%
+  select(term, estimate)
+```
+
+---
+
+## Bootstrapping the regression line
+
+```{r echo=FALSE}
+ggplot(boot_samples, aes(x = hightemp, y = volume, color = factor(replicate))) +
+  geom_smooth(method = "lm", se = FALSE, lwd = 0.2) +
+  geom_abline(slope = m_riders$coefficients[2], intercept = m_riders$coefficients[1], lwd = 1, color = "black") +
+  theme(legend.position = "none") +
+  scale_color_manual(values = rep("gray", 100)) +
+  ylim(100, 750)
+```
+
+---
+
+## Bootstrap interval for the slope
+
+.small[
+```{r}
+boot_dist <- RailTrail %>%
+  specify(response = volume, explanatory = hightemp) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "slope")
+```
+]
+
+```{r echo=FALSE}
+ci <- boot_dist %>%
+  summarise(l = quantile(stat, 0.025), u = quantile(stat, 0.975))
+
+ggplot(data = boot_dist, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 0.25) +
+  geom_vline(xintercept = ci$l, color = color_palette$darkblue) +
+  geom_vline(xintercept = ci$u, color = color_palette$darkblue)
+```
+
+---
+
+## Bootstrap interval for the slope
+
+.question[
+Interpret the bootstrap interval in context of the data.
+]
+
+```{r}
+boot_dist %>%
+  summarise(l = quantile(stat, 0.025), 
+            u = quantile(stat, 0.975))
+```
+
+---
+
+## Hypothesis testing for the slope
+
+$H_0$: No relationship, $\beta_1 = 0$  
+$H_A$: There is a relationship, $\beta_1 \ne 0$
+
+--
+
+.small[
+```{r}
+null_dist <- RailTrail %>%
+  specify(volume ~ hightemp) %>% 
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "slope")
+```
+]
+
+--
+
+```{r echo=FALSE, fig.height = 2.25}
+ggplot(data = null_dist, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 0.25) +
+  xlim(-6, 6) +
+  geom_vline(xintercept = m_riders$coefficients[2], color = color_palette$red) +
+  geom_vline(xintercept = -1*m_riders$coefficients[2], color = color_palette$red) 
+```
+
+---
+
+## Finding the p-value
+
+```{r}
+null_dist %>%
+  filter(stat >= m_riders$coefficients[2]) %>%
+  summarise(p_val = 2 * (n()/1000))
+```
+
+---
+
+## Hypothesis testing for the slope
+
+... the CLT way
+
+```{r}
+tidy(m_riders)
+```
+
+---
+
+## Conditions for inference for regression
+
+Three conditions:
+
+--
+
+1. Observations should be independent
+
+--
+
+2. Residuals should be randomly distributed around 0
+
+--
+
+3. Residuals should be nearly normally distributed, centered at 0
+
+--
+
+4. Residuals should have constant variance
+
+
+---
+
+## Checking independence
+
+One consideration might be time series structure of the data. We can check whether one residual depends on the previous by plotting the residuals in the order of data collection.
+
+```{r fig.height = 2.25}
+m_riders_aug <- augment(m_riders)
+ggplot(data = m_riders_aug, aes(x = 1:nrow(m_riders_aug), y = .resid)) +
+  geom_point() +
+  labs(x = "Index", y = "Residual")
+```
+
+---
+
+## Checking distribution of residuals around 0 and constant variance
+
+```{r}
+ggplot(data = m_riders_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, lty = 3, color = "gray") +
+  labs(y = "Residuals", x = "Predicted values, y-hat")
+```
+
+---
+
+## Checking normality of residuals
+
+```{r}
+ggplot(data = m_riders_aug, aes(x = .resid)) +
+  geom_histogram(binwidth = 30) +
+  labs(x = "Residuals")
+```
+
+---
+
+## What else can we do with these p-values?
+
+Model selection based on p-value method:
+
+- Backwards elimination: Remove the variable with the highest p-value, re-fit, 
+repeat until all variables are significant at the chosen significance level.
+- Forward selection: Start with the variable with the lowest p-value, re-fit,
+repeat until all no more significant variables left at the chosen significance level.
+
+This is sometimes seen in the literature, but is not recommended!
+
+- Relies on arbitrary significance level cutoff
+- Multiple testing!
+
+Instead use adjusted $R^2$, or AIC, or other criterion based model selection.
+
+---
+
+## My thoughts 
+
+Both sets of p-values are largely useless other than in a few very narrow circumstances
+
+* Coefficient p-value 
+    - If you truly want to know if a coefficient is significantly different from zero (taking the other predictors into account) then great
+    - If you want to know which predictors are important - use model selection
+
+* Overall model p-value
+    - Strawman comparison, I don't really care that my model is better than a mean only model, the latter is almost always going to be terrible
+
+---
+
+class: center, middle
+
+# Testing errors and power
+
+---
+
+## Testing errors
+
+- Type 1: Reject $H_0$ when you shouldn't have
+    + P(Type 1 error) = $\alpha$
+    
+- Type 2: Fail to reject $H_0$ when you should have
+    + P(Type 2 error) is harder to calculate, but increases as $\alpha$ decreases
+
+<div class="question">
+`r emo::ji("bust_in_silhouette")` In a court of law
+
+<ul>
+<li> Null hypothesis: Defendant is innocent
+<li> Alternative hypothesis: Defendant is guilty
+</ul>
+
+Which is worse: Type 1 or Type 2 error?
+</div>
+
+---
+
+## Probabilities of testing errors
+
+- P(Type 1 error) = $\alpha$
+
+- P(Type 2 error) = 1 - Power
+
+- Power = P(correctly rejecting the null hypothesis)
+
+
+<div class="question">
+`r emo::ji("busts_in_silhouette")` Fill in the blanks in terms of correctly/incorrectly rejecting/failing to reject the null hypothesis:
+
+<ul>
+<li> $alpha$ is the probability of ___.
+<li> 1 - Power is the probability of ___.
+</ul>
+</div>
+

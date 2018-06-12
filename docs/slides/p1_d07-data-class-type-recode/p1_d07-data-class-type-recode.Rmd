@@ -1,0 +1,559 @@
+---
+title: "Data classes and types + Recoding"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Data classes and types
+
+---
+
+## Data types in R
+
+* **logical**
+
+* **double**
+
+* **integer**
+
+* **character**
+
+* **lists**
+
+* and some more, but we won't be focusing on those
+
+---
+
+## Logical & character
+
+**logical** - boolean values `TRUE` and `FALSE`
+
+```{r}
+typeof(TRUE)
+```
+
+**character** - character strings
+
+```{r}
+typeof("hello")
+typeof('world') # but remember, we use double quotations!
+```
+
+---
+
+## Double & integer
+
+**double** - floating point numerical values (default numerical type)
+
+```{r}
+typeof(1.335)
+typeof(7)
+```
+
+**integer** - integer numerical values (indicated with an `L`)
+
+```{r}
+typeof(7L)
+typeof(1:3)
+```
+
+---
+
+## Lists
+
+**Lists** are 1d objects that can contain any combination of R objects
+
+.small[
+```{r}
+mylist <- list("A", 1:4, c(TRUE, FALSE), (1:4)/2)
+mylist
+```
+
+```{r}
+str(mylist)
+```
+]
+
+---
+
+## Named lists
+
+Because of their more complex structure we often want to name the elements of a list (we 
+can also do this with vectors). This can make reading and accessing the list more 
+straight forward.
+
+.small[
+```{r}
+myotherlist <- list(A = "hello", B = 1:4, "knock knock" = "who's there?")
+str(myotherlist)
+names(myotherlist)
+myotherlist$B
+```
+]
+
+---
+
+## Concatenation
+
+Vectors can be constructed using the `c()` function.
+
+```{r}
+c(1, 2, 3)
+c("Hello", "World!")
+c(1, c(2, c(3)))
+```
+
+---
+
+## Coercion
+
+R is a dynamically typed language -- it will happily convert between the various types 
+without complaint.
+
+```{r}
+c(1, "Hello")
+c(FALSE, 3L)
+c(1.2, 3L)
+```
+
+---
+
+## Missing Values
+
+R uses `NA` to represent missing values in its data structures.
+
+```{r}
+typeof(NA)
+```
+
+---
+
+## Other Special Values
+
+`NaN` - Not a number
+
+`Inf` - Positive infinity
+
+`-Inf` - Negative infinity
+
+<br/>
+
+.pull-left[
+```{r}
+pi / 0
+0 / 0
+1/0 + 1/0
+```
+]
+.pull-right[
+```{r}
+1/0 - 1/0
+NaN / NA
+NaN * NA
+```
+]
+
+---
+
+## Activity
+
+.question[
+What is the type of the following vectors? Explain why they have that type.
+]
+
+* `c(1, NA+1L, "C")`
+* `c(1L / 0, NA)`
+* `c(1:3, 5)`
+* `c(3L, NaN+1L)`
+* `c(NA, TRUE)`
+
+---
+
+## Example: Cat lovers
+
+A survey asked respondents their name and number of cats. The instructions said to enter the number of cats as a numerical value.
+
+.small[
+```{r message=FALSE}
+cat_lovers <- read_csv("../../data/cat-lovers.csv")
+```
+
+```{r echo=FALSE}
+cat_lovers %>%
+  datatable()
+```
+]
+
+---
+
+## Oh why won't you work?!
+
+```{r}
+cat_lovers %>%
+  summarise(mean = mean(number_of_cats))
+```
+
+---
+
+## Oh why won't you still work??!!
+
+```{r}
+cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats, na.rm = TRUE))
+```
+
+---
+
+## Take a breath and look at your data
+
+.question[
+What is the type of the `number_of_cats` variable?
+]
+
+```{r}
+glimpse(cat_lovers)
+```
+
+---
+
+## Let's take another look
+
+.small[
+```{r echo=FALSE}
+cat_lovers %>%
+  datatable()
+```
+]
+
+---
+
+## Sometimes you need to babysit your respondents
+
+```{r}
+cat_lovers %>%
+  mutate(number_of_cats = case_when(
+    name == "Ginger Clark" ~ 2,
+    name == "Doug Bass"    ~ 3,
+    TRUE                   ~ as.numeric(number_of_cats)
+    )) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+## Always you need to respect data types
+
+```{r}
+cat_lovers %>%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    ) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+## Now that we know what we're doing...
+
+```{r}
+cat_lovers <- cat_lovers %>%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    )
+```
+
+---
+
+## Moral of the story
+
+- If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
+
+- Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
+
+---
+
+## Vectors vs. lists
+
+.pull-left[
+.small[
+```{r, error=TRUE}
+x <- c(8,4,7)
+```
+]
+.small[
+```{r}
+x[1]
+```
+]
+.small[
+```{r}
+x[[1]]
+```
+]
+]
+--
+.pull-right[
+.small[
+```{r}
+y <- list(8,4,7)
+```
+]
+.small[
+```{r}
+y[2]
+```
+]
+.small[
+```{r}
+y[[2]]
+```
+]
+]
+
+--
+
+<br>
+
+**Note:** When using tidyverse code you'll rarely need to refer to elements using square brackets, but it's good to be aware of this syntax, especially since you might encounter it when searching for help online.
+
+---
+
+class: center, middle
+
+# Data "set"
+
+---
+
+## Data "sets" in R
+
+- "set" is in quotation marks because it is not a formal data class
+
+- A tidy data "set" can be one of the following types:
+    + `tibble`
+    + `data.frame`
+
+- We'll often work with `tibble`s:
+    + `readr` package (e.g. `read_csv` function) loads data as a `tibble` by default
+    + `tibble`s are part of the tidyverse, so they work well with other packages we are using
+    + they make minimal assumptions about your data, so are less likely to cause hard to track bugs in your code
+
+---
+
+## Data frames
+
+- A data frame is the most commonly used data structure in R, they are just a list of equal length vectors (usually atomic, but you can use generic as well). Each vector is treated as a column and elements of the vectors as rows.
+
+- A tibble is a type of data frame that ... makes your life (i.e. data analysis) easier.
+
+- Most often a data frame will be constructed by reading in from a file, but we can also create them from scratch.
+
+```{r}
+df <- tibble(x = 1:3, y = c("a", "b", "c"))
+class(df)
+glimpse(df)
+```
+
+---
+
+## Data frames (cont.)
+
+```{r}
+attributes(df)
+class(df$x)
+class(df$y)
+```
+
+---
+
+## Working with tibbles in pipelines
+
+.question[
+How many respondents have below average number of cats?
+]
+
+```{r}
+mean_cats <- cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats))
+
+cat_lovers %>%
+  filter(number_of_cats < mean_cats) %>%
+  nrow()
+```
+
+.question[
+Do you believe this number? Why, why not?
+]
+
+---
+
+## A result of a pipeline is always a tibble
+
+```{r}
+mean_cats
+class(mean_cats)
+```
+
+---
+
+## `pull()` can be your new best friend
+
+But use it sparingly!
+
+```{r}
+mean_cats <- cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats)) %>%
+  pull()
+
+cat_lovers %>%
+  filter(number_of_cats < mean_cats) %>%
+  nrow()
+```
+
+--
+
+```{r}
+mean_cats
+class(mean_cats)
+```
+
+---
+
+class: center, middle
+
+# Factors
+
+---
+
+## Factors
+
+Factor objects are how R stores data for categorical variables (fixed numbers of discrete values).
+
+```{r}
+(x = factor(c("BS", "MS", "PhD", "MS")))
+```
+
+```{r}
+glimpse(x)
+```
+
+```{r}
+typeof(x)
+```
+
+---
+
+## Read data in as character strings
+
+```{r}
+glimpse(cat_lovers)
+```
+
+---
+
+## But coerce when plotting
+
+```{r}
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+---
+
+## Use forcats to manipulate factors
+
+```{r}
+cat_lovers <- cat_lovers %>%
+  mutate(handedness = fct_relevel(handedness, 
+                                  "right", "left", "ambidextrous"))
+```
+
+```{r}
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+---
+
+## Come for the functionality
+
+.pull-left[
+... stay for the logo
+]
+.pull-right[
+![](img/hex-forcats.png)
+]
+
+- R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Historically, factors were much easier to work with than character vectors, so many base R functions automatically convert character vectors to factors.
+
+- However, factors are still useful when you have true categorical data, and when you want to override the ordering of character vectors to improve display. The goal of the forcats package is to provide a suite of useful tools that solve common problems with factors.
+
+Source: [forcats.tidyverse.org](http://forcats.tidyverse.org/)
+
+---
+
+## Recap
+
+- Always best to think of data as part of a tibble
+    + This plays nicely with the `tidyverse` as well
+    + Rows are observations, columns are variables
+    
+- Be careful about data types / classes
+    + Sometimes `R` makes silly assumptions about your data class 
+        + Using `tibble`s help, but it might not solve all issues
+        + Think about your data in context, e.g. 0/1 variable is most likely a `factor`
+    + If a plot/output is not behaving the way you expect, first
+    investigate the data class
+    + If you are absolutely sure of a data class, over-write it in your
+    tibble so that you don't need to keep having to keep track of it
+        + `mutate` the variable with the correct class

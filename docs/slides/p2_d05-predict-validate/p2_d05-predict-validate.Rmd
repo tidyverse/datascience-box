@@ -1,0 +1,509 @@
+---
+title: "Prediction + Model validation"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# Set dpi and height for images
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+class: center, middle
+
+# Model selection
+
+---
+
+## Data: Course evals
+
+```{r message=FALSE, warning = FALSE}
+library(tidyverse)
+library(broom)
+library(modelr)  # new!
+```
+
+```{r message=FALSE}
+# Load data
+evals <- read_csv("../../data/evals-mod.csv")
+
+# Calculate bty_avg
+evals <- evals %>%
+  rowwise() %>%
+  mutate(bty_avg = mean(c(bty_f1lower, bty_f1upper, bty_f2upper, 
+                          bty_m1lower, bty_m1upper, bty_m2upper))) %>%
+  ungroup()
+```
+
+---
+
+## Full model
+
+.question[
+What percent of the variability in evaluation scores is explained by the model?
+]
+
+```{r}
+full_model <- lm(score ~ rank + ethnicity + gender + language + 
+                         age + cls_perc_eval + cls_did_eval + 
+                         cls_students + cls_level + cls_profs + 
+                         cls_credits + bty_avg, data = evals)
+glance(full_model)$r.squared
+glance(full_model)$adj.r.squared
+```
+
+---
+
+## Akaike Information Criterion
+
+$$ AIC = -2log(L) + 2k $$
+
+- $L$: likelihood	of the	model
+    - Likelihood of seeing these data	given	the estimated model parameters
+    - Won't go into calculating it in this course (but you will in future courses)
+- Used for model selection, lower the better
+    - Value is not informative on its own
+- Applies	a	penalty	for	number of parameters in the	model, $k$
+    - Different penalty than adjusted $R^2$ but similar idea
+- In R to get the AIC, use `AIC(model)`
+
+```{r aic-full-model}
+glance(full_model)$AIC
+```
+
+---
+
+## Model selection -- a little faster
+
+```{r results="hide"}
+selected_model <- step(full_model, direction = "backward")
+```
+
+```{r}
+tidy(selected_model) %>% select(term, estimate)
+```
+
+---
+
+## Selected variables
+
+| variable     | selected    |
+| ------------ | :----------:|
+| rank         |             |
+| ethnicity    | x           |
+| gender       | x           |
+| language     | x           |
+| age          | x           |
+| cls_perc_eval| x           |
+| cls_did_eval |             |
+| cls_students |             |
+| cls_level    |             |
+| cls_profs    |             |
+| cls_credits  | x           |
+| bty_avg      | x           |
+
+---
+
+## Coefficient interpretation
+
+.question[
+Interpret the slopes of `gender` and `bty_avg` in context of the data.
+]
+
+```{r}
+tidy(selected_model) %>% 
+  select(term, estimate) %>%
+  mutate(estimate = round(estimate, 3))
+```
+
+---
+
+## AIC
+
+```{r}
+glance(full_model)$AIC
+```
+
+```{r}
+glance(selected_model)$AIC
+```
+
+---
+
+## Parsimony
+
+<div class="question">
+Take a look at the variables in the full and the selected model. Can you guess
+why some of them may have been dropped? Remember: We like parsimonous models.
+</div>
+
+.small[
+| variable     | selected    |
+| ------------ | :----------:|
+| rank         |             |
+| ethnicity    | x           |
+| gender       | x           |
+| language     | x           |
+| age          | x           |
+| cls_perc_eval| x           |
+| cls_did_eval |             |
+| cls_students |             |
+| cls_level    |             |
+| cls_profs    |             |
+| cls_credits  | x           |
+| bty_avg      | x           |
+]
+
+---
+
+class: center, middle
+
+# Model validation
+
+---
+
+## Overfitting
+
+- The data we are using to construct our models come from a larger population.
+
+- Ultimately we want our model to tell us how the population works, not just the sample we have.
+
+- If the model we fit is too tailored to our sample, it might not perform as well with the remaining population. This means the model is "overfitting" our data.
+
+- We measure this using **model validation** techniques.
+
+- Note: Overfitting is not a huge concern with linear models with low level interactions, however it can be with more complex and flexible models. The following is just an example of model validation, even though we're using it in a scenario where the concern for overfitting is not high.
+
+---
+
+## Model validation
+
+- One commonly used model validation technique is to partition your data into training
+and testing set
+
+- That is, fit the model on the training data
+
+- And test it on the testing data
+
+- Evaluate model performance using $RMSE$, root-mean squared error
+
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}} $$
+
+.question[
+Do you think we should prefer low or high RMSE?
+]
+
+---
+
+## Random sampling and reproducibility
+
+Gotta set a seed!
+```{r}
+set.seed(3518)
+```
+
+- Use different seeds from each other
+
+- Need inspiration? https://www.random.org/
+
+---
+
+## Cross validation
+
+More specifically, **k-fold cross validation**:
+
+- Split your data into k folds.
+
+- Use 1 fold for testing and the remaining (k - 1) folds for training.
+
+- Repeat k times.
+
+---
+
+## Aside -- the modulo operator
+
+```{r}
+9 %% 5
+```
+
+--
+
+.pull-left[
+```{r echo=FALSE}
+df <- tibble(obs = 1:8, fold = as.integer(c(1,2,3,4,5,1,2,3)))
+df %>% datatable(options = list(dom = "t"), rownames = FALSE)
+```
+]
+
+--
+
+.pull-right[
+```{r}
+(1:8) %% 5
+((1:8) - 1) %% 5
+(((1:8) - 1) %% 5) + 1
+```
+]
+
+---
+
+## Prepping your data for 5-fold CV
+
+```{r}
+evals_cv <- evals %>%
+  mutate(id = 1:n()) %>%
+  sample_n(nrow(evals)) %>%
+  mutate( fold = (((1:n()) - 1) %% 5) + 1 )
+
+evals_cv %>% 
+  count(fold)
+```
+
+---
+
+## CV 1
+
+```{r}
+test_fold <- 1
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% anti_join(test, by = "id")
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+(rmse_test1 <- rmse(mod, test))
+```
+
+---
+
+## RMSE on training vs. testing
+
+.question[
+Would you expect the RMSE to be higher for your training data or your testing data? Why?
+]
+
+---
+
+## RMSE on training vs. testing
+
+RMSE for testing:
+.small[
+```{r}
+(rmse_test1 <- rmse(mod, test))
+```
+]
+
+RMSE for training:
+.small[
+```{r}
+(rmse_train1 <- rmse(mod, train))
+```
+]
+
+---
+
+## CV 2
+
+```{r}
+test_fold <- 2
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% anti_join(test, by = "id")
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test2 <- rmse(mod, test))
+(rmse_train2 <- rmse(mod, train))
+```
+
+---
+
+## CV 3
+
+```{r}
+test_fold <- 3
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% anti_join(test, by = "id")
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test3 <- rmse(mod, test))
+(rmse_train3 <- rmse(mod, train))
+```
+
+---
+
+## CV 4
+
+```{r}
+test_fold <- 4
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% anti_join(test, by = "id")
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test4 <- rmse(mod, test))
+(rmse_train4 <- rmse(mod, train))
+```
+
+---
+
+## CV 5
+
+```{r}
+test_fold <- 5
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% anti_join(test, by = "id")
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test5 <- rmse(mod, test))
+(rmse_train5 <- rmse(mod, train))
+```
+
+---
+
+## Putting it altogether
+
+.small[
+```{r}
+rmse_evals <- tibble(
+  test_fold  = 1:5,
+  rmse_train = c(rmse_train1, rmse_train2, rmse_train3, rmse_train4, rmse_train5),
+  rmse_test  = c(rmse_test1, rmse_test2, rmse_test3, rmse_test4, rmse_test5)
+)
+```
+
+```{r fig.height=2}
+ggplot(data = rmse_evals, mapping = aes(x = test_fold, y = rmse_test)) +
+  geom_point() +
+  geom_line()
+```
+]
+
+---
+
+## How does RMSE compare to y?
+
+- `score` summary stats:
+
+```{r echo=FALSE}
+evals %>%
+  summarise(min = min(score), max = max(score), 
+            mean = mean(score), med = median(score),
+            sd = sd(score), IQR = IQR(score))
+```
+
+- `rmse_test` summary stats:
+
+```{r echo=FALSE}
+rmse_evals %>%
+  summarise(min = min(rmse_test), max = max(rmse_test), 
+            mean = mean(rmse_test), med = median(rmse_test),
+            sd = sd(rmse_test), IQR = IQR(rmse_test))
+```
+
+---
+
+class: center, middle
+
+# Prediction
+
+---
+
+## New observation
+
+To make a prediction for a new observation we need to create a data frame with that observation.
+
+<div class="question">
+Suppose we want to make a prediction for a 35 year old white woman professor who received her education at an English speaking country and who teaches a multi credit course. 80% of her classes tend to fill out evaluations, and she's average looiking (beauty score = 2.5).
+<br><br>
+The following won't work. Why? How would you correct it?
+</div>
+
+```{r}
+new_prof <- data_frame(ethnicity = "white",
+                       sex = "woman",
+                       language = "English",
+                       age = 35, 
+                       cls_perc_eval = 0.80,
+                       cls_credits = "multi-credit",
+                       bty_avg = 2.5)
+```
+
+---
+
+## New observation, corrected
+
+```{r}
+new_prof <- data_frame(ethnicity = "not minority",
+                       gender = "female",
+                       language = "english",
+                       age = 35, 
+                       cls_perc_eval = 0.80,
+                       cls_credits = "multi credit",
+                       bty_avg = 2.5)
+```
+
+---
+
+## Prediction
+
+```{r}
+predict(selected_model, newdata = new_prof)
+```
+
+---
+
+## Uncertainty around prediction
+
+- Confidence interval around $\bar{y}$ for new data (average score for profs with given characteristics):
+
+```{r}
+predict(selected_model, newdata = new_prof, interval = "confidence")
+```
+
+- Prediction interval around $\hat{y}$ for new data (average score for profs with given characteristics):
+
+```{r}
+predict(selected_model, newdata = new_prof, interval = "prediction")
+```

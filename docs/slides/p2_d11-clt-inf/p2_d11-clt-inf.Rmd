@@ -1,0 +1,350 @@
+---
+title: "CLT based inference"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: img/sta199-logo-hex.png
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(DT)
+library(emo)
+library(openintro)
+library(infer)
+library(gridExtra)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+
+## Announcements
+
+- Midterm assigned at noon Monday, due Friday at noon
+    - Mostly modeling + inference
+    - But also some exploratory data analysis
+
+- OH tomorrow: 10:30am - noon
+
+- Team meetings
+
+- What do I owe you?
+    - One other extra credit assignment
+    - Some regrades
+    - HW5 feedback or key
+
+---
+
+class: center, middle
+
+# Inference methods based on CLT
+
+---
+
+## What is the CLT?
+
+The Central Limit Theorem tells us the distribution of certain sample statistics if necessary conditions are met.
+
+- The distribution of the sample statistic is nearly normal
+- The distribution is centered at the (often unknown) population parameter
+- The variability of the distribution is inversely proportional to the square root of the sample size
+
+---
+
+## Inference methods based on CLT
+
+If necessary conditions are met, we can also use inference methods based on the CLT:
+
+--
+
+- use the CLT to calculate the SE of the sample statistic of interest (sample mean, 
+sample proportion, difference between sample means, etc.)
+
+--
+
+- calculate the **test statistic**, number of standard errors away from the null 
+value the observed sample statistic is
+    - Z for proportions
+    - T for means, along with appropriate degrees of freedom
+
+--
+
+- use the test statistic to calculate the **p-value**, the probability of an observed 
+or more extreme outcome given that the null hypothesis is true
+
+---
+
+## Z distribution
+
+.small[
+Also called the **standard normal distribution**: $Z \sim N(mean = 0, \sigma = 1)$
+]
+
+.small[
+Finding probabilities under the normal curve:
+
+```{r}
+pnorm(-1.96)
+pnorm(1.96, lower.tail = FALSE)
+```
+]
+
+--
+
+.small[
+Finding cutoff values under the normal curve:
+
+```{r}
+qnorm(0.025)
+qnorm(0.975)
+```
+]
+
+---
+
+## T distribution
+
+- Also unimodal and symmetric, and centered at 0
+
+- Thicker tails than the normal distribution (to make up for additional variability
+introduced by using $s$ instead of $\sigma$ in calculation of the SE)
+
+- Parameter: **degrees of freedom**
+
+    - df for single mean: $df = n - 1$
+
+    - df for comparing two means: 
+
+$$df \approx \frac{(s_1^2/n_1+s_2^2/n_2)^2}{(s_1^2/n_1)^2/(n_1-1)+(s_2^2/n_2)^2/(n_2-1)} \approx min(n_1 - 1, n_2 - 1)$$
+
+---
+
+## T vs Z distributions
+
+```{r echo=FALSE}
+x = seq(-5,5,len=1000)
+d = rbind(
+  data.frame(dist="t (df=1)",  x=x, d=dt(x,1)),
+  data.frame(dist="t (df=3)",  x=x, d=dt(x,3)),
+  data.frame(dist="t (df=5)",  x=x, d=dt(x,5)),
+  data.frame(dist="t (df=10)", x=x, d=dt(x,10)),
+  data.frame(dist="t (df=15)", x=x, d=dt(x,15)),
+  data.frame(dist="t (df=30)", x=x, d=dt(x,30)),
+  data.frame(dist="Z", x=x, d=dnorm(x))
+)
+
+ggplot(d, aes(x=x, y=d, color=dist)) + geom_line()
+```
+
+---
+
+## T distribution
+
+.small[
+Finding probabilities under the t curve:
+```{r}
+pt(-1.96, df = 9)
+pt(1.96, df = 9, lower.tail = FALSE)
+```
+]
+
+--
+
+<br/>
+.small[
+Finding cutoff values under the t curve:
+```{r}
+qt(0.025, df = 9)
+qt(0.975, df = 9)
+```
+]
+
+---
+
+class: center, middle
+
+# Example
+
+---
+
+## Relaxing after work
+
+.question[
+The GSS asks "After an average work day, about how many 
+hours do you have to relax or pursue activities that you enjoy?". Do these data
+provide convincing evidence that Americans, on average, spend more than 3 hours
+per day relaxing? Note that the variable of interest in the dataset is `hrsrelax`.
+]
+
+```{r fig.height=2.5, fig.width=5, message=FALSE}
+gss = read_csv("data/gss2010.csv")
+
+gss %>% 
+  filter(!is.na(hrsrelax)) %>%
+  summarise(x_bar = mean(hrsrelax), med = median(hrsrelax), 
+            sd = sd(hrsrelax), n = n())
+```
+
+---
+
+## Exploratory Data Analysis
+
+```{r}
+ggplot(data = gss, aes(x = hrsrelax)) + 
+  geom_histogram(binwidth = 1)
+```
+
+---
+
+## Hypotheses
+
+.question[
+What are the hypotheses for evaluation Americans, on average, spend more than 3 hours
+per day relaxing?
+]
+
+--
+
+$$H_0: \mu = 3$$ 
+$$H_A: \mu > 3$$
+
+---
+
+## Conditions
+
+.question[
+What conditions must be satisfied to conduct this hypothesis test using methods 
+based on the CLT? Are these conditions satisfied?
+]
+
+
+---
+
+## Calculating the test statistic
+
+Summary stats from the sample:
+
+```{r fig.height=3, fig.width=5, echo=FALSE}
+hrsrelax_summ <- gss %>% 
+  filter(!is.na(hrsrelax)) %>%
+  summarise(xbar = mean(hrsrelax), s = sd(hrsrelax), n = n())
+hrsrelax_summ
+```
+
+And the CLT says:
+
+$$\bar{x} \sim N\left(mean = \mu, SE = \frac{\sigma}{\sqrt{n}}\right)$$
+
+--
+
+.question[
+How many standard errors away from the population mean is the observed sample mean?
+]
+
+--
+
+.question[
+How likely are we to observe a sample mean that is at least as extreme as the observed sample mean, if in fact the null hypothesis is true?
+]
+
+---
+
+## Calculations
+
+```{r}
+(se <- hrsrelax_summ$s / sqrt(hrsrelax_summ$n))
+(t <- (hrsrelax_summ$xbar - 3) / se)
+(df <- hrsrelax_summ$n - 1)
+pt(t, df, lower.tail = FALSE)
+```
+
+---
+
+## Conclusion
+
+- Since the p-value is small, we reject $H_0$.
+
+- The data provide convincing evidence that Americans, on average, spend more than
+3 hours per day relaxing after work.
+
+--
+
+.question[
+Would you expect a 90% confidence interval for the average number of hours Americans 
+spend relaxing after work to include 3 hours?
+]
+
+---
+
+## Confidence interval for a mean
+
+$$point~estimate \pm critical~value \times SE$$
+
+```{r}
+t_star <- qt(0.95, df)
+pt_est <- hrsrelax_summ$xbar
+round(pt_est + c(-1,1) * t_star * se, 2)
+```
+
+.question[
+Interpret this interval in context of the data.
+]
+
+---
+
+## Built-in functionality in R
+
+- There are built in functions for doing some of these tests in R:
+
+- However a learning goal is this course is not to go through an exhaustive list of all CLT based tests and how to implement them
+
+- Instead you should try to understand how these methods are / are not like the simulation based methods we learned about earlier
+
+.question[
+What is similar, and what is different, between CLT based test of means vs. simulation based test?
+]
+
+---
+
+.small[
+```{r}
+# HT
+t.test(gss$hrsrelax, mu = 3, alternative = "greater")
+
+# CI
+t.test(gss$hrsrelax, conf.level = 0.90)$conf.int
+```
+]

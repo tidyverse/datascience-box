@@ -1,0 +1,522 @@
+---
+title: "Tidytext analysis"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    logo: "../logo/dsbox-logo.png"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(DT)
+library(emo)
+library(openintro)
+library(infer)
+library(gridExtra)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1
+  )
+# Set dpi and height for images
+opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# For magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# For ggplot2
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+## Announcements
+
+- Office hours during finals week:
+  - TAs have their regular office hours listed on the course website
+  - I will have OH 12-1:30pm Wednesday and Friday
+
+- All grades (except final project) should be in by the end of the day on Thursday May 3
+  - At that point check Sakai to make sure your grades are correctly recorded
+  - If you catch any issues (in recorded grade) Slack me/TAs -- for regrade
+  requests use the usual regrade process, this is just for errors/missingness
+  in recorded grades
+  
+- Extra credit 2: If we can get *both* course and TA evaluation response rates 
+to above 80% (currently we’re at 40% for the course evals) everyone gets +5 
+pts on their total (not average) HW score. (We're at 45% as of 11:30am today)
+
+---
+
+## Announcements (cont.)
+
+- Presentation schedule: Saturday, May 5
+  - Section 1 teams: 9am - 10am
+  - Section 2 teams: 10am - 11am
+  - Section 3 teams: 11am - 12pm
+  
+- There will be one more peer eval, specificall for the project, due the evening
+of May 5
+
+---
+
+class: center, middle
+
+# Tidytext analysis
+
+---
+
+## Packages
+
+In addition to `tidyverse` we will be using three other packages today
+
+```{r}
+library(tidytext)
+library(geniusR) # https://github.com/JosiahParry/geniusR
+library(gutenbergr)
+```
+
+---
+
+## Tidytext
+
+- Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use.
+
+- Learn more at https://www.tidytextmining.com/.
+
+---
+
+## What is tidy text?
+
+```{r}
+text <- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+
+text
+```
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df <- tibble(line = 1:7, text = text)
+
+text_df
+```
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df %>%
+  unnest_tokens(word, text)
+```
+
+---
+
+class: center, middle
+
+# Analyzing lyrics of one artist
+
+---
+
+## Let's get more data
+
+We'll use the `geniusR` package to get song lyric data from [Genius](https://genius.com/).
+
+- `genius_album()` allows you to download the lyrics for an entire album in a 
+tidy format. 
+
+- Input: Two arguments artists and album. Supply the quoted name of artist 
+and the album (if it gives you issues check that you have the album name and 
+artists as specified on [Genius](https://genius.com/)).
+
+- Output: A tidy data frame with three columns:
+    - `title`: track name
+    - `track_n`: track number
+    - `text`: lyrics
+
+---
+
+## I have no idea who this person is!
+
+```{r cache=TRUE}
+marc <- genius_album(
+  artist = "Marc E. Bassy", 
+  album = "Gossip Columns"
+  )
+marc
+```
+
+---
+
+## Save for later
+
+```{r}
+marc <- marc %>%
+  mutate(
+    album = "Gossip Columns",
+    artist = "Marc E. Bassy"
+    )
+```
+
+---
+
+## What songs are in the album?
+
+```{r}
+marc %>%
+  distinct(track_title)
+```
+
+---
+
+## How long are Marc's songs?
+
+Length measured by number of lines
+
+```{r}
+marc %>%
+  count(track_title) %>%
+  arrange(desc(n))
+```
+
+---
+
+## Tidy up your lyrics!
+
+```{r}
+marc_lyrics <- marc %>%
+  unnest_tokens(word, lyric)
+
+marc_lyrics
+```
+
+---
+
+## What are the most common words?
+
+```{r}
+marc_lyrics %>%
+  count(word) %>%
+  arrange(desc(n))
+```
+
+---
+
+## Stop words
+
+- In computing, stop words are words which are filtered out before or after processing of natural language data (text).
+
+- They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+
+---
+
+## Spanish stop words
+
+```{r}
+get_stopwords(language = "es")
+```
+
+---
+
+## Various lexicons
+
+See `?get_stopwords` for more info.
+
+```{r}
+get_stopwords(source = "smart")
+```
+
+---
+
+## What are the most common words?
+
+```{r}
+marc_lyrics %>%
+  anti_join(get_stopwords(source = "smart")) %>%
+  count(word) %>%
+  arrange(desc(n))
+```
+
+---
+
+## What are the most common words?
+
+```{r eval=FALSE}
+marc_lyrics %>%
+  anti_join(get_stopwords(source = "smart")) %>%
+  count(word) %>%
+  arrange(desc(n)) %>%
+  top_n(20) %>%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    coord_flip() + 
+    theme_minimal() +
+    labs(title = "Frequency of Marc E. Bassy's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "")
+```
+
+---
+
+```{r echo=FALSE, message=FALSE, fig.height=4.5}
+marc_lyrics %>%
+  anti_join(get_stopwords(source = "smart")) %>%
+  count(word) %>%
+  arrange(desc(n)) %>%
+  top_n(20) %>%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    coord_flip() + 
+    theme_minimal() +
+    labs(title = "Frequency of Marc E. Bassy's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "")
+```
+
+---
+
+## Sentiment analysis
+
+- One way to analyze the sentiment of a text is to consider the text as a combination of its individual words 
+
+- and the sentiment content of the whole text as the sum of the sentiment content of the individual words
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+```{r}
+get_sentiments("afinn")
+```
+]
+.pull-right[
+```{r}
+get_sentiments("bing") 
+```
+]
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+```{r}
+get_sentiments("nrc")
+```
+]
+.pull-right[
+```{r}
+get_sentiments("loughran") 
+```
+]
+
+---
+
+## Sentiments in Marc's lyrics
+
+```{r}
+marc_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  arrange(desc(n))
+```
+
+---
+
+## Visualizing sentiments
+
+```{r echo=FALSE, message=FALSE}
+marc_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  arrange(desc(n)) %>%
+  group_by(sentiment) %>%
+  top_n(10) %>%
+  ungroup() %>%
+  ggplot(aes(fct_reorder(word, n), n, fill = sentiment)) +
+    geom_col() +
+    coord_flip() +
+    facet_wrap(~ sentiment, scales = "free") +
+    theme_minimal() +
+    labs(title = "Sentiments in Marc E. Bassy's lyrics",
+         x = "")
+```
+
+---
+
+## Visualizing sentiments
+
+```{r eval=FALSE}
+marc_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  arrange(desc(n)) %>%
+  group_by(sentiment) %>%
+  top_n(10) %>%
+  ungroup() %>%
+  ggplot(aes(fct_reorder(word, n), n, fill = sentiment)) +
+    geom_col() +
+    coord_flip() +
+    facet_wrap(~ sentiment, scales = "free") +
+    theme_minimal() +
+    labs(title = "Sentiments in Marc E. Bassy's lyrics",
+         x = "")
+```
+
+---
+
+class: center, middle
+
+# Comparing lyrics across artists
+
+---
+
+## Get more data
+
+Get data from two more artists:
+
+```{r cache=TRUE}
+quinn <- genius_album(artist = "Quinn XCII", album = "The Story of Us") %>%
+  mutate(artist = "Quinn XCII", album = "The Story of Us")
+seeb <- genius_album(artist = "Seeb", album = "Nice to Meet You EP") %>%
+  mutate(artist = "Seeb", album = "Nice to Meet You EP")
+```
+
+--
+
+Combine data:
+
+```{r}
+ldoc <- bind_rows(marc, quinn, seeb)
+```
+
+---
+
+## LDOC lyrics
+
+```{r}
+ldoc_lyrics <- ldoc %>%
+  unnest_tokens(word, lyric)
+```
+
+---
+
+## Common LDOC lyrics
+
+Without stop words:
+
+```{r}
+ldoc_lyrics %>%
+  anti_join(get_stopwords(source = "smart")) %>%
+  count(artist, word, sort = TRUE) # alternative way to sort
+```
+
+---
+
+## Common LDOC lyrics
+
+With stop words:
+
+```{r}
+ldoc_lyrics_counts <- ldoc_lyrics %>%
+  count(artist, word, sort = TRUE)
+```
+
+---
+
+## What is a document about?
+
+- Term frequency
+- Inverse document frequency
+
+$$idf(\text{term}) = \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)}$$
+
+tf-idf is about comparing **documents** within a **collection**.
+
+---
+
+## Calculating tf-idf
+
+This is not that exciting... What's the issue?
+
+```{r}
+ldoc_words <- ldoc_lyrics_counts %>%
+  bind_tf_idf(word, artist, n)
+
+ldoc_words
+```
+
+---
+
+## Re-calculating tf-idf
+
+```{r}
+ldoc_words %>%
+  bind_tf_idf(word, artist, n) %>%
+  arrange(-tf_idf)
+```
+
+---
+
+## 
+
+```{r echo=FALSE,message=FALSE, fig.height=4.5}
+ldoc_words %>% 
+  group_by(artist) %>% 
+  top_n(10) %>% 
+  ungroup() %>% 
+  ggplot(aes(fct_reorder(word, tf_idf), tf_idf, fill = artist)) + 
+    geom_col(alpha = 0.9, show.legend = FALSE) + coord_flip() + 
+    facet_wrap(~artist, ncol=1, scales = "free") + 
+    scale_y_continuous(expand = c(0,0)) + 
+    theme_minimal() +
+    labs(x = NULL, y = "tf-idf") +
+    ylim(c(0, 0.017))
+```
+
+---
+
+## Acknowledgements
+
+- Julia Silge: https://github.com/juliasilge/tidytext-tutorial
+
+- Julia Silge and David Robinson: https://www.tidytextmining.com/
+
+- Josiah Parry: https://github.com/JosiahParry/geniusR
+
+
+
+
+

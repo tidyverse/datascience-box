@@ -1,7 +1,0 @@
----
-weight: 1
-title: "Meet the toolkit"
-output: html_document
----
-
-hello

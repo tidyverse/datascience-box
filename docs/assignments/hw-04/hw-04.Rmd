@@ -1,0 +1,156 @@
+---
+title: "HW 04 - You gotta pick a package or two"
+output: 
+  html_document: 
+    css: ../hw.css
+    theme: yeti
+    toc: true
+    toc_float: true
+    fig_caption: false
+---
+
+<div style= "float:right;position: relative; margin-left: 20px">
+```{r setup, echo=FALSE, fig.align="right"}
+knitr::include_graphics("img/pkg.png")
+```
+</div>
+
+<br>
+
+But really, one is enough. Pick a package from the list below, and use it to do something. If you want to use a package not on this list, that's also ok, but run it by me first (so that I can confirm it's not one we introduce in class so far, the goal is to work with a new package).
+
+## Package list
+
+### Packages on CRAN
+
+These packages can be installed with:
+
+```{r eval=FALSE}
+install.packages("PACKAGENAME")
+```
+
+The package manuals are linked below, however developers of the packages might have additional information on the GitHub repo of the package.
+
+- cowsay:
+	- Allows printing of character strings as messages/warnings/etc. with ASCII animals, including cats, cows, frogs, chickens, ghosts, and more.
+	- https://cran.r-project.org/web/packages/cowsay/vignettes/cowsay_tutorial.html
+- babynames:
+	- US Baby Names 1880-2015
+	- https://cran.r-project.org/web/packages/babynames/babynames.pdf
+- Lahman:
+	- Provides the tables from the 'Sean Lahman Baseball Database' as a set of R data.frames. It uses the data on pitching, hitting and fielding performance and other tables from 1871 through 2015, as recorded in the 2016 version of the database. 
+	- https://cran.r-project.org/web/packages/Lahman/Lahman.pdf
+- praise:
+	- https://cran.r-project.org/web/packages/praise/praise.pdf
+	- Build friendly R packages that praise their users if they have done something good, or they just need it to feel better.	
+- GGally:
+	- The R package 'ggplot2' is a plotting system based on the grammar of graphics. 'GGally' extends 'ggplot2' by adding several functions to reduce the complexity of combining geometric objects with transformed data. Some of these functions include a pairwise plot matrix, a two group pairwise plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks. 
+	- https://cran.r-project.org/web/packages/GGally/GGally.pdf
+- ggimage:
+	- Supports image files and graphic objects to be visualized in 'ggplot2' graphic system.
+	- https://cran.r-project.org/web/packages/ggimage/vignettes/ggimage.html
+- suncalc:
+	- R interface to 'suncalc.js' library, part of the 'SunCalc.net' project <http://suncalc.net>, for calculating sun position, sunlight phases (times for sunrise, sunset, dusk, etc.), moon position and lunar phase for the given location and time.
+	- https://cran.r-project.org/web/packages/suncalc/suncalc.pdf
+- ttbbeer
+	- An R data package of beer statistics from U.S. Department of the Treasury, Alcohol and Tobacco Tax and Trade Bureau (TTB)
+	- https://cran.r-project.org/web/packages/ttbbeer/ttbbeer.pdf
+	
+### Packages GitHub only
+
+These packages can be installed with:
+
+```{r eval=FALSE}
+library(devtools)
+install_github("USERNAME/PACKAGENAME")
+```
+
+`USERNAME` refers to the user name of the developer of the package. For example, for the first package listed below, `USERNAME` is `hadley` and `PACKAGENAME` is `emo`.
+
+The package manuals are linked below, however developers of the packages might have additional information on the GitHub repo of the package.
+
+- emo: 
+	- The goal of emo(ji) is to make it very easy to insert emoji into RMarkdown documents 
+	- https://github.com/hadley/emo
+- gganimate:
+	- Create easy animations with ggplot2 
+	- https://github.com/dgrtwo/gganimate
+- emokid:
+	- For those times when you're having trouble expressing how you feel about your broken code.
+	- https://github.com/itsrainingdata/emokid
+- prenoms:
+	- First names given to babies in metropolitan France between 1900 and 2015.
+	- https://github.com/ThinkR-open/prenoms
+- dadjoke:
+	- The goal of dadjoke is to make you laugh in spite of yourself.
+	- https://github.com/jhollist/dadjoke/
+- cooking:
+	- Chopping, peeling, frying, and cooking various ingredients, and combining them to a delicious ragout. Also includes buying them from a local supermarket.
+	- https://github.com/krlmlr/cooking
+- kandinsky
+	- Turn any dataset into a Kandinsky paintingy
+	- https://github.com/gsimchoni/kandinsky
+- emoGG
+	- Use emoji in your ggplot2 plots.
+	- https://github.com/dill/emoGG
+- lego
+	- This R data package contains information about every Lego set manufactured from 1970 to 2015, a total of 6172 sets. 
+	- https://github.com/seankross/lego
+- bingo
+	- Generate Bingo cards
+	- https://github.com/jennybc/bingo
+- CatterPlots
+	- Plots with Cats 
+	- https://github.com/Gibbsdavidl/CatterPlots
+
+## Getting started
+
+Here are the steps for getting started:
+
+- Start with an assignment link that creates a repo on GitHub with starter documents: https://classroom.github.com/a/QlPBWkcA
+- Clone this repo in RStudio
+- Make any changes needed as outlined by the tasks you need to complete for the assignment
+- Make sure all your code chunks are informatively named, and these labels re not repeated
+- Periodically commit changes (the more often the better, for example, once per each new task)
+- Push all your changes back to your GitHub repo
+
+and voila, you're done! Once you push your changes back you do not need to do anything else to "submit" your work. And you can of course push multiple times throughout the assignment. At the time of the deadline we will take whatever is in your repo and consider it your final submission, and grade the state of your work at that time (which means even if you made mistakes before then, you wouldn't be penalized for them as long as the final state of your work is correct).
+
+## Assignment
+
+Install the package you pick. Depending on where the package comes from, how you install the package differs:
+    - If the package is on CRAN (Comprehensive R Archive Network), you can install it with `install.packages`. 
+    - If the package is only on Github (most likely because it is still under development), you need to use the `install_github` function. See above for details.
+
+Then, load the package. Regardless of how you installed the package you can load it with the `library` function.
+
+Finally, do something with the package. It doesn't have to be complicated. In fact, keep it simple. The goal is to try to read and understand the package documentation to be able to carry out a simple task.
+
+## Exercises
+
+1. Which package are you using? State the name of the package, whether it was on CRAN or GitHub, and include the code for loading it.
+2. What are you doing with the package? Give me a brief narrative including code and output.
+
+## Getting help
+
+Use the #questions channel on Slack to ask questions.
+
+- R errors/questions: Make a [reprex](https://www.tidyverse.org/help/#reprex).
+- Git/GitHub errors/questions: Clearly outline your steps that got you to the 
+point you're in.
+
+You are also welcomed to discuss the homework with each other broadly 
+(no sharing code!) as well as ask questions at office hours.
+
+## Grading
+
+In addition to accuracy of your answers to questions, your submission will be 
+evaluated for
+
+- coding style,
+- informatively named code chunks,
+- commit after each question (at a minimum, more commits ok),
+- informative commit messages,
+- document organization, and
+- quality of writing and grammar.
+
