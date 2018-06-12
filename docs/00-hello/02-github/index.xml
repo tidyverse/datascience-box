@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git and GitHub on Data Science Course in a Box</title>
+    <link>/00-hello/02-github/</link>
+    <description>Recent content in Git and GitHub on Data Science Course in a Box</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/00-hello/02-github/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

@@ -194,6 +194,13 @@ p {
     margin: 1rem 0;
 }
 
+.caption{
+  font-size: 13px;
+  color: #a3a3a3;
+  text-align: center;
+  margin-top: 0;
+}
+
 figcaption h4 {
     font-weight: 300 !important;
     opacity: .85;

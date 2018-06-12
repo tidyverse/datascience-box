@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data visualization on Data Science Course in a Box</title>
+    <link>/10-content/02-explore/02-01-data-viz/</link>
+    <description>Recent content in Data visualization on Data Science Course in a Box</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/10-content/02-explore/02-01-data-viz/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

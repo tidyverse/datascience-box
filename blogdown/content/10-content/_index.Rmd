@@ -1,0 +1,7 @@
+---
+weight: 2
+title: "Course content"
+output: html_document
+---
+
+An intro on course content section...

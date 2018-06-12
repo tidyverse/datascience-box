@@ -1,7 +1,0 @@
----
-weight: 20
-title: "Making rigorous conclusions"
-output: html_document
----
-
-This is where into to part 2 goes.
