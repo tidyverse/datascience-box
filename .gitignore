@@ -7,6 +7,5 @@ gss2016.csv
 *_cache
 *_files
 *.md
-*.html
 bookdown*
 *.key
