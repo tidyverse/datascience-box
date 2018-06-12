@@ -1,7 +1,7 @@
 ---
-weight: 1
-title: "RStudio Cloud"
+weight: 4
+title: "Pedagogy"
 output: html_document
 ---
 
-RSCloud stuff
+Pedagogy stuff
