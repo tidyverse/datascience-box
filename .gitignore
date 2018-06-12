@@ -9,3 +9,8 @@ gss2016.csv
 *.md
 bookdown*
 *.key
+*.html
+!docs/*.html
+!docs/*/*.html
+!docs/*/*/*.html
+!docs/*/*/*/*.html

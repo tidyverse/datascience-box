@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Central Limit Theorem</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Central Limit Theorem
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- Midterm assigned on Monday, due Friday at noon
+    - Mostly modeling + inference
+    - But also some exploratory data analysis
+
+- Project proposal due tomorrow -- any questions?
+
+---
+
+## 
+
+.question[
+What is the significance of the year 2020 in the US? And why am I asking this question today?
+]
+
+--
+
+![](img/10b/ap-census-tweet.png)
+
+
+---
+
+class: center, middle
+
+# Sample Statistics and Sampling Distributions
+
+---
+
+## Notation
+
+- Means:
+    - Population: mean = `\(\mu\)`, standard deviation = `\(\sigma\)`
+    - Sample: mean = `\(\bar{x}\)`, standard deviation = `\(s\)`
+
+- Proportions:
+    - Population: `\(p\)`
+    - Sample: `\(\hat{p}\)`
+    
+&lt;br/&gt;    
+
+- Standard error: `\(SE\)`
+
+---
+
+## Variability of sample statistics
+
+- Each sample from the population yields a slightly different sample statistic 
+(sample mean, sample proportion, etc.)
+
+- The variability of these sample statistics is measured by the **standard error**
+
+- Previously we quantified this value via simulation
+
+- Today we talk about the theory underlying **sampling distributions**
+
+---
+
+## Sampling distribution
+
+- **Sampling distribution** is the distribution of sample statistics of random
+samples of size `\(n\)` taken with replacement from a population
+
+- In practice it is impossible to construct sampling distributions since it would 
+require having access to the entire population
+
+- Today for demonstration purposes we will assume we have access to the population
+data, and construct sampling distributions, and examine their shapes, centers, and
+spreads
+
+.question[
+What is the difference between the sampling and bootstrap distribution?
+]
+
+---
+
+## The sampling distribution
+
+.question[
+We have a population that is normally distributed with mean 20 and standard deviation 3. Suppose we take samples of size 50 from this distribution, and plot their sample means. What shape, center, and spread will this distribution have?
+]
+
+---
+
+## The population
+
+
+```r
+set.seed(20180328)
+norm_pop &lt;- tibble(x = rnorm(n = 100000, mean = 20, sd = 3))
+ggplot(data = norm_pop, aes(x = x)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Population distribution")
+```
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+
+## Sampling from the population - 1
+
+
+```r
+samp_1 &lt;- norm_pop %&gt;%
+  sample_n(size = 50, replace = TRUE)
+```
+
+--
+
+
+```r
+samp_1 %&gt;%
+  summarise(x_bar = mean(x))
+```
+
+```
+## # A tibble: 1 x 1
+##   x_bar
+##   &lt;dbl&gt;
+## 1  20.2
+```
+
+---
+
+## Sampling from the population - 2
+
+
+```r
+samp_2 &lt;- norm_pop %&gt;%
+  sample_n(size = 50, replace = TRUE)
+```
+
+--
+
+
+```r
+samp_2 %&gt;%
+  summarise(x_bar = mean(x))
+```
+
+```
+## # A tibble: 1 x 1
+##   x_bar
+##   &lt;dbl&gt;
+## 1  19.5
+```
+
+
+---
+
+## Sampling from the population - 3
+
+
+```r
+samp_3 &lt;- norm_pop %&gt;%
+  sample_n(size = 50, replace = TRUE)
+```
+
+--
+
+
+```r
+samp_3 %&gt;%
+  summarise(x_bar = mean(x))
+```
+
+```
+## # A tibble: 1 x 1
+##   x_bar
+##   &lt;dbl&gt;
+## 1  20.4
+```
+
+
+--
+
+...
+
+---
+
+## Sampling distribution
+
+
+```r
+sampling &lt;- norm_pop %&gt;%
+  rep_sample_n(size = 50, replace = TRUE, reps = 1000) %&gt;%
+  group_by(replicate) %&gt;%
+  summarise(xbar = mean(x))
+sampling
+```
+
+```
+## # A tibble: 1,000 x 2
+##    replicate  xbar
+##        &lt;int&gt; &lt;dbl&gt;
+##  1         1  19.9
+##  2         2  19.6
+##  3         3  19.6
+##  4         4  20.8
+##  5         5  20.1
+##  6         6  20.2
+##  7         7  20.2
+##  8         8  20.5
+##  9         9  19.7
+## 10        10  19.8
+## # ... with 990 more rows
+```
+
+---
+
+## Population vs. sampling
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+.question[
+How do the shapes, centers, and spreads of these distributions compare?
+]
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+.question[
+How do the centers and spreads of these distributions compare?
+]
+
+
+```r
+norm_pop %&gt;%
+  summarise(mu = mean(x), sigma = sd(x))
+```
+
+```
+## # A tibble: 1 x 2
+##      mu sigma
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  20.0  3.00
+```
+
+
+```r
+sampling %&gt;%
+  summarise(mean = mean(xbar), se = sd(xbar))
+```
+
+```
+## # A tibble: 1 x 2
+##    mean    se
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  20.0 0.431
+```
+
+---
+
+## Simulating another sampling distribution
+
+
+```r
+rs_pop &lt;- tibble(x = rbeta(100000, 1, 5) * 100)
+```
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+
+```
+## # A tibble: 1 x 2
+##      mu sigma
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  16.7  14.1
+```
+
+---
+
+## Sampling distribution
+
+
+```r
+sampling &lt;- rs_pop %&gt;%
+  rep_sample_n(size = 50, replace = TRUE, reps = 1000) %&gt;%
+  group_by(replicate) %&gt;%
+  summarise(xbar = mean(x))
+```
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+
+```
+## # A tibble: 1 x 2
+##    mean    se
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  16.6  1.94
+```
+
+---
+
+.question[
+How do the shapes, centers, and spreads of these distributions compare?
+]
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+
+## Recap
+
+- Regardless of the shape of the population distribution, the sampling distribution follows a normal distribution.
+
+- The center of the sampling distribution is at the center of the population distribution.
+
+- The sampling distribution is less variable than the population distribution.
+
+--
+
+.question[
+What was the one (very unrealistic) assumption we had in simulating these sampling distributions?
+]
+
+---
+
+class: center, middle
+
+# Central Limit Theorem
+
+---
+
+## In practice...
+
+We can't directly know what the sampling distributions looks like, because we only draw a single sample.
+
+- The whole point of statistical inference is to deal with this issue: observe only one sample, try to make inference about the entire population
+    
+- We have already seen that there are simulation based methods that help us estimate the sampling distribution
+
+- Additionally, there are theoretical results (**Central Limit Theorem**) that tell us what the sampling distribution should look like (for certain sample statistics)
+
+---
+
+## Central Limit Theorem
+
+If certain conditions are met (more on this in a bit), the sampling distribution of the sample statistic
+will be nearly normally distributed with mean equal to the population parameter
+and standard error proportional to the inverse of the square root of the sample size.
+
+- **Single mean:** `\(\bar{x} \sim N\left(mean = \mu, sd = \frac{\sigma}{\sqrt{n}}\right)\)`
+- **Difference between two means:** `\((\bar{x}_1 - \bar{x}_2) \sim N\left(mean = (\mu_1 - \mu_2), sd = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \right)\)`
+- **Single proportion:** `\(\hat{p} \sim N\left(mean = p, sd = \sqrt{\frac{p (1-p)}{n}} \right)\)`
+- **Difference between two proportions:** `\((\hat{p}_1 - \hat{p}_2) \sim N\left(mean = (p_1 - p_2), sd = \sqrt{\frac{p_1 (1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}} \right)\)`
+
+---
+
+## Conditions:
+
+- **Independence:** The sampled observations must be independent. This is difficult to check, but the following are useful guidelines:
+    - the sample must be random
+    - if sampling without replacement, sample size must be less than 10% of the population size
+    
+- **Sample size / distribution:** 
+    - numerical data: The more skewed the sample (and hence the population)
+    distribution, the larger samples we need. Usually n &gt; 30 is considered a 
+    large enough sample for population distributions that are not extremely skewed.
+    - categorical data: At least 10 successes and 10 failures.
+
+- If comparing two populations, the groups must be independent of each other,
+and all conditions should be checked for both groups.
+
+---
+
+## Standard Error
+
+The standard error is the *standard deviation* of the *sampling distribution*, calculated using sample statistics (since we don't know the population parameters like `\(\sigma\)` or `\(p\)`).
+
+--
+
+- **Single mean:** `\(SE = \frac{s}{\sqrt{n}}\)`
+
+- **Difference between two means:** `\(SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)`
+
+- **Single proportion:** `\(SE = \sqrt{\frac{\hat{p} (1-\hat{p})}{n}}\)`
+
+- **Difference between two proportions:** `\(SE = \sqrt{\frac{\hat{p}_1 (1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}\)`
+
+--
+
+.question[
+How are standard error and sample size associated? What does that say about how the spread of the sampling distribution changes as `\(n\)` increases?
+]
+
+---
+
+## What is the normal distribution?
+
+Normal distribution
+
+- is unimodal and symmetric
+
+- follows the 68-95-99.7 rule
+
+![](img/10b/6895997.png)
+
+---
+
+.question[
+Speeds of cars on a highway are normally distributed with mean 65 miles / hour. The minimum speed recorded is 48 miles / hour and the maximum speed recorded is 83 miles / hour. Which of the following is most likely to be the standard deviation of the distribution?
+]
+
+(a) -5  
+(b) 5  
+(c) 10  
+(d) 15  
+(e) 30  
+
+---
+
+## What is "unusual" under the normal distribution?
+
+Observations that are more than 2 standard deviations away from the mean are often considered unusual under the normal distribution.
+
+---
+
+.question[
+Suppose my iPod has 3,000 songs. The histogram below shows the distribution of the lengths of these songs. We also know that, for songs on this iPod, the mean length is 3.45 minutes and the standard deviation is 1.63 minutes. Calculate the probability that a randomly selected song lasts more than 5 minutes.
+]
+
+![](p2_d10-clt_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
+
+.question[
+I’m about to take a trip to visit friends and the drive is 6 hours. I make a random playlist of 100 songs. What is the probability that my playlist lasts the entire drive? Reminder: For songs on this iPod, the mean length is 3.45 minutes and the standard deviation is 1.63 minutes. 
+]
+
+Hints:
+
+- You know how to find the distribution of `\(\bar{x}\)` (average song length)
+
+- To find probabilities under the normal curve, use the `pnorm()` function.
+
+---
+
+## Recap -- why do we care?
+
+Knowing the distribution of the sample statistic can help us
+
+- estimate a population parameter as point estimate `\(\pm\)` margin of error, where the margin of error is comprised of a measure of how confident we want to be and how variable the sample statistic is
+
+- test for a population parameter by evaluating how likely it is to obtain to observed sample statistic when assuming that the null hypothesis is true as this probability will depend on how variable the sampling distribution is
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

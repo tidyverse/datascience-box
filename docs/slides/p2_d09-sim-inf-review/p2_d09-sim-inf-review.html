@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simulation based inference review</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Simulation based inference review
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- 
+
+---
+
+class: center, middle
+
+# Notes from HW 3
+
+---
+
+## Recap: visualize and describe
+
+.question[
+When asked to visualize and describe distribution(s), how do you decide what visualizations to make?
+]
+
+--
+
+- Make all possible visualizations for the relevant variables, e.g. 
+    - for a single numerical variable, try a histogram as well as a box plot and a density plot.
+    - for one numerical and one categorical variable, try density plots, violin plots, faceted histograms, and side-by-side box plots.
+
+- This doesn't mean include **all** of these in your final write up. Try them out, see which one(s) help tell a story, and include that/those only in your write up. But you won't know without trying which one(s) to include.
+
+---
+
+## Recap: visualize and describe
+
+.question[
+When asked to visualize and describe distribution(s), how do you decide what to mention in your description?
+]
+
+--
+
+- Shape, center, spread, and any unusual observations.
+
+Simply stating features isn't sufficient, dig deeper to see why these features are apparent, e.g.
+
+- if the distribution is bimodal, determine where the peaks are and try to figure out why these show up as two prominent peaks (are there two prominent groups in your data, what are they?)
+
+- if there are outliers, and the observations are identifiable, identify the outliers and try to figure out why these observations stand out as outliers (the answer might be in the data, or might req)
+
+---
+
+## HW 3: Season and bike rentals
+
+Prompt: Create a visualization displaying the relationship between bike rentals and season. Interpret the plot in context of the data.
+
+---
+
+## Option 1
+
+
+
+
+```r
+ggplot(data = bike, aes(x = cnt)) +
+  geom_histogram(binwidth = 1000) +
+  facet_grid(. ~ season)
+```
+
+![](p2_d09-sim-inf-review_files/figure-html/bike-hist-facet-1.png)&lt;!-- --&gt;
+
+---
+
+## Option 2
+
+
+```r
+ggplot(data = bike, aes(x = cnt, color = season, fill = season)) +
+  geom_density(alpha = 0.5)
+```
+
+![](p2_d09-sim-inf-review_files/figure-html/bike-dens-1.png)&lt;!-- --&gt;
+
+---
+
+## Option 3
+
+Daily bike rentals are highest on a typical summer day and lowest on a typical winter day. The variablity of daily bike rentals are somewhat consistent across seasons, but lowest in the summer. There is a high outlier in the winter, and low outlier in the fall.
+
+
+```r
+ggplot(data = bike, aes(x = season, y = cnt)) +
+  geom_boxplot()
+```
+
+![](p2_d09-sim-inf-review_files/figure-html/bike-box-1.png)&lt;!-- --&gt;
+
+---
+
+## Ok, but not satisfying
+
+- The observations in this dataset are recognizable days.
+
+- First, drill down and identify what they sre.
+
+- Then, try to figure out why these observations stand out as outliers.
+
+- It's possible you won't be able to, but you should try.
+
+---
+
+## High outlier in the winter
+
+
+```r
+bike %&gt;%
+  filter(season == "winter") %&gt;%
+  summarise(min = max(cnt), day_min = dteday[which.max(cnt)])
+```
+
+```
+## # A tibble: 1 x 2
+##     min day_min   
+##   &lt;dbl&gt; &lt;date&gt;    
+## 1  7836 2012-03-17
+```
+
+--
+
+.question[
+What happened on March 17, 2012 in Washington DC? If you don't know, google it!
+]
+
+---
+
+![March 17, 2012](img/10a/dc-03-17-2012.png)
+---
+
+## Low outlier in the fall
+
+
+```r
+bike %&gt;%
+  filter(season == "fall") %&gt;%
+  summarise(min = min(cnt), day_min = dteday[which.min(cnt)])
+```
+
+```
+## # A tibble: 1 x 2
+##     min day_min   
+##   &lt;dbl&gt; &lt;date&gt;    
+## 1    22 2012-10-29
+```
+
+--
+
+.question[
+What happened on October 29, 2012 in Washington DC? If you don't know, google it!
+]
+
+---
+
+![October 10, 2012](img/10a/dc-10-29-2012.png)
+
+---
+
+## Details matter
+
+.question[
+Which of the following is a more informative analysis?
+
+(a) There is a high outlier in the winter, and low outlier in the fall.
+
+(b) There is a low outlier in the winter, on St. Patrick's Day. And a low outlier in the fall, on the day Hurricane Sandy hit DC. 
+]
+
+---
+
+## Interpreting regression coefficients
+
+--
+
+- For a model with a single predictor: "For each unit increase in `\(x\)`, `\(y\)` is expected to be higher/lower by `\(b_1\)`, on average."
+
+--
+
+- For a model with a multiple predictors: "**All else held constant**,for each unit increase in `\(x_1\)`, `\(y\)` is expected to be higher/lower by `\(b_1\)`, on average."
+
+--
+
+    - "All else" = all other variables **in** the model.
+
+---
+
+## 
+
+.question[
+Interpret the coefficient of holiday.
+]
+
+
+```
+##                             term  estimate
+## 1                    (Intercept)  2715.141
+## 2                   seasonsummer  -276.949
+## 3                     seasonfall   409.792
+## 4                   seasonwinter -1130.561
+## 5                             yr  2014.066
+## 6                        holiday -1384.379
+## 7                     workingday   119.679
+## 8                 weathersitmist  -420.244
+## 9  weathersitlight precipitation -1907.149
+## 10                      temp_raw   102.997
+## 11                     atemp_raw    18.762
+## 12                       hum_raw   -13.591
+## 13                 windspeed_raw   -40.639
+## 14             holiday:atemp_raw    34.440
+```
+
+--
+
+All else held constant, daily bike rentals are expected to be lower on holidays by 1384, on average, compared to non-holiday days.
+
+---
+
+## 
+
+.question[
+Discuss what makes for a good day to bike in DC.
+]
+
+
+```
+##                             term  estimate
+## 1                    (Intercept)  2715.141
+## 2                   seasonsummer  -276.949
+## 3                     seasonfall   409.792
+## 4                   seasonwinter -1130.561
+## 5                             yr  2014.066
+## 6                        holiday -1384.379
+## 7                     workingday   119.679
+## 8                 weathersitmist  -420.244
+## 9  weathersitlight precipitation -1907.149
+## 10                      temp_raw   102.997
+## 11                     atemp_raw    18.762
+## 12                       hum_raw   -13.591
+## 13                 windspeed_raw   -40.639
+## 14             holiday:atemp_raw    34.440
+```
+
+--
+
+With everything else being the same, Fall days are more popular for bike rentals than days in any other season. Alternatively, with everything else being constant, days with lower humidity are better for biking than days with higher humidity.
+
+---
+
+class: center, middle
+
+# Simulation based inference review
+
+---
+
+## What do you want to do?
+
+- Estimation -&gt; Confidence interval
+
+- Decision -&gt; Hypothesis test
+
+- First step: Ask the following questions
+
+  1. How many variables?
+  2. What type(s) of variable(s)?
+  3. What is the research question?
+
+---
+
+## Data: NC births
+
+The dataset is in the `openintro` package.
+
+
+```r
+glimpse(ncbirths)
+```
+
+```
+## Observations: 1,000
+## Variables: 13
+## $ fage           &lt;int&gt; NA, NA, 19, 21, NA, NA, 18, 17, NA, 20, 30, NA,...
+## $ mage           &lt;int&gt; 13, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16,...
+## $ mature         &lt;fct&gt; younger mom, younger mom, younger mom, younger ...
+## $ weeks          &lt;int&gt; 39, 42, 37, 41, 39, 38, 37, 35, 38, 37, 45, 42,...
+## $ premie         &lt;fct&gt; full term, full term, full term, full term, ful...
+## $ visits         &lt;int&gt; 10, 15, 11, 6, 9, 19, 12, 5, 9, 13, 9, 8, 4, 12...
+## $ marital        &lt;fct&gt; married, married, married, married, married, ma...
+## $ gained         &lt;int&gt; 38, 20, 38, 34, 27, 22, 76, 15, NA, 52, 28, 34,...
+## $ weight         &lt;dbl&gt; 7.63, 7.88, 6.63, 8.00, 6.38, 5.38, 8.44, 4.69,...
+## $ lowbirthweight &lt;fct&gt; not low, not low, not low, not low, not low, lo...
+## $ gender         &lt;fct&gt; male, male, female, male, female, male, male, m...
+## $ habit          &lt;fct&gt; nonsmoker, nonsmoker, nonsmoker, nonsmoker, non...
+## $ whitemom       &lt;fct&gt; not white, not white, white, white, not white, ...
+```
+
+---
+
+## Length of gestation
+
+![](p2_d09-sim-inf-review_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+
+```
+##   min  xbar med    s q1 q3 max
+## 1  20 38.33  39 2.93 37 40  45
+```
+
+
+---
+
+## Length of gestation
+
+.question[
+Assuming that this sample is representative of all births in NC, we are 95% confident that the average length of gestation for babies in NC is between ---- and ---- weeks.
+]
+
+--
+
+**(1) How many variables?**
+
+--
+
+1 variable: length of gestation, `weeks`
+
+--
+
+**(2) What type(s) of variable(s)?**
+
+--
+
+Numerical
+
+--
+
+**(3) What is the research question?**
+
+--
+
+Estimate the average length of gestation `\(\rightarrow\)` confidence interval
+
+---
+
+## Simulation for CI for a mean
+
+**Goal:** Use bootstrapping to estimate the sampling variability of the mean, i.e. the variability of means taken from the same population with the same sample size.
+
+--
+
+1. Take a bootstrap sample - a random sample taken with replacement from the 
+original sample, of the same size as the original sample.
+
+2. Calculate the mean of the bootstrap sample.
+
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap means.
+
+4. Calculate the bounds of the 95% confidence interval as the middle 95% 
+of the bootstrap distribution.
+
+---
+
+## Set a seed first
+
+From the documentation of `set.seed`:
+
+- `set.seed` uses a single integer argument to set as many seeds as are required. There is no guarantee that different values of seed will seed the RNG differently, although any exceptions would be extremely rare.
+
+- Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default.
+
+
+```r
+set.seed(20180326)
+```
+
+---
+
+## Computation for CI for a mean
+
+
+```r
+boot_means &lt;- ncbirths %&gt;%
+  filter(!is.na(weeks)) %&gt;% # remove NAs
+  specify(response = weeks) %&gt;%
+  generate(reps = 1000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+ggplot(data = boot_means, aes(x = stat)) +
+  geom_histogram(binwidth = 0.03)
+```
+
+![](p2_d09-sim-inf-review_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+## Length of gestation
+
+
+```r
+boot_means %&gt;%
+  summarise(
+    lower = quantile(stat, 0.025),
+    upper = quantile(stat, 0.975)
+  )
+```
+
+```
+## Response: weeks (integer)
+## # A tibble: 1 x 2
+##   lower upper
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  38.1  38.5
+```
+
+--
+
+Assuming that this sample is representative of all births in NC, we are 95% confident that the average length of gestation for babies in NC is between 38.1 and 38.5 weeks.
+
+---
+
+## Length of gestation, revisited
+
+.question[
+The average length of human gestation is 280 days, or 40 weeks, from the first day of the woman's last menstrual period. Do these data provide convincing evidence that average length of gestation for women in NC is different than 40 weeks? Use a significance level of 5%.
+]
+
+--
+
+`\(H_0: \mu = 40\)`  
+`\(H_A: \mu \ne 40\)`
+
+--
+
+- We just said, "we are 95% confident that the average length of gestation for babies in NC is between 38.1 and 38.5 weeks".
+
+- Since the null value is outside the CI, we would reject the null hypothesis in favor of the alternative.
+
+- But an alternative, more direct, way of answering this question is using a hypothesis test.
+
+---
+
+## Simulation for HT for a mean
+
+**Goal:** Use bootstrapping to generate a sampling distribution under the assumption of the null hypothesis being true. Then, calculate the p-value to make a decision on the hypotheses.
+
+--
+
+1. Take a bootstrap sample - a random sample taken with replacement from the 
+original sample, of the same size as the original sample.
+
+2. Calculate the mean of the bootstrap sample.
+
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap means.
+
+4. Shift the bootstrap distribution to be centered at the null value by subtracting/adding the difference between the center of the bootstrap distribution and the null value to each bootstrap mean.
+
+5. Calculate the p-value as the proportion of simulations that yield a sample mean at least as extreme as the observed sample mean.
+
+---
+
+## Computation for HT for a mean
+
+
+```r
+boot_means_shifted &lt;- ncbirths %&gt;%
+  filter(!is.na(weeks)) %&gt;% # remove NAs
+  specify(response = weeks) %&gt;%
+  hypothesize(null = "point", mu = 40) %&gt;% # hypothesize step
+  generate(reps = 1000, type = "bootstrap") %&gt;%
+  calculate(stat = "mean")
+ggplot(data = boot_means_shifted, aes(x = stat)) +
+  geom_histogram(binwidth = 0.03) +
+  geom_vline(xintercept = 38.33, color = "red") +
+  geom_vline(xintercept = 40 + (40 - 38.33), color = "red")
+```
+
+![](p2_d09-sim-inf-review_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Length of gestation
+
+
+```r
+boot_means_shifted %&gt;%
+  filter(stat &lt;= 38.33) %&gt;%
+  summarise(p_value = 2 * (n() / 1000))
+```
+
+```
+## # A tibble: 1 x 1
+##   p_value
+##     &lt;dbl&gt;
+## 1       0
+```
+
+--
+
+Since p-value less than the significance level, we reject the null hypothesis. The data provide convincing evidence that the average length of gestation of births in NC is different than 40.
+
+---
+
+## Exercises
+
+Go to RStudio Cloud, make a copy of **NC Births**, and answer the following questions.
+
+1. Do these data provide convincing evidence of a difference in length in gestation between mature and younger moms? Use a significance level of 10%.
+
+2. Estimate the difference in average lengths of gestation between mature and younger moms. Use a significance level equivalent to the hypothesis test above.
+
+3. Do the results of the hypothesis test agree with the result of the confidence interval?
+
+---
+
+## `infer` structure
+
+
+```r
+df %&gt;%
+  specify(response, explanatory) %&gt;% # explanatory optional
+  generate(reps, type) %&gt;% # type: bootstrap, simulate, or permute
+  calculate(stat)
+```
+
+- Always start with data frame
+- Result is always a data frame with a variable called `stat`
+   - See the documentation for `calculate` to see which `stat`istics can be calculated
+- For hypothesis testing add a `hypothesize()` step between `specify()` and `generate()`
+    - `null = "point"`, and then specify the null value
+    - `null = "independence"`
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

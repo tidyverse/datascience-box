@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Modelling nonlinear relationships</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Modelling nonlinear relationships
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Tidy regression output
+
+---
+
+Let's revisit the model predicting heights of paintings from their widths:
+
+
+```r
+pp &lt;- read_csv("../../data/paris-paintings.csv", 
+               na = c("n/a", "", "NA"))
+```
+
+
+```r
+m_ht_wt &lt;- lm(Height_in ~ Width_in, data = pp)
+```
+
+---
+
+## Not-so-tidy regression output
+
+- You might come accross these in your googling adventures, but we'll try to stay away from them
+
+- Not because they are wrong, but because they don't result in tidy data frames as results.
+
+---
+
+## Not-so-tidy regression output (1)
+
+Option 1:
+
+
+```r
+m_ht_wt
+```
+
+```
+## 
+## Call:
+## lm(formula = Height_in ~ Width_in, data = pp)
+## 
+## Coefficients:
+## (Intercept)     Width_in  
+##      3.6214       0.7808
+```
+
+---
+
+## Not-so-tidy regression output (2)
+
+Option 2:
+
+
+```r
+summary(m_ht_wt)
+```
+
+```
+## 
+## Call:
+## lm(formula = Height_in ~ Width_in, data = pp)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -86.714  -4.384  -2.422   3.169  85.084 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 3.621406   0.253860   14.27   &lt;2e-16
+## Width_in    0.780796   0.009505   82.15   &lt;2e-16
+## 
+## Residual standard error: 8.304 on 3133 degrees of freedom
+##   (258 observations deleted due to missingness)
+## Multiple R-squared:  0.6829,	Adjusted R-squared:  0.6828 
+## F-statistic:  6749 on 1 and 3133 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+
+## Review
+
+.question[
+What makes a data frame tidy?
+]
+
+--
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+3. Each type of observational unit forms a table.
+
+---
+
+## Tidy regression output
+
+Achieved with functions from the broom package:
+
+- `tidy`: Constructs a data frame that summarizes the model's statistical findings: coefficient estimates, *standard errors, test statistics, p-values*.
+
+- `augment`: Adds columns to the original data that was modeled. This includes predictions and residuals.
+
+- `glance`: Constructs a concise one-row summary of the model. This typically contains values such as `\(R^2\)`, adjusted `\(R^2\)`, *and residual standard error that are computed once for the entire model*.
+
+---
+
+## Tidy your model's statistical findings
+
+
+```r
+tidy(m_ht_wt)
+```
+
+```
+##          term  estimate   std.error statistic      p.value
+## 1 (Intercept) 3.6214055 0.253860346  14.26535 8.822046e-45
+## 2    Width_in 0.7807964 0.009504522  82.14999 0.000000e+00
+```
+
+
+```r
+tidy(m_ht_wt) %&gt;%
+  select(term, estimate) %&gt;%
+  mutate(estimate = round(estimate, 3))
+```
+
+```
+##          term estimate
+## 1 (Intercept)    3.621
+## 2    Width_in    0.781
+```
+
+---
+
+## Augment data with model results
+
+New variables of note (for now):
+
+- `.fitted`: Predicted value of the response variable
+- `.resid`: Residuals
+
+.small[
+
+```r
+augment(m_ht_wt) %&gt;%
+  slice(1:5)
+```
+
+```
+##   .rownames Height_in Width_in  .fitted   .se.fit    .resid         .hat
+## 1         1        37     29.5 26.65490 0.1659086 10.345100 0.0003991488
+## 2         2        18     14.0 14.55256 0.1652910  3.447445 0.0003961825
+## 3         3        13     16.0 16.11415 0.1578240 -3.114148 0.0003611963
+## 4         4        14     18.0 17.67574 0.1523760 -3.675741 0.0003366899
+## 5         5        14     18.0 17.67574 0.1523760 -3.675741 0.0003366899
+##     .sigma      .cooksd .std.resid
+## 1 8.303538 3.099689e-04  1.2460054
+## 2 8.305367 3.416655e-05  0.4152235
+## 3 8.305409 2.541574e-05 -0.3750734
+## 4 8.305336 3.300498e-05 -0.4427072
+## 5 8.305336 3.300498e-05 -0.4427072
+```
+]
+
+--
+
+.question[
+Why might we be interested in these new variables?
+]
+
+---
+
+## Residuals plot
+
+.small[
+
+```r
+m_ht_wt_aug &lt;- augment(m_ht_wt)
+ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = 2) +
+  labs(x = "Predicted height", y = "Residuals")
+```
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+
+--
+
+.question[
+What does this plot tell us about the fit of the linear model?
+]
+
+---
+
+## Glance to assess model fit
+
+
+```r
+glance(m_ht_wt)
+```
+
+```
+##   r.squared adj.r.squared   sigma statistic p.value df    logLik      AIC
+## 1 0.6829468     0.6828456 8.30427  6748.621       0  2 -11083.45 22172.89
+##        BIC deviance df.residual
+## 1 22191.04 216054.5        3133
+```
+
+--
+
+
+```r
+glance(m_ht_wt)$r.squared
+```
+
+```
+## [1] 0.6829468
+```
+
+--
+
+```
+The $R^2$ is 68.29%.
+```
+
+The `\(R^2\)` is 68.29%.
+
+--
+
+
+```r
+glance(m_ht_wt)$adj.r.squared
+```
+
+```
+## [1] 0.6828456
+```
+
+---
+
+class: center, middle
+
+# Exploring linearity
+
+---
+
+## Data: Paris Paintings
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+## Price vs. width
+
+.question[
+Describe the relationship between price and width of painting.
+]
+
+
+```
+## Warning: Removed 256 rows containing missing values (geom_point).
+```
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's focus on paintings with `Width_in &lt; 100`
+
+
+```r
+pp_wt_lt_100 &lt;- pp %&gt;% 
+  filter(Width_in &lt; 100)
+```
+
+---
+
+## Price vs. width
+
+.question[
+Which plot shows a more linear relationship?
+]
+
+.small[
+  
+.pull-left[
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+]
+
+]
+
+---
+
+## Price vs. width, residuals
+
+.question[
+Which plot shows a residuals that are uncorrelated with predicted values from the model?
+]
+
+.small[
+  
+.pull-left[
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+]
+
+]
+
+--
+
+.question[
+What's the unit of residuals?
+]
+
+---
+
+## Transforming the data
+
+- We saw that `price` has a right-skewed distribution, and the relationship between price and width of painting is non-linear.
+
+--
+
+- In these situations a transformation applied to the response variable may be useful.
+
+--
+
+- In order to decide which transformation to use, we should examine the distribution of the response variable.
+
+--
+
+- The extremely right skewed distribution suggests that a log transformation may 
+be useful.
+    - log = natural log, `\(ln\)`
+    - Default base of the `log` function in R is the natural log: &lt;br&gt;
+    `log(x, base = exp(1))`
+    
+---
+
+## Logged price vs. width
+
+.question[
+How do we interpret the slope of this model?
+]
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+
+## Interpreting models with log transformation
+
+
+```r
+m_lprice_wt &lt;- lm(log(price) ~ Width_in, data = pp_wt_lt_100)
+m_lprice_wt %&gt;%
+  tidy() %&gt;%
+  select(term, estimate) %&gt;%
+  mutate(estimate = round(estimate, 3))
+```
+
+```
+##          term estimate
+## 1 (Intercept)    4.669
+## 2    Width_in    0.019
+```
+
+---
+
+## Linear model with log transformation
+
+$$ \widehat{log(price)} = 4.67 + 0.02 Width $$
+
+--
+
+- For each additional inch the painting is wider, the log price of the
+painting is expected to be higher, on average, by 0.02 livres.
+
+--
+
+- which is not a very useful statement...
+
+---
+
+## Working with logs
+
+- Subtraction and logs: `\(log(a) − log(b) = log(a / b)\)`
+
+--
+
+- Natural logarithm: `\(e^{log(x)} = x\)`
+
+--
+
+- We can use these identities to "undo" the log transformation
+
+---
+
+## Interpreting models with log transformation
+
+The slope coefficient for the log transformed model is 0.02, meaning the log 
+price difference between paintings whose widths are one inch apart is predicted 
+to be 0.02 log livres.
+
+--
+
+$$ log(\text{price for width x+1}) - log(\text{price for width x}) = 0.02 $$
+
+--
+
+$$ log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right) = 0.02 $$
+
+--
+
+$$ e^{log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right)} = e^{0.02} $$
+
+--
+
+$$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
+
+--
+
+For each additional inch the painting is wider, the price of the
+painting is expected to be higher, on average, by a factor of 1.02.
+
+---
+
+## Shortcuts in R
+
+
+```r
+m_lprice_wt %&gt;%
+  tidy() %&gt;%
+  select(term, estimate) %&gt;%
+  mutate(estimate = round(estimate, 3))
+```
+
+```
+##          term estimate
+## 1 (Intercept)    4.669
+## 2    Width_in    0.019
+```
+
+
+```r
+m_lprice_wt %&gt;%
+  tidy() %&gt;%
+  select(term, estimate) %&gt;%
+  mutate(estimate = round(exp(estimate), 3))
+```
+
+```
+##          term estimate
+## 1 (Intercept)  106.540
+## 2    Width_in    1.019
+```
+
+---
+
+## Recap
+
+- Non-constant variance is one of the most common model violations, however it 
+is usually fixable by transforming the response (y) variable.
+
+--
+
+- The most common transformation when the response variable is right skewed is 
+the log transform: `\(log(y)\)`, especially useful when the response variable is 
+(extremely) right skewed.
+
+--
+
+- This transformation is also useful for variance stabilization.
+
+--
+
+- When using a log transformation on the response variable the interpretation of 
+the slope changes: *"For each unit increase in x, y is expected on average to be higher/lower &lt;br&gt; by a factor of `\(e^{b_1}\)`."*
+
+--
+
+- Another useful transformation is the square root: `\(\sqrt{y}\)`, especially 
+useful when the response variable is counts.
+
+---
+
+## Transform, or learn more?
+
+- Data transformations may also be useful when the relationship is non-linear
+
+- However in those cases a polynomial regression may be more appropriate
+  + This is beyond the scope of this course, but you’re welcomed to try it for your final project, and I’d be happy to provide further guidance
+
+---
+
+## Aside: when `\(y = 0\)`
+
+In some cases the value of the response variable might be 0, and
+
+
+```r
+log(0)
+```
+
+```
+## [1] -Inf
+```
+
+--
+
+The trick is to add a very small number to the value of the response variable for these cases so that the `log` function can still be applied:
+
+
+```r
+log(0 + 0.00001)
+```
+
+```
+## [1] -11.51293
+```
+
+---
+
+class: center, middle
+
+# The linear model with multiple predictors
+
+---
+
+## Price, surface area, and living artist
+
+.question[
+What is the typical surface area for paintings?
+]
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+
+--
+
+Less than 1000 square inches (which is roughly a painting that is 31in x 31in). There are very few paintings that have surface area above 5000 square inches.
+
+---
+
+## Price, surface area, and living artist
+
+For simplicity let's focus on the paintings with `Surface &lt; 5000`:
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+
+---
+
+## Price vs. surface and living artist
+
+.question[
+Does the relationship between surface and logged price vary by whether or not
+the artist is living?
+]
+
+.small[
+
+```r
+ggplot(data = pp_Surf_lt_5000,
+       mapping = aes(y = log(price), x = Surface, 
+                     color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(color = "Living artist")
+```
+
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Modelling with main effects 
+
+
+```r
+m_main &lt;- lm(log(price) ~ Surface + factor(artistliving), 
+             data = pp_Surf_lt_5000)
+m_main %&gt;%
+  tidy() %&gt;%
+  select(term, estimate) %&gt;%
+  mutate(estimate = round(estimate, 5))
+```
+
+```
+##                    term estimate
+## 1           (Intercept)  4.88008
+## 2               Surface  0.00027
+## 3 factor(artistliving)1  0.13721
+```
+
+--
+
+Linear model:
+
+$$ \widehat{log(price)} = 4.88 + 0.00027~surface + 0.14~artistliving $$
+
+--
+
+- Plug in 0 for `artistliving` to get the linear model for paintings by non-living
+artists.
+
+- Plug in 1 for `artistliving` to get the linear model for paintings by living
+artists.
+
+---
+
+## Interpretation of main effects
+
+.pull-left[
+![](p2_d03-model-nonlinear_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+- Non-living artist: 
+`\(\widehat{log(price)} = 4.88 + 0.00027~surface + 0.14 \times 0\)`
+`\(= 4.88 + 0.00027~surface\)`
+
+- Living artist: 
+`\(\widehat{log(price)} = 4.88 + 0.00027~surface + 0.14 \times 1\)`
+`\(= 5.02 + 0.00027~surface\)`
+]
+
+- Rate of change in price as the surface area of the painting increases does 
+not vary between paintings by living and non-living artists (same slope), 
+
+- Paintings by living artists are consistently more expensive than paintings by
+non-living artists (different intercept).
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

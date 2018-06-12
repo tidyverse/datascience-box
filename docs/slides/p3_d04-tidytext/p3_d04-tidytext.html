@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tidytext analysis</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tidytext analysis
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+
+## Announcements
+
+- Office hours during finals week:
+  - TAs have their regular office hours listed on the course website
+  - I will have OH 12-1:30pm Wednesday and Friday
+
+- All grades (except final project) should be in by the end of the day on Thursday May 3
+  - At that point check Sakai to make sure your grades are correctly recorded
+  - If you catch any issues (in recorded grade) Slack me/TAs -- for regrade
+  requests use the usual regrade process, this is just for errors/missingness
+  in recorded grades
+  
+- Extra credit 2: If we can get *both* course and TA evaluation response rates 
+to above 80% (currently we’re at 40% for the course evals) everyone gets +5 
+pts on their total (not average) HW score. (We're at 45% as of 11:30am today)
+
+---
+
+## Announcements (cont.)
+
+- Presentation schedule: Saturday, May 5
+  - Section 1 teams: 9am - 10am
+  - Section 2 teams: 10am - 11am
+  - Section 3 teams: 11am - 12pm
+  
+- There will be one more peer eval, specificall for the project, due the evening
+of May 5
+
+---
+
+class: center, middle
+
+# Tidytext analysis
+
+---
+
+## Packages
+
+In addition to `tidyverse` we will be using three other packages today
+
+
+```r
+library(tidytext)
+library(geniusR) # https://github.com/JosiahParry/geniusR
+library(gutenbergr)
+```
+
+---
+
+## Tidytext
+
+- Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use.
+
+- Learn more at https://www.tidytextmining.com/.
+
+---
+
+## What is tidy text?
+
+
+```r
+text &lt;- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+
+text
+```
+
+```
+## [1] "Take me out tonight"                   
+## [2] "Where there's music and there's people"
+## [3] "And they're young and alive"           
+## [4] "Driving in your car"                   
+## [5] "I never never want to go home"         
+## [6] "Because I haven't got one"             
+## [7] "Anymore"
+```
+
+---
+
+## What is tidy text?
+
+
+```r
+text_df &lt;- tibble(line = 1:7, text = text)
+
+text_df
+```
+
+```
+## # A tibble: 7 x 2
+##    line text                                  
+##   &lt;int&gt; &lt;chr&gt;                                 
+## 1     1 Take me out tonight                   
+## 2     2 Where there's music and there's people
+## 3     3 And they're young and alive           
+## 4     4 Driving in your car                   
+## 5     5 I never never want to go home         
+## 6     6 Because I haven't got one             
+## 7     7 Anymore
+```
+
+---
+
+## What is tidy text?
+
+
+```r
+text_df %&gt;%
+  unnest_tokens(word, text)
+```
+
+```
+## # A tibble: 32 x 2
+##     line word   
+##    &lt;int&gt; &lt;chr&gt;  
+##  1     1 take   
+##  2     1 me     
+##  3     1 out    
+##  4     1 tonight
+##  5     2 where  
+##  6     2 there's
+##  7     2 music  
+##  8     2 and    
+##  9     2 there's
+## 10     2 people 
+## # ... with 22 more rows
+```
+
+---
+
+class: center, middle
+
+# Analyzing lyrics of one artist
+
+---
+
+## Let's get more data
+
+We'll use the `geniusR` package to get song lyric data from [Genius](https://genius.com/).
+
+- `genius_album()` allows you to download the lyrics for an entire album in a 
+tidy format. 
+
+- Input: Two arguments artists and album. Supply the quoted name of artist 
+and the album (if it gives you issues check that you have the album name and 
+artists as specified on [Genius](https://genius.com/)).
+
+- Output: A tidy data frame with three columns:
+    - `title`: track name
+    - `track_n`: track number
+    - `text`: lyrics
+
+---
+
+## I have no idea who this person is!
+
+
+```r
+marc &lt;- genius_album(
+  artist = "Marc E. Bassy", 
+  album = "Gossip Columns"
+  )
+```
+
+```
+## Joining, by = c("track_title", "track_n", "track_url")
+```
+
+```r
+marc
+```
+
+```
+## # A tibble: 822 x 4
+##    track_title track_n lyric                                          line
+##    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;
+##  1 Black Jeep        1 Mama used to pick me up in a black Jeep           1
+##  2 Black Jeep        1 Turn me to the countryside from the city str…     2
+##  3 Black Jeep        1 And my daddy wasn't doing well, he wasn't do…     3
+##  4 Black Jeep        1 "He tell me, \"Go inside and say farewell, g…     4
+##  5 Black Jeep        1 And pull over, let me out                         5
+##  6 Black Jeep        1 Let me jump in the backseat, put the windows…     6
+##  7 Black Jeep        1 We got a black Jeep to get us over                7
+##  8 Black Jeep        1 We got a black Jeep for starting over             8
+##  9 Black Jeep        1 We got a black Jeep, it's four wheel drive        9
+## 10 Black Jeep        1 We got a black Jeep, we'll still survive         10
+## # ... with 812 more rows
+```
+
+---
+
+## Save for later
+
+
+```r
+marc &lt;- marc %&gt;%
+  mutate(
+    album = "Gossip Columns",
+    artist = "Marc E. Bassy"
+    )
+```
+
+---
+
+## What songs are in the album?
+
+
+```r
+marc %&gt;%
+  distinct(track_title)
+```
+
+```
+## # A tibble: 16 x 1
+##    track_title                              
+##    &lt;chr&gt;                                    
+##  1 Black Jeep                               
+##  2 So Simple (Ft. G-Eazy)                   
+##  3 Til I Get Found                          
+##  4 Plot Twist (Ft. KYLE)                    
+##  5 Made Love First (Ft. Kehlani)            
+##  6 Heroine                                  
+##  7 Let Me Rock                              
+##  8 New Ting                                 
+##  9 The Season                               
+## 10 Bondage                                  
+## 11 Don't Let Her Go                         
+## 12 Gossip Columns (Ft. Bobby Brackins)      
+## 13 Westside Love (Ft. YG)                   
+## 14 You &amp; Me (Ft. G-Eazy)                    
+## 15 Real One                                 
+## 16 Plot Twist (Remix) (Ft. Hailee Steinfeld)
+```
+
+---
+
+## How long are Marc's songs?
+
+Length measured by number of lines
+
+
+```r
+marc %&gt;%
+  count(track_title) %&gt;%
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 16 x 2
+##    track_title                                   n
+##    &lt;chr&gt;                                     &lt;int&gt;
+##  1 Plot Twist (Remix) (Ft. Hailee Steinfeld)    79
+##  2 Plot Twist (Ft. KYLE)                        76
+##  3 Westside Love (Ft. YG)                       75
+##  4 Til I Get Found                              62
+##  5 Made Love First (Ft. Kehlani)                60
+##  6 So Simple (Ft. G-Eazy)                       57
+##  7 You &amp; Me (Ft. G-Eazy)                        54
+##  8 Gossip Columns (Ft. Bobby Brackins)          52
+##  9 Real One                                     49
+## 10 New Ting                                     48
+## 11 The Season                                   45
+## 12 Let Me Rock                                  41
+## 13 Don't Let Her Go                             35
+## 14 Bondage                                      34
+## 15 Heroine                                      34
+## 16 Black Jeep                                   21
+```
+
+---
+
+## Tidy up your lyrics!
+
+
+```r
+marc_lyrics &lt;- marc %&gt;%
+  unnest_tokens(word, lyric)
+
+marc_lyrics
+```
+
+```
+## # A tibble: 6,379 x 6
+##    track_title track_n  line album          artist        word 
+##    &lt;chr&gt;         &lt;int&gt; &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;
+##  1 Black Jeep        1     1 Gossip Columns Marc E. Bassy mama 
+##  2 Black Jeep        1     1 Gossip Columns Marc E. Bassy used 
+##  3 Black Jeep        1     1 Gossip Columns Marc E. Bassy to   
+##  4 Black Jeep        1     1 Gossip Columns Marc E. Bassy pick 
+##  5 Black Jeep        1     1 Gossip Columns Marc E. Bassy me   
+##  6 Black Jeep        1     1 Gossip Columns Marc E. Bassy up   
+##  7 Black Jeep        1     1 Gossip Columns Marc E. Bassy in   
+##  8 Black Jeep        1     1 Gossip Columns Marc E. Bassy a    
+##  9 Black Jeep        1     1 Gossip Columns Marc E. Bassy black
+## 10 Black Jeep        1     1 Gossip Columns Marc E. Bassy jeep 
+## # ... with 6,369 more rows
+```
+
+---
+
+## What are the most common words?
+
+
+```r
+marc_lyrics %&gt;%
+  count(word) %&gt;%
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 895 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 you     268
+##  2 i       263
+##  3 me      183
+##  4 the     165
+##  5 a       139
+##  6 to      108
+##  7 that     93
+##  8 my       90
+##  9 love     87
+## 10 don't    86
+## # ... with 885 more rows
+```
+
+---
+
+## Stop words
+
+- In computing, stop words are words which are filtered out before or after processing of natural language data (text).
+
+- They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+
+---
+
+## Spanish stop words
+
+
+```r
+get_stopwords(language = "es")
+```
+
+```
+## # A tibble: 308 x 2
+##    word  lexicon 
+##    &lt;chr&gt; &lt;chr&gt;   
+##  1 de    snowball
+##  2 la    snowball
+##  3 que   snowball
+##  4 el    snowball
+##  5 en    snowball
+##  6 y     snowball
+##  7 a     snowball
+##  8 los   snowball
+##  9 del   snowball
+## 10 se    snowball
+## # ... with 298 more rows
+```
+
+---
+
+## Various lexicons
+
+See `?get_stopwords` for more info.
+
+
+```r
+get_stopwords(source = "smart")
+```
+
+```
+## # A tibble: 571 x 2
+##    word        lexicon
+##    &lt;chr&gt;       &lt;chr&gt;  
+##  1 a           smart  
+##  2 a's         smart  
+##  3 able        smart  
+##  4 about       smart  
+##  5 above       smart  
+##  6 according   smart  
+##  7 accordingly smart  
+##  8 across      smart  
+##  9 actually    smart  
+## 10 after       smart  
+## # ... with 561 more rows
+```
+
+---
+
+## What are the most common words?
+
+
+```r
+marc_lyrics %&gt;%
+  anti_join(get_stopwords(source = "smart")) %&gt;%
+  count(word) %&gt;%
+  arrange(desc(n))
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 661 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 love       87
+##  2 yeah       79
+##  3 til        48
+##  4 baby       39
+##  5 hit        33
+##  6 wanna      31
+##  7 plot       30
+##  8 twist      30
+##  9 thought    28
+## 10 girl       26
+## # ... with 651 more rows
+```
+
+---
+
+## What are the most common words?
+
+
+```r
+marc_lyrics %&gt;%
+  anti_join(get_stopwords(source = "smart")) %&gt;%
+  count(word) %&gt;%
+  arrange(desc(n)) %&gt;%
+  top_n(20) %&gt;%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    coord_flip() + 
+    theme_minimal() +
+    labs(title = "Frequency of Marc E. Bassy's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "")
+```
+
+---
+
+![](p3_d04-tidytext_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+## Sentiment analysis
+
+- One way to analyze the sentiment of a text is to consider the text as a combination of its individual words 
+
+- and the sentiment content of the whole text as the sum of the sentiment content of the individual words
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+
+```r
+get_sentiments("afinn")
+```
+
+```
+## # A tibble: 2,476 x 2
+##    word       score
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 abandon       -2
+##  2 abandoned     -2
+##  3 abandons      -2
+##  4 abducted      -2
+##  5 abduction     -2
+##  6 abductions    -2
+##  7 abhor         -3
+##  8 abhorred      -3
+##  9 abhorrent     -3
+## 10 abhors        -3
+## # ... with 2,466 more rows
+```
+]
+.pull-right[
+
+```r
+get_sentiments("bing") 
+```
+
+```
+## # A tibble: 6,788 x 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 2-faced     negative 
+##  2 2-faces     negative 
+##  3 a+          positive 
+##  4 abnormal    negative 
+##  5 abolish     negative 
+##  6 abominable  negative 
+##  7 abominably  negative 
+##  8 abominate   negative 
+##  9 abomination negative 
+## 10 abort       negative 
+## # ... with 6,778 more rows
+```
+]
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+
+```r
+get_sentiments("nrc")
+```
+
+```
+## # A tibble: 13,901 x 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 abacus      trust    
+##  2 abandon     fear     
+##  3 abandon     negative 
+##  4 abandon     sadness  
+##  5 abandoned   anger    
+##  6 abandoned   fear     
+##  7 abandoned   negative 
+##  8 abandoned   sadness  
+##  9 abandonment anger    
+## 10 abandonment fear     
+## # ... with 13,891 more rows
+```
+]
+.pull-right[
+
+```r
+get_sentiments("loughran") 
+```
+
+```
+## # A tibble: 4,149 x 2
+##    word         sentiment
+##    &lt;chr&gt;        &lt;chr&gt;    
+##  1 abandon      negative 
+##  2 abandoned    negative 
+##  3 abandoning   negative 
+##  4 abandonment  negative 
+##  5 abandonments negative 
+##  6 abandons     negative 
+##  7 abdicated    negative 
+##  8 abdicates    negative 
+##  9 abdicating   negative 
+## 10 abdication   negative 
+## # ... with 4,139 more rows
+```
+]
+
+---
+
+## Sentiments in Marc's lyrics
+
+
+```r
+marc_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word) %&gt;%
+  arrange(desc(n))
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 129 x 3
+##    sentiment word        n
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+##  1 positive  love       87
+##  2 positive  like       65
+##  3 negative  plot       30
+##  4 negative  twist      30
+##  5 negative  shit       19
+##  6 negative  fuck       17
+##  7 negative  bondage    14
+##  8 negative  bad        10
+##  9 negative  naughty     9
+## 10 negative  lost        7
+## # ... with 119 more rows
+```
+
+---
+
+## Visualizing sentiments
+
+![](p3_d04-tidytext_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
+
+## Visualizing sentiments
+
+
+```r
+marc_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word) %&gt;%
+  arrange(desc(n)) %&gt;%
+  group_by(sentiment) %&gt;%
+  top_n(10) %&gt;%
+  ungroup() %&gt;%
+  ggplot(aes(fct_reorder(word, n), n, fill = sentiment)) +
+    geom_col() +
+    coord_flip() +
+    facet_wrap(~ sentiment, scales = "free") +
+    theme_minimal() +
+    labs(title = "Sentiments in Marc E. Bassy's lyrics",
+         x = "")
+```
+
+---
+
+class: center, middle
+
+# Comparing lyrics across artists
+
+---
+
+## Get more data
+
+Get data from two more artists:
+
+
+```r
+quinn &lt;- genius_album(artist = "Quinn XCII", album = "The Story of Us") %&gt;%
+  mutate(artist = "Quinn XCII", album = "The Story of Us")
+```
+
+```
+## Joining, by = c("track_title", "track_n", "track_url")
+```
+
+```r
+seeb &lt;- genius_album(artist = "Seeb", album = "Nice to Meet You EP") %&gt;%
+  mutate(artist = "Seeb", album = "Nice to Meet You EP")
+```
+
+```
+## Joining, by = c("track_title", "track_n", "track_url")
+```
+
+--
+
+Combine data:
+
+
+```r
+ldoc &lt;- bind_rows(marc, quinn, seeb)
+```
+
+---
+
+## LDOC lyrics
+
+
+```r
+ldoc_lyrics &lt;- ldoc %&gt;%
+  unnest_tokens(word, lyric)
+```
+
+---
+
+## Common LDOC lyrics
+
+Without stop words:
+
+
+```r
+ldoc_lyrics %&gt;%
+  anti_join(get_stopwords(source = "smart")) %&gt;%
+  count(artist, word, sort = TRUE) # alternative way to sort
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 1,297 x 3
+##    artist        word      n
+##    &lt;chr&gt;         &lt;chr&gt; &lt;int&gt;
+##  1 Marc E. Bassy love     87
+##  2 Marc E. Bassy yeah     79
+##  3 Seeb          love     65
+##  4 Marc E. Bassy til      48
+##  5 Marc E. Bassy baby     39
+##  6 Seeb          high     34
+##  7 Marc E. Bassy hit      33
+##  8 Marc E. Bassy wanna    31
+##  9 Marc E. Bassy plot     30
+## 10 Marc E. Bassy twist    30
+## # ... with 1,287 more rows
+```
+
+---
+
+## Common LDOC lyrics
+
+With stop words:
+
+
+```r
+ldoc_lyrics_counts &lt;- ldoc_lyrics %&gt;%
+  count(artist, word, sort = TRUE)
+```
+
+---
+
+## What is a document about?
+
+- Term frequency
+- Inverse document frequency
+
+`$$idf(\text{term}) = \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)}$$`
+
+tf-idf is about comparing **documents** within a **collection**.
+
+---
+
+## Calculating tf-idf
+
+This is not that exciting... What's the issue?
+
+
+```r
+ldoc_words &lt;- ldoc_lyrics_counts %&gt;%
+  bind_tf_idf(word, artist, n)
+
+ldoc_words
+```
+
+```
+## # A tibble: 1,852 x 6
+##    artist        word      n     tf   idf tf_idf
+##    &lt;chr&gt;         &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Marc E. Bassy you     268 0.0420     0      0
+##  2 Marc E. Bassy i       263 0.0412     0      0
+##  3 Marc E. Bassy me      183 0.0287     0      0
+##  4 Quinn XCII    i       173 0.0455     0      0
+##  5 Marc E. Bassy the     165 0.0259     0      0
+##  6 Quinn XCII    you     155 0.0408     0      0
+##  7 Marc E. Bassy a       139 0.0218     0      0
+##  8 Seeb          you     123 0.0632     0      0
+##  9 Quinn XCII    the     115 0.0302     0      0
+## 10 Marc E. Bassy to      108 0.0169     0      0
+## # ... with 1,842 more rows
+```
+
+---
+
+## Re-calculating tf-idf
+
+
+```r
+ldoc_words %&gt;%
+  bind_tf_idf(word, artist, n) %&gt;%
+  arrange(-tf_idf)
+```
+
+```
+## # A tibble: 1,852 x 6
+##    artist        word        n      tf   idf  tf_idf
+##    &lt;chr&gt;         &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Seeb          anybody    30 0.0154  1.10  0.0169 
+##  2 Seeb          waking     18 0.00925 1.10  0.0102 
+##  3 Seeb          high       34 0.0175  0.405 0.00708
+##  4 Quinn XCII    worst      23 0.00605 1.10  0.00664
+##  5 Seeb          human      10 0.00514 1.10  0.00565
+##  6 Quinn XCII    another    18 0.00473 1.10  0.00520
+##  7 Marc E. Bassy plot       30 0.00470 1.10  0.00517
+##  8 Marc E. Bassy twist      30 0.00470 1.10  0.00517
+##  9 Marc E. Bassy yeah       79 0.0124  0.405 0.00502
+## 10 Seeb          can        23 0.0118  0.405 0.00479
+## # ... with 1,842 more rows
+```
+
+---
+
+## 
+
+![](p3_d04-tidytext_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+
+---
+
+## Acknowledgements
+
+- Julia Silge: https://github.com/juliasilge/tidytext-tutorial
+
+- Julia Silge and David Robinson: https://www.tidytextmining.com/
+
+- Josiah Parry: https://github.com/JosiahParry/geniusR
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

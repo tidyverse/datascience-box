@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web scraping</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Web scraping
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Scraping the web
+
+---
+
+## Scraping the web: what? why?
+
+- Increasing amount of data is available on the web.
+- These data are provided in an unstructured format: you can always copy&amp;paste, but it's 
+time-consuming and prone to errors.
+- Web scraping is the process of extracting this information automatically and transform it into 
+a structured dataset.
+- Two different scenarios:
+    - Screen scraping: extract data from source code of website, with html parser (easy) or 
+    regular expression matching (less easy).
+    - Web APIs (application programming interface): website offers a set of structured http 
+    requests that return JSON or XML files.
+- Why R? It includes all tools necessary to do web scraping, familiarity, direct analysis of data... But python, perl, java are also efficient tools.
+
+---
+
+class: center, middle
+
+# Web Scraping with rvest
+
+---
+
+## Hypertext Markup Language
+
+Most of the data on the web is still largely available as HTML - while it is structured (hierarchical / tree based) it often is not available in a form useful for analysis (flat / tidy).
+
+```html
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;This is a title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p align="center"&gt;Hello world!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+
+---
+
+## rvest
+
+`rvest` is a package that makes basic processing and manipulation of HTML data straight forward.
+
+--
+
+Core functions:
+
+* `read_html` - read HTML data from a url or character string.
+
+* `html_nodes` - select specified nodes from the HTML document using CSS selectors.
+
+* `html_table` - parse an HTML table into a data frame.
+
+* `html_text` - extract tag pairs' content.
+
+* `html_name` - extract tags' names.
+
+* `html_attrs` - extract all of each tag's attributes.
+
+* `html_attr` - extract tags' attribute value by name.
+
+---
+
+## SelectorGadget
+
+- SelectorGadget: Open source tool that eases CSS selector generation and discovery
+
+- Install the [Chrome Extension](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb) 
+
+- A box will open in the bottom right of the website. Click on a page element that you 
+would like your selector to match (it will turn green). SelectorGadget will then generate 
+a minimal CSS selector for that element, and will highlight (yellow) everything that is 
+matched by the selector. 
+- Now click on a highlighted element to remove it from the selector (red), or click on an 
+unhighlighted element to add it to the selector. Through this process of selection and 
+rejection, SelectorGadget helps you come up with the appropriate CSS selector for your needs.
+
+
+```r
+vignette("selectorgadget")
+```
+
+---
+
+class: center, middle
+
+# Top 250 movies on IMDB
+
+---
+
+## Top 250 movies on IMDB
+
+Take a look at the source code, look for the tag `table` tag:
+&lt;br&gt;
+http://www.imdb.com/chart/top
+
+![imdb_top](img/imdb_top_250.png)
+
+---
+
+## First check to make sure you're allowed!
+
+
+```r
+# install.packages("robotstxt")
+library(robotstxt)
+paths_allowed("http://www.imdb.com")
+```
+
+```
+## 
+ www.imdb.com
+```
+
+```
+## [1] TRUE
+```
+
+vs. e.g.
+
+
+```r
+paths_allowed("http://www.facebook.com")
+```
+
+```
+## 
+ www.facebook.com
+```
+
+```
+## [1] FALSE
+```
+
+
+---
+
+## Demo
+
+![imdb_top](img/demo.png)
+
+Go to [rstudio.cloud](https://rstudio.cloud/) `\(\rightarrow\)` Web scraping `\(\rightarrow\)` Make a copy `\(\rightarrow\)` `scrape-250.R`
+
+---
+
+## Select and format pieces
+
+.small[
+
+```r
+library(rvest)
+
+page &lt;- read_html("http://www.imdb.com/chart/top")
+
+titles &lt;- page %&gt;%
+  html_nodes(".titleColumn a") %&gt;%
+  html_text()
+
+years &lt;- page %&gt;%
+  html_nodes(".secondaryInfo") %&gt;%
+  html_text() %&gt;%
+  str_replace("\\(", "") %&gt;% # remove (
+  str_replace("\\)", "") %&gt;% # remove )
+  as.numeric()
+
+scores &lt;- page %&gt;%
+  html_nodes("#main strong") %&gt;%
+  html_text() %&gt;%
+  as.numeric()
+  
+imdb_top_250 &lt;- tibble(
+  title = titles, 
+  year = years, 
+  score = scores
+  )
+```
+]
+
+---
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; title &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; score &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Shawshank Redemption &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Godfather &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1972 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Godfather: Part II &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1974 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Dark Knight &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2008 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 12 Angry Men &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1957 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Schindler's List &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1993 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Return of the King &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2003 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Pulp Fiction &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Good, the Bad and the Ugly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1966 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fight Club &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1999 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Fellowship of the Ring &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2001 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Forrest Gump &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Star Wars: Episode V - The Empire Strikes Back &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Inception &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2010 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Two Towers &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2002 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Clean up / enhance
+
+May or may not be a lot of work depending on how messy the data are
+
+- See if you like what you got:
+
+
+```r
+glimpse(imdb_top_250)
+```
+
+```
+## Observations: 250
+## Variables: 3
+## $ title &lt;chr&gt; "The Shawshank Redemption", "The Godfather", "The Godfat...
+## $ year  &lt;dbl&gt; 1994, 1972, 1974, 2008, 1957, 1993, 2003, 1994, 1966, 19...
+## $ score &lt;dbl&gt; 9.2, 9.2, 9.0, 9.0, 8.9, 8.9, 8.9, 8.9, 8.8, 8.8, 8.8, 8...
+```
+
+- Add a variable for rank
+
+```r
+imdb_top_250 &lt;- imdb_top_250 %&gt;%
+  mutate(
+    rank = 1:nrow(imdb_top_250)
+  )
+```
+
+---
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; title &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; score &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; rank &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Shawshank Redemption &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Godfather &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1972 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Godfather: Part II &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1974 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Dark Knight &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2008 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 12 Angry Men &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1957 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Schindler's List &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1993 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Return of the King &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2003 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Pulp Fiction &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Good, the Bad and the Ugly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1966 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fight Club &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1999 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Fellowship of the Ring &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2001 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Forrest Gump &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Star Wars: Episode V - The Empire Strikes Back &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Inception &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2010 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 14 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Two Towers &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2002 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ... &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## css selectors
+
+We will be using a tool called selector gadget to help up identify the html elements of interest - it does this by constructing a css selector which can be used to subset the html document.
+
+Selector          |  Example         |     Description
+------------      |------------------|      ------------------------------------------------
+element           |  `p`             |      Select all &amp;lt;p&amp;gt; elements
+element element   |  `div p`         |      Select all &amp;lt;p&amp;gt; elements inside a &amp;lt;div&amp;gt; element          
+element&gt;element   |  `div &gt; p`       |      Select all &amp;lt;p&amp;gt; elements with &amp;lt;div&amp;gt; as a parent
+.class            |  `.title`        |      Select all elements with class="title"
+\#id              |  `.name`         |      Select all elements with id="name"
+[attribute]       |  `[class]`       |      Select all elements with a class attribute
+[attribute=value] |  `[class=title]` |      Select all elements with class="title"
+
+---
+
+## Analyze
+
+.question[
+How would you go about answering this question: Which 1995 movies made the list?
+]
+
+---
+
+
+```r
+imdb_top_250 %&gt;% 
+  filter(year == 1995)
+```
+
+```
+## # A tibble: 9 x 4
+##   title               year score  rank
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 Se7en               1995   8.6    23
+## 2 The Usual Suspects  1995   8.6    27
+## 3 Braveheart          1995   8.3    75
+## 4 Toy Story           1995   8.3    93
+## 5 Heat                1995   8.2   122
+## 6 Casino              1995   8.2   145
+## 7 Before Sunrise      1995   8.1   208
+## 8 La Haine            1995   8     231
+## 9 Twelve Monkeys      1995   8     247
+```
+
+---
+
+## Analyze
+
+.question[
+How would you go about answering this question: Which years have the most movies on the list?
+]
+
+--
+
+
+```r
+imdb_top_250 %&gt;% 
+  group_by(year) %&gt;%
+  summarise(total = n()) %&gt;%
+  arrange(desc(total)) %&gt;%
+  head(5)
+```
+
+```
+## # A tibble: 5 x 2
+##    year total
+##   &lt;dbl&gt; &lt;int&gt;
+## 1  1995     9
+## 2  1957     7
+## 3  2014     7
+## 4  2000     6
+## 5  2001     6
+```
+
+---
+
+## Visualize
+
+.question[
+How would you go about creating this visualization: Visualize the average yearly score for movies that made it on the top 250 list over time.
+]
+
+--
+
+.small[
+![](p1_d08-web-scraping_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+---
+
+## Potential challenges
+
+- Unreliable formatting at the source
+- Data broken into many pages
+- ...
+
+.question[
+Compare the display of information at https://raleigh.craigslist.org/search/apa to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
