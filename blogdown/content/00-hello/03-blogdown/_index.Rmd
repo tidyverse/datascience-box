@@ -1,0 +1,7 @@
+---
+weight: 3
+title: "Blogdown"
+output: html_document
+---
+
+Setting up your course website with blogdown...

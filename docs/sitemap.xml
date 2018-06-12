@@ -3,43 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/10-explore/11-data-viz/</loc>
+    <loc>/10-content/01-syllabus/</loc>
   </url>
   
   <url>
-    <loc>/00-intro/</loc>
+    <loc>/10-content/02-explore/02-01-data-viz/</loc>
   </url>
   
   <url>
-    <loc>/00-intro/01-setup/</loc>
+    <loc>/00-hello/</loc>
   </url>
   
   <url>
-    <loc>/00-intro/02-dayone/</loc>
+    <loc>/00-hello/01-rscloud/</loc>
   </url>
   
   <url>
-    <loc>/00-intro/03-toolkit/</loc>
+    <loc>/20-tech-stack/01-rscloud/</loc>
   </url>
   
   <url>
-    <loc>/10-explore/</loc>
+    <loc>/30-pedagogy/</loc>
   </url>
   
   <url>
-    <loc>/20-rigor/</loc>
+    <loc>/10-content/</loc>
   </url>
   
   <url>
-    <loc>/30-forward/</loc>
+    <loc>/10-content/02-explore/</loc>
   </url>
   
   <url>
-    <loc>/40-infrastructure/</loc>
+    <loc>/00-hello/02-github/</loc>
   </url>
   
   <url>
-    <loc>/50-git/</loc>
+    <loc>/20-tech-stack/02-git/</loc>
+  </url>
+  
+  <url>
+    <loc>/00-hello/03-blogdown/</loc>
+  </url>
+  
+  <url>
+    <loc>/10-content/03-rigor/</loc>
+  </url>
+  
+  <url>
+    <loc>/20-tech-stack/</loc>
+  </url>
+  
+  <url>
+    <loc>/00-hello/04-alternatives/</loc>
+  </url>
+  
+  <url>
+    <loc>/10-content/04-forward/</loc>
   </url>
   
   <url>

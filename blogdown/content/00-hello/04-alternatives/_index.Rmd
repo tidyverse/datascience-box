@@ -1,0 +1,7 @@
+---
+weight: 4
+title: "Alternative setups"
+output: html_document
+---
+
+Alternative ways of setting up your course...

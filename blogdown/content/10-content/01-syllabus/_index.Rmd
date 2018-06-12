@@ -1,0 +1,7 @@
+---
+weight: 1
+title: "Course syllabus"
+output: html_document
+---
+
+Course syllabus...
