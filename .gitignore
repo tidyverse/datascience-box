@@ -14,3 +14,7 @@ bookdown*
 !docs/*/*.html
 !docs/*/*/*.html
 !docs/*/*/*/*.html
+!website/*.html
+!website/*/*.html
+!website/*/*/*.html
+!website/*/*/*/*.html
