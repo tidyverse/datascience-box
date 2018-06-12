@@ -4,4 +4,4 @@ title: "Pedagogy"
 output: html_document
 ---
 
-Pedagogy stuff
+Tips and recommendations for pedagogy to be posted soon.

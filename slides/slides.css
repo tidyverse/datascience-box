@@ -9,18 +9,18 @@ body {
 h2 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
-  color: #6CA0DC;
+  color: #A7D5E8;
   font-size: 12px;
   margin: 0.25em 0 0.5em 0;
 }
 h1, h3 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
-  color: #6CA0DC;
+  color: #A7D5E8;
 }
 a, a > code {
   font-family: 'Source Sans Pro', sans-serif;
-  color: #6CA0DC;
+  color: #A7D5E8;
   text-decoration: none;
 }
 
@@ -36,7 +36,7 @@ a, a > code {
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {
-  background-color: #6CA0DC;
+  background-color: #A7D5E8;
   color: #ffffff;
   /* text-shadow: 0 0 20px #333; */
 }

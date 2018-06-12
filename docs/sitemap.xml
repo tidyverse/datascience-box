@@ -7,10 +7,6 @@
   </url>
   
   <url>
-    <loc>/10-content/02-explore/02-01-data-viz/</loc>
-  </url>
-  
-  <url>
     <loc>/00-hello/</loc>
   </url>
   
@@ -35,7 +31,7 @@
   </url>
   
   <url>
-    <loc>/20-tech-stack/02-git/</loc>
+    <loc>/20-tech-stack/02-github/</loc>
   </url>
   
   <url>
@@ -56,14 +52,6 @@
   
   <url>
     <loc>/10-content/04-forward/</loc>
-  </url>
-  
-  <url>
-    <loc>/10-content/04-forward/_index.knit/</loc>
-  </url>
-  
-  <url>
-    <loc>/10-content/04-forward/_index.utf8/</loc>
   </url>
   
   <url>

@@ -4,6 +4,12 @@ title: "Git and GitHub"
 output: html_document
 ---
 
+There is some placeholder text here, to be fleshed out soon.
+
+And here is a link to [ghclass vignette](https://rundel.github.io/ghclass/articles/ghclass.html).
+
+----
+
 ## Instructions for assignment getting started and "submission" via Git
 
 Here are the steps for getting started:

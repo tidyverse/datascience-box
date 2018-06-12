@@ -4,6 +4,7 @@ author: ""
 output:
   xaringan::moon_reader:
     css: "../slides.css"
+    logo: "../dsbox-logo.png"
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -91,7 +92,11 @@ A - While statistics $\ne$ data science, they are very closely related and have 
 **Q - Will we be doing computing?**   
 A - Yes.
 
---
+...
+
+---
+
+# What is this course?
 
 **Q - Is this an intro CS course?**  
 A - No, but many themes are shared.
@@ -248,7 +253,7 @@ class: center, middle
 
 ---
 
-## Tips for asking questions:
+## Tips for asking questions
 
 - First search existing discussion for answers. If the question has already been answered, you're done! If it has already been asked but you're not satisfied with the answer, add to the thread. 
 - Give your question context from course concepts not couse assignments.
@@ -258,9 +263,14 @@ class: center, middle
     - Good description: "I am getting the following error and I'm not sure how to resilve it - `Error: could not find function "ggplot"`"
     - Bad description: "R giving errors, help me! Aaaarrrrrgh!” 
 - Note that you can edit a question after posting it.
+
+---
+
+## Tips for asking questions
+
 - Format your questions nicely using markdown and code formatting.
 - Where appropriate, provide links to specific files, or even lines within them, in the body of your issue. This will help your helper understand your question. Note that only the teaching team will have access to private repos.
-- (Optional) Tag someone or some group of people. Start by typing the @ symbol and Slack will generate some good suggestions. 
+- (Optional) Tag someone or some group of people. Start by typing the @ symbol and GitHub will generate some good suggestions. 
     
 ---
 
@@ -275,14 +285,10 @@ class: center, middle
 ## Sharing/reusing code
 
 - I am well aware that a huge volume of code is available on the web to solve any number of problems.
-
 - Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). 
-
 - Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. 
-
 - On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. 
-
-- Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team. 
+- Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team.
 - On the take home exams all communication with classmates is explicitly forbidden.
 
 ---

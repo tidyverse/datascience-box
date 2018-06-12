@@ -10,23 +10,5 @@
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
-    <item>
-      <title>Looking forward</title>
-      <link>/10-content/04-forward/_index.knit/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/10-content/04-forward/_index.knit/</guid>
-      <description>This part has a bunch of independent modules, each on a different topic. Pick and choose to your liking, depending on how much time you have to cover them.</description>
-    </item>
-    
-    <item>
-      <title>Looking forward</title>
-      <link>/10-content/04-forward/_index.utf8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/10-content/04-forward/_index.utf8/</guid>
-      <description>This part has a bunch of independent modules, each on a different topic. Pick and choose to your liking, depending on how much time you have to cover them.</description>
-    </item>
-    
   </channel>
 </rss>
