@@ -47,14 +47,6 @@
   </url>
   
   <url>
-    <loc>/10-content/03-rigor/_index.knit/</loc>
-  </url>
-  
-  <url>
-    <loc>/10-content/03-rigor/_index.utf8/</loc>
-  </url>
-  
-  <url>
     <loc>/20-tech-stack/</loc>
   </url>
   
@@ -64,6 +56,14 @@
   
   <url>
     <loc>/10-content/04-forward/</loc>
+  </url>
+  
+  <url>
+    <loc>/10-content/04-forward/_index.knit/</loc>
+  </url>
+  
+  <url>
+    <loc>/10-content/04-forward/_index.utf8/</loc>
   </url>
   
   <url>

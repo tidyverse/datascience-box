@@ -77,20 +77,6 @@
 	"content": "This is where into to part 2 goes.\n"
 },
 {
-	"uri": "/10-content/03-rigor/_index.knit/",
-	"title": "Making rigorous conclusions",
-	"tags": [],
-	"description": "",
-	"content": "This is where into to part 2 goes.\n"
-},
-{
-	"uri": "/10-content/03-rigor/_index.utf8/",
-	"title": "Making rigorous conclusions",
-	"tags": [],
-	"description": "",
-	"content": "This is where into to part 2 goes.\n"
-},
-{
 	"uri": "/20-tech-stack/",
 	"title": "Technology stack",
 	"tags": [],
@@ -106,6 +92,20 @@
 },
 {
 	"uri": "/10-content/04-forward/",
+	"title": "Looking forward",
+	"tags": [],
+	"description": "",
+	"content": "This part has a bunch of independent modules, each on a different topic. Pick and choose to your liking, depending on how much time you have to cover them.\n"
+},
+{
+	"uri": "/10-content/04-forward/_index.knit/",
+	"title": "Looking forward",
+	"tags": [],
+	"description": "",
+	"content": "This part has a bunch of independent modules, each on a different topic. Pick and choose to your liking, depending on how much time you have to cover them.\n"
+},
+{
+	"uri": "/10-content/04-forward/_index.utf8/",
 	"title": "Looking forward",
 	"tags": [],
 	"description": "",
