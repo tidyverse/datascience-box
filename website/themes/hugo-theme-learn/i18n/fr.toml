@@ -8,7 +8,7 @@ other = "Supprimer l'historique"
 other = "Pièces jointes"
 
 [title-404]
-other = "Erreur"
+other = "404 Erreur"
 
 [message-404]
 other = "Oups. On dirait que cette page n'existe pas ¯\\_(ツ)_/¯"

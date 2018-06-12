@@ -8,7 +8,7 @@ other = "Clear History"
 other = "Attachments"
 
 [title-404]
-other = "Error"
+other = "404 Error"
 
 [message-404]
 other = "Woops. Looks like this page doesn't exist ¯\\_(ツ)_/¯."
