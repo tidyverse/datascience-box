@@ -4,8 +4,8 @@ title: "Hello #dsbox"
 output: html_document
 ---
 
-This section provides an overview of setting up your data science course from 
-scratch. Specifically this section discusses setting up an RStudio Cloud 
-workspace, a GitHub organization, and the course website. We also discuss 
-alternative setups for a similar course using some or all of the materials 
-provided here.
+Hello! And welcome!
+
+Let's start with how to set up an RStudio Cloud workspace, a GitHub organization, 
+and the course website. We also discuss alternative setups for a similar 
+course using some or all of the materials provided here.
