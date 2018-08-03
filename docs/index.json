@@ -11,7 +11,7 @@
 	"title": "Hello #dsbox",
 	"tags": [],
 	"description": "",
-	"content": "Hello! And welcome!\nLet’s start with how to set up an RStudio Cloud workspace, a GitHub organization, and the course website. We also discuss alternative setups for a similar course using some or all of the materials provided here.\n"
+	"content": "Hello! And welcome!\nLet’s start with setting up an RStudio Cloud workspace for your class, creating a GitHub organization, and the course website. We also discuss alternative setups for a similar course using some or all of the materials provided here.\n"
 },
 {
 	"uri": "/00-hello/01-rscloud/",

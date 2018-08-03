@@ -6,6 +6,7 @@ output: html_document
 
 Hello! And welcome!
 
-Let's start with how to set up an RStudio Cloud workspace, a GitHub organization, 
+Let's start with setting up an RStudio Cloud workspace for your class, 
+creating a GitHub organization, 
 and the course website. We also discuss alternative setups for a similar 
 course using some or all of the materials provided here.
