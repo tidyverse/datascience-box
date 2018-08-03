@@ -1,0 +1,140 @@
+/* * Customizing tufte.css * */
+
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700';
+@import 'https://fonts.googleapis.com/css?family=Source+Code+Pro';
+
+@charset "UTF-8";
+
+/* Tufte CSS styles */
+
+html {
+	font-size: 12px;
+}
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+	background-color: #fefefe;
+	color: #222;
+	counter-reset: li;
+}
+
+h1.title {
+	font-weight: 700;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #008CBA;
+}
+
+h1 {
+	font-style: normal;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #008CBA;
+}
+
+h2 {
+	font-style: normal;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	color: #008CBA;
+}
+
+h3.subtitle {
+	font-style: normal;
+	color: #008CBA;
+}
+
+h4 {
+	font-style: normal;
+	font-weight: 400;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-top: 1.5rem;
+	margin-bottom: 0;
+	line-height: 1;
+}
+
+h4.author,
+h4.date {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+}
+
+.numeral {
+	font-family: "Source Sans Pro";
+	font-weight: 300;
+}
+
+em {
+	font-style: italic;
+	font-weight: 300;
+	font-family: "Source Sans Pro";
+}
+
+strong {
+	font-style: bold;
+	font-weight: 600;
+	font-family: "Source Sans Pro";
+}
+
+/* Code formatting */
+
+@media screen and (max-width: 760px) {
+	pre {
+		width: 100%;
+		font-size: 16px;
+	}
+}
+
+code {
+	font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+pre code {
+	font-size: 15px;
+}
+
+.marginnote code,
+.sidenote code {
+	font-size: 1rem;
+}
+
+pre {
+		width: 100%;
+		font-size: 16px;
+		overflow-x: auto;
+}
+
+/* Question counter */
+
+ol {
+	/* Remove the default left padding */
+	padding-left: 0;
+}
+
+ol>li {
+	/* Create a positioning context */
+	position: relative;
+	/* Disable the normal item numbering */
+	list-style: none;
+	width: 90%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 0;
+	padding-left: 90px;
+}
+
+ol>li:before {
+	/* Use the counter as content */
+	content: "Question " counter(li)".";
+	/* Increment the counter by 1 */
+	counter-increment: li;
+	position: absolute;
+	color: #008CBA;
+	left: -0.5px;
+	font-weight: bold;
+}
+
+ol ol {
+	counter-reset: subitem;
+}

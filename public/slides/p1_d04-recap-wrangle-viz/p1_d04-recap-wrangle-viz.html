@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recap: Wrangling and visualizing data</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Recap: Wrangling and visualizing data
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# R/RStudio
+
+---
+
+# R/RStudio
+
+- R: statistical programming language
+
+- RStudio: integrated development environment for the R language
+
+- RStudio Cloud allows us to use RStudio without local installation (which can be hairy)
+  - Interested in learning about other ways of using RStudio -- come by office hours
+  - Already have another way of using RStudio -- make sure to maintain Cloud account for quick classroom execises
+  
+---
+
+# R packages
+
+- R is an open source language
+
+- Packages developed by open source developers
+
+![](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb08c29a21970d-pis)
+
+---
+
+class: center, middle
+
+# Git/GitHub
+
+---
+
+## Merge conflicts
+
+.pull-left[
+Confused about merge conflicts? Everyone is...
+]
+.pull-right[
+![](img/so-git-merge.png)
+]
+
+--
+
+- Why does a merge conflict happen?
+
+--
+
+- TELL ME YOUR WOES...
+
+---
+
+## Caching your password
+
+Needs to be done on a per-project basis (for now):
+
+- Go to the Terminal within a project (the most recent lab?)
+- Type the following to cache your password for `\(60 * 60 * 24 * 7 = 604800\)` seconds
+
+
+```bash
+git config --global credential.helper 'cache --timeout 604800'
+```
+
+---
+
+## Tips for collaborating via Git/GitHub
+
+- Always pull first before you start working.
+
+- Commit, and push, often to minimize merge conflicts and/or to make merge conflicts easier to resolve.
+
+- If you find yourself in a situation that is difficult to resolve, ask questions asap, don't let it linger and get bigger.
+
+---
+
+class: center, middle
+
+# Visualizing Star Wars (better)
+
+Follow along on ☁️: Review and recap - 02-07 -- `viz-star-wars.Rmd`
+
+---
+
+## Starting point
+
+
+```r
+library(tidyverse)
+starwars &lt;- starwars %&gt;%
+  filter(mass &lt; 500)
+
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point()
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+## Add title
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters")
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+## Add x and y labels
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)")
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+## Change legend label
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender")
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Change zooming
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender") +
+  xlim(c(100, 200)) + 
+  ylim(c(40, 120))
+```
+
+```
+## Warning: Removed 14 rows containing missing values (geom_point).
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+## Change transparency
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point(alpha = 0.3) +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender")
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+## Change theme - `theme_dark()`
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender") +
+  theme_dark()
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+## Change theme - `theme_minimal()`
+
+
+```r
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender") +
+  theme_minimal()
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+## 538 theme
+
+
+```r
+# install.packages("ggthemes")
+library(ggthemes)
+
+ggplot(data = starwars, aes(x = height, y = mass, color = gender)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Star Wars characters",
+       x = "Height (in cm)", y = "Mass (in kg)", color = "Gender") +
+  theme_fivethirtyeight()
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Further customization
+
+- It is possible to do a lot more customization to your plots
+- See http://ggplot2.tidyverse.org/ for help on using the ggplot2 package
+    + You can find a list of all ggplot2 functions in the Reference tab of the package homepage
+- You'll find that sometimes customization is valuable, and sometimes the defaults work well and while customization might be doable (technically) it might not be necessary
+
+---
+
+class: center, middle
+
+# Activity
+
+Follow along on ☁️: Review and recap - 02-07 -- `examine-world-trend.Rmd`
+
+---
+
+## Examining world trends
+
+Examine the code given to produce the existing plots in the "Examining Gapminder data" document. Then, make the appropriate changes listed below. 
+
+- Task 1: Subset for 1952 (instead of 2007)
+- Task 2: Plot life expectancy (`lifeExp`) vs. population (`pop`)
+- Task 3: In addition to coloring the points by continent, size the points by GPD (`gpdPercap`)
+- Task 4: A brief (1-2 sentences only) description of what you see in the plot.
+
+Work on it individually, but consult with your teammates alogn the way.
+    
+---
+
+class: center, middle
+
+# Wrangling diamonds 💍
+
+Follow along on ☁️: Review and recap - 02-07 -- `wrangling-diamonds.Rmd`
+
+---
+
+## The data
+
+Diamond prices are driven by 4Cs: carat, cut, color, and clarity. We'll explore a dataset containing the prices and other attributes of almost 54,000 diamondsn from the tidyverse package.
+
+Take a peek at the codebook with
+
+
+```r
+?diamonds
+```
+
+or at http://ggplot2.tidyverse.org/reference/diamonds.html.
+
+---
+
+## 4Cs
+
+- Carat: unit of mass equal to 200 mg used for measuring gemstones and pearls 
+
+- Cut: objective measure of a diamond's light performance / sparkle
+
+- Color:
+
+![diamond_colors](img/diamond_colors.png)
+
+- Clarity:
+
+![diamond_clarity](img/diamond_clarity.png)
+
+---
+
+## Measurements
+
+![diamond_measurements](img/diamond_measurements.png)
+
+---
+
+## Price
+
+.question[
+What type of variable is price? Would you expect its distribution to be symmetric, right-skewed, or left-skewed? Why? Make a histogram of the distribution of diamond prices. Does the shape of the distribution match your expectation?
+]
+
+--
+
+
+```r
+ggplot(data = diamonds, mapping = aes(x = price)) +
+  geom_histogram(binwidth = 500)
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+## Cut
+
+.question[
+How many diamonds of each type of cut are there? List them in ascending order.
+]
+
+--
+
+
+```r
+diamonds %&gt;%
+  count(cut) %&gt;%
+  arrange(n)
+```
+
+```
+## # A tibble: 5 x 2
+##   cut           n
+##   &lt;ord&gt;     &lt;int&gt;
+## 1 Fair       1610
+## 2 Good       4906
+## 3 Very Good 12082
+## 4 Premium   13791
+## 5 Ideal     21551
+```
+
+---
+
+## Clarity
+
+.question[
+Calculate the relative frequency of each clarity of diamonds. List them in descending order.
+]
+
+--
+
+
+```r
+diamonds %&gt;%
+  count(cut) %&gt;%
+  mutate(rel_freq_cut = round(n / sum(n), 3)) %&gt;%
+  arrange(desc(rel_freq_cut))
+```
+
+```
+## # A tibble: 5 x 3
+##   cut           n rel_freq_cut
+##   &lt;ord&gt;     &lt;int&gt;        &lt;dbl&gt;
+## 1 Ideal     21551        0.4  
+## 2 Premium   13791        0.256
+## 3 Very Good 12082        0.224
+## 4 Good       4906        0.091
+## 5 Fair       1610        0.03
+```
+
+---
+
+## Clarity by cut
+
+.question[
+Calculate the relative frequency of each clarity of diamonds by cut. For each cut type, determine which clarity type is most likely, and display its relative frequency for that cut.
+]
+
+--
+
+
+```r
+diamonds %&gt;%
+  count(cut, clarity) %&gt;%
+  group_by(cut) %&gt;%
+  mutate(rel_freq_clarity = round(n / sum(n), 3)) %&gt;%
+  arrange(cut, desc(rel_freq_clarity)) %&gt;%
+  top_n(1)
+```
+
+```
+## Selecting by rel_freq_clarity
+```
+
+```
+## # A tibble: 5 x 4
+## # Groups:   cut [5]
+##   cut       clarity     n rel_freq_clarity
+##   &lt;ord&gt;     &lt;ord&gt;   &lt;int&gt;            &lt;dbl&gt;
+## 1 Fair      SI2       466            0.289
+## 2 Good      SI1      1560            0.318
+## 3 Very Good SI1      3240            0.268
+## 4 Premium   SI1      3575            0.259
+## 5 Ideal     VS2      5071            0.235
+```
+
+---
+
+## Depth and price
+
+.question[
+Plot the relationship between depth and price of only fair cut diamonds.
+]
+
+--
+
+
+```r
+diamonds %&gt;%
+  filter(cut == "Fair") %&gt;%
+  ggplot(mapping = aes(x = depth, y = price)) +
+    geom_point()
+```
+
+![](p1_d04-recap-wrangle-viz_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+## Recap
+
+- Start with data frame
+- Pipe into a verb
+- Only print output if counting, summarizing, etc.
+- Save output as the original data frame (or something else) if more will be done with the data frame in another step/pipe
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

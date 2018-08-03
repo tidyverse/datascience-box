@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inference for regression</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Inference for regression
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- Midterm due Friday at noon
+
+---
+
+class: center, middle
+
+# Inference for regression
+
+---
+
+## Riders in Florence, MA
+
+.small[
+The Pioneer Valley Planning Commission collected data in Florence, MA for 90 days from April 5 to November 15, 2005 using a laser sensor, with breaks in the laser beam recording when a rail-trail user passed the data collection station.
+
+- `hightemp` daily high temperature (in degrees Fahrenheit)
+- `volume` estimated number of trail users that day (number of breaks recorded)
+]
+
+
+```r
+library(mosaicData)
+data(RailTrail)
+```
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+
+---
+
+## Coefficient interpretation
+
+.question[
+👤 Interpret the coefficients of the regression model for predicting volume (estimated number of trail users that day) from hightemp (daily high temperature, in F).
+]
+
+
+```r
+m_riders &lt;- lm(volume ~ hightemp, data = RailTrail)
+tidy(m_riders) %&gt;%
+  select(term, estimate)
+```
+
+```
+##          term   estimate
+## 1 (Intercept) -17.079281
+## 2    hightemp   5.701878
+```
+
+
+
+---
+
+## Uncertainty around the slope
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+
+## Bootstrapping the data, once
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+
+```
+##          term    estimate
+## 1 (Intercept) -144.565643
+## 2    hightemp    7.756174
+```
+
+---
+
+## Bootstrapping the data, once again
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+
+```
+##          term   estimate
+## 1 (Intercept) -32.548510
+## 2    hightemp   5.888436
+```
+
+---
+
+## Bootstrapping the data, again
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+
+```
+##          term   estimate
+## 1 (Intercept) -113.54272
+## 2    hightemp    7.29884
+```
+
+---
+
+## Bootstrapping the regression line
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+
+## Bootstrap interval for the slope
+
+.small[
+
+```r
+boot_dist &lt;- RailTrail %&gt;%
+  specify(response = volume, explanatory = hightemp) %&gt;%
+  generate(reps = 1000, type = "bootstrap") %&gt;%
+  calculate(stat = "slope")
+```
+]
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+## Bootstrap interval for the slope
+
+.question[
+Interpret the bootstrap interval in context of the data.
+]
+
+
+```r
+boot_dist %&gt;%
+  summarise(l = quantile(stat, 0.025), 
+            u = quantile(stat, 0.975))
+```
+
+```
+## Response: volume (integer)
+## Explanatory: hightemp (integer)
+## # A tibble: 1 x 2
+##       l     u
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  4.19  7.48
+```
+
+---
+
+## Hypothesis testing for the slope
+
+`\(H_0\)`: No relationship, `\(\beta_1 = 0\)`  
+`\(H_A\)`: There is a relationship, `\(\beta_1 \ne 0\)`
+
+--
+
+.small[
+
+```r
+null_dist &lt;- RailTrail %&gt;%
+  specify(volume ~ hightemp) %&gt;% 
+  hypothesize(null = "independence") %&gt;%
+  generate(reps = 1000, type = "permute") %&gt;%
+  calculate(stat = "slope")
+```
+]
+
+--
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+## Finding the p-value
+
+
+```r
+null_dist %&gt;%
+  filter(stat &gt;= m_riders$coefficients[2]) %&gt;%
+  summarise(p_val = 2 * (n()/1000))
+```
+
+```
+## # A tibble: 1 x 1
+##   p_val
+##   &lt;dbl&gt;
+## 1     0
+```
+
+---
+
+## Hypothesis testing for the slope
+
+... the CLT way
+
+
+```r
+tidy(m_riders)
+```
+
+```
+##          term   estimate  std.error  statistic      p.value
+## 1 (Intercept) -17.079281 59.3953040 -0.2875527 7.743652e-01
+## 2    hightemp   5.701878  0.8480074  6.7238541 1.705138e-09
+```
+
+---
+
+## Conditions for inference for regression
+
+Three conditions:
+
+--
+
+1. Observations should be independent
+
+--
+
+2. Residuals should be randomly distributed around 0
+
+--
+
+3. Residuals should be nearly normally distributed, centered at 0
+
+--
+
+4. Residuals should have constant variance
+
+
+---
+
+## Checking independence
+
+One consideration might be time series structure of the data. We can check whether one residual depends on the previous by plotting the residuals in the order of data collection.
+
+
+```r
+m_riders_aug &lt;- augment(m_riders)
+ggplot(data = m_riders_aug, aes(x = 1:nrow(m_riders_aug), y = .resid)) +
+  geom_point() +
+  labs(x = "Index", y = "Residual")
+```
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+
+## Checking distribution of residuals around 0 and constant variance
+
+
+```r
+ggplot(data = m_riders_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, lty = 3, color = "gray") +
+  labs(y = "Residuals", x = "Predicted values, y-hat")
+```
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
+
+## Checking normality of residuals
+
+
+```r
+ggplot(data = m_riders_aug, aes(x = .resid)) +
+  geom_histogram(binwidth = 30) +
+  labs(x = "Residuals")
+```
+
+![](p2_d12-inf-reg_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
+
+## What else can we do with these p-values?
+
+Model selection based on p-value method:
+
+- Backwards elimination: Remove the variable with the highest p-value, re-fit, 
+repeat until all variables are significant at the chosen significance level.
+- Forward selection: Start with the variable with the lowest p-value, re-fit,
+repeat until all no more significant variables left at the chosen significance level.
+
+This is sometimes seen in the literature, but is not recommended!
+
+- Relies on arbitrary significance level cutoff
+- Multiple testing!
+
+Instead use adjusted `\(R^2\)`, or AIC, or other criterion based model selection.
+
+---
+
+## My thoughts 
+
+Both sets of p-values are largely useless other than in a few very narrow circumstances
+
+* Coefficient p-value 
+    - If you truly want to know if a coefficient is significantly different from zero (taking the other predictors into account) then great
+    - If you want to know which predictors are important - use model selection
+
+* Overall model p-value
+    - Strawman comparison, I don't really care that my model is better than a mean only model, the latter is almost always going to be terrible
+
+---
+
+class: center, middle
+
+# Testing errors and power
+
+---
+
+## Testing errors
+
+- Type 1: Reject `\(H_0\)` when you shouldn't have
+    + P(Type 1 error) = `\(\alpha\)`
+    
+- Type 2: Fail to reject `\(H_0\)` when you should have
+    + P(Type 2 error) is harder to calculate, but increases as `\(\alpha\)` decreases
+
+&lt;div class="question"&gt;
+👤 In a court of law
+
+&lt;ul&gt;
+&lt;li&gt; Null hypothesis: Defendant is innocent
+&lt;li&gt; Alternative hypothesis: Defendant is guilty
+&lt;/ul&gt;
+
+Which is worse: Type 1 or Type 2 error?
+&lt;/div&gt;
+
+---
+
+## Probabilities of testing errors
+
+- P(Type 1 error) = `\(\alpha\)`
+
+- P(Type 2 error) = 1 - Power
+
+- Power = P(correctly rejecting the null hypothesis)
+
+
+&lt;div class="question"&gt;
+👥 Fill in the blanks in terms of correctly/incorrectly rejecting/failing to reject the null hypothesis:
+
+&lt;ul&gt;
+&lt;li&gt; `\(alpha\)` is the probability of ___.
+&lt;li&gt; 1 - Power is the probability of ___.
+&lt;/ul&gt;
+&lt;/div&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

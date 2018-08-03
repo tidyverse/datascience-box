@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CLT based inference</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# CLT based inference
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+
+
+## Announcements
+
+- Midterm assigned at noon Monday, due Friday at noon
+    - Mostly modeling + inference
+    - But also some exploratory data analysis
+
+- OH tomorrow: 10:30am - noon
+
+- Team meetings
+
+- What do I owe you?
+    - One other extra credit assignment
+    - Some regrades
+    - HW5 feedback or key
+
+---
+
+class: center, middle
+
+# Inference methods based on CLT
+
+---
+
+## What is the CLT?
+
+The Central Limit Theorem tells us the distribution of certain sample statistics if necessary conditions are met.
+
+- The distribution of the sample statistic is nearly normal
+- The distribution is centered at the (often unknown) population parameter
+- The variability of the distribution is inversely proportional to the square root of the sample size
+
+---
+
+## Inference methods based on CLT
+
+If necessary conditions are met, we can also use inference methods based on the CLT:
+
+--
+
+- use the CLT to calculate the SE of the sample statistic of interest (sample mean, 
+sample proportion, difference between sample means, etc.)
+
+--
+
+- calculate the **test statistic**, number of standard errors away from the null 
+value the observed sample statistic is
+    - Z for proportions
+    - T for means, along with appropriate degrees of freedom
+
+--
+
+- use the test statistic to calculate the **p-value**, the probability of an observed 
+or more extreme outcome given that the null hypothesis is true
+
+---
+
+## Z distribution
+
+.small[
+Also called the **standard normal distribution**: `\(Z \sim N(mean = 0, \sigma = 1)\)`
+]
+
+.small[
+Finding probabilities under the normal curve:
+
+
+```r
+pnorm(-1.96)
+```
+
+```
+## [1] 0.0249979
+```
+
+```r
+pnorm(1.96, lower.tail = FALSE)
+```
+
+```
+## [1] 0.0249979
+```
+]
+
+--
+
+.small[
+Finding cutoff values under the normal curve:
+
+
+```r
+qnorm(0.025)
+```
+
+```
+## [1] -1.959964
+```
+
+```r
+qnorm(0.975)
+```
+
+```
+## [1] 1.959964
+```
+]
+
+---
+
+## T distribution
+
+- Also unimodal and symmetric, and centered at 0
+
+- Thicker tails than the normal distribution (to make up for additional variability
+introduced by using `\(s\)` instead of `\(\sigma\)` in calculation of the SE)
+
+- Parameter: **degrees of freedom**
+
+    - df for single mean: `\(df = n - 1\)`
+
+    - df for comparing two means: 
+
+`$$df \approx \frac{(s_1^2/n_1+s_2^2/n_2)^2}{(s_1^2/n_1)^2/(n_1-1)+(s_2^2/n_2)^2/(n_2-1)} \approx min(n_1 - 1, n_2 - 1)$$`
+
+---
+
+## T vs Z distributions
+
+![](p2_d11-clt-inf_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+## T distribution
+
+.small[
+Finding probabilities under the t curve:
+
+```r
+pt(-1.96, df = 9)
+```
+
+```
+## [1] 0.0408222
+```
+
+```r
+pt(1.96, df = 9, lower.tail = FALSE)
+```
+
+```
+## [1] 0.0408222
+```
+]
+
+--
+
+&lt;br/&gt;
+.small[
+Finding cutoff values under the t curve:
+
+```r
+qt(0.025, df = 9)
+```
+
+```
+## [1] -2.262157
+```
+
+```r
+qt(0.975, df = 9)
+```
+
+```
+## [1] 2.262157
+```
+]
+
+---
+
+class: center, middle
+
+# Example
+
+---
+
+## Relaxing after work
+
+.question[
+The GSS asks "After an average work day, about how many 
+hours do you have to relax or pursue activities that you enjoy?". Do these data
+provide convincing evidence that Americans, on average, spend more than 3 hours
+per day relaxing? Note that the variable of interest in the dataset is `hrsrelax`.
+]
+
+
+```r
+gss = read_csv("data/gss2010.csv")
+
+gss %&gt;% 
+  filter(!is.na(hrsrelax)) %&gt;%
+  summarise(x_bar = mean(hrsrelax), med = median(hrsrelax), 
+            sd = sd(hrsrelax), n = n())
+```
+
+```
+## # A tibble: 1 x 4
+##   x_bar   med    sd     n
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1  3.68     3  2.63  1154
+```
+
+---
+
+## Exploratory Data Analysis
+
+
+```r
+ggplot(data = gss, aes(x = hrsrelax)) + 
+  geom_histogram(binwidth = 1)
+```
+
+```
+## Warning: Removed 890 rows containing non-finite values (stat_bin).
+```
+
+![](p2_d11-clt-inf_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+## Hypotheses
+
+.question[
+What are the hypotheses for evaluation Americans, on average, spend more than 3 hours
+per day relaxing?
+]
+
+--
+
+`$$H_0: \mu = 3$$` 
+`$$H_A: \mu &gt; 3$$`
+
+---
+
+## Conditions
+
+.question[
+What conditions must be satisfied to conduct this hypothesis test using methods 
+based on the CLT? Are these conditions satisfied?
+]
+
+
+---
+
+## Calculating the test statistic
+
+Summary stats from the sample:
+
+
+```
+## # A tibble: 1 x 3
+##    xbar     s     n
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1  3.68  2.63  1154
+```
+
+And the CLT says:
+
+`$$\bar{x} \sim N\left(mean = \mu, SE = \frac{\sigma}{\sqrt{n}}\right)$$`
+
+--
+
+.question[
+How many standard errors away from the population mean is the observed sample mean?
+]
+
+--
+
+.question[
+How likely are we to observe a sample mean that is at least as extreme as the observed sample mean, if in fact the null hypothesis is true?
+]
+
+---
+
+## Calculations
+
+
+```r
+(se &lt;- hrsrelax_summ$s / sqrt(hrsrelax_summ$n))
+```
+
+```
+## [1] 0.07740938
+```
+
+```r
+(t &lt;- (hrsrelax_summ$xbar - 3) / se)
+```
+
+```
+## [1] 8.7876
+```
+
+```r
+(df &lt;- hrsrelax_summ$n - 1)
+```
+
+```
+## [1] 1153
+```
+
+```r
+pt(t, df, lower.tail = FALSE)
+```
+
+```
+## [1] 2.720895e-18
+```
+
+---
+
+## Conclusion
+
+- Since the p-value is small, we reject `\(H_0\)`.
+
+- The data provide convincing evidence that Americans, on average, spend more than
+3 hours per day relaxing after work.
+
+--
+
+.question[
+Would you expect a 90% confidence interval for the average number of hours Americans 
+spend relaxing after work to include 3 hours?
+]
+
+---
+
+## Confidence interval for a mean
+
+`$$point~estimate \pm critical~value \times SE$$`
+
+
+```r
+t_star &lt;- qt(0.95, df)
+pt_est &lt;- hrsrelax_summ$xbar
+round(pt_est + c(-1,1) * t_star * se, 2)
+```
+
+```
+## [1] 3.55 3.81
+```
+
+.question[
+Interpret this interval in context of the data.
+]
+
+---
+
+## Built-in functionality in R
+
+- There are built in functions for doing some of these tests in R:
+
+- However a learning goal is this course is not to go through an exhaustive list of all CLT based tests and how to implement them
+
+- Instead you should try to understand how these methods are / are not like the simulation based methods we learned about earlier
+
+.question[
+What is similar, and what is different, between CLT based test of means vs. simulation based test?
+]
+
+---
+
+.small[
+
+```r
+# HT
+t.test(gss$hrsrelax, mu = 3, alternative = "greater")
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  gss$hrsrelax
+## t = 8.7876, df = 1153, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is greater than 3
+## 95 percent confidence interval:
+##  3.552813      Inf
+## sample estimates:
+## mean of x 
+##  3.680243
+```
+
+```r
+# CI
+t.test(gss$hrsrelax, conf.level = 0.90)$conf.int
+```
+
+```
+## [1] 3.552813 3.807672
+## attr(,"conf.level")
+## [1] 0.9
+```
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

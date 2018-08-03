@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Welcome to Data Science
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Hello world!
+
+---
+
+## What is data science?
+
+- &lt;i class="fa fa-database fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-flask fa-10x"&gt;&lt;/i&gt; = data science?
+
+--
+
+- &lt;i class="fa fa-database fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa-10x"&gt;&lt;/i&gt; = data science?
+
+--
+
+- &lt;i class="fa fa-database fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-user fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa-10x"&gt;&lt;/i&gt; = data science?
+
+--
+
+- &lt;i class="fa fa-database fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-users fa-10x"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa-10x"&gt;&lt;/i&gt; = data science?
+
+--
+
+&lt;br&gt;
+
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. We're going to learn to do this in a `tidy` way -- more on that later!
+
+---
+
+# What is this course?
+
+This is a course on introduction to data science, with an emphasis on statistical thinking.
+
+--
+
+**Q - What data science background does this course assume?**  
+A - None.
+
+--
+
+**Q - Is this an intro stat course?**  
+A - While statistics `\(\ne\)` data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is **not** your typical high school statistics course.
+
+--
+
+**Q - Will we be doing computing?**   
+A - Yes.
+
+...
+
+---
+
+# What is this course?
+
+**Q - Is this an intro CS course?**  
+A - No, but many themes are shared.
+
+--
+
+**Q - What computing language will we learn?**  
+A - R.
+
+--
+
+**Q: Why not language X?**  
+A: We can discuss that over ☕.
+
+
+---
+
+class: center, middle
+
+# Data in the wild
+
+---
+
+# A year as told by fitbit
+
+.pull-left[
+by Nick Strayer
+
+http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
+]
+.pull-right[
+![A year as told by fitbit](img/nick-strayer-fitbit.png)
+]
+---
+
+# R-Ladies global tour
+
+.pull-left[
+by Maelle Salmon
+
+http://www.masalmon.eu/2017/10/06/globalrladiestour/
+]
+.pull-right[
+![R Ladies Global Tour](img/maelle-salmon-rladies.png)
+]
+
+
+
+
+---
+
+# Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
+
+.pull-left[
+by David Robinson (Stack Overflow)
+
+http://varianceexplained.org/r/trump-tweets/
+]
+.pull-right[
+![Trump tweets](img/david-robinson-trump-tweets.png)
+]
+
+---
+
+class: center, middle
+
+# Your turn!
+
+---
+
+## Create a GitHub account
+
+Go to https://github.com/, and create an account (unless you already have one). Tips for selecting a username:&lt;sup&gt;1&lt;/sup&gt;
+
+.small[
+- Incorporate your actual name so that people can remember your GitHub handle easily.
+- Reuse username from other contexts if you can, e.g., Twitter or Slack.
+- Pick a username you will be comfortable revealing to your future boss.
+- Shorter is better than longer.
+- Be as unique as possible in as few characters as possible.
+- Make it timeless. Don’t highlight your current university, employer, or place of residence.
+- Avoid words laden with special meaning in programming, like `NA`.
+]
+
+.footnote[ 
+[1] Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan
+]
+
+.instructions[
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+]
+
+---
+
+## Join RStudio.cloud
+
+Go to [bit.ly/sta199-f18-rstudio-join](http://bit.ly/sta199-f18-rstudio-join), and log in with your GitHub credentials.
+
+.instructions[
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+]
+
+---
+
+## Create your first data visualization
+
+- Once you log on to RStudio Cloud, click on this course's workspace "STA 199 - Spring 18"
+- You should see a project called UN Votes, fork it by clicking on the &lt;i class="fa fa-fork"&gt;&lt;/i&gt; icon. This will create your copy of the project and launch it.
+- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
+- Then change the country names to those you're interested in. Your spelling and capitalization should match the data so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
+
+.instructions[
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+]
+
+---
+
+class: center, middle
+
+# Course structure and policies
+
+---
+
+## Class meetings
+
+- Interactive
+
+- Some lectures, lots of learn-by-doing
+
+- Bring your laptop to class every day
+
+---
+
+## Diversity &amp; Inclusiveness:
+
+- Intent: Students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
+
+- If you have a name and/or set of pronouns that differ from those that appear in your official Duke records, please let me know!
+
+- If you feel like your performance in the class is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
+
+- I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
+
+---
+
+## How to get help
+
+- Course content, logistics, etc. discussion on course Slack.
+        
+- Often it's a lot more pleasant an experience to get your questions answered in person. Make use of the teaching team's office hours, we're here to help!
+
+- For personal and grade related questions, use email.
+
+---
+
+## Tips for asking questions
+
+- First search existing discussion for answers. If the question has already been answered, you're done! If it has already been asked but you're not satisfied with the answer, add to the thread. 
+- Give your question context from course concepts not couse assignments.
+    - Good context: "I have a question on filtering"
+    - Bad context: "I have a question on HW 1 question 4"
+- Be precise in your description:
+    - Good description: "I am getting the following error and I'm not sure how to resilve it - `Error: could not find function "ggplot"`"
+    - Bad description: "R giving errors, help me! Aaaarrrrrgh!” 
+- Note that you can edit a question after posting it.
+
+---
+
+## Tips for asking questions
+
+- Format your questions nicely using markdown and code formatting.
+- Where appropriate, provide links to specific files, or even lines within them, in the body of your issue. This will help your helper understand your question. Note that only the teaching team will have access to private repos.
+- (Optional) Tag someone or some group of people. Start by typing the @ symbol and GitHub will generate some good suggestions. 
+    
+---
+
+## Academic integrity
+
+- Only work that is clearly assigned as team work can be completed collaboratively.
+
+- Use of disallowed materials during the take home exam will not be tolerated.
+
+---
+
+## Sharing/reusing code
+
+- I am well aware that a huge volume of code is available on the web to solve any number of problems.
+- Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). 
+- Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. 
+- On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. 
+- Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team.
+- On the take home exams all communication with classmates is explicitly forbidden.
+
+---
+
+## Course components:
+
+- Teams: 3-4 person teams, based on survey and pretest results, consistent throughout the semester
+- Application exercises: Usually start in class and finish in teams by the next class period, check/no check
+- Homework: Individual, lowest score dropped
+- Lab: Team, lowest score dropped
+- Exams: Individual, two take home midterms
+- Final project: Team, presentations during scheduled final exam time (last day of finals!), you must participate in the project and be in class to present to pass this class
+- Self paced tutorials: Individual, check/no check, extra credit
+
+---
+
+## Grading
+
+- Weights of each component are given in the syllabus.
+
+- Class attendance is a firm expectation; frequent absences or tardiness 
+will be considered a legitimate cause for grade reduction.
+
+- Exact ranges for letter grades will be curved and cutoffs will be 
+determined after the final exam.
+
+- The more evidence there is that the class has mastered the material, the 
+more generous the curve will be.
+
+---
+
+## Other policies
+
+- Please refrain from texting or using your computer for anything other than coursework during class.
+
+- You must be in class on a day when you're scheduled to present, there are no make ups for presentations.
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

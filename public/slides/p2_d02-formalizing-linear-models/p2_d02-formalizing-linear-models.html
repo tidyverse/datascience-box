@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formalizing linear models</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Formalizing linear models
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Characterizing relationships with models
+
+---
+
+## Data &amp; packages
+
+
+```r
+library(tidyverse)
+library(broom)
+```
+
+
+```r
+pp &lt;- read_csv("../../data/paris-paintings.csv", 
+               na = c("n/a", "", "NA"))
+```
+
+---
+
+## Want to follow along?
+
+Go to RStudio Cloud -&gt; make a copy of "Modelling Paris Paintings"
+
+---
+
+## Height &amp; width
+
+
+```r
+(m_ht_wt &lt;- lm(Height_in ~ Width_in, data = pp))
+```
+
+```
+## 
+## Call:
+## lm(formula = Height_in ~ Width_in, data = pp)
+## 
+## Coefficients:
+## (Intercept)     Width_in  
+##      3.6214       0.7808
+```
+
+--
+
+&lt;br&gt;
+
+`$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$`
+
+--
+
+- **Slope:** For each additional inch the painting is wider, the height is expected
+to be higher, on average, by 0.78 inches.
+
+--
+
+- **Intercept:** Paintings that are 0 inches wide are expected to be 3.62 inches high,
+on average.
+    - Does this make sense?
+
+---
+
+## The linear model with a single predictor
+
+- We're interested in the `\(\beta_0\)` (population parameter for the intercept)
+and the `\(\beta_1\)` (population parameter for the slope) in the 
+following model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x $$
+
+--
+
+- Tough luck, you can't have them...
+
+--
+
+- So we use the sample statistics to estimate them:
+
+$$ \hat{y} = b_0 + b_1~x $$
+
+---
+
+## Least squares regression
+
+The regression line minimizes the sum of squared residuals.
+
+--
+
+If `\(e_i = y - \hat{y}\)`,
+
+then, the regression line minimizes `\(\sum_{i = 1}^n e_i^2\)`.
+
+---
+
+## Visualizing residuals
+
+![](p2_d02-formalizing-linear-models_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+![](p2_d02-formalizing-linear-models_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+![](p2_d02-formalizing-linear-models_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+
+---
+
+## Properties of the least squares regression line
+
+- The regression line goes through the center of mass point, the coordinates corresponding to average `\(x\)` and average `\(y\)`: `\((\bar{x}, \bar{y})\)`:
+
+`$$\hat{y} = b_0 + b_1 x ~ \rightarrow ~ b_0 = \hat{y} - b_1 x$$`
+
+- The slope has the same sign as the correlation coefficient:
+
+`$$b_1 = r \frac{s_y}{s_x}$$`
+
+- The sum of the residuals is zero: 
+`$$\sum_{i = 1}^n e_i = 0$$`
+
+- The residuals and `\(x\)` values are uncorrelated.
+
+---
+
+## Height &amp; landscape features
+
+
+```r
+(m_ht_lands &lt;- lm(Height_in ~ factor(landsALL), data = pp))
+```
+
+```
+## 
+## Call:
+## lm(formula = Height_in ~ factor(landsALL), data = pp)
+## 
+## Coefficients:
+##       (Intercept)  factor(landsALL)1  
+##            22.680             -5.645
+```
+
+--
+
+&lt;br&gt;
+
+`$$\widehat{Height_{in}} = 22.68 - 5.65~landsALL$$`
+
+---
+
+## Height &amp; landscape features (cont.)
+
+- **Slope:** Paintings with landscape features are expected, on average,
+to be 5.65 inches shorter than paintings that without landscape features.
+    - Compares baseline level (`landsALL = 0`) to other level
+    (`landsALL = 1`).
+
+- **Intercept:** Paintings that don't have landscape features are expected, on 
+average, to be 22.68 inches tall.
+
+---
+
+## Categorical predictor with 2 levels
+
+<div id="htmlwidget-260787140e6048c26842" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-260787140e6048c26842">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],["L1764-2","L1764-3","L1764-4","L1764-5a","L1764-5b","L1764-6","L1764-7a","L1764-7b"],[360,6,12,6,6,9,12,12],[0,0,1,1,1,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>price<\/th>\n      <th>landsALL<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+## Relationship between height and school
+
+
+```r
+(m_ht_sch &lt;- lm(Height_in ~ school_pntg, data = pp))
+```
+
+```
+## 
+## Call:
+## lm(formula = Height_in ~ school_pntg, data = pp)
+## 
+## Coefficients:
+##     (Intercept)  school_pntgD/FL     school_pntgF     school_pntgG  
+##          14.000            2.329           10.197            1.650  
+##    school_pntgI     school_pntgS     school_pntgX  
+##          10.287           30.429            2.869
+```
+
+--
+
+- When the categorical explanatory variable has many levels, they're encoded to
+**dummy variables**.
+
+- Each coefficient describes the expected difference between heights in that 
+particular school compared to the baseline level.
+
+---
+
+## Categorical predictor with &gt;2 levels
+
+.small[
+<div id="htmlwidget-11241bcffda4bc3e8348" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-11241bcffda4bc3e8348">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7"],["A","D/FL","F","G","I","S","X"],[0,1,0,0,0,0,0],[0,0,1,0,0,0,0],[0,0,0,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>school_pntg<\/th>\n      <th>D_FL<\/th>\n      <th>F<\/th>\n      <th>G<\/th>\n      <th>I<\/th>\n      <th>S<\/th>\n      <th>X<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+## The linear model with multiple predictors
+
+- Population model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x_1 + \beta_2~x_2 + \cdots + \beta_k~x_k $$
+
+--
+
+- Sample model that we use to estimate the population model:
+  
+$$ \hat{y} = b_0 + b_1~x_1 + b_2~x_2 + \cdots + b_k~x_k $$
+
+---
+
+## Correlation does not imply causation!
+
+Remember this when interpreting model coefficients
+
+---
+
+class: center, middle
+
+# Prediction with models
+
+---
+
+## Predict height from width
+
+.question[
+On average, how tall are paintings that are 60 inches wide?
+`$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$`
+]
+
+--
+
+
+```r
+3.62 + 0.78 * 60
+```
+
+```
+## [1] 50.42
+```
+
+"On average, we expect paintings that are 60 inches wide to be 50.42 inches high."
+
+**Warning:** We "expect" this to happen, but there will be some variability. (We'll
+learn about measuring the variability around the prediction later.)
+
+---
+
+## Prediction vs. extrapolation
+
+.question[
+On average, how tall are paintings that are 400 inches wide?
+`$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$`
+]
+
+![](p2_d02-formalizing-linear-models_files/figure-html/extrapolate-1.png)&lt;!-- --&gt;
+
+---
+
+## Watch out for extrapolation!
+
+&gt; "When those blizzards hit the East Coast this winter, it proved to my satisfaction 
+that global warming was a fraud. That snow was freezing cold. But in an alarming 
+trend, temperatures this spring have risen. Consider this: On February 6th it was 10 
+degrees. Today it hit almost 80. At this rate, by August it will be 220 degrees. So 
+clearly folks the climate debate rages on."&lt;sup&gt;1&lt;/sup&gt;  &lt;br&gt;
+Stephen Colbert, April 6th, 2010
+
+.footnote[
+[1] OpenIntro Statistics. "Extrapolation is treacherous." OpenIntro Statistics.
+]
+
+---
+
+class: center, middle
+
+# Measuring model fit
+
+---
+
+## Measuring the strength of the fit
+
+- The strength of the fit of a linear model is most commonly evaluated using `\(R^2\)`.
+
+- It tells us what percent of variability in the response variable is explained by 
+the model.
+
+- The remainder of the variability is explained by variables not included in the 
+model.
+
+- `\(R^2\)` is sometimes called the coefficient of determination.
+
+---
+
+## Obtaining `\(R^2\)` in R
+
+- Height vs. width
+.small[
+
+```r
+glance(m_ht_wt)
+```
+
+```
+##   r.squared adj.r.squared   sigma statistic p.value df    logLik      AIC
+## 1 0.6829468     0.6828456 8.30427  6748.621       0  2 -11083.45 22172.89
+##        BIC deviance df.residual
+## 1 22191.04 216054.5        3133
+```
+
+```r
+glance(m_ht_wt)$r.squared # extract R-squared
+```
+
+```
+## [1] 0.6829468
+```
+]
+
+Roughly 68% of the variability in heights of paintings can be explained by their
+widths.
+
+- Height vs. lanscape features
+.small[
+
+```r
+glance(m_ht_lands)$r.squared
+```
+
+```
+## [1] 0.03456724
+```
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

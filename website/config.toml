@@ -2,7 +2,7 @@ theme = "hugo-theme-learn"
 baseURL = "/"
 languageCode = "en-us"
 title = "Data Science Course in a Box"
-publishDir = "../docs"
+publishDir = "../public"
 relativeurls = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
