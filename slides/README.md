@@ -2,7 +2,7 @@
 
 ## Outline
 
-The course is divided into three parts. Part 1 is on exloratory data analysis, part 2 is making rigorous conclusions via statistical tools like modeling and inference, and part 3 includes four topics (that could easily be swapped with others or taught in any order) that are designed to inspire studends to learn more data science and statistics.
+The course is divided into three parts. Part 1 is on exploratory data analysis, part 2 is making rigorous conclusions via statistical tools like modeling and inference, and part 3 includes four topics (that could easily be swapped with others or taught in any order) that are designed to inspire students to learn more data science and statistics.
 
 ### Part 1: Exploring data
 
@@ -37,7 +37,7 @@ The course is divided into three parts. Part 1 is on exloratory data analysis, p
 
 - p3_d01: Web scraping
 - p3_d02: Functions and automation
-- p3_d03: Interactive vidualizations with Shiny
+- p3_d03: Interactive visualizations with Shiny
 - p3_d04: Bayesian inference
 
 ## Toolkit
