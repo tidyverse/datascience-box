@@ -16,3 +16,4 @@ labs/*/*.html
 project/*.html
 project/*/*/*.html
 slides/*/*.html
+public/
