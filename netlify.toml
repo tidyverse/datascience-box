@@ -1,10 +1,7 @@
 [build]
-  base    = "website"
-  publish = "public"
+  base    = "website/"
+  publish = "website/public/"
   command = "hugo"
 
 [build.environment]
   HUGO_VERSION = "0.45"
-  
-
-  
