@@ -1,0 +1,6 @@
+# contents of netlify.toml
+[context.production.environment]
+  HUGO_VERSION = "0.45"
+
+[build.environment]
+  HUGO_VERSION = "0.45"
