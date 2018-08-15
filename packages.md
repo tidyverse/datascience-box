@@ -1,0 +1,3 @@
+knitr
+tidyverse
+nycflights13
