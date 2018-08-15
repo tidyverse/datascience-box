@@ -1,7 +1,7 @@
 ---
 weight: 3
-title: "Technology stack"
+title: "Infrastructure"
 output: html_document
 ---
 
-Intro on tech stack...
+Intro on infrastructure...
