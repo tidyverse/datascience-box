@@ -1,6 +1,6 @@
 ---
 weight: 2
-title: "Exploring data"
+title: "Making rigorous conclusions"
 output: html_document
 ---
 

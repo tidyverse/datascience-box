@@ -1,0 +1,31 @@
+---
+weight: 2
+title: "Philosophy"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+Assuming you like chocolate and strawberries, which of the following images is 
+more likely to make you want to learn to bake a cake? I'm guessing the 
+answer is the image on the left: the cake.
+
+```{r cake-ingredients, fig.align="center", echo=FALSE}
+include_graphics(path = "../../images/cake-ingredients.png")
+```
+
+The teaching philosophy of this course builds on this same idea. We first show 
+the students the end result, and then step back and teach the necessary 
+components. Specifically, instead of starting with data structurs and functions, 
+we start data visualization. And not just a toy example, but a complex, 
+multivariate data visualization. Of course, we don't want students feeling like...
+
+```{r owl, fig.align="center", echo=FALSE}
+include_graphics(path = "../../images/owl.jpg")
+```
+
+The course goes starts out slow and emphasizes iteration. Students are initially 
+provided with lots of scaffolding, and then slowly we take away the scaffolding 
+until they are starting with a blank slate for their final projects.

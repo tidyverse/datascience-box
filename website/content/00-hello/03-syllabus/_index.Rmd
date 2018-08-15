@@ -1,17 +1,23 @@
 ---
-weight: 1
-title: "Course syllabus"
+weight: 3
+title: "Syllabus"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+```
+
 The diagram below shows the flow of topics in the course.
 
-![Topic flow](../../images/syllabus.png)
+```{r topic-flow, fig.align="center", echo=FALSE}
+include_graphics(path = "../../images/syllabus.png")
+```
 
 The table below describes the topics in further detail.
 
-|Week|Unit|Name         |Type         |Summary
-|----|----|-------------|-------------|-----------------
+|Week|Unit      |Name         |Type      |Summary
+|----|----------|-------------|----------|------------------------------
 |1|Visualizing and Wrangling Data|Welcome to Data Science|Lecture|Overview of class policies; introduction to data science, git, and RStudio cloud
 |1|Visualizing and Wrangling Data|Lab 00: Logistics|Lab|Overview of lab policies; class survey and pretest; create github and RStudio Cloud accounts
 |2|Visualizing and Wrangling Data|Meet the Toolkit|Lecture|Introduction to RStudio cloud, R syntax, R Markdown syntax, and version control
@@ -24,7 +30,6 @@ The table below describes the topics in further detail.
 |4|Visualizing and Wrangling Data|Tips for effective data visualization|Lecture|Tips for effective data visualization; presentation by Duke Library's Data and Visualization Services team
 |4|Visualizing and Wrangling Data|HW 01: Ugly Charts|Homework|Improving a poor data visualization by using the principles discussed in class
 |4|Visualizing and Wrangling Data|Lab 03: Visualizing spatial data|Lab|Using spatial data to examine the clustering of Denny's restaurants and La Quinta hotels; importance of visualizing spatial data (John Snow)
-|5|Visualizing and Wrangling Data|Guest lecture: Hadley Wickham & Jenny Bryan|Lecture|Skype Q&A with prominent data scientists Hadley Wickham and Jenny Bryan
 |5|Visualizing and Wrangling Data|Review and recap|Lecture|Review of and further practice with R tidyverse, Rstudio Cloud, git, and github
 |5|Visualizing and Wrangling Data|Lab 04: Wrangling spatial data|Lab|Working further with the dataset from Lab 03 using new tidyverse functions
 |6|Visualizing and Wrangling Data|Reading 02|Reading|Overview of data, data collection, scientific studies, and experimental design

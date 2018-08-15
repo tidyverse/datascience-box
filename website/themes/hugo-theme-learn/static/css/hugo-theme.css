@@ -1,5 +1,10 @@
 /* Insert here special css for hugo theme, on top of any other imported css */
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* Table of contents */
 
