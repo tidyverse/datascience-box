@@ -3,12 +3,19 @@
 .RData
 .Ruserdata
 .DS_Store
+# large data
 gss2016.csv
+# keynote files
+*.key
+# website - build by netlify
+public/
+# intermediary files
+exams/*/*.md
+project/*/*/*.md
+website/*/*/*.md
 *_cache
 *_files
-*.md
-bookdown*
-*.key
+# html output
 assignments/*/*.html
 exams/*/*.html
 extras/*/*.html
@@ -16,4 +23,3 @@ labs/*/*.html
 project/*.html
 project/*/*/*.html
 slides/*/*.html
-public/
