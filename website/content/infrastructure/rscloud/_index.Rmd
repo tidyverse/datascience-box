@@ -1,7 +1,10 @@
 ---
 weight: 1
 title: "RStudio Cloud"
-output: blogdown::html_page
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
 ---
 
 The RStudio IDE includes a viewable environment, a file browser, data viewer, 

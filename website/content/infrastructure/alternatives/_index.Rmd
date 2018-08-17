@@ -1,12 +1,15 @@
 ---
 weight: 5
 title: "Alternative setups"
-output: blogdown::html_page
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
 ---
 
-In this section we describe a few alternative setups for your course.
+In this section we describe alternative setups for your course.
 
-## RStudio access
+## RStudio (without RStudio Cloud)
 
 In a course at this level students should access the RStudio IDE through a 
 centralized RStudio server instance, which allows us to provide students with 
@@ -103,6 +106,6 @@ partner with their departmental and/or university IT professionals. Additionally
 building these partnerships can lead to collaborations that benefit the entire 
 university.
 
-## Not using Git
+## Course management and collaboration (without GitHub)
 
 and using RStudio Cloud only...

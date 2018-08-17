@@ -1,10 +1,23 @@
 ---
 weight: 1
 title: "RStudio Cloud"
-output: blogdown::html_page
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#setting-up-your-course-in-rstudio-cloud">Setting up your course in RStudio Cloud</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#base-project-template">Base project template</a></li>
+<li><a href="#git-integration">Git integration</a></li>
+<li><a href="#limits">Limits</a></li>
+<li><a href="#rstudio-cloud-is-in-alpha">RStudio Cloud is in alpha!</a></li>
+</ul>
+</div>
 
 <p>The RStudio IDE includes a viewable environment, a file browser, data viewer, and a plotting pane, which makes it less intimidating than the bare R shell. Additionally, since it is a full fledged IDE, it also features integrated help, syntax highlighting, and context-aware tab completion, which are all powerful tools that help flatten the learning curve.</p>
 <p><a href="https://rstudio.cloud/">RStudio Cloud</a> is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation. The main reason for this choice is reducing friction at first exposure to R. Local installation can be difficult to manage, both for the student and the instructor, and can shift the focus away from data science learning at the beginning of the course. In the pedagogical decisions section we discuss in further detail the reasons for avoiding local installation at the beginning of the course and discuss when to introduce it later on in the course.</p>

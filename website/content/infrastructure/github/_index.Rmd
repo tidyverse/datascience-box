@@ -1,7 +1,10 @@
 ---
 weight: 2
 title: "Git and GitHub"
-output: blogdown::html_page
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
 ---
 
 One of the defining principles behind how this course teaches computing is that 
@@ -100,6 +103,8 @@ which can dramatically reduce the course administrative workload. Two solutions
 to this problem are (1) GitHub Classroom and (2) ghclass. Use of ghclass, an R 
 package for GitHub classroom tools is detailed below, and use of GitHub 
 classroom is described in the [alternative setups] section.
+
+<!-- 
 
 Some placeholder text below...
 
@@ -219,3 +224,5 @@ Open the R Markdown (Rmd) file in your project, change the author name to your *
 ## Pulling changes:
 
 Now, the remaining team members who have not been concurrently making these changes on their projects should click on the **Pull** button in their Git pane and observe that the changes are now reflected on their projects as well.
+
+-->
