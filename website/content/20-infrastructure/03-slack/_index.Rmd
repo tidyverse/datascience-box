@@ -1,0 +1,14 @@
+---
+weight: 3
+title: "Slack"
+output: html_document
+---
+
+This section will have content on
+
+- Setting up Slack
+- Inviting students
+- Channels
+- Policies for students
+- Tips
+- Challenges
