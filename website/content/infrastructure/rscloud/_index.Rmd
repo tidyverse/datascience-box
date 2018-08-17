@@ -169,7 +169,7 @@ If you have a base project template set up for your workspace, this new project
 created from GitHub will also have the packages installed in the base project 
 template.
 
-For more on using Git and GitHub in the classroom, see [here](../02-github/).
+For more on using Git and GitHub in the classroom, see [here](../github/).
 
 ## Limits
 
