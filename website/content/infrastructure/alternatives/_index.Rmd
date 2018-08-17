@@ -1,7 +1,7 @@
 ---
 weight: 5
 title: "Alternative setups"
-output: html_document
+output: blogdown::html_page
 ---
 
 In this section we describe a few alternative setups for your course.

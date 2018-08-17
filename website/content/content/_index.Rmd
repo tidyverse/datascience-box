@@ -1,7 +1,7 @@
 ---
 weight: 2
 title: "Course content"
-output: html_document
+output: blogdown::html_page
 ---
 
 Course materials are organized in three parts: exploring data, making 

@@ -1,7 +1,7 @@
 ---
 weight: 2
 title: "Git and GitHub"
-output: html_document
+output: blogdown::html_page
 ---
 
 One of the defining principles behind how this course teaches computing is that 

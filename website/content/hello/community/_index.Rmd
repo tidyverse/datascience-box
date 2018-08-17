@@ -1,7 +1,7 @@
 ---
 weight: 5
 title: "Community"
-output: html_document
+output: blogdown::html_page
 ---
 
 Like what's in the box? Have questions? Is something you need missing? Want to 

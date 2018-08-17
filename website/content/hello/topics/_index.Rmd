@@ -1,7 +1,7 @@
 ---
 weight: 3
 title: "Topics"
-output: html_document
+output: blogdown::html_page
 ---
 
 ```{r setup, include=FALSE}

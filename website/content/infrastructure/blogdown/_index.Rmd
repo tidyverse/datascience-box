@@ -1,7 +1,7 @@
 ---
 weight: 4
 title: "Blogdown"
-output: html_document
+output: blogdown::html_page
 ---
 
 A nifty tool for building your course website is [blogdown](https://bookdown.org/yihui/blogdown/).

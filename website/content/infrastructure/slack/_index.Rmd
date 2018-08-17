@@ -1,7 +1,7 @@
 ---
 weight: 3
 title: "Slack"
-output: html_document
+output: blogdown::html_page
 ---
 
 This section will have content on
