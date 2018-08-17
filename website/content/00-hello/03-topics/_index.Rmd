@@ -8,34 +8,56 @@ output: html_document
 library(knitr)
 ```
 
-The diagram below shows the flow of topics in the course.
+The course content is organized in three units:
 
 ```{r topic-flow, fig.align="center", echo=FALSE}
 include_graphics(path = "../../images/topic-flow.png")
 ```
 
-The table below describes the topics in further detail.
+**Unit 1 - Exploring data: ** This unit focuses on data visualiation and data 
+wranling. Specifically we cover fundamentals of data and data visualization, 
+confounding variables, and Simpson's paradox as well as the concept of tidy 
+data, data import, data cleaning, and data curation. We end the unit with web 
+scraping and introduce the idea of iteration in preparation for the next unit. 
+Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown, 
+Git, GitHub, etc.
+
+**Unit 2 - Making rigorous conclusions:** In this part we introduce modeling and 
+statistical inference for making data based conclusions. We discuss building, 
+interpreting, and selecting models, visualizing interaction effects, and 
+prediction and model validity. Statistical inference is introduced from a 
+simulation based perspective, and the Central Limit Theorem is discussed very 
+briefly to lay the foundation for future coursework in statistics. 
+
+**Unit 3 - Looking forward:** In the last unit we present a series of modules
+such as interactive reporting and visualizaiton with Shiny, text analysis, and  
+Bayesian inference. These are independent modules that instructors can choose to 
+include in their introductory data science curriculum depending on how much time 
+they have left in the semester.
+
+The table below outlines a sample course schedule developed for a 15-week long 
+semester course.
 
 |Week|Unit      |Name         |Type      |Summary
 |----|----------|-------------|----------|------------------------------
-|1|Visualizing and Wrangling Data|Welcome to Data Science|Lecture|Overview of class policies; introduction to data science, git, and RStudio Cloud
-|1|Visualizing and Wrangling Data|Lab 00: Logistics|Lab|Overview of lab policies; class survey and pretest; create github and RStudio Cloud accounts
-|2|Visualizing and Wrangling Data|Meet the Toolkit|Lecture|Introduction to RStudio Cloud, R syntax, R Markdown syntax, and version control
-|2|Visualizing and Wrangling Data|Lab 01: Hello R!|Lab|Working with RStudio Cloud, R, R markdown, and version control
-|3|Visualizing and Wrangling Data|Fundamentals of data & data visualization|Lecture|Introduction to visualizing numerical and categorical with the ggplot2 package
-|3|Visualizing and Wrangling Data|Tidy data & data wrangling|Lecture|Introduction to tidy data, data wrangling, and the dplyr package
-|3|Visualizing and Wrangling Data|Lab 02: Data wrangling and visualization|Lab|Summarizing data using ggplot2 and dplyr
-|4|Visualizing and Wrangling Data|Merge conflicts|Lecture|Resolving merge conflicts; practice using git
-|4|Visualizing and Wrangling Data|Tips for effective data visualization|Lecture|Tips for effective data visualization; presentation by Duke Library's Data and Visualization Services team
-|4|Visualizing and Wrangling Data|HW 01: Ugly Charts|Homework|Improving a poor data visualization by using the principles discussed in class
-|4|Visualizing and Wrangling Data|Lab 03: Visualizing spatial data|Lab|Using spatial data to examine the clustering of Denny's restaurants and La Quinta hotels; importance of visualizing spatial data (John Snow)
-|5|Visualizing and Wrangling Data|Review and recap|Lecture|Review of and further practice with R tidyverse, RStudio Cloud, git, and github
-|5|Visualizing and Wrangling Data|Lab 04: Wrangling spatial data|Lab|Working further with the dataset from Lab 03 using new tidyverse functions
-|6|Visualizing and Wrangling Data|Confounding variables and Simpson's paradox|Lecture|Overview of scientific studies, conditiol probability, Simpson's Paradox, coding style
-|6|Visualizing and Wrangling Data|HW 02: Gotta catch 'em all|Homework|Visualizing Pokémon Go data and interpreting the results
-|6|Visualizing and Wrangling Data|Midterm 01|Midterm|Visualizing and interpeting flight data
-|6|Visualizing and Wrangling Data|Coding style + Data types + Recoding variables|Lecture|Overview of coding style and data types in R; introduction of more tidyverse functions
-|6|Visualizing and Wrangling Data|Lab 05: Simpson's paradox|Lab|Review of Simpson's Paradox using data from a study on smoking in Whickham, England
+|1|Exploring Data|Welcome to Data Science|Lecture|Overview of class policies; introduction to data science, git, and RStudio Cloud
+|1|Exploring Data|Lab 00: Logistics|Lab|Overview of lab policies; class survey and pretest; create github and RStudio Cloud accounts
+|2|Exploring Data|Meet the Toolkit|Lecture|Introduction to RStudio Cloud, R syntax, R Markdown syntax, and version control
+|2|Exploring Data|Lab 01: Hello R!|Lab|Working with RStudio Cloud, R, R markdown, and version control
+|3|Exploring Data|Fundamentals of data & data visualization|Lecture|Introduction to visualizing numerical and categorical with the ggplot2 package
+|3|Exploring Data|Tidy data & data wrangling|Lecture|Introduction to tidy data, data wrangling, and the dplyr package
+|3|Exploring Data|Lab 02: Data wrangling and visualization|Lab|Summarizing data using ggplot2 and dplyr
+|4|Exploring Data|Merge conflicts|Lecture|Resolving merge conflicts; practice using git
+|4|Exploring Data|Tips for effective data visualization|Lecture|Tips for effective data visualization; presentation by Duke Library's Data and Visualization Services team
+|4|Exploring Data|HW 01: Ugly Charts|Homework|Improving a poor data visualization by using the principles discussed in class
+|4|Exploring Data|Lab 03: Visualizing spatial data|Lab|Using spatial data to examine the clustering of Denny's restaurants and La Quinta hotels; importance of visualizing spatial data (John Snow)
+|5|Exploring Data|Review and recap|Lecture|Review of and further practice with R tidyverse, RStudio Cloud, git, and github
+|5|Exploring Data|Lab 04: Wrangling spatial data|Lab|Working further with the dataset from Lab 03 using new tidyverse functions
+|6|Exploring Data|Confounding variables and Simpson's paradox|Lecture|Overview of scientific studies, conditiol probability, Simpson's Paradox, coding style
+|6|Exploring Data|HW 02: Gotta catch 'em all|Homework|Visualizing Pokémon Go data and interpreting the results
+|6|Exploring Data|Midterm 01|Midterm|Visualizing and interpeting flight data
+|6|Exploring Data|Coding style + Data types + Recoding variables|Lecture|Overview of coding style and data types in R; introduction of more tidyverse functions
+|6|Exploring Data|Lab 05: Simpson's paradox|Lab|Review of Simpson's Paradox using data from a study on smoking in Whickham, England
 |7|Making rigorous conclusions|Factors + The language of models|Lecture|Review of factors, introduction to modelling using 18th century Paris art auction data
 |7|Making rigorous conclusions|Formalizing linear models|Lecture|Introduction to linear modelling and least squares regression in R
 |7|Making rigorous conclusions|Lab 06: Modelling course evaluations|Lab|Visualizing, modelling, and interpreting course evaluation data
@@ -46,26 +68,25 @@ The table below describes the topics in further detail.
 |9|Making rigorous conclusions|HW 03: Bike rentals in DC|Homework|Visualizing, modelling, and interpreting Washington D.C. bike rental data
 |9|Making rigorous conclusions|Estimation via bootstrapping|Lecture|Introduction to statistical inference, confidence intervals, and bootstrapping
 |9|Making rigorous conclusions|Lab 08: Pulling yourself up by your bootstraps|Lab|Visualizing, bootstrapping, and interpreting data from the General Social Survey
-|11|Making rigorous conclusions|Hypothesis testing via simulation methods|Lecture|Hypothesis testing and simulation
-|11|Making rigorous conclusions|Women in Data Science|Extra Credit|Learn about women in data science and write about your findings
-|11|Making rigorous conclusions|HW 04: You gotta pick a package or two|Homework|Pick any R package not used in class and do something brief yet meaningful with it, including visualizations and narrative
-|11|Making rigorous conclusions|Inference overview|Lecture|Inference of hypothesis tests and confidence intervals
-|11|Making rigorous conclusions|Lab: Work on project proposals|Lab|Working on project proposals
-|12|Making rigorous conclusions|Review of simulation-based inference|Lecture|Review of homework 3, simulation-based inference
-|12|Making rigorous conclusions|HW 05: Simulate to infer|Homework|Performing hypothesis tests and confidence intervals on data from the American Community Survey
-|12|Making rigorous conclusions|Central Limit Theorem|Lecture|Central limit theorem
-|12|Making rigorous conclusions|Lab 09: Simulation based inference|Lab|Performing and interpreting hypothesis tests with North Carolina births data
-|13|Making rigorous conclusions|Central limit theorem based inference|Lecture|Central limit theorem
-|13|Making rigorous conclusions|Inference for regression|Lecture|Inference for regression; testing errors
+|10|Making rigorous conclusions|Hypothesis testing via simulation methods|Lecture|Hypothesis testing and simulation
+|10|Making rigorous conclusions|HW 04: You gotta pick a package or two|Homework|Pick any R package not used in class and do something brief yet meaningful with it, including visualizations and narrative
+|10|Making rigorous conclusions|Inference overview|Lecture|Inference of hypothesis tests and confidence intervals
+|10|Making rigorous conclusions|Lab: Work on project proposals|Lab|Working on project proposals
+|11|Making rigorous conclusions|Review of simulation-based inference|Lecture|Review of homework 3, simulation-based inference
+|11|Making rigorous conclusions|HW 05: Simulate to infer|Homework|Performing hypothesis tests and confidence intervals on data from the American Community Survey
+|11|Making rigorous conclusions|Central Limit Theorem|Lecture|Central limit theorem
+|11|Making rigorous conclusions|Lab 09: Simulation based inference|Lab|Performing and interpreting hypothesis tests with North Carolina births data
+|12|Making rigorous conclusions|Central limit theorem based inference|Lecture|Central limit theorem
+|12|Making rigorous conclusions|Inference for regression|Lecture|Inference for regression; testing errors
 |13|Making rigorous conclusions|Lab: MT review|Lab|Working on midterm
 |13|Making rigorous conclusions|Midterm 02|Midterm|Interpeting data from the CDC's National Health and Nutrition Examition Survey using hypothesis testing and linear models
-|14|Looking ahead|Web scraping|Lecture|Scraping website data for visualization and analysis
-|14|Looking ahead|Functions and automation|Lecture|Creating user-defined functions for use in web scraping
-|14|Looking ahead|Lab 10: Scrape and analyze|Lab|Scraping North Carolina brewery data from ratebeer.com for visualization and analysis
-|15|Looking ahead|Interactive data visualization and reporting, Part 1|Lecture|Creating shiny apps in R
-|15|Looking ahead|Interactive data visualization and reporting, Part 2|Lecture|Creating shiny apps in R
-|15|Looking ahead|HW 06: Scrape and analyze|Homework|Scraping data from various websites for visualization and analysis
-|15|Looking ahead|Lab: Work on project|Lab|Working on final project
-|16|Looking ahead|Bayesian inference|Lecture|Overview of Bayesian inference
-|16|Looking ahead|Text analysis of song lyrics|Lecture|Using natural language processing techniques on the song lyrics of LDOC performers
-|16|Looking ahead|Project presentations|Final Project|Giving 6-minute final project presentations and rating the presentations of fellow lab members
+|13|Looking ahead|Web scraping|Lecture|Scraping website data for visualization and analysis
+|13|Looking ahead|Functions and automation|Lecture|Creating user-defined functions for use in web scraping
+|13|Looking ahead|Lab 10: Scrape and analyze|Lab|Scraping North Carolina brewery data from ratebeer.com for visualization and analysis
+|14|Looking ahead|Interactive data visualization and reporting, Part 1|Lecture|Creating shiny apps in R
+|14|Looking ahead|Interactive data visualization and reporting, Part 2|Lecture|Creating shiny apps in R
+|14|Looking ahead|HW 06: Scrape and analyze|Homework|Scraping data from various websites for visualization and analysis
+|14|Looking ahead|Lab: Work on project|Lab|Working on final project
+|15|Looking ahead|Bayesian inference|Lecture|Overview of Bayesian inference
+|15|Looking ahead|Text analysis of song lyrics|Lecture|Using natural language processing techniques on the song lyrics of LDOC performers
+|15|Looking ahead|Project presentations|Final Project|Giving 6-minute final project presentations and rating the presentations of fellow lab members

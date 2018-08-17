@@ -20,7 +20,7 @@ be covered more quickly to make room for more content at the end of the course.
 
 ### What is in the box?
 
-Student facing materials:
+**Student facing materials:**
 
 - slides: 25 slide decks, each to be covered roughly in a 75 minute class 
 session
@@ -31,7 +31,7 @@ introduction from the instructor
 - project: Final project assignment
 - tutorials: Interactive learning exercises built with `learnr` (WIP)
 
-Instructor facing materials:
+**Instructor facing materials:**
 
 - Computing infrastructure:
     - RStudio: Choosing between RStudio Cloud, RStudio Server Pro, or local RStudio 
@@ -39,23 +39,9 @@ IDE and how to structure your course using each option
     - Git/GitHub: How to use Git and GitHub as the learning management system for 
 your course as well as a collaborative platform for your students and how to use 
 GitHub Classroom and `ghclass` for setting up your course
-    - Creating `learnr` modules
-    - Using `blogdown` to create your course website
+    - Creating `learnr` modules (coming soon)
+    - Using `blogdown` to create your course website (coming soon)
 - Predagogical tips
-
-### How is the course content organized?
-
-The course content is organized in three parts.
-
-- Part 1 - Exploring data: This part focuses on exploratory data analysis as well 
-as introducing the toolkit for the course.
-- Part 2 - Making rigorous conclusions: In this part we introduce modeling and 
-statistical inference for making data based conclusions.
-- Part 3 - Looking forward: In this part we present a series of modules, e.g. 
-interactive reporting and visualizaiton with Shiny, text analsis, Bayesian 
-inference, etc., that teachers can choose to include in their introductory 
-data science curriculum depending on how much time they have left in the 
-semester.
 
 ### Why R?
 
