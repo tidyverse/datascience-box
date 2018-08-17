@@ -1,3 +1,0 @@
-[
-["index.html", "A Minimal Book Example Chapter 1 Prerequisites", " A Minimal Book Example Yihui Xie 2018-01-08 Chapter 1 Prerequisites This is a sample book written in Markdown. You can use anything that Pandoc’s Markdown supports, e.g., a math equation \\(a^2 + b^2 = c^2\\). For now, you have to install the development versions of bookdown from Github: devtools::install_github(&quot;rstudio/bookdown&quot;) Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading #. To compile this example to PDF, you need to install XeLaTeX. "]
-]
