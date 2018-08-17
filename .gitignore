@@ -16,11 +16,10 @@ website/*/*/*.md
 *_cache
 *_files
 # html output
-#assignments/*/*.html
-#exams/*/*.html
-#extras/*/*.html
-#labs/*/*.html
-#project/*.html
-#project/*/*/*.html
-#slides/*/*.html
-*.html
+assignments/*/*.html
+exams/*/*.html
+extras/*/*.html
+labs/*/*.html
+project/*.html
+project/*/*/*.html
+slides/*/*.html
