@@ -4,5 +4,29 @@ title: "Exploring data"
 output: blogdown::html_page
 ---
 
-Links to materials to be posted here, but they can all be found on the 
-[GitHub repo](https://github.com/rstudio-education/datascience-box).
+## Lectures
+
+- [Welcome to Data Science](../../slides/p0_d01-welcome/p1_d01-welcome.html): Overview of class policies; introduction to data science, git, and RStudio Cloud
+- Meet the Toolkit: Introduction to RStudio Cloud, R syntax, R Markdown syntax, and version control
+- Fundamentals of data & data visualization: Introduction to visualizing numerical and categorical with the ggplot2 package
+- Tidy data & data wrangling: Introduction to tidy data, data wrangling, and the dplyr package
+- Merge conflicts: Resolving merge conflicts; practice using git
+- Tips for effective data visualization: Tips for effective data visualization; presentation by Duke Library's Data and Visualization Services team
+- Review and recap: Review of and further practice with R tidyverse, RStudio Cloud, git, and github
+- Confounding variables and Simpson's paradox: Overview of scientific studies, conditiol probability, Simpson's Paradox, coding style
+- Coding style + Data types + Recoding variables: Overview of coding style and data types in R; introduction of more tidyverse functions
+
+## Labs
+
+- Lab 00 - Logistics: Overview of lab policies; class survey and pretest; create github and RStudio Cloud accounts
+- Lab 01 - Hello R!: Working with RStudio Cloud, R, R markdown, and version control
+- Lab 02 - Data wrangling and visualization: Summarizing data using ggplot2 and dplyr
+- Lab 03 - Visualizing spatial data: Using spatial data to examine the clustering of Denny's restaurants and La Quinta hotels; importance of visualizing spatial data (John Snow)
+- Lab 04 - Wrangling spatial data: Working further with the dataset from Lab 03 using new tidyverse functions
+- Lab 05 - Simpson's paradox: Review of Simpson's Paradox using data from a study on smoking in Whickham, England
+
+## Homework assignments
+
+- HW 01 - Ugly Charts: Improving a poor data visualization by using the principles discussed in class
+- HW 02 - Gotta catch 'em all: Visualizing Pokémon Go data and interpreting the results
+
