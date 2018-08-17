@@ -4,21 +4,21 @@ title: "Overview"
 output: blogdown::html_page
 ---
 
-### Who is this course for?
+## Who is this course for?
 
 The materials in this box are designed for learners who have no background 
 in data science, statistics, or programming. However, they also assume that 
 the learners are interested in making sense of (sometimes messy) data and 
 willing to dive into the documentation of the packages we introduce.
 
-### Where does this course fit in a curriculum?
+## Where does this course fit in a curriculum?
 
 This course can serve as a first course in an undergraduate data science or 
 statistics curriculum. It can also serve as an introductory course in a graduate 
 program, and depending on the background of the students, earlier topics can 
 be covered more quickly to make room for more content at the end of the course. 
 
-### What is in the box?
+## What is in the box?
 
 **Student facing materials:**
 
@@ -43,7 +43,7 @@ GitHub Classroom and `ghclass` for setting up your course
     - Using `blogdown` to create your course website (coming soon)
 - Predagogical tips
 
-### Why R?
+## Why R?
 
 Unlike most other software designed specifically for teaching statistics, R 
 is free and open source, powerful, flexible, and relevant beyond the 
@@ -79,7 +79,7 @@ argue that learning a tool that is applicable beyond the introductory statistics
 course and that enhances students' problem solving skills is a burden worth 
 bearing.
 
-### Why not language X?
+## Why not language X?
 
 There are a number of other great programming tools out there that can also be 
 used for introducing students to data science, e.g. Python. These materials are 
@@ -87,7 +87,7 @@ designed for teaching data science with R. A great example of a similar
 curriculum using Python is [Data 8](http://data8.org/) designed at Universit of 
 California, Berkeley.
 
-### Why RStudio?
+## Why RStudio?
 
 The RStudio IDE includes a viewable environment, a file browser, data viewer, 
 and a plotting pane, which makes it less intimidating than the bare R shell. 
