@@ -26,9 +26,9 @@ also add a new workspace and control its permissions, and the projects you
 create here can be public or private.
 
 All student facing materials for this course have been organized in an RStudio 
-Cloud workspace [here](https://rstudio.cloud/spaces/1655/projects). Soon you will 
-have the option to copy that workspace and use it to organize assignments and 
-assessments.
+Cloud workspace [here](https://rstudio.cloud/spaces/1655/join?access_code=6fbqA1UcHm0rLmdhjyQahLIBzMy%2FNt0P4Wmlx1TG). Soon you will have the option to copy that workspace and 
+use it to organize assignments and assessments. [Note: The workspace is currently 
+work in progress, rest of the materials will be added soon.]
 
 A natural way to set up a course in RStudio Cloud is using a private workspace. 
 In this structure a classroom (a cohort of students in one semester of the course) 
