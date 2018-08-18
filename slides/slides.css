@@ -1,17 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
 
 body { 
   font-family: 'Source Sans Pro'; sans-serif;
-  font-weight: 400;
   color: #333333;
+}
+p {
+  padding: 0;
+  margin: 12px;
 }
 h2 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
   color: #A7D5E8;
   font-size: 12px;
-  margin: 0.25em 0 0.5em 0;
+  margin: 0 0 0.5em 0;
 }
 h1, h3 {
   font-family: 'Source Sans Pro', sans-serif;
@@ -28,10 +33,10 @@ a, a > code {
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
-  font-size: 90%;
+  font-size: 70%;
 }
 .remark-code, .remark-inline-code { 
-  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
+  font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; 
 }
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
@@ -77,10 +82,32 @@ a, a > code {
   padding: 0.25px;
 }
 .instructions {
-  color: #D55E00;
+  border-left: solid 5px #FFD748;
+  background-color: #FFD74850;
+  font-size: 90%;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.instructions li::before {
+  content: ">"; 
+  color: #FFD748;
+  display: inline-block; 
+  margin-left: -1.5em
+}
+blockquote {
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
 }
 ul {
-  list-style-type: square;
+  list-style: none;
+}
+li::before {
+  content: "✚"; 
+  color: #A7D5E8; 
+  display: inline-block; 
+  width: 1.5em;
+  margin-left: -1.5em
 }
 li{
   margin: 10px 0;
@@ -90,10 +117,6 @@ li{
 .small { font-size: 70% }
 img, video, iframe {
   max-width: 100%;
-}
-blockquote {
-  border-left: solid 5px lightgray;
-  padding-left: 1em;
 }
 table {
   margin: auto;
@@ -128,7 +151,7 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     width: 81px;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url("img/sta199-logo-hex.png");
+    background-image: url("dsbox-logo.png");
 }
 
 .element.style {
