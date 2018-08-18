@@ -6,7 +6,7 @@ output: blogdown::html_page
 
 ## Lectures
 
-- [Welcome to Data Science](../../slides/p0_d01-welcome/p1_d01-welcome.html): Overview of class policies; introduction to data science, git, and RStudio Cloud
+- [Welcome to Data Science](../../slides/u1_d01-welcome/u1_d01-welcome.html): Overview of class policies; introduction to data science, git, and RStudio Cloud
 - Meet the Toolkit: Introduction to RStudio Cloud, R syntax, R Markdown syntax, and version control
 - Fundamentals of data & data visualization: Introduction to visualizing numerical and categorical with the ggplot2 package
 - Tidy data & data wrangling: Introduction to tidy data, data wrangling, and the dplyr package
