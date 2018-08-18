@@ -1,5 +1,5 @@
 baseURL = "https://datasciencebox.org//"
-title = "Data Science Course in a Box"
+title = "Data Science in a Box"
 copyright = "&copy; 2018 RStudio"
 theme = "hugo-theme-learn"
 enableEmoji = true
