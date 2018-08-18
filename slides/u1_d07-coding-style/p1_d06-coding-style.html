@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coding style</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Coding style
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Coding style
+
+---
+
+## Style guide
+
+&gt;"Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread."
+&gt;
+&gt;Hadley Wickham
+
+- Style guide for this course is based on the Tidyverse style guide: http://style.tidyverse.org/
+
+- There's more to it than what we'll cover today, but we'll mention more as we introduce more functionality, and do a recap later in the semester
+
+---
+
+## File names and code chunk labels
+
+- Do not use spaces in file names, use `-` or `_` to separate words
+- Use all lowercase letters
+
+
+```r
+# Good
+ucb-admit.csv
+
+# Bad
+UCB Admit.csv
+```
+
+---
+
+## Object names
+
+- Use `_` to separate words in object names
+- Use informative but short object names
+- Do not reuse object names within an analysis
+
+
+```r
+# Good
+acs_employed
+
+# Bad
+acs.employed
+acs2
+acs_subset
+acs_subsetted_for_males
+```
+
+---
+
+## Spacing
+
+- Put a space before and after all infix operators (=, +, -, &lt;-, etc.), and when naming arguments in function calls. 
+- Always put a space after a comma, and never before (just like in regular English).
+
+
+```r
+# Good
+average &lt;- mean(feet / 12 + inches, na.rm = TRUE)
+
+# Bad
+average&lt;-mean(feet/12+inches,na.rm=TRUE)
+```
+
+---
+
+## ggplot
+
+- Always end a line with `+`
+- Always indent the next line
+
+
+```r
+# Good
+ggplot(diamonds, mapping = aes(x = price)) +
+  geom_histogram()
+
+# Bad
+ggplot(diamonds,mapping=aes(x=price))+geom_histogram()
+```
+
+---
+
+## Long lines
+
+- Limit your code to 80 characters per line. This fits comfortably on a printed page with a reasonably sized font.
+
+- Take advantage of RStudio editor's auto formatting for indentation at line breaks.
+
+---
+
+## Assignment
+
+- Use `&lt;-` not `=`
+
+
+```r
+# Good
+x &lt;- 2
+
+# Bad
+x = 2
+```
+
+---
+
+## Quotes
+
+Use `"`, not `'`, for quoting text. The only exception is when the text already contains double quotes and no single quotes.
+
+
+```r
+ggplot(diamonds, mapping = aes(x = price)) +
+  geom_histogram() +
+  # Good
+  labs(title = "`Shine bright like a diamond`",
+  # Good
+       x = "Diamond prices",
+  # Bad
+       y = 'Frequency')
+```
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

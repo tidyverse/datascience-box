@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data classes and types + Recoding</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data classes and types + Recoding
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Data classes and types
+
+---
+
+## Data types in R
+
+* **logical**
+
+* **double**
+
+* **integer**
+
+* **character**
+
+* **lists**
+
+* and some more, but we won't be focusing on those
+
+---
+
+## Logical &amp; character
+
+**logical** - boolean values `TRUE` and `FALSE`
+
+
+```r
+typeof(TRUE)
+```
+
+```
+## [1] "logical"
+```
+
+**character** - character strings
+
+
+```r
+typeof("hello")
+```
+
+```
+## [1] "character"
+```
+
+```r
+typeof('world') # but remember, we use double quotations!
+```
+
+```
+## [1] "character"
+```
+
+---
+
+## Double &amp; integer
+
+**double** - floating point numerical values (default numerical type)
+
+
+```r
+typeof(1.335)
+```
+
+```
+## [1] "double"
+```
+
+```r
+typeof(7)
+```
+
+```
+## [1] "double"
+```
+
+**integer** - integer numerical values (indicated with an `L`)
+
+
+```r
+typeof(7L)
+```
+
+```
+## [1] "integer"
+```
+
+```r
+typeof(1:3)
+```
+
+```
+## [1] "integer"
+```
+
+---
+
+## Lists
+
+**Lists** are 1d objects that can contain any combination of R objects
+
+.small[
+
+```r
+mylist &lt;- list("A", 1:4, c(TRUE, FALSE), (1:4)/2)
+mylist
+```
+
+```
+## [[1]]
+## [1] "A"
+## 
+## [[2]]
+## [1] 1 2 3 4
+## 
+## [[3]]
+## [1]  TRUE FALSE
+## 
+## [[4]]
+## [1] 0.5 1.0 1.5 2.0
+```
+
+
+```r
+str(mylist)
+```
+
+```
+## List of 4
+##  $ : chr "A"
+##  $ : int [1:4] 1 2 3 4
+##  $ : logi [1:2] TRUE FALSE
+##  $ : num [1:4] 0.5 1 1.5 2
+```
+]
+
+---
+
+## Named lists
+
+Because of their more complex structure we often want to name the elements of a list (we 
+can also do this with vectors). This can make reading and accessing the list more 
+straight forward.
+
+.small[
+
+```r
+myotherlist &lt;- list(A = "hello", B = 1:4, "knock knock" = "who's there?")
+str(myotherlist)
+```
+
+```
+## List of 3
+##  $ A          : chr "hello"
+##  $ B          : int [1:4] 1 2 3 4
+##  $ knock knock: chr "who's there?"
+```
+
+```r
+names(myotherlist)
+```
+
+```
+## [1] "A"           "B"           "knock knock"
+```
+
+```r
+myotherlist$B
+```
+
+```
+## [1] 1 2 3 4
+```
+]
+
+---
+
+## Concatenation
+
+Vectors can be constructed using the `c()` function.
+
+
+```r
+c(1, 2, 3)
+```
+
+```
+## [1] 1 2 3
+```
+
+```r
+c("Hello", "World!")
+```
+
+```
+## [1] "Hello"  "World!"
+```
+
+```r
+c(1, c(2, c(3)))
+```
+
+```
+## [1] 1 2 3
+```
+
+---
+
+## Coercion
+
+R is a dynamically typed language -- it will happily convert between the various types 
+without complaint.
+
+
+```r
+c(1, "Hello")
+```
+
+```
+## [1] "1"     "Hello"
+```
+
+```r
+c(FALSE, 3L)
+```
+
+```
+## [1] 0 3
+```
+
+```r
+c(1.2, 3L)
+```
+
+```
+## [1] 1.2 3.0
+```
+
+---
+
+## Missing Values
+
+R uses `NA` to represent missing values in its data structures.
+
+
+```r
+typeof(NA)
+```
+
+```
+## [1] "logical"
+```
+
+---
+
+## Other Special Values
+
+`NaN` - Not a number
+
+`Inf` - Positive infinity
+
+`-Inf` - Negative infinity
+
+&lt;br/&gt;
+
+.pull-left[
+
+```r
+pi / 0
+```
+
+```
+## [1] Inf
+```
+
+```r
+0 / 0
+```
+
+```
+## [1] NaN
+```
+
+```r
+1/0 + 1/0
+```
+
+```
+## [1] Inf
+```
+]
+.pull-right[
+
+```r
+1/0 - 1/0
+```
+
+```
+## [1] NaN
+```
+
+```r
+NaN / NA
+```
+
+```
+## [1] NaN
+```
+
+```r
+NaN * NA
+```
+
+```
+## [1] NaN
+```
+]
+
+---
+
+## Activity
+
+.question[
+What is the type of the following vectors? Explain why they have that type.
+]
+
+* `c(1, NA+1L, "C")`
+* `c(1L / 0, NA)`
+* `c(1:3, 5)`
+* `c(3L, NaN+1L)`
+* `c(NA, TRUE)`
+
+---
+
+## Example: Cat lovers
+
+A survey asked respondents their name and number of cats. The instructions said to enter the number of cats as a numerical value.
+
+.small[
+
+```r
+cat_lovers &lt;- read_csv("../../data/cat-lovers.csv")
+```
+
+<div id="htmlwidget-52e08143f4b709fb89e7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-52e08143f4b709fb89e7">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"],["Bernice Warren","Woodrow Stone","Willie Bass","Tyrone Estrada","Alex Daniels","Jane Bates","Latoya Simpson","Darin Woods","Agnes Cobb","Tabitha Grant","Perry Cross","Wanda Silva","Alicia Sims","Emily Logan","Woodrow Elliott","Brent Copeland","Pedro Carlson","Patsy Luna","Brett Robbins","Oliver George","Calvin Perry","Lora Gutierrez","Charlotte Sparks","Earl Mack","Leslie Wade","Santiago Barker","Jose Bell","Lynda Smith","Bradford Marshall","Irving Miller","Caroline Simpson","Frances Welch","Melba Jenkins","Veronica Morales","Juanita Cunningham","Maurice Howard","Teri Pierce","Phil Franklin","Jan Zimmerman","Leslie Price","Bessie Patterson","Ethel Wolfe","Naomi Wright","Sadie Frank","Lonnie Cannon","Tony Garcia","Darla Newton","Ginger Clark","Lionel Campbell","Florence Klein","Harriet Leonard","Terrence Harrington","Travis Garner","Doug Bass","Pat Norris","Dawn Young","Shari Alvarez","Tamara Robinson","Megan Morgan","Kara Obrien"],["0","0","1","3","3","2","1","1","0","0","0","0","1","3","3","2","1","1","0","0","1","1","0","0","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","3","3","2","1","1.5 - honestly I think one of my cats is half human","0","0","0","0","1","three","1","1","1","0","0","2"],["left","left","left","left","left","left","left","left","left","left","left","left","left","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","ambidextrous","ambidextrous","ambidextrous","ambidextrous","ambidextrous"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>number_of_cats<\/th>\n      <th>handedness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+## Oh why won't you work?!
+
+
+```r
+cat_lovers %&gt;%
+  summarise(mean = mean(number_of_cats))
+```
+
+```
+## Warning in mean.default(number_of_cats): argument is not numeric or
+## logical: returning NA
+```
+
+```
+## # A tibble: 1 x 1
+##    mean
+##   &lt;dbl&gt;
+## 1    NA
+```
+
+---
+
+## Oh why won't you still work??!!
+
+
+```r
+cat_lovers %&gt;%
+  summarise(mean_cats = mean(number_of_cats, na.rm = TRUE))
+```
+
+```
+## Warning in mean.default(number_of_cats, na.rm = TRUE): argument is not
+## numeric or logical: returning NA
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_cats
+##       &lt;dbl&gt;
+## 1        NA
+```
+
+---
+
+## Take a breath and look at your data
+
+.question[
+What is the type of the `number_of_cats` variable?
+]
+
+
+```r
+glimpse(cat_lovers)
+```
+
+```
+## Observations: 60
+## Variables: 3
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass...
+## $ number_of_cats &lt;chr&gt; "0", "0", "1", "3", "3", "2", "1", "1", "0", "0...
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left",...
+```
+
+---
+
+## Let's take another look
+
+.small[
+<div id="htmlwidget-ebba5cb495187b6a3036" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ebba5cb495187b6a3036">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"],["Bernice Warren","Woodrow Stone","Willie Bass","Tyrone Estrada","Alex Daniels","Jane Bates","Latoya Simpson","Darin Woods","Agnes Cobb","Tabitha Grant","Perry Cross","Wanda Silva","Alicia Sims","Emily Logan","Woodrow Elliott","Brent Copeland","Pedro Carlson","Patsy Luna","Brett Robbins","Oliver George","Calvin Perry","Lora Gutierrez","Charlotte Sparks","Earl Mack","Leslie Wade","Santiago Barker","Jose Bell","Lynda Smith","Bradford Marshall","Irving Miller","Caroline Simpson","Frances Welch","Melba Jenkins","Veronica Morales","Juanita Cunningham","Maurice Howard","Teri Pierce","Phil Franklin","Jan Zimmerman","Leslie Price","Bessie Patterson","Ethel Wolfe","Naomi Wright","Sadie Frank","Lonnie Cannon","Tony Garcia","Darla Newton","Ginger Clark","Lionel Campbell","Florence Klein","Harriet Leonard","Terrence Harrington","Travis Garner","Doug Bass","Pat Norris","Dawn Young","Shari Alvarez","Tamara Robinson","Megan Morgan","Kara Obrien"],["0","0","1","3","3","2","1","1","0","0","0","0","1","3","3","2","1","1","0","0","1","1","0","0","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","3","3","2","1","1.5 - honestly I think one of my cats is half human","0","0","0","0","1","three","1","1","1","0","0","2"],["left","left","left","left","left","left","left","left","left","left","left","left","left","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","ambidextrous","ambidextrous","ambidextrous","ambidextrous","ambidextrous"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>number_of_cats<\/th>\n      <th>handedness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+## Sometimes you need to babysit your respondents
+
+
+```r
+cat_lovers %&gt;%
+  mutate(number_of_cats = case_when(
+    name == "Ginger Clark" ~ 2,
+    name == "Doug Bass"    ~ 3,
+    TRUE                   ~ as.numeric(number_of_cats)
+    )) %&gt;%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+```
+## Warning in eval_bare(f[[3]], env): NAs introduced by coercion
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_cats
+##       &lt;dbl&gt;
+## 1     0.817
+```
+
+---
+
+## Always you need to respect data types
+
+
+```r
+cat_lovers %&gt;%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    ) %&gt;%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_cats
+##       &lt;dbl&gt;
+## 1     0.817
+```
+
+---
+
+## Now that we know what we're doing...
+
+
+```r
+cat_lovers &lt;- cat_lovers %&gt;%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    )
+```
+
+---
+
+## Moral of the story
+
+- If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
+
+- Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
+
+---
+
+## Vectors vs. lists
+
+.pull-left[
+.small[
+
+```r
+x &lt;- c(8,4,7)
+```
+]
+.small[
+
+```r
+x[1]
+```
+
+```
+## [1] 8
+```
+]
+.small[
+
+```r
+x[[1]]
+```
+
+```
+## [1] 8
+```
+]
+]
+--
+.pull-right[
+.small[
+
+```r
+y &lt;- list(8,4,7)
+```
+]
+.small[
+
+```r
+y[2]
+```
+
+```
+## [[1]]
+## [1] 4
+```
+]
+.small[
+
+```r
+y[[2]]
+```
+
+```
+## [1] 4
+```
+]
+]
+
+--
+
+&lt;br&gt;
+
+**Note:** When using tidyverse code you'll rarely need to refer to elements using square brackets, but it's good to be aware of this syntax, especially since you might encounter it when searching for help online.
+
+---
+
+class: center, middle
+
+# Data "set"
+
+---
+
+## Data "sets" in R
+
+- "set" is in quotation marks because it is not a formal data class
+
+- A tidy data "set" can be one of the following types:
+    + `tibble`
+    + `data.frame`
+
+- We'll often work with `tibble`s:
+    + `readr` package (e.g. `read_csv` function) loads data as a `tibble` by default
+    + `tibble`s are part of the tidyverse, so they work well with other packages we are using
+    + they make minimal assumptions about your data, so are less likely to cause hard to track bugs in your code
+
+---
+
+## Data frames
+
+- A data frame is the most commonly used data structure in R, they are just a list of equal length vectors (usually atomic, but you can use generic as well). Each vector is treated as a column and elements of the vectors as rows.
+
+- A tibble is a type of data frame that ... makes your life (i.e. data analysis) easier.
+
+- Most often a data frame will be constructed by reading in from a file, but we can also create them from scratch.
+
+
+```r
+df &lt;- tibble(x = 1:3, y = c("a", "b", "c"))
+class(df)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+```r
+glimpse(df)
+```
+
+```
+## Observations: 3
+## Variables: 2
+## $ x &lt;int&gt; 1, 2, 3
+## $ y &lt;chr&gt; "a", "b", "c"
+```
+
+---
+
+## Data frames (cont.)
+
+
+```r
+attributes(df)
+```
+
+```
+## $names
+## [1] "x" "y"
+## 
+## $row.names
+## [1] 1 2 3
+## 
+## $class
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+```r
+class(df$x)
+```
+
+```
+## [1] "integer"
+```
+
+```r
+class(df$y)
+```
+
+```
+## [1] "character"
+```
+
+---
+
+## Working with tibbles in pipelines
+
+.question[
+How many respondents have below average number of cats?
+]
+
+
+```r
+mean_cats &lt;- cat_lovers %&gt;%
+  summarise(mean_cats = mean(number_of_cats))
+
+cat_lovers %&gt;%
+  filter(number_of_cats &lt; mean_cats) %&gt;%
+  nrow()
+```
+
+```
+## [1] 60
+```
+
+.question[
+Do you believe this number? Why, why not?
+]
+
+---
+
+## A result of a pipeline is always a tibble
+
+
+```r
+mean_cats
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_cats
+##       &lt;dbl&gt;
+## 1     0.817
+```
+
+```r
+class(mean_cats)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+---
+
+## `pull()` can be your new best friend
+
+But use it sparingly!
+
+
+```r
+mean_cats &lt;- cat_lovers %&gt;%
+  summarise(mean_cats = mean(number_of_cats)) %&gt;%
+  pull()
+
+cat_lovers %&gt;%
+  filter(number_of_cats &lt; mean_cats) %&gt;%
+  nrow()
+```
+
+```
+## [1] 33
+```
+
+--
+
+
+```r
+mean_cats
+```
+
+```
+## [1] 0.8166667
+```
+
+```r
+class(mean_cats)
+```
+
+```
+## [1] "numeric"
+```
+
+---
+
+class: center, middle
+
+# Factors
+
+---
+
+## Factors
+
+Factor objects are how R stores data for categorical variables (fixed numbers of discrete values).
+
+
+```r
+(x = factor(c("BS", "MS", "PhD", "MS")))
+```
+
+```
+## [1] BS  MS  PhD MS 
+## Levels: BS MS PhD
+```
+
+
+```r
+glimpse(x)
+```
+
+```
+##  Factor w/ 3 levels "BS","MS","PhD": 1 2 3 2
+```
+
+
+```r
+typeof(x)
+```
+
+```
+## [1] "integer"
+```
+
+---
+
+## Read data in as character strings
+
+
+```r
+glimpse(cat_lovers)
+```
+
+```
+## Observations: 60
+## Variables: 3
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass...
+## $ number_of_cats &lt;dbl&gt; 0, 0, 1, 3, 3, 2, 1, 1, 0, 0, 0, 0, 1, 3, 3, 2,...
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left",...
+```
+
+---
+
+## But coerce when plotting
+
+
+```r
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+![](p1_d07-data-class-type-recode_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+
+---
+
+## Use forcats to manipulate factors
+
+
+```r
+cat_lovers &lt;- cat_lovers %&gt;%
+  mutate(handedness = fct_relevel(handedness, 
+                                  "right", "left", "ambidextrous"))
+```
+
+
+```r
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+![](p1_d07-data-class-type-recode_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+
+---
+
+## Come for the functionality
+
+.pull-left[
+... stay for the logo
+]
+.pull-right[
+![](img/hex-forcats.png)
+]
+
+- R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Historically, factors were much easier to work with than character vectors, so many base R functions automatically convert character vectors to factors.
+
+- However, factors are still useful when you have true categorical data, and when you want to override the ordering of character vectors to improve display. The goal of the forcats package is to provide a suite of useful tools that solve common problems with factors.
+
+Source: [forcats.tidyverse.org](http://forcats.tidyverse.org/)
+
+---
+
+## Recap
+
+- Always best to think of data as part of a tibble
+    + This plays nicely with the `tidyverse` as well
+    + Rows are observations, columns are variables
+    
+- Be careful about data types / classes
+    + Sometimes `R` makes silly assumptions about your data class 
+        + Using `tibble`s help, but it might not solve all issues
+        + Think about your data in context, e.g. 0/1 variable is most likely a `factor`
+    + If a plot/output is not behaving the way you expect, first
+    investigate the data class
+    + If you are absolutely sure of a data class, over-write it in your
+    tibble so that you don't need to keep having to keep track of it
+        + `mutate` the variable with the correct class
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
