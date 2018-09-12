@@ -29,17 +29,12 @@ a, a > code {
   text-decoration: none;
 }
 
-.footnote {
-  position: absolute;
-  bottom: 3em;
-  padding-right: 4em;
-  font-size: 70%;
+.remark-slide-content{
+  font-size: 24px;
 }
-.remark-code, .remark-inline-code { 
-  font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; 
-}
-.remark-code-line-highlighted     { background-color: #ffff88; }
 
+
+/* Sections */
 .inverse {
   background-color: #A7D5E8;
   color: #ffffff;
@@ -48,6 +43,18 @@ a, a > code {
 .inverse h1, .inverse h2, .inverse h3 {
   color: #f3f3f3;
 }
+
+
+/* Code formatting */
+.remark-code-line-highlighted {
+  background-color: #A7D5E8;
+}
+.remark-code, .remark-inline-code { 
+  font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; 
+}
+.remark-code-line-highlighted     { background-color: #ffff88; }
+
+
 /* Two-column layout */
 .left-column {
   color: #777;
@@ -77,9 +84,22 @@ a, a > code {
 .pull-right ~ * {
   clear: both;
 }
+
+
+/* Custom boxes */
 .question {
-  background-color: #E1ECF8;
-  padding: 0.25px;
+  border-left: solid 5px #1E5C65;
+  background-color: #1E5C6530;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.alert {
+  border-right: solid 5px #A7D5E8;
+  background-color: #A7D5E830;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 .instructions {
   border-left: solid 5px #FFD748;
@@ -95,10 +115,16 @@ a, a > code {
   display: inline-block; 
   margin-left: -1.5em
 }
+
+
+/* Quotes */
 blockquote {
   border-left: solid 5px lightgray;
   padding-left: 1em;
 }
+
+
+/* Lists */
 ul {
   list-style: none;
 }
@@ -112,12 +138,21 @@ li::before {
 li{
   margin: 10px 0;
 }
+
+
+/* Font sizes */
 .large { font-size: 130% }
-.midi { font-size: 90% }
+.midi { font-size: 85% }
 .small { font-size: 70% }
+
+
+/* Embedded images */
 img, video, iframe {
   max-width: 100%;
 }
+
+
+/* Tables */
 table {
   margin: auto;
   border-top: 1px solid #666;
@@ -127,21 +162,39 @@ table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
 thead, tfoot, tr:nth-child(even) { background: #eee }
 
-@page { margin: 0; }
-@media print {
-  .remark-slide-scaler {
-    width: 100% !important;
-    height: 100% !important;
-    transform: scale(1) !important;
-    top: 0 !important;
-    left: 0 !important;
-  }
+/* Footer */
+div.my-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #A7D5E8;
+    position: absolute;
+    bottom: 0px;
+    left: 80px;
+    height: 35px;
+    width: 100%;
+}
+div.my-footer span {
+    font-size: 12pt;
+    position: absolute;
+    color: #333333;
+    left: 20px;
+    bottom: 10px;
+}
+div.my-footer a {
+    font-size: 12pt;
+    color: #333333;
 }
 
-.remark-slide-content{
-  font-size: 24px;
+
+/* Footnote */
+.footnote {
+  position: absolute;
+  bottom: 3em;
+  padding-right: 4em;
+  font-size: 70%;
 }
 
+
+/* Logo */
 .remark-slide-content:after {
     content: "";
     position: absolute;
@@ -154,6 +207,33 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     background-image: url("dsbox-logo.png");
 }
 
+
+/* Slide number */
+.remark-slide-number {
+  color: #333333;
+  opacity: 1;
+  font-size: 12pt;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+/* Media */
+@page { margin: 0; }
+@media print {
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+
+/* What is this? */
 .element.style {
     position: absolute;
     left: 0px;
