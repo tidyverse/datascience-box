@@ -1,46 +1,22 @@
 ---
-title: "Data classes and types + Recoding"
+title: "Data classes and types + Recoding <br> `r emo::ji('minidisc')`"
+author: ""
 output:
   xaringan::moon_reader:
     css: "../slides.css"
-    logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
-      highlightStyle: github
       highlightLines: true
+      highlightStyle: solarized-dark
       countIncrementalSlides: false
 ---
+
+```{r child = "../setup.Rmd"}
+```
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(DT)
-```
-
-```{r setup, include=FALSE}
-# R options
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  warn = 1
-  )
-# Set dpi and height for images
-knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
-# ggplot2 color palette with gray
-color_palette <- list(gray = "#999999", 
-                      salmon = "#E69F00", 
-                      lightblue = "#56B4E9", 
-                      green = "#009E73", 
-                      yellow = "#F0E442", 
-                      darkblue = "#0072B2", 
-                      red = "#D55E00", 
-                      purple = "#CC79A7")
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-# For magick
-dev.off <- function(){
-  invisible(grDevices::dev.off())
-}
-# For ggplot2
-ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 class: center, middle
@@ -52,15 +28,10 @@ class: center, middle
 ## Data types in R
 
 * **logical**
-
 * **double**
-
 * **integer**
-
 * **character**
-
 * **lists**
-
 * and some more, but we won't be focusing on those
 
 ---
@@ -318,7 +289,6 @@ cat_lovers <- cat_lovers %>%
 ## Moral of the story
 
 - If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
-
 - Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
 
 ---
@@ -378,11 +348,9 @@ class: center, middle
 ## Data "sets" in R
 
 - "set" is in quotation marks because it is not a formal data class
-
 - A tidy data "set" can be one of the following types:
     + `tibble`
     + `data.frame`
-
 - We'll often work with `tibble`s:
     + `readr` package (e.g. `read_csv` function) loads data as a `tibble` by default
     + `tibble`s are part of the tidyverse, so they work well with other packages we are using
@@ -393,9 +361,7 @@ class: center, middle
 ## Data frames
 
 - A data frame is the most commonly used data structure in R, they are just a list of equal length vectors (usually atomic, but you can use generic as well). Each vector is treated as a column and elements of the vectors as rows.
-
 - A tibble is a type of data frame that ... makes your life (i.e. data analysis) easier.
-
 - Most often a data frame will be constructed by reading in from a file, but we can also create them from scratch.
 
 ```{r}
@@ -535,10 +501,11 @@ ggplot(cat_lovers, mapping = aes(x = handedness)) +
 ]
 
 - R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Historically, factors were much easier to work with than character vectors, so many base R functions automatically convert character vectors to factors.
-
 - However, factors are still useful when you have true categorical data, and when you want to override the ordering of character vectors to improve display. The goal of the forcats package is to provide a suite of useful tools that solve common problems with factors.
 
+.footnote[
 Source: [forcats.tidyverse.org](http://forcats.tidyverse.org/)
+]
 
 ---
 
@@ -547,13 +514,12 @@ Source: [forcats.tidyverse.org](http://forcats.tidyverse.org/)
 - Always best to think of data as part of a tibble
     + This plays nicely with the `tidyverse` as well
     + Rows are observations, columns are variables
-    
 - Be careful about data types / classes
     + Sometimes `R` makes silly assumptions about your data class 
         + Using `tibble`s help, but it might not solve all issues
         + Think about your data in context, e.g. 0/1 variable is most likely a `factor`
     + If a plot/output is not behaving the way you expect, first
     investigate the data class
-    + If you are absolutely sure of a data class, over-write it in your
+    + If you are absolutely sure of a data class, overwrite it in your
     tibble so that you don't need to keep having to keep track of it
         + `mutate` the variable with the correct class

@@ -1,46 +1,22 @@
 ---
-title: "Web scraping"
+title: "Web scraping <br> `r emo::ji('spider_web')`"
+author: ""
 output:
   xaringan::moon_reader:
     css: "../slides.css"
-    logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
-      highlightStyle: github
       highlightLines: true
+      highlightStyle: solarized-dark
       countIncrementalSlides: false
 ---
+
+```{r child = "../setup.Rmd"}
+```
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(knitr)
-```
-
-```{r setup, include=FALSE}
-# R options
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  warn = 1
-  )
-# Set dpi and height for images
-knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
-# ggplot2 color palette with gray
-color_palette <- list(gray = "#999999", 
-                      salmon = "#E69F00", 
-                      lightblue = "#56B4E9", 
-                      green = "#009E73", 
-                      yellow = "#F0E442", 
-                      darkblue = "#0072B2", 
-                      red = "#D55E00", 
-                      purple = "#CC79A7")
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-# For magick
-dev.off <- function(){
-  invisible(grDevices::dev.off())
-}
-# For ggplot2
-ggplot2::theme_set(ggplot2::theme_bw())
 ```
 
 class: center, middle
@@ -96,35 +72,29 @@ Most of the data on the web is still largely available as HTML - while it is str
 
 Core functions:
 
-* `read_html` - read HTML data from a url or character string.
-
-* `html_nodes` - select specified nodes from the HTML document using CSS selectors.
-
-* `html_table` - parse an HTML table into a data frame.
-
-* `html_text` - extract tag pairs' content.
-
-* `html_name` - extract tags' names.
-
-* `html_attrs` - extract all of each tag's attributes.
-
-* `html_attr` - extract tags' attribute value by name.
+- `read_html` - read HTML data from a url or character string.
+- `html_nodes` - select specified nodes from the HTML document using CSS selectors.
+- `html_table` - parse an HTML table into a data frame.
+- `html_text` - extract tag pairs' content.
+- `html_name` - extract tags' names.
+- `html_attrs` - extract all of each tag's attributes.
+- `html_attr` - extract tags' attribute value by name.
 
 ---
 
 ## SelectorGadget
 
 - SelectorGadget: Open source tool that eases CSS selector generation and discovery
-
 - Install the [Chrome Extension](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb) 
-
-- A box will open in the bottom right of the website. Click on a page element that you 
-would like your selector to match (it will turn green). SelectorGadget will then generate 
-a minimal CSS selector for that element, and will highlight (yellow) everything that is 
+- A box will open in the bottom right of the website. Click on a page element 
+that you would like your selector to match (it will turn green). SelectorGadget 
+will then generate a minimal CSS selector for that element, and will highlight 
+(yellow) everything that is 
 matched by the selector. 
-- Now click on a highlighted element to remove it from the selector (red), or click on an 
-unhighlighted element to add it to the selector. Through this process of selection and 
-rejection, SelectorGadget helps you come up with the appropriate CSS selector for your needs.
+- Now click on a highlighted element to remove it from the selector (red), or 
+click on an unhighlighted element to add it to the selector. Through this process 
+of selection and rejection, SelectorGadget helps you come up with the appropriate 
+CSS selector for your needs.
 
 ```{r eval=FALSE}
 vignette("selectorgadget")
@@ -316,5 +286,5 @@ imdb_top_250 %>%
 - ...
 
 .question[
-Compare the display of information at https://raleigh.craigslist.org/search/apa to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
+Compare the display of information at [raleigh.craigslist.org/search/apa](https://raleigh.craigslist.org/search/apa) to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
 ]

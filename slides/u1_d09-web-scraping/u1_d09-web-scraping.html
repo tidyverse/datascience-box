@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Web scraping</title>
+    <title>Web scraping   🕸</title>
     <meta charset="utf-8">
-    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
+    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
+    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Web scraping
+# Web scraping <br> 🕸
 
 ---
 
 
 
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org/" target="_blank"&gt;datasciencebox.org
+&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
 
 
 
@@ -72,35 +87,29 @@ Most of the data on the web is still largely available as HTML - while it is str
 
 Core functions:
 
-* `read_html` - read HTML data from a url or character string.
-
-* `html_nodes` - select specified nodes from the HTML document using CSS selectors.
-
-* `html_table` - parse an HTML table into a data frame.
-
-* `html_text` - extract tag pairs' content.
-
-* `html_name` - extract tags' names.
-
-* `html_attrs` - extract all of each tag's attributes.
-
-* `html_attr` - extract tags' attribute value by name.
+- `read_html` - read HTML data from a url or character string.
+- `html_nodes` - select specified nodes from the HTML document using CSS selectors.
+- `html_table` - parse an HTML table into a data frame.
+- `html_text` - extract tag pairs' content.
+- `html_name` - extract tags' names.
+- `html_attrs` - extract all of each tag's attributes.
+- `html_attr` - extract tags' attribute value by name.
 
 ---
 
 ## SelectorGadget
 
 - SelectorGadget: Open source tool that eases CSS selector generation and discovery
-
 - Install the [Chrome Extension](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb) 
-
-- A box will open in the bottom right of the website. Click on a page element that you 
-would like your selector to match (it will turn green). SelectorGadget will then generate 
-a minimal CSS selector for that element, and will highlight (yellow) everything that is 
+- A box will open in the bottom right of the website. Click on a page element 
+that you would like your selector to match (it will turn green). SelectorGadget 
+will then generate a minimal CSS selector for that element, and will highlight 
+(yellow) everything that is 
 matched by the selector. 
-- Now click on a highlighted element to remove it from the selector (red), or click on an 
-unhighlighted element to add it to the selector. Through this process of selection and 
-rejection, SelectorGadget helps you come up with the appropriate CSS selector for your needs.
+- Now click on a highlighted element to remove it from the selector (red), or 
+click on an unhighlighted element to add it to the selector. Through this process 
+of selection and rejection, SelectorGadget helps you come up with the appropriate 
+CSS selector for your needs.
 
 
 ```r
@@ -136,7 +145,7 @@ paths_allowed("http://www.imdb.com")
 
 ```
 ## 
- www.imdb.com
+ www.imdb.com                      No encoding supplied: defaulting to UTF-8.
 ```
 
 ```
@@ -471,18 +480,17 @@ imdb_top_250 %&gt;%
 ```
 
 ```
-## # A tibble: 9 x 4
+## # A tibble: 8 x 4
 ##   title               year score  rank
 ##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Se7en               1995   8.6    23
-## 2 The Usual Suspects  1995   8.6    27
-## 3 Braveheart          1995   8.3    75
-## 4 Toy Story           1995   8.3    93
+## 1 Se7en               1995   8.6    22
+## 2 The Usual Suspects  1995   8.5    26
+## 3 Braveheart          1995   8.3    73
+## 4 Toy Story           1995   8.3    92
 ## 5 Heat                1995   8.2   122
-## 6 Casino              1995   8.2   145
-## 7 Before Sunrise      1995   8.1   208
-## 8 La Haine            1995   8     231
-## 9 Twelve Monkeys      1995   8     247
+## 6 Casino              1995   8.2   143
+## 7 Before Sunrise      1995   8.1   204
+## 8 La Haine            1995   8     230
 ```
 
 ---
@@ -508,7 +516,7 @@ imdb_top_250 %&gt;%
 ## # A tibble: 5 x 2
 ##    year total
 ##   &lt;dbl&gt; &lt;int&gt;
-## 1  1995     9
+## 1  1995     8
 ## 2  1957     7
 ## 3  2014     7
 ## 4  2000     6
@@ -526,7 +534,7 @@ How would you go about creating this visualization: Visualize the average yearly
 --
 
 .small[
-![](p1_d08-web-scraping_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+![](u1_d09-web-scraping_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 ]
 ---
 
@@ -537,13 +545,13 @@ How would you go about creating this visualization: Visualize the average yearly
 - ...
 
 .question[
-Compare the display of information at https://raleigh.craigslist.org/search/apa to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
+Compare the display of information at [raleigh.craigslist.org/search/apa](https://raleigh.craigslist.org/search/apa) to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
 ]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
 "highlightLines": true,
+"highlightStyle": "solarized-dark",
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
