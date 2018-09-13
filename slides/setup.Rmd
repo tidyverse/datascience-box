@@ -1,0 +1,33 @@
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# figure height, width, dpi
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# fontawesome
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# code highlighting
+hook_source <- knitr::knit_hooks$get('source')
+knitr::knit_hooks$set(source = function(x, options) {
+  x <- stringr::str_replace(x, "^[[:blank:]]?([^*].+?)[[:blank:]]*#<<[[:blank:]]*$", "*\\1")
+  hook_source(x, options)
+})
+```
+
+layout: true
+  
+<div class="my-footer">
+<span>
+<a href="https://datasciencebox.org/" target="_blank">datasciencebox.org
+</a>
+</span>
+</div> 
+
+---
