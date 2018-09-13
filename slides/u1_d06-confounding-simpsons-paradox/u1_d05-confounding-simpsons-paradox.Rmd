@@ -1,45 +1,21 @@
 ---
-title: "Scientific studies, confounding, and Simpson's paradox"
+title: "Scientific studies, confounding, <br>and Simpson's paradox <br> `r emo::ji('confounded')`"
+author: ""
 output:
   xaringan::moon_reader:
     css: "../slides.css"
-    logo: img/sta199-logo-hex.png
     lib_dir: libs
     nature:
-      highlightStyle: github
       highlightLines: true
+      highlightStyle: solarized-dark
       countIncrementalSlides: false
 ---
 
-```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
+```{r child = "../setup.Rmd"}
 ```
 
-```{r setup, include=FALSE}
-# R options
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  warn = 1
-  )
-# Set dpi and height for images
-knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
-# ggplot2 color palette with gray
-color_palette <- list(gray = "#999999", 
-                      salmon = "#E69F00", 
-                      lightblue = "#56B4E9", 
-                      green = "#009E73", 
-                      yellow = "#F0E442", 
-                      darkblue = "#0072B2", 
-                      red = "#D55E00", 
-                      purple = "#CC79A7")
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-# For magick
-dev.off <- function(){
-  invisible(grDevices::dev.off())
-}
-# For ggplot2
-ggplot2::theme_set(ggplot2::theme_bw())
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
 ```
 
 class: center, middle
@@ -53,7 +29,6 @@ class: center, middle
 - Observational
     - Collect data in a way that does not interfere with how the data arise ("observe")
     - Only establish an association
-
 - Experimental
     - Randomly assign subjects to treatments
     - Establish causal connections
@@ -66,6 +41,7 @@ Design a study comparing average energy levels of people who do and do not exerc
 
 ## Study: Bfast cereal keeps girls slim
 
+.midi[
 Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn't. The index was even lower for girls who said they ate cereal for breakfast, according to findings of the study conducted by the Maryland Medical Research Institute with funding from the National Institutes of Health (NIH) and cereal-maker General Mills.
  
 [...]
@@ -77,9 +53,14 @@ The results were gleaned from a larger NIH survey of 2,379 girls in California, 
 As part of the survey, the girls were asked once a year what they had eaten during the previous three days.
  
 [...]
+]
 
 .question[
 What is the explanatory and what is the response variable?
+]
+
+.footnote[
+Souce: [Study: Cereal Keeps Girls Slim](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/), Retrieved Sep 13, 2018.
 ]
 
 ---
@@ -88,25 +69,27 @@ What is the explanatory and what is the response variable?
 
 --
 
-1. Eating breakfast causes girls to be slimmer 
+- Eating breakfast causes girls to be slimmer 
 
 --
-
-2. Being slim causes girls to eat breakfast
+- Being slim causes girls to eat breakfast
 
 --
-
-3. A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that make it seem like there is a relationship between them
+- A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that make it seem like there is a relationship between them
 
 ---
 
 ## Correlation != causation
 
+<br><br>
+.center[
 ![](img/xkcdcorrelation.png)
+]
+<br><br>
 
-<br><br><br>
-
+.footnote[
 Randall Munroe CC BY-NC 2.5 http://xkcd.com/552/
+]
 
 ---
 
@@ -127,7 +110,6 @@ class: center, middle
 **Notation**: $P(A | B)$: Probability of event A given event B
 
 - What is the probability that it be unseasonably warm tomorrow?
-
 - What is the probability that it be unseasonably warm tomorrow, given that it it was unseasonably warm tomorrow?
 
 ---
@@ -155,7 +137,9 @@ $P(Very) = \frac{122}{500} = 0.244$
 
 <br>
 
+.footnote[
 Source: [SurveyUSA News Poll 23754](http://www.surveyusa.com/client/PollReport.aspx?g=783743b0-efc1-4b67-9201-58352a8f61f1)
+]
 
 ---
 
@@ -241,16 +225,14 @@ class: center, middle
 
 ## Relationships between variables
 
-- Bivariate relationship: Fitness -> Heart health
-
-- Multivariate relationship: Calories + Age + Fitness -> Heart health
+- Bivariate relationship: Fitness $\rightarrow$ Heart health
+- Multivariate relationship: Calories + Age + Fitness $\rightarrow$ Heart health
 
 ---
 
 ## Simpson's paradox
 
 - Not considering an important variable when studying a relationship can result in what we call a **Simpson's paradox**, which illustrates the effect the omission of an explanatory variable can have on the measure of association between another explanatory variable and a response variable. 
-
 - In other words, the inclusion of a third variable in the analysis can change the apparent relationship between the other two variables. 
 
 ![](img/simpsons_paradox.jpeg)
@@ -259,12 +241,9 @@ class: center, middle
 
 ## Berkeley admission data
 
-- Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a sex bias in graduate admissions
-
+- Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a sex bias in graduate admissions.
 - The data come from six departments. For confidentiality we'll call them A-F. 
-
 - We have information on whether the applicant was male or female and whether they were admitted or rejected. 
-
 - First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
 
 ---
@@ -374,34 +353,3 @@ ggplot(ucb_admit, mapping = aes(x = Gender, fill = Admit)) +
   labs(x = "Gender", y = "", fill = "Admission",
        title = "Admit by gender by department")
 ```
-
----
-
-class: center, middle
-
-# What else do I need to know from this week's reading?
-
----
-
-## Short answer
-
-Everything `r emo::ji("stuck_out_tongue_winking_eye")`
-
----
-
-## Long answer
-
-Be able to identify
-
-- whether a study is observational or experiment, and further features of the study design
-
-- sources of bias in a study
-
-- misrepresentations in summaries of study results (in popular media or in scientific literature)
-
----
-
-## Any questions?
-
-
-on the reading, or otherwise?
