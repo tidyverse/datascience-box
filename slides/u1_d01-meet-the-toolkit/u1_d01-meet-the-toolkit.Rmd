@@ -1,0 +1,346 @@
+---
+title: "Meet the toolkit <br> `r emo::ji('hammer_and_pick')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: solarized-dark
+      countIncrementalSlides: false
+---
+
+layout: true
+  
+<div class="my-footer">
+<span>
+<a href="https://datasciencebox.org/" target="_blank">datasciencebox.org
+</a>
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(fontawesome)
+```
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warn = 1
+  )
+# figure height, width, dpi
+knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
+# fontawesome
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# magick
+dev.off <- function(){
+  invisible(grDevices::dev.off())
+}
+# ggplot2 theme minimal
+ggplot2::theme_set(ggplot2::theme_minimal())
+```
+
+
+class: center, middle
+
+# Reproducible data analysis
+
+---
+
+## Reproducibility checklist
+
+.question[
+What does it mean for a data analysis to be "reproducible"?
+]
+
+--
+
+Near-term goals:
+
+- Are the tables and figures reproducible from the code and data?
+- Does the code actually do what you think it does?
+- In addition to what was done, is it clear **why** it was done? 
+(e.g., how were parameter settings chosen?)
+
+Long-term goals:
+
+- Can the code be used for other data?
+- Can you extend the code to do other things?
+
+---
+
+## Toolkit
+
+![toolkit](img/toolkit.png)
+
+- Scriptability $\rightarrow$ R
+- Literate programming (code, narrative, output in one place) $\rightarrow$ R Markdown
+- Version control $\rightarrow$ Git / GitHub
+
+---
+
+class: center, middle
+
+# R and RStudio
+
+---
+
+## What is R/RStudio?
+
+- R is a statistical programming language
+- RStudio is a convenient interface for R (an integreated development environment, IDE)
+- At its simplest:<sup>➥</sup>
+    - R is like a car’s engine
+    - RStudio is like a car’s dashboard
+
+```{r fig.align="center", echo=FALSE}
+knitr::include_graphics("img/engine-dashboard.png")
+```
+
+.footnote[
+➥ Source: [Modern Dive](https://moderndive.com/)
+]
+
+---
+
+## Let's take a tour - R / RStudio
+
+<br><br>
+
+<center>
+[DEMO]
+</center>
+
+<br><br>
+
+Concepts introduced:
+
+- Console
+- Using R as a calculator
+- Environment
+- Loading and viewing a data frame
+- Accessing a variable in a data frame
+- R functions
+
+---
+
+## R essentials
+
+A short list (for now):
+
+- Functions are (most often) verbs, followed by what they will be applied to in parantheses:
+
+```{r eval=FALSE}
+do_this(to_this)
+do_that(to_this, to_that, with_those)
+```
+
+--
+
+- Columns (variables) in data frames are accessed with `$`:
+
+```{r eval=FALSE}
+dataframe$var_name
+```
+
+--
+
+- Packages are installed with the `install.packages` function and loaded with the `library` function, once per session:
+
+```{r eval=FALSE}
+install.packages("package_name")
+library(package_name)
+```
+
+---
+
+## tidyverse
+
+.pull-left[
+![](img/tidyverse.png)
+]
+
+.pull-right[
+.center[
+[tidyverse.org](https://www.tidyverse.org/)
+]
+
+- The tidyverse is an opinionated collection of R packages designed for data science. 
+- All packages share an underlying philosophy and a common grammar. 
+]
+
+---
+
+class: center, middle
+
+# R Markdown
+
+---
+
+
+## R Markdown
+
+- Fully reproducible reports -- each time you knit the analysis is ran from the beginning
+- Simple markdown syntax for text
+- Code goes in chunks, defined by three backticks, narrative goes outside of chunks
+
+---
+
+## Let's take a tour - R Markdown
+
+Before we that...
+
+.question[
+What is the Bechdel test?
+]
+
+--
+
+The Bechdel test asks whether a work of fiction features at least two women who talk to each other about something other than a man, and there must be two women named characters.
+
+--
+
+<br>
+
+<center>
+[DEMO]
+</center>
+
+<br>
+
+--
+
+Concepts introduced:
+
+- Copying a project of mine
+- Knitting documents
+- R Markdown and (some) R syntax
+
+---
+
+## R Markdown help
+
+.pull-left[
+.center[
+[R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+]
+![](img/rmd-cheatsheet.png)
+]
+.pull-right[
+.center[
+Markdown Quick Reference  
+`Help -> Markdown Quick Reference`
+]
+![](img/md-cheatsheet.png)
+]
+
+---
+
+## Workspaces
+
+Remember this, and expect it to bite you a few times as you're learning to work 
+with R Markdown: The workspace of your R Markdown document is separate from the Console!
+
+- Run the following in the console
+```{r eval = FALSE}
+x <- 2
+x * 3
+```
+.question[
+All looks good, eh?
+]
+
+- Then, add the following chunk in your R Markdown document
+```{r eval = FALSE}
+x * 3
+```
+.question[
+What happens? Why the error?
+]
+
+---
+
+## How will we use R Markdown?
+
+- Every assignment / report / project / etc. is an R Markdown document
+- You'll always have a template R Markdown document to start with
+- The amount of scaffolding in the template will decrease over the semester
+
+---
+
+class: center, middle
+
+# Git and GitHub
+
+---
+
+## Version control
+
+- We introduced GitHub as a platform for collaboration
+- But it's much more than that...
+- It's actually desiged for version control
+
+---
+
+## Versioning
+
+```{r echo=FALSE, fig.align = "center", out.width = 1200}
+knitr::include_graphics("img/lego-steps.png")
+```
+
+---
+
+## Versioning 
+
+with human readable messages
+
+```{r echo=FALSE, fig.align = "center", out.width = 1200}
+knitr::include_graphics("img/lego-steps-commit-messages.png")
+```
+
+---
+
+## Why do we need version control?
+
+```{r echo=FALSE, fig.align = "center"}
+knitr::include_graphics("img/phd_comics_vc.gif")
+```
+
+---
+
+# Git and GitHub tips
+
+- Git is a version control system -- like “Track Changes” features from Microsoft Word on steroids. GitHub is the home for your Git-based projects on the internet -- like DropBox but much, much better).
+
+--
+- There are millions of git commands -- ok, that's an exaggeration, but there are a lot of them -- and very few people know them all. 99% of the time you will use git to add, commit, push, and pull.
+
+--
+- We will be doing Git things and interfacing with GitHub through RStudio, but if you google for help you might come accross methods for doing these things in the command line -- skip that and move on to the next resource unless you feel comfortable trying it out.
+
+--
+- There is a great resource for working with git and R: [happygitwithr.com](http://happygitwithr.com/). Some of the content in there is beyond the scope of this course, but it's a good place to look for help.
+
+---
+
+## Let's take a tour - Git and GitHub
+
+<br><br>
+
+<center>
+[DEMO]
+</center>
+
+<br><br>
+
+- Concepts introduced:
+  - Connect an R project to Github repository
+  - Working with a local and remote repository
+  - Committing, Pushing and Pulling
+- There is just a bit more of GitHub that we'll use in this class, but for today this is enough
