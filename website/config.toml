@@ -28,3 +28,8 @@ defaultContentLanguageInSubdir = false
 [params]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "blue"
+  
+  editURL = "https://github.com/rstudio-education/datascience-box/edit/master/website/content/"
+  description = "GitHub repo for Data Science in a Box"
+
+
