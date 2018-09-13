@@ -11,13 +11,13 @@ This repository serves as a "data science course in a box" containing all materi
 ## Contents
 
 - `slides`: 26 `xaringan` slide decks, each to be covered roughly in a 75 minute class session
-- `assignments`: 6 homewoek assignments
+- `assignments`: 6 homework assignments
 - `labs`: 10 guided hands on exercises for students requiring minimal introduction from the instructor
 - `exams`: 2 sample take-home exams and keys
 - `project`: Final project assignment
 - (WIP) `tutorials`: Interactive learning exercises built with `learnr` 
 - (WIP) `website`: This website includes links to all of the above and contains 
-additional material for helpimng instructors set up their course.
+additional material for helping instructors set up their course.
 
 ## Resources
 
