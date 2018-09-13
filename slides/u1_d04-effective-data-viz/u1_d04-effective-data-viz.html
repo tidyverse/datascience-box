@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tips for effective data visualization   💅</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
+    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
+    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tips for effective data visualization <br> 💅
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org/" target="_blank"&gt;datasciencebox.org
+&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: center, middle
+
+# Data visualization
+
+---
+
+## What is data visualization?
+
+Anything	that	converts	data	sources	into	a	visual	representation	
+
+- charts
+- plots
+- maps
+- tables
+- etc.
+
+.footnote[
+Source: https://guides.library.duke.edu/datavis
+]
+
+---
+
+class: center, middle
+
+# Why do we visualize?
+
+---
+
+## Data: `datasaurus_dozen`
+
+Below is an exceprt from the `datasaurus_dozen` dataset:
+
+
+```
+## # A tibble: 142 x 8
+##    away_x away_y bullseye_x bullseye_y circle_x circle_y dino_x dino_y
+##     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1   32.3   61.4       51.2       83.3     56.0     79.3   55.4   97.2
+##  2   53.4   26.2       59.0       85.5     50.0     79.0   51.5   96.0
+##  3   63.9   30.8       51.9       85.8     51.3     82.4   46.2   94.5
+##  4   70.3   82.5       48.2       85.0     51.2     79.2   42.8   91.4
+##  5   34.1   45.7       41.7       84.0     44.4     78.2   40.8   88.3
+##  6   67.7   37.1       37.9       82.6     45.0     77.9   38.7   84.9
+##  7   53.3   97.5       39.5       80.8     48.6     78.8   35.6   79.9
+##  8   63.5   25.1       39.6       82.7     42.1     76.9   33.1   77.6
+##  9   68.0   81.0       34.8       80.0     41.0     76.4   29.0   74.5
+## 10   67.4   29.7       27.6       72.8     34.6     72.7   26.2   71.4
+## # ... with 132 more rows
+```
+
+---
+
+## Summary statistics
+
+.question[
+.midi[
+Write pseudo-code for calculating the correlation of (`x`,`y`) for each of the 
+thirteen `dataset`s? Based on the summary statistics, how similar do the 
+relationships between `x` and `y` in the thirteen datasets look?
+]
+]
+
+.pull-left[
+
+```
+## # A tibble: 1,846 x 3
+##    dataset     x     y
+##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 dino     55.4  97.2
+##  2 dino     51.5  96.0
+##  3 dino     46.2  94.5
+##  4 dino     42.8  91.4
+##  5 dino     40.8  88.3
+##  6 dino     38.7  84.9
+##  7 dino     35.6  79.9
+##  8 dino     33.1  77.6
+##  9 dino     29.0  74.5
+## 10 dino     26.2  71.4
+## # ... with 1,836 more rows
+```
+]
+--
+.pull-right[
+
+```r
+datasaurus_dozen %&gt;%
+  group_by(dataset) %&gt;%
+  summarise(r = cor(x, y))
+```
+
+```
+## # A tibble: 13 x 2
+##    dataset          r
+##    &lt;chr&gt;        &lt;dbl&gt;
+##  1 away       -0.0641
+##  2 bullseye   -0.0686
+##  3 circle     -0.0683
+##  4 dino       -0.0645
+##  5 dots       -0.0603
+##  6 h_lines    -0.0617
+##  7 high_lines -0.0685
+##  8 slant_down -0.0690
+##  9 slant_up   -0.0686
+## 10 star       -0.0630
+## 11 v_lines    -0.0694
+## 12 wide_lines -0.0666
+## 13 x_shape    -0.0656
+```
+]
+
+---
+
+## Visualization
+
+.question[
+Based on the summary statistics, how similar do the relationships between `x` 
+and `y` in the thirteen datasets look?
+]
+
+![](u1_d04-effective-data-viz_files/figure-html/datasaurus-plot-1.png)&lt;!-- --&gt;
+
+---
+
+## Anscombe's quartet
+
+
+```r
+library(Tmisc)
+quartet
+```
+
+.pull-left[
+
+```
+##    set  x     y
+## 1    I 10  8.04
+## 2    I  8  6.95
+## 3    I 13  7.58
+## 4    I  9  8.81
+## 5    I 11  8.33
+## 6    I 14  9.96
+## 7    I  6  7.24
+## 8    I  4  4.26
+## 9    I 12 10.84
+## 10   I  7  4.82
+## 11   I  5  5.68
+## 12  II 10  9.14
+## 13  II  8  8.14
+## 14  II 13  8.74
+## 15  II  9  8.77
+## 16  II 11  9.26
+## 17  II 14  8.10
+## 18  II  6  6.13
+## 19  II  4  3.10
+## 20  II 12  9.13
+## 21  II  7  7.26
+## 22  II  5  4.74
+```
+]
+.pull-right[
+
+```
+##    set  x     y
+## 23 III 10  7.46
+## 24 III  8  6.77
+## 25 III 13 12.74
+## 26 III  9  7.11
+## 27 III 11  7.81
+## 28 III 14  8.84
+## 29 III  6  6.08
+## 30 III  4  5.39
+## 31 III 12  8.15
+## 32 III  7  6.42
+## 33 III  5  5.73
+## 34  IV  8  6.58
+## 35  IV  8  5.76
+## 36  IV  8  7.71
+## 37  IV  8  8.84
+## 38  IV  8  8.47
+## 39  IV  8  7.04
+## 40  IV  8  5.25
+## 41  IV 19 12.50
+## 42  IV  8  5.56
+## 43  IV  8  7.91
+## 44  IV  8  6.89
+```
+]
+
+---
+
+## Summarising Anscombe's quartet
+
+
+```r
+quartet %&gt;%
+  group_by(set) %&gt;%
+  summarise(
+    mean_x = mean(x), 
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    r = cor(x, y)
+  )
+```
+
+```
+## # A tibble: 4 x 6
+##   set   mean_x mean_y  sd_x  sd_y     r
+##   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 I          9   7.50  3.32  2.03 0.816
+## 2 II         9   7.50  3.32  2.03 0.816
+## 3 III        9   7.5   3.32  2.03 0.816
+## 4 IV         9   7.50  3.32  2.03 0.817
+```
+
+---
+
+## Visualizing Anscombe's quartet
+
+
+```r
+ggplot(quartet, aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(~ set, ncol = 4)
+```
+
+![](u1_d04-effective-data-viz_files/figure-html/quartet-plot-1.png)&lt;!-- --&gt;
+
+---
+
+## Age at first kiss
+
+.question[
+Do you see anything out of the ordinary?
+]
+
+
+```r
+ggplot(student_survey, aes(x = first_kiss)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "How old were you when you had your first kiss?")
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_bin).
+```
+
+![](u1_d04-effective-data-viz_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+## Facebook visits
+
+.question[
+How are people reporting lower vs. higher values of FB visits?
+]
+
+
+```r
+ggplot(student_survey, aes(x = fb_visits_per_day)) +
+  geom_dotplot(binwidth = 5, dotsize = 0.4) +
+  labs(title = "How many times do you go on Facebook per day?")
+```
+
+![](u1_d04-effective-data-viz_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+# Designing effective visualizations
+
+---
+
+## Keep it simple
+
+&lt;img src="img/pie-3d.jpg" width="300" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="u1_d04-effective-data-viz_files/figure-html/pie-to-bar-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Use	color	to	draw	attention
+
+
+&lt;img src="u1_d04-effective-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="500" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="u1_d04-effective-data-viz_files/figure-html/unnamed-chunk-5-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Tell a story
+
+&lt;img src="img/time-series.story.png" width="800" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Credit: Angela Zoss and Eric Monson, Duke DVS
+]
+
+---
+
+class: center, middle
+
+&lt;iframe width="768" height="432" src="https://www.youtube.com/embed/Z8t4k0Q8e8Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

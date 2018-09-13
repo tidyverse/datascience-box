@@ -11,39 +11,12 @@ output:
       countIncrementalSlides: false
 ---
 
-layout: true
-  
-<div class="my-footer">
-<span>
-<a href="https://datasciencebox.org/" target="_blank">datasciencebox.org
-</a>
-</span>
-</div> 
-
----
+```{r child = "../setup.Rmd"}
+```
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(emo)
-```
-
-```{r setup, include=FALSE}
-# R options
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  warn = 1
-  )
-# figure height, width, dpi
-knitr::opts_chunk$set(fig.height = 2.5, fig.width = 5, dpi = 300) 
-# fontawesome
-htmltools::tagList(rmarkdown::html_dependency_font_awesome())
-# magick
-dev.off <- function(){
-  invisible(grDevices::dev.off())
-}
-# ggplot2 theme minimal
-ggplot2::theme_set(ggplot2::theme_minimal())
 ```
 
 class: center, middle
