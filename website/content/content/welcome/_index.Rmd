@@ -10,9 +10,10 @@ with data as quickly as possible. A personal goal of mine is 10 minutes from
 beginning of class to the first data visualization students produce! The 
 application exercise in this lecture is one way of achieving this goal.
 
-Lecture slides are below, and the application exercise can be found [here](/appex/ae-01-un-votes/ae-01-un-votes.html). You can also access the 
-source R Markdown file for the application exercise 
-[here](https://github.com/rstudio-education/datascience-box/blob/master/appex/ae-01-un-votes/ae-01-un-votes.Rmd) on GitHub 
+Lecture slides are below and you can find the source code for the slides  [here](https://github.com/rstudio-education/datascience-box/tree/master/slides/u0_d01-welcome). 
+The application exercise can be found [here](/appex/ae-01-un-votes/ae-01-un-votes.html), and 
+you can also access the source R Markdown file for the application exercise 
+[here](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-01-un-votes) on GitHub 
 and [here](https://rstudio.cloud/spaces/1655/project/32445) on RStudio Cloud.
 
 <center>

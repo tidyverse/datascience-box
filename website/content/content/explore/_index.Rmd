@@ -1,20 +1,29 @@
 ---
-weight: 1
+weight: 2
 title: "Exploring data"
 output: blogdown::html_page
 ---
 
 ## Lectures
 
-- [Welcome to Data Science](../../slides/u1_d01-welcome/u1_d01-welcome.html): Overview of class policies; introduction to data science, git, and RStudio Cloud
-- Meet the Toolkit: Introduction to RStudio Cloud, R syntax, R Markdown syntax, and version control
-- Fundamentals of data & data visualization: Introduction to visualizing numerical and categorical with the ggplot2 package
-- Tidy data & data wrangling: Introduction to tidy data, data wrangling, and the dplyr package
-- Merge conflicts: Resolving merge conflicts; practice using git
-- Tips for effective data visualization: Tips for effective data visualization; presentation by Duke Library's Data and Visualization Services team
-- Review and recap: Review of and further practice with R tidyverse, RStudio Cloud, git, and github
-- Confounding variables and Simpson's paradox: Overview of scientific studies, conditiol probability, Simpson's Paradox, coding style
-- Coding style + Data types + Recoding variables: Overview of coding style and data types in R; introduction of more tidyverse functions
+- [Meet the toolkit](/slides/u1_d01-meet-the-toolkit/u1_d01-meet-the-toolkit.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/slides/u1_d01-meet-the-toolkit)
+  - AE 02 - [Bechdel](/appex/ae-02-bechdel/ae-02-bechdel.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-02-bechdel) - [<i class="fas fa-cloud"></i>](https://rstudio.cloud/spaces/1655/project/74335)
+
+- [Data and visualization](/slides/u1_d02-data-and-viz/u1_d02-data-and-viz.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/slides/u1_d02-data-and-viz)
+  - AE 03 - [Starwars](/appex/ae-03-starwars/ae-03-starwars.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-03-starwars) - [<i class="fas fa-cloud"></i>](https://rstudio.cloud/spaces/1655/project/74379)
+
+- [Tidy data and data wrangling](/slides/u1_d03-tidy-data-wrangle/u1_d03-tidy-data-wrangle.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/slides/u1_d03-tidy-data-wrangle)
+  - AE 04 - [NC bike crashes](/appex/ae-04-ncbikecrash/ae-04-ncbikecrash.html) - [<i class="fas fa-code"></i>](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-04-ncbikecrash) - [<i class="fas fa-cloud"></i>](https://rstudio.cloud/spaces/1655/project/74393)
+
+- [Tips for effective data visualization](/slides/u1_d04-effective-data-viz/u1_d04-effective-data-viz.html)
+- [Merge conflicts](/slides/u1_d05-merge-conflicts/u1_d05-merge-conflicts.html) 
+- Tips for effective data visualization in R
+- [Confounding variables and Simpson's paradox](/slides/u1_d06-confounding-simpsons-paradox/u1_d06-confounding-simpsons-paradox.html)
+- [Coding style](/slides/u1_d07-coding-style/u1_d07-coding-style.html)
+- [Data types + Recoding variables](/slides/u1_d08-data-class-type-recode/u1_d08-data-class-type-recode.html)
+- Review + recap
+- [Web scraping](/slides/u1_d09-web-scraping/u1_d09-web-scraping.html)
+- [Functions and automation](/slides/u1_d10-functions-and-automation/u1_d10-functions-and-automation.html)
 
 ## Labs
 

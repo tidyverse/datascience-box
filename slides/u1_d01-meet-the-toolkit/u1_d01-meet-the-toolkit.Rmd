@@ -175,13 +175,7 @@ Concepts introduced:
 
 ---
 
-## R Markdown and Bechdel
-
-.center[
-### <i class="fas fa-laptop"></i> `AE 02 - Bechdel`
-]
-
-<br>
+## <i class="fas fa-laptop"></i> `AE 02 - Bechdel`
 
 .question[
 What is the Bechdel test?

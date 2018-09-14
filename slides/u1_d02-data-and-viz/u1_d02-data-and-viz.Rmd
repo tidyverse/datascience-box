@@ -398,6 +398,13 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
+## <i class="fas fa-laptop"></i> `AE 03 - Starwars`
+
+- Go to RStudio Cloud and make a copy of the application exercise project and launch it.
+- Open and knit the R Markdown document
+
+---
+
 class: center, middle
 
 # Identifying variables

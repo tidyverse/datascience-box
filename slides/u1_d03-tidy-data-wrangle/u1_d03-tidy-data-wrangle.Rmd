@@ -407,3 +407,11 @@ ncbikecrash %>%
 ncbikecrash %>% 
   count(driver_alcohol_drugs_simplified)
 ```
+
+---
+
+## <i class="fas fa-laptop"></i> `AE 04 - NC bike crashes`
+
+- Go to the course GitHub organization and clone the repo for this application exercise
+- For each question you work on, set the `eval` chunk option to `TRUE` and knit
+
