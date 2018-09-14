@@ -83,13 +83,9 @@ knitr::include_graphics("img/engine-dashboard.png")
 
 ## Let's take a tour - R / RStudio
 
-<br><br>
-
-<center>
-[DEMO]
-</center>
-
-<br><br>
+.center[
+![](../img/demo.png)
+]
 
 Concepts introduced:
 
@@ -166,7 +162,26 @@ class: center, middle
 
 ## Let's take a tour - R Markdown
 
-Before we that...
+
+.center[
+![](../img/demo.png)
+]
+
+Concepts introduced:
+
+- Copying a project of mine
+- Knitting documents
+- R Markdown and (some) R syntax
+
+---
+
+## R Markdown and Bechdel
+
+.center[
+### <i class="fas fa-laptop"></i> `AE 02 - Bechdel`
+]
+
+<br>
 
 .question[
 What is the Bechdel test?
@@ -180,19 +195,8 @@ The Bechdel test asks whether a work of fiction features at least two women who 
 
 <br>
 
-<center>
-[DEMO]
-</center>
-
-<br>
-
---
-
-Concepts introduced:
-
-- Copying a project of mine
-- Knitting documents
-- R Markdown and (some) R syntax
+- Go to RStudio Cloud and make a copy of the application exercise project and launch it.
+- Open and knit the R Markdown document.
 
 ---
 
@@ -303,16 +307,13 @@ knitr::include_graphics("img/phd_comics_vc.gif")
 
 ## Let's take a tour - Git and GitHub
 
-<br><br>
-
-<center>
-[DEMO]
-</center>
-
-<br><br>
+.center[
+![](../img/demo.png)
+]
 
 - Concepts introduced:
   - Connect an R project to Github repository
   - Working with a local and remote repository
-  - Committing, Pushing and Pulling
+  - Making a change locally, committing, and pushing
+  - Making a change on GitHub and pulling
 - There is just a bit more of GitHub that we'll use in this class, but for today this is enough

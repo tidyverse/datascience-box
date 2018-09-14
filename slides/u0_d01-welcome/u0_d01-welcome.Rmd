@@ -161,13 +161,6 @@ https://gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d
 
 ---
 
-class: center, middle
-
-# Application exercise
-## <i class="fas fa-laptop"></i> `AE 01 - UN Votes`
-
----
-
 ## Create a GitHub account
 
 .instructions[
@@ -210,8 +203,12 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 
 ## Create your first data visualization!
 
-- Once you log on to RStudio Cloud, click on this course's workspace.
-- Make a copy of the project called UN Votes, and launch it.
+.center[
+### <i class="fas fa-laptop"></i> `AE 01 - UN Votes`
+]
+
+- Log on to RStudio Cloud and click on this course's workspace.
+- Make a copy of the project for this application exercise and launch it.
 - In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
 - Then, change the country names to those you're interested in. Your spelling and capitalization should match how the countries appear in the data, so take a peek at the Appendix to confirm spelling. Knit again. And voila, your first data visualization!
