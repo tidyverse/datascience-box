@@ -14,8 +14,8 @@ The course content is organized in three units:
 include_graphics(path = "../../images/topic-flow.png")
 ```
 
-**Unit 1 - Exploring data: ** This unit focuses on data visualiation and data 
-wranling. Specifically we cover fundamentals of data and data visualization, 
+**Unit 1 - Exploring data: ** This unit focuses on data visualization and data 
+wrangling. Specifically we cover fundamentals of data and data visualization, 
 confounding variables, and Simpson's paradox as well as the concept of tidy 
 data, data import, data cleaning, and data curation. We end the unit with web 
 scraping and introduce the idea of iteration in preparation for the next unit. 
@@ -23,7 +23,7 @@ Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown
 Git, GitHub, etc.
 
 **Unit 2 - Making rigorous conclusions:** In this part we introduce modeling and 
-statistical inference for making data based conclusions. We discuss building, 
+statistical inference for making data-based conclusions. We discuss building, 
 interpreting, and selecting models, visualizing interaction effects, and 
 prediction and model validity. Statistical inference is introduced from a 
 simulation based perspective, and the Central Limit Theorem is discussed very 
@@ -51,7 +51,7 @@ computing lab.
 3    | Data and visualization
 4    | Tidy data and data wrangling
 5    | Tips for effective data visualization
-6    | Merge conflict+ Tips for effective data visualization in R
+6    | Merge conflict + Tips for effective data visualization in R
 7    | Confounding variables and Simpson's paradox
 8    | Coding style + Data types + Recoding variables
 9    | Review + recap
