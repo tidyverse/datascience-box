@@ -8,4 +8,4 @@ Course materials are organized in three parts: exploring data, making
 rigorous conclusions, and looking further.
 
 All source files linked, and are also in the [GitHub repo](https://github.com/rstudio-education/datascience-box) for this project. 
-If you plan on usinng these materials, please review the [LICENSE](https://github.com/rstudio-education/datascience-box/blob/master/LICENSE.md) first.
+If you plan on using these materials, please review the [LICENSE](https://github.com/rstudio-education/datascience-box/blob/master/LICENSE.md) first.
