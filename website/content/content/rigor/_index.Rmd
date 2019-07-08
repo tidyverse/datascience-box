@@ -6,3 +6,5 @@ output: blogdown::html_page
 
 Links to materials to be posted here, but they can all be found on the 
 [GitHub repo](https://github.com/rstudio-education/datascience-box).
+
+<iframe src="https://datasciencebox.org/slides/u0_d01-welcome/u0_d01-welcome.html#1" width="300" height="225" frameborder="0"></iframe>
