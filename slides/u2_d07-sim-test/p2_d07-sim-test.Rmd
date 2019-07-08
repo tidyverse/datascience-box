@@ -113,7 +113,7 @@ $\hat{p}~$: rate of complication in the sample = $\frac{3}{62}$ =
 ## Correlation vs. causation
 
 .question[
-`r emo::ji("bust_in_silhouette")` Is it possible to assess the consultant's claim using the data?
+Is it possible to assess the consultant's claim using the data?
 ]
 
 --
@@ -179,7 +179,7 @@ null hypothesis is true)
 ## Setting the hypotheses
 
 .question[
-`r emo::ji("busts_in_silhouette")` Which of the following is the correct set of hypotheses?
+Which of the following is the correct set of hypotheses?
 ]
 
 (a) $H_0: p = 0.10$; $H_A: p \ne 0.10$ <br>
@@ -202,7 +202,7 @@ Since $H_0: p = 0.10$, we need to simulate a null distribution where the
 probability of success (complication) for each trial (patient) is 0.10.
 
 .question[
-`r emo::ji("busts_in_silhouette")` Describe how you would simulate the null distribution for this study using a bag of 
+Describe how you would simulate the null distribution for this study using a bag of 
 chips. How many chips? What colors? What do the colors indicate? How many draws? 
 <b>With replacement</b> or <b>without replacement</b>?
 ]
@@ -212,7 +212,7 @@ chips. How many chips? What colors? What do the colors indicate? How many draws?
 ## What do we expect?
 
 .question[
-`r emo::ji("bust_in_silhouette")` When sampling from the null distribution, what is the expected proportion of success 
+When sampling from the null distribution, what is the expected proportion of success 
 (complications)?
 ]
 
@@ -319,7 +319,7 @@ null_dist %>%
 ## Visualizing the null distribution
 
 .question[
-`r emo::ji("bust_in_silhouette")` What would you expect the center of the null distribution to be?
+What would you expect the center of the null distribution to be?
 ]
 
 --
@@ -336,7 +336,7 @@ ggplot(data = null_dist, mapping = aes(x = stat)) +
 ## Calculating the p-value, visually
 
 .question[
-`r emo::ji("busts_in_silhouette")` What is the p-value, i.e. in what % of the 
+What is the p-value, i.e. in what % of the 
 simulations was the simulated sample proportion at least as extreme as the 
 observed sample proportion?
 ]
@@ -377,7 +377,7 @@ convincing evidence for the alternative hypothesis.
 ## Conclusion
 
 .question[
-`r emo::ji("bust_in_silhouette")` What is the conclusion of the hypothesis test?
+What is the conclusion of the hypothesis test?
 ]
 
 --
@@ -404,7 +404,7 @@ null_dist <- organ_donor %>%
   specify(response = outcome, success = "complication") %>%
   hypothesize(null = "point", p = c("complication" = 0.10, "no complication" = 0.90)) %>% 
   generate(reps = 15000, type = "simulate") %>% 
-  calculate(stat = "prop", order = c("treatment", "control"))
+  calculate(stat = "prop")
 ```
 ]
 
@@ -447,7 +447,7 @@ equal to the null value, $\ne$
 --
 
 .question[
-`r emo::ji("bust_in_silhouette")` Average systolic blood pressure of people with 
+Average systolic blood pressure of people with 
 Stage 1 Hypertension is 150 mm Hg. Suppose we want to use a hypothesis test to 
 evaluate whether a new blood pressure medication has <b>an effect</b> on the average 
 blood pressure of heart patients. What are the hypotheses?
@@ -464,7 +464,7 @@ class: center, middle
 ## Is yawning contagious?
 
 .question[
-`r emo::ji("bust_in_silhouette")` Do you think yawning is contagious?
+Do you think yawning is contagious?
 ]
 
 .pull-left[
@@ -520,7 +520,7 @@ mb_yawn %>%
 ## Independence?
 
 .question[
-`r emo::ji("bust_in_silhouette")` Based on the proportions we calculated, 
+Based on the proportions we calculated, 
 do you think yawning is really contagious, i.e. are seeing someone yawn 
 and yawning dependent?
 ]
@@ -593,7 +593,7 @@ on the board.
 ## Checking for independence
 
 .question[
-`r emo::ji("busts_in_silhouette")` Do the simulation results suggest that yawning 
+Do the simulation results suggest that yawning 
 is contagious, i.e. does seeing someone yawn and yawning appear to be dependent?
 ]
 
@@ -612,7 +612,7 @@ null_dist <- mb_yawn %>%
 ## Visualizing the null distribution
 
 .question[
-`r emo::ji("bust_in_silhouette")` What would you expect the center of the 
+What would you expect the center of the 
 null distribution to be?
 ]
 
@@ -629,7 +629,7 @@ ggplot(data = null_dist, mapping = aes(x = stat)) +
 ## Calculating the p-value, visually
 
 .question[
-`r emo::ji("busts_in_silhouette")` What is the p-value, i.e. in what % of the 
+What is the p-value, i.e. in what % of the 
 simulations was the simulated difference in sample proportion at least as extreme 
 as the observed difference in sample proportions?
 ]
@@ -655,7 +655,7 @@ null_dist %>%
 ## Conclusion
 
 .question[
-`r emo::ji("busts_in_silhouette")` What is the conclusion of the hypothesis test?
+What is the conclusion of the hypothesis test?
 ]
 
 <br>
@@ -663,5 +663,5 @@ null_dist %>%
 --
 
 .question[
-`r emo::ji("bust_in_silhouette")` Do you "buy" this conclusion?
+Do you "buy" this conclusion?
 ]

@@ -4,7 +4,9 @@
     <title>Hypothesis testing via simulation</title>
     <meta charset="utf-8">
     <meta name="author" content="Dr. Çetinkaya-Rundel" />
-    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
+    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
+    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -97,7 +99,7 @@ estimate the parameter using a **sample statistic** as a **point estimate**.
 ## Correlation vs. causation
 
 .question[
-👤 Is it possible to assess the consultant's claim using the data?
+Is it possible to assess the consultant's claim using the data?
 ]
 
 --
@@ -163,7 +165,7 @@ null hypothesis is true)
 ## Setting the hypotheses
 
 .question[
-👥 Which of the following is the correct set of hypotheses?
+Which of the following is the correct set of hypotheses?
 ]
 
 (a) `\(H_0: p = 0.10\)`; `\(H_A: p \ne 0.10\)` &lt;br&gt;
@@ -186,7 +188,7 @@ Since `\(H_0: p = 0.10\)`, we need to simulate a null distribution where the
 probability of success (complication) for each trial (patient) is 0.10.
 
 .question[
-👥 Describe how you would simulate the null distribution for this study using a bag of 
+Describe how you would simulate the null distribution for this study using a bag of 
 chips. How many chips? What colors? What do the colors indicate? How many draws? 
 &lt;b&gt;With replacement&lt;/b&gt; or &lt;b&gt;without replacement&lt;/b&gt;?
 ]
@@ -196,7 +198,7 @@ chips. How many chips? What colors? What do the colors indicate? How many draws?
 ## What do we expect?
 
 .question[
-👤 When sampling from the null distribution, what is the expected proportion of success 
+When sampling from the null distribution, what is the expected proportion of success 
 (complications)?
 ]
 
@@ -297,7 +299,7 @@ null_dist &lt;- organ_donor %&gt;%
 ## Visualizing the null distribution
 
 .question[
-👤 What would you expect the center of the null distribution to be?
+What would you expect the center of the null distribution to be?
 ]
 
 --
@@ -317,7 +319,7 @@ ggplot(data = null_dist, mapping = aes(x = stat)) +
 ## Calculating the p-value, visually
 
 .question[
-👥 What is the p-value, i.e. in what % of the 
+What is the p-value, i.e. in what % of the 
 simulations was the simulated sample proportion at least as extreme as the 
 observed sample proportion?
 ]
@@ -362,7 +364,7 @@ convincing evidence for the alternative hypothesis.
 ## Conclusion
 
 .question[
-👤 What is the conclusion of the hypothesis test?
+What is the conclusion of the hypothesis test?
 ]
 
 --
@@ -390,13 +392,7 @@ null_dist &lt;- organ_donor %&gt;%
   specify(response = outcome, success = "complication") %&gt;%
   hypothesize(null = "point", p = c("complication" = 0.10, "no complication" = 0.90)) %&gt;% 
   generate(reps = 15000, type = "simulate") %&gt;% 
-  calculate(stat = "prop", order = c("treatment", "control"))
-```
-
-```
-## Warning in calculate(., stat = "prop", order = c("treatment", "control")):
-## Statistic is not based on a difference; the `order` argument is ignored.
-## Check `?calculate` for details.
+  calculate(stat = "prop")
 ```
 ]
 
@@ -451,7 +447,7 @@ equal to the null value, `\(\ne\)`
 --
 
 .question[
-👤 Average systolic blood pressure of people with 
+Average systolic blood pressure of people with 
 Stage 1 Hypertension is 150 mm Hg. Suppose we want to use a hypothesis test to 
 evaluate whether a new blood pressure medication has &lt;b&gt;an effect&lt;/b&gt; on the average 
 blood pressure of heart patients. What are the hypotheses?
@@ -468,7 +464,7 @@ class: center, middle
 ## Is yawning contagious?
 
 .question[
-👤 Do you think yawning is contagious?
+Do you think yawning is contagious?
 ]
 
 .pull-left[
@@ -548,7 +544,7 @@ mb_yawn %&gt;%
 ## Independence?
 
 .question[
-👤 Based on the proportions we calculated, 
+Based on the proportions we calculated, 
 do you think yawning is really contagious, i.e. are seeing someone yawn 
 and yawning dependent?
 ]
@@ -626,7 +622,7 @@ on the board.
 ## Checking for independence
 
 .question[
-👥 Do the simulation results suggest that yawning 
+Do the simulation results suggest that yawning 
 is contagious, i.e. does seeing someone yawn and yawning appear to be dependent?
 ]
 
@@ -646,7 +642,7 @@ null_dist &lt;- mb_yawn %&gt;%
 ## Visualizing the null distribution
 
 .question[
-👤 What would you expect the center of the 
+What would you expect the center of the 
 null distribution to be?
 ]
 
@@ -666,7 +662,7 @@ ggplot(data = null_dist, mapping = aes(x = stat)) +
 ## Calculating the p-value, visually
 
 .question[
-👥 What is the p-value, i.e. in what % of the 
+What is the p-value, i.e. in what % of the 
 simulations was the simulated difference in sample proportion at least as extreme 
 as the observed difference in sample proportions?
 ]
@@ -696,7 +692,7 @@ null_dist %&gt;%
 ## Conclusion
 
 .question[
-👥 What is the conclusion of the hypothesis test?
+What is the conclusion of the hypothesis test?
 ]
 
 &lt;br&gt;
@@ -704,7 +700,7 @@ null_dist %&gt;%
 --
 
 .question[
-👤 Do you "buy" this conclusion?
+Do you "buy" this conclusion?
 ]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -723,19 +719,30 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
