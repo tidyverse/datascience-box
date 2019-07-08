@@ -1,0 +1,8 @@
+{{ $is_list := .is_list }}
+{{ $ := .content }}
+
+{{ range $.Params.link }}
+<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ .url | absURL }}">
+  {{ .name }}
+</a>
+{{ end }}
