@@ -23,3 +23,6 @@ labs/*/*.html
 project/*.html
 project/*/*/*.html
 #slides/*/*.html
+# large data
+gss2010.csv
+
