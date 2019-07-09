@@ -44,7 +44,7 @@ are issued temporary visitor accounts which expire at the end of the semester.
 
 More modest configurations can be more than adequate (e.g., a mid-to-high end 
 desktop) for the vast majority of use cases, however care should be given when 
-working with larger datasets in a shared enviroment. An alternative approach 
+working with larger datasets in a shared environment. An alternative approach 
 is to use a virtualized hardware in the cloud (e.g. EC2, Azure, etc.).
 
 The primary benefit of running and managing the server in-house comes down to 
@@ -53,7 +53,7 @@ change configurations, restart or kill sessions, and monitor all aspects of the
 system. This does increase the demands on the instructor and any involved IT 
 staff, but we have found the benefits to far outweigh the costs. One other 
 unforeseen benefit to a centralized approach is that it makes it possible to 
-present large scale analytical tasks that would not be possible on a traditional 
+present large scale analytic tasks that would not be possible on a traditional 
 desktop or laptop. For example, advanced courses can include homework 
 assignments where students need to process a dataset that is on the order of 
 several hundred gigabytes in size, which would not be possible if they were 
@@ -72,7 +72,7 @@ server.
 
 Docker is a popular and rapidly evolving containerization tool suite that allows 
 users to automate the deployment of software in a repeatable and self-contained 
-way. Each container wraps a portion of the filesystem in such a way that all of 
+way. Each container wraps a portion of the file system in such a way that all of 
 the code, runtimes, tools, and libraries needed for a piece of software are 
 available, meaning that software will always run in exactly the same way 
 regardless of the environment in which it is being run. As such, Docker is a 
@@ -84,7 +84,7 @@ An additional advantage of Docker containers is that they are similar to virtual
 machines in that they are sandboxed from one another. By mapping each student to 
 a single container we are able to keep all student processes segregated and 
 enforce strict CPU, memory, and disk usage quotas to avoid accidental disruption 
-of one another's work. 
+of the work of one another. 
 
 However Docker containers are generally lighter weight than virtual machines, in 
 terms of system resources used. This makes it feasible to run a large number of 
