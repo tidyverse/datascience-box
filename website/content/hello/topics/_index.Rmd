@@ -11,7 +11,7 @@ library(knitr)
 The course content is organized in three units:
 
 ```{r topic-flow, fig.align="center", echo=FALSE}
-include_graphics(path = "../../images/topic-flow.png")
+include_graphics(path = "../../images/topic-flow.jpeg")
 ```
 
 **Unit 1 - Exploring data: ** This unit focuses on data visualization and data 
