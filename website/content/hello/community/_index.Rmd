@@ -8,4 +8,4 @@ Like what's in the box? Have questions? Is something you need missing? Want to
 exchange ideas with others teaching similar courses?
 
 Post on [RStudio Community under Teaching](https://community.rstudio.com/c/teaching) 
-or tweet with [#rstats](https://twitter.com/search?q=%23rstats.
+or tweet with [#rstats](https://twitter.com/search?q=%23rstats).
