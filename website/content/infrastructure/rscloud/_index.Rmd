@@ -75,7 +75,7 @@ Viewer	    | View projects shared with everyone	             | Auditor, Visitor
 
 This set of permissions will allow instructors full access including management 
 of users. Teaching assistants will be able to peek into student projects, which 
-can ve very useful when helping troubleshoot. Students won't be able to see 
+can very useful when helping troubleshoot. Students won't be able to see 
 each others' projects. Students auditing your course or visitors, such as 
 colleagues wanting to view/experience your course setup will have limited 
 access.
@@ -182,7 +182,7 @@ Each project on RStudio Cloud is allocated 1 GB of RAM. While this is a pretty
 generous limit, actions like joining large tables or fitting complicated 
 models could exceed the limit. 
 
-I recommend testing out the any work you assign, especiallty those using large 
+I recommend testing out the any work you assign, especially those using large 
 datasets, in order to avoid unexpected hiccups due to out of memory issues. One 
 challenge is that you might have no control over what issues students might run 
 into if they are working on an open ended project using a dataset of their own 
