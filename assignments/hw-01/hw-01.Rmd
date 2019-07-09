@@ -50,7 +50,7 @@ and 2011.
 The following plots were produced based off the data given on the Wikipedia 
 page.
 
-![fisheries-plot](img/inst_staff.png)
+![instructors-plot](img/inst_staff.png)
 
 The source data can be found in the `instructors` dataset in the **dsbox** package.
 
