@@ -66,7 +66,7 @@ session
 introduction from the instructor
 - exams: 2 sample take-home exams and keys
 - project: Final project assignment
-- tutorials: Interactive learning exercises built with `learnr` (WIP)
+- tutorials: Interactive learning exercises built with **learnr** (WIP)
 
 **Instructor facing materials:**
 
@@ -75,9 +75,9 @@ introduction from the instructor
 IDE and how to structure your course using each option
     - Git/GitHub: How to use Git and GitHub as the learning management system for 
 your course as well as a collaborative platform for your students and how to use 
-GitHub Classroom and `ghclass` for setting up your course
-    - Creating `learnr` modules (coming soon)
-    - Using `blogdown` to create your course website (coming soon)
+GitHub Classroom and **ghclass** for setting up your course
+    - Creating **learnr** modules (coming soon)
+    - Using **blogdown** to create your course website (coming soon)
 - Pedagogical tips
 
 ## Why R?
