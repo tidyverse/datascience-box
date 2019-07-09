@@ -110,3 +110,12 @@ course slides are built with [**xaringan**](https://github.com/yihui/xaringan),
 and course website is built with [**blogdown**](https://bookdown.org/yihui/blogdown/). 
 Leveraging all of these packages allows the instructor to live and breathe in R 
 for all aspects of running their course.
+
+## Learn more
+
+The following talk titled "Let them eat cake (first)!" describes in further 
+detail and with examples from the course materials each of the design principles 
+outlined aboove.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RsVOrpXAPXo?start=908" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
