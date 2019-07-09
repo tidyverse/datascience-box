@@ -27,7 +27,7 @@ output: blogdown::html_page
 
 ## Labs
 
-- Lab 00 - Logistics: Overview of lab policies; class survey and pretest; create github and RStudio Cloud accounts
+- Lab 00 - Logistics: Overview of lab policies; class survey and pretest; create GitHub and RStudio Cloud accounts
 - Lab 01 - Hello R!: Working with RStudio Cloud, R, R markdown, and version control
 - Lab 02 - Data wrangling and visualization: Summarizing data using ggplot2 and dplyr
 - Lab 03 - Visualizing spatial data: Using spatial data to examine the clustering of Denny's restaurants and La Quinta hotels; importance of visualizing spatial data (John Snow)
@@ -37,5 +37,5 @@ output: blogdown::html_page
 ## Homework assignments
 
 - HW 01 - Ugly Charts: Improving a poor data visualization by using the principles discussed in class
-- HW 02 - Gotta catch 'em all: Visualizing Pokémon Go data and interpreting the results
+- HW 02 - Gotta catch 'em all: Visualizing Pokemon Go data and interpreting the results
 
