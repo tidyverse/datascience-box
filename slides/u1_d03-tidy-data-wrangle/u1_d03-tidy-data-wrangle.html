@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Tidy data and data wrangling   🔧</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
-    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
-    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -87,7 +86,7 @@ Is each of the following a dataset or a summary table?
 ##  8 R5-D4                  97    32
 ##  9 Biggs Darklighter     183    84
 ## 10 Obi-Wan Kenobi        182    77
-## # ... with 77 more rows
+## # … with 77 more rows
 ```
 ]
 .pull-right[
@@ -240,72 +239,72 @@ glimpse(ncbikecrash)
 ```
 ## Observations: 7,467
 ## Variables: 66
-## $ object_id            &lt;int&gt; 1686, 1674, 1673, 1687, 1653, 1665, 1642,...
-## $ city                 &lt;chr&gt; "None - Rural Crash", "Henderson", "None ...
-## $ county               &lt;chr&gt; "Wayne", "Vance", "Lincoln", "Columbus", ...
-## $ region               &lt;chr&gt; "Coastal", "Piedmont", "Piedmont", "Coast...
-## $ development          &lt;chr&gt; "Farms, Woods, Pastures", "Residential", ...
-## $ locality             &lt;chr&gt; "Rural (&lt;30% Developed)", "Mixed (30% To ...
-## $ on_road              &lt;chr&gt; "SR 1915", "NICHOLAS ST", "US 321", "W BU...
-## $ rural_urban          &lt;chr&gt; "Rural", "Urban", "Rural", "Urban", "Urba...
-## $ speed_limit          &lt;chr&gt; "50 - 55  MPH", "30 - 35  MPH", "50 - 55 ...
-## $ traffic_control      &lt;chr&gt; "No Control Present", "Stop Sign", "Doubl...
-## $ weather              &lt;chr&gt; "Clear", "Clear", "Clear", "Rain", "Clear...
-## $ workzone             &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No",...
-## $ bike_age             &lt;chr&gt; "52", "66", "33", "52", "22", "15", "41",...
-## $ bike_age_group       &lt;chr&gt; "50-59", "60-69", "30-39", "50-59", "20-2...
-## $ bike_alcohol         &lt;chr&gt; "No", "No", "No", "Yes", "No", "No", "No"...
-## $ bike_alcohol_drugs   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
-## $ bike_direction       &lt;chr&gt; "With Traffic", "With Traffic", "With Tra...
-## $ bike_injury          &lt;chr&gt; "B: Evident Injury", "C: Possible Injury"...
-## $ bike_position        &lt;chr&gt; "Bike Lane / Paved Shoulder", "Travel Lan...
-## $ bike_race            &lt;chr&gt; "Black", "Black", "White", "Black", "Whit...
-## $ bike_sex             &lt;chr&gt; "Male", "Male", "Male", "Male", "Female",...
-## $ driver_age           &lt;chr&gt; "34", NA, "37", "55", "25", "17", NA, "50...
-## $ driver_age_group     &lt;chr&gt; "30-39", NA, "30-39", "50-59", "25-29", "...
-## $ driver_alcohol       &lt;chr&gt; "No", "Missing", "No", "No", "No", "No", ...
-## $ driver_alcohol_drugs &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
-## $ driver_est_speed     &lt;chr&gt; "51-55 mph", "6-10 mph", "41-45 mph", "11...
-## $ driver_injury        &lt;chr&gt; "O: No Injury", "Unknown Injury", "O: No ...
-## $ driver_race          &lt;chr&gt; "White", "Unknown/Missing", "Hispanic", "...
-## $ driver_sex           &lt;chr&gt; "Male", NA, "Female", "Male", "Male", "Fe...
-## $ driver_vehicle_type  &lt;chr&gt; "Single Unit Truck (2-Axle, 6-Tire)", NA,...
-## $ crash_alcohol        &lt;chr&gt; "No", "No", "No", "Yes", "No", "No", "No"...
-## $ crash_date           &lt;chr&gt; "11DEC2013", "20NOV2013", "03NOV2013", "1...
-## $ crash_day            &lt;chr&gt; "Wednesday", "Wednesday", "Sunday", "Satu...
-## $ crash_group          &lt;chr&gt; "Motorist Overtaking Bicyclist", "Bicycli...
-## $ crash_hour           &lt;int&gt; 6, 20, 18, 18, 13, 17, 17, 7, 15, 2, 12, ...
-## $ crash_location       &lt;chr&gt; "Non-Intersection", "Intersection", "Non-...
-## $ crash_month          &lt;chr&gt; "December", "November", "November", "Dece...
-## $ crash_severity       &lt;chr&gt; "B: Evident Injury", "C: Possible Injury"...
-## $ crash_time           &lt;time&gt; 06:10:00, 20:41:00, 18:05:00, 18:34:00, ...
-## $ crash_type           &lt;chr&gt; "Motorist Overtaking - Undetected Bicycli...
-## $ crash_year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ ambulance_req        &lt;chr&gt; "Yes", "No", "Yes", "Yes", "Yes", "Yes", ...
-## $ hit_run              &lt;chr&gt; "No", "Yes", "No", "No", "No", "No", "Yes...
-## $ light_condition      &lt;chr&gt; "Dark - Roadway Not Lighted", NA, "Dark -...
-## $ road_character       &lt;chr&gt; "Straight - Level", "Straight - Level", "...
-## $ road_class           &lt;chr&gt; "State Secondary Route", "Local Street", ...
-## $ road_condition       &lt;chr&gt; "Dry", "Dry", "Dry", "Water (Standing, Mo...
-## $ road_configuration   &lt;chr&gt; "Two-Way, Not Divided", "Two-Way, Divided...
-## $ road_defects         &lt;chr&gt; "None", NA, "None", "None", "None", "None...
-## $ road_feature         &lt;chr&gt; "No Special Feature", "T-Intersection", "...
-## $ road_surface         &lt;chr&gt; "Coarse Asphalt", "Smooth Asphalt", "Smoo...
-## $ num_bikes_ai         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_bi         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_ci         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_ki         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_no         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_to         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_bikes_ui         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ num_lanes            &lt;chr&gt; "2 lanes", "2 lanes", "2 lanes", "1 lane"...
-## $ num_units            &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,...
-## $ distance_mi_from     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "...
-## $ frm_road             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
-## $ rte_invd_cd          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ towrd_road           &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
-## $ geo_point            &lt;chr&gt; "35.3336070056, -77.9955023901", "36.3151...
-## $ geo_shape            &lt;chr&gt; "{\"type\": \"Point\", \"coordinates\": [...
+## $ object_id            &lt;int&gt; 1686, 1674, 1673, 1687, 1653, 1665, 1642, 1…
+## $ city                 &lt;chr&gt; "None - Rural Crash", "Henderson", "None - …
+## $ county               &lt;chr&gt; "Wayne", "Vance", "Lincoln", "Columbus", "N…
+## $ region               &lt;chr&gt; "Coastal", "Piedmont", "Piedmont", "Coastal…
+## $ development          &lt;chr&gt; "Farms, Woods, Pastures", "Residential", "F…
+## $ locality             &lt;chr&gt; "Rural (&lt;30% Developed)", "Mixed (30% To 70…
+## $ on_road              &lt;chr&gt; "SR 1915", "NICHOLAS ST", "US 321", "W BURK…
+## $ rural_urban          &lt;chr&gt; "Rural", "Urban", "Rural", "Urban", "Urban"…
+## $ speed_limit          &lt;chr&gt; "50 - 55  MPH", "30 - 35  MPH", "50 - 55  M…
+## $ traffic_control      &lt;chr&gt; "No Control Present", "Stop Sign", "Double …
+## $ weather              &lt;chr&gt; "Clear", "Clear", "Clear", "Rain", "Clear",…
+## $ workzone             &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "…
+## $ bike_age             &lt;chr&gt; "52", "66", "33", "52", "22", "15", "41", "…
+## $ bike_age_group       &lt;chr&gt; "50-59", "60-69", "30-39", "50-59", "20-24"…
+## $ bike_alcohol         &lt;chr&gt; "No", "No", "No", "Yes", "No", "No", "No", …
+## $ bike_alcohol_drugs   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ bike_direction       &lt;chr&gt; "With Traffic", "With Traffic", "With Traff…
+## $ bike_injury          &lt;chr&gt; "B: Evident Injury", "C: Possible Injury", …
+## $ bike_position        &lt;chr&gt; "Bike Lane / Paved Shoulder", "Travel Lane"…
+## $ bike_race            &lt;chr&gt; "Black", "Black", "White", "Black", "White"…
+## $ bike_sex             &lt;chr&gt; "Male", "Male", "Male", "Male", "Female", "…
+## $ driver_age           &lt;chr&gt; "34", NA, "37", "55", "25", "17", NA, "50",…
+## $ driver_age_group     &lt;chr&gt; "30-39", NA, "30-39", "50-59", "25-29", "0-…
+## $ driver_alcohol       &lt;chr&gt; "No", "Missing", "No", "No", "No", "No", "M…
+## $ driver_alcohol_drugs &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ driver_est_speed     &lt;chr&gt; "51-55 mph", "6-10 mph", "41-45 mph", "11-1…
+## $ driver_injury        &lt;chr&gt; "O: No Injury", "Unknown Injury", "O: No In…
+## $ driver_race          &lt;chr&gt; "White", "Unknown/Missing", "Hispanic", "Bl…
+## $ driver_sex           &lt;chr&gt; "Male", NA, "Female", "Male", "Male", "Fema…
+## $ driver_vehicle_type  &lt;chr&gt; "Single Unit Truck (2-Axle, 6-Tire)", NA, "…
+## $ crash_alcohol        &lt;chr&gt; "No", "No", "No", "Yes", "No", "No", "No", …
+## $ crash_date           &lt;chr&gt; "11DEC2013", "20NOV2013", "03NOV2013", "14D…
+## $ crash_day            &lt;chr&gt; "Wednesday", "Wednesday", "Sunday", "Saturd…
+## $ crash_group          &lt;chr&gt; "Motorist Overtaking Bicyclist", "Bicyclist…
+## $ crash_hour           &lt;int&gt; 6, 20, 18, 18, 13, 17, 17, 7, 15, 2, 12, 22…
+## $ crash_location       &lt;chr&gt; "Non-Intersection", "Intersection", "Non-In…
+## $ crash_month          &lt;chr&gt; "December", "November", "November", "Decemb…
+## $ crash_severity       &lt;chr&gt; "B: Evident Injury", "C: Possible Injury", …
+## $ crash_time           &lt;drtn&gt; 06:10:00, 20:41:00, 18:05:00, 18:34:00, 13…
+## $ crash_type           &lt;chr&gt; "Motorist Overtaking - Undetected Bicyclist…
+## $ crash_year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2…
+## $ ambulance_req        &lt;chr&gt; "Yes", "No", "Yes", "Yes", "Yes", "Yes", "Y…
+## $ hit_run              &lt;chr&gt; "No", "Yes", "No", "No", "No", "No", "Yes",…
+## $ light_condition      &lt;chr&gt; "Dark - Roadway Not Lighted", NA, "Dark - R…
+## $ road_character       &lt;chr&gt; "Straight - Level", "Straight - Level", "St…
+## $ road_class           &lt;chr&gt; "State Secondary Route", "Local Street", "U…
+## $ road_condition       &lt;chr&gt; "Dry", "Dry", "Dry", "Water (Standing, Movi…
+## $ road_configuration   &lt;chr&gt; "Two-Way, Not Divided", "Two-Way, Divided, …
+## $ road_defects         &lt;chr&gt; "None", NA, "None", "None", "None", "None",…
+## $ road_feature         &lt;chr&gt; "No Special Feature", "T-Intersection", "No…
+## $ road_surface         &lt;chr&gt; "Coarse Asphalt", "Smooth Asphalt", "Smooth…
+## $ num_bikes_ai         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_bi         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_ci         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_ki         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_no         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_to         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_bikes_ui         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ num_lanes            &lt;chr&gt; "2 lanes", "2 lanes", "2 lanes", "1 lane", …
+## $ num_units            &lt;int&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+## $ distance_mi_from     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "0"…
+## $ frm_road             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ rte_invd_cd          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ towrd_road           &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ geo_point            &lt;chr&gt; "35.3336070056, -77.9955023901", "36.315187…
+## $ geo_shape            &lt;chr&gt; "{\"type\": \"Point\", \"coordinates\": [-7…
 ```
 
 ---
@@ -374,7 +373,7 @@ ncbikecrash %&gt;%
 ##  8      7134 Durh… Durham Piedm… Commercial  Urban (… &lt;NA&gt;    Urban      
 ##  9      1670 Durh… Durham Piedm… Commercial  Urban (… INFINI… Urban      
 ## 10      1773 Durh… Durham Piedm… Residential Urban (… &lt;NA&gt;    Urban      
-## # ... with 330 more rows, and 58 more variables: speed_limit &lt;chr&gt;,
+## # … with 330 more rows, and 58 more variables: speed_limit &lt;chr&gt;,
 ## #   traffic_control &lt;chr&gt;, weather &lt;chr&gt;, workzone &lt;chr&gt;, bike_age &lt;chr&gt;,
 ## #   bike_age_group &lt;chr&gt;, bike_alcohol &lt;chr&gt;, bike_alcohol_drugs &lt;chr&gt;,
 ## #   bike_direction &lt;chr&gt;, bike_injury &lt;chr&gt;, bike_position &lt;chr&gt;,
@@ -385,7 +384,7 @@ ncbikecrash %&gt;%
 ## #   driver_vehicle_type &lt;chr&gt;, crash_alcohol &lt;chr&gt;, crash_date &lt;chr&gt;,
 ## #   crash_day &lt;chr&gt;, crash_group &lt;chr&gt;, crash_hour &lt;int&gt;,
 ## #   crash_location &lt;chr&gt;, crash_month &lt;chr&gt;, crash_severity &lt;chr&gt;,
-## #   crash_time &lt;time&gt;, crash_type &lt;chr&gt;, crash_year &lt;int&gt;,
+## #   crash_time &lt;drtn&gt;, crash_type &lt;chr&gt;, crash_year &lt;int&gt;,
 ## #   ambulance_req &lt;chr&gt;, hit_run &lt;chr&gt;, light_condition &lt;chr&gt;,
 ## #   road_character &lt;chr&gt;, road_class &lt;chr&gt;, road_condition &lt;chr&gt;,
 ## #   road_configuration &lt;chr&gt;, road_defects &lt;chr&gt;, road_feature &lt;chr&gt;,
@@ -416,7 +415,7 @@ ncbikecrash %&gt;%
 ## 2       414 Durh… Durham Piedm… Residential Urban (… PVA 90… Urban      
 ## 3      3016 Durh… Durham Piedm… Residential Urban (… &lt;NA&gt;    Urban      
 ## 4      1383 Durh… Durham Piedm… Residential Urban (… PVA 62… Urban      
-## # ... with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
+## # … with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
 ## #   weather &lt;chr&gt;, workzone &lt;chr&gt;, bike_age &lt;chr&gt;, bike_age_group &lt;chr&gt;,
 ## #   bike_alcohol &lt;chr&gt;, bike_alcohol_drugs &lt;chr&gt;, bike_direction &lt;chr&gt;,
 ## #   bike_injury &lt;chr&gt;, bike_position &lt;chr&gt;, bike_race &lt;chr&gt;,
@@ -426,7 +425,7 @@ ncbikecrash %&gt;%
 ## #   driver_sex &lt;chr&gt;, driver_vehicle_type &lt;chr&gt;, crash_alcohol &lt;chr&gt;,
 ## #   crash_date &lt;chr&gt;, crash_day &lt;chr&gt;, crash_group &lt;chr&gt;,
 ## #   crash_hour &lt;int&gt;, crash_location &lt;chr&gt;, crash_month &lt;chr&gt;,
-## #   crash_severity &lt;chr&gt;, crash_time &lt;time&gt;, crash_type &lt;chr&gt;,
+## #   crash_severity &lt;chr&gt;, crash_time &lt;drtn&gt;, crash_type &lt;chr&gt;,
 ## #   crash_year &lt;int&gt;, ambulance_req &lt;chr&gt;, hit_run &lt;chr&gt;,
 ## #   light_condition &lt;chr&gt;, road_character &lt;chr&gt;, road_class &lt;chr&gt;,
 ## #   road_condition &lt;chr&gt;, road_configuration &lt;chr&gt;, road_defects &lt;chr&gt;,
@@ -497,7 +496,7 @@ ncbikecrash %&gt;%
 ##  8 Rale… Wake   Piedm… Commercial  Urban (… PERSON… Urban       30 - 35  M…
 ##  9 Whit… Colum… Coast… Residential Rural (… FLOWER… Urban       30 - 35  M…
 ## 10 New … Craven Coast… Residential Urban (… SUTTON… Urban       20 - 25  M…
-## # ... with 7,457 more rows, and 57 more variables: traffic_control &lt;chr&gt;,
+## # … with 7,457 more rows, and 57 more variables: traffic_control &lt;chr&gt;,
 ## #   weather &lt;chr&gt;, workzone &lt;chr&gt;, bike_age &lt;chr&gt;, bike_age_group &lt;chr&gt;,
 ## #   bike_alcohol &lt;chr&gt;, bike_alcohol_drugs &lt;chr&gt;, bike_direction &lt;chr&gt;,
 ## #   bike_injury &lt;chr&gt;, bike_position &lt;chr&gt;, bike_race &lt;chr&gt;,
@@ -507,7 +506,7 @@ ncbikecrash %&gt;%
 ## #   driver_sex &lt;chr&gt;, driver_vehicle_type &lt;chr&gt;, crash_alcohol &lt;chr&gt;,
 ## #   crash_date &lt;chr&gt;, crash_day &lt;chr&gt;, crash_group &lt;chr&gt;,
 ## #   crash_hour &lt;int&gt;, crash_location &lt;chr&gt;, crash_month &lt;chr&gt;,
-## #   crash_severity &lt;chr&gt;, crash_time &lt;time&gt;, crash_type &lt;chr&gt;,
+## #   crash_severity &lt;chr&gt;, crash_time &lt;drtn&gt;, crash_type &lt;chr&gt;,
 ## #   crash_year &lt;int&gt;, ambulance_req &lt;chr&gt;, hit_run &lt;chr&gt;,
 ## #   light_condition &lt;chr&gt;, road_character &lt;chr&gt;, road_class &lt;chr&gt;,
 ## #   road_condition &lt;chr&gt;, road_configuration &lt;chr&gt;, road_defects &lt;chr&gt;,
@@ -531,19 +530,19 @@ ncbikecrash %&gt;%
 
 ```
 ## # A tibble: 7,467 x 5
-##    city          county     region  development       locality            
-##    &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;             &lt;chr&gt;               
-##  1 None - Rural… Wayne      Coastal Farms, Woods, Pa… Rural (&lt;30% Develop…
-##  2 Henderson     Vance      Piedmo… Residential       Mixed (30% To 70% D…
-##  3 None - Rural… Lincoln    Piedmo… Farms, Woods, Pa… Rural (&lt;30% Develop…
-##  4 Whiteville    Columbus   Coastal Commercial        Urban (&gt;70% Develop…
-##  5 Wilmington    New Hanov… Coastal Residential       Urban (&gt;70% Develop…
-##  6 None - Rural… Robeson    Coastal Farms, Woods, Pa… Rural (&lt;30% Develop…
-##  7 None - Rural… Richmond   Piedmo… Residential       Mixed (30% To 70% D…
-##  8 Raleigh       Wake       Piedmo… Commercial        Urban (&gt;70% Develop…
-##  9 Whiteville    Columbus   Coastal Residential       Rural (&lt;30% Develop…
-## 10 New Bern      Craven     Coastal Residential       Urban (&gt;70% Develop…
-## # ... with 7,457 more rows
+##    city           county     region  development       locality            
+##    &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;             &lt;chr&gt;               
+##  1 None - Rural … Wayne      Coastal Farms, Woods, Pa… Rural (&lt;30% Develop…
+##  2 Henderson      Vance      Piedmo… Residential       Mixed (30% To 70% D…
+##  3 None - Rural … Lincoln    Piedmo… Farms, Woods, Pa… Rural (&lt;30% Develop…
+##  4 Whiteville     Columbus   Coastal Commercial        Urban (&gt;70% Develop…
+##  5 Wilmington     New Hanov… Coastal Residential       Urban (&gt;70% Develop…
+##  6 None - Rural … Robeson    Coastal Farms, Woods, Pa… Rural (&lt;30% Develop…
+##  7 None - Rural … Richmond   Piedmo… Residential       Mixed (30% To 70% D…
+##  8 Raleigh        Wake       Piedmo… Commercial        Urban (&gt;70% Develop…
+##  9 Whiteville     Columbus   Coastal Residential       Rural (&lt;30% Develop…
+## 10 New Bern       Craven     Coastal Residential       Urban (&gt;70% Develop…
+## # … with 7,457 more rows
 ```
 
 ---
@@ -566,7 +565,7 @@ ncbikecrash %&gt;%
 ## 3      1673 None… Linco… Piedm… Farms, Woo… Rural (… US 321  Rural      
 ## 4      1687 Whit… Colum… Coast… Commercial  Urban (… W BURK… Urban      
 ## 5      1653 Wilm… New H… Coast… Residential Urban (… RACINE… Urban      
-## # ... with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
+## # … with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
 ## #   weather &lt;chr&gt;, workzone &lt;chr&gt;, bike_age &lt;chr&gt;, bike_age_group &lt;chr&gt;,
 ## #   bike_alcohol &lt;chr&gt;, bike_alcohol_drugs &lt;chr&gt;, bike_direction &lt;chr&gt;,
 ## #   bike_injury &lt;chr&gt;, bike_position &lt;chr&gt;, bike_race &lt;chr&gt;,
@@ -576,7 +575,7 @@ ncbikecrash %&gt;%
 ## #   driver_sex &lt;chr&gt;, driver_vehicle_type &lt;chr&gt;, crash_alcohol &lt;chr&gt;,
 ## #   crash_date &lt;chr&gt;, crash_day &lt;chr&gt;, crash_group &lt;chr&gt;,
 ## #   crash_hour &lt;int&gt;, crash_location &lt;chr&gt;, crash_month &lt;chr&gt;,
-## #   crash_severity &lt;chr&gt;, crash_time &lt;time&gt;, crash_type &lt;chr&gt;,
+## #   crash_severity &lt;chr&gt;, crash_time &lt;drtn&gt;, crash_type &lt;chr&gt;,
 ## #   crash_year &lt;int&gt;, ambulance_req &lt;chr&gt;, hit_run &lt;chr&gt;,
 ## #   light_condition &lt;chr&gt;, road_character &lt;chr&gt;, road_class &lt;chr&gt;,
 ## #   road_condition &lt;chr&gt;, road_configuration &lt;chr&gt;, road_defects &lt;chr&gt;,
@@ -609,7 +608,7 @@ ncbikecrash %&gt;%
 ## 3      6995 Kins… Lenoir Coast… Commercial  Urban (… &lt;NA&gt;    Urban      
 ## 4      6998 Faye… Cumbe… Coast… Residential Urban (… &lt;NA&gt;    Urban      
 ## 5      7000 None… Onslow Coast… Farms, Woo… Rural (… &lt;NA&gt;    Rural      
-## # ... with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
+## # … with 58 more variables: speed_limit &lt;chr&gt;, traffic_control &lt;chr&gt;,
 ## #   weather &lt;chr&gt;, workzone &lt;chr&gt;, bike_age &lt;chr&gt;, bike_age_group &lt;chr&gt;,
 ## #   bike_alcohol &lt;chr&gt;, bike_alcohol_drugs &lt;chr&gt;, bike_direction &lt;chr&gt;,
 ## #   bike_injury &lt;chr&gt;, bike_position &lt;chr&gt;, bike_race &lt;chr&gt;,
@@ -619,7 +618,7 @@ ncbikecrash %&gt;%
 ## #   driver_sex &lt;chr&gt;, driver_vehicle_type &lt;chr&gt;, crash_alcohol &lt;chr&gt;,
 ## #   crash_date &lt;chr&gt;, crash_day &lt;chr&gt;, crash_group &lt;chr&gt;,
 ## #   crash_hour &lt;int&gt;, crash_location &lt;chr&gt;, crash_month &lt;chr&gt;,
-## #   crash_severity &lt;chr&gt;, crash_time &lt;time&gt;, crash_type &lt;chr&gt;,
+## #   crash_severity &lt;chr&gt;, crash_time &lt;drtn&gt;, crash_type &lt;chr&gt;,
 ## #   crash_year &lt;int&gt;, ambulance_req &lt;chr&gt;, hit_run &lt;chr&gt;,
 ## #   light_condition &lt;chr&gt;, road_character &lt;chr&gt;, road_class &lt;chr&gt;,
 ## #   road_condition &lt;chr&gt;, road_configuration &lt;chr&gt;, road_defects &lt;chr&gt;,
@@ -727,7 +726,7 @@ ncbikecrash %&gt;%
 ##  8 Alamance  Mebane            
 ##  9 Alamance  None - Rural Crash
 ## 10 Alexander None - Rural Crash
-## # ... with 381 more rows
+## # … with 381 more rows
 ```
 
 ---
@@ -862,6 +861,7 @@ ncbikecrash %&gt;%
 - Go to the course GitHub organization and clone the repo for this application exercise
 - For each question you work on, set the `eval` chunk option to `TRUE` and knit
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightLines": true,
@@ -871,26 +871,79 @@ ncbikecrash %&gt;%
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

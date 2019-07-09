@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Data and visualization   📉</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
-    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
-    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -183,7 +182,7 @@ starwars
 ##  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   &lt;NA&gt;  
 ##  9 Bigg…    183    84 black      light      brown           24   male  
 ## 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  
-## # ... with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;,
+## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;,
 ## #   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 ]
@@ -212,19 +211,19 @@ glimpse(starwars)
 ```
 ## Observations: 87
 ## Variables: 13
-## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", ...
-## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188...
-## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 8...
-## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "b...
-## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "l...
-## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue",...
-## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0...
-## $ gender     &lt;chr&gt; "male", NA, NA, "male", "female", "male", "female",...
-## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alder...
-## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human...
-## $ films      &lt;list&gt; [&lt;"Revenge of the Sith", "Return of the Jedi", "Th...
-## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;,...
-## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Adva...
+## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "L…
+## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, …
+## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.…
+## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "bro…
+## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "lig…
+## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "…
+## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, …
+## $ gender     &lt;chr&gt; "male", NA, NA, "male", "female", "male", "female", N…
+## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaa…
+## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human",…
+## $ films      &lt;list&gt; [&lt;"Revenge of the Sith", "Return of the Jedi", "The …
+## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;…
+## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanc…
 ```
 
 ---
@@ -241,7 +240,7 @@ Run the following **in the Console** to view the help
 ?starwars
 ```
 
-&lt;img src="img/starwars-help.png" width="435" /&gt;
+![](img/starwars-help.png)&lt;!-- --&gt;
 
 ---
 
@@ -295,7 +294,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Jabba!
 
-&lt;img src="img/jabbaplot.png" width="768" /&gt;
+![](img/jabbaplot.png)&lt;!-- --&gt;
 
 ---
 
@@ -642,6 +641,7 @@ starwars &lt;- starwars %&gt;%
 
 ![](u1_d02-data-and-viz_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;![](u1_d02-data-and-viz_files/figure-html/unnamed-chunk-28-2.png)&lt;!-- --&gt;
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightLines": true,
@@ -651,34 +651,81 @@ starwars &lt;- starwars %&gt;%
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
-/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
 })();
 </script>

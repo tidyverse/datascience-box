@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Web scraping   🕸</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
-    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
-    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -224,37 +223,37 @@ imdb_top_250 &lt;- tibble(
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Shawshank Redemption &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Les évadés &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Godfather &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le parrain &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1972 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Godfather: Part II &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le parrain, 2ème partie &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1974 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Dark Knight &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; The Dark Knight: Le chevalier noir &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2008 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 12 Angry Men &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Douze hommes en colère &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1957 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Schindler's List &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; La liste de Schindler &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1993 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Return of the King &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: Le retour du roi &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2003 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
   &lt;/tr&gt;
@@ -264,7 +263,7 @@ imdb_top_250 &lt;- tibble(
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Good, the Bad and the Ugly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le bon, la brute et le truand &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1966 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
   &lt;/tr&gt;
@@ -274,7 +273,7 @@ imdb_top_250 &lt;- tibble(
    &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Fellowship of the Ring &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: La communauté de l'anneau &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2001 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
   &lt;/tr&gt;
@@ -284,17 +283,17 @@ imdb_top_250 &lt;- tibble(
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Star Wars: Episode V - The Empire Strikes Back &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Inception &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2010 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Two Towers &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; L'empire contre-attaque &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: Les deux tours &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2002 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
   &lt;/tr&gt;
@@ -322,9 +321,9 @@ glimpse(imdb_top_250)
 ```
 ## Observations: 250
 ## Variables: 3
-## $ title &lt;chr&gt; "The Shawshank Redemption", "The Godfather", "The Godfat...
-## $ year  &lt;dbl&gt; 1994, 1972, 1974, 2008, 1957, 1993, 2003, 1994, 1966, 19...
-## $ score &lt;dbl&gt; 9.2, 9.2, 9.0, 9.0, 8.9, 8.9, 8.9, 8.9, 8.8, 8.8, 8.8, 8...
+## $ title &lt;chr&gt; "Les évadés", "Le parrain", "Le parrain, 2ème partie", "Th…
+## $ year  &lt;dbl&gt; 1994, 1972, 1974, 2008, 1957, 1993, 2003, 1994, 1966, 1999…
+## $ score &lt;dbl&gt; 9.2, 9.2, 9.0, 9.0, 8.9, 8.9, 8.9, 8.9, 8.8, 8.8, 8.8, 8.7…
 ```
 
 - Add a variable for rank
@@ -349,43 +348,43 @@ imdb_top_250 &lt;- imdb_top_250 %&gt;%
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Shawshank Redemption &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Les évadés &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1994 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Godfather &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le parrain &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1972 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9.2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Godfather: Part II &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le parrain, 2ème partie &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1974 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Dark Knight &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; The Dark Knight: Le chevalier noir &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2008 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 12 Angry Men &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Douze hommes en colère &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1957 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Schindler's List &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; La liste de Schindler &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1993 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Return of the King &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: Le retour du roi &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2003 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.9 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
@@ -397,7 +396,7 @@ imdb_top_250 &lt;- imdb_top_250 %&gt;%
    &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Good, the Bad and the Ugly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le bon, la brute et le truand &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 1966 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
@@ -409,7 +408,7 @@ imdb_top_250 &lt;- imdb_top_250 %&gt;%
    &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Fellowship of the Ring &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: La communauté de l'anneau &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2001 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.8 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 11 &lt;/td&gt;
@@ -421,19 +420,19 @@ imdb_top_250 &lt;- imdb_top_250 %&gt;%
    &lt;td style="text-align:left;"&gt; 12 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Star Wars: Episode V - The Empire Strikes Back &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Inception &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2010 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 13 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Inception &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 2010 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; L'empire contre-attaque &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1980 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 14 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; The Lord of the Rings: The Two Towers &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Le seigneur des anneaux: Les deux tours &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 2002 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 8.7 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 15 &lt;/td&gt;
@@ -481,16 +480,16 @@ imdb_top_250 %&gt;%
 
 ```
 ## # A tibble: 8 x 4
-##   title               year score  rank
-##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 Se7en               1995   8.6    22
-## 2 The Usual Suspects  1995   8.5    26
-## 3 Braveheart          1995   8.3    73
-## 4 Toy Story           1995   8.3    92
-## 5 Heat                1995   8.2   122
-## 6 Casino              1995   8.2   143
-## 7 Before Sunrise      1995   8.1   204
-## 8 La Haine            1995   8     230
+##   title           year score  rank
+##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 Seven           1995   8.6    21
+## 2 Usual Suspects  1995   8.5    29
+## 3 Braveheart      1995   8.3    75
+## 4 Toy Story       1995   8.3    84
+## 5 Heat            1995   8.2   123
+## 6 Casino          1995   8.2   144
+## 7 Before Sunrise  1995   8.1   201
+## 8 La haine        1995   8     230
 ```
 
 ---
@@ -517,10 +516,10 @@ imdb_top_250 %&gt;%
 ##    year total
 ##   &lt;dbl&gt; &lt;int&gt;
 ## 1  1995     8
-## 2  1957     7
+## 2  2001     7
 ## 3  2014     7
-## 4  2000     6
-## 5  2001     6
+## 4  1957     6
+## 5  1997     6
 ```
 
 ---
@@ -548,6 +547,7 @@ How would you go about creating this visualization: Visualize the average yearly
 Compare the display of information at [raleigh.craigslist.org/search/apa](https://raleigh.craigslist.org/search/apa) to the list on the IMDB top 250 list. What challenges can you foresee in scraping a list of the available apartments?
 ]
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightLines": true,
@@ -557,26 +557,79 @@ Compare the display of information at [raleigh.craigslist.org/search/apa](https:
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Functions and automation   🤖</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link href="libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
-    <script src="libs/font-awesome/js/fontawesome-all.min.js"></script>
-    <script src="libs/font-awesome/js/fa-v4-shims.min.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -216,7 +215,7 @@ scrape_episode(twd)
 ```
 
 ```
-## [1] 131
+## [1] 147
 ```
 
 ![Number of episodes in Game of Thrones](img/episode_got.png)
@@ -303,9 +302,9 @@ scrape_show_info(twd)
 
 ```
 ## # A tibble: 1 x 3
-##   title            runtime genres                         
-##   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;                          
-## 1 The Walking Dead 44min   Drama, Horror, Sci-Fi, Thriller
+##   title            runtime genres                 
+##   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;                  
+## 1 The Walking Dead 44min   Drama, Horror, Thriller
 ```
 
 ```r
@@ -416,9 +415,9 @@ scrape_show_info(twd_url)
 
 ```
 ## # A tibble: 1 x 3
-##   title            runtime genres                         
-##   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;                          
-## 1 The Walking Dead 44min   Drama, Horror, Sci-Fi, Thriller
+##   title            runtime genres                 
+##   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;                  
+## 1 The Walking Dead 44min   Drama, Horror, Thriller
 ```
 
 ```r
@@ -457,106 +456,106 @@ urls &lt;- read_html("http://www.imdb.com/chart/tvmeter") %&gt;%
 
 
 ```
-##   [1] "http://www.imdb.com/title/tt5057054/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_1"  
-##   [2] "http://www.imdb.com/title/tt5071412/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_2"  
-##   [3] "http://www.imdb.com/title/tt0944947/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_3"  
-##   [4] "http://www.imdb.com/title/tt6548228/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_4"  
-##   [5] "http://www.imdb.com/title/tt5715524/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_5"  
-##   [6] "http://www.imdb.com/title/tt3032476/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_6"  
-##   [7] "http://www.imdb.com/title/tt1844624/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_7"  
-##   [8] "http://www.imdb.com/title/tt6048596/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_8"  
-##   [9] "http://www.imdb.com/title/tt1586680/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_9"  
-##  [10] "http://www.imdb.com/title/tt7493974/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_10" 
-##  [11] "http://www.imdb.com/title/tt2372162/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_11" 
-##  [12] "http://www.imdb.com/title/tt2649356/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_12" 
-##  [13] "http://www.imdb.com/title/tt0413573/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_13" 
-##  [14] "http://www.imdb.com/title/tt2661044/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_14" 
-##  [15] "http://www.imdb.com/title/tt0472954/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_15" 
-##  [16] "http://www.imdb.com/title/tt5834204/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_16" 
-##  [17] "http://www.imdb.com/title/tt1520211/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_17" 
-##  [18] "http://www.imdb.com/title/tt3322310/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_18" 
-##  [19] "http://www.imdb.com/title/tt0460681/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_19" 
-##  [20] "http://www.imdb.com/title/tt0108778/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_20" 
-##  [21] "http://www.imdb.com/title/tt8235236/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_21" 
-##  [22] "http://www.imdb.com/title/tt2467372/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_22" 
-##  [23] "http://www.imdb.com/title/tt0386676/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_23" 
-##  [24] "http://www.imdb.com/title/tt3107288/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_24" 
-##  [25] "http://www.imdb.com/title/tt5363918/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_25" 
-##  [26] "http://www.imdb.com/title/tt2306299/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_26" 
-##  [27] "http://www.imdb.com/title/tt1632701/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_27" 
-##  [28] "http://www.imdb.com/title/tt0452046/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_28" 
-##  [29] "http://www.imdb.com/title/tt6110648/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_29" 
-##  [30] "http://www.imdb.com/title/tt6487482/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_30" 
-##  [31] "http://www.imdb.com/title/tt0475784/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_31" 
-##  [32] "http://www.imdb.com/title/tt4574334/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_32" 
-##  [33] "http://www.imdb.com/title/tt0903747/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_33" 
-##  [34] "http://www.imdb.com/title/tt2193021/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_34" 
-##  [35] "http://www.imdb.com/title/tt1124373/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_35" 
-##  [36] "http://www.imdb.com/title/tt8021824/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_36" 
-##  [37] "http://www.imdb.com/title/tt2085059/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_37" 
-##  [38] "http://www.imdb.com/title/tt7076630/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_38" 
-##  [39] "http://www.imdb.com/title/tt0203259/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_39" 
-##  [40] "http://www.imdb.com/title/tt3281796/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_40" 
-##  [41] "http://www.imdb.com/title/tt2442560/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_41" 
-##  [42] "http://www.imdb.com/title/tt2356777/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_42" 
-##  [43] "http://www.imdb.com/title/tt1305826/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_43" 
-##  [44] "http://www.imdb.com/title/tt3006802/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_44" 
-##  [45] "http://www.imdb.com/title/tt2699110/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_45" 
-##  [46] "http://www.imdb.com/title/tt4052886/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_46" 
-##  [47] "http://www.imdb.com/title/tt2632424/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_47" 
-##  [48] "http://www.imdb.com/title/tt6468322/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_48" 
-##  [49] "http://www.imdb.com/title/tt7375404/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_49" 
-##  [50] "http://www.imdb.com/title/tt1837492/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_50" 
-##  [51] "http://www.imdb.com/title/tt3743822/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_51" 
-##  [52] "http://www.imdb.com/title/tt5420376/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_52" 
-##  [53] "http://www.imdb.com/title/tt2741602/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_53" 
-##  [54] "http://www.imdb.com/title/tt5016504/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_54" 
-##  [55] "http://www.imdb.com/title/tt1405406/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_55" 
-##  [56] "http://www.imdb.com/title/tt5555260/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_56" 
-##  [57] "http://www.imdb.com/title/tt0460649/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_57" 
-##  [58] "http://www.imdb.com/title/tt4354880/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_58" 
-##  [59] "http://www.imdb.com/title/tt3749900/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_59" 
-##  [60] "http://www.imdb.com/title/tt1856010/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_60" 
-##  [61] "http://www.imdb.com/title/tt0364845/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_61" 
-##  [62] "http://www.imdb.com/title/tt0898266/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_62" 
-##  [63] "http://www.imdb.com/title/tt0436992/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_63" 
-##  [64] "http://www.imdb.com/title/tt2364582/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_64" 
-##  [65] "http://www.imdb.com/title/tt4955642/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_65" 
-##  [66] "http://www.imdb.com/title/tt1796960/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_66" 
-##  [67] "http://www.imdb.com/title/tt1843230/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_67" 
-##  [68] "http://www.imdb.com/title/tt2707408/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_68" 
-##  [69] "http://www.imdb.com/title/tt0412142/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_69" 
-##  [70] "http://www.imdb.com/title/tt0369179/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_70" 
-##  [71] "http://www.imdb.com/title/tt1475582/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_71" 
-##  [72] "http://www.imdb.com/title/tt2191671/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_72" 
-##  [73] "http://www.imdb.com/title/tt2891574/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_73" 
-##  [74] "http://www.imdb.com/title/tt3288518/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_74" 
-##  [75] "http://www.imdb.com/title/tt0844441/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_75" 
-##  [76] "http://www.imdb.com/title/tt0460627/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_76" 
-##  [77] "http://www.imdb.com/title/tt4016454/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_77" 
-##  [78] "http://www.imdb.com/title/tt1266020/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_78" 
-##  [79] "http://www.imdb.com/title/tt4786824/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_79" 
-##  [80] "http://www.imdb.com/title/tt2802850/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_80" 
-##  [81] "http://www.imdb.com/title/tt3398228/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_81" 
-##  [82] "http://www.imdb.com/title/tt4270492/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_82" 
-##  [83] "http://www.imdb.com/title/tt2861424/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_83" 
-##  [84] "http://www.imdb.com/title/tt4236770/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_84" 
-##  [85] "http://www.imdb.com/title/tt3230854/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_85" 
-##  [86] "http://www.imdb.com/title/tt7008682/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_86" 
-##  [87] "http://www.imdb.com/title/tt1600194/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_87" 
-##  [88] "http://www.imdb.com/title/tt5909930/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_88" 
-##  [89] "http://www.imdb.com/title/tt0108757/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_89" 
-##  [90] "http://www.imdb.com/title/tt2262532/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_90" 
-##  [91] "http://www.imdb.com/title/tt1442437/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_91" 
-##  [92] "http://www.imdb.com/title/tt1595859/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_92" 
-##  [93] "http://www.imdb.com/title/tt0411008/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_93" 
-##  [94] "http://www.imdb.com/title/tt0773262/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_94" 
-##  [95] "http://www.imdb.com/title/tt1740299/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_95" 
-##  [96] "http://www.imdb.com/title/tt6470478/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_96" 
-##  [97] "http://www.imdb.com/title/tt6315640/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_97" 
-##  [98] "http://www.imdb.com/title/tt1567432/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_98" 
-##  [99] "http://www.imdb.com/title/tt3322314/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_99" 
-## [100] "http://www.imdb.com/title/tt3322312/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=J7JXQMW1GCS5AWJH1375&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_100"
+##   [1] "http://www.imdb.com/title/tt4574334/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_1"  
+##   [2] "http://www.imdb.com/title/tt5753856/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_2"  
+##   [3] "http://www.imdb.com/title/tt7366338/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_3"  
+##   [4] "http://www.imdb.com/title/tt2085059/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_4"  
+##   [5] "http://www.imdb.com/title/tt0944947/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_5"  
+##   [6] "http://www.imdb.com/title/tt8772296/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_6"  
+##   [7] "http://www.imdb.com/title/tt5834204/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_7"  
+##   [8] "http://www.imdb.com/title/tt5180504/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_8"  
+##   [9] "http://www.imdb.com/title/tt3920596/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_9"  
+##  [10] "http://www.imdb.com/title/tt4052886/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_10" 
+##  [11] "http://www.imdb.com/title/tt1869454/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_11" 
+##  [12] "http://www.imdb.com/title/tt7137906/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_12" 
+##  [13] "http://www.imdb.com/title/tt3006802/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_13" 
+##  [14] "http://www.imdb.com/title/tt5296406/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_14" 
+##  [15] "http://www.imdb.com/title/tt2661044/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_15" 
+##  [16] "http://www.imdb.com/title/tt0412253/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_16" 
+##  [17] "http://www.imdb.com/title/tt0386676/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_17" 
+##  [18] "http://www.imdb.com/title/tt0903747/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_18" 
+##  [19] "http://www.imdb.com/title/tt2442560/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_19" 
+##  [20] "http://www.imdb.com/title/tt2357547/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_20" 
+##  [21] "http://www.imdb.com/title/tt7395992/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_21" 
+##  [22] "http://www.imdb.com/title/tt2560140/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_22" 
+##  [23] "http://www.imdb.com/title/tt0108778/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_23" 
+##  [24] "http://www.imdb.com/title/tt1520211/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_24" 
+##  [25] "http://www.imdb.com/title/tt7087260/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_25" 
+##  [26] "http://www.imdb.com/title/tt7016936/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_26" 
+##  [27] "http://www.imdb.com/title/tt2306299/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_27" 
+##  [28] "http://www.imdb.com/title/tt0413573/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_28" 
+##  [29] "http://www.imdb.com/title/tt0898266/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_29" 
+##  [30] "http://www.imdb.com/title/tt4236770/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_30" 
+##  [31] "http://www.imdb.com/title/tt2364582/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_31" 
+##  [32] "http://www.imdb.com/title/tt0460681/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_32" 
+##  [33] "http://www.imdb.com/title/tt5114356/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_33" 
+##  [34] "http://www.imdb.com/title/tt6821044/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_34" 
+##  [35] "http://www.imdb.com/title/tt2467372/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_35" 
+##  [36] "http://www.imdb.com/title/tt7187044/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_36" 
+##  [37] "http://www.imdb.com/title/tt5420376/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_37" 
+##  [38] "http://www.imdb.com/title/tt7949606/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_38" 
+##  [39] "http://www.imdb.com/title/tt5574490/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_39" 
+##  [40] "http://www.imdb.com/title/tt1327801/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_40" 
+##  [41] "http://www.imdb.com/title/tt1632701/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_41" 
+##  [42] "http://www.imdb.com/title/tt8403536/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_42" 
+##  [43] "http://www.imdb.com/title/tt6468322/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_43" 
+##  [44] "http://www.imdb.com/title/tt2372162/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_44" 
+##  [45] "http://www.imdb.com/title/tt4508902/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_45" 
+##  [46] "http://www.imdb.com/title/tt3743822/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_46" 
+##  [47] "http://www.imdb.com/title/tt1190634/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_47" 
+##  [48] "http://www.imdb.com/title/tt0475784/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_48" 
+##  [49] "http://www.imdb.com/title/tt0452046/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_49" 
+##  [50] "http://www.imdb.com/title/tt7671068/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_50" 
+##  [51] "http://www.imdb.com/title/tt8362852/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_51" 
+##  [52] "http://www.imdb.com/title/tt0106148/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_52" 
+##  [53] "http://www.imdb.com/title/tt2193021/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_53" 
+##  [54] "http://www.imdb.com/title/tt8694364/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_54" 
+##  [55] "http://www.imdb.com/title/tt2356777/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_55" 
+##  [56] "http://www.imdb.com/title/tt3107288/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_56" 
+##  [57] "http://www.imdb.com/title/tt8064302/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_57" 
+##  [58] "http://www.imdb.com/title/tt3526078/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_58" 
+##  [59] "http://www.imdb.com/title/tt0203259/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_59" 
+##  [60] "http://www.imdb.com/title/tt0348914/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_60" 
+##  [61] "http://www.imdb.com/title/tt2741602/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_61" 
+##  [62] "http://www.imdb.com/title/tt0364845/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_62" 
+##  [63] "http://www.imdb.com/title/tt1064899/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_63" 
+##  [64] "http://www.imdb.com/title/tt6474378/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_64" 
+##  [65] "http://www.imdb.com/title/tt0141842/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_65" 
+##  [66] "http://www.imdb.com/title/tt1586680/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_66" 
+##  [67] "http://www.imdb.com/title/tt1844624/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_67" 
+##  [68] "http://www.imdb.com/title/tt8860450/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_68" 
+##  [69] "http://www.imdb.com/title/tt0804503/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_69" 
+##  [70] "http://www.imdb.com/title/tt3566726/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_70" 
+##  [71] "http://www.imdb.com/title/tt0436992/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_71" 
+##  [72] "http://www.imdb.com/title/tt0472954/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_72" 
+##  [73] "http://www.imdb.com/title/tt6517320/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_73" 
+##  [74] "http://www.imdb.com/title/tt1266020/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_74" 
+##  [75] "http://www.imdb.com/title/tt5687612/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_75" 
+##  [76] "http://www.imdb.com/title/tt0460649/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_76" 
+##  [77] "http://www.imdb.com/title/tt2701582/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_77" 
+##  [78] "http://www.imdb.com/title/tt1475582/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_78" 
+##  [79] "http://www.imdb.com/title/tt4270492/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_79" 
+##  [80] "http://www.imdb.com/title/tt5194792/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_80" 
+##  [81] "http://www.imdb.com/title/tt0773262/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_81" 
+##  [82] "http://www.imdb.com/title/tt2191671/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_82" 
+##  [83] "http://www.imdb.com/title/tt0306414/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_83" 
+##  [84] "http://www.imdb.com/title/tt1606375/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_84" 
+##  [85] "http://www.imdb.com/title/tt0098904/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_85" 
+##  [86] "http://www.imdb.com/title/tt3032476/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_86" 
+##  [87] "http://www.imdb.com/title/tt3749900/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_87" 
+##  [88] "http://www.imdb.com/title/tt0118401/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_88" 
+##  [89] "http://www.imdb.com/title/tt5743796/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_89" 
+##  [90] "http://www.imdb.com/title/tt1796960/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_90" 
+##  [91] "http://www.imdb.com/title/tt1442437/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_91" 
+##  [92] "http://www.imdb.com/title/tt4647692/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_92" 
+##  [93] "http://www.imdb.com/title/tt1312171/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_93" 
+##  [94] "http://www.imdb.com/title/tt2802850/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_94" 
+##  [95] "http://www.imdb.com/title/tt1124373/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_95" 
+##  [96] "http://www.imdb.com/title/tt2861424/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_96" 
+##  [97] "http://www.imdb.com/title/tt6763664/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_97" 
+##  [98] "http://www.imdb.com/title/tt7562112/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_98" 
+##  [99] "http://www.imdb.com/title/tt0411008/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_99" 
+## [100] "http://www.imdb.com/title/tt8778064/?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=332cb927-0342-42b3-815c-f9124e84021d&amp;pf_rd_r=EVEK1DD1MWHQ17003Q0Z&amp;pf_rd_s=center-1&amp;pf_rd_t=15506&amp;pf_rd_i=tvmeter&amp;ref_=chttvm_tt_100"
 ```
 
 ---
@@ -573,9 +572,9 @@ scrape_show_info(urls[1])
 
 ```
 ## # A tibble: 1 x 3
-##   title     runtime genres
-##   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; 
-## 1 Jack Ryan 1h      ""
+##   title           runtime genres                                           
+##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;                                            
+## 1 Stranger Things 51min   Drama, Fantasy, Horror, Mystery, Sci-Fi, Thriller
 ```
 
 ```r
@@ -584,9 +583,9 @@ scrape_show_info(urls[2])
 
 ```
 ## # A tibble: 1 x 3
-##   title runtime genres                
-##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                 
-## 1 Ozark 1h      Crime, Drama, Thriller
+##   title runtime genres
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+## 1 Dark  1h      ""
 ```
 
 ```r
@@ -595,9 +594,9 @@ scrape_show_info(urls[3])
 
 ```
 ## # A tibble: 1 x 3
-##   title           runtime genres                                    
-##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;                                     
-## 1 Game of Thrones 57min   Action, Adventure, Drama, Fantasy, Romance
+##   title     runtime  genres
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; 
+## 1 Chernobyl 5h 30min ""
 ```
 ]
 
@@ -632,6 +631,7 @@ scrape_show_info &lt;- function(x){
 }
 ```
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightLines": true,
@@ -641,26 +641,79 @@ scrape_show_info &lt;- function(x){
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
   }
-});
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
