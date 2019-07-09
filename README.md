@@ -4,7 +4,7 @@
 
 How can we effectively and efficiently teach statistical thinking and computation to students with little to no background in either? How can we equip them with the skills and tools for reasoning with various types of data and leave them wanting to learn more? 
 
-This introductory data science course that is our (working) answer to these questions. The courses focuses on data acquisition and wrangling, exploratory data analysis, data visualization, and effective communication and approaching statistics from a model-based, instead of an inference-based, perspective. A heavy emphasis is placed on a consitent syntax (with tools from the `tidyverse`), reproducibility (with R Markdown) and version control and collaboration (with git/GitHub). We help ease the learning curve by avoiding local installation and supplementing out-of-class learning with interactive tools (like `learnr` tutorials). By the end of the semester teams of students work on fully reproducible data analysis projects on data they acquired, answering questions they care about. 
+This introductory data science course that is our (working) answer to these questions. The courses focuses on data acquisition and wrangling, exploratory data analysis, data visualization, and effective communication and approaching statistics from a model-based, instead of an inference-based, perspective. A heavy emphasis is placed on a consistent syntax (with tools from the `tidyverse`), reproducibility (with R Markdown) and version control and collaboration (with git/GitHub). We help ease the learning curve by avoiding local installation and supplementing out-of-class learning with interactive tools (like `learnr` tutorials). By the end of the semester teams of students work on fully reproducible data analysis projects on data they acquired, answering questions they care about. 
 
 This repository serves as a "data science course in a box" containing all materials required to teach (or learn from) the course described above.
 
@@ -44,4 +44,13 @@ as well.
 
 ### Tools
 
-- [ghclass](https://rundel.github.io/ghclass/) (WIP)
+- [ghclass](https://rundel.github.io/ghclass/)
+
+## Attribution
+
+If you plan on using any of the materials in this repository, please review the 
+[license](LICENSE.md). Educators heavily re-using the materials are encouraged to 
+add the following note to their course homepage / syllabus / repository: "Materials 
+used in this course are derived from [datasciencebox.org](https://datasciencebox.org)."
+If you are only using a small subset, please display a similar attribution message 
+on the specific derived item.
