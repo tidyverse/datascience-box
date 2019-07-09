@@ -31,7 +31,7 @@ briefly to lay the foundation for future coursework in statistics.
 
 **Unit 3 - Looking forward:** In the last unit we present a series of modules
 such as interactive reporting and visualizaiton with Shiny, text analysis, and 
-Bayesian inference. These are independent modules that instructors can choose to 
+Bayesian inference. These are independent modules that educators can choose to 
 include in their introductory data science curriculum depending on how much time 
 they have left in the semester.
 
