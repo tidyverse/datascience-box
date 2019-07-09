@@ -9,7 +9,7 @@ output: blogdown::html_page
 There are two answers to this question, depending on whether you are a learner 
 or educator. (And really, aren't we all both?)
 
-### Learner persona
+**Learner persona**
 
 If you are a learner who is interested in making sense of (sometimes messy) data
 and who
@@ -26,7 +26,7 @@ The course is designed to be accessible to new learners at the undergraduate
 level and above, though adventurous learners at the high school level might also 
 enjoy these materials.
 
-### Educator persona
+**Educator persona**
 
 If you are an educator who is / will be teaching data science at the introductory 
 level and who
@@ -68,7 +68,7 @@ introduction from the instructor
 - project: Final project assignment
 - tutorials: Interactive learning exercises built with **learnr** (WIP)
 
-**Instructor facing materials:**
+**Educator facing materials:**
 
 - Computing infrastructure:
     - RStudio: Choosing between RStudio Cloud, RStudio Server Pro, or local RStudio 
