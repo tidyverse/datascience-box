@@ -184,7 +184,7 @@ Before picking visualization tools for our single variable, we need to understan
 Continuous data on the other hand can take on an inifinite number of values within a stated range. Take height for example: while we usually round to the nearest inch, technically a person's height can take on an infinite number of positive values if you continue to be precise to more and more decimal places.
 
 Pick which variables are continuous:
-```{r continuous quiz, echo = F}
+```{r continuous-quiz, echo = F}
 quiz(
   caption = "Your turn!",
   question("Which numerical variables are continuous?",
@@ -198,7 +198,7 @@ quiz(
 If data isn't numerical then it is *categorical* (or *qualitative*), which means the data cannot necessarily be measured or quantified but still takes on distinct values. Categorical variables can be things you might observe with your senses, like colors or tastes, or labels like names of cities or people, or something more abstract like written text. Just because something is categorical doesn't mean it can't be sorted though: categorical data that is *ordinal* if it can be put in some sort of natural ordering, such as education levels (high school, college, grad school, etc.).
 
 Pick which variables are ordinal:
-```{r ordinal quiz, echo = F}
+```{r ordinal-quiz, echo = F}
 quiz(
   caption = "Your turn!",
   question("Which categorical variables are ordinal?",
