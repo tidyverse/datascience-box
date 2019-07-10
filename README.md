@@ -54,3 +54,11 @@ add the following note to their course homepage / syllabus / repository: "Materi
 used in this course are derived from [datasciencebox.org](https://datasciencebox.org)."
 If you are only using a small subset, please display a similar attribution message 
 on the specific derived item.
+
+## Feedback
+
+We would love to hear from you if you are using these resources. 
+Please take just a few minutes to fill out 
+[this Google form](https://forms.gle/AjqXStdFq42TTV9LA). All fields are optional, 
+but the more information you provide, the more data we will have to assess the 
+reach and impact of this project.

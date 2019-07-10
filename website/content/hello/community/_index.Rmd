@@ -9,3 +9,9 @@ exchange ideas with others teaching similar courses?
 
 Post on [RStudio Community under Teaching](https://community.rstudio.com/c/teaching) 
 or tweet with [#rstats](https://twitter.com/search?q=%23rstats).
+
+Additionally, we would love to hear from you if you are using these resources. 
+Please take just a few minutes to fill out 
+[this Google form](https://forms.gle/AjqXStdFq42TTV9LA). All fields are optional, 
+but the more information you provide, the more data we will have to assess the 
+reach and impact of this project.
