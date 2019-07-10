@@ -204,3 +204,8 @@ RStudio Cloud in alpha. The development team is still adding important features
 and improving performance, reliability and availability. If you have any 
 questions or feedback, you can reach out on the 
 [RStudio Community](https://community.rstudio.com/c/rstudio-cloud).
+
+## Learn more
+
+To see this all in action and learn more, watch the RStudio Cloud webinar 
+[here](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom).
