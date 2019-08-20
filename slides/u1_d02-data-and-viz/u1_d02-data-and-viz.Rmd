@@ -415,7 +415,7 @@ class: center, middle
 
 * Univariate data analysis - distribution of single variable
 * Bivariate data analysis - relationship between two variables
-* Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+* Multivariable data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
 
 ---
 
