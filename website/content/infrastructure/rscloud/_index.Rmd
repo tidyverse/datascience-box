@@ -23,7 +23,7 @@ pedagogical decisions section, we discuss in further detail the reasons for
 avoiding local installation at the beginning of the course and discuss when 
 to introduce it later on in the course.
 
-When you create an account on RStudio Cloud you get a workspace of your own, 
+When you create an account on RStudio Cloud, you get a workspace of your own, 
 and the projects you create here are public to RStudio Cloud members. You can 
 also add a new workspace and control its permissions, and the projects you 
 create here can be public or private.
