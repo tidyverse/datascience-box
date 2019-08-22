@@ -11,7 +11,7 @@ describes the toolkit choices, and the [infrastructure](/20-infrastructure) sect
 provides a path forward for educators who are considering using these tools for 
 their own teaching purposes.
 
-While the recommended tech stack is for the entirety of course development is tall, 
+While the recommended tech stack for the entirety of course development is tall, 
 only a few of the technologies are student facing:
 
 - RStudio Cloud: [RStudio Cloud](https://rstudio.cloud/) is a managed cloud 
