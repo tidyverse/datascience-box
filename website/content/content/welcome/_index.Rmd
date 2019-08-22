@@ -11,9 +11,7 @@ produce their first data visualization within the first 10 minutes of class. The
 application exercise in this lecture is one way of achieving this goal.
 
 Lecture slides are below and source code for the slides are [here](https://github.com/rstudio-education/datascience-box/tree/master/slides/u0_d01-welcome). 
-The application exercise can be found [here](/appex/ae-01-un-votes/ae-01-un-votes.html), and 
-you can also access the source R Markdown file for the application exercise 
-[here](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-01-un-votes) on GitHub 
+The application exercise can be found [here](/appex/ae-01-un-votes/ae-01-un-votes.html), and the R Markdown source file for the application exercise is [here](https://github.com/rstudio-education/datascience-box/tree/master/appex/ae-01-un-votes) on GitHub 
 and [here](https://rstudio.cloud/spaces/1655/project/32445) on RStudio Cloud.
 
 <center>
