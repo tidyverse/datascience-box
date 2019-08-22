@@ -19,7 +19,7 @@ as opposed to using a local installation. The main reason for this choice is
 reducing friction at first exposure to R. Local installation can be difficult 
 to manage, both for the student and the instructor, and can shift the focus 
 away from data science learning at the beginning of the course. In the 
-pedagogical decisions section we discuss in further detail the reasons for 
+pedagogical decisions section, we discuss in further detail the reasons for 
 avoiding local installation at the beginning of the course and discuss when 
 to introduce it later on in the course.
 
