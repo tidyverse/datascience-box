@@ -19,11 +19,11 @@ as opposed to using a local installation. The main reason for this choice is
 reducing friction at first exposure to R. Local installation can be difficult 
 to manage, both for the student and the instructor, and can shift the focus 
 away from data science learning at the beginning of the course. In the 
-pedagogical decisions section we discuss in further detail the reasons for 
+pedagogical decisions section, we discuss in further detail the reasons for 
 avoiding local installation at the beginning of the course and discuss when 
 to introduce it later on in the course.
 
-When you create an account on RStudio Cloud you get a workspace of your own, 
+When you create an account on RStudio Cloud, you get a workspace of your own, 
 and the projects you create here are public to RStudio Cloud members. You can 
 also add a new workspace and control its permissions, and the projects you 
 create here can be public or private.
@@ -131,7 +131,7 @@ You will see in the above screenshot that the user (on the right) is not
 the admin of the course. This screenshot was taken when logged into the demo 
 workspace as a student (contributor). I strongly recommend that instructors make 
 a second account for themselves on RStudio Cloud and add that user as a 
-contributor to the workspace to be see what your students see when they log in. 
+contributor to the workspace to be able to see what your students see when they log in. 
 It's a great way to test out functionality and resolve unexpected issues 
 your students might encounter, before they encounter them. I recommend using an 
 incognito browser window for the student account so that you can stay logged in 
