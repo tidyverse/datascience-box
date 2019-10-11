@@ -66,7 +66,7 @@ class: center, middle
 ## What is R/RStudio?
 
 - R is a statistical programming language
-- RStudio is a convenient interface for R (an integreated development environment, IDE)
+- RStudio is a convenient interface for R (an integrated development environment, IDE)
 - At its simplest:<sup>➥</sup>
     - R is like a car’s engine
     - RStudio is like a car’s dashboard
