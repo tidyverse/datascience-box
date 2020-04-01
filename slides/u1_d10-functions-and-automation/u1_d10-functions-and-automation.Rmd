@@ -396,7 +396,7 @@ top_100_shows <- map_df(urls, scrape_show_info)
 - This will hit the `urls` one after another, and grab the info.
 
 --
-- If you get `HTTP Error 429 (Too man requests)` you might want to slow down your hits.
+- If you get `HTTP Error 429 (Too many requests)` you might want to slow down your hits.
 
 --
 - You can add a `Sys.sleep()` call to slow down your function:
