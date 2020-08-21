@@ -1,5 +1,5 @@
 ---
-title: "Linear model with single predictor <br> `r emo::ji('dango')`"
+title: "Linear models with a single predictor <br> `r emo::ji('dango')`"
 author: ""
 output:
   xaringan::moon_reader:

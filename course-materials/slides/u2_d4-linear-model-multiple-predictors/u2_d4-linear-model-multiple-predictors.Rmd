@@ -1,5 +1,5 @@
 ---
-title: "Linear model with multiple predictors <br> `r emo::ji('woman_juggling')`"
+title: "Linear models with multiple predictors <br> `r emo::ji('woman_juggling')`"
 author: ""
 output:
   xaringan::moon_reader:
