@@ -4,7 +4,7 @@
   padding: 1em 1em 1em 4em;
   margin-bottom: 5px;
   margin-left: 5px;
-  font-weight: bold;
+  border: 1pt solid #d8d8d8;
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("application-exercise.png");
 }
@@ -18,11 +18,39 @@
 
 .slide-deck {
   padding: 1em 1em 1em 4em;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #80D4E6;
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("slide-deck.png");
+}
+
+.lab{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #FFD748;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("lab.png");
+}
+
+.homework{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #F26BAA;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("hw.png");
+}
+
+.tutorial{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("tutorial.png");
 }
 
 .rstudio-cloud {
