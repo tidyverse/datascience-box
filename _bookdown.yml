@@ -17,6 +17,7 @@ rmd_files: [
   "02-exploring-data.Rmd",
   "02-making-rigorous-conclusions.Rmd",
   "02-looking-forward.Rmd",
+  "02-interactive-tutorials.Rmd",
   "02-project.Rmd",
   "02-exams.Rmd",
 
