@@ -1,6 +1,6 @@
 # Project {#project}
 
-The following is a sample project assignment for this curriculum. You can find the source code for this assignment write up [here](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/project), along with sample evaluation forms to be used by the teaching team as well as by students to evaluate each others' presentations.
+The following is a sample project assignment for this curriculum. You can find the source code for this assignment write up [here](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/project). I've also provided [sample evaluation forms](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/project/evaluation-forms) to be used by the teaching team and students as well as a [sample repo structure](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/project/repo-structure) for the project.
 
 ---
 
