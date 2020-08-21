@@ -1,0 +1,150 @@
+# Topics {#topics}
+
+The course content is organized in three units:
+
+```{r topic-flow, fig.align="center", echo=FALSE}
+library(DiagrammeR)
+
+topic_flow <- create_graph() %>%
+  # Exploring data ----
+  add_node(label = "Exploring\ndata", 
+           node_aes = node_aes(x = 2, y = 2,
+                               shape = "square", fixedsize = TRUE, height = 1, 
+                               fontname = "helvetica", fontsize = 12, fontcolor = "black",
+                               color = "#364E4F", penwidth = 2, fillcolor = "#BCECED")) %>%
+  add_node(label = "Visualize", 
+           node_aes = node_aes(x = 2, y = 3, 
+                               fontsize = 10, width = 0.75,
+                               color = "#BCECED", penwidth = 2, fillcolor = "white")) %>%
+  add_node(label = "Wrangle", 
+           node_aes = node_aes(x = 3, y = 1, 
+                               fontsize = 10, width = 0.75,
+                               color = "#BCECED", penwidth = 2, fillcolor = "white")) %>%
+  add_node(label = "Import", 
+           node_aes = node_aes(x = 1, y = 1, 
+                               fontsize = 10, width = 0.75,
+                               color = "#BCECED", penwidth = 2, fillcolor = "white")) %>%
+  add_edge(from = "Visualize", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Wrangle", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Import", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  # Making rigorous conclusions ----
+  add_node(label = "Making\nrigorous\nconclusions", 
+           node_aes = node_aes(x = 5, y = 2,
+                               shape = "square", fixedsize = TRUE, height = 1, 
+                               fontsize = 12, fontcolor = "black",
+                               color = "#5581B0", penwidth = 2, fillcolor = "#B6D7E4")) %>%
+  add_edge(from = "Exploring\ndata", to = "Making\nrigorous\nconclusions",
+           edge_aes = edge_aes(arrowhead = "normal")) %>%
+  add_edge(from = "Making\nrigorous\nconclusions", to = "Exploring\ndata",
+           edge_aes = edge_aes(arrowhead = "normal")) %>%
+  add_node(label = "Model", 
+           node_aes = node_aes(x = 4, y = 3, 
+                               fontsize = 10, width = 0.75,
+                               color = "#B6D7E4", penwidth = 2, fillcolor = "white")) %>%
+  add_node(label = "Predict", 
+           node_aes = node_aes(x = 6, y = 3, 
+                               fontsize = 10, width = 0.75,
+                               color = "#B6D7E4", penwidth = 2, fillcolor = "white")) %>%
+  add_node(label = "Infer", 
+           node_aes = node_aes(x = 5, y = 1, 
+                               fontsize = 10, width = 0.75,
+                               color = "#B6D7E4", penwidth = 2, fillcolor = "white")) %>%
+  add_edge(from = "Model", to = "Making\nrigorous\nconclusions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Predict", to = "Making\nrigorous\nconclusions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Infer", to = "Making\nrigorous\nconclusions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  # Looking further ----
+  add_node(label = "Looking\nfurther", 
+           node_aes = node_aes(x = 8, y = 2,
+                               shape = "square", fixedsize = TRUE, height = 1, 
+                               fontname = "helvetica", fontsize = 12, fontcolor = "black",
+                               color = "#737F7E", penwidth = 2, fillcolor = "#F9F9F9")) %>%
+  add_edge(from = "Making\nrigorous\nconclusions", to = "Looking\nfurther",
+           edge_aes = edge_aes(arrowhead = "normal")) %>%
+  add_edge(to = "Making\nrigorous\nconclusions", from = "Looking\nfurther",
+           edge_aes = edge_aes(arrowhead = "normal"))
+
+render_graph(topic_flow)
+```
+
+**Unit 1 - Exploring data: ** This unit focuses on data visualization and data 
+wrangling. Specifically we cover fundamentals of data and data visualization, 
+confounding variables, and Simpson's paradox as well as the concept of tidy 
+data, data import, data cleaning, and data curation. We end the unit with web 
+scraping and introduce the idea of iteration in preparation for the next unit. 
+Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown, 
+Git, and GitHub.
+
+**Unit 2 - Making rigorous conclusions:** In this part we introduce modelling and 
+statistical inference for making data-based conclusions. We discuss building, 
+interpreting, and selecting models, visualizing interaction effects, and 
+prediction and model validation. Statistical inference is introduced from a 
+simulation based perspective, and the Central Limit Theorem is discussed very 
+briefly to lay the foundation for future coursework in statistics. 
+
+**Unit 3 - Looking forward:** In the last unit we present a series of modules
+such as interactive reporting and visualization with Shiny, text analysis, and 
+Bayesian inference. These are independent modules that educators can choose to 
+include in their introductory data science curriculum depending on how much time 
+they have left in the semester.
+
+<br>
+
+The table below outlines a sample course schedule developed for a 15-week long 
+semester course that meets twice a week for lecture and once a week for a 
+computing lab. Our recommendation for shorter semesters or 10-week quarters would 
+be to skip hypothesis testing and inference beyond bootstrapping (we believe 
+that it's important to touch on quantifying uncertainty even if you don't have 
+time to cover statistical inference deeply) and also top skip any topics in the 
+looking further unit other than data science ethics (we believe that this is an 
+essential topic to cover both throughout the class and also as at least one 
+dedicated session).
+
+<br>
+
+|Session| Topic
+|:------|:--------------------------------------------
+Lec 01   | Welcome to Data Science
+**UNIT 1** | **EXPLORING DATA**
+Lec 02   | Meet the toolkit
+*Lab 01* | *Hello R!*
+Lec 03   | Fundamentals of data and data visualization
+Lec 04   | Building plots for various data types
+*Lab 02* | *Plastic waste*
+Lec 05   | Tidy data and data wrangling
+Lec 06   | Data types and recoding data
+*Lab 03* | *Nobel laureates*
+Lec 07   | Tips for effective data visualization
+Lec 08   | Joining and mapping
+*Lab 04* | *Ugly charts*
+Lec 09   | Scientific studies and confounding
+Lec 10   | Communicating data science results effectively
+*Lab 05* | *Simpson’s paradox*
+Lec 11   | Harvesting data from the web
+Lec 12   | Functions and iteration
+*Lab 06* | *University of Edinburgh Art Collection*
+**UNIT 2** | **MAKING RIGOROUS CONCLUSIONS**
+Lec 13   | The language of models
+Lec 14   | Linear models with a single predictor
+*Lab 07* | *Modeling course evaluations, Pt. 1*
+Lec 15   | Modeling non-linear relationships
+Lec 16   | Linear model with multiple predictors
+*Lab 08* | *Modeling course evaluations, Pt. 2*
+Lec 17   | Model selection
+Lec 18   | Model validation
+*Lab 09* | *Work on projects*
+Lec 19   | Logistic regression
+Lec 20   | Quantifying uncertainty around estimates with bootstrapping
+*Lab 10* | *Collaborating on GitHub*
+Lec 21   | Hypothesis testing via simulation methods
+Lec 22   | Central limit theorem
+*Lab 11* | *Pull yourself up by your bootstraps*
+Lec 23   | Inference for regression
+Lec 24   | Inference overview
+*Lab 12* | *Smoking when pregnant*
+**UNIT 3** | **LOOKING FORWARD**
+Lec 25   | Data science ethics
+Lec 26   | Text analysis
+Lec 25   | Interactive data visualization and reporting with dashboards
+Lec 26   | Interactive data visualization and reporting with Shiny
+Lec 27   | Bayesian inference
+*Lab 13* | *Project presentations*
