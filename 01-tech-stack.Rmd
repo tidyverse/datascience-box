@@ -27,7 +27,7 @@ learning management system (compared to traditional tools like Blackboard or Sak
 - Piazza: [Piazza](http://piazza.com/) is an easy to use and free Q&A platform 
 that your students might very well be already familiar with from other classes. 
 It is also possible that it's already integrated into your learning management 
-system if you're teahcing in a university setting. Students are discouraged from 
+system if you're teaching in a university setting. Students are discouraged from 
 using email for questions and discussions related to content of the course, only 
 emails about personal matters are allowed. Hence most course communication 
 happens on Slack. Both public (for announcements and general questions) and 
