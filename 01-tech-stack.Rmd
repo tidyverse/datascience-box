@@ -21,4 +21,4 @@ It is also possible that it's already integrated into your learning management s
 Students are discouraged from using email for questions and discussions related to content of the course, only emails about personal matters are allowed. 
 Hence most course communication happens on Piazza. 
 Both public (for announcements and general questions) and private (for team communication) channels are used. 
-Note that not Piazza is not everyone's first choice, a fewoptions for alternatives used in statistics and data science courses can be found [on this Twitter thread](https://twitter.com/minebocek/status/1292499540105404416).
+Note that Piazza is not everyone's first choice, a few options for alternatives used in statistics and data science courses can be found [on this Twitter thread](https://twitter.com/minebocek/status/1292499540105404416).

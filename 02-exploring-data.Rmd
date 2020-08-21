@@ -194,7 +194,7 @@ Visualizing spatial data
 
 
 ::: {.lab}
-**Lab 5: La Quinta is Spanish for 'next to Denny's', Pt. 5** 
+**Lab 5: La Quinta is Spanish for 'next to Denny's', Pt. 2** 
 
 Wrangling spatial data
 
