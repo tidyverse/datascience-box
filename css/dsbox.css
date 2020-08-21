@@ -52,6 +52,15 @@
   background-image: url("tutorial.png");
 }
 
+.exam{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("exam.png");
+}
+
 .rstudio-cloud {
   padding: 1em 1em 1em 4em;
   margin-bottom: 5px;
