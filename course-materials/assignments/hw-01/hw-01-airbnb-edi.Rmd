@@ -14,7 +14,7 @@ knitr::include_graphics("img/madeleine-kohler-90Qn643Pq9c-unsplash.jpg")
 
 Recent development in Edinburgh regarding the growth of Airbnb and its impact on the housing market means a better understanding of the Airbnb listings is needed. Using data provided by Airbnb, we can explore how Airbnb availability and prices vary by neighborhood.
 
-The data came from the [Kaggle database](https://www.kaggle.com/thoroc/edinburgh-inside-airbnb/version/2). It's 
+The data come from the [Kaggle database](https://www.kaggle.com/thoroc/edinburgh-inside-airbnb/version/2). It's 
 been modified to better serve the goals of this exploration.
 
 ## Learning goals
