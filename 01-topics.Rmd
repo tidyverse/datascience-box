@@ -86,5 +86,3 @@ such as interactive reporting and visualization with Shiny, text analysis, and
 Bayesian inference. These are independent modules that educators can choose to 
 include in their introductory data science curriculum depending on how much time 
 they have left in the semester.
-
-<br>
