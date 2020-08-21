@@ -19,6 +19,7 @@ rmd_files: [
   "02-looking-forward.Rmd",
   "02-interactive-tutorials.Rmd",
   "02-project.Rmd",
+  "02-videos.Rmd",
   "02-exams.Rmd",
 
   "03-access-r.Rmd",
