@@ -224,5 +224,6 @@ Rest assured that this request will be approved.
 
 To see this all in action and learn more, watch the following RStudio Cloud webinars:
 
+- [Teaching R online with RStudio Cloud](https://mine-cetinkaya-rundel.github.io/teach-r-online/) (July 2020)
 - [Teaching R online with RStudio Cloud](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom) (March 2020)
 - [RStudio Cloud in the Classroom](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom)
