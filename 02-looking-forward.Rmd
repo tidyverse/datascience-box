@@ -1,11 +1,77 @@
 # Looking forward {#looking-forward}
 
-## Slides
+In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, and  Bayesian inference. These are independent modules that educators can choose to  include in their introductory data science curriculum depending on how much time  they have left in the semester.
 
-## Application exercises
+## Slides & application exercises
+
+::: {.slide-deck}
+**Unit 3 - Deck 1: Data science ethics** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d01-ethics/u3_d01-ethics.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d01-ethics)
+:::
+
+
+::: {.slide-deck}
+**Unit 3 - Deck 2: Interactive data visualization** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d02-shiny-1/u3_d2-shiny-1.pdf)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d02-shiny-1)
+:::
+
+
+::: {.slide-deck}
+**Unit 3 - Deck 3: Interactive data visualization and reporting** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d03-shiny-2/u3_d3-shiny-2.pdf)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d03-shiny-2)
+:::
+
+
+::: {.slide-deck}
+**Unit 3 - Deck 4: Bayesian inference** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d04-bayes-inf/u3_d04-bayes-inf.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d04-bayes-inf)
+:::
+
+
+::: {.slide-deck}
+**Unit 3 - Deck 5: Text analysis** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d05-text-analysis/u3_d05-text-analysis.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d05-text-analysis)
+:::
 
 ## Labs
 
+::: {.lab}
+**Lab 12: Working on projects** 
+
+Workflows for data science projects
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-12/lab-12-work-on-projects.html)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-12)
+:::
+
+
+::: {.lab}
+**Lab 13: Collaborating on GitHub** 
+
+Workflows for data science projects, closing issues with commits, gh-pages
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-13/lab-13-collaborating-on-github.html)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-13)
+:::
+
+
 ## Homework assignments
 
-## Interactive tutorials
+::: {.homework}
+**HW 8: Wrapping up** 
+
+Pick a package and do something with it, make an ugly plot!
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-08/hw-08-wrap-up.html)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-08)
+:::
