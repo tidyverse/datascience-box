@@ -13,7 +13,7 @@
   clear: right;
   display: block;
   font-weight: bold;
-  color: #80D4E6;
+  color: #A7D5E8;
 }
 
 .slide-deck {
@@ -65,7 +65,7 @@
   clear: right;
   display: block;
   font-weight: bold;
-  color: #80D4E6;
+  color: #A7D5E8;
 }
 
 
@@ -73,16 +73,10 @@
 
 h1 {
   font-weight: bold;
-  color: #E374A8; 
-}
-
-h1.title {
-  font-weight: bold;
-  font-size: 2.5em !important;
-  color: #80D4E6; 
+  color: #A7D5E8; 
 }
 
 h2, h3, h4, h5, h6 {
   font-weight: bold;
-  color: #80D4E6; 
+  color: #1E5C65; 
 }
