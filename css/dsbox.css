@@ -1,0 +1,67 @@
+/* custom environments */
+
+.application-exercise {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("application-exercise.png");
+}
+.application-exercise:before {
+  content: "Application exercise: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #80D4E6;
+}
+
+.slide-deck {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("slide-deck.png");
+}
+.slide-deck:before {
+  content: "Slide deck: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #80D4E6;
+}
+
+.rstudio-cloud {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("cloud.png");
+}
+.rstudio-cloud:before {
+  content: "RStudio Cloud: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #80D4E6;
+}
+
+
+/* colors */
+
+h1 {
+  font-weight: bold;
+  color: #E374A8; 
+}
+
+h1.title {
+  font-weight: bold;
+  font-size: 2.5em !important;
+  color: #80D4E6; 
+}
+
+h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #80D4E6; 
+}
