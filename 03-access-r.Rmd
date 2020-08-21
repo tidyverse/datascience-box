@@ -1,5 +1,7 @@
 # (PART) Infrastructure {-}
 
+# Accessing R {#access-r}
+
 One of the design principles of this course is "cherish day one" -- get students 
 from nothing to their first meaningful data visualization within the first 10 minutes 
 of the course. Achieving this is possible, but requires careful consideration of 
@@ -11,8 +13,6 @@ xaringan, etc.), and use Slack for course communication. Lastly, the alternative
 setups section describes other approaches to setting up the computing infrastructure 
 that can be just as efficient and effective as the ones described in the main 
 choices for the course, and discusses pros and cons.
-
-# Accessing R {#access-r}
 
 The RStudio IDE includes a viewable environment, a file browser, data viewer, 
 and a plotting pane, which makes it less intimidating than the bare R shell. 
