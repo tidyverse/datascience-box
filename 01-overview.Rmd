@@ -72,7 +72,7 @@ session
 - labs: 12 guided hands on exercises for students requiring minimal introduction from the instructor
 - exams: 2 sample take-home exams and keys
 - project: Final project assignment
-- tutorials: 8 interactive learnr tutorials built
+- tutorials: 8 interactive learnr tutorials
 
 **Educator facing materials:**
 
