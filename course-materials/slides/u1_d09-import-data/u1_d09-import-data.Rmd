@@ -1,5 +1,5 @@
 ---
-title: "Import data <br> `r emo::ji('up_arrow')`"
+title: "Importing data <br> `r emo::ji('up_arrow')`"
 author: ""
 output:
   xaringan::moon_reader:

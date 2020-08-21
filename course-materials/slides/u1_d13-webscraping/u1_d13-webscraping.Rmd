@@ -1,5 +1,5 @@
 ---
-title: "Webscraping <br> `r emo::ji('spider_web')`"
+title: "Web scraping <br> `r emo::ji('spider_web')`"
 author: ""
 output:
   xaringan::moon_reader:

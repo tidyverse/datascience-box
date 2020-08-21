@@ -1,5 +1,5 @@
 ---
-title: "Joining data <br> `r emo::ji('handshake')`"
+title: "Joining data from multiple sources <br> `r emo::ji('handshake')`"
 author: ""
 output:
   xaringan::moon_reader:
