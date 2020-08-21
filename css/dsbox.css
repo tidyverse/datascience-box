@@ -24,13 +24,6 @@
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("slide-deck.png");
 }
-.slide-deck:before {
-  content: "Slide deck: ";
-  clear: right;
-  display: block;
-  font-weight: bold;
-  color: #80D4E6;
-}
 
 .rstudio-cloud {
   padding: 1em 1em 1em 4em;

@@ -1,11 +1,41 @@
 # Exploring data {#exploring-data}
 
-## Slides
+This unit focuses on data visualization and data wrangling. Specifically we cover fundamentals of data and data visualization, confounding variables, and Simpson's paradox as well as the concept of tidy data, data import, data cleaning, and data curation. We end the unit with web scraping and introduce the idea of iteration in preparation for the next unit. Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown, Git, and GitHub.
 
-## Application exercises
+## Slides & application exercises
+
+::: {.slide-deck}
+**Unit 1 - Deck 2: Meet the toolkit** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d02-meet-the-toolkit/u1_d02-meet-the-toolkit.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d02-meet-the-toolkit)
+:::
+
+
+::: {.slide-deck}
+**Unit 1 - Deck 3: Data visualization, Part 1** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d03-data-viz-1/u1_d03-data-viz-1.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d03-data-viz-1)
+:::
+
+
+::: {.slide-deck}
+**Unit 1 - Deck 4: Data visualization, Part 2** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d04-data-viz-2/u1_d04-data-viz-2.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d04-data-viz-2)
+:::
+
+
+::: {.slide-deck}
+**Unit 1 - Deck 5: Data wrangling** 
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d05-data-wrangle/u1_d05-data-wrangle.html#1)
+[[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d05-data-wrangle)
+:::
 
 ## Labs
 
 ## Homework assignments
 
-## Interactive tutorials
