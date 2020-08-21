@@ -24,6 +24,6 @@ Majority of the materials linked live in the GitHub repo serving this website. Y
 
 ## Acknowledements {-}
 
-Huge thanks to the #rstats education community who have made numerous suggestions for this resource, to Lee Suddaby and Zeno Kujowa for converting the homework assignments to learnr tutorials, and to [Muge Cetinkaya](http://muge.fr/) for the hex logo!
+Huge thanks to the #rstats education community who have made numerous suggestions for this resource, to Lee Suddaby and Zeno Kujowa for converting the homework assignments to learnr tutorials, and to [Müge Çetinkaya](http://muge.fr/) for the hex logo!
 
 This website is built with [bookdown](https://bookdown.org/), the lovely icons by [icons8](http://icons8.com/), and none of this would be possible without the [tidyverse](https://tidyverse.org/).
