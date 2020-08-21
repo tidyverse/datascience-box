@@ -22,7 +22,7 @@ Data Science in a Box contains the materials required to teach (or learn from) t
 
 Majority of the materials linked live in the GitHub repo serving this website. You can access the repo [here](https://github.com/rstudio-education/datascience-box).
 
-## Acknowledements
+## Acknowledements {-}
 
 Huge thanks to the #rstats education community who have made numerous suggestions for this resource, to Lee Suddaby and Zeno Kujowa for converting the homework assignments to learnr tutorials, and to [Muge Cetinkaya](http://muge.fr/) for the hex logo!
 
