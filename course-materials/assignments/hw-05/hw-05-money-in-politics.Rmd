@@ -1,0 +1,391 @@
+---
+title: "HW 05 - Money in US politics"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r include=FALSE}
+library(DT)
+```
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Sharon McCutcheon on Unsplash"}
+knitr::include_graphics("img/sharon-mccutcheon-rItGZ4vquWk-unsplash.jpg")
+```
+
+Every election cycle brings its own brand of excitement -- and lots of money. 
+Political donations are of particular interest to political scientists and 
+other researchers studying politics and voting patterns. They are also of 
+interest to citizens who want to stay informed of how much money their candidates 
+raise and where that money comes from.
+
+In the United States, _"only American citizens (and immigrants with green cards) 
+can contribute to federal politics, but the American divisions of foreign 
+companies can form political action committees (PACs) and collect contributions 
+from their American employees."_^[Source: [Open Secrets - Foreign Connected PACs](https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs).] 
+
+In this assignment we will scrape and work with data foreign connected PACs that 
+donate to US political campaigns. First, we will get data foreign connected PAC 
+contributions in the 2020 election cycle. Then, you will use a similar approach 
+to get data such contributions from previous years so that we can examine trends 
+over time.
+
+In order to complete this assignment you will need a Chrome browser with the 
+[Selector Gadget extension](http://selectorgadget.com/) installed.
+
+# Packages
+
+In this assignment we will work with the following packaes. They should already 
+be installed in your project, and you can load them with the following:
+
+```{r load-packages, eval=TRUE, message=FALSE}
+library(tidyverse)
+library(robotstxt)
+library(rvest)
+library(scales)
+```
+
+# Data collection via web scraping
+
+```{r opensecrets, eval=TRUE, echo=FALSE, fig.margin = TRUE}
+knitr::include_graphics("img/opensecrets.png")
+```
+
+The data come from [OpenSecrets.org](https://www.opensecrets.org), a _"website tracking the influence of money on U.S. politics, and how that money affects policy and citizens' lives"_. 
+This website is hosted by The Center for Responsive Politics, which is a nonpartisan, 
+independent nonprofit that _"tracks money in U.S. politics and its effect on elections and public policy."_^[Source: [Open Secrets - About](https://www.opensecrets.org/about/).]
+
+Before getting started, let's check that a bot has permissions to access pages 
+on this domain.
+
+```{r paths-allowed, eval=TRUE, warning=FALSE, message=FALSE}
+paths_allowed("https://www.opensecrets.org")
+```
+
+## 2020 Foreign-connected PAC contributions
+
+```{r nc_races, eval=TRUE, echo=FALSE, out.width="60%"}
+knitr::include_graphics("img/pac_2020.png")
+```
+
+The goal of this exercise is scrape the data from a page that looks like the 
+the page shown above, and save it as a data frame that looks like the 
+data frame shown below.
+
+```{r read-nc-page, echo=FALSE, message=FALSE, eval=TRUE}
+pac_2020 <- read_csv("data/pac-2020.csv")
+datatable(pac_2020, width="60%")
+```
+
+Since the data are already formatted as a table, we can use the `html_table()`
+function to extract it out of the page. Note that this function has some useful 
+arguments like `header` (to indicate whether the first row of the table 
+should be used as header) and `fill` (to indicate whether rows with fewer than 
+the maximum number of columns shuld be filled with `NA`).
+
+<div class="box">
+Complete the following set of steps in the `01-scrape-pac-2020.R` file in the 
+`scripts` folder of your repository. This file already contains some starter 
+code to help you out.
+</div>
+
+- Fill in the blanks to scrape the table from the webpage, and confirm that 
+the resulting data frame, `pac_2020`, has 215 observations and 5 variables.
+
+```{marginfigure}
+**Hint:** Take a look at the help for the `rename()` function to determine 
+whether these new variable names need to be quoted or not.
+```
+
+- The names of the variables in the `pac_2020` data frame are somewhat ill-formed.
+Rename the variables to the following: `name`, `country_parent`, `total`, 
+`dems`, `repubs`. Note that `dems` is short for Democrats and `repubs` is short 
+for Republicans, the two major parties in the US. Once you make the change 
+view the data frame in the data viewer to see how things look.
+
+- The `name` variable looks pretty messy. There is lots of white space between 
+the name and the affliate in parantheses. But remember, we have a string 
+manipulation function that removes pesky white spaces: `str_squish()`. Fix up 
+the `name` variable using this function. Confirm that your data frame looks like 
+the data shown above.
+
+- Write the data frame out to a csv file called `pac-2020.csv` in the 
+`data` folder.
+
+```{marginfigure}
+**Hint:** You already know what these numbers should be!
+```
+
+1. In your R Markdown document, load `pac-2020.csv` and report its number of 
+observations and variables using inline code.
+
+## Functionalize!
+
+You can probably guess where we're headed: we'll ultimately scrape data for 
+contributions in all election years Open Secrets has data for. Since that means 
+repeating a task many times, let's first write a function that works on the 
+first page. Confirm it works on a few others. Then iterate it over pages for 
+all years.
+
+<div class="box">
+Complete the following set of steps in the `02-scrape-pac-function.R` file in the 
+`scripts` folder of your repository. This file already contains some starter 
+code to help you out.
+</div>
+
+- Write a function called `scrape_pac()` that scrapes information from the 
+Open Secrets webpage for foreign-conntected PAC contributions in a given year. 
+This function should have one input: the URL of the webpage and should return 
+a data frame. You should be able to reuse code you developed for scraping 
+2020 data here.
+
+- Enhance your function with one more feature: adding a new column to the data 
+frame for `year`. We will want this information when we ultimately have data 
+from all years, so this is a good time to keep track of it. Our function doesn't 
+take a year argument, but the year is embedded in the URL, so we can extract it 
+out of there, and add it as a new column. Use the `str_sub()` function to extract 
+the last 4 characters from the URL. You will probably want to look at the help 
+for this function to figure out how to specify "last 4 characters".
+
+- Define the URLs for 2020, 2018, and 1998 contributions. Then, test your 
+function using these URLs as inputs. Does the function seem to do what you 
+expected it to do?
+
+- Write the data frames for 2020, 2018, and 1998 to csv files called 
+`pac-2020-fn.csv` (to avoid overwriting the earlier file), `pac-2018.csv`, 
+and `pac-1998.csv`, respectively, in the `data` folder.
+
+2. In your R Markdown file, load these three data frames and report each of 
+their numbers of observations and variables using inline code.
+
+## Foreign-connected PAC contributions for all years
+
+Our final task in data scraping is to map the `scrape_pac()` function over a 
+list of all URLs of web pages containing information on foreign-connected 
+PAC contributions for each year.
+
+Go back to the URLs you defined in the previous exercise, what pattern emerges? 
+They each have the following form:
+
+```{r eval=FALSE}
+url_2020 <- "...cycle=2020"
+url_2018 <- "...cycle=2018"
+url_1998 <- "...cycle=1998"
+```
+
+<div class="box">
+Complete the following set of steps in the `03-scrape-pac-all.R` file in the 
+`scripts` folder of your repository. This file already contains some starter 
+code to help you out.
+</div>
+
+- Construct a vector called `urls` that contains the URLs for each webpage that 
+contains information on foreign-connected PAC contributions for a given year.
+
+- Map the `scrape_pac()` function over `urls` in a way that will result in a 
+data frame called `pac_all`.
+
+- Write the data frame to a csv file called `pac-all.csv` in the `data` folder. 
+
+3. In your R Markdown file, load `pac-all.csv` and report its number of 
+observations and variables using inline code.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *If you haven't yet done so, now is definitely a good time to commit and push your changes to GitHub with an appropriate commit message (e.g. "Data scraping complete"). Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+# Data cleaning
+
+In this section we clean the `pac_all` data frame to prepare it for analysis and 
+visualization. We have two goals in data cleaning:
+
+- Separate the `country_parent` into two such that country and parent company appear in different columns for country-level analysis.
+
+- Convert contribution amounts in `total`, `dems`, and `repubs` from character 
+strings to numeric values.
+
+Exercises 4 and 5 walk you through how to make these fixes to the data.
+
+4. Use the `separate()` function to separate `country_parent` into `country` 
+and `parent` columns. Note that country and parent company names are separated 
+by `\` (which will need to be specified in your function) and also note that 
+there are some entries where the `\` sign appears twice and in these cases we 
+want to only split the value at the first occurrence of `\`. This can be 
+accomplished by setting the `extra` argument in to `"merge"` so that the cell 
+is split into only 2 segments, e.g. we want `"Denmark/Novo Nordisk A/S"` to 
+be split into `"Denmark"` and `"Novo Nordisk A/S"`. (See help for `separate()` 
+for more on this.)
+
+5. Remove the character strings including `$` and `,` signs in the `total`, `dems`,
+and `repubs` columns and convert these columns to numeric. Few hints to help 
+you out: 
+  - Function for removing character strings is `str_remove()`. 
+  - The `$` character is a special character so it will need to be escaped.
+  - Some contribution amounts are in the millions (e.g. Anheuser-Busch contributed a total of $1,510,897 in 2008). In this case we need to remove all occurences of `,`, which we can do by using `str_remove_all()` instead of `str_remove()`.
+
+# Data visualization
+
+```{r include=FALSE}
+pac_all <- read_csv("data/pac-all-clean.csv")
+```
+
+6. Create a line plot of total contributions from all foreign-connected PACs 
+in the UK and Canada over the years. Once you have made the plot, write a brief 
+interpretation of what the graph reveals. Make sure to comment on the dip at 2020. 
+Few hints to help you out:
+  - Filter for only `Canada` and `UK`
+  - Calculate sum of total contributions from PACs for each year for each country
+  by using a sequence of `group_by()` then `summarise()`.
+  - Make a plot of total contributions (y-axis) by year (x-axis) where two lines 
+  identified by different colors represent each of Canada and UK.
+  
+Next, we will walk you through creating the following visualization for 
+contributions from UK-connected PACs to Democratic and Republican parties.
+
+```{r echo=FALSE, fig.width=7, fig.height=4, fig.retina=3}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  ) %>%
+  pivot_longer(cols = c(Democrat, Republican), names_to = "party", values_to = "amount") %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = amount, group = party, color = party)) +
+  labs(title = "UK PACs")
+```
+
+First, we need to filter the data for UK contributions as well as years only 
+up to 2018:
+
+```{r}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) 
+```
+
+Next, we need to calculate total contributions to Democratic and Republican 
+parties from all UK-connected PACs each year. This requires a `group_by()` and 
+`summarise()` step:
+
+```{r}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  )
+```
+
+This results in a 11x3 tibble (11 years, and a column each for year, 
+total contributions in that year to the Democratic party, and total 
+contributions in that year to the Republican party). Ultimately we want to 
+color the lines by party though, and this requires our data to be formatted 
+a little differently:
+
+```{r echo=FALSE}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  ) %>%
+  pivot_longer(cols = c(Democrat, Republican), names_to = "party", values_to = "amount") 
+```
+
+Note that now we have two rows per year, one for contributions to the 
+Democratic party and the other for the Republican. The contribution 
+amounts are not stored in a new column called `amount` and the party 
+information is no longer spread across two columns, but appears in a single
+column called `party`. We can achieve this by pivoting our data to be longer 
+(going from 11 to 22 rows):
+
+```{r eval=FALSE}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  ) %>%
+  pivot_longer(cols = c(Democrat, Republican), names_to = "party", values_to = "amount") 
+```
+
+And finally we are ready to visualize!
+
+```{r echo=FALSE, fig.width=7, fig.height=4, fig.retina=3}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  ) %>%
+  pivot_longer(
+    cols = c(Democrat, Republican), 
+    names_to = "party", 
+    values_to = "amount"
+    ) %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = amount, group = party, color = party))
+```
+
+7. In this exercise we ask you to build on the plot we constructed above to 
+make it a little more visually applealing. The desired outcome is shown below, 
+and it's your job to get from where we left things off above to this outcome 
+by adding more layers to your plot. **Hint:** You will need to make use of 
+some functions from the **scales** package for axis labels as well as from **ggplot2**. Remember, if you can't figure out certain bits, you can always 
+ask on Piazza!
+
+```{r echo=FALSE, fig.width=7, fig.height=4, fig.retina=3}
+pac_all %>%
+  filter(
+    country == "UK",
+    year < 2020
+    ) %>%
+  group_by(year) %>%
+  summarise(
+    Democrat = sum(dems),
+    Republican = sum(repubs)
+  ) %>%
+  pivot_longer(
+    cols = c(Democrat, Republican), 
+    names_to = "party", 
+    values_to = "amount"
+    ) %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = amount, group = party, color = party)) +
+  scale_color_manual(values = c("blue", "red")) +
+  scale_y_continuous(labels = dollar_format(scale = 0.000001, suffix = "M")) +
+  labs(
+    x = "Year",
+    y = "Amount",
+    color = "Party",
+    title = "Contribution to US politics from UK-Connected PACs",
+    subtitle = "By party, over time"
+  ) +
+  theme_minimal()
+```
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is definitely a good time to knit your document, and commit and push your changes to GitHub with an appropriate commit message (e.g. "Data visualization complete"). Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*

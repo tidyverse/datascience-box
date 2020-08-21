@@ -1,0 +1,165 @@
+/* * Customizing tufte.css * */
+
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700';
+@import 'https://fonts.googleapis.com/css?family=Source+Code+Pro';
+
+@charset "UTF-8";
+
+/* Tufte CSS styles */
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+	background-color: #fefefe;
+	color: #222;
+	counter-reset: li;
+}
+
+h1.title {
+	font-weight: 700;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #B8DDD8;
+}
+
+h1 {
+	font-style: normal;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #B8DDD8;
+}
+
+h2 {
+	font-style: normal;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	color: #B8DDD8;
+}
+
+h3.subtitle {
+	font-style: normal;
+	color: #B8DDD8;
+}
+
+h4 {
+	font-style: normal;
+	font-weight: 400;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-top: 1.5rem;
+	margin-bottom: 0;
+	line-height: 1;
+}
+
+h4.author,
+h4.date {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+}
+
+.numeral {
+	font-family: "Source Sans Pro";
+	font-weight: 300;
+}
+
+em {
+	font-style: italic;
+	font-weight: 300;
+	font-family: "Source Sans Pro";
+}
+
+strong {
+	font-style: bold;
+	font-weight: 600;
+	font-family: "Source Sans Pro";
+}
+
+
+/* Code formatting */
+
+@media screen and (max-width: 760px) {
+	pre {
+		width: 100%;
+		font-size: 16px;
+     	overflow-x: auto;
+	}
+}
+
+code {
+	font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	line-height: 1.6;
+}
+
+pre {
+	background-color: #FFFFFF;
+	border-color: #CCCCCC;
+	border-style: solid;	
+	border-width: 1px;
+    border-radius: 4px;
+	width: 50%;
+	overflow-x: auto;
+ 	padding: 1em;
+}
+
+pre.r {
+	background-color: #F5F5F5;	
+	border-color: #CCCCCC
+}
+
+.marginnote code,
+.sidenote code {
+	font-size: 1rem;
+}
+
+/* Exercise counter */
+
+ol {
+	/* Remove the default left padding */
+	padding-left: 0;
+}
+
+ol>li {
+	/* Create a positioning context */
+	position: relative;
+	/* Disable the normal item numbering */
+	list-style: none;
+	width: 90%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 0;
+	padding-left: 120px;
+}
+
+ol>li:before {
+	/* Use the counter as content */
+	content: "Exercise " counter(li)".";
+	/* Increment the counter by 1 */
+	counter-increment: li;
+	position: absolute;
+	color: #B8DDD8;
+	left: -0.5px;
+	font-weight: bold;
+}
+
+ol ol {
+	counter-reset: subitem;
+}
+
+ul ul {
+  width: 100%;
+}
+
+.box {
+	background-color: #a3c586;
+	border-color: #CCCCCC;
+	color: #FFFFFF;
+	border-style: solid;	
+	border-width: 1px;
+    border-radius: 4px;
+	overflow-x: auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	width: 55%;
+}
+
+.box p {
+	width: 90%;
+	padding-left: 1em;
+}

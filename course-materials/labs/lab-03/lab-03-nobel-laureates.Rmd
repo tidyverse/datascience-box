@@ -1,0 +1,168 @@
+---
+title: "Lab 03 - Nobel laureates"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+In January 2017, Buzzfeed published an article on why Nobel laureates show 
+immigration is so important for American science. You can read the article 
+[here](https://www.buzzfeednews.com/article/peteraldhous/immigration-and-science). In the article they show that while most living Nobel laureates in the 
+sciences are based in the US, many of them were born in other countries. 
+This is one reason why scientific leaders say that immigration is vital for progress. In this lab we will work with the data from this article to 
+recreate some of their visualizations as well as explore new questions.
+
+The learning goals of this lab are:
+
+- Manipulate and transform data to prepare it for visualization.
+- Recreate visualizations.
+- Summarise data.
+- Get more practice working as a team.
+
+## Workflow
+
+This is the first week you're working in teams. You have a team repository that each member of the team has access to. You can all push to this repository, but **for this week only** we will keep things simple and ask that the **team lead for the week is the only one who pushes** while others work on together with them.
+
+Starting next week we'll show you how you can all collectively work in a repo, the (mini) chaos that might result in (called a merge conflict), and how to resolve it.
+
+## Getting started
+
+Go to the course GitHub organization and locate your Lab 03 repo, which should be named `lab-03-nobel-winners-YOUR_TEAMNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to Lab 01 if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
+
+First, open the R Markdown document `lab-03-nobel-winners.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+
+### Packages
+
+We'll use the **tidyverse** package for this analysis. Run the following code in the Console to load this package.
+
+```{r load-packages, message=FALSE, eval=TRUE}
+library(tidyverse)
+```
+
+## The data
+
+The dataset for this assignment can be found as a csv file in the `data` folder of your repository. You can read it in using the following.
+
+```{r load-data, message=FALSE, eval=TRUE}
+nobel <- read_csv("data/nobel.csv")
+```
+
+The variable descriptions are as follows:
+
+- `id`: ID number
+- `firstname`: First name of laureate
+- `surname`: Surname 
+- `year`: Year prize won
+- `category`: Category of prize
+- `affiliation`: Affiliation of laureate
+- `city`: City of laureate in prize year
+- `country`: Country of laureate in prize year
+- `born_date`: Birth date of laureate
+- `died_date`: Death date of laureate
+- `gender`: Gender of laureate
+- `born_city`: City where laureate was born
+- `born_country`: Country where laureate was born
+- `born_country_code`: Code of country where laureate was born
+- `died_city`: City where laureate died
+- `died_country`: Country where laureate died
+- `died_country_code`: Code of country where laureate died
+- `overall_motivation`: Overall motivation for recognition
+- `share`: Number of other winners award is shared with
+- `motivation`: Motivation for recognition
+
+In a few cases the name of the city/country changed after laureate was given (e.g. in 1975 Bosnia and Herzegovina was part of the Socialist Federative Republic of Yugoslavia). In these cases the variables below reflect a different name than their counterparts without the suffix `_original`.
+
+- `born_country_original`: Original country where laureate was born
+- `born_city_original`: Original city where laureate was born
+- `died_country_original`: Original country where laureate died
+- `died_city_original`: Original city where laureate died
+- `city_original`: Original city where laureate lived at the time of winning the award
+- `country_original`: Original country where laureate lived at the time of winning the award
+
+## Exercises
+
+### Get to know your data
+
+1. How many observations and how many variables are in the dataset? Use inline code to answer this question.
+
+There are some observations in this dataset that we will exclude from our analysis to match the Buzzfeed results.
+
+2. Create a new data frame called `nobel_living` that filters for
+  - laureates for whom `country` is available
+  - laureates who are people as opposed to organizations (organizations are denoted with `"org"` as their `gender`)
+  - laureates who are still alive (their `died_date` is `NA`)
+  
+Confirm that once you have filtered for these characteristics you are left with a data frame with 228 observations.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+### Most living Nobel laureates were based in the US when they won their prizes
+
+... says the Buzzfeed article. Let's see if that's true.
+
+First, we'll create a new variable to identify whether the laureate was in the US when they won their prize. We'll use the `mutate()` function for this. The following pipeline mutates the `nobel_living` data frame by adding a new variable called `country_us`. We use an if statement to create this variable. The first argument in the `if_else()` function we're using to write this if statement is the condition we're testing for. If `country` is equal to `"USA"`, we set `country_us` to `"USA"`. If not, we set the `country_us` to `"Other"`.
+
+```{marginfigure}
+Note that we can achieve the same result using the `fct_other()` function we've seen before (i.e. with `country_us = fct_other(country, "USA")`). We decided to use the `if_else()` here to show you one example of an if statement in R.
+```
+
+```{r}
+nobel_living <- nobel_living %>%
+  mutate(
+    country_us = if_else(country == "USA", "USA", "Other")
+  )
+```
+
+Next, we will limit our analysis to only the following categories: Physics, Medicine, Chemistry, and Economics.
+
+```{r}
+nobel_living_science <- nobel_living %>%
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
+
+For the next exercise work with the `nobel_living_science` data frame you created above. This means you'll need to define this data frame in your R Markdown document, even though the next exercise doesn't explicitly ask you to do so.
+
+3. Create a faceted bar plot visualizing the relationship between the category of prize and whether the laureate was in the US when they won the nobel prize. Note: Your visualization should be faceted by category. For each facet you should have two bars, one for winners in the US and one for Other. Flip the coordinates so the bars are horizontal, not vertical. Interpret your visualization, and say a few words about whether the Buzzfeed headline is supported by the data.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+### But of those US-based Nobel laureates, many were born in other countries
+
+```{marginfigure}
+**Hint:** You should be able to ~~cheat~~ borrow from code you used earlier to create the `country_us` variable.
+```
+
+4. Create a new variable called `born_country_us` that has the value `"USA"` if the laureate is born in the US, and `"Other"` otherwise.
+
+5. Add a second variable to your visualization from Exercise 3 based on whether the laureate was born in the US or not. Your final visualization should contain a facet for each category, within each facet a bar for whether they won the award in the US or not, and within each bar whether they were born in the US or not. Based on your visualization, do the data appear to support Buzzfeed's claim? Explain your reasoning in 1-2 sentences.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+### Here’s where those immigrant Nobelists were born
+
+```{marginfigure}
+Note that your bar plot won't exactly match the one from the Buzzfeed article. This is likely because the data has been updated since the article was published.
+```
+
+6. In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the `count()`) function for their birth country, `born_country`, and arrange the resulting data frame in descending order of number of observations for each country.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+## Wrapping up
+
+Go back through your write up to make sure you're following coding style guidelines we discussed in class. Make any edits as needed.
+
+Also, make sure all of your R chunks are properly labeled, and your figures are reasonably sized.
+
+Once the team leader for the week pushes their final changes, others should also clone the team repo (or if you've already done so, *pull* on the Git pane) and knit the R Markdown document to confirm that they can reproduce the report.
+
+## Interested in how Buzzfeed made their visualizations?
+
+The plots in the Buzzfeed article are called waffle plots. You can find the code used for making these plots in Buzzfeed's GitHub repo (yes, they have one!) [here](https://buzzfeednews.github.io/2017-01-immigration-and-science/). You're not expected to recreate them as part of your assignment, but you're welcomed to do so for fun!

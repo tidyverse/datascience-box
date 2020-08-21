@@ -1,0 +1,80 @@
+---
+title: "Favourite foods"
+author: "Mine Çetinkaya-Rundel"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+## Exercise 1
+
+* Read in the Excel file called `favourite-food.xlsx` from the `data-raw/` folder.
+
+```{r label-me1, eval=FALSE}
+fav_food <- read_excel(___)
+fav_food
+```
+
+* Clean up `NA`s and make sure you're happy with variable types.
+
+```{r label-me2, eval=FALSE}
+fav_food <- read_excel(___, ___)
+fav_food 
+```
+
+* Convert SES (socio economic status) to a factor variables with levels in the 
+following order: `Low`, `Middle`, `High`.
+
+```{r label-me3}
+# add code here
+```
+
+* Write out the resulting data frame to `favourite-food.csv` in the `data/` folder.
+
+```{r label-me4}
+# add code here
+```
+
+* Finally, read `favourite-food.csv` back in from the `data/` folder and 
+observe the variable types. Are they as you left them?
+
+```{r label-me5}
+# add code here
+```
+
+## Exercise 2
+
+* Read in the Excel file called `favourite-food.xlsx` from the `data-raw/` folder, 
+taking care of `NA`s and variable types.
+
+```{r label-me6, eval=FALSE}
+fav_food <- read_excel(___, ___)
+fav_food 
+```
+
+* Convert SES (socio economic status) to a factor variables with levels in the 
+following order: `Low`, `Middle`, `High`.
+
+```{r label-me7}
+# add code here
+```
+
+* Write out the resulting data frame to `favourite-food.rds` in the `data/` folder.
+
+```{r label-me8}
+# add code here
+```
+
+* Read `favourite-food.rds` back in from the `data/` folder and observe the 
+variable types. Are they as you left them?
+
+```{r label-me9}
+# add code here
+```

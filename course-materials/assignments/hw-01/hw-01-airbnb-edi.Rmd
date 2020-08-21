@@ -1,0 +1,90 @@
+---
+title: "HW 01 - Airbnb listings in Edinburgh"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Madeleine Kohler on Unsplash"}
+knitr::include_graphics("img/madeleine-kohler-90Qn643Pq9c-unsplash.jpg")
+```
+
+Recent development in Edinburgh regarding the growth of Airbnb and its impact on the housing market means a better understanding of the Airbnb listings is needed. Using data provided by Airbnb, we can explore how Airbnb availability and prices vary by neighborhood.
+
+The data come from the [Kaggle database](https://www.kaggle.com/thoroc/edinburgh-inside-airbnb/version/2). It's 
+been modified to better serve the goals of this exploration.
+
+## Learning goals
+
+The goal of this assignment is not to conduct a thorough analysis of Airbnb listings in Edinburgh, but instead to give you another chance to practice your workflow, data visualization, and interpretation skills.
+
+## Getting help
+
+If you have any questions about the assignment, please post them on Piazza!
+
+## Getting started
+
+```{marginfigure}
+**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means I didn't have your GitHub username as of when I assigned the homework. Please let me know your GitHub username asap, and I can create your repo.
+```
+
+Go to the course GitHub organization and locate your HW 1 repo, which should be named `hw-01-airbnb-edi-YOUR_GITHUB_USERNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to Lab 01 if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
+
+First, open the R Markdown document `hw-01-airbnb-edi.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+
+## Packages
+
+We'll use the **tidyverse** package for this analysis, and the data is in the **dsbox** package. Run the following code in the Console to load these packages.
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Data
+
+1. The dataset you'll be using is called `edibnb`. Run `View(edibnb)` in your Console to view the data in the data viewer. What does each row in the dataset represent?
+
+```{marginfigure}
+**Hint:** The Markdown Quick Reference sheet has an example of inline R code that might be helpful. You can access it from the Help menu in RStudio.
+```
+
+2. How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code. 
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is a good time to commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+Each column represents a variable. We can get a list of the variables in the data frame using the `names()` function.
+
+```{r}
+names(edibnb)
+```
+
+You can find descriptions of each of the variables in the help file for the dataset, which you can access by running `?edibnb` in your Console.
+
+```{marginfigure}
+**Note:** The plot will give a warning about some observations with non-finite values for price being removed. Don't worry about the warning, it simply means that 199 listings in the data didn't have prices available, so they can't be plotted.
+```
+
+3. Create a faceted histogram where each facet represents a neighborhood and displays the distribution of Airbnb prices in that neighborhood. Sample code is provided below, but you will need to fill in the blanks.
+
+```{r eval=FALSE}
+ggplot(data = ___, mapping = aes(x = ___)) +
+  geom_histogram(binwidth = ___) +
+  facet_wrap(~___)
+```
+
+Let's deconstruct this code: 
+
+- `ggplot()` is the function we are using to build our plot, in layers.
+- In the first layer we always define the data frame as the first argument. Then, we define the mappings between the variables in the dataset and the **aes**thetics of the plot (e.g. x and y coordinates, colors, etc.). 
+- In the next layer we represent the data with **geom**etric shapes, in this case with a histogram. You should decide what makes a reasonable bin width for the histogram by trying out a few options.
+- In the final layer we facet the data by neighbourhood.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes again.*
+
+4. Create a similar visualization, this time showing the distribution of review scores (`review_scores_rating`) across neighborhoods. In your answer, include a brief interpretation of how Airbnb guests rate properties in general and how the neighborhoods compare to each other in terms of their ratings.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes again.*

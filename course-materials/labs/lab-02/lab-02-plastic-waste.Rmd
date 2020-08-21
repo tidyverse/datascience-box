@@ -1,0 +1,207 @@
+---
+title: "Lab 02 - Global plastic waste"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../lab.css
+link-citations: yes
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{marginfigure}
+**A note on expectations: ** For each exercise and on your own question you 
+answer include any relevant output (tables, summary statistics, plots) in your 
+answer. Doing this is easy! Just place any relevant R code in a code chunk, 
+and hit Knit HTML.
+```
+
+Plastic pollution is a major and growing problem, negatively affecting oceans and wildlife health. [Our World in Data](https://ourworldindata.org/plastic-pollution) has a lot of great data at various levels including globally, per country, and over time. For this lab we focus on data from 2010.
+
+Additionally, National Geographic recently ran a data visualization communication contest on plastic waste as seen [here](https://www.nationalgeographic.org/funding-opportunities/innovation-challenges/plastic/dataviz/).
+
+Learning goals for this lab are:
+
+- Visualize numerical and categorical data.
+- Recreate visualizations.
+- Get more practice using with Git and GitHub.
+
+## Getting started
+
+```{marginfigure}
+**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means I didn't have your GitHub username as of when I assigned the homework. Please let me know your GitHub username asap, and I can create your repo.
+```
+
+Go to the course GitHub organization and locate your Lab 02 repo, which should be named `lab-02-plastic-waste-YOUR_GITHUB_USERNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to Lab 01 if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
+
+First, open the R Markdown document `lab-02-plastic-waste.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+
+### Packages
+
+We'll use the **tidyverse** package for this analysis. Run the following code in the Console to load this package.
+
+```{r load-packages, message=FALSE, eval=TRUE}
+library(tidyverse)
+```
+
+### Housekeeping
+
+```{marginfigure}
+Your email address is the address tied to your GitHub account and your name should be first and last name.
+```
+
+Before we can get started we need to take care of some required housekeeping. Specifically,  we need to configure your git so that RStudio can communicate with GitHub. This requires two pieces of information: your email address and your name.
+
+To do so, run the following:
+
+```{r eval=FALSE}
+usethis::use_git_config(user.name = "your name", user.email = "your email")
+```
+
+For example, for me this looks like:
+
+```{r eval=FALSE}
+usethis::use_git_config(user.name = "Mine Cetinkaya-Rundel", user.email = "cetinkaya.mine@gmail.com")
+```
+
+## The data
+
+The dataset for this assignment can be found as a csv file in the `data` folder of your repository. You can read it in using the following.
+
+```{r load-data, message=FALSE, eval=TRUE}
+plastic_waste <- read_csv("data/plastic-waste.csv")
+```
+
+The variable descriptions are as follows:
+
+- `code`: 3 Letter country code
+- `entity`: Country name
+- `continent`: Continent name
+- `year`: Year
+- `gdp_per_cap`: GDP per capita constant 2011 international $, rate
+- `plastic_waste_per_cap`: Amount of plastic waste per capita in kg/day
+- `mismanaged_plastic_waste_per_cap`: Amount of mismanaged plastic waste per capita in kg/day
+- `mismanaged_plastic_waste`: Tonnes of mismanaged plastic waste
+- `coastal_pop`: Number of individuals living on/near coast
+- `total_pop`: Total population according to Gapminder
+
+## Exercises
+
+Let's start by taking a look at the distribution of plastic waste per capita in 2010.
+
+```{r plastic_waste_per_cap-hist, eval=TRUE}
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_histogram(binwidth = 0.2)
+```
+
+One country stands out as an unusual observation at the top of the distribution. One way of identifying this country is to filter the data for countries where plastic waste per capita is greater than 3.5 kg/person.
+
+```{r plastic_waste_per_cap-max, eval=TRUE}
+plastic_waste %>%
+  filter(plastic_waste_per_cap > 3.5)
+```
+
+Did you expect this result? You might consider doing some research on Trinidad and Tobago to see why plastic waste per capita is so high there, or whether this is a data error.
+
+1. Plot, using histograms, the distribution of plastic waste per capita faceted by continent. What can you say about how the continents compare to each other in terms of their plastic waste per capita?
+
+```{marginfigure}
+From this point onwards the plots / output of the code won't be printed in the lab, but you can run the code and view the results yourself.
+```
+
+Another way of visualizing numerical data is using density plots.
+
+```{r plastic_waste_per_cap-dens}
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_density()
+```
+
+And compare distributions across continents by coloring density curves by continent.
+
+```{r plastic_waste_per_cap-dens-color}
+ggplot(data = plastic_waste, 
+       mapping = aes(x = plastic_waste_per_cap, 
+                     color = continent)) +
+  geom_density()
+```
+
+The resulting plot may be a little difficult to read, so let's also fill the curves in with colors as well.
+
+```{r plastic_waste_per_cap-dens-color-fill}
+ggplot(data = plastic_waste, 
+       mapping = aes(x = plastic_waste_per_cap, 
+                     color = continent, 
+                     fill = continent)) +
+  geom_density()
+```
+
+The overlapping colors make it difficult to tell what's happening with the distributions in continents plotted first, and hence coverred by continents plotted over them. We can change the transparency level of the fill color to help with this. The `alpha` argument takes values between 0 and 1: 0 is completely transparent and 1 is completely opaque. There is no way to tell what value will work best, so you just need to try a few.
+
+```{r plastic_waste_per_cap-dens-color-fill-alpha}
+ggplot(data = plastic_waste, 
+       mapping = aes(x = plastic_waste_per_cap, 
+                     color = continent, 
+                     fill = continent)) +
+  geom_density(alpha = 0.7)
+```
+
+This still doesn't look great...
+
+1. Recreate the density plots above using a different (lower) alpha level that works better for displaying the density curves for all continents.
+
+1. Describe why we defined the `color` and `fill` of the curves by mapping aesthetics of the plot but we defined the `alpha` level as a characteristic of the plotting geom.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is a good time to commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+And yet another way to visualize this relationship is using side-by-side box plots.
+
+```{r plastic_waste_per_cap-box}
+ggplot(data = plastic_waste, 
+       mapping = aes(x = continent, 
+                     y = plastic_waste_per_cap)) +
+  geom_boxplot()
+```
+
+1. Learn something new: violin plots! Read about them at http://ggplot2.tidyverse.org/reference/geom_violin.html, 
+and convert your side-by-side box plots from the previous task to violin plots. 
+What do the violin plots reveal that box plots do not? What features are 
+apparent in the box plots but not in the violin plots?
+
+```{marginfigure}
+Remember that we use `geom_point()` to make scatterplots.
+```
+
+1. Visualize the relationship between plastic waste per capita and mismanaged plastic waste per capita using a scatterplot. Describe the relationship.
+
+1. Color the points in the scatterplot by continent. Does there seem to be any clear distinctions between continents with respect to how plastic waste per capita and mismanaged plastic waste per capita are associated?
+
+1. Visualize the relationship between plastic waste per capita and total population as well as plastic waste per capita and coastal population. Do either of these pairs of variables appear to be more strongly linearly associated?
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is another good time to commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+```{marginfigure}
+Hint: The x-axis is a calculated variable. One country with plastic waste per capita over 3 kg/day has been filtered out. And the colors are from the viridis color palette. Take a look at the functions starting with `scale_color_viridis_*`.
+```
+
+1. Recreate the following plot, and interpret what you see in context of the data.
+
+```{r echo=FALSE, message=FALSE, eval=TRUE, warning=FALSE}
+plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3) %>%
+  ggplot(aes(x = coastal_pop_prop, y = plastic_waste_per_cap, color = continent)) + 
+    geom_point() +
+    geom_smooth(color = "black") +
+    scale_color_viridis_d() +
+    labs(x = "Coastal population proportion (Coastal / total population)", 
+         y = "Plastic waste per capita ", 
+         color = "Continent",
+         title = "Plastic waste vs. coastal population proportion",
+         subtitle = "by continent") +
+    theme_minimal()
+```
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*

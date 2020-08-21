@@ -1,0 +1,34 @@
+---
+title: "Sales"
+author: "Mine Çetinkaya-Rundel"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+* Read in the Excel file called `sales.xlsx` from the `data-raw/` folder 
+such that it looks like the following.
+
+```{r echo=FALSE}
+knitr::include_graphics("images/sales-1.png")
+```
+
+```{r}
+
+```
+
+* **Stretch goal:** Manipulate the sales data such such that it looks like the 
+following.
+
+```{r echo=FALSE}
+knitr::include_graphics("images/sales-2.png")
+```
+
+```{r}
+
+```
+

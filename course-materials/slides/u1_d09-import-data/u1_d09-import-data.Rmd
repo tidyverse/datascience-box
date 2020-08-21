@@ -1,0 +1,372 @@
+---
+title: "Import data <br> `r emo::ji('up_arrow')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(skimr)
+library(knitr)
+library(DT)
+library(here)
+```
+
+class: middle
+
+# Reading rectangular data into R
+
+---
+
+class: middle
+
+.pull-left[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/readr.png")
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/readxl.png")
+```
+]
+
+---
+
+## readr
+
+- `read_csv()` - comma delimited files
+- `read_csv2()` - semicolon separated files (common in countries where , is used as the decimal place)
+- `read_tsv()` - tab delimited files
+- `read_delim()` - reads in files with any delimiter
+- `read_fwf()` - fixed width files
+- `read_table()` - common variation of fixed width files where columns are separated by white space
+- ...
+
+---
+
+## Reading data
+
+```{r}
+nobel <- read_csv(file = "data/nobel.csv")
+```
+
+---
+
+.tiny[
+```{r message=FALSE, results="md", echo=FALSE, render = normal_print}
+width <- options()$width
+options(width=120)
+skim(nobel)
+options(width = width)
+```
+]
+
+---
+
+## Writing data
+
+- Write a file
+
+```{r cache=TRUE}
+df <- tribble(
+  ~x, ~y,
+  1,  "a",
+  2,  "b",
+  3,  "c"
+)
+
+write_csv(df, path = "data/df.csv")
+```
+
+- Check that it got written out
+
+```{r}
+fs::dir_ls("data")
+```
+
+---
+
+.your-turn[
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 07 - Nobels and sales + Data import` > open `nobels-csv.Rmd` and knit.
+- Read in the `nobels.csv` file from the `data-raw/` folder.
+- Split into two (STEM and non-STEM): 
+  - Create a new data frame, `nobel_stem`, that filters for the STEM fields 
+(Physics, Medicine, Chemistry, and Economics).
+  - Create another data frame, `nobel_nonstem`, that filters for the remaining 
+fields.  
+- Write out the two data frames to `nobel-stem.csv` and `nobel-nonstem.csv`, 
+respectively, to `data/`.
+
+**Hint:** Use the `%in%` operator when filtering.
+]
+
+---
+
+class: middle
+
+# Variable names
+
+---
+
+```{r message=FALSE}
+edi_airbnb <- read_csv("data/edi-airbnb.csv")
+names(edi_airbnb)
+```
+
+--
+
+... but R doesn't allow spaces in variable names
+
+```{r error=TRUE}
+ggplot(edi_airbnb, aes(x = Number of bathrooms, y = Price)) +
+  geom_point()
+```
+
+---
+
+## Option 1 - Define column names
+
+.small[
+```{r}
+edi_airbnb_col_names <- read_csv("data/edi-airbnb.csv",
+  col_names = c("id", "price", "neighbourhood", "accommodates",
+                "bathroom", "bedroom", "bed", 
+                "review_scores_rating", "n_reviews", "url"))
+
+names(edi_airbnb_col_names)
+```
+]
+
+---
+
+## Option 2 - Format text to snake_case
+
+```{r warning=FALSE}
+edi_airbnb_cleaned_names <- edi_airbnb %>%
+  janitor::clean_names()
+
+names(edi_airbnb_cleaned_names)
+```
+
+---
+
+class: middle
+
+# Variable types
+
+---
+
+.discussion[
+Which class is `x`? Why?
+]
+
+.pull-left[
+<br><br><br>
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/df-na.png")
+```
+]
+.pull-right[
+```{r message=FALSE}
+read_csv("data/df-na.csv")
+```
+]
+
+---
+
+## Option 1. Explicit NAs
+
+```{r eval=FALSE}
+read_csv("data/df-na.csv", 
+         na = c("", "NA", ".", "9999", "Not applicable"))
+```
+
+.pull-left[
+<br>
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/df-na.png")
+```
+]
+.pull-right[
+```{r echo=FALSE,message=FALSE}
+read_csv("data/df-na.csv", 
+  na = c("", "NA", ".", "9999",
+         "Not applicable"))
+```
+]
+
+---
+
+## Option 2. Specify column types
+
+.midi[
+```{r}
+read_csv("data/df-na.csv", 
+  col_types = list(col_double(), col_character(), col_character()))
+```
+]
+
+---
+
+## Column types
+
+.small[
+**type function**  | **data type**
+------------------ | -------------
+`col_character()`  | character
+`col_date()`       | date
+`col_datetime()`   | POSIXct (date-time)
+`col_double()`     | double (numeric)
+`col_factor()`     | factor
+`col_guess()`      | let readr guess (default)
+`col_integer()`    | integer
+`col_logical()`    | logical
+`col_number()`     | numbers mixed with non-number characters
+`col_numeric()`    | double or integer
+`col_skip()`       | do not read
+`col_time()`       | time
+]
+
+---
+
+.your-turn[
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 07 - Nobels and sales + Data import` > open `food-excel.Rmd` and knit. Work on **Exercise 1**.
+- Read in the Excel file called `favourite-food.xlsx` from the `data-raw/` folder.
+- Clean up `NA`s and make sure you're happy with variable types.
+- Convert SES (socio economic status) to a factor variables with levels in the 
+following order: `Low`, `Middle`, `High`.
+- Write out the resulting data frame to `favourite-food.csv` in the `data/` folder.
+- Finally, read `favourite-food.csv` back in from  the `data/` folder and observe the variable types. Are they as you left them?
+]
+
+---
+
+## `read_rds()` and `write_rds()`
+
+- CSVs can be unreliable for saving interim results if there is specific 
+variable type information you want to hold on to.
+- An alterive is RDS files, you can read and write them with `read_rds()` and 
+`write_rds()`, respectively.
+
+```{r eval=FALSE}
+read_rds(path)
+write_rds(x, path)
+```
+
+---
+
+.your-turn[
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 07 - Nobels and sales + Data import` > open `food-excel.Rmd` and knit. Work on **Exercise 2**.
+- Repeat the first three steps from Exercise 1.
+- Write out the resulting data frame to `favourite-food.rds` in the `data/` folder.
+- Read `favourite-food.rds` back in from  the `data/` folder and observe the 
+variable types.  Are they as you left them?
+]
+
+---
+
+.pull-left[
+.your-turn[
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 07 - Nobels and sales + Data import` > open `sales-excel.Rmd` and knit. 
+- Load the `sales.xlsx` file from the `data-raw/` folder, using appropriate 
+arguments for the `read_excel()` function such that it looks like the following.
+If done, see next slide for stretch goal.
+]
+]
+.pull-right[
+.midi[
+```{r echo=FALSE}
+sales <- read_excel("data/sales.xlsx", skip = 3, col_names = c("id", "n"))
+sales
+```
+]
+]
+
+---
+
+.pull-left[
+.your-turn[
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 07 - Nobels and sales + Data import` > open `sales-excel.Rmd` and knit. 
+- **Stretch goal:** Manipulate the sales data such that it looks like the following.
+]
+]
+.pull-right[
+```{r echo=FALSE}
+sales %>%
+  mutate(
+    is_brand_name = str_detect(id, "Brand"),
+    brand = if_else(is_brand_name, id, NA_character_)
+  ) %>%
+  fill(brand) %>%
+  filter(!is_brand_name) %>%
+  select(brand, id, n) %>%
+  mutate(
+    id = as.numeric(id),
+    n = as.numeric(n)
+  )
+```
+]
+
+---
+
+class: middle
+
+# Importing many files
+
+---
+
+```{r message=FALSE}
+sales_files <- fs::dir_ls("data/sales")
+sales_files
+
+library(vroom)
+sales <- vroom(sales_files, id = "filename")
+sales
+```
+
+---
+
+## vroom vroom!!
+
+.pull-left[
+```{r echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("img/vroom.png")
+```
+]
+.pull-right[
+- **vroom** is most useful for reading large amounts of data in, fast!
+- and it has nice bells-and-whistles like delimiter guessing, reading many files in at once, etc.
+- Learn more at [vroom.r-lib.org](https://vroom.r-lib.org/)
+]
+
+---
+
+class: middle
+
+# Other types of data
+
+---
+
+## Other types of data
+
+- **googlesheets4:** Google Sheets
+- **haven**: SPSS, Stata, and SAS files
+- **DBI**, along with a database specific backend (e.g. RMySQL, RSQLite, RPostgreSQL etc): allows you to run SQL queries against a database and return a data frame
+- **jsonline**: JSON
+- **xml2**: xml
+- **rvest**: web scraping
+- **httr**: web APIs
+- **sparklyr**: data loaded into spark

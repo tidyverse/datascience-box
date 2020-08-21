@@ -1,0 +1,338 @@
+---
+title: "Building plots for various data types <br> `r emo::ji('bar_chart')``r emo::ji('bar_chart')`"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(datasauRus)
+library(DT)
+library(Tmisc)
+library(dsbox)
+```
+
+class: center, middle
+
+# Identifying variables
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: center, middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+* shape:
+    * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    * modality: unimodal, bimodal, multimodal, uniform
+* center: mean (`mean`), median (`median`), mode (not always useful)
+* spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+* unusal observations
+
+---
+
+## Histograms
+
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_histogram(binwidth = 10)
+```
+
+---
+
+## Density plots
+
+```{r out.width="75%", warning = FALSE}
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_density()
+```
+
+---
+
+## Box plots
+
+```{r out.width="60%", warning = FALSE}
+ggplot(data = starwars, mapping = aes(y = height)) +
+  geom_boxplot()
+```
+
+---
+
+class: center, middle
+
+# Visualizing relationships between numerical and categorical data
+
+---
+
+## Side-by-side box plots
+
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
+```
+
+---
+
+## Scatter plot...
+
+This is not a great representation of these data.
+
+```{r out.width="60%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_point()
+```
+
+---
+
+## Violin plots
+
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_violin()
+```
+
+---
+
+## Jitter plot
+
+```{r echo=FALSE}
+set.seed(1234)
+```
+
+
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_jitter()
+```
+
+---
+
+## Beeswarm plots
+
+```{r out.width="75%", warning = FALSE}
+library(ggbeeswarm)
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_beeswarm()
+```
+
+---
+
+class: center, middle
+
+# Visualizing categorical data
+
+---
+
+## Bar plots
+
+```{r out.width="80%"}
+ggplot(data = starwars, mapping = aes(x = gender)) +
+  geom_bar()
+```
+
+---
+
+## Segmented bar plots, counts
+
+```{r out.width="80%"}
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar()
+```
+
+---
+
+## Recode hair color
+
+Using the `fct_other()` function from the **forcats** package, which is also part of the **tidyverse**.
+
+```{r}
+starwars <- starwars %>%
+  mutate(hair_color2 = 
+           fct_other(hair_color, 
+                     keep = c("black", "brown", "brown", "blond")
+                     )
+         )
+```
+
+---
+
+## Segmented bar plots, counts
+
+```{r out.width="70%"}
+ggplot(data = starwars, 
+       mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar() +
+  coord_flip()
+```
+
+---
+
+## Segmented bar plots, proportions
+
+```{r out.width="70%"}
+ggplot(data = starwars, 
+       mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar(position = "fill") +
+  coord_flip()
+  labs(y = "proportion")
+```
+
+---
+
+.question[
+Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
+]
+
+```{r echo=FALSE, out.width="50%"}
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar() +
+  coord_flip()
+```
+
+```{r echo=FALSE, out.width="50%"}
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  labs(y = "proportion")
+```
+
+---
+
+class: center, middle
+
+# Why do we visualize?
+
+---
+
+## Data: `datasaurus_dozen`
+
+Below is an exceprt from the `datasaurus_dozen` dataset:
+
+```{r datasaurus-view-wide, echo=FALSE}
+library(datasauRus)
+datasaurus_dozen_wide %>%
+  select(1:8)
+```
+
+---
+
+## Summary statistics
+
+.small[
+```{r datasaurus-cor}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarise(r = cor(x, y))
+```
+]
+
+---
+
+## 
+
+.question[
+How similar do the relationships between `x` and `y` in the thirteen datasets look?
+How similar are they based on summary stats?
+]
+
+```{r datasaurus-plot, echo=FALSE, fig.height=4, fig.width=7}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
+  facet_wrap(~ dataset, ncol = 5) +
+  theme(legend.position = "none")
+```
+
+---
+
+## Anscombe's quartet
+
+```{r quartet-for-show, eval=FALSE}
+library(Tmisc)
+quartet
+```
+
+.pull-left[
+```{r quartet-view1, echo=FALSE}
+quartet[1:22,]
+```
+]
+.pull-right[
+```{r quartet-view2, echo=FALSE}
+quartet[23:44,]
+```
+]
+
+---
+
+## Summarising Anscombe's quartet
+
+```{r quartet-summary}
+quartet %>%
+  group_by(set) %>%
+  summarise(
+    mean_x = mean(x), 
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    r = cor(x, y)
+  )
+```
+
+---
+
+## Visualizing Anscombe's quartet
+
+```{r quartet-plot, out.width="75%"}
+ggplot(quartet, aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(~ set, ncol = 4)
+```
+
+---
+
+## Age at first kiss
+
+.question[
+Do you see anything out of the ordinary?
+]
+
+```{r fig.height=2.5, echo=FALSE, warning=FALSE}
+ggplot(student_survey, aes(x = first_kiss)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "How old were you when you had your first kiss?")
+```
+
+---
+
+## Facebook visits
+
+.question[
+How are people reporting lower vs. higher values of FB visits?
+]
+
+```{r fig.height=2.5, echo=FALSE, warning=FALSE}
+ggplot(student_survey, aes(x = fb_visits_per_day)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "How many times do you go on Facebook per day?", x = "")
+```

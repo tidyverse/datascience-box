@@ -1,0 +1,99 @@
+---
+title: "Lab 05 - Smokers in Whickham"
+subtitle: "Simpson's paradox"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../lab.css
+link-citations: yes
+---
+
+```{r include=FALSE}
+library(tufte)
+library(knitr)
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  digits = 2
+  )
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Getting started
+
+```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
+include_graphics("img/whickham.png")
+```
+
+A study of conducted in Whickham, England recorded participants' age, smoking status at baseline, and then 20 years later recorded their health outcome.
+
+### Packages
+
+In this lab we will work with the `tidyverse` and `mosaicData` packages.
+
+This is the first time we're using the `mosaicData` package, you need to make 
+sure to install it first by running `install.packages("mosaicData")` in the 
+console.
+
+```{r}
+library(tidyverse) 
+library(mosaicData) 
+```
+
+Note that these packages are also loaded in your R Markdown document.
+
+## The data
+
+The data is in the `mosaicData` package. You can load it with
+
+```{r load-data}
+data(Whickham)
+```
+
+Take a peek at the codebook with
+
+```{r eval=FALSE}
+?Whickham
+```
+
+## Exercises
+
+1. What type of study do you think these data comne from: observational 
+   or experiment? Why?
+
+2. How many observations are in this dataset? What does each observation 
+   represent?
+
+3. How many variables are in this dataset? What type of variable is each? 
+   Display each variable using an appropriate visualization.
+
+4. What would you expect the relationship between smoking status and 
+   health outcome to be?
+
+5. Create a visualization depicting the relationship between smoking status 
+   and health outcome. Briefly describe the relationship, and evaluate whether 
+   this meets your expectations. Additionally, calculate the relevant
+   conditional probabilities to help your narrative. Here is some code to 
+   get you started:
+
+```{r}
+Whickham %>%
+  count(smoker, outcome)
+```
+
+6. Create a new variable called `age_cat` using the following scheme:
+
+- `age <= 44 ~ "18-44"`
+- `age > 44 & age <= 64 ~ "45-64"`
+- `age > 64 ~ "65+"`
+
+7. Re-create the visualization depicting the relationship between smoking 
+status and health outcome, faceted by `age_cat`. What changed? What might 
+explain this change? Extend the contingency table from earlier by 
+breaking it down by age category and use it to help your narrative.
+
+```{r}
+Whickham %>%
+  count(smoker, age_cat, outcome)
+```

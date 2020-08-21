@@ -1,0 +1,105 @@
+---
+title: "Type coercion"
+author: "Mine Çetinkaya-Rundel"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+- `c(1, NA+1L, "C")`
+
+```{r}
+c(1, NA+1L, "C")
+```
+
+```{r}
+1
+NA+1L
+"C"
+```
+
+```{r}
+typeof(c(1, NA+1L, "C"))
+```
+
+
+- `c(1L / 0, NA)`
+
+```{r}
+c(1L / 0, NA)
+```
+
+```{r}
+typeof(1L)
+typeof(0)
+typeof(1L/0) # Inf
+typeof(NA)
+```
+
+```{r}
+typeof(c(1L / 0, NA))
+```
+
+- `c(1:3, 5)`
+
+```{r}
+c(1:3, 5)
+```
+
+```{r}
+typeof(1:3)
+typeof(5)
+```
+
+```{r}
+typeof(c(1:3, 5))
+```
+
+- `c(3, "3+")`
+
+```{r}
+c(3, "3+")
+```
+
+```{r}
+typeof(3)
+typeof("3+")
+```
+
+```{r}
+typeof(c(3, "3+"))
+```
+
+- `c(NA, TRUE)`
+
+```{r}
+c(NA, TRUE)
+```
+
+```{r}
+typeof(NA)
+typeof(TRUE)
+```
+
+```{r}
+typeof(c(NA, TRUE))
+```
+
+- `c(3L, NaN+1L)`
+
+```{r}
+c(3L, NaN+1L)
+```
+
+```{r}
+typeof(3L)
+typeof(NaN)
+typeof(1L)
+typeof(NaN+1L)
+```
+
+```{r}
+typeof(c(3L, NaN+1L))
+```

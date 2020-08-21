@@ -1,0 +1,82 @@
+---
+title: "HW 04 - Legos and instructors"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Daniel Cheung on Unsplash"}
+knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
+```
+
+This week we'll do some data gymnastics to refresh and review what we learned over the past few weeks.
+
+# Packages
+
+In this assignment we will work with the `tidyverse` as usual ans the **dsbox** package for the data.
+
+```{r load-package, eval=FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Lego sales
+
+We have (simulated) data from lego sales in 2018 for a sample of customers who bought legos in the US.  The dataset is called `lego_sales`. You can find descriptions of each of the variables in the help file for the dataset, which you can access by running `?lego_sales` in your Console.
+
+Answer the following questions using pipelines. For each question, state your answer in a sentence, e.g. "The first three common names of purchasers are ...".
+
+1. What are the three most common first names of purchasers?
+
+2. What are the three most common themes of lego sets purchased?
+
+3. Among the most common theme of lego sets purchased, what is the most common 
+subtheme?
+
+```{marginfigure}
+*Hint:* Use the `case_when()` function.
+```
+
+4. Create a new variable called `age_group` and group the ages into the 
+following categories: "18 and under", "19 - 25", "26 - 35", "36 - 50", "51 and over".
+
+```{marginfigure}
+*Hint:* You will need to consider quantity of purchases.
+```
+
+5. Which age group has purchased the highest number of lego sets. 
+
+```{marginfigure}
+*Hint:* You will need to consider quantity of purchases as well as price of 
+lego sets.
+```
+
+6. Which age group has spent the most money on legos?
+
+7. Come up with a question you want to answer using these data, and write it down. 
+Then, create a data visualization that answers the question, and explain how 
+your visualization answers the question.
+
+## Instructional staff employment trends
+
+The next dataset is about instructional staff employee hiring trends between 1975 and 2011. 
+The dataset is called `instructors`. You can find descriptions of each of the variables in the help file for the dataset, which you can access by running `?instructors` in your Console.
+
+The American Association of University Professors (AAUP) is a nonprofit membership association of faculty and other academic professionals. [This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) compiled by the AAUP shows trends in instructional staff employees between 1975 and 2011, and contains an image very similar to the one given below.
+
+```{r instructors, echo = FALSE, fig.width=7}
+knitr::include_graphics("img/instructors.png")
+```
+
+During the lab you had a chance to discuss with your teammates how you 
+would improve upon this visualization if the main objective was to communicate 
+that the proportion of part-time faculty have gone up over time compared to 
+other instructional staff types.
+
+8. Implement the improvements and provide your improved visualization as part 
+of your answer. Also write a few sentences about why you chose to make these 
+improvements and how they address the main goal stated above. Feel free to reuse 
+any code from the lab.

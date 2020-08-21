@@ -1,0 +1,489 @@
+---
+title: "Inference overview <br> `r emo::ji('sunrise_over_mountains')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(DT)
+library(emo)
+library(openintro)
+```
+
+class: center, middle
+
+# From last time
+
+---
+
+## Packages
+
+```{r message=FALSE}
+library(tidyverse)
+library(infer)
+```
+
+
+---
+
+# From last time - Testing for independence
+
+---
+
+## Study results
+
+.small[
+```{r}
+yawn %>%
+  count(group, result) %>%
+  group_by(group) %>%
+  mutate(p_hat = n / sum(n))
+```
+]
+
+Difference in proportions of yawners: 
+
+$\hat{p}_{treatment} - \hat{p}_{control} = 0.2941 - 0.25 = 0.0441$
+
+---
+
+## Two competing claims
+
+- "There is nothing going on." 
+Yawning and seeing someone yawn are **independent**, yawning is not contagious, observed difference in proportions is simply due to chance. $\rightarrow$ Null hypothesis
+
+- "There is something going on."
+Yawning and seeing someone yawn are **dependent**, yawning is contagious, observed difference in proportions is not due to chance. $\rightarrow$ Alternative hypothesis
+
+---
+
+## Running the simulation
+
+1. Shuffle the 50 cards at least 7 times<sup>1</sup> to ensure that the cards counted out are from a random process.
+
+2. Count out the top 16 cards and set them aside. These cards represent the people in the control group.
+
+3. Out of the remaining 34 cards (treatment group) count the \red{number of face cards} (the number of people who yawned in the treatment group).
+
+4. Calculate the difference in proportions of yawners (treatment - control), and plot it 
+on the board.
+
+5. Mark the difference you find on the dot plot on the board.
+
+.footnote[
+[1] http://www.dartmouth.edu/~chance/course/topics/winning_number.html
+]
+
+---
+
+## Simulation by hand
+
+.question[
+Do the simulation results suggest that yawning is contagious, i.e. does seeing someone yawn and yawning appear to be dependent?
+]
+
+![yawn-sim-results](img/yawn-sim-results.png)
+
+---
+
+## Simulation by computation
+
+```{r}
+null_dist <- yawn %>%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %>%
+  hypothesize(null = "independence") %>%
+  generate(100, type = "permute") %>%
+  calculate(stat = "diff in props", 
+            order = c("trmt", "ctrl"))
+```
+
+---
+
+## Simulation by computation - 1
+
+.small[
+- Start with the data frame
+- **Specify the variables**
+    - **Since the response variable is categorical, specify the level which should be considered as "success"**
+
+```{r eval=FALSE}
+yawn %>%
+{{  specify(response = result, explanatory = group, 
+          success = "yawn") }}
+```
+]
+
+---
+
+## Simulation by computation - 2
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- **State the null hypothesis (yawning and whether or not you see someone yawn are independent)**
+
+```{r eval=FALSE}
+yawn %>%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %>%
+{{ hypothesize(null = "independence") }}
+```
+]
+
+---
+
+## Simulation by computation - 3
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- **Generate simulated differences via permutation**
+
+```{r eval=FALSE}
+yawn %>%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %>%
+  hypothesize(null = "independence") %>%
+{{ generate(100, type = "permute") }}
+```
+]
+
+---
+
+## Simulation by computation - 4
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- Generate simulated differences via permutation
+- **Calculate the sample statistic of interest (difference in propotions)**
+    - **Since the explanatory variable is categorical, specify the order in which the subtraction should occur for the calculation of the sample statistic, $(\hat{p}_{treatment} - \hat{p}_{control})$.**
+    
+```{r eval=FALSE}
+yawn %>%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %>%
+  hypothesize(null = "independence") %>%
+  generate(100, type = "permute") %>%
+{{ calculate(stat = "diff in props", 
+           order = c("trmt", "ctrl")) }}
+```
+]
+
+---
+
+## Simulation by computation - 0
+
+.small[
+- **Save the result**
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- Generate simulated differences via permutation
+- Calculate the sample statistic of interest (difference in propotions)
+    - Since the explanatory variable is categorical, specify the order in which the subtraction should occur for the calculation of the sample statistic, $(\hat{p}_{treatment} - \hat{p}_{control})$.
+    
+```{r eval=FALSE}
+{{null_dist <- yawn %>% }}
+  specify(response = outcome, explanatory = group, 
+          success = "yawn") %>%
+  hypothesize(null = "independence") %>%
+  generate(100, type = "permute") %>%
+  calculate(stat = "diff in props", 
+            order = c("treatment", "control"))
+```
+]
+
+---
+
+## Visualizing the null distribution
+
+.question[
+What would you expect the center of the null distribution to be?
+]
+
+--
+
+```{r}
+ggplot(data = null_dist, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 0.05) +
+  labs(title = "Null distribution")
+```
+
+---
+
+## Calculating the p-value, visually
+
+.question[
+What is the p-value, i.e. in what % of the 
+simulations was the simulated difference in sample proportion at least as extreme 
+as the observed difference in sample proportions?
+]
+
+```{r echo=FALSE}
+ggplot(data = null_dist, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 0.05) +
+  labs(title = "Null distribution")
+```
+
+---
+
+## Calculating the p-value, directly
+
+```{r}
+null_dist %>%
+  filter(stat >= 0.0441) %>%
+  summarise(p_value = n()/nrow(null_dist))
+```
+
+---
+
+## Conclusion
+
+.question[
+What is the conclusion of the hypothesis test?
+]
+
+<br>
+
+--
+
+.question[
+Do you "buy" this conclusion?
+]
+
+---
+
+class: center, middle
+
+# Inference overview
+
+---
+
+## What do you want to do?
+
+- Estimation -> Confidence interval
+
+- Decision -> Hypothesis test
+
+- First step: Ask the following questions
+
+  1. How many variables?
+  2. What types of variables?
+  3. What is the research question?
+
+---
+
+class: center, middle
+
+# Confidence intervals
+
+---
+
+## Confidence intervals
+
+- Bootstrap
+
+- Bounds: cutoff values for the middle XX% of the distribution
+
+- Interpretation: We are XX% confident that the true population parameter is in the interval.
+
+- Definition of confidence level: XX% of random samples of size n are expected to produce confidence intervals that contain the true population parameter.
+
+- `infer::generate(reps, type = "bootstrap")`
+
+---
+
+## Confidence intervals exercises
+
+.question[
+Describe the simulation process for estimating the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+
+]
+
+---
+
+## Accuracy vs. precision
+
+.question[
+What happens to the width of the confidence interval as the confidence level increases? Why? Should we always prefer a confidence interval with a higher confidence level?
+]
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE, fig.width=10, fig.height=7}
+set.seed(20171107)
+acs_emp <- acs12 %>% filter(employment == "employed", income > 0)
+acs_10 <- acs_emp %>% sample_n(10) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+acs_100 <- acs_emp %>% sample_n(100) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+acs_500 <- acs_emp %>% sample_n(500) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+p1 <- ggplot(acs_10, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 10")
+p2 <- ggplot(acs_100, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 100")
+p3 <- ggplot(acs_500, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 500")
+gridExtra::grid.arrange(p1, p2, p3, ncol = 1)
+```
+
+
+---
+
+## Equivalency of confidence and significance levels
+
+- Two sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - \alpha$
+- One sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - (2 \times \alpha)$
+
+```{r echo = FALSE, message=FALSE, fig.width=10, fig.height=4}
+par(mfrow = c(1,2))
+normTail(U = 1.96, L = -1.96, df = 100, col = "#56B4E9", axes = FALSE)
+text(x = 0, y = 0.15, "0.95", col = "#56B4E9", cex = 2)
+text(x = -3, y = 0.05, "0.025", col = "#56B4E9", cex = 1.5)
+text(x = 3, y = 0.05, "0.025", col = "#56B4E9", cex = 1.5)
+#
+normTail(U = 1.65, L = -1.65, df = 100, col = "#56B4E9", axes = FALSE)
+normTail(U = 1.65, df = 100, col = "gray", add = TRUE, axes = FALSE)
+text(x = 0, y = 0.15, "0.90", col = "#56B4E9", cex = 2)
+text(x = -3, y = 0.05, "0.05", col = "#56B4E9", cex = 1.5)
+text(x = 3, y = 0.05, "0.05", col = "gray", cex = 1.5)
+```
+
+---
+
+## Interpretation of confidence intervals
+
+.question[
+Which of the following is more informative: 
+
+<ul>
+<li> The difference in price of a gallon of milk between Whole Foods and Harris Teeter is 30 cents.
+<li> A gallon of milk costs 30 cents more at Whole Foods compared to Harris Teeter.
+</ul>
+</div>
+]
+
+--
+
+.question[
+What does your answer tell you about interpretation of confidence intervals for differences between two population parameters?
+]
+
+---
+
+class: center, middle
+
+# Hypothesis tests
+
+---
+
+## Hypothesis testing
+
+- Set the hypotheses.
+
+- Calculate the observed sample statistic.
+
+- Calculate the p-value.
+
+- Make a conclusion, about the hypotheses, in context of the data and the research question.
+
+- `infer::hypothesize(null = "point")` and `infer::generate(reps, type = "simulate")` or `infer::generate(reps, type = "bootstrap")`
+
+- `infer::hypothesize(null = "independence")` and `infer::generate(reps, type = "permute")`
+  
+---
+
+## Hypothesis testing exercises
+
+.small[
+.question[
+`r emo::ji("busts_in_silhouette")`
+Describe the simulation process for tesing for the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the null hypothesis would be independence or point.
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+
+> **Panda Express, BME, get MECT, Duke Squirrels, Team Power:** single standard deviation
+
+> **ACE, Kimchi Stew, Databaes, HJC, 23, 24/7, five squared:** single population mean
+
+> **Team Untitled, R we done yet?, Blue Wombats, Cosmic:** difference between two population proportions
+
+> **InterstellR, Tequila Mockingbird, Sweeter than SugR:** difference between two population medians
+
+> **The Data Wranglers, Git R Done, Migos, Six Squared:** single population median
+]]
+
+---
+
+## Testing errors
+
+- Type 1: Reject $H_0$ when you shouldn't have
+    + P(Type 1 error) = $\alpha$
+    
+- Type 2: Fail to reject $H_0$ when you should have
+    + P(Type 2 error) is harder to calculate, but increases as $\alpha$ decreases
+
+--
+
+.question[
+In a court of law
+
+- Null hypothesis: Defendant is innocent
+- Alternative hypothesis: Defendant is guilty
+
+Which is worse: Type 1 or Type 2 error?
+]
+
+---
+
+## Probabilities of testing errors
+
+- P(Type 1 error) = $\alpha$
+
+- P(Type 2 error) = 1 - Power
+
+- Power = P(correctly rejecting the null hypothesis)
+
+--
+
+.question[
+Fill in the blanks in terms of correctly/incorrectly rejecting/failing to reject the null hypothesis:
+
+- $\alpha$ is the probability of ______.
+- 1 - Power is the probability of ______.
+]

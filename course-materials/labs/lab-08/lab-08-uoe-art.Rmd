@@ -1,0 +1,425 @@
+---
+title: "Lab 08 - University of Edinburgh Art Collection"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(robotstxt)
+library(rvest)
+library(tidyverse)
+```
+
+The University of Edinburgh Art Collection _"supports the world-leading research and teaching that happens within the University. Comprised of an astonishing range of objects and ideas spanning two millennia and a multitude of artistic forms, the collection reflects not only the long and rich trajectory of the University, but also major national and international shifts in art history."_^[Source: https://collections.ed.ac.uk/art/about].
+
+```{marginfigure}
+See the sidebar [here](https://collections.ed.ac.uk/art) and note that there are 
+2909 pieces in the art collection we're collecting data on.
+```
+
+In this lab we'll scrape data on all art pieces in the [Edinburgh College 
+of Art collection](https://collections.ed.ac.uk/art/search/*:*/Collection:%22edinburgh+college+of+art%7C%7C%7CEdinburgh+College+of+Art%22).
+
+The earning goals of this lab are:
+
+- Web scraping from a single page
+- Writing functions
+- Iteration
+- Writing data
+
+Before getting started, let's check that a bot has permissions to access pages on this domain.
+
+```{r paths-allowed, warning=FALSE}
+paths_allowed("https://collections.ed.ac.uk/art)")
+```
+
+## Getting started
+
+Go to the course GitHub organization and locate your lab repo, which should be named `lab-08-uoe-art-YOUR_TEAMNAME`. Grab the URL of the repo, and clone it in RStudio Cloud.
+
+```{marginfigure}
+Your email address is the address tied to your GitHub account and your name 
+should be first and last name.
+```
+
+Run the following (but update it for your name and email!) in the Console to 
+configure Git:
+
+```{r git-config, eval=FALSE}
+library(usethis)
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+``` 
+
+## R scripts vs. R Markdown documents
+
+Today we will be using both R scripts and R Markdown documents:
+
+- `.R`: R scripts are plain text files containing **only** code and brief comments,
+  - We'll use R scripts in the web scraping stage and ultimately save the scraped 
+  data as a csv.
+- `.Rmd`: R Markdown documents are plain text files containing.
+  - We'll use an R Markdown document in the web analysis stage, where we start 
+  off by reading in the csv file we wrote out in the scraping stage.
+  
+Here is the organization of your repo, and the corresponding section in the 
+lab that each file will be used for:
+
+```
+|-data
+|  |- README.md
+|-lab-06-uoe-art.Rmd              # analysis
+|-lab-06-uoe-art.Rproj
+|-README.md
+|-scripts                         # webscraping
+|  |- 01-scrape-page-one.R        # scraping a single page
+|  |- 02-scrape-page-function.R   # functions
+|  |- 03-scrape-page-many.R       # iteration
+```
+  
+## SelectorGadget
+
+For this lab, please use Google Chrome as your web browser. If you are using the 
+one of the computers in the computer lab, you can access Google Chrome by 
+searching for it in the search bar at the bottom left of your home screen. Then, 
+go to the [SelectorGadget extension page](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en) on the Chrome Web Store and click on "Add to Chrome" (big blue 
+button). A pop up window will ask _Add "SelectorGadget"?_, click "Add extension". 
+Another pop up window will asl whether you want to get your extensions on all 
+your computer. If you want this, you can turn on sync, but you don't need to 
+for the purpose of this lab.
+
+```{r selectorgadget, fig.margin = TRUE, echo = FALSE}
+knitr::include_graphics("img/selectorgadget.png")
+```
+
+You should now be able to access SelectorGadget by clicking on the icon next to 
+the search bar in the Chrome browser.
+
+### Scraping a single page
+
+```{marginfigure}
+**Tip:** To run the code you can highlight or put your cursor next to the lines of code you want to run and hit Command+Enter.
+```
+
+<div class="box">
+Work in `scripts/01-scrape-page-one.R`.
+</div>
+
+We will start off by scraping data on the first 10 pieces in the collection from 
+[here](https://collections.ed.ac.uk/art/search/*:*/Collection:%22edinburgh+college+of+art%7C%7C%7CEdinburgh+College+of+Art%22?offset=0).
+
+First, we define a new object called `first_url`, which is the link above. Then, 
+we read the page at this url with the `read_html()` function from the **rvest** 
+package. The code for this is already provided in `01-scrape-page-one.R`.
+
+```{r}
+# set url
+first_url <- "https://collections.ed.ac.uk/art/search/*:*/Collection:%22edinburgh+college+of+art%7C%7C%7CEdinburgh+College+of+Art%22?offset=0"
+
+# read html page
+page <- read_html(first_url)
+```
+
+For the ten pieces on this page we will extract `title`, `artist`, and `link` 
+information, and put these three variables in a data frame.
+
+### Titles
+
+Let's start with titles. We make use of the SelectorGadget to identify the 
+tags for the relevant nodes:
+
+```{r iteminfo-h3a, fig.margin = TRUE, echo = FALSE}
+knitr::include_graphics("img/iteminfo-h3a.gif")
+```
+
+```{r}
+page %>%
+  html_nodes(".iteminfo") %>%
+  html_node("h3 a")
+```
+
+Then we extract the text with `html_text()`:
+
+```{r}
+page %>%
+  html_nodes(".iteminfo") %>%
+  html_node("h3 a") %>%
+  html_text()
+```
+
+And get rid of all the spurious whitespace in the text with `str_squish()`:
+
+```{marginfigure}
+Take a look at the help docs for `str_squish()` (with `?str_squish`) to 
+```
+
+```{r}
+page %>%
+  html_nodes(".iteminfo") %>%
+  html_node("h3 a") %>%
+  html_text() %>%
+  str_squish()
+```
+
+And finally save the resulting data as a vector of length 10:
+
+```{r}
+titles <- page %>%
+  html_nodes(".iteminfo") %>%
+  html_node("h3 a") %>%
+  html_text() %>%
+  str_squish()
+```
+
+### Links
+
+The same nodes that contain the text for the titles also contains information 
+on the links to individual art piece pages for each title. We can extract this 
+information using a new function from the rvest package, `html_attr()`, which 
+extracts attributes.
+
+A mini HTML lesson! The following is how we define hyperlinked text in HTML:
+
+```
+<a href="https://www.google.com">Seach on Google</a>
+```
+
+And this is how the text would look like on a webpage: [Seach on Google](https://www.google.com).
+
+Here the text is `Seach on Google` and the `href` attribute contains the url 
+of the website you'd go to if you click on the hyperlinked text: `https://www.google.com`.
+
+The moral of the story is: the link is stored in the `href` attribute.
+
+```{r}
+page %>%
+  html_nodes(".iteminfo") %>%   # same nodes
+  html_node("h3 a") %>%         # as before
+  html_attr("href")             # but get href attribute instead of text
+```
+
+These don't really look like urls as we know then though. They're relative 
+links.
+
+```{marginfigure}
+See the help for `str_replace()` to find out how it works. Remember that the 
+first argument is passed in from the pipeline, so you just need to define the 
+`pattern` and `replacement` arguments.
+```
+
+1. Click on one of art piece titles in your browser and take note of the url 
+of the webpage it takes you to. How does that url compare to what we scraped 
+above? How is it different? Using `str_replace()`, fix the URLs.
+
+### Artists
+
+2. Fill in the blanks to scrape artist names.
+
+### Put it altogether
+
+3. Fill in the blanks to organize everything in a tibble.
+
+### Scrape the next page
+
+4. Click on the next page, and grab its url. Fill in the blank in 
+to define a new object: `second_url`. Copy-paste code from top of the R script 
+to scrape the new set of art pieces, and save the resulting data frame as 
+`second_ten`.
+
+## Functions
+
+<div class="box">
+Work in `scripts/02-scrape-page-function.R`.
+</div>
+
+You've been using R functions, now it's time to write your own!
+
+Let's start simple. Here is a function that takes in an argument `x`, and adds 2 
+to it.
+
+```{r}
+add_two <- function(x){
+  x + 2
+}
+```
+
+Let's test it:
+
+```{r}
+add_two(3)
+add_two(10)
+```
+
+The skeleton for defining functions in R is as follows:
+
+```{r eval=FALSE}
+function_name <- function(input){
+  # do something with the input(s)
+  # return something
+}
+```
+
+Then, a function for scraping a page should look something like:
+
+```{marginfigure}
+**Reminder:** Function names should be short but evocative verbs.
+```
+
+```{r}
+function_name <- function(url){
+  # read page at url
+  # extract title, link, artist info for n pieces on page
+  # return a n x 3 tibble
+}
+```
+
+5. Fill in the blanks using code you already developed in the previous exercises. 
+Name the function `scrape_page`. 
+
+6. Test out your new function by running the following in the console. Does the 
+output look right? Discuss with teammaates whether you're getting the same results 
+as before.
+
+```{r eval=FALSE}
+scrape_page(first_url)
+scrape_page(second_url)
+```
+
+## Iteration
+
+<div class="box">
+Work in `scripts/03-scrape-page-many.R`.
+</div>
+
+We went from manually scraping individual pages to writing a function to do 
+the same. Next, we will work on making our workflow a little more efficient 
+by using R to iterate over all pages that contain information on the art collection. 
+
+```{marginfigure}
+**Reminder:** The collection has 2909 pieces in total.
+```
+
+That means we give develop a list of URLs (of pages that each have 10 art pieces), 
+and write some code that applies the `scrape_page()` function to each page, and 
+combines the resulting data frames from each page into a single data frame with 
+2909 rows and 3 columns.
+
+### List of URLs
+
+Click through the first few of the pages in the art collection and observe their 
+URLs to confirm the following pattern:
+
+```
+[sometext]offset=0     # Pieces 1-10
+[sometext]offset=10    # Pieces 11-20
+[sometext]offset=20    # Pieces 21-30
+[sometext]offset=30    # Pieces 31-40
+...
+[sometext]offset=2900  # Pieces 2900-2909
+```
+
+We can construct these URLs in R by pasting together two pieces: (1) a common 
+(`root`) text for the beginning of the URL, and (2) numbers starting at 0, increasing 
+by 10, all the way up to 2900. Two new functions are helpful for accomplishing 
+this: `paste0()` for pasting two pieces of text and `seq()` for generating a 
+sequence of numbers.
+
+7. Fill in the blanks to construct the list of URLs. 
+
+### Mapping
+
+Finally, we're ready to iterate over the list of URLs we constructed. We will do 
+this by **map**ping the function we developed over the list of URLs. There are 
+a series of mapping functions in R (which we'll learn about in more detail 
+tomorrow), and they each take the following form:
+
+```
+map([x], [function to apply to each element of x])
+```
+
+In our case `x` is the list of URLs we constructed and the function to apply 
+to each element of `x` is the function we developed earlier, `scrape_page`.
+And as a result we want a data frame, so we use `map_dfr` function:
+
+```{r eval=FALSE}
+map_dfr(urls, scrape_page)
+```
+
+8. Fill in the blanks to scrape all pages, and to create a new data frame called 
+`uoe_art`.
+
+### Write out data
+
+9. Finally write out the data frame you constructed into the `data` folder so 
+that you can use it in the analysis section.
+
+## Analysis
+
+<div class="box">
+Work in `lab-06-uoe-art.Rmd` for the rest of the lab.
+</div>
+
+Now that we have a tidy dataset that we can analyze, let's do that!
+
+We'll start with some data cleaning, to clean up the dates that appear at the 
+end of some title text in parentheses. Some of these are years, others are 
+more specific dates, some art pieces have no date information whatsoever, and 
+others have some non-date information in parentheses. This should be interesting 
+to clean up!
+
+First thing we'll try is to separate the `title` column into two: one for the 
+actual `title` and the other for the `date` if it exists. In human speak, we 
+need to 
+
+> "separate the `title` column at the first occurence of `(` and put the contents on one side of the `(` into a column called `title` and the contents on the other side into a column called `date`"
+
+Luckily, there's a function that does just this: `separate()`!
+
+And once we have completed separating the single `title` column into `title` 
+and `date`, we need to do further cleanup in the `date` column to get rid of 
+extraneous `)`s with `str_remove()`, capture year information, and save the data 
+as a numeric variable.
+
+```{marginfigure}
+**Hint:** Remember escaping special characters from yesterday's lecture? You'll 
+need to use that trick again.
+```
+
+10. Fill in the blanks in to implement the data wrangling we described above. 
+Note that this will result in some warnings when you run the code, and that's OK! 
+Read the warnings, and explain what they mean, and why we are ok with leaving 
+them in given that our objective is to just capture `year` where it's convenient 
+to do so.
+
+11. Print out a summary of the dataframe using the `skim()` function. How many 
+pieces have artist info missing? How many have year info missing?
+
+12. Make a histogram of years. Use a reasonable binwidth. Do you see anything 
+out of the ordinary?
+
+```{marginfigure}
+**Hint:** You'll want to use `mutate()` and `if_else()` or `case_when()` to 
+implement the correction.
+```
+
+13. Find which piece has the out of the ordinary year and go to its page on the 
+art collection website to find the correct year for it. Can you tell why our code 
+didn't capture the correct year information? Correct the error in the data frame 
+and visualize the data again.
+
+14. Who is the most commonly featured artist in the collection? Do you know them? 
+Any guess as to why the university has so many pieces from them?
+
+```{marginfigure}
+**Hint:** You'll want to use a combination of `filter()` and `str_detect()`. 
+You will want to read the help for `str_detect()` at a minimum, and consider 
+how you might capture titles where the word appears as "child" and "Child".
+```
+
+15. Final question! How many art pieces have the word "child" in their title? See 
+if you can figure it out, and ask for help if not.

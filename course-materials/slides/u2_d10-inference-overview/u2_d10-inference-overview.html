@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Inference overview   🌄</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Inference overview <br> 🌄
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: center, middle
+
+# From last time
+
+---
+
+## Packages
+
+
+```r
+library(tidyverse)
+library(infer)
+```
+
+
+---
+
+# From last time - Testing for independence
+
+---
+
+## Study results
+
+.small[
+
+```r
+yawn %&gt;%
+  count(group, result) %&gt;%
+  group_by(group) %&gt;%
+  mutate(p_hat = n / sum(n))
+```
+
+```
+## # A tibble: 4 x 4
+## # Groups:   group [2]
+##   group result       n p_hat
+##   &lt;fct&gt; &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
+## 1 ctrl  not yawn    12 0.75 
+## 2 ctrl  yawn         4 0.25 
+## 3 trmt  not yawn    24 0.706
+## 4 trmt  yawn        10 0.294
+```
+]
+
+Difference in proportions of yawners: 
+
+`\(\hat{p}_{treatment} - \hat{p}_{control} = 0.2941 - 0.25 = 0.0441\)`
+
+---
+
+## Two competing claims
+
+- "There is nothing going on." 
+Yawning and seeing someone yawn are **independent**, yawning is not contagious, observed difference in proportions is simply due to chance. `\(\rightarrow\)` Null hypothesis
+
+- "There is something going on."
+Yawning and seeing someone yawn are **dependent**, yawning is contagious, observed difference in proportions is not due to chance. `\(\rightarrow\)` Alternative hypothesis
+
+---
+
+## Running the simulation
+
+1. Shuffle the 50 cards at least 7 times&lt;sup&gt;1&lt;/sup&gt; to ensure that the cards counted out are from a random process.
+
+2. Count out the top 16 cards and set them aside. These cards represent the people in the control group.
+
+3. Out of the remaining 34 cards (treatment group) count the \red{number of face cards} (the number of people who yawned in the treatment group).
+
+4. Calculate the difference in proportions of yawners (treatment - control), and plot it 
+on the board.
+
+5. Mark the difference you find on the dot plot on the board.
+
+.footnote[
+[1] http://www.dartmouth.edu/~chance/course/topics/winning_number.html
+]
+
+---
+
+## Simulation by hand
+
+.question[
+Do the simulation results suggest that yawning is contagious, i.e. does seeing someone yawn and yawning appear to be dependent?
+]
+
+![yawn-sim-results](img/yawn-sim-results.png)
+
+---
+
+## Simulation by computation
+
+
+```r
+null_dist &lt;- yawn %&gt;%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %&gt;%
+  hypothesize(null = "independence") %&gt;%
+  generate(100, type = "permute") %&gt;%
+  calculate(stat = "diff in props", 
+            order = c("trmt", "ctrl"))
+```
+
+---
+
+## Simulation by computation - 1
+
+.small[
+- Start with the data frame
+- **Specify the variables**
+    - **Since the response variable is categorical, specify the level which should be considered as "success"**
+
+
+```r
+yawn %&gt;%
+{{  specify(response = result, explanatory = group, 
+          success = "yawn") }}
+```
+]
+
+---
+
+## Simulation by computation - 2
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- **State the null hypothesis (yawning and whether or not you see someone yawn are independent)**
+
+
+```r
+yawn %&gt;%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %&gt;%
+* hypothesize(null = "independence") 
+```
+]
+
+---
+
+## Simulation by computation - 3
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- **Generate simulated differences via permutation**
+
+
+```r
+yawn %&gt;%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %&gt;%
+  hypothesize(null = "independence") %&gt;%
+* generate(100, type = "permute") 
+```
+]
+
+---
+
+## Simulation by computation - 4
+
+.small[
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- Generate simulated differences via permutation
+- **Calculate the sample statistic of interest (difference in propotions)**
+    - **Since the explanatory variable is categorical, specify the order in which the subtraction should occur for the calculation of the sample statistic, `\((\hat{p}_{treatment} - \hat{p}_{control})\)`.**
+    
+
+```r
+yawn %&gt;%
+  specify(response = result, explanatory = group, 
+          success = "yawn") %&gt;%
+  hypothesize(null = "independence") %&gt;%
+  generate(100, type = "permute") %&gt;%
+{{ calculate(stat = "diff in props", 
+           order = c("trmt", "ctrl")) }}
+```
+]
+
+---
+
+## Simulation by computation - 0
+
+.small[
+- **Save the result**
+- Start with the data frame
+- Specify the variables
+    - Since the response variable is categorical, specify the level which should be considered as "success"
+- State the null hypothesis (yawning and whether or not you see someone yawn are independent)
+- Generate simulated differences via permutation
+- Calculate the sample statistic of interest (difference in propotions)
+    - Since the explanatory variable is categorical, specify the order in which the subtraction should occur for the calculation of the sample statistic, `\((\hat{p}_{treatment} - \hat{p}_{control})\)`.
+    
+
+```r
+*null_dist &lt;- yawn %&gt;% 
+  specify(response = outcome, explanatory = group, 
+          success = "yawn") %&gt;%
+  hypothesize(null = "independence") %&gt;%
+  generate(100, type = "permute") %&gt;%
+  calculate(stat = "diff in props", 
+            order = c("treatment", "control"))
+```
+]
+
+---
+
+## Visualizing the null distribution
+
+.question[
+What would you expect the center of the null distribution to be?
+]
+
+--
+
+
+```r
+ggplot(data = null_dist, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 0.05) +
+  labs(title = "Null distribution")
+```
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-10-1.png" width="1500" /&gt;
+
+---
+
+## Calculating the p-value, visually
+
+.question[
+What is the p-value, i.e. in what % of the 
+simulations was the simulated difference in sample proportion at least as extreme 
+as the observed difference in sample proportions?
+]
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-11-1.png" width="1500" /&gt;
+
+---
+
+## Calculating the p-value, directly
+
+
+```r
+null_dist %&gt;%
+  filter(stat &gt;= 0.0441) %&gt;%
+  summarise(p_value = n()/nrow(null_dist))
+```
+
+```
+## # A tibble: 1 x 1
+##   p_value
+##     &lt;dbl&gt;
+## 1    0.56
+```
+
+---
+
+## Conclusion
+
+.question[
+What is the conclusion of the hypothesis test?
+]
+
+&lt;br&gt;
+
+--
+
+.question[
+Do you "buy" this conclusion?
+]
+
+---
+
+class: center, middle
+
+# Inference overview
+
+---
+
+## What do you want to do?
+
+- Estimation -&gt; Confidence interval
+
+- Decision -&gt; Hypothesis test
+
+- First step: Ask the following questions
+
+  1. How many variables?
+  2. What types of variables?
+  3. What is the research question?
+
+---
+
+class: center, middle
+
+# Confidence intervals
+
+---
+
+## Confidence intervals
+
+- Bootstrap
+
+- Bounds: cutoff values for the middle XX% of the distribution
+
+- Interpretation: We are XX% confident that the true population parameter is in the interval.
+
+- Definition of confidence level: XX% of random samples of size n are expected to produce confidence intervals that contain the true population parameter.
+
+- `infer::generate(reps, type = "bootstrap")`
+
+---
+
+## Confidence intervals exercises
+
+.question[
+Describe the simulation process for estimating the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+
+]
+
+---
+
+## Accuracy vs. precision
+
+.question[
+What happens to the width of the confidence interval as the confidence level increases? Why? Should we always prefer a confidence interval with a higher confidence level?
+]
+
+---
+
+## Sample size and width of intervals
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-13-1.png" width="3000" /&gt;
+
+
+---
+
+## Equivalency of confidence and significance levels
+
+- Two sided alternative HT with `\(\alpha\)` `\(\rightarrow\)` `\(CL = 1 - \alpha\)`
+- One sided alternative HT with `\(\alpha\)` `\(\rightarrow\)` `\(CL = 1 - (2 \times \alpha)\)`
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-14-1.png" width="3000" /&gt;
+
+---
+
+## Interpretation of confidence intervals
+
+.question[
+Which of the following is more informative: 
+
+&lt;ul&gt;
+&lt;li&gt; The difference in price of a gallon of milk between Whole Foods and Harris Teeter is 30 cents.
+&lt;li&gt; A gallon of milk costs 30 cents more at Whole Foods compared to Harris Teeter.
+&lt;/ul&gt;
+&lt;/div&gt;
+]
+
+--
+
+.question[
+What does your answer tell you about interpretation of confidence intervals for differences between two population parameters?
+]
+
+---
+
+class: center, middle
+
+# Hypothesis tests
+
+---
+
+## Hypothesis testing
+
+- Set the hypotheses.
+
+- Calculate the observed sample statistic.
+
+- Calculate the p-value.
+
+- Make a conclusion, about the hypotheses, in context of the data and the research question.
+
+- `infer::hypothesize(null = "point")` and `infer::generate(reps, type = "simulate")` or `infer::generate(reps, type = "bootstrap")`
+
+- `infer::hypothesize(null = "independence")` and `infer::generate(reps, type = "permute")`
+  
+---
+
+## Hypothesis testing exercises
+
+.small[
+.question[
+👥
+Describe the simulation process for tesing for the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the null hypothesis would be independence or point.
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+
+&gt; **Panda Express, BME, get MECT, Duke Squirrels, Team Power:** single standard deviation
+
+&gt; **ACE, Kimchi Stew, Databaes, HJC, 23, 24/7, five squared:** single population mean
+
+&gt; **Team Untitled, R we done yet?, Blue Wombats, Cosmic:** difference between two population proportions
+
+&gt; **InterstellR, Tequila Mockingbird, Sweeter than SugR:** difference between two population medians
+
+&gt; **The Data Wranglers, Git R Done, Migos, Six Squared:** single population median
+]]
+
+---
+
+## Testing errors
+
+- Type 1: Reject `\(H_0\)` when you shouldn't have
+    + P(Type 1 error) = `\(\alpha\)`
+    
+- Type 2: Fail to reject `\(H_0\)` when you should have
+    + P(Type 2 error) is harder to calculate, but increases as `\(\alpha\)` decreases
+
+--
+
+.question[
+In a court of law
+
+- Null hypothesis: Defendant is innocent
+- Alternative hypothesis: Defendant is guilty
+
+Which is worse: Type 1 or Type 2 error?
+]
+
+---
+
+## Probabilities of testing errors
+
+- P(Type 1 error) = `\(\alpha\)`
+
+- P(Type 2 error) = 1 - Power
+
+- Power = P(correctly rejecting the null hypothesis)
+
+--
+
+.question[
+Fill in the blanks in terms of correctly/incorrectly rejecting/failing to reject the null hypothesis:
+
+- `\(\alpha\)` is the probability of ______.
+- 1 - Power is the probability of ______.
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data tidying and reshaping   🧹</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data tidying and reshaping <br> 🧹
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+## A grammar of data tidying
+
+.pull-left[
+&lt;img src="img/tidyr-part-of-tidyverse.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+The goal of tidyr is to help you create tidy data
+]
+
+---
+
+class: middle
+
+# Instructional staff employment trends
+
+---
+
+The American Association of 
+University Professors (AAUP) is a nonprofit membership association of faculty 
+and other academic professionals. 
+[This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) 
+by the AAUP shows trends in instructional staff employees between 1975 
+and 2011, and contains an image very similar to the one given below.
+
+&lt;img src="img/staff-employment.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Data
+
+Each row in this dataset represents a faculty type, and the columns are the 
+years for which we have data. The values are percentage of hires of that type 
+of faculty for each year.
+
+
+```r
+staff &lt;- read_csv("data/instructional-staff.csv")
+staff
+```
+
+```
+## # A tibble: 5 x 12
+##   faculty_type `1975` `1989` `1993` `1995` `1999` `2001` `2003` `2005` `2007` `2009`
+##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Full-Time T…   29     27.6   25     24.8   21.8   20.3   19.3   17.8   17.2   16.8
+## 2 Full-Time T…   16.1   11.4   10.2    9.6    8.9    9.2    8.8    8.2    8      7.6
+## 3 Full-Time N…   10.3   14.1   13.6   13.6   15.2   15.5   15     14.8   14.9   15.1
+## 4 Part-Time F…   24     30.4   33.1   33.2   35.5   36     37     39.3   40.5   41.1
+## 5 Graduate St…   20.5   16.5   18.1   18.8   18.7   19     20     19.9   19.5   19.4
+## # … with 1 more variable: `2011` &lt;dbl&gt;
+```
+
+---
+
+## Recreate the visualization
+
+In order to recreate this visualization we need to first reshape the data to have 
+one variable for faculty type and one variable for year. In other words, 
+we will convert the data from the long format to wide format. 
+
+But before we do so... 
+
+.discussion[
+If the long data will have a row for each year/faculty type combination, 
+and there are 5 faculty types and 11 years of data, how many rows will the data have?
+]
+
+---
+
+class: middle
+
+&lt;img src="img/pivot.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## `pivot_*()` functions
+
+
+![](img/tidyr-longer-wider.gif)&lt;!-- --&gt;
+
+---
+
+## `pivot_longer()`
+
+
+```r
+pivot_longer(data, cols, names_to = "name", values_to = "value")
+```
+
+- The first argument is `data` as usual.
+--
+
+- The second argument, `cols`, is where you specify which columns to pivot 
+into longer format -- in this case all columns except for the `faculty_type` 
+--
+
+- The third argument, `names_to`, is a string specifying the name of the column to create from the data stored in the column names of data -- in this case `year`
+--
+
+- The fourth argument, `values_to`, is a string specifying the name of the column to create from the data stored in cell values, in this case `percentage`
+
+---
+
+## Pivot staff data
+
+
+```r
+staff %&gt;%
+  pivot_longer(
+    cols = -faculty_type, 
+    names_to = "year", 
+    values_to = "percentage"
+    )
+```
+
+```
+## # A tibble: 55 x 3
+##    faculty_type              year  percentage
+##    &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
+##  1 Full-Time Tenured Faculty 1975        29  
+##  2 Full-Time Tenured Faculty 1989        27.6
+##  3 Full-Time Tenured Faculty 1993        25  
+##  4 Full-Time Tenured Faculty 1995        24.8
+##  5 Full-Time Tenured Faculty 1999        21.8
+##  6 Full-Time Tenured Faculty 2001        20.3
+##  7 Full-Time Tenured Faculty 2003        19.3
+##  8 Full-Time Tenured Faculty 2005        17.8
+##  9 Full-Time Tenured Faculty 2007        17.2
+## 10 Full-Time Tenured Faculty 2009        16.8
+## # … with 45 more rows
+```
+
+---
+
+## Pivot staff data, and save result
+
+
+```r
+staff_long &lt;- staff %&gt;%
+  pivot_longer(
+    cols = -faculty_type, 
+    names_to = "year", 
+    values_to = "percentage"
+    )
+
+staff_long
+```
+
+```
+## # A tibble: 55 x 3
+##    faculty_type              year  percentage
+##    &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
+##  1 Full-Time Tenured Faculty 1975        29  
+##  2 Full-Time Tenured Faculty 1989        27.6
+##  3 Full-Time Tenured Faculty 1993        25  
+##  4 Full-Time Tenured Faculty 1995        24.8
+##  5 Full-Time Tenured Faculty 1999        21.8
+##  6 Full-Time Tenured Faculty 2001        20.3
+##  7 Full-Time Tenured Faculty 2003        19.3
+##  8 Full-Time Tenured Faculty 2005        17.8
+##  9 Full-Time Tenured Faculty 2007        17.2
+## 10 Full-Time Tenured Faculty 2009        16.8
+## # … with 45 more rows
+```
+
+---
+
+.discussion[
+This doesn't look quite right, how would you fix it?
+]
+
+
+```r
+staff_long %&gt;%
+  ggplot(aes(x = percentage, y = year, color = faculty_type)) +
+  geom_col(position = "dodge")
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-8-1.png" width="2400" /&gt;
+
+---
+
+
+```r
+staff_long %&gt;%
+  ggplot(aes(x = percentage, y = year, fill = faculty_type)) +
+  geom_col(position = "dodge")
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-9-1.png" width="2400" /&gt;
+
+---
+
+## Some improvement...
+
+
+```r
+staff_long %&gt;%
+  ggplot(aes(x = percentage, y = year, fill = faculty_type)) +
+  geom_col()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-10-1.png" width="2400" /&gt;
+
+---
+
+## More improvement
+
+
+```r
+staff_long %&gt;%
+  ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
+  geom_line()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-11-1.png" width="2400" /&gt;
+
+---
+
+.discussion[
+What is the difference between these two plots?
+]
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-12-1.png" width="1800" /&gt;
+
+---
+
+## Make year numeric again!
+
+
+```r
+staff_long &lt;- staff_long %&gt;%
+  mutate(year = as.numeric(year))
+
+staff_long %&gt;%
+  ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
+  geom_line()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-13-1.png" width="1800" /&gt;
+
+---
+
+.discussion[
+How would you go about creating the following plot?
+]
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-14-1.png" width="1800" /&gt;
+
+---
+
+
+```r
+staff_long %&gt;%
+* mutate(part_time = if_else(faculty_type == "Part-Time Faculty",
+*                            "Part-Time Faculty",
+*                            "Other Faculty")) %&gt;%
+  ggplot(aes(x = year, y = percentage/100, 
+             group = faculty_type, 
+             color = part_time)) + 
+  geom_line() +
+  scale_color_manual(values = c("gray", "red")) + 
+  theme_minimal() + 
+  labs(
+    title = "Instructional staff employment trends",
+    x = "Year",
+    y = "Proportion",
+    color = ""
+  ) +
+  theme(legend.position = "bottom")
+```
+
+---
+
+
+```r
+staff_long %&gt;%
+  mutate(part_time = if_else(faculty_type == "Part-Time Faculty", 
+                             "Part-Time Faculty", 
+                             "Other Faculty")) %&gt;% 
+  ggplot(aes(x = year, y = percentage/100, 
+*            group = faculty_type,
+*            color = part_time)) +
+  geom_line() +
+* scale_color_manual(values = c("gray", "red")) +
+* theme_minimal() +
+  labs(
+    title = "Instructional staff employment trends",
+    x = "Year",
+    y = "Proportion",
+    color = ""
+  ) +
+  theme(legend.position = "bottom")
+```
+
+---
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-17-1.png" width="1500" /&gt;
+
+---
+
+
+```r
+*library(scales)
+staff_long %&gt;%
+  mutate(part_time = 
+           if_else(faculty_type == "Part-Time Faculty", 
+                   "Part-Time Faculty", "Other Faculty")) %&gt;% 
+  ggplot(aes(x = year, y = percentage/100, group = faculty_type, 
+             color = part_time)) +
+  geom_line() +
+  scale_color_manual(values = c("gray", "red")) +
+* scale_y_continuous(labels = percent) +
+  theme_minimal() +
+  labs(
+    title = "Instructional staff employment trends",
+    x = "Year",
+*   y = "Percentage",
+    color = ""
+  ) +
+  theme(legend.position = "bottom")
+```
+
+---
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-19-1.png" width="1500" /&gt;
+
+---
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-20-1.png" width="1500" /&gt;
+
+---
+
+
+```r
+library(scales)
+staff_long %&gt;%
+  mutate(part_time = 
+           if_else(faculty_type == "Part-Time Faculty", 
+                   "Part-Time Faculty", "Other Faculty")) %&gt;% 
+  ggplot(aes(x = year, y = percentage/100, group = faculty_type, 
+             color = part_time)) +
+  geom_line() +
+  scale_color_manual(values = c("gray", "red")) +
+* scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  theme_minimal() +
+  labs(
+    title = "Instructional staff employment trends",
+    x = "Year",
+    y = "Percentage",
+    color = ""
+  ) +
+  theme(legend.position = "bottom")
+```
+
+---
+
+class: middle
+
+# Other common tidying moves
+
+---
+
+&lt;img src="img/relig-income.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+.xsmall[
+Source: [pewforum.org/religious-landscape-study/income-distribution](https://www.pewforum.org/religious-landscape-study/income-distribution/), Retrieved 14 April, 2020
+]
+
+---
+
+## Read data 
+
+
+```r
+library(readxl)
+rel_inc &lt;- read_excel("data/relig-income.xlsx") # directly from Excel!
+```
+
+.small[
+
+```
+## # A tibble: 12 x 6
+##    `Religious trad… `Less than $30,… `$30,000-$49,99… `$50,000-$99,99… `$100,000 or mo…
+##    &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 "Buddhist"                  0.36              0.18            0.32             0.13 
+##  2 "Catholic"                  0.36              0.19            0.26             0.19 
+##  3 "Evangelical Pr…            0.35              0.22            0.28             0.14 
+##  4 "Hindu"                     0.17              0.13            0.34             0.36 
+##  5 "Historically B…            0.53              0.22            0.17             0.08 
+##  6 "Jehovah's Witn…            0.48              0.25            0.22             0.04 
+##  7 "Jewish"                    0.16              0.15            0.24             0.44 
+##  8 "Mainline Prote…            0.290             0.2             0.28             0.23 
+##  9 "Mormon"                    0.27              0.2             0.33             0.2  
+## 10 "Muslim"                    0.34              0.17            0.290            0.2  
+## 11 "Orthodox Chris…            0.18              0.17            0.36             0.290
+## 12 "Unaffiliated (…            0.33              0.2             0.26             0.21 
+## # … with 1 more variable: `Sample Size` &lt;dbl&gt;
+```
+]
+
+---
+
+## Rename columns
+
+.small[
+
+```r
+rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  )
+```
+
+```
+## # A tibble: 12 x 6
+##    religion     `Less than $30,0… `$30,000-$49,99… `$50,000-$99,99… `$100,000 or mo…     n
+##    &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;
+##  1 "Buddhist"               0.36              0.18            0.32             0.13    233
+##  2 "Catholic"               0.36              0.19            0.26             0.19   6137
+##  3 "Evangelica…             0.35              0.22            0.28             0.14   7462
+##  4 "Hindu"                  0.17              0.13            0.34             0.36    172
+##  5 "Historical…             0.53              0.22            0.17             0.08   1704
+##  6 "Jehovah's …             0.48              0.25            0.22             0.04    208
+##  7 "Jewish"                 0.16              0.15            0.24             0.44    708
+##  8 "Mainline P…             0.290             0.2             0.28             0.23   5208
+##  9 "Mormon"                 0.27              0.2             0.33             0.2     594
+## 10 "Muslim"                 0.34              0.17            0.290            0.2     205
+## 11 "Orthodox C…             0.18              0.17            0.36             0.290   155
+## 12 "Unaffiliat…             0.33              0.2             0.26             0.21   6790
+```
+]
+
+--
+
+.discussion[
+If we want a new variable called `income` with levels such as "Less than $30,000", "$30,000-$49,999", ... etc. which function should we use?
+]
+
+---
+
+## Pivot longer
+
+.small[
+
+```r
+rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer(
+    cols = -c(religion, n),   # all but religion and n
+    names_to = "income", 
+    values_to = "proportion"
+  )
+```
+
+```
+## # A tibble: 48 x 4
+##    religion                   n income            proportion
+##    &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
+##  1 Buddhist                 233 Less than $30,000       0.36
+##  2 Buddhist                 233 $30,000-$49,999         0.18
+##  3 Buddhist                 233 $50,000-$99,999         0.32
+##  4 Buddhist                 233 $100,000 or more        0.13
+##  5 Catholic                6137 Less than $30,000       0.36
+##  6 Catholic                6137 $30,000-$49,999         0.19
+##  7 Catholic                6137 $50,000-$99,999         0.26
+##  8 Catholic                6137 $100,000 or more        0.19
+##  9 Evangelical Protestant  7462 Less than $30,000       0.35
+## 10 Evangelical Protestant  7462 $30,000-$49,999         0.22
+## # … with 38 more rows
+```
+]
+
+---
+
+## Calculate frequencies
+
+.small[
+
+```r
+rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %&gt;%
+  mutate(frequency = round(proportion * n))
+```
+
+```
+## # A tibble: 48 x 5
+##    religion                   n income            proportion frequency
+##    &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Buddhist                 233 Less than $30,000       0.36        84
+##  2 Buddhist                 233 $30,000-$49,999         0.18        42
+##  3 Buddhist                 233 $50,000-$99,999         0.32        75
+##  4 Buddhist                 233 $100,000 or more        0.13        30
+##  5 Catholic                6137 Less than $30,000       0.36      2209
+##  6 Catholic                6137 $30,000-$49,999         0.19      1166
+##  7 Catholic                6137 $50,000-$99,999         0.26      1596
+##  8 Catholic                6137 $100,000 or more        0.19      1166
+##  9 Evangelical Protestant  7462 Less than $30,000       0.35      2612
+## 10 Evangelical Protestant  7462 $30,000-$49,999         0.22      1642
+## # … with 38 more rows
+```
+]
+
+---
+
+## Save data
+
+
+```r
+rel_inc_long &lt;- rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %&gt;%
+  mutate(frequency = round(proportion * n))
+```
+
+---
+
+## Start plotting
+
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
+  geom_col()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-29-1.png" width="1500" /&gt;
+
+---
+
+## Reverse religion order
+
+
+```r
+*ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency)) +
+  geom_col()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-30-1.png" width="1500" /&gt;
+
+---
+
+## Add income
+
+
+```r
+*ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+  geom_col() 
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-31-1.png" width="1500" /&gt;
+
+---
+
+## Dodge bars
+
+.small[
+
+```r
+ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+* geom_col(position = "dodge")
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-32-1.png" width="1500" /&gt;
+]
+
+---
+
+## Change theme
+
+.small[
+
+```r
+ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+  geom_col(position = "dodge") +
+* theme_minimal()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-33-1.png" width="1500" /&gt;
+]
+
+---
+
+## Move legend to the bottom
+
+.small[
+
+```r
+ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+  geom_col(position = "dodge") +
+  theme_minimal() +
+* theme(legend.position = "bottom")
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-34-1.png" width="1500" /&gt;
+]
+
+---
+
+## Prettier colors
+
+.small[
+
+```r
+ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+  geom_col(position = "dodge") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+* scale_fill_viridis_d()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-35-1.png" width="1500" /&gt;
+]
+
+---
+
+## Fix labels
+
+
+```r
+ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+  geom_col(position = "dodge") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_d() +
+* labs(
+*   x = "Frequency", y = "",
+*   title = "Income distribution by religious group",
+*   caption = "Source: pewforum.org/religious-landscape-study/income-distribution"
+*   )
+```
+
+---
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-37-1.png" width="1500" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

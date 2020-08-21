@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Text analysis   📃</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Text analysis <br> 📃
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: center, middle
+
+# Tidytext analysis
+
+---
+
+## Packages
+
+In addition to `tidyverse` we will be using four other packages today
+
+
+```r
+library(tidytext)
+library(genius)
+library(wordcloud)
+library(DT)
+```
+
+---
+
+## Tidytext
+
+- Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use.
+- Learn more at https://www.tidytextmining.com/.
+
+---
+
+## What is tidy text?
+
+
+```r
+text &lt;- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+
+text
+```
+
+```
+## [1] "Take me out tonight"                    "Where there's music and there's people" "And they're young and alive"           
+## [4] "Driving in your car"                    "I never never want to go home"          "Because I haven't got one"             
+## [7] "Anymore"
+```
+
+---
+
+## What is tidy text?
+
+
+```r
+text_df &lt;- tibble(line = 1:7, text = text)
+
+text_df
+```
+
+```
+## # A tibble: 7 x 2
+##    line text                                  
+##   &lt;int&gt; &lt;chr&gt;                                 
+## 1     1 Take me out tonight                   
+## 2     2 Where there's music and there's people
+## 3     3 And they're young and alive           
+## 4     4 Driving in your car                   
+## 5     5 I never never want to go home         
+## 6     6 Because I haven't got one             
+## 7     7 Anymore
+```
+
+---
+
+## What is tidy text?
+
+
+```r
+text_df %&gt;%
+  unnest_tokens(word, text)
+```
+
+```
+## # A tibble: 32 x 2
+##     line word   
+##    &lt;int&gt; &lt;chr&gt;  
+##  1     1 take   
+##  2     1 me     
+##  3     1 out    
+##  4     1 tonight
+##  5     2 where  
+##  6     2 there's
+##  7     2 music  
+##  8     2 and    
+##  9     2 there's
+## 10     2 people 
+## # … with 22 more rows
+```
+
+---
+
+class: center, middle
+
+# What are you listening to?
+
+---
+
+## From the "Getting to know you" survey
+
+&gt; "What are your 3 - 5 most favorite songs right now?"
+
+.midi[
+
+```r
+listening &lt;- read_csv("data/listening.csv")
+listening
+```
+
+```
+## # A tibble: 104 x 1
+##    songs                                                                                                                          
+##    &lt;chr&gt;                                                                                                                          
+##  1 Gamma Knife - King Gizzard and the Lizard Wizard; Self Immolate - King Gizzard and the Lizard Wizard; Take Control - Old Gods …
+##  2 I dont listen to much music                                                                                                    
+##  3 Mess by Ed Sheeran, Take me back to london by Ed Sheeran and Sounds of the Skeng by Stormzy                                    
+##  4 Hate Me (Sometimes) - Stand Atlantic; Edge of Seventeen - Stevie Nicks; It's Not Living (If It's Not With You) - The 1975; Peo…
+##  5 whistle, gogobebe, sassy me                                                                                                    
+##  6 Shofukan, Think twice, Padiddle                                                                                                
+##  7 Groundislava - Feel the Heat (Indecorum Remix), Nominal - Everyday Everyone and Akon - locked up (Solomon Eves DNB Remix)      
+##  8 Loving you - passion the musical, Senorita - Shawn Mendes and Camilla Cabello, all the good girls go to hell - Billie Eilish   
+##  9 lay it down slow - spiritualised, dead boys - Sam Fender, figure it out - Royal Blood                                          
+## 10 Don't Stop Me Now (Queen), Finale (Toby Fox), Machine in the Walls (Mudeth)                                                    
+## # … with 94 more rows
+```
+]
+
+---
+
+## Looking for commonalities
+
+.midi[
+
+```r
+listening %&gt;%
+  unnest_tokens(word, songs) %&gt;%
+  count(word, sort = TRUE)
+```
+
+```
+## # A tibble: 786 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 the      56
+##  2 by       23
+##  3 to       20
+##  4 and      19
+##  5 i        19
+##  6 you      15
+##  7 of       13
+##  8 a        11
+##  9 in       11
+## 10 me       10
+## # … with 776 more rows
+```
+]
+
+---
+
+## Stop words
+
+- In computing, stop words are words which are filtered out before or after processing of natural language data (text).
+- They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+
+---
+
+## English stop words
+
+
+```r
+get_stopwords()
+```
+
+```
+## # A tibble: 175 x 2
+##    word      lexicon 
+##    &lt;chr&gt;     &lt;chr&gt;   
+##  1 i         snowball
+##  2 me        snowball
+##  3 my        snowball
+##  4 myself    snowball
+##  5 we        snowball
+##  6 our       snowball
+##  7 ours      snowball
+##  8 ourselves snowball
+##  9 you       snowball
+## 10 your      snowball
+## # … with 165 more rows
+```
+
+---
+
+## Spanish stop words
+
+
+```r
+get_stopwords(language = "es")
+```
+
+```
+## # A tibble: 308 x 2
+##    word  lexicon 
+##    &lt;chr&gt; &lt;chr&gt;   
+##  1 de    snowball
+##  2 la    snowball
+##  3 que   snowball
+##  4 el    snowball
+##  5 en    snowball
+##  6 y     snowball
+##  7 a     snowball
+##  8 los   snowball
+##  9 del   snowball
+## 10 se    snowball
+## # … with 298 more rows
+```
+
+---
+
+## Various lexicons
+
+See `?get_stopwords` for more info.
+
+.midi[
+
+```r
+get_stopwords(source = "smart")
+```
+
+```
+## # A tibble: 571 x 2
+##    word        lexicon
+##    &lt;chr&gt;       &lt;chr&gt;  
+##  1 a           smart  
+##  2 a's         smart  
+##  3 able        smart  
+##  4 about       smart  
+##  5 above       smart  
+##  6 according   smart  
+##  7 accordingly smart  
+##  8 across      smart  
+##  9 actually    smart  
+## 10 after       smart  
+## # … with 561 more rows
+```
+]
+
+---
+
+## Back to: Looking for commonalities
+
+.small[
+
+```r
+listening %&gt;%
+  unnest_tokens(word, songs) %&gt;%
+* anti_join(stop_words) %&gt;%
+* filter(!(word %in% c("1", "2", "3", "4", "5"))) %&gt;%
+  count(word, sort = TRUE)
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 640 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 ed          7
+##  2 queen       7
+##  3 sheeran     7
+##  4 love        6
+##  5 bad         5
+##  6 time        5
+##  7 1975        4
+##  8 dog         4
+##  9 king        4
+## 10 life        4
+## # … with 630 more rows
+```
+]
+
+---
+
+## Top 20 common words in songs
+
+.pull-left[
+.small[
+
+```r
+top20_songs &lt;- listening %&gt;%
+  unnest_tokens(word, songs) %&gt;%
+  anti_join(stop_words) %&gt;%
+  filter(
+    !(word %in% c("1", "2", "3", "4", "5"))
+    ) %&gt;%
+  count(word) %&gt;%
+  top_n(20)
+```
+]
+]
+.pull-right[
+.midi[
+
+```r
+top20_songs %&gt;%
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 41 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 ed          7
+##  2 queen       7
+##  3 sheeran     7
+##  4 love        6
+##  5 bad         5
+##  6 time        5
+##  7 1975        4
+##  8 dog         4
+##  9 king        4
+## 10 life        4
+## # … with 31 more rows
+```
+]
+]
+---
+
+## Visualizing commonalities: bar chart
+
+.midi[
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-14-1.png" width="2100" /&gt;
+]
+
+---
+
+... the code
+
+
+```r
+ggplot(top20_songs, aes(x = fct_reorder(word, n), y = n)) +
+  geom_col() +
+  labs(x = "Common words", y = "Count") +
+  coord_flip()
+```
+
+
+---
+
+## Visualizing commonalities: wordcloud
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-16-1.png" width="1500" /&gt;
+
+---
+
+... and the code
+
+
+```r
+set.seed(1234)
+wordcloud(words = top20_songs$word, 
+          freq = top20_songs$n, 
+          colors = brewer.pal(5,"Blues"),
+          random.order = FALSE)
+```
+
+---
+
+## Ok, so people like Ed Sheeran!
+
+
+```r
+str_subset(listening$songs, "Sheeran")
+```
+
+```
+## [1] "Mess by Ed Sheeran, Take me back to london by Ed Sheeran and Sounds of the Skeng by Stormzy"                
+## [2] "Ed Sheeran- I don't care, beautiful people, don't"                                                          
+## [3] "Truth Hurts by Lizzo , Wetsuit by The Vaccines , Beautiful People by Ed Sheeran"                            
+## [4] "Sounds of the Skeng - Stormzy, Venom - Eminem, Take me back to london - Ed Sheeran, I see fire - Ed Sheeran"
+```
+
+---
+
+## But I had to ask...
+
+--
+
+What is 1975?
+
+--
+
+
+```r
+str_subset(listening$songs, "1975")
+```
+
+```
+## [1] "Hate Me (Sometimes) - Stand Atlantic; Edge of Seventeen - Stevie Nicks; It's Not Living (If It's Not With You) - The 1975; People - The 1975; Hypersonic Missiles - Sam Fender"
+## [2] "Chocolate by the 1975, sanctuary by Joji, A young understating by Sundara Karma"                                                                                               
+## [3] "Lauv - I'm lonely, kwassa - good life, the 1975 - sincerity is scary"
+```
+
+---
+
+class: center, middle
+
+# Analyzing lyrics of one artist
+
+---
+
+## Let's get more data
+
+We'll use the **genius** package to get song lyric data from [Genius](https://genius.com/).
+
+- `genius_album()`: download lyrics for an entire album
+- `add_genius()`: download lyrics for multiple albums
+
+---
+
+## Ed's most recent-ish albums
+
+
+```r
+artist_albums &lt;- tribble(
+  ~artist,      ~album,
+  "Ed Sheeran", "No.6 Collaborations Project",
+  "Ed Sheeran", "Divide",
+  "Ed Sheeran", "Multiply",
+  "Ed Sheeran", "Plus",
+)
+
+sheeran &lt;- artist_albums %&gt;%
+  add_genius(artist, album, "album")
+```
+
+---
+
+## Songs in the four albums
+
+.small[
+<div id="htmlwidget-3e739065d5398554549f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3e739065d5398554549f">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74"],["No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus"],["South of the Border (Ft. Camila Cabello &amp; Cardi B)","Take Me Back to London (Ft. Stormzy)","Best Part of Me (Ft. YEBBA)","Remember the Name (Ft. 50 Cent &amp; Eminem)","Nothing on You (Ft. Dave &amp; Paulo Londra)","1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)","BLOW by Ed Sheeran, Chris Stapleton &amp; Bruno Mars","Beautiful People (Ft. Khalid)","Cross Me (Ft. Chance the Rapper &amp; PnB Rock)","I Don't Care by Ed Sheeran &amp; Justin Bieber","Antisocial by Ed Sheeran &amp; Travis Scott","Feels (Ft. J Hus &amp; Young Thug)","Put It All on Me (Ft. Ella Mai)","I Don't Want Your Money (Ft. H.E.R.)","Way to Break My Heart (Ft. Skrillex)","Dive","Perfect","Galway Girl","Happier","How Would You Feel (Paean)","Supermarket Flowers","Barcelona","Save Myself","Eraser","Castle on the Hill","Shape of You","New Man","Hearts Don't Break Around Here","What Do I Know?","Bibia Be Ye Ye","Nancy Mulligan","Perfect Duet by Ed Sheeran &amp; Beyonce","One","I'm a Mess","Sing! (Ft. Pharrell Williams)","Don't","Photograph","Tenerife Sea","Runaway","Afire Love","Take It Back","Even My Dad Does Sometimes","Reuf by Nekfeu (Ft. Ed Sheeran)","All of the Stars","English Rose","Touch and Go","Lay It All on Me by Rudimental (Ft. Ed Sheeran)","Nina","Bloodstream","The Man","Thinking Out Loud","Shirtsleeves","I See Fire","New York","Make It Rain","Drunk","Wake Me Up","Small Bump","This","The Parting Glass","Autumn Leaves","Gold Rush","Sunburn","Sofa","Homeless","The A Team","U.N.I.","Grade 8","The City","Lego House","You Need Me, I Don't Need You","Kiss Me","Give Me Love","Little Bird"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>album<\/th>\n      <th>track_title<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"p","order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+## How long are Ed Sheeran's songs?
+
+Length measured by number of lines
+
+
+```r
+sheeran %&gt;%
+  count(track_title, sort = TRUE)
+```
+
+```
+## # A tibble: 74 x 2
+##    track_title                                              n
+##    &lt;chr&gt;                                                &lt;int&gt;
+##  1 Take It Back                                           101
+##  2 South of the Border (Ft. Camila Cabello &amp; Cardi B)      77
+##  3 Remember the Name (Ft. 50 Cent &amp; Eminem)                76
+##  4 Take Me Back to London (Ft. Stormzy)                    75
+##  5 Don't                                                   74
+##  6 Reuf by Nekfeu (Ft. Ed Sheeran)                         74
+##  7 Sing! (Ft. Pharrell Williams)                           72
+##  8 Nothing on You (Ft. Dave &amp; Paulo Londra)                67
+##  9 1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)    66
+## 10 Lay It All on Me by Rudimental (Ft. Ed Sheeran)         66
+## # … with 64 more rows
+```
+
+---
+
+## Tidy up your lyrics!
+
+
+```r
+sheeran_lyrics &lt;- sheeran %&gt;%
+  unnest_tokens(word, lyric)
+
+sheeran_lyrics
+```
+
+```
+## # A tibble: 15,448 x 6
+##    artist     album                       track_n  line track_title                                        word   
+##    &lt;chr&gt;      &lt;chr&gt;                         &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                              &lt;chr&gt;  
+##  1 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) she    
+##  2 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) got    
+##  3 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) the    
+##  4 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) mmm    
+##  5 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) brown  
+##  6 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) eyes   
+##  7 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) caramel
+##  8 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) thighs 
+##  9 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) long   
+## 10 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hair   
+## # … with 15,438 more rows
+```
+
+---
+
+## What are the most common words?
+
+
+```r
+sheeran_lyrics %&gt;%
+  count(word, sort = TRUE)
+```
+
+```
+## # A tibble: 2,308 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 i       524
+##  2 you     514
+##  3 the     481
+##  4 and     452
+##  5 my      349
+##  6 me      310
+##  7 to      304
+##  8 a       285
+##  9 in      242
+## 10 on      231
+## # … with 2,298 more rows
+```
+
+---
+
+## What a romantic!
+
+.midi[
+
+```r
+sheeran_lyrics %&gt;%
+  anti_join(stop_words) %&gt;%
+  count(word, sort = TRUE)
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 1,946 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 love    161
+##  2 home     68
+##  3 time     53
+##  4 feel     48
+##  5 wanna    47
+##  6 baby     46
+##  7 life     42
+##  8 &lt;NA&gt;     38
+##  9 lay      37
+## 10 eyes     36
+## # … with 1,936 more rows
+```
+]
+
+---
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-26-1.png" width="2100" /&gt;
+
+---
+
+... and the code
+
+
+```r
+sheeran_lyrics %&gt;%
+  anti_join(stop_words) %&gt;%
+  count(word)%&gt;%
+  top_n(20) %&gt;%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    labs(title = "Frequency of Ed Sheeran's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "") +
+    coord_flip()
+```
+
+---
+
+class: center, middle
+
+# Sentiment analysis
+
+---
+
+## Sentiment analysis
+
+- One way to analyze the sentiment of a text is to consider the text as a combination of its individual words 
+- and the sentiment content of the whole text as the sum of the sentiment content of the individual words
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+
+```r
+get_sentiments("afinn")
+```
+
+```
+## # A tibble: 2,477 x 2
+##    word       value
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1 abandon       -2
+##  2 abandoned     -2
+##  3 abandons      -2
+##  4 abducted      -2
+##  5 abduction     -2
+##  6 abductions    -2
+##  7 abhor         -3
+##  8 abhorred      -3
+##  9 abhorrent     -3
+## 10 abhors        -3
+## # … with 2,467 more rows
+```
+]
+.pull-right[
+
+```r
+get_sentiments("bing") 
+```
+
+```
+## # A tibble: 6,786 x 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 2-faces     negative 
+##  2 abnormal    negative 
+##  3 abolish     negative 
+##  4 abominable  negative 
+##  5 abominably  negative 
+##  6 abominate   negative 
+##  7 abomination negative 
+##  8 abort       negative 
+##  9 aborted     negative 
+## 10 aborts      negative 
+## # … with 6,776 more rows
+```
+]
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+
+```r
+get_sentiments("nrc")
+```
+
+```
+## # A tibble: 13,901 x 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 abacus      trust    
+##  2 abandon     fear     
+##  3 abandon     negative 
+##  4 abandon     sadness  
+##  5 abandoned   anger    
+##  6 abandoned   fear     
+##  7 abandoned   negative 
+##  8 abandoned   sadness  
+##  9 abandonment anger    
+## 10 abandonment fear     
+## # … with 13,891 more rows
+```
+]
+.pull-right[
+
+```r
+get_sentiments("loughran") 
+```
+
+```
+## # A tibble: 4,150 x 2
+##    word         sentiment
+##    &lt;chr&gt;        &lt;chr&gt;    
+##  1 abandon      negative 
+##  2 abandoned    negative 
+##  3 abandoning   negative 
+##  4 abandonment  negative 
+##  5 abandonments negative 
+##  6 abandons     negative 
+##  7 abdicated    negative 
+##  8 abdicates    negative 
+##  9 abdicating   negative 
+## 10 abdication   negative 
+## # … with 4,140 more rows
+```
+]
+
+---
+
+class: middle
+
+## Categorizing sentiments
+
+---
+
+## Sentiments in Sheeran's lyrics
+
+.midi[
+
+```r
+sheeran_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word, sort = TRUE)
+```
+
+```
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 245 x 3
+##    sentiment word        n
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+##  1 positive  love      161
+##  2 positive  like      127
+##  3 positive  right      21
+##  4 positive  darling    18
+##  5 negative  drunk      17
+##  6 negative  hurting    16
+##  7 negative  cold       15
+##  8 negative  shit       14
+##  9 positive  free       14
+## 10 positive  lover      14
+## # … with 235 more rows
+```
+]
+
+---
+
+class: middle
+
+**Goal:** Find the top 10 most common words with positive and negative sentiments.
+
+---
+
+### Step 1: Top 10 words for each sentiment
+
+.midi[
+
+```r
+sheeran_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word) %&gt;%
+  group_by(sentiment) %&gt;%
+  top_n(10) 
+```
+
+```
+## # A tibble: 21 x 3
+## # Groups:   sentiment [2]
+##    sentiment word        n
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+##  1 negative  cold       15
+##  2 negative  drunk      17
+##  3 negative  fall       13
+##  4 negative  fell       11
+##  5 negative  fuck        9
+##  6 negative  hurt       10
+##  7 negative  hurting    16
+##  8 negative  miss       12
+##  9 negative  shit       14
+## 10 negative  wrong       8
+## # … with 11 more rows
+```
+]
+
+---
+
+### Step 2: `ungroup()`
+
+.midi[
+
+```r
+sheeran_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word) %&gt;%
+  group_by(sentiment) %&gt;%
+  top_n(10) %&gt;%
+  ungroup()
+```
+
+```
+## # A tibble: 21 x 3
+##    sentiment word        n
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+##  1 negative  cold       15
+##  2 negative  drunk      17
+##  3 negative  fall       13
+##  4 negative  fell       11
+##  5 negative  fuck        9
+##  6 negative  hurt       10
+##  7 negative  hurting    16
+##  8 negative  miss       12
+##  9 negative  shit       14
+## 10 negative  wrong       8
+## # … with 11 more rows
+```
+]
+
+---
+
+### Step 3: Save the result
+
+
+```r
+sheeran_top10 &lt;- sheeran_lyrics %&gt;%
+  inner_join(get_sentiments("bing")) %&gt;%
+  count(sentiment, word) %&gt;%
+  group_by(sentiment) %&gt;%
+  top_n(10) %&gt;%
+  ungroup()
+```
+
+---
+
+class: middle
+
+**Goal:** Visualize the top 10 most common words with positive and negative sentiments.
+
+---
+
+### Step 1: Create a bar chart
+
+.midi[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = word, y = n, fill = sentiment)) +
+  geom_col()
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-36-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 2: Order bars by frequency
+
+.midi[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col()
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-37-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 3: Facet by sentiment
+
+.midi[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment)
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-38-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 4: Free the scales!
+
+.midi[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free")
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-39-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 4: Flip the coordinates
+
+.midi[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip()
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-40-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 5: Clean up labels
+
+.small[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip() +
+  labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "")
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-41-1.png" width="2100" /&gt;
+]
+
+---
+
+### Step 6: Remove redundant info
+
+.small[
+
+```r
+sheeran_top10 %&gt;%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip() +
+  labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "") +
+  guides(fill = FALSE) 
+```
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-42-1.png" width="2100" /&gt;
+]
+
+---
+
+class: middle
+
+## Scoring sentiments
+
+---
+
+## Assign a sentiment score
+
+.small[
+
+```r
+sheeran_lyrics %&gt;%
+  anti_join(stop_words) %&gt;%
+  left_join(get_sentiments("afinn")) 
+```
+
+```
+## Joining, by = "word"
+## Joining, by = "word"
+```
+
+```
+## # A tibble: 5,190 x 7
+##    artist     album                       track_n  line track_title                                        word    value
+##    &lt;chr&gt;      &lt;chr&gt;                         &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                              &lt;chr&gt;   &lt;dbl&gt;
+##  1 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) mmm        NA
+##  2 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) brown      NA
+##  3 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) eyes       NA
+##  4 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) caramel    NA
+##  5 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) thighs     NA
+##  6 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hair       NA
+##  7 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) wedding    NA
+##  8 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) ring       NA
+##  9 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hey        NA
+## 10 Ed Sheeran No.6 Collaborations Project       2     3 South of the Border (Ft. Camila Cabello &amp; Cardi B) lookin     NA
+## # … with 5,180 more rows
+```
+]
+
+---
+
+
+```r
+sheeran_lyrics %&gt;%
+  anti_join(stop_words) %&gt;%
+  left_join(get_sentiments("afinn")) %&gt;%
+  filter(!is.na(value)) %&gt;%
+  group_by(album) %&gt;%
+  summarise(total_sentiment = sum(value)) %&gt;%
+  arrange(total_sentiment)
+```
+
+```
+## # A tibble: 4 x 2
+##   album                       total_sentiment
+##   &lt;chr&gt;                                 &lt;dbl&gt;
+## 1 No.6 Collaborations Project             -13
+## 2 Plus                                     48
+## 3 Multiply                                134
+## 4 Divide                                  138
+```
+
+---
+
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-45-1.png" width="100%" /&gt;
+
+---
+
+## Acknowledgements
+
+- Julia Silge: https://github.com/juliasilge/tidytext-tutorial
+- Julia Silge and David Robinson: https://www.tidytextmining.com/
+- Josiah Parry: https://github.com/JosiahParry/genius
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
