@@ -69,7 +69,7 @@ Now that the necessary packages are installed, you should be able to Knit your d
 
 If you'd like to run your code in the Console as well you'll also need to load the packages there. To do so, run the following in the console. 
 
-```{r eval = FALSE}
+```{r message=FALSE}
 library(tidyverse) 
 library(datasauRus)
 ```

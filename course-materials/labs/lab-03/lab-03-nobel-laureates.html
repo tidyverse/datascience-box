@@ -465,32 +465,30 @@ counter-reset: subitem;
 
 
 <p>In January 2017, Buzzfeed published an article on why Nobel laureates show immigration is so important for American science. You can read the article <a href="https://www.buzzfeednews.com/article/peteraldhous/immigration-and-science">here</a>. In the article they show that while most living Nobel laureates in the sciences are based in the US, many of them were born in other countries. This is one reason why scientific leaders say that immigration is vital for progress. In this lab we will work with the data from this article to recreate some of their visualizations as well as explore new questions.</p>
-<div id="learning-goals" class="section level1">
-<h1>Learning goals</h1>
+<p>The learning goals of this lab are:</p>
 <ul>
 <li>Manipulate and transform data to prepare it for visualization.</li>
 <li>Recreate visualizations.</li>
 <li>Summarise data.</li>
 <li>Get more practice working as a team.</li>
 </ul>
-</div>
-<div id="workflow" class="section level1">
-<h1>Workflow</h1>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
 <p>This is the first week you’re working in teams. You have a team repository that each member of the team has access to. You can all push to this repository, but <strong>for this week only</strong> we will keep things simple and ask that the <strong>team lead for the week is the only one who pushes</strong> while others work on together with them.</p>
 <p>Starting next week we’ll show you how you can all collectively work in a repo, the (mini) chaos that might result in (called a merge conflict), and how to resolve it.</p>
 </div>
-<div id="getting-started" class="section level1">
-<h1>Getting started</h1>
+<div id="getting-started" class="section level2">
+<h2>Getting started</h2>
 <p>Go to the course GitHub organization and locate your Lab 03 repo, which should be named <code>lab-03-nobel-winners-YOUR_TEAMNAME</code>. Grab the URL of the repo, and clone it in RStudio. Refer to Lab 01 if you would like to see step-by-step instructions for cloning a repo into an RStudio project.</p>
 <p>First, open the R Markdown document <code>lab-03-nobel-winners.Rmd</code> and Knit it. Make sure it compiles without errors. The output will be in the file markdown <code>.md</code> file with the same name.</p>
-</div>
-<div id="packages" class="section level1">
-<h1>Packages</h1>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
 <p>We’ll use the <strong>tidyverse</strong> package for this analysis. Run the following code in the Console to load this package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
-<div id="data" class="section level1">
-<h1>Data</h1>
+</div>
+<div id="the-data" class="section level2">
+<h2>The data</h2>
 <p>The dataset for this assignment can be found as a csv file in the <code>data</code> folder of your repository. You can read it in using the following.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>nobel &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/nobel.csv&quot;</span>)</span></code></pre></div>
 <p>The variable descriptions are as follows:</p>
@@ -526,10 +524,10 @@ counter-reset: subitem;
 <li><code>country_original</code>: Original country where laureate lived at the time of winning the award</li>
 </ul>
 </div>
-<div id="exercises" class="section level1">
-<h1>Exercises</h1>
-<div id="get-to-know-your-data" class="section level2">
-<h2>Get to know your data</h2>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<div id="get-to-know-your-data" class="section level3">
+<h3>Get to know your data</h3>
 <ol style="list-style-type: decimal">
 <li>How many observations and how many variables are in the dataset? Use inline code to answer this question.</li>
 </ol>
@@ -545,8 +543,8 @@ counter-reset: subitem;
 <p>Confirm that once you have filtered for these characteristics you are left with a data frame with 228 observations.</p>
 <p>✅ ⬆️ <em>Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
 </div>
-<div id="most-living-nobel-laureates-were-based-in-the-us-when-they-won-their-prizes" class="section level2">
-<h2>Most living Nobel laureates were based in the US when they won their prizes</h2>
+<div id="most-living-nobel-laureates-were-based-in-the-us-when-they-won-their-prizes" class="section level3">
+<h3>Most living Nobel laureates were based in the US when they won their prizes</h3>
 <p>… says the Buzzfeed article. Let’s see if that’s true.</p>
 <p>First, we’ll create a new variable to identify whether the laureate was in the US when they won their prize. We’ll use the <code>mutate()</code> function for this. The following pipeline mutates the <code>nobel_living</code> data frame by adding a new variable called <code>country_us</code>. We use an if statement to create this variable. The first argument in the <code>if_else()</code> function we’re using to write this if statement is the condition we’re testing for. If <code>country</code> is equal to <code>&quot;USA&quot;</code>, we set <code>country_us</code> to <code>&quot;USA&quot;</code>. If not, we set the <code>country_us</code> to <code>&quot;Other&quot;</code>.</p>
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note that we can achieve the same result using the <code>fct_other()</code> function we’ve seen before (i.e. with <code>country_us = fct_other(country, “USA”)</code>). We decided to use the <code>if_else()</code> here to show you one example of an if statement in R.</span></span></p>
@@ -563,8 +561,8 @@ counter-reset: subitem;
 </ol>
 <p>✅ ⬆️ <em>Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
 </div>
-<div id="but-of-those-us-based-nobel-laureates-many-were-born-in-other-countries" class="section level2">
-<h2>But of those US-based Nobel laureates, many were born in other countries</h2>
+<div id="but-of-those-us-based-nobel-laureates-many-were-born-in-other-countries" class="section level3">
+<h3>But of those US-based Nobel laureates, many were born in other countries</h3>
 <p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You should be able to <del>cheat</del> borrow from code you used earlier to create the <code>country_us</code> variable.</span></span></p>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Create a new variable called <code>born_country_us</code> that has the value <code>&quot;USA&quot;</code> if the laureate is born in the US, and <code>&quot;Other&quot;</code> otherwise.</p></li>
@@ -572,8 +570,8 @@ counter-reset: subitem;
 </ol>
 <p>✅ ⬆️ <em>Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
 </div>
-<div id="heres-where-those-immigrant-nobelists-were-born" class="section level2">
-<h2>Here’s where those immigrant Nobelists were born</h2>
+<div id="heres-where-those-immigrant-nobelists-were-born" class="section level3">
+<h3>Here’s where those immigrant Nobelists were born</h3>
 <p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note that your bar plot won’t exactly match the one from the Buzzfeed article. This is likely because the data has been updated since the article was published.</span></span></p>
 <ol start="6" style="list-style-type: decimal">
 <li>In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the <code>count()</code>) function for their birth country, <code>born_country</code>, and arrange the resulting data frame in descending order of number of observations for each country.</li>
@@ -581,15 +579,14 @@ counter-reset: subitem;
 <p>✅ ⬆️ <em>Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
 </div>
 </div>
-<div id="wrapping-up" class="section level1">
-<h1>Wrapping up</h1>
+<div id="wrapping-up" class="section level2">
+<h2>Wrapping up</h2>
 <p>Go back through your write up to make sure you’re following coding style guidelines we discussed in class. Make any edits as needed.</p>
 <p>Also, make sure all of your R chunks are properly labeled, and your figures are reasonably sized.</p>
 <p>Once the team leader for the week pushes their final changes, others should also clone the team repo (or if you’ve already done so, <em>pull</em> on the Git pane) and knit the R Markdown document to confirm that they can reproduce the report.</p>
-<p>If you haven’t yet submitted your team name, don’t forget to do so <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUNVBWSk1VVldNR082UzhURUk5RVdSUjRLUS4u">here</a>.</p>
 </div>
-<div id="interested-in-how-buzzfeed-made-their-visualizations" class="section level1">
-<h1>Interested in how Buzzfeed made their visualizations?</h1>
+<div id="interested-in-how-buzzfeed-made-their-visualizations" class="section level2">
+<h2>Interested in how Buzzfeed made their visualizations?</h2>
 <p>The plots in the Buzzfeed article are called waffle plots. You can find the code used for making these plots in Buzzfeed’s GitHub repo (yes, they have one!) <a href="https://buzzfeednews.github.io/2017-01-immigration-and-science/">here</a>. You’re not expected to recreate them as part of your assignment, but you’re welcomed to do so for fun!</p>
 </div>
 

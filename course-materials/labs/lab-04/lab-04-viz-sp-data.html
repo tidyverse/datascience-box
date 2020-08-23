@@ -474,29 +474,32 @@ counter-reset: subitem;
 <p>If you’re not familiar with these two establishments, <a href="https://www.dennys.com/">Denny’s</a> is a casual diner chain that is open 24 hours and <a href="http://www.lq.com/">La Quinta Inn and Suites</a> is a hotel chain.</p>
 <p>These two establishments tend to be clustered together, or at least this observation is a joke made famous by Mitch Hedberg. In this lab we explore the validity of this joke and along the way learn some more data wrangling and tips for visualizing spatial data.</p>
 <p>The inspiration for this lab comes from a blog post by John Reiser on his <em>new jersey geographer</em> blog. You can read that analysis <a href="http://njgeo.org/2014/01/30/mitch-hedberg-and-gis/">here</a>. Reiser’s blog post focuses on scraping data from Denny’s and La Quinta Inn and Suites websites using Python. In this lab we focus on visualization and analysis of these data. However note that the data scraping was also done in R, and we we will discuss web scraping using R later in the course. But for now we focus on the data that has already been scraped and tidied for you.</p>
-<div id="packages" class="section level1">
-<h1>Packages</h1>
+<div id="getting-started" class="section level2">
+<h2>Getting started</h2>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
 <p>In this lab we will use the <strong>tidyverse</strong> and <strong>dsbox</strong> packages.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse) </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">library</span>(dsbox) </span></code></pre></div>
 </div>
-<div id="housekeeping" class="section level1">
-<h1>Housekeeping</h1>
-<div id="project-name" class="section level2">
-<h2>Project name:</h2>
+</div>
+<div id="housekeeping" class="section level2">
+<h2>Housekeeping</h2>
+<div id="project-name" class="section level3">
+<h3>Project name</h3>
 <p>Currently your project is called <em>Untitled Project</em>. Update the name of your project to be “Lab 03 - Visualizing spatial data”.</p>
 </div>
-</div>
-<div id="warm-up" class="section level1">
-<h1>Warm up</h1>
+<div id="warm-up" class="section level3">
+<h3>Warm up</h3>
 <p><strong>Pick one team member to complete the steps in this section while the others contribute to the discussion but do not actually touch the files on their computer.</strong></p>
 <p>Before we introduce the data, let’s warm up with some simple exercises.</p>
-<div id="yaml" class="section level2">
-<h2>YAML:</h2>
+</div>
+<div id="yaml" class="section level3">
+<h3>YAML</h3>
 <p>Open the R Markdown (Rmd) file in your project, change the author name to your <strong>team</strong> name, and knit the document.</p>
 </div>
-<div id="commiting-and-pushing-changes" class="section level2">
-<h2>Commiting and pushing changes:</h2>
+<div id="commiting-and-pushing-changes" class="section level3">
+<h3>Commiting and pushing changes</h3>
 <ul>
 <li>Go to the <strong>Git</strong> pane in your RStudio.</li>
 <li>View the <strong>Diff</strong> and confirm that you are happy with the changes.</li>
@@ -504,20 +507,20 @@ counter-reset: subitem;
 <li>Click on <strong>Push</strong>. This will prompt a dialogue box where you first need to enter your user name, and then your password.</li>
 </ul>
 </div>
-<div id="pulling-changes" class="section level2">
-<h2>Pulling changes:</h2>
+<div id="pulling-changes" class="section level3">
+<h3>Pulling changes</h3>
 <p>Now, the remaining team members who have not been concurrently making these changes on their projects should click on the <strong>Pull</strong> button in their Git pane and observe that the changes are now reflected on their projects as well.</p>
 </div>
 </div>
-<div id="the-data" class="section level1">
-<h1>The data</h1>
+<div id="the-data" class="section level2">
+<h2>The data</h2>
 <p>The datasets we’ll use are called <code>dennys</code> and <code>laquinta</code> from the <strong>dsbox</strong> package. Note that these data were scraped from <a href="https://locations.dennys.com/">here</a> and <a href="https://www.lq.com/en/findandbook/hotel-listings.html">here</a>, respectively.</p>
 <p>To help with our analysis we will also use a dataset on US states:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>states &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/states.csv&quot;</span>)</span></code></pre></div>
 <p>Each observation in this dataset represents a state, including DC. Along with the name of the state we have the two-letter abbreviation and we have the geographic area of the state (in square miles).</p>
 </div>
-<div id="exercises" class="section level1">
-<h1>Exercises</h1>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
 <ol style="list-style-type: decimal">
 <li><p>What are the dimensions of the Denny’s dataset? (Hint: Use inline R code and functions like <code>nrow</code> and <code>ncol</code> to compose your answer.) What does each row in the dataset represent? What are the variables?</p></li>
 <li><p>What are the dimensions of the La Quinta’s dataset? What does each row in the dataset represent? What are the variables?</p></li>

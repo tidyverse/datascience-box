@@ -11,7 +11,7 @@
 
 <meta name="author" content="Mine Çetinkaya-Rundel" />
 
-<meta name="date" content="2020-08-20" />
+<meta name="date" content="2020-08-21" />
 
 <title>Bechdel</title>
 
@@ -378,7 +378,7 @@ summary {
 
 <h1 class="title toc-ignore">Bechdel</h1>
 <h4 class="author">Mine Çetinkaya-Rundel</h4>
-<h4 class="date">2020-08-20</h4>
+<h4 class="date">2020-08-21</h4>
 
 </div>
 
@@ -409,7 +409,6 @@ library(tidyverse)</code></pre>
   summarise(med_budget = median(budget_2013),
             med_domgross = median(domgross_2013, na.rm = TRUE),
             med_intgross = median(intgross_2013, na.rm = TRUE))</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 2 x 4
 ##   binary med_budget med_domgross med_intgross
 ##   &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
@@ -433,18 +432,18 @@ library(tidyverse)</code></pre>
   arrange(desc(roi)) %&gt;% 
   select(title, clean_test, binary, roi, budget_2013, intgross_2013)</code></pre>
 <pre><code>## # A tibble: 1,615 x 6
-##    title                      clean_test binary    roi budget_2013 intgross_2013
-##    &lt;chr&gt;                      &lt;ord&gt;      &lt;chr&gt;   &lt;dbl&gt;       &lt;int&gt;         &lt;dbl&gt;
-##  1 Tropa de Elite             ok         PASS   1638.      7345604      16088238
-##  2 St. Trinian&#39;s              ok         PASS   1496.     12808396      25219695
-##  3 Jin ling shi san chai      ok         PASS    301.    103569079      97066426
-##  4 Chinjeolhan geumjassi      ok         PASS    111.      5368649      28002720
-##  5 Che: Part One              notalk     FAIL    103.     62770866      32595998
-##  6 Shaolin Soccer             nowomen    FAIL     87.5    13158460      56286669
-##  7 Mononoke-hime              ok         PASS     63.3    29024763     218193652
-##  8 Agora                      notalk     FAIL     62.9    76001212      42335163
-##  9 Perfume: The Story of a M… ok         PASS     60.1    73624227     154418394
-## 10 Centurion                  notalk     FAIL     53.6    16023478       7075508
+##    title                clean_test binary    roi budget_2013 intgross_2013
+##    &lt;chr&gt;                &lt;ord&gt;      &lt;chr&gt;   &lt;dbl&gt;       &lt;int&gt;         &lt;dbl&gt;
+##  1 Tropa de Elite       ok         PASS   1638.      7345604      16088238
+##  2 St. Trinian&#39;s        ok         PASS   1496.     12808396      25219695
+##  3 Jin ling shi san ch… ok         PASS    301.    103569079      97066426
+##  4 Chinjeolhan geumjas… ok         PASS    111.      5368649      28002720
+##  5 Che: Part One        notalk     FAIL    103.     62770866      32595998
+##  6 Shaolin Soccer       nowomen    FAIL     87.5    13158460      56286669
+##  7 Mononoke-hime        ok         PASS     63.3    29024763     218193652
+##  8 Agora                notalk     FAIL     62.9    76001212      42335163
+##  9 Perfume: The Story … ok         PASS     60.1    73624227     154418394
+## 10 Centurion            notalk     FAIL     53.6    16023478       7075508
 ## # … with 1,605 more rows</code></pre>
 <p>Below is a visualization of the return on investment by test result, however it’s difficult to see the distributions due to a few extreme observations.</p>
 <pre class="r"><code>ggplot(data = bechdel90_13, mapping = aes(x = clean_test, y = roi, color = binary)) +
