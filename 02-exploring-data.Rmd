@@ -18,6 +18,11 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 [Bechdel + R Markdown](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown)
 ::: 
 
+::: {.reading}
+- [R4DS :: Chp 2 - Introduction](https://r4ds.had.co.nz/explore-intro.html)
+- [IMS :: Sec 1.1 & 1.2 - Case study & Data basics](https://openintro-ims.netlify.app/getting-started-with-data.html#basic-stents-strokes)
+::: 
+
 :::
 
 
@@ -31,6 +36,10 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 [Star Wars + Data visualisation](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz)
 ::: 
 
+::: {.reading}
+[R4DS :: Chp 3 - Data visualization](https://r4ds.had.co.nz/data-visualisation.html)
+::: 
+
 :::
 
 
@@ -39,6 +48,11 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d04-data-viz-2/u1_d04-data-viz-2.html#1)
 [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d04-data-viz-2)
+
+::: {.reading}
+[IMS :: Chp 2 - Summarizing and visualizing data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html)
+::: 
+
 :::
 
 
@@ -52,7 +66,12 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 [Hotels + Data wrangling](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling)
 :::
 
+::: {.reading}
+[R4DS :: Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
+::: 
+
 :::
+
 
 ::: {.slide-deck}
 **Unit 1 - Deck 6: Joining data from multiple sources** 
@@ -63,6 +82,10 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 ::: {.application-exercise}
 [Fisheries + Data joins](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-fisheries-datajoins)
 :::
+
+::: {.reading}
+[R4DS :: Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+::: 
 
 :::
 
