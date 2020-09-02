@@ -1,8 +1,9 @@
-# (PART) Hello #dsbox! {-}
+# (PART) Hello \#dsbox! {.unnumbered}
 
 # Overview {#overview}
 
-Hello! And welcome!
+Hello!
+And welcome!
 
 There is a little bit of something for everyone (who wants to teach/learn) data science in this box.
 
@@ -12,147 +13,107 @@ If you are a learner, you might consider jumping straight into the course conten
 
 ## Who is this course for?
 
-There are two answers to this question, depending on whether you are a learner 
-or educator. (And really, aren't we all both?)
+There are two answers to this question, depending on whether you are a learner or educator.
+(And really, aren't we all both?)
 
 **Learner persona**
 
-If you are a learner who is interested in making sense of (sometimes messy) data
-and who
+If you are a learner who is interested in making sense of (sometimes messy) data and who
 
-- has little to no background in data science, statistics, or programming, or
-- has been using R for a while but wants to modernize their skills,
+-   has little to no background in data science, statistics, or programming, or
+-   has been using R for a while but wants to modernize their skills,
 
-the materials in this course are for you!  The content is definitely newcomer 
-friendly, however you should be willing to ask questions and dive into the 
-documentation of the packages we introduce.
+the materials in this course are for you!
+The content is definitely newcomer friendly, however you should be willing to ask questions and dive into the documentation of the packages we introduce.
 
-Note that course prerequisites are not listed, and this is not an oversight. 
-The course is designed to be accessible to new learners at the undergraduate 
-level and above, though adventurous learners at the high school level might also 
-enjoy these materials.
+Note that course prerequisites are not listed, and this is not an oversight.
+The course is designed to be accessible to new learners at the undergraduate level and above, though adventurous learners at the high school level might also enjoy these materials.
 
 **Educator persona**
 
-If you are an educator who is / will be teaching data science at the introductory 
-level and who
+If you are an educator who is / will be teaching data science at the introductory level and who
 
-- has been teaching with R for a while but wants to update bits of or 
-completely overhaul their teaching materials, or
-- is new to teaching (with) R but otherwise comfortable with the basics of the 
-language
+-   has been teaching with R for a while but wants to update bits of or completely overhaul their teaching materials, or
+-   is new to teaching (with) R but otherwise comfortable with the basics of the language
 
 the course materials provided here are for you.
 
-The course is designed to be taught at the introductory undergraduate level and 
-above, however it is possible to re-purpose much of this content at the high 
-school level as well.
+The course is designed to be taught at the introductory undergraduate level and above, however it is possible to re-purpose much of this content at the high school level as well.
 
-Note that a specific discipline is not mentioned, and this is not an oversight. 
-Many disciplines are offering their version of introductory data science 
-nowadays, and we think more the merrier! The course draws on data sets 
-primarily from the social sciences and humanities, and a few from natural 
-sciences.
+Note that a specific discipline is not mentioned, and this is not an oversight.
+Many disciplines are offering their version of introductory data science nowadays, and we think more the merrier!
+The course draws on data sets primarily from the social sciences and humanities, and a few from natural sciences.
 
 ## Where does this course fit in a curriculum?
 
-This course can serve as a first course in an undergraduate data science or 
-statistics curriculum. It can also serve as an introductory course in a graduate 
-program, and depending on the background of the students, earlier topics can 
-be covered more quickly to make room for more content at the end of the course. 
+This course can serve as a first course in an undergraduate data science or statistics curriculum.
+It can also serve as an introductory course in a graduate program, and depending on the background of the students, earlier topics can be covered more quickly to make room for more content at the end of the course.
 
 ## What is in the box?
 
 **Student facing materials:**
 
-- slides: 30 slide decks, each to be covered roughly in a 75 minute class 
-session
-- application exercises: 10 application exercises
-- assignments: 8 homework assignments
-- labs: 12 guided hands on exercises for students requiring minimal introduction from the instructor
-- exams: 2 sample take-home exams and keys
-- project: Final project assignment
-- tutorials: 8 interactive learnr tutorials
+-   slides: 30 slide decks, each to be covered roughly in a 75 minute class session
+-   application exercises: 10 application exercises
+-   assignments: 8 homework assignments
+-   labs: 12 guided hands on exercises for students requiring minimal introduction from the instructor
+-   exams: 2 sample take-home exams and keys
+-   project: Final project assignment
+-   tutorials: 8 interactive learnr tutorials
 
 **Educator facing materials:**
 
-- Computing infrastructure:
-    - RStudio: Choosing between RStudio Cloud, RStudio Server Pro, or local RStudio 
-IDE and how to structure your course using each option
-    - Git/GitHub: How to use Git and GitHub as the learning management system for 
-your course as well as a collaborative platform for your students and how to use 
-GitHub Classroom and **ghclass** for setting up your course
-    - Creating **learnr** modules
-    - Using **blogdown** to create your course website
-- Pedagogical tips
+-   Computing infrastructure:
+
+    -   RStudio: Choosing between RStudio Cloud, RStudio Server Pro, or local RStudio IDE and how to structure your course using each option
+    -   Git/GitHub: How to use Git and GitHub as the learning management system for your course as well as a collaborative platform for your students and how to use GitHub Classroom and **ghclass** for setting up your course
+    -   Creating **learnr** modules
+    -   Using **blogdown** to create your course website
+
+-   Pedagogical tips
 
 ## Why R?
 
-Unlike most other software designed specifically for teaching statistics, R 
-is free and open source, powerful, flexible, and relevant beyond the 
-introductory statistics classroom. Arguments against using and teaching 
-R at especially the introductory statistics level generally cluster around 
-the following two points: teaching programming in addition to statistical 
-concepts is challenging and the command line is more intimidating to beginners 
-than the graphical user interface (GUI) most point-and-click type software 
-offer.
+Unlike most other software designed specifically for teaching statistics, R is free and open source, powerful, flexible, and relevant beyond the introductory statistics classroom.
+Arguments against using and teaching R at especially the introductory statistics level generally cluster around the following two points: teaching programming in addition to statistical concepts is challenging and the command line is more intimidating to beginners than the graphical user interface (GUI) most point-and-click type software offer.
 
-One solution for these concerns is to avoid hands-on data analysis completely. 
-If we do not ask our students to start with raw data and instead always provide 
-them with small, tidy rectangles of data then there is never really a need for 
-statistical software beyond spreadsheet or graphing calculator. This is not 
-what we want in a modern statistics course and is a disservice to students.
+One solution for these concerns is to avoid hands-on data analysis completely.
+If we do not ask our students to start with raw data and instead always provide them with small, tidy rectangles of data then there is never really a need for statistical software beyond spreadsheet or graphing calculator.
+This is not what we want in a modern statistics course and is a disservice to students.
 
-Another solution is to use traditional point-and-click software for data 
-analysis. The typical argument is that the GUI is easier for students to learn 
-and so they can spend more time on statistical concepts. However, this ignores 
-the fact that these software tools also have nontrivial learning curves. In 
-fact, teaching specific data analysis tasks using such software often requires 
-lengthy step-by-step instructions, with annotated screenshots, for navigating 
-menus and other interface elements. Also, it is not uncommon that instructions 
-for one task do not easily extend to another. Replacing such instructions with 
-just a few lines of R code actually makes the instructional materials more 
-concise and less intimidating.
+Another solution is to use traditional point-and-click software for data analysis.
+The typical argument is that the GUI is easier for students to learn and so they can spend more time on statistical concepts.
+However, this ignores the fact that these software tools also have nontrivial learning curves.
+In fact, teaching specific data analysis tasks using such software often requires lengthy step-by-step instructions, with annotated screenshots, for navigating menus and other interface elements.
+Also, it is not uncommon that instructions for one task do not easily extend to another.
+Replacing such instructions with just a few lines of R code actually makes the instructional materials more concise and less intimidating.
 
-Many in the statistics education community are in favor of teaching R (or some 
-other programming language, like Python) in upper level statistics courses, 
-however the value of using R in introductory statistics courses is not as widely 
-accepted. We acknowledge that this addition can be burdensome, however we would 
-argue that learning a tool that is applicable beyond the introductory statistics 
-course and that enhances students' problem solving skills is a burden worth 
-bearing.
+Many in the statistics education community are in favor of teaching R (or some other programming language, like Python) in upper level statistics courses, however the value of using R in introductory statistics courses is not as widely accepted.
+We acknowledge that this addition can be burdensome, however we would argue that learning a tool that is applicable beyond the introductory statistics course and that enhances students' problem solving skills is a burden worth bearing.
 
 ## Why not language X?
 
-There are a number of other great programming tools out there that can also be 
-used for introducing students to data science, e.g. Python. These materials are 
-designed for teaching data science with R. A great example of a similar 
-curriculum using Python is [Data 8](http://data8.org/) designed at University of 
-California, Berkeley.
+There are a number of other great programming tools out there that can also be used for introducing students to data science, e.g.
+Python.
+These materials are designed for teaching data science with R.
+A great example of a similar curriculum using Python is [Data 8](http://data8.org/) designed at University of California, Berkeley.
 
 ## Why RStudio?
 
-The RStudio IDE includes a viewable environment, a file browser, data viewer, 
-and a plotting pane, which makes it less intimidating than the bare R shell. 
-Additionally, since it is a full fledged IDE, it also features integrated help, 
-syntax highlighting, and context-aware tab completion, which are all powerful 
-tools that help flatten the learning curve. RStudio also has direct integration 
-with other critically important tools for teaching computing best practices and 
-reproducible research.
+The RStudio IDE includes a viewable environment, a file browser, data viewer, and a plotting pane, which makes it less intimidating than the bare R shell.
+Additionally, since it is a full fledged IDE, it also features integrated help, syntax highlighting, and context-aware tab completion, which are all powerful tools that help flatten the learning curve.
+RStudio also has direct integration with other critically important tools for teaching computing best practices and reproducible research.
 
-Our recommendation is that students access the RStudio IDE through a centralized 
-RStudio server instance or using RStudio Cloud. We describe this in further 
-detail in the Infrastructure section.
+Our recommendation is that students access the RStudio IDE through a centralized RStudio server instance or using RStudio Cloud.
+We describe this in further detail in the Infrastructure section.
 
-It should be noted that we do not want to completely dissuade students from 
-downloading and installing R and RStudio locally, we just do not want it to be 
-a prerequisite for getting started. We have found that teaching personal setup 
-is best done progressively throughout a semester, usually via one-on-one 
-interactions during office hours or after class. Our goal is that all students 
-will be able to continue using R in any setting.
+It should be noted that we do not want to completely dissuade students from downloading and installing R and RStudio locally, we just do not want it to be a prerequisite for getting started.
+We have found that teaching personal setup is best done progressively throughout a semester, usually via one-on-one interactions during office hours or after class.
+Our goal is that all students will be able to continue using R in any setting.
 
 ## Learn more
 
-If you would like to learn more about the design philosophy behind the course as well as implementation details, we recommend the following paper that is freely available online. 
+If you would like to learn more about the design philosophy behind the course as well as implementation details, we recommend the following paper that is freely available online.
 
-> Mine Çetinkaya-Rundel & Victoria Ellison (In press), A fresh look at introductory data science, *Journal of Statistics Education*. [doi.org/10.1080/10691898.2020.1804497](https://doi.org/10.1080/10691898.2020.1804497).
+> Mine Çetinkaya-Rundel & Victoria Ellison (In press), A fresh look at introductory data science, *Journal of Statistics Education*.
+> [doi.org/10.1080/10691898.2020.1804497](https://doi.org/10.1080/10691898.2020.1804497).
