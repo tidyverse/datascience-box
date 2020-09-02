@@ -2,7 +2,7 @@
 
 A nifty tool for building your course website is blogdown.
 
-Perhaps the most useful aspect of blogdown in this setting is that your slides, assignments, etc. written in R Markdown can be automatically rendered, so you don’t need to separately knit those documents. 
+Perhaps the most useful aspect of blogdown in this setting is that your slides, assignments, etc. written in R Markdown can be automatically rendered, so you don't need to separately knit those documents.
 
 If you would like to build your course website with blogdown, you can use [this course website](http://introds.org/) as an example, source code [here](https://github.com/ids-s1-19/website).
 

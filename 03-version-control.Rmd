@@ -1,68 +1,75 @@
 # Version control {#version-control}
 
-One of the defining principles behind how this course teaches computing is that everything the instructor and the students produce should be reproducible -- how you get a result is just as important as the result itself. 
-Implicit in the idea of reproducibility is collaboration, the code you produce is documentation of the process and it is critical to share it (even if only with yourself in the future). 
-One of the goals of this course is to teach students tools that make this documentation and collaboration as robust and painless as possible. 
+One of the defining principles behind how this course teaches computing is that everything the instructor and the students produce should be reproducible -- how you get a result is just as important as the result itself.
+Implicit in the idea of reproducibility is collaboration, the code you produce is documentation of the process and it is critical to share it (even if only with yourself in the future).
+One of the goals of this course is to teach students tools that make this documentation and collaboration as robust and painless as possible.
 This is best accomplished with a distributed version control system like Git
 
-This course adopts a top down approach to teaching Git -- students are *required* to use it for *all* assignments. 
+This course adopts a top down approach to teaching Git -- students are *required* to use it for *all* assignments.
 These type of tools tend to suffer from delayed gratification as when they are first introduced students view them as a clunky addition to their workflow and it is not until weeks or even months later that they experience the value first hand.
 
-If this section doesn't convince you that you should be using Git and GitHub in your data science course, the section on [alternative setups][alternative_setups] describes how to leverage RStudio Cloud features for assignment dissemination, collection, and providing feedback. 
+If this section doesn't convince you that you should be using Git and GitHub in your data science course, the section on [alternative setups][alternative\_setups] describes how to leverage RStudio Cloud features for assignment dissemination, collection, and providing feedback.
 You can also use your own institution's learning management system for this purpose as well.
 
 ## Git
 
 Learning Git is a steep hill to climb, but with appropriate and user friendly tooling and careful pedagogy, being able to use core functionality of git for the purposes of version control in a data analysis context doesn't have to be.
 
-The learning curve for Git is unavoidable but I have found it best to focus on core functionality. Specifically, I teach a simple centralized git workflow which uses RStudio's project based git GUI. 
-Each new assignment starts with creating a new project from git (i.e. `clone`), the RStudio git GUI continuously displays git `status` and allows users to `add`, `rm`, `commit`, `push`, and `pull`. 
+The learning curve for Git is unavoidable but I have found it best to focus on core functionality.
+Specifically, I teach a simple centralized git workflow which uses RStudio's project based git GUI.
+Each new assignment starts with creating a new project from git (i.e. `clone`), the RStudio git GUI continuously displays git `status` and allows users to `add`, `rm`, `commit`, `push`, and `pull`.
 These happen to be the most commonly used git commands, and using only these students will be able to do most of what they need to do to work and collaborate on assignments and submit them.
 
-However it is not unusual for students to mangle their repositories such that the command line tools become necessary, and when this happens, the instruction team can help students get out of the rut. 
+However it is not unusual for students to mangle their repositories such that the command line tools become necessary, and when this happens, the instruction team can help students get out of the rut.
 
-The most complicated task students regularly encounter are merge conflicts, most of which are straight forward to resolve. 
-Students often develop elaborate workflows to avoid these types of issues but they eventually come to understand the resolution process. 
+The most complicated task students regularly encounter are merge conflicts, most of which are straight forward to resolve.
+Students often develop elaborate workflows to avoid these types of issues but they eventually come to understand the resolution process.
 
-It is super important to encourage students to **commit early and often** to reduce the size of each change. 
-Finally, in the early stages of learning git it is useful to engineer situations in which students encounter problems while they are in the classroom so that the professor and teaching assistants are present to troubleshoot and walk them through the process in person. 
+It is super important to encourage students to **commit early and often** to reduce the size of each change.
+Finally, in the early stages of learning git it is useful to engineer situations in which students encounter problems while they are in the classroom so that the professor and teaching assistants are present to troubleshoot and walk them through the process in person.
 A sample activity for resolving merge conflicts is provided in the course materials.
 
 ## GitHub
 
-The use of GitHub also goes a long way to help students visualize and understand the git process which also aids in student buy-in. 
-The web interface allows students to easily view diffs (file changes over time) in files they are collaborating on, keep track of commit histories, and search both the current state as well as the entire history of the code base. 
+The use of GitHub also goes a long way to help students visualize and understand the git process which also aids in student buy-in.
+The web interface allows students to easily view diffs (file changes over time) in files they are collaborating on, keep track of commit histories, and search both the current state as well as the entire history of the code base.
 Within the classroom GitHub can be thought of as an advanced and flexible learning management system (compared to traditional tools like Blackboard or Sakai).
 
-At its most basic, GitHub can be used as a central repository where students turn in their work and where the professor and teaching assistants then collect it and provide feedback. 
-However using this ecosystem for only assignment submission ignores the most compelling features and advantages. 
-In our classes students are expected to push their work in progress throughout the assignment period. This is not enforced explicitly, but rather through the design of the assignments. 
-Most assignments are large scale and team based, meaning no one student can easily complete all the work on their own. 
-In addition, the various tasks within the assignment are interdependent, meaning students are not able to divide up the work and complete each piece individually. 
-This type of design strongly encourages the students to share their work in progress which they are able to do using GitHub. 
+At its most basic, GitHub can be used as a central repository where students turn in their work and where the professor and teaching assistants then collect it and provide feedback.
+However using this ecosystem for only assignment submission ignores the most compelling features and advantages.
+In our classes students are expected to push their work in progress throughout the assignment period.
+This is not enforced explicitly, but rather through the design of the assignments.
+Most assignments are large scale and team based, meaning no one student can easily complete all the work on their own.
+In addition, the various tasks within the assignment are interdependent, meaning students are not able to divide up the work and complete each piece individually.
+This type of design strongly encourages the students to share their work in progress which they are able to do using GitHub.
 This is also useful to the instructor as it allows for opportunities for observation and feedback through the course of the assignment without forcing students to turn in "drafts".
 
-Additionally, GitHub's organization and teams features are a natural fit for managing course related tasks. We have used a model where each class has a separate organization to which the students are invited at the beginning of the semester. 
+Additionally, GitHub's organization and teams features are a natural fit for managing course related tasks.
+We have used a model where each class has a separate organization to which the students are invited at the beginning of the semester.
 Students have individual and team personas on GitHub, and are given write access to repos for assignments accordingly, depending on whether the assignment is to be completed individually or in teams.
 
-In general, I have found that using one repository per team per assignment works best. 
-This creates a LOT of repositories by the end of the semester, but that's okay! 
-In order to comply with Family Educational Rights and Privacy Act (FERPA) requirements all student repositories are kept private by default, which is possible at no cost thanks to GitHub's generous academic discount policy. 
+In general, I have found that using one repository per team per assignment works best.
+This creates a LOT of repositories by the end of the semester, but that's okay!
+In order to comply with Family Educational Rights and Privacy Act (FERPA) requirements all student repositories are kept private by default, which is possible at no cost thanks to GitHub's generous academic discount policy.
 
-Setup and management for larger classes can be challenging due to the sheer number of components, however most actions can be scripted via the GitHub API which can dramatically reduce the course administrative workload. Two solutions to this problem are (1) GitHub Classroom and (2) ghclass. 
-Use of ghclass, an R package for GitHub classroom tools is detailed below, and use of GitHub classroom is described in the [alternative setups][alternative_setups] section.
+Setup and management for larger classes can be challenging due to the sheer number of components, however most actions can be scripted via the GitHub API which can dramatically reduce the course administrative workload.
+Two solutions to this problem are (1) GitHub Classroom and (2) ghclass.
+Use of ghclass, an R package for GitHub classroom tools is detailed below, and use of GitHub classroom is described in the [alternative setups][alternative\_setups] section.
 
 ## ghclass
 
-The [**ghclass**](https://rundel.github.io/ghclass/) package is designed to enable instructors to efficiently manage their courses on GitHub. 
-It has a wide range of functionality for managing organizations, teams, repositories, and users on GitHub and helps automate most of the tedious and repetitive tasks around creating and distributing assignments. 
+The [**ghclass**](https://rundel.github.io/ghclass/) package is designed to enable instructors to efficiently manage their courses on GitHub.
+It has a wide range of functionality for managing organizations, teams, repositories, and users on GitHub and helps automate most of the tedious and repetitive tasks around creating and distributing assignments.
 
 If you would like to learn more about using ghclass to set up your course on GitHub, I strongly recommend reviewing the video and materials from the following 1.5 hr workshop: [Teaching computing with Git and GitHub](https://mine-cetinkaya-rundel.github.io/teach-r-online/).
 
 ## Learn more
 
-If you would like to learn more about teaching with version control, I recommend the following paper. 
+If you would like to learn more about teaching with version control, I recommend the following paper.
 
-> Beckman, M. D., Çetinkaya-Rundel, M., Horton, N. J., Rundel, C. W., Sullivan, A. J., & Tackett, M. (2020). Implementing version control with Git as a learning objective in statistics courses. [arxiv.org/abs/2001.01988](https://arxiv.org/abs/2001.01988)
+> Beckman, M. D., Çetinkaya-Rundel, M., Horton, N. J., Rundel, C. W., Sullivan, A. J., & Tackett, M.
+> (2020).
+> Implementing version control with Git as a learning objective in statistics courses.
+> [arxiv.org/abs/2001.01988](https://arxiv.org/abs/2001.01988)
 
-If you would like to learn more about using version control with R, I strongly recommend [Happy Git with R](https://happygitwithr.com/). 
+If you would like to learn more about using version control with R, I strongly recommend [Happy Git with R](https://happygitwithr.com/).

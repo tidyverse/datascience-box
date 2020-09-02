@@ -1,100 +1,92 @@
 # Interactive tutorials {#interactive-tutorials}
 
-The following interactive tutorials have been built with [**learnr**](https://rstudio.github.io/learnr/publishing.html) and [**gradethis**](https://rstudio-education.github.io/gradethis/). They're available on shinyapps.io (linked) as well as distributed with the [**dsbox**](https://rstudio-education.github.io/dsbox/tutorials/index.html) package.^[The dsbox package is not yet on CRAN, until then you will need to install from GitHub with `devtools::install_github("rstudio-education/dsbox")`.] With the dsbox package installed, you can also run these tutorials in the Tutorials pane of your RStudio window. This might be preferable for courses with high enrollment where students need to access the tutorials at the same time. 
+The following interactive tutorials have been built with [**learnr**](https://rstudio.github.io/learnr/publishing.html) and [**gradethis**](https://rstudio-education.github.io/gradethis/).
+They're available on shinyapps.io (linked) as well as distributed with the [**dsbox**](https://rstudio-education.github.io/dsbox/tutorials/index.html) package.[^interactive-tutorials-1]
+With the dsbox package installed, you can also run these tutorials in the Tutorials pane of your RStudio window.
+This might be preferable for courses with high enrollment where students need to access the tutorials at the same time.
 
-Note that many of these include examples and questions from the homework assignments listed earlier. You can think of these as interactive, auto-feedback versions of the simpler questions in the homework assignments. If using both the tutorials and the homework assignments in your teaching, I recommend modifying the homework assignments to remove the redundant questions (they will usually be the earlier, shorter, simpler questions) and making the homework assignment shorter. Students will ultimately get exposed to the same material, but get auto-feedback in the tutorials and human feedback on the homework assignments.
+[^interactive-tutorials-1]: The dsbox package is not yet on CRAN, until then you will need to install from GitHub with `devtools::install_github("rstudio-education/dsbox")`.
+
+Note that many of these include examples and questions from the homework assignments listed earlier.
+You can think of these as interactive, auto-feedback versions of the simpler questions in the homework assignments.
+If using both the tutorials and the homework assignments in your teaching, I recommend modifying the homework assignments to remove the redundant questions (they will usually be the earlier, shorter, simpler questions) and making the homework assignment shorter.
+Students will ultimately get exposed to the same material, but get auto-feedback in the tutorials and human feedback on the homework assignments.
 
 If you would like to learn about making your own tutorials with learnr, I strongly recommend reviewing the video and materials from the following 1.5 hour workshop: [Building interactive tutorials in R](https://mine-cetinkaya-rundel.github.io/teach-r-online/).
 
-
 ::: {.tutorial}
-**Tutorial 1: Airbnb listings in Edinburgh** 
+**Tutorial 1: Airbnb listings in Edinburgh**
 
 The goal of this tutorial is not to conduct a thorough analysis of Airbnb listings in Edinburgh, but instead to give you a chance to practice your data visualisation and interpretation skills.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-01-edibnb/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/01-basics)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-01-edibnb/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/01-basics)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 2: Road Traffic Accidents** 
+**Tutorial 2: Road Traffic Accidents**
 
-- Continue practising data visualization skills with ggplot2. 
-- Filter data for certain attributes with `filter()`. 
-- Create new variables based on existing variables in the data with `mutate()`. 
+-   Continue practising data visualization skills with ggplot2.
+-   Filter data for certain attributes with `filter()`.
+-   Create new variables based on existing variables in the data with `mutate()`.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-02-accidents/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/02-accidents)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-02-accidents/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/02-accidents)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 3: What should I major in?** 
+**Tutorial 3: What should I major in?**
 
-- Continue practising data tidying and visualisation. 
-- Calculate summary statistics with `summarise()`. 
-- Arrange output of dplyr chains with `arrange()`. 
+-   Continue practising data tidying and visualisation.
+-   Calculate summary statistics with `summarise()`.
+-   Arrange output of dplyr chains with `arrange()`.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-03-collegegrads/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/03-collegegrads)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-03-collegegrads/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/03-collegegrads)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 4: Lego sales** 
+**Tutorial 4: Lego sales**
 
-- Practice the analysis skills you have learned so far. 
-- Develop a question you can answer with the data. 
-- Deepen your understanding of building and interpreting visualisations. 
+-   Practice the analysis skills you have learned so far.
+-   Develop a question you can answer with the data.
+-   Deepen your understanding of building and interpreting visualisations.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-04-legosales/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/04-legosales)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-04-legosales/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/04-legosales)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 5: Money in US politics** 
+**Tutorial 5: Money in US politics**
 
-- Get started with scraping data from the web. 
-- Continue to build on your data cleaning and visualisation skills. 
+-   Get started with scraping data from the web.
+-   Continue to build on your data cleaning and visualisation skills.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/05-moneyinpolitics)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/05-moneyinpolitics)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 6: Bike Rentals in D.C.** 
+**Tutorial 6: Bike Rentals in D.C.**
 
-- Continue to hone your data wrangling skills.
-- Practice modelling and interpreting model results and performance. 
-- Conduct backwards selection for finding the "best" model.  
+-   Continue to hone your data wrangling skills.
+-   Practice modelling and interpreting model results and performance.
+-   Conduct backwards selection for finding the "best" model.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-06-dcbikeshare/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/06-dcbikeshare)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-06-dcbikeshare/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/06-dcbikeshare)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 7: Exploring the General Social Survey** 
+**Tutorial 7: Exploring the General Social Survey**
 
-- Work on your data manipulation skills.
-- Fit linear models with multiple predictors.
-- Interpret regression output. 
+-   Work on your data manipulation skills.
+-   Fit linear models with multiple predictors.
+-   Interpret regression output.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-07-exploregss/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/07-exploregss)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-07-exploregss/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/07-exploregss)
 :::
 
-
 ::: {.tutorial}
-**Tutorial 8: Bootstrapping the General Social Survey** 
+**Tutorial 8: Bootstrapping the General Social Survey**
 
-- Continue to hone your data wrangling skills.
-- Use bootstrapping to construct confidence intervals.
-- Interpret of confidence intervals in context of the data.
+-   Continue to hone your data wrangling skills.
+-   Use bootstrapping to construct confidence intervals.
+-   Interpret of confidence intervals in context of the data.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-08-bootstrapgss/)
-[[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/08-bootstrapgss)
+[[Tutorial]](https://minecr.shinyapps.io/dsbox-08-bootstrapgss/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/08-bootstrapgss)
 :::
