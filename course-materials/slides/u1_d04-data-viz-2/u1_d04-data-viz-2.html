@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Building plots for various data types   📊</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Building plots for various data types <br> 📊
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Identifying variables
+
+---
+
+## Number of variables involved
+
+-   Univariate data analysis - distribution of single variable
+-   Bivariate data analysis - relationship between two variables
+-   Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+-   **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+-   If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+-   shape:
+
+    -   skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    -   modality: unimodal, bimodal, multimodal, uniform
+
+-   center: mean (`mean`), median (`median`), mode (not always useful)
+
+-   spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+
+-   unusal observations
+
+---
+
+## Histograms
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_histogram(binwidth = 10)
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_bin).
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-2-1.png" width="75%" /&gt;
+
+---
+
+## Density plots
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height)) +
+  geom_density()
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_density).
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-3-1.png" width="75%" /&gt;
+
+---
+
+class: middle
+
+# Visualizing categorical data
+
+---
+
+## Bar plots
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = gender)) +
+  geom_bar()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-4-1.png" width="80%" /&gt;
+
+---
+
+## Segmented bar plots, counts
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
+  geom_bar()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-5-1.png" width="80%" /&gt;
+
+---
+
+## Recode hair color
+
+
+```r
+starwars &lt;- starwars %&gt;%
+  mutate(hair_color2 = 
+           fct_other(hair_color, 
+                     keep = c("black", "brown", "brown", "blond")
+                     )
+         )
+```
+
+---
+
+## Segmented bar plots, counts
+
+
+```r
+ggplot(data = starwars, 
+       mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar() +
+  coord_flip()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-7-1.png" width="70%" /&gt;
+
+---
+
+## Segmented bar plots, proportions
+
+
+```r
+ggplot(data = starwars, 
+       mapping = aes(x = gender, fill = hair_color2)) +
+  geom_bar(position = "fill") +
+  coord_flip()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-8-1.png" width="70%" /&gt;
+
+```r
+  labs(y = "proportion")
+```
+
+```
+## $y
+## [1] "proportion"
+## 
+## attr(,"class")
+## [1] "labels"
+```
+
+---
+
+.question[ Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?]
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-9-1.png" width="50%" /&gt;
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-10-1.png" width="50%" /&gt;
+
+---
+
+.your-turn[
+
+Time to actually play around with the Star Wars dataset!
+
+-   Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
+-   Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
+-   Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
+
+class: middle
+
+# Visualizing relationships between numerical and categorical data
+
+---
+
+## Side-by-side box plots
+
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-11-1.png" width="75%" /&gt;
+
+---
+
+## Scatter plot...
+
+This is not a great representation of these data.
+
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_point()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-12-1.png" width="60%" /&gt;
+
+---
+
+## Violin plots
+
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_violin()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-13-1.png" width="75%" /&gt;
+
+---
+
+## Jitter plot
+
+
+
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_jitter()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-15-1.png" width="75%" /&gt;
+
+---
+
+## Beeswarm plots
+
+
+```r
+library(ggbeeswarm)
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_beeswarm()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-16-1.png" width="75%" /&gt;
+
+---
+
+## Ridge plots
+
+
+```r
+library(ggridges)
+ggplot(starwars, aes(x = height, y = gender, fill = gender, color = gender)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+```
+## Picking joint bandwidth of 3.93
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_density_ridges).
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-17-1.png" width="70%" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

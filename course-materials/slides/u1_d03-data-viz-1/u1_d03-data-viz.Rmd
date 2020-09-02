@@ -20,13 +20,15 @@ library(emo)
 library(tidyverse)
 library(fontawesome)
 library(magick)
+library(Tmisc)
+library(dsbox)
 ```
 
 class: middle
 
 # Exploratory data analysis
 
---------------------------------------------------------------------------------
+---
 
 ## What is EDA?
 
@@ -34,13 +36,13 @@ class: middle
 -   Often, this is visual. That's what we're focusing on today.
 -   But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis. That's what we'll focus on next.
 
---------------------------------------------------------------------------------
+---
 
 class: middle
 
 # Data visualization
 
---------------------------------------------------------------------------------
+---
 
 ## Data visualization
 
@@ -49,7 +51,7 @@ class: middle
 -   Data visualization is the creation and study of the visual representation of data.
 -   There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations (**ggplot2** is one of them, and that's what we're going to use).
 
---------------------------------------------------------------------------------
+---
 
 ## ggplot2 $\in$ tidyverse
 
@@ -71,7 +73,7 @@ knitr::include_graphics("img/grammar-of-graphics.png")
 
 .footnote[ Source: [BloggoType](http://bloggotype.blogspot.com/2016/08/holiday-notes2-grammar-of-graphics.html)]
 
---------------------------------------------------------------------------------
+---
 
 ```{r out.width="70%"}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -80,7 +82,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
---------------------------------------------------------------------------------
+---
 
 .question[ - What are the functions doing the plotting?
 - What is the dataset being plotted?
@@ -99,7 +101,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
     ## Warning: Removed 28 rows containing missing values (geom_point).
 
---------------------------------------------------------------------------------
+---
 
 .question[ What does `geom_smooth()` do?]
 
@@ -111,7 +113,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Hello ggplot2!
 
@@ -134,13 +136,13 @@ library(tidyverse)
 
 -   For help with the ggplot2, see [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
 
---------------------------------------------------------------------------------
+---
 
 class: middle
 
 # Visualizing Star Wars
 
---------------------------------------------------------------------------------
+---
 
 ## Dataset terminology
 
@@ -155,13 +157,13 @@ starwars
 
 ]
 
---------------------------------------------------------------------------------
+---
 
 ## Luke Skywalker
 
 ![luke-skywalker](img/luke-skywalker.png)
 
---------------------------------------------------------------------------------
+---
 
 ## What's in the Star Wars data?
 
@@ -171,7 +173,7 @@ Take a `glimpse` at the data:
 glimpse(starwars)
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## What's in the Star Wars data?
 
@@ -187,7 +189,7 @@ What does each column represent?]
 knitr::include_graphics("img/starwars-help.png")
 ```
 
---------------------------------------------------------------------------------
+---
 ## Mass vs. height
 
 ```{r out.width="70%"}
@@ -195,7 +197,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point()
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## What's that warning?
 
@@ -207,7 +209,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 -   Going forward I'll supress the warning to save room on slides, but it's important to note it
 
---------------------------------------------------------------------------------
+---
 
 ## Labels
 
@@ -222,7 +224,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ]
 
---------------------------------------------------------------------------------
+---
 
 ## Mass vs. height
 
@@ -241,7 +243,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ]
 
---------------------------------------------------------------------------------
+---
 
 ## Jabba!
 
@@ -261,7 +263,7 @@ image_write(out, "img/jabbaplot.png", format = "png")
 knitr::include_graphics("img/jabbaplot.png")
 ```
 
---------------------------------------------------------------------------------
+---
 ## Additional variables
 
 We can map additional variables to various features of the plot:
@@ -275,13 +277,13 @@ We can map additional variables to various features of the plot:
 
 -   faceting: small multiples displaying different subsets
 
---------------------------------------------------------------------------------
+---
 
 class: middle
 
 # Aesthetics
 
---------------------------------------------------------------------------------
+---
 
 ## Aesthetics options
 
@@ -292,7 +294,7 @@ Visual characteristics of plotting characters that can be **mapped to a specific
 -   `shape`
 -   `alpha` (transparency)
 
---------------------------------------------------------------------------------
+---
 
 ## Mass vs. height + gender
 
@@ -302,7 +304,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
---------------------------------------------------------------------------------
+---
 ## Mass vs. height + gender
 
 ```{r out.width="70%", warning=FALSE}
@@ -312,7 +314,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Mass vs. height + gender
 
@@ -323,7 +325,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
   geom_point(size = 2) #<<
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Aesthetics summary
 
@@ -342,20 +344,20 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 
 -   Use aesthetics for mapping features of a plot to a variable, define the features in the geom for customization **not** mapped to a variable
 
---------------------------------------------------------------------------------
+---
 
 class: middle
 
 # Faceting
 
---------------------------------------------------------------------------------
+---
 
 ## Faceting
 
 -   Smaller plots that display different subsets of the data
 -   Useful for exploring conditional relationships and large data
 
---------------------------------------------------------------------------------
+---
 
 ```{r out.width="80%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -365,7 +367,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        subtitle = "Faceted by gender")  #<<
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Dive further...
 
@@ -379,7 +381,7 @@ Think about how the code relates to the output.]
 .alert[ The plots in the next few slides do not have proper titles, axis labels, etc. because we want you to figure out what's happening in the plots.
 But you should always label your plots!]
 
---------------------------------------------------------------------------------
+---
 
 ```{r out.width="90%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -387,21 +389,21 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(gender ~ .)
 ```
 
---------------------------------------------------------------------------------
+---
 ```{r out.width="90%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   facet_grid(. ~ gender)
 ```
 
---------------------------------------------------------------------------------
+---
 ```{r out.width="95%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   facet_wrap(~ eye_color)
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Facet summary
 
@@ -413,221 +415,17 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 -   `facet_wrap()`: 1d ribbon wrapped into 2d
 
---------------------------------------------------------------------------------
-
-class: middle
-
-# Identifying variables
-
---------------------------------------------------------------------------------
-
-## Number of variables involved
-
--   Univariate data analysis - distribution of single variable
--   Bivariate data analysis - relationship between two variables
--   Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
-
---------------------------------------------------------------------------------
-
-## Types of variables
-
--   **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
--   If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
-
---------------------------------------------------------------------------------
-
-class: middle
-
-# Visualizing numerical data
-
---------------------------------------------------------------------------------
-
-## Describing shapes of numerical distributions
-
--   shape:
-
-    -   skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
-    -   modality: unimodal, bimodal, multimodal, uniform
-
--   center: mean (`mean`), median (`median`), mode (not always useful)
-
--   spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
-
--   unusal observations
-
---------------------------------------------------------------------------------
-
-## Histograms
-
-```{r out.width="75%"}
-ggplot(data = starwars, mapping = aes(x = height)) +
-  geom_histogram(binwidth = 10)
-```
-
---------------------------------------------------------------------------------
-## Density plots
-
-```{r out.width="75%"}
-ggplot(data = starwars, mapping = aes(x = height)) +
-  geom_density()
-```
-
---------------------------------------------------------------------------------
-class: middle
-
-# Visualizing categorical data
-
---------------------------------------------------------------------------------
-
-## Bar plots
-
-```{r out.width="80%"}
-ggplot(data = starwars, mapping = aes(x = gender)) +
-  geom_bar()
-```
-
---------------------------------------------------------------------------------
-## Segmented bar plots, counts
-
-```{r out.width="80%"}
-ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
-  geom_bar()
-```
-
---------------------------------------------------------------------------------
-## Recode hair color
-
-```{r}
-starwars <- starwars %>%
-  mutate(hair_color2 = 
-           fct_other(hair_color, 
-                     keep = c("black", "brown", "brown", "blond")
-                     )
-         )
-```
-
---------------------------------------------------------------------------------
-## Segmented bar plots, counts
-
-```{r out.width="70%"}
-ggplot(data = starwars, 
-       mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar() +
-  coord_flip()
-```
-
---------------------------------------------------------------------------------
-## Segmented bar plots, proportions
-
-```{r out.width="70%"}
-ggplot(data = starwars, 
-       mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar(position = "fill") +
-  coord_flip()
-  labs(y = "proportion")
-```
-
---------------------------------------------------------------------------------
-
-.question[ Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?]
-
-```{r echo=FALSE, out.width="50%"}
-ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar() +
-  coord_flip()
-```
-
-```{r echo=FALSE, out.width="50%"}
-ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar(position = "fill") +
-  coord_flip() +
-  labs(y = "proportion")
-```
-
---------------------------------------------------------------------------------
-
-.your-turn[
-
-Time to actually play around with the Star Wars dataset!
-
--   Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
--   Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
--   Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
-
-class: middle
-
-# Visualizing relationships between numerical and categorical data
-
---------------------------------------------------------------------------------
-## Side-by-side box plots
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_boxplot()
-```
-
---------------------------------------------------------------------------------
-## Scatter plot...
-
-This is not a great representation of these data.
-
-```{r out.width="60%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_point()
-```
-
---------------------------------------------------------------------------------
-## Violin plots
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_violin()
-```
-
---------------------------------------------------------------------------------
-## Jitter plot
-
-```{r echo=FALSE}
-set.seed(1234)
-```
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_jitter()
-```
-
---------------------------------------------------------------------------------
-
-## Beeswarm plots
-
-```{r out.width="75%", warning = FALSE}
-library(ggbeeswarm)
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_beeswarm()
-```
-
---------------------------------------------------------------------------------
-
-## Ridge plots
-
-```{r out.width="70%"}
-library(ggridges)
-ggplot(starwars, aes(x = height, y = gender, fill = gender, color = gender)) + 
-  geom_density_ridges(alpha = 0.5)
-```
-
-----------------------------------------------------------------------------------------
-
+---
 
 class: middle
 
 # Why do we visualize?
 
---------------------------------------------------------------------------------
+---
 
 ## Data: `datasaurus_dozen`
 
-Below is an exceprt from the `datasaurus_dozen` dataset:
+Below is an excerpt from the `datasaurus_dozen` dataset:
 
 ```{r datasaurus-view-wide, echo=FALSE}
 library(datasauRus)
@@ -635,7 +433,8 @@ datasaurus_dozen_wide %>%
   select(1:8)
 ```
 
---------------------------------------------------------------------------------
+---
+
 ## Summary statistics
 
 .small[
@@ -648,9 +447,7 @@ datasaurus_dozen %>%
 
 ]
 
---------------------------------------------------------------------------------
-
-## 
+---
 
 .question[ How similar do the relationships between `x` and `y` in the thirteen datasets look?
 How similar are they based on summary stats?]
@@ -662,7 +459,7 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
   theme(legend.position = "none")
 ```
 
---------------------------------------------------------------------------------
+---
 ## Anscombe's quartet
 
 ```{r quartet-for-show, eval=FALSE}
@@ -684,7 +481,7 @@ quartet[23:44,]
 
 ]
 
---------------------------------------------------------------------------------
+---
 
 ## Summarising Anscombe's quartet
 
@@ -700,7 +497,7 @@ quartet %>%
   )
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Visualizing Anscombe's quartet
 
@@ -710,7 +507,7 @@ ggplot(quartet, aes(x = x, y = y)) +
   facet_wrap(~ set, ncol = 4)
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Age at first kiss
 
@@ -722,7 +519,7 @@ ggplot(student_survey, aes(x = first_kiss)) +
   labs(title = "How old were you when you had your first kiss?")
 ```
 
---------------------------------------------------------------------------------
+---
 
 ## Facebook visits
 
