@@ -25,7 +25,7 @@ library(openintro)
 library(infer)
 ```
 
-class: center, middle
+class: middle
 
 # Simulation based inference review
 

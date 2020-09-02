@@ -20,7 +20,7 @@ library(tidyverse)
 library(emo)
 ```
 
-class: center, middle
+class: middle
 
 # Hello world!
 
@@ -97,7 +97,7 @@ A: We can discuss that over `r emo::ji("coffee")`.
 
 ---
 
-class: center, middle
+class: middle
 
 # Data in the wild
 
@@ -225,7 +225,7 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 
 ---
 
-class: center, middle
+class: middle
 
 # Course structure and policies
 
@@ -267,7 +267,7 @@ class: center, middle
 ## Tips for asking questions
 
 - First search existing discussion for answers. If the question has already been answered, you're done! If it has already been asked but you're not satisfied with the answer, add to the thread. 
-- Give your question context from course concepts not couse assignments.
+- Give your question context from course concepts not course assignments.
     - Good context: "I have a question on filtering"
     - Bad context: "I have a question on HW 1 question 4"
 - Be precise in your description:

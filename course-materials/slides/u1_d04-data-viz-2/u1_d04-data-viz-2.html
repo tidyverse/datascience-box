@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Building plots for various data types   📊📊</title>
+    <title>Building plots for various data types   📊</title>
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
@@ -12,7 +12,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Building plots for various data types <br> 📊📊
+# Building plots for various data types <br> 📊
+### 
 
 ---
 
@@ -32,20 +33,28 @@ layout: true
 
 
 
-class: center, middle
+class: middle
 
 # Identifying variables
 
 ---
 
-## Types of variables
+## Number of variables involved
 
-- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
-- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+-   Univariate data analysis - distribution of single variable
+-   Bivariate data analysis - relationship between two variables
+-   Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
 
 ---
 
-class: center, middle
+## Types of variables
+
+-   **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+-   If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
 
 # Visualizing numerical data
 
@@ -53,12 +62,16 @@ class: center, middle
 
 ## Describing shapes of numerical distributions
 
-* shape:
-    * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
-    * modality: unimodal, bimodal, multimodal, uniform
-* center: mean (`mean`), median (`median`), mode (not always useful)
-* spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
-* unusal observations
+-   shape:
+
+    -   skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    -   modality: unimodal, bimodal, multimodal, uniform
+
+-   center: mean (`mean`), median (`median`), mode (not always useful)
+
+-   spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+
+-   unusal observations
 
 ---
 
@@ -68,6 +81,10 @@ class: center, middle
 ```r
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_bin).
 ```
 
 &lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-2-1.png" width="75%" /&gt;
@@ -82,95 +99,15 @@ ggplot(data = starwars, mapping = aes(x = height)) +
   geom_density()
 ```
 
+```
+## Warning: Removed 6 rows containing non-finite values (stat_density).
+```
+
 &lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-3-1.png" width="75%" /&gt;
 
 ---
 
-## Box plots
-
-
-```r
-ggplot(data = starwars, mapping = aes(y = height)) +
-  geom_boxplot()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-4-1.png" width="60%" /&gt;
-
----
-
-class: center, middle
-
-# Visualizing relationships between numerical and categorical data
-
----
-
-## Side-by-side box plots
-
-
-```r
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_boxplot()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-5-1.png" width="75%" /&gt;
-
----
-
-## Scatter plot...
-
-This is not a great representation of these data.
-
-
-```r
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_point()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-6-1.png" width="60%" /&gt;
-
----
-
-## Violin plots
-
-
-```r
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_violin()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-7-1.png" width="75%" /&gt;
-
----
-
-## Jitter plot
-
-
-
-
-
-```r
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_jitter()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-9-1.png" width="75%" /&gt;
-
----
-
-## Beeswarm plots
-
-
-```r
-library(ggbeeswarm)
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_beeswarm()
-```
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-10-1.png" width="75%" /&gt;
-
----
-
-class: center, middle
+class: middle
 
 # Visualizing categorical data
 
@@ -184,7 +121,7 @@ ggplot(data = starwars, mapping = aes(x = gender)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-11-1.png" width="80%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-4-1.png" width="80%" /&gt;
 
 ---
 
@@ -196,13 +133,11 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-12-1.png" width="80%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-5-1.png" width="80%" /&gt;
 
 ---
 
 ## Recode hair color
-
-Using the `fct_other()` function from the **forcats** package, which is also part of the **tidyverse**.
 
 
 ```r
@@ -226,7 +161,7 @@ ggplot(data = starwars,
   coord_flip()
 ```
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-14-1.png" width="70%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-7-1.png" width="70%" /&gt;
 
 ---
 
@@ -240,7 +175,7 @@ ggplot(data = starwars,
   coord_flip()
 ```
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-15-1.png" width="70%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-8-1.png" width="70%" /&gt;
 
 ```r
   labs(y = "proportion")
@@ -260,209 +195,144 @@ ggplot(data = starwars,
 Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
 ]
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-16-1.png" width="50%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-9-1.png" width="50%" /&gt;
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-17-1.png" width="50%" /&gt;
-
----
-
-class: center, middle
-
-# Why do we visualize?
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-10-1.png" width="50%" /&gt;
 
 ---
 
-## Data: `datasaurus_dozen`
+.your-turn[
 
-Below is an exceprt from the `datasaurus_dozen` dataset:
+Time to actually play around with the Star Wars dataset!
 
-
-```
-## # A tibble: 142 x 8
-##    away_x away_y bullseye_x bullseye_y circle_x circle_y dino_x dino_y
-##     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1   32.3   61.4       51.2       83.3     56.0     79.3   55.4   97.2
-##  2   53.4   26.2       59.0       85.5     50.0     79.0   51.5   96.0
-##  3   63.9   30.8       51.9       85.8     51.3     82.4   46.2   94.5
-##  4   70.3   82.5       48.2       85.0     51.2     79.2   42.8   91.4
-##  5   34.1   45.7       41.7       84.0     44.4     78.2   40.8   88.3
-##  6   67.7   37.1       37.9       82.6     45.0     77.9   38.7   84.9
-##  7   53.3   97.5       39.5       80.8     48.6     78.8   35.6   79.9
-##  8   63.5   25.1       39.6       82.7     42.1     76.9   33.1   77.6
-##  9   68.0   81.0       34.8       80.0     41.0     76.4   29.0   74.5
-## 10   67.4   29.7       27.6       72.8     34.6     72.7   26.2   71.4
-## # … with 132 more rows
-```
+-   Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
+-   Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
+-   Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
 
 ---
 
-## Summary statistics
+class: middle
 
-.small[
-
-```r
-datasaurus_dozen %&gt;%
-  group_by(dataset) %&gt;%
-  summarise(r = cor(x, y))
-```
-
-```
-## # A tibble: 13 x 2
-##    dataset          r
-##    &lt;chr&gt;        &lt;dbl&gt;
-##  1 away       -0.0641
-##  2 bullseye   -0.0686
-##  3 circle     -0.0683
-##  4 dino       -0.0645
-##  5 dots       -0.0603
-##  6 h_lines    -0.0617
-##  7 high_lines -0.0685
-##  8 slant_down -0.0690
-##  9 slant_up   -0.0686
-## 10 star       -0.0630
-## 11 v_lines    -0.0694
-## 12 wide_lines -0.0666
-## 13 x_shape    -0.0656
-```
-]
+# Visualizing relationships between numerical and categorical data
 
 ---
 
-## 
-
-.question[
-How similar do the relationships between `x` and `y` in the thirteen datasets look?
-How similar are they based on summary stats?
-]
-
-&lt;img src="u1_d04-data-viz-2_files/figure-html/datasaurus-plot-1.png" width="2100" /&gt;
-
----
-
-## Anscombe's quartet
+## Side-by-side box plots
 
 
 ```r
-library(Tmisc)
-quartet
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
 ```
 
-.pull-left[
-
-```
-##    set  x    y
-## 1    I 10  8.0
-## 2    I  8  7.0
-## 3    I 13  7.6
-## 4    I  9  8.8
-## 5    I 11  8.3
-## 6    I 14 10.0
-## 7    I  6  7.2
-## 8    I  4  4.3
-## 9    I 12 10.8
-## 10   I  7  4.8
-## 11   I  5  5.7
-## 12  II 10  9.1
-## 13  II  8  8.1
-## 14  II 13  8.7
-## 15  II  9  8.8
-## 16  II 11  9.3
-## 17  II 14  8.1
-## 18  II  6  6.1
-## 19  II  4  3.1
-## 20  II 12  9.1
-## 21  II  7  7.3
-## 22  II  5  4.7
-```
-]
-.pull-right[
-
-```
-##    set  x    y
-## 23 III 10  7.5
-## 24 III  8  6.8
-## 25 III 13 12.7
-## 26 III  9  7.1
-## 27 III 11  7.8
-## 28 III 14  8.8
-## 29 III  6  6.1
-## 30 III  4  5.4
-## 31 III 12  8.2
-## 32 III  7  6.4
-## 33 III  5  5.7
-## 34  IV  8  6.6
-## 35  IV  8  5.8
-## 36  IV  8  7.7
-## 37  IV  8  8.8
-## 38  IV  8  8.5
-## 39  IV  8  7.0
-## 40  IV  8  5.2
-## 41  IV 19 12.5
-## 42  IV  8  5.6
-## 43  IV  8  7.9
-## 44  IV  8  6.9
-```
-]
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-11-1.png" width="75%" /&gt;
 
 ---
 
-## Summarising Anscombe's quartet
+## Scatter plot...
+
+This is not a great representation of these data.
 
 
 ```r
-quartet %&gt;%
-  group_by(set) %&gt;%
-  summarise(
-    mean_x = mean(x), 
-    mean_y = mean(y),
-    sd_x = sd(x),
-    sd_y = sd(y),
-    r = cor(x, y)
-  )
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_point()
 ```
 
-```
-## # A tibble: 4 x 6
-##   set   mean_x mean_y  sd_x  sd_y     r
-##   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 I          9   7.50  3.32  2.03 0.816
-## 2 II         9   7.50  3.32  2.03 0.816
-## 3 III        9   7.5   3.32  2.03 0.816
-## 4 IV         9   7.50  3.32  2.03 0.817
-```
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-12-1.png" width="60%" /&gt;
 
 ---
 
-## Visualizing Anscombe's quartet
+## Violin plots
 
 
 ```r
-ggplot(quartet, aes(x = x, y = y)) +
-  geom_point() +
-  facet_wrap(~ set, ncol = 4)
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_violin()
 ```
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/quartet-plot-1.png" width="75%" /&gt;
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-13-1.png" width="75%" /&gt;
 
 ---
 
-## Age at first kiss
+## Jitter plot
 
-.question[
-Do you see anything out of the ordinary?
-]
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-18-1.png" width="1500" /&gt;
+
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_jitter()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-15-1.png" width="75%" /&gt;
 
 ---
 
-## Facebook visits
+## Beeswarm plots
 
-.question[
-How are people reporting lower vs. higher values of FB visits?
-]
 
-&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-19-1.png" width="1500" /&gt;
+```r
+library(ggbeeswarm)
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_beeswarm()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-16-1.png" width="75%" /&gt;
+
+---
+
+## Ridge plots
+
+
+```r
+library(ggridges)
+ggplot(starwars, aes(x = height, y = gender, fill = gender, color = gender)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+```
+## Picking joint bandwidth of 3.93
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-17-1.png" width="70%" /&gt;
+
+---
+
+class: middle
+
+# Visualizing relationships between numerical and numerical data
+
+---
+
+## Scatterplot
+
+
+```r
+starwars_without_jabba &lt;- starwars %&gt;% filter(mass &lt; 500)
+```
+
+
+```r
+ggplot(starwars_without_jabba, aes(x = height, y = mass)) +
+  geom_point()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-19-1.png" width="75%" /&gt;
+
+---
+
+## Hex plots
+
+Especially useful for large data (which this one is not!)
+
+
+```r
+ggplot(starwars_without_jabba, aes(x = height, y = mass)) +
+  geom_hex()
+```
+
+&lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-20-1.png" width="75%" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

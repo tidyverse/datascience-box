@@ -24,7 +24,7 @@ library(modelr)
 library(openintro)
 ```
 
-class: center, middle
+class: middle
 
 # Model selection
 
@@ -51,7 +51,7 @@ R-squared
 
 ---
 
-class: center, middle
+class: middle
 
 # Predicting professor evaluation scores
 

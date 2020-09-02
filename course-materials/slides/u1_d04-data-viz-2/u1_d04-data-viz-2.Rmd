@@ -1,5 +1,6 @@
 ---
-title: "Building plots for various data types <br> `r emo::ji('bar_chart')``r emo::ji('bar_chart')`"
+title: "Building plots for various data types <br> `r emo::ji('bar_chart')`"
+author: ""
 output:
   xaringan::moon_reader:
     css: "../slides.css"
@@ -15,27 +16,34 @@ output:
 ```
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(emo)
 library(tidyverse)
-library(datasauRus)
-library(DT)
-library(Tmisc)
-library(dsbox)
+library(fontawesome)
+library(magick)
 ```
 
-class: center, middle
+class: middle
 
 # Identifying variables
 
 ---
 
-## Types of variables
+## Number of variables involved
 
-- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
-- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+-   Univariate data analysis - distribution of single variable
+-   Bivariate data analysis - relationship between two variables
+-   Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
 
 ---
 
-class: center, middle
+## Types of variables
+
+-   **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+-   If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
 
 # Visualizing numerical data
 
@@ -43,18 +51,22 @@ class: center, middle
 
 ## Describing shapes of numerical distributions
 
-* shape:
-    * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
-    * modality: unimodal, bimodal, multimodal, uniform
-* center: mean (`mean`), median (`median`), mode (not always useful)
-* spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
-* unusal observations
+-   shape:
+
+    -   skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    -   modality: unimodal, bimodal, multimodal, uniform
+
+-   center: mean (`mean`), median (`median`), mode (not always useful)
+
+-   spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+
+-   unusal observations
 
 ---
 
 ## Histograms
 
-```{r out.width="75%", warning=FALSE}
+```{r out.width="75%"}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
 ```
@@ -63,82 +75,14 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 
 ## Density plots
 
-```{r out.width="75%", warning = FALSE}
+```{r out.width="75%"}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_density()
 ```
 
 ---
 
-## Box plots
-
-```{r out.width="60%", warning = FALSE}
-ggplot(data = starwars, mapping = aes(y = height)) +
-  geom_boxplot()
-```
-
----
-
-class: center, middle
-
-# Visualizing relationships between numerical and categorical data
-
----
-
-## Side-by-side box plots
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_boxplot()
-```
-
----
-
-## Scatter plot...
-
-This is not a great representation of these data.
-
-```{r out.width="60%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_point()
-```
-
----
-
-## Violin plots
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_violin()
-```
-
----
-
-## Jitter plot
-
-```{r echo=FALSE}
-set.seed(1234)
-```
-
-
-```{r out.width="75%", warning=FALSE}
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_jitter()
-```
-
----
-
-## Beeswarm plots
-
-```{r out.width="75%", warning = FALSE}
-library(ggbeeswarm)
-ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
-  geom_beeswarm()
-```
-
----
-
-class: center, middle
+class: middle
 
 # Visualizing categorical data
 
@@ -163,8 +107,6 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
 ---
 
 ## Recode hair color
-
-Using the `fct_other()` function from the **forcats** package, which is also part of the **tidyverse**.
 
 ```{r}
 starwars <- starwars %>%
@@ -219,120 +161,108 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
 
 ---
 
-class: center, middle
+.your-turn[
 
-# Why do we visualize?
+Time to actually play around with the Star Wars dataset!
 
----
-
-## Data: `datasaurus_dozen`
-
-Below is an exceprt from the `datasaurus_dozen` dataset:
-
-```{r datasaurus-view-wide, echo=FALSE}
-library(datasauRus)
-datasaurus_dozen_wide %>%
-  select(1:8)
-```
+-   Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
+-   Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
+-   Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
 
 ---
 
-## Summary statistics
+class: middle
 
-.small[
-```{r datasaurus-cor}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
-  summarise(r = cor(x, y))
-```
-]
+# Visualizing relationships between numerical and categorical data
 
 ---
 
-## 
+## Side-by-side box plots
 
-.question[
-How similar do the relationships between `x` and `y` in the thirteen datasets look?
-How similar are they based on summary stats?
-]
-
-```{r datasaurus-plot, echo=FALSE, fig.height=4, fig.width=7}
-ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
-  geom_point()+
-  facet_wrap(~ dataset, ncol = 5) +
-  theme(legend.position = "none")
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot()
 ```
 
 ---
 
-## Anscombe's quartet
+## Scatter plot...
 
-```{r quartet-for-show, eval=FALSE}
-library(Tmisc)
-quartet
-```
+This is not a great representation of these data.
 
-.pull-left[
-```{r quartet-view1, echo=FALSE}
-quartet[1:22,]
-```
-]
-.pull-right[
-```{r quartet-view2, echo=FALSE}
-quartet[23:44,]
-```
-]
-
----
-
-## Summarising Anscombe's quartet
-
-```{r quartet-summary}
-quartet %>%
-  group_by(set) %>%
-  summarise(
-    mean_x = mean(x), 
-    mean_y = mean(y),
-    sd_x = sd(x),
-    sd_y = sd(y),
-    r = cor(x, y)
-  )
+```{r out.width="60%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_point()
 ```
 
 ---
 
-## Visualizing Anscombe's quartet
+## Violin plots
 
-```{r quartet-plot, out.width="75%"}
-ggplot(quartet, aes(x = x, y = y)) +
-  geom_point() +
-  facet_wrap(~ set, ncol = 4)
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_violin()
 ```
 
 ---
 
-## Age at first kiss
+## Jitter plot
 
-.question[
-Do you see anything out of the ordinary?
-]
+```{r echo=FALSE}
+set.seed(1234)
+```
 
-```{r fig.height=2.5, echo=FALSE, warning=FALSE}
-ggplot(student_survey, aes(x = first_kiss)) +
-  geom_histogram(binwidth = 1) +
-  labs(title = "How old were you when you had your first kiss?")
+```{r out.width="75%", warning=FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_jitter()
 ```
 
 ---
 
-## Facebook visits
+## Beeswarm plots
 
-.question[
-How are people reporting lower vs. higher values of FB visits?
-]
+```{r out.width="75%", warning = FALSE}
+library(ggbeeswarm)
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_beeswarm()
+```
 
-```{r fig.height=2.5, echo=FALSE, warning=FALSE}
-ggplot(student_survey, aes(x = fb_visits_per_day)) +
-  geom_histogram(binwidth = 1) +
-  labs(title = "How many times do you go on Facebook per day?", x = "")
+---
+
+## Ridge plots
+
+```{r out.width="70%", warning = FALSE}
+library(ggridges)
+ggplot(starwars, aes(x = height, y = gender, fill = gender, color = gender)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+---
+
+class: middle
+
+# Visualizing relationships between numerical and numerical data
+
+---
+
+## Scatterplot
+
+```{r}
+starwars_without_jabba <- starwars %>% filter(mass < 500)
+```
+
+```{r out.width="75%", warning=FALSE}
+ggplot(starwars_without_jabba, aes(x = height, y = mass)) +
+  geom_point()
+```
+
+---
+
+## Hex plots
+
+Especially useful for large data (which this one is not!)
+
+```{r out.width="75%", warning=FALSE}
+ggplot(starwars_without_jabba, aes(x = height, y = mass)) +
+  geom_hex()
 ```

@@ -23,7 +23,7 @@ library(DT)
 library(emo)
 ```
 
-class: center, middle
+class: middle
 
 # Hypothesis testing for a single proportion
 
@@ -394,7 +394,7 @@ null_dist %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # One vs. two sided hypothesis tests
 
@@ -423,7 +423,7 @@ blood pressure of heart patients. What are the hypotheses?
 
 ---
 
-class: center, middle
+class: middle
 
 # Testing for independence
 

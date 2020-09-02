@@ -1,50 +1,33 @@
-# (PART) Infrastructure {-}
+# (PART) Infrastructure {.unnumbered}
 
 # Accessing R {#access-r}
 
-One of the design principles of this course is "cherish day one" -- get students 
-from nothing to their first meaningful data visualization within the first 10 minutes 
-of the course. Achieving this is possible, but requires careful consideration of 
-the computing infrastructure. This section outlines how one can set up their 
-course to run on RStudio Cloud, use GitHub for not only version control and 
-collaboration but also the learning management system for the course, build their 
-course materials with packages from the *down universe (rmarkdown, blogdown, 
-xaringan, etc.), and use Slack for course communication. Lastly, the alternative 
-setups section describes other approaches to setting up the computing infrastructure 
-that can be just as efficient and effective as the ones described in the main 
-choices for the course, and discusses pros and cons.
+One of the design principles of this course is "cherish day one" -- get students from nothing to their first meaningful data visualization within the first 10 minutes of the course.
+Achieving this is possible, but requires careful consideration of the computing infrastructure.
+This section outlines how one can set up their course to run on RStudio Cloud, use GitHub for not only version control and collaboration but also the learning management system for the course, build their course materials with packages from the \*down universe (rmarkdown, blogdown, xaringan, etc.), and use Slack for course communication.
+Lastly, the alternative setups section describes other approaches to setting up the computing infrastructure that can be just as efficient and effective as the ones described in the main choices for the course, and discusses pros and cons.
 
-The RStudio IDE includes a viewable environment, a file browser, data viewer, 
-and a plotting pane, which makes it less intimidating than the bare R shell. 
-Additionally, since it is a full fledged IDE, it also features integrated help, 
-syntax highlighting, and context-aware tab completion, which are all powerful 
-tools that help flatten the learning curve.
+The RStudio IDE includes a viewable environment, a file browser, data viewer, and a plotting pane, which makes it less intimidating than the bare R shell.
+Additionally, since it is a full fledged IDE, it also features integrated help, syntax highlighting, and context-aware tab completion, which are all powerful tools that help flatten the learning curve.
 
-[RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the 
-RStudio IDE. We recommend having students access RStudio via RStudio Cloud 
-as opposed to using a local installation. The main reason for this choice is 
-reducing friction at first exposure to R. Local installation can be difficult 
-to manage, both for the student and the instructor, and can shift the focus 
-away from data science learning at the beginning of the course. In the 
-pedagogical decisions section, we discuss in further detail the reasons for 
-avoiding local installation at the beginning of the course and discuss when 
-to introduce it later on in the course.
+[RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation.
+The main reason for this choice is reducing friction at first exposure to R.
+Local installation can be difficult to manage, both for the student and the instructor, and can shift the focus away from data science learning at the beginning of the course.
+In the pedagogical decisions section, we discuss in further detail the reasons for avoiding local installation at the beginning of the course and discuss when to introduce it later on in the course.
 
-When you create an account on RStudio Cloud, you get a workspace of your own, 
-and the projects you create here can be public or private. You can 
-also add a new workspace and control its permissions, and the projects you 
-create here can also be public or private.
+When you create an account on RStudio Cloud, you get a workspace of your own, and the projects you create here can be public or private.
+You can also add a new workspace and control its permissions, and the projects you create here can also be public or private.
 
 ::: {.rstudio-cloud}
-The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK). You can join the workspace and play around with the application exercises. 
-::: 
+The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK).
+You can join the workspace and play around with the application exercises.
+:::
 
-A natural way to set up a course in RStudio Cloud is using a private workspace. 
-In this structure a classroom (a cohort of students in one semester of the course) 
-maps to a workspace. Once a workspace is set up, instructors can invite students 
-to the workspace via an invite link. Workspaces allow for various permission 
-levels which can be assigned to students, teaching assistants, and instructors. 
-Then, each assignment/project in the course maps to an RStudio Cloud project. 
+A natural way to set up a course in RStudio Cloud is using a private workspace.
+In this structure a classroom (a cohort of students in one semester of the course) maps to a workspace.
+Once a workspace is set up, instructors can invite students to the workspace via an invite link.
+Workspaces allow for various permission levels which can be assigned to students, teaching assistants, and instructors.
+Then, each assignment/project in the course maps to an RStudio Cloud project.
 
 ```{r rscloud-bigpicture, fig.align="center", echo=FALSE, fig.cap="RStudio Cloud classroom structure"}
 include_graphics(path = "images/rscloud-bigpicture.png")
@@ -52,58 +35,55 @@ include_graphics(path = "images/rscloud-bigpicture.png")
 
 ## Setting up your course in RStudio Cloud
 
-First, create a new workspace on RStudio Cloud. By default, this new workspace 
-will be a private workspace. All it takes to create a new workspace is a name 
-and brief information for the space. You can update the information once the 
-space is created, however you can't change the name of the space. For the name,  
+First, create a new workspace on RStudio Cloud.
+By default, this new workspace will be a private workspace.
+All it takes to create a new workspace is a name and brief information for the space.
+You can update the information once the space is created, however you can't change the name of the space.
+For the name,\
 I recommend using something along the lines of Course number - Semester.
 
 ```{r rscloud-new-workspace, fig.align="center", echo=FALSE, fig.cap="Creating a new workspace on RStudio Cloud"}
 include_graphics(path = "images/rscloud-new-workspace.png")
 ```
 
-Next step is to invite members to the workspace. You can do this by sending 
-invitations or using a sharing link. I recommend using the latter approach 
-for efficiency. Once all of your students are in the course (or once drop/add 
-period ends) you can change the settings so that additional members cannot join 
-throughout the semester using the sharing link, and can only be added via an 
-invitation from the instructor.
+Next step is to invite members to the workspace.
+You can do this by sending invitations or using a sharing link.
+I recommend using the latter approach for efficiency.
+Once all of your students are in the course (or once drop/add period ends) you can change the settings so that additional members cannot join throughout the semester using the sharing link, and can only be added via an invitation from the instructor.
 
 ```{r rscloud-workspace-permissions, fig.align="center", echo=FALSE, fig.cap="Setting workspace permissions"}
 include_graphics(path = "images/rscloud-workspace-permissions.png")
 ```
 
-As highlighted in the figure above, when a workspace is set to accept members 
-via a shared link, the owner can also set a default permission level for those 
-entering the workspace via the sharing link. Suggested permission levels and 
-suggestions for mapping to course roles are as follows.
+As highlighted in the figure above, when a workspace is set to accept members via a shared link, the owner can also set a default permission level for those entering the workspace via the sharing link.
+Suggested permission levels and suggestions for mapping to course roles are as follows.
 
-RStudio Cloud role | Permissions                               | Course role
--------------------|-------------------------------------------|---------------
-Admin       | Manage users, view, edit and manage all projects | Instructor
-Moderator	  | View, edit and manage all projects	             | Teaching Assistant
-Contributor |	Create, edit and manage their own projects	     | Student
-Viewer	    | View projects shared with everyone	             | Auditor, Visitor
++--------------------+--------------------------------------------------+--------------------+
+| RStudio Cloud role | Permissions                                      | Course role        |
++====================+==================================================+====================+
+| Admin              | Manage users, view, edit and manage all projects | Instructor         |
++--------------------+--------------------------------------------------+--------------------+
+| Moderator          | View, edit and manage all projects               | Teaching Assistant |
++--------------------+--------------------------------------------------+--------------------+
+| Contributor        | Create, edit and manage their own projects       | Student            |
++--------------------+--------------------------------------------------+--------------------+
+| Viewer             | View projects shared with everyone               | Auditor, Visitor   |
++--------------------+--------------------------------------------------+--------------------+
 
-This set of permissions will allow instructors full access including management 
-of users. Teaching assistants will be able to peek into student projects, which 
-can be very useful when helping troubleshoot. Students won't be able to see 
-each others' projects. Students auditing your course or visitors, such as 
-colleagues wanting to view/experience your course setup will have limited 
-access.
+This set of permissions will allow instructors full access including management of users.
+Teaching assistants will be able to peek into student projects, which can be very useful when helping troubleshoot.
+Students won't be able to see each others' projects.
+Students auditing your course or visitors, such as colleagues wanting to view/experience your course setup will have limited access.
 
-RStudio Cloud also allows you to specify who can see the list of members. Admins 
-and moderators can, by default, see all members of the workspace. I prefer to
-allow contributors (students) to see the list of members and viewers (auditors 
-and visitors) to not since course enrollment information should not be 
-available to non-official members of the course.
+RStudio Cloud also allows you to specify who can see the list of members.
+Admins and moderators can, by default, see all members of the workspace.
+I prefer to allow contributors (students) to see the list of members and viewers (auditors and visitors) to not since course enrollment information should not be available to non-official members of the course.
 
 ## Projects
 
-A project in RStudio Cloud is equivalent to an RStudio project. If you are an 
-RStudio user, but you don't use projects, I highly recommend considering 
-switching your workflow to include projects. You can learn more about them 
-[here](http://r4ds.had.co.nz/workflow-projects.html#rstudio-projects).
+A project in RStudio Cloud is equivalent to an RStudio project.
+If you are an RStudio user, but you don't use projects, I highly recommend considering switching your workflow to include projects.
+You can learn more about them [here](http://r4ds.had.co.nz/workflow-projects.html#rstudio-projects).
 
 ```{r rscloud-new-project, fig.align="center", echo=FALSE, fig.cap="A new project in RStudio Cloud is a new project in the RStudio IDE"}
 include_graphics(path = "images/rscloud-new-project.png")
@@ -111,19 +91,13 @@ include_graphics(path = "images/rscloud-new-project.png")
 
 ### Access
 
-When you create a new project in your workspace, it is by default visible 
-only to you plus the admins and moderators of the space. This default has two 
-advantages:
+When you create a new project in your workspace, it is by default visible only to you plus the admins and moderators of the space.
+This default has two advantages:
 
-1. It allows you to develop a project semi-privately and actively decide when 
-the project is ready to be shared with students. This can be especially 
-beneficial when developing an assessment like an exam.
-2. It means when a student creates a project in the workspace it's not, by 
-default, visible to other students.
+1.  It allows you to develop a project semi-privately and actively decide when the project is ready to be shared with students. This can be especially beneficial when developing an assessment like an exam.
+2.  It means when a student creates a project in the workspace it's not, by default, visible to other students.
 
-When your project is ready to be shared with the students in your course, you 
-can adjust the access level by clicking on the gear icon to reveal the 
-settings menu.
+When your project is ready to be shared with the students in your course, you can adjust the access level by clicking on the gear icon to reveal the settings menu.
 
 ```{r rscloud-project-permissions, fig.align="center", echo=FALSE, fig.cap="Setting project permissions within a workspace"}
 include_graphics(path = "images/rscloud-project-permissions.png")
@@ -131,99 +105,71 @@ include_graphics(path = "images/rscloud-project-permissions.png")
 
 ### Copying
 
-When a student clicks on your shared project, they are notified that this is 
-a temporary copy (with red blinking text), and are given the option to make 
-their own permanent copy of the project. This is the first thing a student 
-should do when they start working on a project. 
+When a student clicks on your shared project, they are notified that this is a temporary copy (with red blinking text), and are given the option to make their own permanent copy of the project.
+This is the first thing a student should do when they start working on a project.
 
-When a student makes a copy of a project, a new project where they are the 
-owner and that is only visible to them (and the admins and moderators of the 
-space) is created. This copy contains all documents included in the 
-original project and has all the packages installed (but not loaded) as well.
+When a student makes a copy of a project, a new project where they are the owner and that is only visible to them (and the admins and moderators of the space) is created.
+This copy contains all documents included in the original project and has all the packages installed (but not loaded) as well.
 
 ```{r rscloud-project-copy, fig.align="center", echo=FALSE, fig.cap="Making a copy of a project"}
 include_graphics(path = "images/rscloud-project-copy.png")
 ```
 
-You will see in the above screenshot that the user (on the right) is not 
-the admin of the course. This screenshot was taken when logged into the demo 
-workspace as a student (contributor). I strongly recommend that instructors make 
-a second account for themselves on RStudio Cloud and add that user as a 
-contributor to the workspace to be able to see what your students see when they log in. 
-It's a great way to test out functionality and resolve unexpected issues 
-your students might encounter, before they encounter them. I recommend using an 
-incognito browser window for the student account so that you can stay logged in 
-both as a student and as the instructor at the same time and test the student 
-view as you develop content as an instructor.
+You will see in the above screenshot that the user (on the right) is not the admin of the course.
+This screenshot was taken when logged into the demo workspace as a student (contributor).
+I strongly recommend that instructors make a second account for themselves on RStudio Cloud and add that user as a contributor to the workspace to be able to see what your students see when they log in.
+It's a great way to test out functionality and resolve unexpected issues your students might encounter, before they encounter them.
+I recommend using an incognito browser window for the student account so that you can stay logged in both as a student and as the instructor at the same time and test the student view as you develop content as an instructor.
 
-One huge advantage of your students working in RStudio Cloud is that you as the 
-instructor, and anyone with an admin and moderator role, can peek into student 
-projects. While it is important for your students to learn to ask questions in 
-a way that does not depend on someone else being able to see their work directly 
-(and for this I strongly recommend teaching students to make 
-[reprexes](https://www.tidyverse.org/help/#reprex)), it is sometimes, especially 
-early on, nice to be able to peek into a student's project.
+One huge advantage of your students working in RStudio Cloud is that you as the instructor, and anyone with an admin and moderator role, can peek into student projects.
+While it is important for your students to learn to ask questions in a way that does not depend on someone else being able to see their work directly (and for this I strongly recommend teaching students to make [reprexes](https://www.tidyverse.org/help/#reprex)), it is sometimes, especially early on, nice to be able to peek into a student's project.
 
 ## Base project template
 
-If you consistently use a particular set of packages and/or need a particular 
-set of documents to be included in each project, the base project template 
-functionality will come in very handy. You can use this by defining a base 
-project template for the space. Simply create a new project and add any packages 
-or files you want projects created in the space to start with. After creating 
-your project, select it on the Settings page as the base project template. 
+If you consistently use a particular set of packages and/or need a particular set of documents to be included in each project, the base project template functionality will come in very handy.
+You can use this by defining a base project template for the space.
+Simply create a new project and add any packages or files you want projects created in the space to start with.
+After creating your project, select it on the Settings page as the base project template.
 
 ```{r rscloud-base-template, fig.align="center", echo=FALSE, fig.cap="Selecting a base project template"}
 include_graphics(path = "images/rscloud-base-template.png")
 ```
 
-Note that a project must be shared with everyone in the space in order to be 
-used as a template; only projects which are viewable by everyone in the space 
-will appear in the templates list.
+Note that a project must be shared with everyone in the space in order to be used as a template; only projects which are viewable by everyone in the space will appear in the templates list.
 
 ## Git integration
 
-It is possible to create (clone) a new project in RStudio Cloud from a GitHub 
-repository, just like in the RStudio IDE.
+It is possible to create (clone) a new project in RStudio Cloud from a GitHub repository, just like in the RStudio IDE.
 
 ```{r rscloud-git-project, fig.align="center", echo=FALSE, fig.cap="Creating a new project from GitHub repository"}
 include_graphics(path = "images/rscloud-git-project.png")
 ```
 
-If you have a base project template set up for your workspace, this new project 
-created from GitHub will also have the packages installed in the base project 
-template.
+If you have a base project template set up for your workspace, this new project created from GitHub will also have the packages installed in the base project template.
 
-For more on using Git and GitHub in the classroom, see [here][version_control].
+For more on using Git and GitHub in the classroom, see [here][version\_control].
 
 ## Limits
 
 ### Memory
 
-Each project on RStudio Cloud is allocated 1 GB of RAM. While this is a pretty 
-generous limit, actions like joining large tables or fitting complicated 
-models could exceed the limit. 
+Each project on RStudio Cloud is allocated 1 GB of RAM.
+While this is a pretty generous limit, actions like joining large tables or fitting complicated models could exceed the limit.
 
-I recommend testing out the any work you assign, especially those using large 
-datasets, in order to avoid unexpected hiccups due to out of memory issues. One 
-challenge is that you might have no control over what issues students might run 
-into if they are working on an open ended project using a dataset of their own 
-choice. In these circumstances it's helpful to keep in the back of your mind 
-that one way an out of memory issue can present itself is with the RStudio Cloud 
-project crashing.
+I recommend testing out the any work you assign, especially those using large datasets, in order to avoid unexpected hiccups due to out of memory issues.
+One challenge is that you might have no control over what issues students might run into if they are working on an open ended project using a dataset of their own choice.
+In these circumstances it's helpful to keep in the back of your mind that one way an out of memory issue can present itself is with the RStudio Cloud project crashing.
 
 ### Users / projects
 
-Another limit that you will most likely hit when setting up your course on 
-RStudio Cloud is that each account is allocated one private space, with up to 
-three members and five projects. Once you hit this limit RStudio Cloud will 
-prompt you to submit a request to the RStudio Cloud team for more capacity. 
+Another limit that you will most likely hit when setting up your course on RStudio Cloud is that each account is allocated one private space, with up to three members and five projects.
+Once you hit this limit RStudio Cloud will prompt you to submit a request to the RStudio Cloud team for more capacity.
 Rest assured that this request will be approved.
 
 ## Learn more
 
 To see this all in action and learn more, watch the following RStudio Cloud webinars:
 
-- [Teaching R online with RStudio Cloud](https://mine-cetinkaya-rundel.github.io/teach-r-online/) (July 2020)
-- [Teaching R online with RStudio Cloud](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom) (March 2020)
-- [RStudio Cloud in the Classroom](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom)
+-   [Teaching R online with RStudio Cloud](https://mine-cetinkaya-rundel.github.io/teach-r-online/) (July 2020)
+-   [Teaching R online with RStudio Cloud](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom) (March 2020)
+-   [RStudio Cloud in the Classroom](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom)

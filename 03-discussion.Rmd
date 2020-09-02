@@ -2,6 +2,9 @@
 
 Our recommended tool for course discussion is [Piazza](http://piazza.com/).
 
-We have, in the past, used Slack for course communication as well. Slack has the advantage of being real-life feeling as well as being the communication tool of choice for many data science teams. However it doesn't work well for class discussion as threading and searchability are poor. Additionally, the instructor does not have the option to edit student questions, which is frustrating if they have not formatted their code appropriately.
+We have, in the past, used Slack for course communication as well.
+Slack has the advantage of being real-life feeling as well as being the communication tool of choice for many data science teams.
+However it doesn't work well for class discussion as threading and searchability are poor.
+Additionally, the instructor does not have the option to edit student questions, which is frustrating if they have not formatted their code appropriately.
 
 Other options are GitHub issues and Gitter, especially for courses using version control.

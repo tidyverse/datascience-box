@@ -21,7 +21,7 @@ library(broom)
 library(openintro)
 ```
 
-class: center, middle
+class: middle
 
 # Predicting categorical data
 
@@ -346,7 +346,7 @@ ggplot(spam_model_aug, aes(x = num_char)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Sensitivity and specificity
 

@@ -9,6 +9,7 @@ grDevices
 graphics
 stats
 countdown
+emo
 tidyverse
 ggplot2
 tibble
@@ -18,7 +19,5 @@ purrr
 dplyr
 stringr
 forcats
-emo
-dsbox
 fontawesome
 magick

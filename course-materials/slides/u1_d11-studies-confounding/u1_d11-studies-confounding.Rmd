@@ -23,7 +23,7 @@ library(kableExtra)
 library(dsbox)
 ```
 
-class: center, middle
+class: middle
 
 # Scientific studies
 
@@ -112,7 +112,7 @@ knitr::include_graphics("img/random_sample_assign_grid.png")
 
 ---
 
-class: center, middle
+class: middle
 
 # Conditional probability
 
@@ -194,7 +194,7 @@ Inspired by the previous example and how we used the conditional probabilities t
 
 ---
 
-class: center, middle
+class: middle
 
 # Simpson's paradox
 
@@ -465,7 +465,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # group_by
 
@@ -551,7 +551,7 @@ ucbadmit %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # count
 

@@ -22,7 +22,7 @@ library(broom)
 library(here)
 ```
 
-class: center, middle
+class: middle
 
 # Model checking
 
@@ -179,7 +179,7 @@ ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Exploring linearity
 

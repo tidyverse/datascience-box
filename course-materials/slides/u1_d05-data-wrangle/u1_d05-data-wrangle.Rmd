@@ -21,7 +21,7 @@ library(emo)
 library(dsbox)
 ```
 
-class: center, middle
+class: middle
 
 # Tidy data
 
@@ -144,7 +144,7 @@ starwars %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # Grammar of data wrangling
 

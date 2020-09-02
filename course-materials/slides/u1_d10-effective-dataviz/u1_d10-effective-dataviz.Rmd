@@ -21,7 +21,7 @@ library(DT)
 library(here)
 ```
 
-class: center, middle
+class: middle
 
 # Designing effective visualizations
 
@@ -88,7 +88,7 @@ Credit: Angela Zoss and Eric Monson, Duke DVS
 
 ---
 
-class: center, middle
+class: middle
 
 # Principles	for	effective	visualizations
 
@@ -134,7 +134,7 @@ Source: [YouGov Survey Results](https://d25d2506sfb94s.cloudfront.net/cumulus_up
 
 ---
 
-class: center, middle
+class: middle
 
 # Order matters
 
@@ -229,7 +229,7 @@ ggplot(data = brexit, aes(x = region)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Put long categories on 
 # the y-axis
@@ -276,7 +276,7 @@ ggplot(data = brexit, aes(x = fct_rev(region))) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Pick a purpose
 
@@ -444,7 +444,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Select meaningful colors
 

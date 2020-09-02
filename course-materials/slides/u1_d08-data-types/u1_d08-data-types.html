@@ -405,7 +405,7 @@ summary(x)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##     1.0     1.8     2.5     2.5     3.2     4.0       1
+##    1.00    1.75    2.50    2.50    3.25    4.00       1
 ```
 
 
@@ -561,8 +561,7 @@ cat_lovers %&gt;%
 ```
 
 ```
-## Warning in mean.default(number_of_cats): argument is not numeric or
-## logical: returning NA
+## Warning in mean.default(number_of_cats): argument is not numeric or logical: returning NA
 ```
 
 ```
@@ -592,8 +591,8 @@ cat_lovers %&gt;%
 ```
 
 ```
-## Warning in mean.default(number_of_cats, na.rm = TRUE): argument is not
-## numeric or logical: returning NA
+## Warning in mean.default(number_of_cats, na.rm = TRUE): argument is not numeric or logical:
+## returning NA
 ```
 
 ```
@@ -619,9 +618,9 @@ glimpse(cat_lovers)
 ```
 ## Rows: 60
 ## Columns: 3
-## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass"…
-## $ number_of_cats &lt;chr&gt; "0", "0", "1", "3", "3", "2", "1", "1", "0", "0"…
-## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left", …
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass", "Tyrone Estrad…
+## $ number_of_cats &lt;chr&gt; "0", "0", "1", "3", "3", "2", "1", "1", "0", "0", "0", "0", "1",…
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left", "left", "left", …
 ```
 
 ---
@@ -629,8 +628,8 @@ glimpse(cat_lovers)
 ## Let's take another look
 
 .small[
-<div id="htmlwidget-812c89e95650979761d7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-812c89e95650979761d7">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"],["Bernice Warren","Woodrow Stone","Willie Bass","Tyrone Estrada","Alex Daniels","Jane Bates","Latoya Simpson","Darin Woods","Agnes Cobb","Tabitha Grant","Perry Cross","Wanda Silva","Alicia Sims","Emily Logan","Woodrow Elliott","Brent Copeland","Pedro Carlson","Patsy Luna","Brett Robbins","Oliver George","Calvin Perry","Lora Gutierrez","Charlotte Sparks","Earl Mack","Leslie Wade","Santiago Barker","Jose Bell","Lynda Smith","Bradford Marshall","Irving Miller","Caroline Simpson","Frances Welch","Melba Jenkins","Veronica Morales","Juanita Cunningham","Maurice Howard","Teri Pierce","Phil Franklin","Jan Zimmerman","Leslie Price","Bessie Patterson","Ethel Wolfe","Naomi Wright","Sadie Frank","Lonnie Cannon","Tony Garcia","Darla Newton","Ginger Clark","Lionel Campbell","Florence Klein","Harriet Leonard","Terrence Harrington","Travis Garner","Doug Bass","Pat Norris","Dawn Young","Shari Alvarez","Tamara Robinson","Megan Morgan","Kara Obrien"],["0","0","1","3","3","2","1","1","0","0","0","0","1","3","3","2","1","1","0","0","1","1","0","0","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","3","3","2","1","1.5 - honestly I think one of my cats is half human","0","0","1","0","1","three","1","1","1","0","0","2"],["left","left","left","left","left","left","left","left","left","left","left","left","left","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","ambidextrous","ambidextrous","ambidextrous","ambidextrous","ambidextrous"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>number_of_cats<\/th>\n      <th>handedness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f4bb5562ee727b6030f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f4bb5562ee727b6030f1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"],["Bernice Warren","Woodrow Stone","Willie Bass","Tyrone Estrada","Alex Daniels","Jane Bates","Latoya Simpson","Darin Woods","Agnes Cobb","Tabitha Grant","Perry Cross","Wanda Silva","Alicia Sims","Emily Logan","Woodrow Elliott","Brent Copeland","Pedro Carlson","Patsy Luna","Brett Robbins","Oliver George","Calvin Perry","Lora Gutierrez","Charlotte Sparks","Earl Mack","Leslie Wade","Santiago Barker","Jose Bell","Lynda Smith","Bradford Marshall","Irving Miller","Caroline Simpson","Frances Welch","Melba Jenkins","Veronica Morales","Juanita Cunningham","Maurice Howard","Teri Pierce","Phil Franklin","Jan Zimmerman","Leslie Price","Bessie Patterson","Ethel Wolfe","Naomi Wright","Sadie Frank","Lonnie Cannon","Tony Garcia","Darla Newton","Ginger Clark","Lionel Campbell","Florence Klein","Harriet Leonard","Terrence Harrington","Travis Garner","Doug Bass","Pat Norris","Dawn Young","Shari Alvarez","Tamara Robinson","Megan Morgan","Kara Obrien"],["0","0","1","3","3","2","1","1","0","0","0","0","1","3","3","2","1","1","0","0","1","1","0","0","4","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","3","3","2","1","1.5 - honestly I think one of my cats is half human","0","0","1","0","1","three","1","1","1","0","0","2"],["left","left","left","left","left","left","left","left","left","left","left","left","left","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","right","ambidextrous","ambidextrous","ambidextrous","ambidextrous","ambidextrous"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>number_of_cats<\/th>\n      <th>handedness<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 ]
 
 ---
@@ -655,8 +654,7 @@ cat_lovers %&gt;%
 ```
 
 ```
-## Warning in eval_tidy(pair$rhs, env = default_env): NAs introduced by
-## coercion
+## Warning in eval_tidy(pair$rhs, env = default_env): NAs introduced by coercion
 ```
 
 ```
@@ -874,7 +872,7 @@ mean_cats
 ```
 
 ```
-## [1] 0.83
+## [1] 0.8333333
 ```
 
 ```r
@@ -905,7 +903,7 @@ mean_cats
 ```
 
 ```
-## [1] 0.83
+## [1] 0.8333333
 ```
 ]
 .pull-right[
@@ -1010,9 +1008,9 @@ glimpse(cat_lovers)
 ```
 ## Rows: 60
 ## Columns: 3
-## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass"…
-## $ number_of_cats &lt;dbl&gt; 0, 0, 1, 3, 3, 2, 1, 1, 0, 0, 0, 0, 1, 3, 3, 2, …
-## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left", …
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass", "Tyrone Estrad…
+## $ number_of_cats &lt;dbl&gt; 0, 0, 1, 3, 3, 2, 1, 1, 0, 0, 0, 0, 1, 3, 3, 2, 1, 1, 0, 0, 1, 1…
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left", "left", "left", …
 ```
 
 ---
@@ -1107,18 +1105,18 @@ hotels %&gt;%
 
 ```
 ## # A tibble: 119,390 x 4
-##    arrival_date_year arrival_date_mon… arrival_date_wee… arrival_date_day…
-##                &lt;dbl&gt; &lt;chr&gt;                         &lt;dbl&gt;             &lt;dbl&gt;
-##  1              2015 July                             27                 1
-##  2              2015 July                             27                 1
-##  3              2015 July                             27                 1
-##  4              2015 July                             27                 1
-##  5              2015 July                             27                 1
-##  6              2015 July                             27                 1
-##  7              2015 July                             27                 1
-##  8              2015 July                             27                 1
-##  9              2015 July                             27                 1
-## 10              2015 July                             27                 1
+##    arrival_date_year arrival_date_month arrival_date_week_number arrival_date_day_of_month
+##                &lt;dbl&gt; &lt;chr&gt;                                 &lt;dbl&gt;                     &lt;dbl&gt;
+##  1              2015 July                                     27                         1
+##  2              2015 July                                     27                         1
+##  3              2015 July                                     27                         1
+##  4              2015 July                                     27                         1
+##  5              2015 July                                     27                         1
+##  6              2015 July                                     27                         1
+##  7              2015 July                                     27                         1
+##  8              2015 July                                     27                         1
+##  9              2015 July                                     27                         1
+## 10              2015 July                                     27                         1
 ## # … with 119,380 more rows
 ```
 
@@ -1140,19 +1138,19 @@ hotels %&gt;%
 
 ```
 ## # A tibble: 119,390 x 5
-##    arrival_date_ye… arrival_date_mo… arrival_date_we… arrival_date_da…
-##               &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
-##  1             2015 July                           27                1
-##  2             2015 July                           27                1
-##  3             2015 July                           27                1
-##  4             2015 July                           27                1
-##  5             2015 July                           27                1
-##  6             2015 July                           27                1
-##  7             2015 July                           27                1
-##  8             2015 July                           27                1
-##  9             2015 July                           27                1
-## 10             2015 July                           27                1
-## # … with 119,380 more rows, and 1 more variable: arrival_date &lt;glue&gt;
+##    arrival_date_year arrival_date_mon… arrival_date_week… arrival_date_day_o… arrival_date
+##                &lt;dbl&gt; &lt;chr&gt;                          &lt;dbl&gt;               &lt;dbl&gt; &lt;glue&gt;      
+##  1              2015 July                              27                   1 2015 July 1 
+##  2              2015 July                              27                   1 2015 July 1 
+##  3              2015 July                              27                   1 2015 July 1 
+##  4              2015 July                              27                   1 2015 July 1 
+##  5              2015 July                              27                   1 2015 July 1 
+##  6              2015 July                              27                   1 2015 July 1 
+##  7              2015 July                              27                   1 2015 July 1 
+##  8              2015 July                              27                   1 2015 July 1 
+##  9              2015 July                              27                   1 2015 July 1 
+## 10              2015 July                              27                   1 2015 July 1 
+## # … with 119,380 more rows
 ```
 ]
 
@@ -1234,19 +1232,19 @@ hotels %&gt;%
 
 ```
 ## # A tibble: 119,390 x 5
-##    arrival_date_ye… arrival_date_mo… arrival_date_we… arrival_date_da…
-##               &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
-##  1             2015 July                           27                1
-##  2             2015 July                           27                1
-##  3             2015 July                           27                1
-##  4             2015 July                           27                1
-##  5             2015 July                           27                1
-##  6             2015 July                           27                1
-##  7             2015 July                           27                1
-##  8             2015 July                           27                1
-##  9             2015 July                           27                1
-## 10             2015 July                           27                1
-## # … with 119,380 more rows, and 1 more variable: arrival_date &lt;date&gt;
+##    arrival_date_year arrival_date_mon… arrival_date_week… arrival_date_day_o… arrival_date
+##                &lt;dbl&gt; &lt;chr&gt;                          &lt;dbl&gt;               &lt;dbl&gt; &lt;date&gt;      
+##  1              2015 July                              27                   1 2015-07-01  
+##  2              2015 July                              27                   1 2015-07-01  
+##  3              2015 July                              27                   1 2015-07-01  
+##  4              2015 July                              27                   1 2015-07-01  
+##  5              2015 July                              27                   1 2015-07-01  
+##  6              2015 July                              27                   1 2015-07-01  
+##  7              2015 July                              27                   1 2015-07-01  
+##  8              2015 July                              27                   1 2015-07-01  
+##  9              2015 July                              27                   1 2015-07-01  
+## 10              2015 July                              27                   1 2015-07-01  
+## # … with 119,380 more rows
 ```
 ]
 
