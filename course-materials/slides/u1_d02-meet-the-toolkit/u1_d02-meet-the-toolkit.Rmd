@@ -20,7 +20,7 @@ library(tidyverse)
 library(fontawesome)
 ```
 
-class: center, middle
+class: middle
 
 # Reproducible data analysis
 
@@ -58,7 +58,7 @@ Long-term goals:
 
 ---
 
-class: center, middle
+class: middle
 
 # Toolkit overview
 
@@ -88,7 +88,7 @@ knitr::include_graphics("img/whole-game-04.png")
 
 ---
 
-class: center, middle
+class: middle
 
 # R and RStudio
 
@@ -174,7 +174,7 @@ library(package_name)
 
 ---
 
-class: center, middle
+class: middle
 
 # R Markdown
 
@@ -264,7 +264,7 @@ What happens? Why the error?
 
 ---
 
-class: center, middle
+class: middle
 
 # Git and GitHub
 
@@ -333,7 +333,7 @@ knitr::include_graphics("img/phd_comics_vc.gif")
 
 ---
 
-class: center, middle
+class: middle
 
 # Getting help in R
 

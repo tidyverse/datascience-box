@@ -24,7 +24,7 @@ library(rvest)
 library(DT)
 ```
 
-class: center, middle
+class: middle
 
 # The language of models
 
@@ -36,7 +36,7 @@ class: center, middle
 - For now we will focus on **linear** models (but remember there are *many* *many* other types of models too!)
 
 ---
-class: center, middle
+class: middle
 
 # Data: Paris Paintings
 
@@ -138,7 +138,7 @@ pp %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # Modeling the relationship between variables
 
@@ -420,7 +420,7 @@ variables
 
 ---
 
-class: center, middle
+class: middle
 
 # Interpreting models
 

@@ -23,7 +23,7 @@ library(rvest)
 library(DT)
 ```
 
-class: center, middle
+class: middle
 
 # Edinburgh College of Art Collection
 
@@ -100,7 +100,7 @@ tibble(headers, values) %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # Functions
 
@@ -423,7 +423,7 @@ mean <- function(x){
 
 ---
 
-class: center, middle
+class: middle
 
 # Automation
 

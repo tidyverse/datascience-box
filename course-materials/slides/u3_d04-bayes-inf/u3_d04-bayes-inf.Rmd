@@ -26,7 +26,7 @@ library(infer)
 library(gridExtra)
 ```
 
-class: center, middle
+class: middle
 
 # Bayes' Theorem
 
@@ -60,7 +60,7 @@ $$P(A~and~B) = P(A~|~B) \times P(B)$$
 
 ---
 
-class: center, middle
+class: middle
 
 # Let's play
 
@@ -133,7 +133,7 @@ class: center, middle
 
 ---
 
-class: center, middle
+class: middle
 
 # Setting a prior
 
@@ -163,7 +163,7 @@ $H_2$: R bad, L good
 
 ---
 
-class: center, middle
+class: middle
 
 # Observe and decide
 
@@ -186,7 +186,7 @@ What is your decision? How did you make this decision?
 
 ---
 
-class: center, middle
+class: middle
 
 # Posterior probability
 
@@ -228,7 +228,7 @@ What is the probability, based on the outcome of the first two rolls, that R is 
 
 ---
 
-class: center, middle
+class: middle
 
 # Recap
 
@@ -256,7 +256,7 @@ class: center, middle
 
 ---
 
-class: center, middle
+class: middle
 
 # Breast cancer screening
 

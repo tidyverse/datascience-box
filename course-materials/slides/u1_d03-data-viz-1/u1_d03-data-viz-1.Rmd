@@ -22,7 +22,7 @@ library(fontawesome)
 library(magick)
 ```
 
-class: center, middle
+class: middle
 
 # Exploratory data analysis
 
@@ -37,7 +37,7 @@ analysis. That's what we'll focus on next.
 
 ---
 
-class: center, middle
+class: middle
 
 # Data visualization
 
@@ -145,7 +145,7 @@ library(tidyverse)
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing Star Wars
 
@@ -280,7 +280,7 @@ We can map additional variables to various features of the plot:
 
 ---
 
-class: center, middle
+class: middle
 
 # Aesthetics
 
@@ -347,7 +347,7 @@ features in the geom for customization **not** mapped to a variable
 
 ---
 
-class: center, middle
+class: middle
 
 # Faceting
 
@@ -423,7 +423,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Identifying variables
 
@@ -444,7 +444,7 @@ class: center, middle
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing numerical data
 
@@ -488,7 +488,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing categorical data
 

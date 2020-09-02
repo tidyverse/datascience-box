@@ -19,7 +19,7 @@ output:
 library(tidyverse)
 ```
 
-class: center, middle
+class: middle
 
 # Tidytext analysis
 
@@ -80,7 +80,7 @@ text_df %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # What are you listening to?
 
@@ -260,7 +260,7 @@ str_subset(listening$songs, "1975")
 
 ---
 
-class: center, middle
+class: middle
 
 # Analyzing lyrics of one artist
 
@@ -381,7 +381,7 @@ sheeran_lyrics %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # Sentiment analysis
 

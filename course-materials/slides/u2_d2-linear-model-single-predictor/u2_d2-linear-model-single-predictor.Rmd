@@ -24,7 +24,7 @@ library(here)
 
 
 
-class: center, middle
+class: middle
 
 # Interpreting models
 
@@ -261,7 +261,7 @@ Source: XKCD, [Cell phones](https://xkcd.com/925/)
 
 ---
 
-class: center, middle
+class: middle
 
 # Prediction with models
 
@@ -356,7 +356,7 @@ Stephen Colbert, April 6th, 2010
 
 ---
 
-class: center, middle
+class: middle
 
 # Measuring model fit
 
@@ -416,7 +416,7 @@ widths.
 
 ---
 
-class: center, middle
+class: middle
 
 # Tidy regression output
 
@@ -528,7 +528,7 @@ ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Model checking
 

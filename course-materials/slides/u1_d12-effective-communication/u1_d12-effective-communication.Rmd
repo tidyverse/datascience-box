@@ -23,7 +23,7 @@ library(kableExtra)
 library(readxl)
 ```
 
-class: center, middle
+class: middle
 
 # Communicating data science results effectively
 
@@ -43,7 +43,7 @@ Peng, Roger D., and Elizabeth Matsui. "The Art of Data Science." A Guide for Any
 
 ---
 
-class: center, middle
+class: middle
 
 # Stating and refining the question
 
@@ -102,7 +102,7 @@ If biased, will the value be an overestimate or underestimate?
 
 ---
 
-class: center, middle
+class: middle
 
 # Exploratory data analysis
 

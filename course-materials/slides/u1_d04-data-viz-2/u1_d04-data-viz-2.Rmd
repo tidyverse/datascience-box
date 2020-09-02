@@ -22,7 +22,7 @@ library(Tmisc)
 library(dsbox)
 ```
 
-class: center, middle
+class: middle
 
 # Identifying variables
 
@@ -35,7 +35,7 @@ class: center, middle
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing numerical data
 
@@ -79,7 +79,7 @@ ggplot(data = starwars, mapping = aes(y = height)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing relationships between numerical and categorical data
 
@@ -138,7 +138,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Visualizing categorical data
 
@@ -219,7 +219,7 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Why do we visualize?
 

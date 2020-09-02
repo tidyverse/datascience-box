@@ -24,7 +24,7 @@ library(modelr)
 library(openintro)
 ```
 
-class: center, middle
+class: middle
 
 # From last time
 
@@ -40,7 +40,7 @@ selected_model <- step(full_model, direction = "backward")
 ```
 
 
-class: center, middle
+class: middle
 
 # Model validation
 
@@ -291,7 +291,7 @@ rmse_evals %>%
 
 ---
 
-class: center, middle
+class: middle
 
 # Prediction
 

@@ -28,7 +28,7 @@ library(broom)
 
 ---
 
-class: center, middle
+class: middle
 
 # Misrepresentation
 
@@ -129,7 +129,7 @@ by Alberto Cairo
 
 ---
 
-class: center, middle
+class: middle
 
 # Privacy
 
@@ -172,7 +172,7 @@ class: middle
 
 ---
 
-class: center, middle
+class: middle
 
 # Algorithmic bias
 
@@ -366,7 +366,7 @@ Source: Modern Data Science with R, by Baumer, Kaplan, and Horton
 
 ---
 
-class: center, middle
+class: middle
 
 # Continuing your education on data science ethics
 

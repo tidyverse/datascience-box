@@ -35,7 +35,7 @@ layout: true
 
 
 
-class: center, middle
+class: middle
 
 # Interpreting models
 
@@ -347,7 +347,7 @@ Source: XKCD, [Cell phones](https://xkcd.com/925/)
 
 ---
 
-class: center, middle
+class: middle
 
 # Prediction with models
 
@@ -368,7 +368,7 @@ On average, how tall are paintings that are 60 inches wide?
 ```
 
 ```
-## [1] 50
+## [1] 50.42
 ```
 
 --
@@ -403,8 +403,8 @@ predict(m_ht_wt, newdata = newpainting)
 ```
 
 ```
-##  1 
-## 50
+##        1 
+## 50.46919
 ```
 
 - Making a prediction for multiple new observations:
@@ -415,8 +415,8 @@ predict(m_ht_wt, newdata = newpaintings)
 ```
 
 ```
-##  1  2  3 
-## 43 50 58
+##        1        2        3 
+## 42.66123 50.46919 58.27715
 ```
 
 ---
@@ -452,7 +452,7 @@ Stephen Colbert, April 6th, 2010
 
 ---
 
-class: center, middle
+class: middle
 
 # Measuring model fit
 
@@ -483,7 +483,7 @@ glance(m_ht_lands)$r.squared
 ```
 
 ```
-## [1] 0.035
+## [1] 0.03456724
 ```
 ]
 
@@ -524,7 +524,7 @@ glance(m_ht_wt)$r.squared # extract R-squared
 ```
 
 ```
-## [1] 0.68
+## [1] 0.6829468
 ```
 ]
 
@@ -533,7 +533,7 @@ widths.
 
 ---
 
-class: center, middle
+class: middle
 
 # Tidy regression output
 
@@ -562,7 +562,7 @@ m_ht_wt
 ## 
 ## Coefficients:
 ## (Intercept)     Width_in  
-##       3.621        0.781
+##      3.6214       0.7808
 ```
 
 ---
@@ -582,18 +582,18 @@ summary(m_ht_wt)
 ## lm(formula = Height_in ~ Width_in, data = pp)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -86.71  -4.38  -2.42   3.17  85.08 
+##     Min      1Q  Median      3Q     Max 
+## -86.714  -4.384  -2.422   3.169  85.084 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)   3.6214     0.2539    14.3   &lt;2e-16
-## Width_in      0.7808     0.0095    82.2   &lt;2e-16
+## (Intercept) 3.621406   0.253860   14.27   &lt;2e-16
+## Width_in    0.780796   0.009505   82.15   &lt;2e-16
 ## 
-## Residual standard error: 8.3 on 3133 degrees of freedom
+## Residual standard error: 8.304 on 3133 degrees of freedom
 ##   (258 observations deleted due to missingness)
-## Multiple R-squared:  0.683,	Adjusted R-squared:  0.683 
-## F-statistic: 6.75e+03 on 1 and 3133 DF,  p-value: &lt;2e-16
+## Multiple R-squared:  0.6829,	Adjusted R-squared:  0.6828 
+## F-statistic:  6749 on 1 and 3133 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -710,7 +710,7 @@ ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
 
 ---
 
-class: center, middle
+class: middle
 
 # Model checking
 
