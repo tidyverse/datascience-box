@@ -20,6 +20,11 @@ You can join the workspace and play around with the application exercises.
 ::: {.application-exercise}
 [Bechdel + R Markdown](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown)
 :::
+
+::: {.reading}
+-   [R4DS :: Chp 2 - Introduction](https://r4ds.had.co.nz/explore-intro.html)
+-   [IMS :: Sec 1.1 & 1.2 - Case study & Data basics](https://openintro-ims.netlify.app/getting-started-with-data.html#basic-stents-strokes)
+:::
 :::
 
 ::: {.slide-deck}
@@ -30,12 +35,20 @@ You can join the workspace and play around with the application exercises.
 ::: {.application-exercise}
 [Star Wars + Data visualisation](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz)
 :::
+
+::: {.reading}
+[R4DS :: Chp 3 - Data visualization](https://r4ds.had.co.nz/data-visualisation.html)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 1 - Deck 4: Building plots for various data types**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d04-data-viz-2/u1_d04-data-viz-2.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d04-data-viz-2)
+
+::: {.reading}
+[IMS :: Chp 2 - Summarizing and visualizing data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html)
+:::
 :::
 
 ::: {.slide-deck}
@@ -45,6 +58,10 @@ You can join the workspace and play around with the application exercises.
 
 ::: {.application-exercise}
 [Hotels + Data wrangling](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling)
+:::
+
+::: {.reading}
+[R4DS :: Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
 :::
 :::
 
@@ -56,12 +73,20 @@ You can join the workspace and play around with the application exercises.
 ::: {.application-exercise}
 [Fisheries + Data joins](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-fisheries-datajoins)
 :::
+
+::: {.reading}
+[R4DS :: Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 1 - Deck 7: Data tidying and reshaping**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d07-tidy-data/u1_d07-tidy-data.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d07-tidy-data)
+
+::: {.reading}
+[R4DS :: Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
+:::
 :::
 
 ::: {.slide-deck}
@@ -71,6 +96,14 @@ You can join the workspace and play around with the application exercises.
 
 ::: {.application-exercise}
 [Hotels + Data types](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-hotels-datatypes)
+:::
+
+::: {.reading}
+-   [R4DS :: Chp 20.2 - Vector basics](https://r4ds.had.co.nz/vectors.html#vector-basics)
+-   [R4DS :: Chp 20.3 - Important types of atomic vector](https://r4ds.had.co.nz/vectors.html#important-types-of-atomic-vector)
+-   [R4DS :: Chp 15 - Factors](https://r4ds.had.co.nz/factors.html)
+-   [R4DS :: Chp 16.2 - Creating date/times](https://r4ds.had.co.nz/dates-and-times.html#creating-datetimes)
+-   [R4DS :: Chp 16.3 - Date-time components](https://r4ds.had.co.nz/dates-and-times.html#date-time-components)
 :::
 :::
 
@@ -82,18 +115,31 @@ You can join the workspace and play around with the application exercises.
 ::: {.application-exercise}
 [Nobels & Sales + Data import](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-07-nobels-sales-dataimport)
 :::
+
+::: {.reading}
+[R4DS :: Chp 11 - Data import](https://r4ds.had.co.nz/data-import.html)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 1 - Deck 10: Tips for effective data visualization**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d10-effective-dataviz/u1_d10-effective-dataviz.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d10-effective-dataviz)
+
+::: {.reading}
+[IMS :: Sec 2.3 - Effective data visualization](https://openintro-ims.netlify.app/summarizing-visualizing-data.html#effective-data-visualization)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 1 - Deck 11: Scientific studies and confounding**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d11-studies-confounding/u1_d11-studies-confounding.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d11-studies-confounding)
+
+::: {.reading}
+-   [IMS :: Sec 1.3 - Sampling principles and strategies](https://openintro-ims.netlify.app/getting-started-with-data.html#sampling-principles-strategies)
+-   [IMS :: Sec 1.4 - Experiments](https://openintro-ims.netlify.app/getting-started-with-data.html#experiments)
+:::
 :::
 
 ::: {.slide-deck}
@@ -119,6 +165,11 @@ You can join the workspace and play around with the application exercises.
 
 ::: {.application-exercise}
 [University of Edinburgh Art + Functions](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-uoeart-functions)
+:::
+
+::: {.reading}
+-   [R4DS :: Chp 19 - Functions](https://r4ds.had.co.nz/functions.html)
+-   [R4DS :: Sec 21.5 - The map functions](https://r4ds.had.co.nz/iteration.html#the-map-functions)
 :::
 :::
 

@@ -16,6 +16,25 @@
   color: #A7D5E8;
 }
 
+.reading {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("book.png");
+}
+.reading:before {
+  content: "Reading: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #1E5C65;
+}
+.reading ul li {
+  list-style-type: square;
+}
+
 .slide-deck {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
