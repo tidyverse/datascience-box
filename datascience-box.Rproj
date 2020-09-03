@@ -13,5 +13,3 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-
-SpellingDictionary: en_US
