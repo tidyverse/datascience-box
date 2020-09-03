@@ -28,7 +28,8 @@ rmd_files: [
   "03-sharing.Rmd",
   "03-alternative-setups.Rmd",
   
-  "04-pedagogy.Rmd"
+  "04-pedagogy.Rmd",
+  "04-schedule.Rmd"
   ]
 
 new_session: yes
