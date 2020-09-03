@@ -42,10 +42,10 @@ class: middle
 class: middle
 
 .pull-left[
-&lt;img src="img/readr.png" width="80%" /&gt;
+&lt;img src="img/readr.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-&lt;img src="img/readxl.png" width="80%" /&gt;
+&lt;img src="img/readxl.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -67,22 +67,6 @@ class: middle
 
 ```r
 nobel &lt;- read_csv(file = "data/nobel.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   .default = col_character(),
-##   id = col_double(),
-##   year = col_double(),
-##   born_date = col_date(format = ""),
-##   died_date = col_date(format = ""),
-##   share = col_double()
-## )
-```
-
-```
-## See spec(...) for full column specifications.
 ```
 
 ---
@@ -166,9 +150,8 @@ fs::dir_ls("data")
 ```
 
 ```
-## data/df-na.csv           data/df.csv              data/edi-airbnb.csv      
-## data/favourite-food.xlsx data/nobel.csv           data/sales               
-## data/sales.xlsx
+## data/df-na.csv           data/df.csv              data/edi-airbnb.csv      data/favourite-food.xlsx 
+## data/nobel.csv           data/sales               data/sales.xlsx
 ```
 
 ---
@@ -202,10 +185,9 @@ names(edi_airbnb)
 ```
 
 ```
-##  [1] "ID"                   "Price"                "neighbourhood"       
-##  [4] "accommodates"         "Number of bathrooms"  "Number of Bedrooms"  
-##  [7] "n beds"               "Review Scores Rating" "Number of reviews"   
-## [10] "listing_url"
+##  [1] "ID"                   "Price"                "neighbourhood"        "accommodates"        
+##  [5] "Number of bathrooms"  "Number of Bedrooms"   "n beds"               "Review Scores Rating"
+##  [9] "Number of reviews"    "listing_url"
 ```
 
 --
@@ -235,33 +217,14 @@ edi_airbnb_col_names &lt;- read_csv("data/edi-airbnb.csv",
   col_names = c("id", "price", "neighbourhood", "accommodates",
                 "bathroom", "bedroom", "bed", 
                 "review_scores_rating", "n_reviews", "url"))
-```
 
-```
-## Parsed with column specification:
-## cols(
-##   id = col_character(),
-##   price = col_character(),
-##   neighbourhood = col_character(),
-##   accommodates = col_character(),
-##   bathroom = col_character(),
-##   bedroom = col_character(),
-##   bed = col_character(),
-##   review_scores_rating = col_character(),
-##   n_reviews = col_character(),
-##   url = col_character()
-## )
-```
-
-```r
 names(edi_airbnb_col_names)
 ```
 
 ```
-##  [1] "id"                   "price"                "neighbourhood"       
-##  [4] "accommodates"         "bathroom"             "bedroom"             
-##  [7] "bed"                  "review_scores_rating" "n_reviews"           
-## [10] "url"
+##  [1] "id"                   "price"                "neighbourhood"        "accommodates"        
+##  [5] "bathroom"             "bedroom"              "bed"                  "review_scores_rating"
+##  [9] "n_reviews"            "url"
 ```
 ]
 
@@ -278,10 +241,9 @@ names(edi_airbnb_cleaned_names)
 ```
 
 ```
-##  [1] "id"                   "price"                "neighbourhood"       
-##  [4] "accommodates"         "number_of_bathrooms"  "number_of_bedrooms"  
-##  [7] "n_beds"               "review_scores_rating" "number_of_reviews"   
-## [10] "listing_url"
+##  [1] "id"                   "price"                "neighbourhood"        "accommodates"        
+##  [5] "number_of_bathrooms"  "number_of_bedrooms"   "n_beds"               "review_scores_rating"
+##  [9] "number_of_reviews"    "listing_url"
 ```
 
 ---
@@ -292,13 +254,13 @@ class: middle
 
 ---
 
-.discussion[
+.question[
 Which class is `x`? Why?
 ]
 
 .pull-left[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="img/df-na.png" width="100%" /&gt;
+&lt;img src="img/df-na.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -316,9 +278,7 @@ read_csv("data/df-na.csv")
 ## 4 4     d              ola   
 ## 5 5     e              hola  
 ## 6 .     f              whatup
-## 7 7     g              wassup
-## 8 8     h              sup   
-## 9 9     i              &lt;NA&gt;
+## # … with 3 more rows
 ```
 ]
 
@@ -334,7 +294,7 @@ read_csv("data/df-na.csv",
 
 .pull-left[
 &lt;br&gt;
-&lt;img src="img/df-na.png" width="100%" /&gt;
+&lt;img src="img/df-na.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -348,9 +308,7 @@ read_csv("data/df-na.csv",
 ## 4     4 d     ola   
 ## 5     5 e     hola  
 ## 6    NA f     whatup
-## 7     7 g     wassup
-## 8     8 h     sup   
-## 9     9 i     &lt;NA&gt;
+## # … with 3 more rows
 ```
 ]
 
@@ -366,12 +324,6 @@ read_csv("data/df-na.csv",
 ```
 
 ```
-## Warning: 1 parsing failure.
-## row col expected actual             file
-##   6   x a double      . 'data/df-na.csv'
-```
-
-```
 ## # A tibble: 9 x 3
 ##       x y              z     
 ##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; 
@@ -381,9 +333,7 @@ read_csv("data/df-na.csv",
 ## 4     4 d              ola   
 ## 5     5 e              hola  
 ## 6    NA f              whatup
-## 7     7 g              wassup
-## 8     8 h              sup   
-## 9     9 i              &lt;NA&gt;
+## # … with 3 more rows
 ```
 ]
 
@@ -468,9 +418,7 @@ If done, see next slide for stretch goal.
 ## 4 1822    3    
 ## 5 Brand 2 n    
 ## 6 3333    1    
-## 7 2156    3    
-## 8 3987    6    
-## 9 3216    5
+## # … with 3 more rows
 ```
 ]
 ]
@@ -495,7 +443,7 @@ If done, see next slide for stretch goal.
 ## 4 Brand 2  3333     1
 ## 5 Brand 2  2156     3
 ## 6 Brand 2  3987     6
-## 7 Brand 2  3216     5
+## # … with 1 more row
 ```
 ]
 
@@ -525,27 +473,15 @@ sales
 
 ```
 ## # A tibble: 19 x 6
-##    filename                month     year brand  item     n
-##    &lt;chr&gt;                   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 data/sales/01-sales.csv January   2019     1  1234     3
-##  2 data/sales/01-sales.csv January   2019     1  8721     9
-##  3 data/sales/01-sales.csv January   2019     1  1822     2
-##  4 data/sales/01-sales.csv January   2019     2  3333     1
-##  5 data/sales/01-sales.csv January   2019     2  2156     9
-##  6 data/sales/01-sales.csv January   2019     2  3987     6
-##  7 data/sales/01-sales.csv January   2019     2  3827     6
-##  8 data/sales/02-sales.csv February  2019     1  1234     8
-##  9 data/sales/02-sales.csv February  2019     1  8721     2
-## 10 data/sales/02-sales.csv February  2019     1  1822     3
-## 11 data/sales/02-sales.csv February  2019     2  3333     1
-## 12 data/sales/02-sales.csv February  2019     2  2156     3
-## 13 data/sales/02-sales.csv February  2019     2  3987    NA
-## 14 data/sales/03-sales.csv March     2019     1  1234     3
-## 15 data/sales/03-sales.csv March     2019     1  3627     1
-## 16 data/sales/03-sales.csv March     2019     1  8820     3
-## 17 data/sales/03-sales.csv March     2019     2  7253     1
-## 18 data/sales/03-sales.csv March     2019     2  8766     3
-## 19 data/sales/03-sales.csv March     2019     2  8288    NA
+##   filename                month    year brand  item     n
+##   &lt;chr&gt;                   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 data/sales/01-sales.csv January  2019     1  1234     3
+## 2 data/sales/01-sales.csv January  2019     1  8721     9
+## 3 data/sales/01-sales.csv January  2019     1  1822     2
+## 4 data/sales/01-sales.csv January  2019     2  3333     1
+## 5 data/sales/01-sales.csv January  2019     2  2156     9
+## 6 data/sales/01-sales.csv January  2019     2  3987     6
+## # … with 13 more rows
 ```
 
 ---

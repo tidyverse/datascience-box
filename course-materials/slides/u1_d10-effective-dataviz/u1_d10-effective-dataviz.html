@@ -115,7 +115,7 @@ ggplot(data = brexit, aes(x = opinion)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-6-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-6-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -129,7 +129,7 @@ ggplot(data = brexit, aes(x = fct_infreq(opinion))) +
   geom_bar()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-7-1.png" width="75%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-7-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -142,7 +142,7 @@ ggplot(data = brexit, aes(x = opinion)) +
   labs(x = "Opinion", y = "Count")
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-8-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -154,7 +154,7 @@ ggplot(data = brexit, aes(x = region)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-9-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-9-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -175,7 +175,7 @@ brexit &lt;- brexit %&gt;%
 ```
 ]
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-11-1.png" width="55%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-11-1.png" width="55%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -206,7 +206,7 @@ ggplot(data = brexit, aes(x = region)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-13-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-13-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -225,7 +225,7 @@ ggplot(data = brexit, aes(x = region)) +
   geom_bar()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-14-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-14-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -238,7 +238,7 @@ ggplot(data = brexit, aes(x = region)) +
   coord_flip()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-15-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -251,7 +251,7 @@ ggplot(data = brexit, aes(x = region)) +
   coord_flip()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-16-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -265,7 +265,7 @@ ggplot(data = brexit, aes(x = fct_rev(region))) +
   coord_flip()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-17-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -284,7 +284,7 @@ ggplot(data = brexit, aes(x = region, fill = opinion)) +
   coord_flip()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-18-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -298,7 +298,7 @@ ggplot(data = brexit, aes(x = opinion, fill = region)) +
   facet_grid(. ~ region)
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-19-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -312,7 +312,7 @@ ggplot(data = brexit, aes(x = opinion)) +
   facet_grid(. ~ region)
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-20-1.png" width="80%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -333,7 +333,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ---
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-22-1.png" width="90%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -355,7 +355,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ---
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-24-1.png" width="1500" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -378,7 +378,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ---
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-26-1.png" width="1500" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -401,7 +401,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ---
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-28-1.png" width="1500" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -420,7 +420,7 @@ ggplot(data = brexit, aes(x = region, fill = opinion)) +
   coord_flip()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-29-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-29-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -434,13 +434,13 @@ ggplot(data = brexit, aes(x = region, fill = opinion)) +
   scale_fill_viridis_d()
 ```
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-30-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-30-1.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Clean up labels
 
-&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-31-1.png" width="85%" /&gt;
+&lt;img src="u1_d10-effective-dataviz_files/figure-html/unnamed-chunk-31-1.png" width="85%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

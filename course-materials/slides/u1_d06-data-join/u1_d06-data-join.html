@@ -72,16 +72,6 @@ the United Nations collects data on fisheries production of countries.
 fisheries &lt;- read_csv("data/fisheries.csv")
 ```
 
-```
-## Parsed with column specification:
-## cols(
-##   country = col_character(),
-##   capture = col_double(),
-##   aquaculture = col_double(),
-##   total = col_double()
-## )
-```
-
 ---
 
 ## First peek at the data
@@ -174,19 +164,6 @@ fisheries %&gt;%
 ```
 
 ```
-## Warning: Predicate functions must be wrapped in `where()`.
-## 
-##   # Bad
-##   data %&gt;% select(is.numeric)
-## 
-##   # Good
-##   data %&gt;% select(where(is.numeric))
-## 
-## ℹ Please update your code.
-## This message is displayed once per session.
-```
-
-```
 ## # A tibble: 1 x 3
 ##   capture aquaculture   total
 ##     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
@@ -195,7 +172,7 @@ fisheries %&gt;%
 
 ---
 
-.discussion[
+.question[
 The (not-so-great) visualization below shows the distribution of fishery harvest 
 of countries for 2016, by capture and aquaculture. What are some ways you would 
 improve this visualization? Note that countries whose total harvest was less 
@@ -237,19 +214,15 @@ fisheries
 
 ```
 ## # A tibble: 82 x 4
-##    country    capture aquaculture   total
-##    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Angola      486490         655  487145
-##  2 Argentina   755226        3673  758899
-##  3 Australia   174629       96847  271476
-##  4 Bangladesh 1674770     2203554 3878324
-##  5 Brazil      705000      581230 1286230
-##  6 Cambodia    629950      172500  802450
-##  7 Cameroon    233190        2315  235505
-##  8 Canada      874727      200765 1075492
-##  9 Chad        110000          94  110094
-## 10 Chile      1829238     1050117 2879355
-## # … with 72 more rows
+##   country    capture aquaculture   total
+##   &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Angola      486490         655  487145
+## 2 Argentina   755226        3673  758899
+## 3 Australia   174629       96847  271476
+## 4 Bangladesh 1674770     2203554 3878324
+## 5 Brazil      705000      581230 1286230
+## 6 Cambodia    629950      172500  802450
+## # … with 76 more rows
 ```
 
 ---
@@ -268,19 +241,15 @@ fisheries %&gt;% select(country)
 
 ```
 ## # A tibble: 82 x 1
-##    country   
-##    &lt;chr&gt;     
-##  1 Angola    
-##  2 Argentina 
-##  3 Australia 
-##  4 Bangladesh
-##  5 Brazil    
-##  6 Cambodia  
-##  7 Cameroon  
-##  8 Canada    
-##  9 Chad      
-## 10 Chile     
-## # … with 72 more rows
+##   country   
+##   &lt;chr&gt;     
+## 1 Angola    
+## 2 Argentina 
+## 3 Australia 
+## 4 Bangladesh
+## 5 Brazil    
+## 6 Cambodia  
+## # … with 76 more rows
 ```
 ]
 .pull-right[
@@ -291,19 +260,15 @@ continents
 
 ```
 ## # A tibble: 245 x 2
-##    country           continent
-##    &lt;chr&gt;             &lt;chr&gt;    
-##  1 Afghanistan       Asia     
-##  2 Åland Islands     Europe   
-##  3 Albania           Europe   
-##  4 Algeria           Africa   
-##  5 American Samoa    Oceania  
-##  6 Andorra           Europe   
-##  7 Angola            Africa   
-##  8 Anguilla          Americas 
-##  9 Antigua &amp; Barbuda Americas 
-## 10 Argentina         Americas 
-## # … with 235 more rows
+##   country        continent
+##   &lt;chr&gt;          &lt;chr&gt;    
+## 1 Afghanistan    Asia     
+## 2 Åland Islands  Europe   
+## 3 Albania        Europe   
+## 4 Algeria        Africa   
+## 5 American Samoa Oceania  
+## 6 Andorra        Europe   
+## # … with 239 more rows
 ```
 ]
 
@@ -374,10 +339,6 @@ inner_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 2 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -386,7 +347,7 @@ inner_join(x, y)
 ```
 ]
 .pull-right[
-![](img/inner-join.gif)&lt;!-- --&gt;
+&lt;img src="img/inner-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -400,10 +361,6 @@ left_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 3 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -413,7 +370,7 @@ left_join(x, y)
 ```
 ]
 .pull-right[
-![](img/left-join.gif)&lt;!-- --&gt;
+&lt;img src="img/left-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -427,10 +384,6 @@ right_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 3 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -440,7 +393,7 @@ right_join(x, y)
 ```
 ]
 .pull-right[
-![](img/right-join.gif)&lt;!-- --&gt;
+&lt;img src="img/right-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -454,10 +407,6 @@ full_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 4 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -468,7 +417,7 @@ full_join(x, y)
 ```
 ]
 .pull-right[
-![](img/full-join.gif)&lt;!-- --&gt;
+&lt;img src="img/full-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -482,10 +431,6 @@ semi_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 2 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -494,7 +439,7 @@ semi_join(x, y)
 ```
 ]
 .pull-right[
-![](img/semi-join.gif)&lt;!-- --&gt;
+&lt;img src="img/semi-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -508,10 +453,6 @@ anti_join(x, y)
 ```
 
 ```
-## Joining, by = "value"
-```
-
-```
 ## # A tibble: 1 x 1
 ##   value
 ##   &lt;dbl&gt;
@@ -519,12 +460,12 @@ anti_join(x, y)
 ```
 ]
 .pull-right[
-![](img/anti-join.gif)&lt;!-- --&gt;
+&lt;img src="img/anti-join.gif" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-.discussion[
+.question[
 We want to keep all rows and columns from `fisheries` and add a column for 
 corresponding continents. Which join function should we use?
 ]
@@ -537,19 +478,15 @@ fisheries %&gt;% select(country)
 
 ```
 ## # A tibble: 82 x 1
-##    country   
-##    &lt;chr&gt;     
-##  1 Angola    
-##  2 Argentina 
-##  3 Australia 
-##  4 Bangladesh
-##  5 Brazil    
-##  6 Cambodia  
-##  7 Cameroon  
-##  8 Canada    
-##  9 Chad      
-## 10 Chile     
-## # … with 72 more rows
+##   country   
+##   &lt;chr&gt;     
+## 1 Angola    
+## 2 Argentina 
+## 3 Australia 
+## 4 Bangladesh
+## 5 Brazil    
+## 6 Cambodia  
+## # … with 76 more rows
 ```
 ]
 .pull-right[
@@ -560,19 +497,15 @@ continents
 
 ```
 ## # A tibble: 245 x 2
-##    country           continent
-##    &lt;chr&gt;             &lt;chr&gt;    
-##  1 Afghanistan       Asia     
-##  2 Åland Islands     Europe   
-##  3 Albania           Europe   
-##  4 Algeria           Africa   
-##  5 American Samoa    Oceania  
-##  6 Andorra           Europe   
-##  7 Angola            Africa   
-##  8 Anguilla          Americas 
-##  9 Antigua &amp; Barbuda Americas 
-## 10 Argentina         Americas 
-## # … with 235 more rows
+##   country        continent
+##   &lt;chr&gt;          &lt;chr&gt;    
+## 1 Afghanistan    Asia     
+## 2 Åland Islands  Europe   
+## 3 Albania        Europe   
+## 4 Algeria        Africa   
+## 5 American Samoa Oceania  
+## 6 Andorra        Europe   
+## # … with 239 more rows
 ```
 ]
 
@@ -585,13 +518,9 @@ continents
 fisheries &lt;- left_join(fisheries, continents) 
 ```
 
-```
-## Joining, by = "country"
-```
-
 --
 
-.discussion[
+.question[
 How does `left_join()` know to join the two data frames by `country`?
 ]
 
@@ -666,7 +595,7 @@ fisheries %&gt;%
 
 ---
 
-.discussion[
+.question[
 What does the following code do?
 ]
 
@@ -704,7 +633,7 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
   geom_col()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-40-1.png" width="3000" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -717,7 +646,7 @@ ggplot(fisheries_summary,
   geom_col()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-41-1.png" width="3000" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -743,7 +672,7 @@ ggplot(fisheries_summary,
 
 ---
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-43-1.png" width="1500" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -801,7 +730,7 @@ map_data("world")
 
 ## A few fixes for better matching
 
-.discussion[
+.question[
 What does the following code do?
 ]
 
@@ -829,7 +758,7 @@ ggplot(world_map, aes(x = long, y = lat, group = group)) +
   theme_minimal()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-48-1.png" width="3600" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 
@@ -845,19 +774,15 @@ fisheries %&gt;% select(country)
 
 ```
 ## # A tibble: 82 x 1
-##    country   
-##    &lt;chr&gt;     
-##  1 Angola    
-##  2 Argentina 
-##  3 Australia 
-##  4 Bangladesh
-##  5 Brazil    
-##  6 Cambodia  
-##  7 Cameroon  
-##  8 Canada    
-##  9 Chad      
-## 10 Chile     
-## # … with 72 more rows
+##   country   
+##   &lt;chr&gt;     
+## 1 Angola    
+## 2 Argentina 
+## 3 Australia 
+## 4 Bangladesh
+## 5 Brazil    
+## 6 Cambodia  
+## # … with 76 more rows
 ```
 ]
 .pull-right[
@@ -1916,16 +1841,16 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   theme_minimal()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-53-1.png" width="3600" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-.discussion[
+.question[
 What is misleading about the following map?
 ]
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-54-1.png" width="3600" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1955,7 +1880,7 @@ ggplot() +
 
 ---
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-56-1.png" width="3300" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1983,7 +1908,7 @@ ggplot() +
 
 ---
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-58-1.png" width="3300" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -2012,11 +1937,11 @@ ggplot() +
 
 ---
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-60-1.png" width="3300" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-60-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-61-1.png" width="3300" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-61-1.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

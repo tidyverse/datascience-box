@@ -177,8 +177,7 @@ average, to be 22.68 inches tall.
 ## 4 L1764-5a     6        1
 ## 5 L1764-5b     6        1
 ## 6 L1764-6      9        0
-## 7 L1764-7a    12        0
-## 8 L1764-7b    12        0
+## # … with 2 more rows
 ```
 
 ---
@@ -201,7 +200,7 @@ tidy(m_ht_sch)
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
 ## 5 school_pntgI       10.3       10.0     1.02  0.306  
 ## 6 school_pntgS       30.4       11.4     2.68  0.00744
-## 7 school_pntgX        2.87      10.3     0.279 0.780
+## # … with 1 more row
 ```
 
 --
@@ -231,7 +230,7 @@ particular school compared to the baseline level.
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
 ## 5 school_pntgI       10.3       10.0     1.02  0.306  
 ## 6 school_pntgS       30.4       11.4     2.68  0.00744
-## 7 school_pntgX        2.87      10.3     0.279 0.780
+## # … with 1 more row
 ```
 ]
 
@@ -273,7 +272,7 @@ What is the baseline level?
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
 ## 5 school_pntgI       10.3       10.0     1.02  0.306  
 ## 6 school_pntgS       30.4       11.4     2.68  0.00744
-## 7 school_pntgX        2.87      10.3     0.279 0.780
+## # … with 1 more row
 ```
 
 ---
@@ -292,7 +291,7 @@ What is the baseline level?
 ## 4 G               0     0     1     0     0     0
 ## 5 I               0     0     0     1     0     0
 ## 6 S               0     0     0     0     1     0
-## 7 X               0     0     0     0     0     1
+## # … with 1 more row
 ```
 
 ---
@@ -314,7 +313,7 @@ Interpret the intercept, slope for Dutch/Flemish, slope for Spanish paintings.
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
 ## 5 school_pntgI       10.3       10.0     1.02  0.306  
 ## 6 school_pntgS       30.4       11.4     2.68  0.00744
-## 7 school_pntgX        2.87      10.3     0.279 0.780
+## # … with 1 more row
 ```
 
 ---
@@ -339,7 +338,7 @@ Remember this when interpreting model coefficients
 
 &lt;br&gt;
 
-&lt;img src="img/cell_phones.png" width="100%" /&gt;
+&lt;img src="img/cell_phones.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 .footnote[
 Source: XKCD, [Cell phones](https://xkcd.com/925/)
@@ -428,12 +427,7 @@ On average, how tall are paintings that are 400 inches wide?
 `$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$`
 ]
 
-
-```
-## `geom_smooth()` using formula 'y ~ x'
-```
-
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/extrapolate-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/extrapolate-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -513,10 +507,10 @@ glance(m_ht_wt)
 
 ```
 ## # A tibble: 1 x 12
-##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC deviance
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1     0.683         0.683  8.30     6749.       0     1 -11083. 22173. 22191.  216055.
-## # … with 2 more variables: df.residual &lt;int&gt;, nobs &lt;int&gt;
+##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC deviance df.residual
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1     0.683         0.683  8.30     6749.       0     1 -11083. 22173. 22191.  216055.        3133
+## # … with 1 more variable: nobs &lt;int&gt;
 ```
 
 ```r
@@ -586,9 +580,11 @@ summary(m_ht_wt)
 ## -86.714  -4.384  -2.422   3.169  85.084 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 3.621406   0.253860   14.27   &lt;2e-16
-## Width_in    0.780796   0.009505   82.15   &lt;2e-16
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 3.621406   0.253860   14.27   &lt;2e-16 ***
+## Width_in    0.780796   0.009505   82.15   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 8.304 on 3133 degrees of freedom
 ##   (258 observations deleted due to missingness)
@@ -650,10 +646,10 @@ glance(m_ht_wt)
 
 ```
 ## # A tibble: 1 x 12
-##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC deviance
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1     0.683         0.683  8.30     6749.       0     1 -11083. 22173. 22191.  216055.
-## # … with 2 more variables: df.residual &lt;int&gt;, nobs &lt;int&gt;
+##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC deviance df.residual
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1     0.683         0.683  8.30     6749.       0     1 -11083. 22173. 22191.  216055.        3133
+## # … with 1 more variable: nobs &lt;int&gt;
 ```
 ]
 
@@ -705,7 +701,7 @@ ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
   labs(x = "Predicted height", y = "Residuals")
 ```
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-20-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -729,7 +725,7 @@ our explanatory and response variables.
 - Residuals distributed randomly around 0
 - With no visible pattern along the x or y axes
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-21-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -737,7 +733,7 @@ our explanatory and response variables.
 
 ### Fan shapes
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-22-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -745,7 +741,7 @@ our explanatory and response variables.
 
 ### Residuals correlated with predicted values
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-23-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -753,7 +749,7 @@ our explanatory and response variables.
 
 ### Groups of patterns
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-24-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -761,7 +757,7 @@ our explanatory and response variables.
 
 ### Any patterns!
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-25-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -771,7 +767,7 @@ whether a linear model is a good fit for modeling the relationship
 between height and width of paintings?
 ]
 
-&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-26-1.png" width="1500" /&gt;
+&lt;img src="u2_d2-linear-model-single-predictor_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

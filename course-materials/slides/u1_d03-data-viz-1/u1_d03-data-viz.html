@@ -66,7 +66,7 @@ class: middle
 
 .pull-left[
 
-&lt;img src="img/ggplot2-part-of-tidyverse.png" width="80%" /&gt;
+&lt;img src="img/ggplot2-part-of-tidyverse.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ] .pull-right[ - **ggplot2** is tidyverse's data visualization package - The `gg` in "ggplot2" stands for Grammar of Graphics - It is inspired by the book **Grammar of Graphics** by Leland Wilkinson] ---
 
@@ -74,7 +74,7 @@ class: middle
 
 A grammar of graphics is a tool that enables us to concisely describe the components of a graphic
 
-&lt;img src="img/grammar-of-graphics.png" width="70%" /&gt;
+&lt;img src="img/grammar-of-graphics.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 .footnote[ Source: [BloggoType](http://bloggotype.blogspot.com/2016/08/holiday-notes2-grammar-of-graphics.html)]
 
@@ -88,11 +88,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
-```
-## Warning: Removed 28 rows containing missing values (geom_point).
-```
-
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -127,7 +123,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-6-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -176,19 +172,15 @@ starwars
 
 ```
 ## # A tibble: 87 x 14
-##    name  height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species
-##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
-##  1 Luke…    172    77 blond      fair       blue            19   male  mascu… Tatooine  Human  
-##  2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   none  mascu… Tatooine  Droid  
-##  3 R2-D2     96    32 &lt;NA&gt;       white, bl… red             33   none  mascu… Naboo     Droid  
-##  4 Dart…    202   136 none       white      yellow          41.9 male  mascu… Tatooine  Human  
-##  5 Leia…    150    49 brown      light      brown           19   fema… femin… Alderaan  Human  
-##  6 Owen…    178   120 brown, gr… light      blue            52   male  mascu… Tatooine  Human  
-##  7 Beru…    165    75 brown      light      blue            47   fema… femin… Tatooine  Human  
-##  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   none  mascu… Tatooine  Droid  
-##  9 Bigg…    183    84 black      light      brown           24   male  mascu… Tatooine  Human  
-## 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  mascu… Stewjon   Human  
-## # … with 77 more rows, and 3 more variables: films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species films
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt;
+## 1 Luke…    172    77 blond      fair       blue            19   male  mascu… Tatooine  Human   &lt;chr…
+## 2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   none  mascu… Tatooine  Droid   &lt;chr…
+## 3 R2-D2     96    32 &lt;NA&gt;       white, bl… red             33   none  mascu… Naboo     Droid   &lt;chr…
+## 4 Dart…    202   136 none       white      yellow          41.9 male  mascu… Tatooine  Human   &lt;chr…
+## 5 Leia…    150    49 brown      light      brown           19   fema… femin… Alderaan  Human   &lt;chr…
+## 6 Owen…    178   120 brown, gr… light      blue            52   male  mascu… Tatooine  Human   &lt;chr…
+## # … with 81 more rows, and 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ]
@@ -213,20 +205,20 @@ glimpse(starwars)
 ```
 ## Rows: 87
 ## Columns: 14
-## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Organa", "Owen La…
-## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 228, 180, 173, 1…
-## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.0, 84.0, NA, 11…
-## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", NA, "black", "au…
-## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "light", "white,…
-## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue", "red", "brown"…
-## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, 41.9, 64.0, 200…
-## $ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female", "none", "male"…
-## $ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "feminine", "masculine…
-## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "Tatooine", "Tato…
-## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human", "Human", "Droid", "H…
-## $ films      &lt;list&gt; [&lt;"The Empire Strikes Back", "Revenge of the Sith", "Return of the Jedi",…
-## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "Imperial Speeder …
-## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanced x1", &lt;&gt;, &lt;&gt;, &lt;&gt;, &lt;…
+## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Organa", "Owen Lars",…
+## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 228, 180, 173, 175, …
+## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.0, 84.0, NA, 112.0,…
+## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", NA, "black", "auburn…
+## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "light", "white, red…
+## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue", "red", "brown", "b…
+## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, 41.9, 64.0, 200.0, …
+## $ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female", "none", "male", "m…
+## $ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "feminine", "masculine", "…
+## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "Tatooine", "Tatooine…
+## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human", "Human", "Droid", "Human…
+## $ films      &lt;list&gt; [&lt;"The Empire Strikes Back", "Revenge of the Sith", "Return of the Jedi", "A …
+## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "Imperial Speeder Bike…
+## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanced x1", &lt;&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "…
 ```
 
 ---
@@ -242,7 +234,7 @@ What does each column represent?]
 ?starwars
 ```
 
-&lt;img src="img/starwars-help.png" width="145" /&gt;
+&lt;img src="img/starwars-help.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Mass vs. height
@@ -253,11 +245,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point()
 ```
 
-```
-## Warning: Removed 28 rows containing missing values (geom_point).
-```
-
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-13-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -285,7 +273,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -299,7 +287,7 @@ Who is the not so tall but really chubby character?]
 
 .small[
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -307,7 +295,7 @@ Who is the not so tall but really chubby character?]
 
 ## Jabba!
 
-&lt;img src="img/jabbaplot.png" width="256" /&gt;
+&lt;img src="img/jabbaplot.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Additional variables
@@ -351,7 +339,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-17-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Mass vs. height + gender
@@ -364,7 +352,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-18-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -378,7 +366,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 * geom_point(size = 2)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-19-1.png" width="70%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -423,7 +411,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      subtitle = "Faceted by gender")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-20-1.png" width="80%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -448,7 +436,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(gender ~ .)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-21-1.png" width="90%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -458,7 +446,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(. ~ gender)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-22-1.png" width="90%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -468,7 +456,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_wrap(~ eye_color)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-23-1.png" width="95%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -497,19 +485,15 @@ Below is an excerpt from the `datasaurus_dozen` dataset:
 
 ```
 ## # A tibble: 142 x 8
-##    away_x away_y bullseye_x bullseye_y circle_x circle_y dino_x dino_y
-##     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1   32.3   61.4       51.2       83.3     56.0     79.3   55.4   97.2
-##  2   53.4   26.2       59.0       85.5     50.0     79.0   51.5   96.0
-##  3   63.9   30.8       51.9       85.8     51.3     82.4   46.2   94.5
-##  4   70.3   82.5       48.2       85.0     51.2     79.2   42.8   91.4
-##  5   34.1   45.7       41.7       84.0     44.4     78.2   40.8   88.3
-##  6   67.7   37.1       37.9       82.6     45.0     77.9   38.7   84.9
-##  7   53.3   97.5       39.5       80.8     48.6     78.8   35.6   79.9
-##  8   63.5   25.1       39.6       82.7     42.1     76.9   33.1   77.6
-##  9   68.0   81.0       34.8       80.0     41.0     76.4   29.0   74.5
-## 10   67.4   29.7       27.6       72.8     34.6     72.7   26.2   71.4
-## # … with 132 more rows
+##   away_x away_y bullseye_x bullseye_y circle_x circle_y dino_x dino_y
+##    &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1   32.3   61.4       51.2       83.3     56.0     79.3   55.4   97.2
+## 2   53.4   26.2       59.0       85.5     50.0     79.0   51.5   96.0
+## 3   63.9   30.8       51.9       85.8     51.3     82.4   46.2   94.5
+## 4   70.3   82.5       48.2       85.0     51.2     79.2   42.8   91.4
+## 5   34.1   45.7       41.7       84.0     44.4     78.2   40.8   88.3
+## 6   67.7   37.1       37.9       82.6     45.0     77.9   38.7   84.9
+## # … with 136 more rows
 ```
 
 ---
@@ -526,26 +510,16 @@ datasaurus_dozen %&gt;%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 13 x 2
-##    dataset          r
-##    &lt;chr&gt;        &lt;dbl&gt;
-##  1 away       -0.0641
-##  2 bullseye   -0.0686
-##  3 circle     -0.0683
-##  4 dino       -0.0645
-##  5 dots       -0.0603
-##  6 h_lines    -0.0617
-##  7 high_lines -0.0685
-##  8 slant_down -0.0690
-##  9 slant_up   -0.0686
-## 10 star       -0.0630
-## 11 v_lines    -0.0694
-## 12 wide_lines -0.0666
-## 13 x_shape    -0.0656
+##   dataset        r
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 away     -0.0641
+## 2 bullseye -0.0686
+## 3 circle   -0.0683
+## 4 dino     -0.0645
+## 5 dots     -0.0603
+## 6 h_lines  -0.0617
+## # … with 7 more rows
 ```
 
 ]
@@ -555,7 +529,7 @@ datasaurus_dozen %&gt;%
 .question[ How similar do the relationships between `x` and `y` in the thirteen datasets look?
 How similar are they based on summary stats?]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/datasaurus-plot-1.png" width="2100" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/datasaurus-plot-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Anscombe's quartet
@@ -644,10 +618,6 @@ quartet %&gt;%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 4 x 6
 ##   set   mean_x mean_y  sd_x  sd_y     r
 ##   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -668,7 +638,7 @@ ggplot(quartet, aes(x = x, y = y)) +
   facet_wrap(~ set, ncol = 4)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/quartet-plot-1.png" width="75%" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/quartet-plot-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -676,7 +646,7 @@ ggplot(quartet, aes(x = x, y = y)) +
 
 .question[ Do you see anything out of the ordinary?]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="1500" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -684,7 +654,7 @@ ggplot(quartet, aes(x = x, y = y)) +
 
 .question[ How are people reporting lower vs. higher values of FB visits?]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="1500" /&gt;
+&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -329,7 +329,7 @@ cat_lovers %>%
 
 ## Take a breath and look at your data
 
-.discussion[
+.question[
 What is the type of the `number_of_cats` variable?
 ]
 
@@ -471,7 +471,7 @@ df
 
 ## Working with data frames in pipelines
 
-.discussion[
+.question[
 How many respondents have below average number of cats?
 ]
 
@@ -488,7 +488,7 @@ cat_lovers %>%
 
 --
 
-.discussion[
+.question[
 Do you believe this number? Why, why not?
 ]
 
@@ -705,7 +705,7 @@ we're just going to scratch the surface of working with dates in R here...
 
 ---
 
-.discussion[
+.question[
 Calculate and visualise the number of bookings on any given arrival date.
 ]
 

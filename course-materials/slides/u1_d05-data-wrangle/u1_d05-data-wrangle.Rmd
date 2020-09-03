@@ -267,7 +267,7 @@ select(hotels, hotel, lead_time)
 ]
 --
 .pull-right[
-.discussion[
+.question[
 What if we wanted to select these columns, and then arrange the data in descending order of lead time?
 ]
 ]
@@ -370,7 +370,7 @@ The pipe operator is implemented in the package **magrittr**, though we don't ne
 
 --
 
-.discussion[
+.question[
 Any guesses as to why the package is called magrittr?
 ]
 
@@ -868,7 +868,7 @@ hotels %>%
 
 ---
 
-.discussion[
+.question[
 What is happening in the following chunk?
 ]
 

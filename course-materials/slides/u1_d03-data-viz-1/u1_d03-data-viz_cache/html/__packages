@@ -1,13 +1,7 @@
 base
-methods
 usethis
 devtools
 testthat
-datasets
-utils
-grDevices
-graphics
-stats
 countdown
 emo
 tidyverse
@@ -21,3 +15,9 @@ stringr
 forcats
 fontawesome
 magick
+fs
+rmarkdown
+xaringan
+conflicted
+Tmisc
+dsbox

@@ -101,7 +101,7 @@ evals %&gt;%
   ggpairs()
 ```
 
-&lt;img src="u2_d5-model-selection_files/figure-html/unnamed-chunk-3-1.png" width="2100" /&gt;
+&lt;img src="u2_d5-model-selection_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -111,7 +111,7 @@ other two variables (`cls_students` or `cls_perc_eval`) is least likely to
 be effective in increasing the model's predictive power?
 ]
 
-&lt;img src="u2_d5-model-selection_files/figure-html/unnamed-chunk-4-1.png" width="2100" /&gt;
+&lt;img src="u2_d5-model-selection_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -513,17 +513,15 @@ None, stick with model from Step 4.
 
 ```
 ## # A tibble: 9 x 2
-##   term                   estimate
-##   &lt;chr&gt;                     &lt;dbl&gt;
-## 1 (Intercept)            3.41    
-## 2 ethnicitynot minority  0.202   
-## 3 gendermale             0.177   
-## 4 languagenon-english   -0.151   
-## 5 age                   -0.00487 
-## 6 cls_perc_eval          0.00549 
-## 7 cls_did_eval           0.000722
-## 8 cls_creditsone credit  0.524   
-## 9 bty_avg                0.0615
+##   term                  estimate
+##   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 (Intercept)            3.41   
+## 2 ethnicitynot minority  0.202  
+## 3 gendermale             0.177  
+## 4 languagenon-english   -0.151  
+## 5 age                   -0.00487
+## 6 cls_perc_eval          0.00549
+## # … with 3 more rows
 ```
 
 ---
@@ -596,8 +594,7 @@ tidy(selected_model) %&gt;% select(term, estimate)
 ## 4 languagenon-english   -0.161  
 ## 5 age                   -0.00501
 ## 6 cls_perc_eval          0.00509
-## 7 cls_creditsone credit  0.515  
-## 8 bty_avg                0.0650
+## # … with 2 more rows
 ```
 ]
 
@@ -672,8 +669,7 @@ Interpret the slope of `bty_avg` and `gender` in the selected model.
 ## 4 languagenon-english   -0.161  
 ## 5 age                   -0.00501
 ## 6 cls_perc_eval          0.00509
-## 7 cls_creditsone credit  0.515  
-## 8 bty_avg                0.0650
+## # … with 2 more rows
 ```
 ]
 

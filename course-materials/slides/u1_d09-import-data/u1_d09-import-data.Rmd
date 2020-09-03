@@ -169,7 +169,7 @@ class: middle
 
 ---
 
-.discussion[
+.question[
 Which class is `x`? Why?
 ]
 

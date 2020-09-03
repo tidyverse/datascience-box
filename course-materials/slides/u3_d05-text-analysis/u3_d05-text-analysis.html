@@ -19,7 +19,7 @@
   </head>
   <body>
     <textarea id="source">
-class: middle, inverse, title-slide
+class: center, middle, inverse, title-slide
 
 # Text analysis <br> 📃
 ### 
@@ -85,8 +85,9 @@ text
 ```
 
 ```
-## [1] "Take me out tonight"                    "Where there's music and there's people" "And they're young and alive"           
-## [4] "Driving in your car"                    "I never never want to go home"          "Because I haven't got one"             
+## [1] "Take me out tonight"                    "Where there's music and there's people"
+## [3] "And they're young and alive"            "Driving in your car"                   
+## [5] "I never never want to go home"          "Because I haven't got one"             
 ## [7] "Anymore"
 ```
 
@@ -111,7 +112,7 @@ text_df
 ## 4     4 Driving in your car                   
 ## 5     5 I never never want to go home         
 ## 6     6 Because I haven't got one             
-## 7     7 Anymore
+## # … with 1 more row
 ```
 
 ---
@@ -126,19 +127,15 @@ text_df %&gt;%
 
 ```
 ## # A tibble: 32 x 2
-##     line word   
-##    &lt;int&gt; &lt;chr&gt;  
-##  1     1 take   
-##  2     1 me     
-##  3     1 out    
-##  4     1 tonight
-##  5     2 where  
-##  6     2 there's
-##  7     2 music  
-##  8     2 and    
-##  9     2 there's
-## 10     2 people 
-## # … with 22 more rows
+##    line word   
+##   &lt;int&gt; &lt;chr&gt;  
+## 1     1 take   
+## 2     1 me     
+## 3     1 out    
+## 4     1 tonight
+## 5     2 where  
+## 6     2 there's
+## # … with 26 more rows
 ```
 
 ---
@@ -162,19 +159,15 @@ listening
 
 ```
 ## # A tibble: 104 x 1
-##    songs                                                                                                                          
-##    &lt;chr&gt;                                                                                                                          
-##  1 Gamma Knife - King Gizzard and the Lizard Wizard; Self Immolate - King Gizzard and the Lizard Wizard; Take Control - Old Gods …
-##  2 I dont listen to much music                                                                                                    
-##  3 Mess by Ed Sheeran, Take me back to london by Ed Sheeran and Sounds of the Skeng by Stormzy                                    
-##  4 Hate Me (Sometimes) - Stand Atlantic; Edge of Seventeen - Stevie Nicks; It's Not Living (If It's Not With You) - The 1975; Peo…
-##  5 whistle, gogobebe, sassy me                                                                                                    
-##  6 Shofukan, Think twice, Padiddle                                                                                                
-##  7 Groundislava - Feel the Heat (Indecorum Remix), Nominal - Everyday Everyone and Akon - locked up (Solomon Eves DNB Remix)      
-##  8 Loving you - passion the musical, Senorita - Shawn Mendes and Camilla Cabello, all the good girls go to hell - Billie Eilish   
-##  9 lay it down slow - spiritualised, dead boys - Sam Fender, figure it out - Royal Blood                                          
-## 10 Don't Stop Me Now (Queen), Finale (Toby Fox), Machine in the Walls (Mudeth)                                                    
-## # … with 94 more rows
+##   songs                                                                                             
+##   &lt;chr&gt;                                                                                             
+## 1 Gamma Knife - King Gizzard and the Lizard Wizard; Self Immolate - King Gizzard and the Lizard Wiz…
+## 2 I dont listen to much music                                                                       
+## 3 Mess by Ed Sheeran, Take me back to london by Ed Sheeran and Sounds of the Skeng by Stormzy       
+## 4 Hate Me (Sometimes) - Stand Atlantic; Edge of Seventeen - Stevie Nicks; It's Not Living (If It's …
+## 5 whistle, gogobebe, sassy me                                                                       
+## 6 Shofukan, Think twice, Padiddle                                                                   
+## # … with 98 more rows
 ```
 ]
 
@@ -192,19 +185,15 @@ listening %&gt;%
 
 ```
 ## # A tibble: 786 x 2
-##    word      n
-##    &lt;chr&gt; &lt;int&gt;
-##  1 the      56
-##  2 by       23
-##  3 to       20
-##  4 and      19
-##  5 i        19
-##  6 you      15
-##  7 of       13
-##  8 a        11
-##  9 in       11
-## 10 me       10
-## # … with 776 more rows
+##   word      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 the      56
+## 2 by       23
+## 3 to       20
+## 4 and      19
+## 5 i        19
+## 6 you      15
+## # … with 780 more rows
 ```
 ]
 
@@ -226,19 +215,15 @@ get_stopwords()
 
 ```
 ## # A tibble: 175 x 2
-##    word      lexicon 
-##    &lt;chr&gt;     &lt;chr&gt;   
-##  1 i         snowball
-##  2 me        snowball
-##  3 my        snowball
-##  4 myself    snowball
-##  5 we        snowball
-##  6 our       snowball
-##  7 ours      snowball
-##  8 ourselves snowball
-##  9 you       snowball
-## 10 your      snowball
-## # … with 165 more rows
+##   word   lexicon 
+##   &lt;chr&gt;  &lt;chr&gt;   
+## 1 i      snowball
+## 2 me     snowball
+## 3 my     snowball
+## 4 myself snowball
+## 5 we     snowball
+## 6 our    snowball
+## # … with 169 more rows
 ```
 
 ---
@@ -252,19 +237,15 @@ get_stopwords(language = "es")
 
 ```
 ## # A tibble: 308 x 2
-##    word  lexicon 
-##    &lt;chr&gt; &lt;chr&gt;   
-##  1 de    snowball
-##  2 la    snowball
-##  3 que   snowball
-##  4 el    snowball
-##  5 en    snowball
-##  6 y     snowball
-##  7 a     snowball
-##  8 los   snowball
-##  9 del   snowball
-## 10 se    snowball
-## # … with 298 more rows
+##   word  lexicon 
+##   &lt;chr&gt; &lt;chr&gt;   
+## 1 de    snowball
+## 2 la    snowball
+## 3 que   snowball
+## 4 el    snowball
+## 5 en    snowball
+## 6 y     snowball
+## # … with 302 more rows
 ```
 
 ---
@@ -281,19 +262,15 @@ get_stopwords(source = "smart")
 
 ```
 ## # A tibble: 571 x 2
-##    word        lexicon
-##    &lt;chr&gt;       &lt;chr&gt;  
-##  1 a           smart  
-##  2 a's         smart  
-##  3 able        smart  
-##  4 about       smart  
-##  5 above       smart  
-##  6 according   smart  
-##  7 accordingly smart  
-##  8 across      smart  
-##  9 actually    smart  
-## 10 after       smart  
-## # … with 561 more rows
+##   word      lexicon
+##   &lt;chr&gt;     &lt;chr&gt;  
+## 1 a         smart  
+## 2 a's       smart  
+## 3 able      smart  
+## 4 about     smart  
+## 5 above     smart  
+## 6 according smart  
+## # … with 565 more rows
 ```
 ]
 
@@ -312,24 +289,16 @@ listening %&gt;%
 ```
 
 ```
-## Joining, by = "word"
-```
-
-```
 ## # A tibble: 640 x 2
-##    word        n
-##    &lt;chr&gt;   &lt;int&gt;
-##  1 ed          7
-##  2 queen       7
-##  3 sheeran     7
-##  4 love        6
-##  5 bad         5
-##  6 time        5
-##  7 1975        4
-##  8 dog         4
-##  9 king        4
-## 10 life        4
-## # … with 630 more rows
+##   word        n
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 ed          7
+## 2 queen       7
+## 3 sheeran     7
+## 4 love        6
+## 5 bad         5
+## 6 time        5
+## # … with 634 more rows
 ```
 ]
 
@@ -362,19 +331,15 @@ top20_songs %&gt;%
 
 ```
 ## # A tibble: 41 x 2
-##    word        n
-##    &lt;chr&gt;   &lt;int&gt;
-##  1 ed          7
-##  2 queen       7
-##  3 sheeran     7
-##  4 love        6
-##  5 bad         5
-##  6 time        5
-##  7 1975        4
-##  8 dog         4
-##  9 king        4
-## 10 life        4
-## # … with 31 more rows
+##   word        n
+##   &lt;chr&gt;   &lt;int&gt;
+## 1 ed          7
+## 2 queen       7
+## 3 sheeran     7
+## 4 love        6
+## 5 bad         5
+## 6 time        5
+## # … with 35 more rows
 ```
 ]
 ]
@@ -383,7 +348,7 @@ top20_songs %&gt;%
 ## Visualizing commonalities: bar chart
 
 .midi[
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-14-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -403,7 +368,7 @@ ggplot(top20_songs, aes(x = fct_reorder(word, n), y = n)) +
 
 ## Visualizing commonalities: wordcloud
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-16-1.png" width="1500" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -493,8 +458,8 @@ sheeran &lt;- artist_albums %&gt;%
 ## Songs in the four albums
 
 .small[
-<div id="htmlwidget-3e739065d5398554549f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3e739065d5398554549f">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74"],["No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus"],["South of the Border (Ft. Camila Cabello &amp; Cardi B)","Take Me Back to London (Ft. Stormzy)","Best Part of Me (Ft. YEBBA)","Remember the Name (Ft. 50 Cent &amp; Eminem)","Nothing on You (Ft. Dave &amp; Paulo Londra)","1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)","BLOW by Ed Sheeran, Chris Stapleton &amp; Bruno Mars","Beautiful People (Ft. Khalid)","Cross Me (Ft. Chance the Rapper &amp; PnB Rock)","I Don't Care by Ed Sheeran &amp; Justin Bieber","Antisocial by Ed Sheeran &amp; Travis Scott","Feels (Ft. J Hus &amp; Young Thug)","Put It All on Me (Ft. Ella Mai)","I Don't Want Your Money (Ft. H.E.R.)","Way to Break My Heart (Ft. Skrillex)","Dive","Perfect","Galway Girl","Happier","How Would You Feel (Paean)","Supermarket Flowers","Barcelona","Save Myself","Eraser","Castle on the Hill","Shape of You","New Man","Hearts Don't Break Around Here","What Do I Know?","Bibia Be Ye Ye","Nancy Mulligan","Perfect Duet by Ed Sheeran &amp; Beyonce","One","I'm a Mess","Sing! (Ft. Pharrell Williams)","Don't","Photograph","Tenerife Sea","Runaway","Afire Love","Take It Back","Even My Dad Does Sometimes","Reuf by Nekfeu (Ft. Ed Sheeran)","All of the Stars","English Rose","Touch and Go","Lay It All on Me by Rudimental (Ft. Ed Sheeran)","Nina","Bloodstream","The Man","Thinking Out Loud","Shirtsleeves","I See Fire","New York","Make It Rain","Drunk","Wake Me Up","Small Bump","This","The Parting Glass","Autumn Leaves","Gold Rush","Sunburn","Sofa","Homeless","The A Team","U.N.I.","Grade 8","The City","Lego House","You Need Me, I Don't Need You","Kiss Me","Give Me Love","Little Bird"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>album<\/th>\n      <th>track_title<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"p","order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9acb472f3bc023769b12" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9acb472f3bc023769b12">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74"],["No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","No.6 Collaborations Project","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Divide","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Multiply","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus","Plus"],["Beautiful People (Ft. Khalid)","Take Me Back to London (Ft. Stormzy)","I Don't Care by Ed Sheeran &amp; Justin Bieber","Antisocial by Ed Sheeran &amp; Travis Scott","I Don't Want Your Money (Ft. H.E.R.)","1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)","South of the Border (Ft. Camila Cabello &amp; Cardi B)","Cross Me (Ft. Chance the Rapper &amp; PnB Rock)","Best Part of Me (Ft. YEBBA)","Remember the Name (Ft. 50 Cent &amp; Eminem)","Feels (Ft. J Hus &amp; Young Thug)","Put It All on Me (Ft. Ella Mai)","Nothing on You (Ft. Dave &amp; Paulo Londra)","Way to Break My Heart (Ft. Skrillex)","BLOW by Ed Sheeran, Chris Stapleton &amp; Bruno Mars","Eraser","Castle on the Hill","Perfect","New Man","Hearts Don't Break Around Here","What Do I Know?","How Would You Feel (Paean)","Supermarket Flowers","Bibia Be Ye Ye","Dive","Shape of You","Galway Girl","Happier","Barcelona","Nancy Mulligan","Save Myself","Perfect Duet by Ed Sheeran &amp; Beyonce","One","Bloodstream","Thinking Out Loud","Shirtsleeves","Even My Dad Does Sometimes","I See Fire","Reuf by Nekfeu (Ft. Ed Sheeran)","Make It Rain","Lay It All on Me by Rudimental (Ft. Ed Sheeran)","I'm a Mess","Sing! (Ft. Pharrell Williams)","Don't","Nina","Photograph","Tenerife Sea","Runaway","The Man","Afire Love","Take It Back","All of the Stars","English Rose","Touch and Go","New York","The A Team","Drunk","Wake Me Up","Small Bump","This","Lego House","Kiss Me","The Parting Glass","Little Bird","Sunburn","Homeless","U.N.I.","Grade 8","The City","You Need Me, I Don't Need You","Give Me Love","Autumn Leaves","Gold Rush","Sofa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>album<\/th>\n      <th>track_title<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"p","order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 ]
 
 ---
@@ -511,19 +476,15 @@ sheeran %&gt;%
 
 ```
 ## # A tibble: 74 x 2
-##    track_title                                              n
-##    &lt;chr&gt;                                                &lt;int&gt;
-##  1 Take It Back                                           101
-##  2 South of the Border (Ft. Camila Cabello &amp; Cardi B)      77
-##  3 Remember the Name (Ft. 50 Cent &amp; Eminem)                76
-##  4 Take Me Back to London (Ft. Stormzy)                    75
-##  5 Don't                                                   74
-##  6 Reuf by Nekfeu (Ft. Ed Sheeran)                         74
-##  7 Sing! (Ft. Pharrell Williams)                           72
-##  8 Nothing on You (Ft. Dave &amp; Paulo Londra)                67
-##  9 1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)    66
-## 10 Lay It All on Me by Rudimental (Ft. Ed Sheeran)         66
-## # … with 64 more rows
+##   track_title                                              n
+##   &lt;chr&gt;                                                &lt;int&gt;
+## 1 Bloodstream                                             76
+## 2 Take Me Back to London (Ft. Stormzy)                    75
+## 3 Reuf by Nekfeu (Ft. Ed Sheeran)                         74
+## 4 The A Team                                              71
+## 5 New Man                                                 68
+## 6 1000 Nights (Ft. A Boogie wit da Hoodie &amp; Meek Mill)    66
+## # … with 68 more rows
 ```
 
 ---
@@ -539,20 +500,16 @@ sheeran_lyrics
 ```
 
 ```
-## # A tibble: 15,448 x 6
-##    artist     album                       track_n  line track_title                                        word   
-##    &lt;chr&gt;      &lt;chr&gt;                         &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                              &lt;chr&gt;  
-##  1 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) she    
-##  2 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) got    
-##  3 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) the    
-##  4 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) mmm    
-##  5 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) brown  
-##  6 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) eyes   
-##  7 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) caramel
-##  8 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) thighs 
-##  9 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) long   
-## 10 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hair   
-## # … with 15,438 more rows
+## # A tibble: 13,639 x 6
+##   artist     album                       track_n  line track_title                   word 
+##   &lt;chr&gt;      &lt;chr&gt;                         &lt;int&gt; &lt;int&gt; &lt;chr&gt;                         &lt;chr&gt;
+## 1 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) we   
+## 2 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) are  
+## 3 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) we   
+## 4 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) are  
+## 5 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) we   
+## 6 Ed Sheeran No.6 Collaborations Project       1     1 Beautiful People (Ft. Khalid) are  
+## # … with 13,633 more rows
 ```
 
 ---
@@ -566,20 +523,16 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## # A tibble: 2,308 x 2
-##    word      n
-##    &lt;chr&gt; &lt;int&gt;
-##  1 i       524
-##  2 you     514
-##  3 the     481
-##  4 and     452
-##  5 my      349
-##  6 me      310
-##  7 to      304
-##  8 a       285
-##  9 in      242
-## 10 on      231
-## # … with 2,298 more rows
+## # A tibble: 1,983 x 2
+##   word      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 i       468
+## 2 the     402
+## 3 and     401
+## 4 you     381
+## 5 me      314
+## 6 my      263
+## # … with 1,977 more rows
 ```
 
 ---
@@ -595,30 +548,22 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## Joining, by = "word"
-```
-
-```
-## # A tibble: 1,946 x 2
-##    word      n
-##    &lt;chr&gt; &lt;int&gt;
-##  1 love    161
-##  2 home     68
-##  3 time     53
-##  4 feel     48
-##  5 wanna    47
-##  6 baby     46
-##  7 life     42
-##  8 &lt;NA&gt;     38
-##  9 lay      37
-## 10 eyes     36
-## # … with 1,936 more rows
+## # A tibble: 1,634 x 2
+##   word      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 love    124
+## 2 yeah    100
+## 3 ye       75
+## 4 time     47
+## 5 home     43
+## 6 baby     42
+## # … with 1,628 more rows
 ```
 ]
 
 ---
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-26-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -664,19 +609,15 @@ get_sentiments("afinn")
 
 ```
 ## # A tibble: 2,477 x 2
-##    word       value
-##    &lt;chr&gt;      &lt;dbl&gt;
-##  1 abandon       -2
-##  2 abandoned     -2
-##  3 abandons      -2
-##  4 abducted      -2
-##  5 abduction     -2
-##  6 abductions    -2
-##  7 abhor         -3
-##  8 abhorred      -3
-##  9 abhorrent     -3
-## 10 abhors        -3
-## # … with 2,467 more rows
+##   word       value
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 abandon       -2
+## 2 abandoned     -2
+## 3 abandons      -2
+## 4 abducted      -2
+## 5 abduction     -2
+## 6 abductions    -2
+## # … with 2,471 more rows
 ```
 ]
 .pull-right[
@@ -687,19 +628,15 @@ get_sentiments("bing")
 
 ```
 ## # A tibble: 6,786 x 2
-##    word        sentiment
-##    &lt;chr&gt;       &lt;chr&gt;    
-##  1 2-faces     negative 
-##  2 abnormal    negative 
-##  3 abolish     negative 
-##  4 abominable  negative 
-##  5 abominably  negative 
-##  6 abominate   negative 
-##  7 abomination negative 
-##  8 abort       negative 
-##  9 aborted     negative 
-## 10 aborts      negative 
-## # … with 6,776 more rows
+##   word       sentiment
+##   &lt;chr&gt;      &lt;chr&gt;    
+## 1 2-faces    negative 
+## 2 abnormal   negative 
+## 3 abolish    negative 
+## 4 abominable negative 
+## 5 abominably negative 
+## 6 abominate  negative 
+## # … with 6,780 more rows
 ```
 ]
 
@@ -715,19 +652,15 @@ get_sentiments("nrc")
 
 ```
 ## # A tibble: 13,901 x 2
-##    word        sentiment
-##    &lt;chr&gt;       &lt;chr&gt;    
-##  1 abacus      trust    
-##  2 abandon     fear     
-##  3 abandon     negative 
-##  4 abandon     sadness  
-##  5 abandoned   anger    
-##  6 abandoned   fear     
-##  7 abandoned   negative 
-##  8 abandoned   sadness  
-##  9 abandonment anger    
-## 10 abandonment fear     
-## # … with 13,891 more rows
+##   word      sentiment
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 abacus    trust    
+## 2 abandon   fear     
+## 3 abandon   negative 
+## 4 abandon   sadness  
+## 5 abandoned anger    
+## 6 abandoned fear     
+## # … with 13,895 more rows
 ```
 ]
 .pull-right[
@@ -738,19 +671,15 @@ get_sentiments("loughran")
 
 ```
 ## # A tibble: 4,150 x 2
-##    word         sentiment
-##    &lt;chr&gt;        &lt;chr&gt;    
-##  1 abandon      negative 
-##  2 abandoned    negative 
-##  3 abandoning   negative 
-##  4 abandonment  negative 
-##  5 abandonments negative 
-##  6 abandons     negative 
-##  7 abdicated    negative 
-##  8 abdicates    negative 
-##  9 abdicating   negative 
-## 10 abdication   negative 
-## # … with 4,140 more rows
+##   word         sentiment
+##   &lt;chr&gt;        &lt;chr&gt;    
+## 1 abandon      negative 
+## 2 abandoned    negative 
+## 3 abandoning   negative 
+## 4 abandonment  negative 
+## 5 abandonments negative 
+## 6 abandons     negative 
+## # … with 4,144 more rows
 ```
 ]
 
@@ -773,24 +702,16 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## Joining, by = "word"
-```
-
-```
-## # A tibble: 245 x 3
-##    sentiment word        n
-##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
-##  1 positive  love      161
-##  2 positive  like      127
-##  3 positive  right      21
-##  4 positive  darling    18
-##  5 negative  drunk      17
-##  6 negative  hurting    16
-##  7 negative  cold       15
-##  8 negative  shit       14
-##  9 positive  free       14
-## 10 positive  lover      14
-## # … with 235 more rows
+## # A tibble: 210 x 3
+##   sentiment word        n
+##   &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+## 1 positive  love      124
+## 2 positive  like       80
+## 3 positive  loved      25
+## 4 positive  right      24
+## 5 negative  falling    18
+## 6 positive  well       18
+## # … with 204 more rows
 ```
 ]
 
@@ -815,21 +736,17 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## # A tibble: 21 x 3
+## # A tibble: 23 x 3
 ## # Groups:   sentiment [2]
-##    sentiment word        n
-##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
-##  1 negative  cold       15
-##  2 negative  drunk      17
-##  3 negative  fall       13
-##  4 negative  fell       11
-##  5 negative  fuck        9
-##  6 negative  hurt       10
-##  7 negative  hurting    16
-##  8 negative  miss       12
-##  9 negative  shit       14
-## 10 negative  wrong       8
-## # … with 11 more rows
+##   sentiment word       n
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
+## 1 negative  bad       15
+## 2 negative  broken     8
+## 3 negative  burn       9
+## 4 negative  cold      11
+## 5 negative  drunk     17
+## 6 negative  fall      14
+## # … with 17 more rows
 ```
 ]
 
@@ -849,20 +766,16 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## # A tibble: 21 x 3
-##    sentiment word        n
-##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
-##  1 negative  cold       15
-##  2 negative  drunk      17
-##  3 negative  fall       13
-##  4 negative  fell       11
-##  5 negative  fuck        9
-##  6 negative  hurt       10
-##  7 negative  hurting    16
-##  8 negative  miss       12
-##  9 negative  shit       14
-## 10 negative  wrong       8
-## # … with 11 more rows
+## # A tibble: 23 x 3
+##   sentiment word       n
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
+## 1 negative  bad       15
+## 2 negative  broken     8
+## 3 negative  burn       9
+## 4 negative  cold      11
+## 5 negative  drunk     17
+## 6 negative  fall      14
+## # … with 17 more rows
 ```
 ]
 
@@ -898,7 +811,7 @@ sheeran_top10 %&gt;%
   geom_col()
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-36-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -913,7 +826,7 @@ sheeran_top10 %&gt;%
   geom_col()
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-37-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -929,7 +842,7 @@ sheeran_top10 %&gt;%
   facet_wrap(~ sentiment)
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-38-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -945,7 +858,7 @@ sheeran_top10 %&gt;%
   facet_wrap(~ sentiment, scales = "free")
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-39-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -962,7 +875,7 @@ sheeran_top10 %&gt;%
   coord_flip()
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-40-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -980,7 +893,7 @@ sheeran_top10 %&gt;%
   labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "")
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-41-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -999,7 +912,7 @@ sheeran_top10 %&gt;%
   guides(fill = FALSE) 
 ```
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-42-1.png" width="2100" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1021,25 +934,16 @@ sheeran_lyrics %&gt;%
 ```
 
 ```
-## Joining, by = "word"
-## Joining, by = "word"
-```
-
-```
-## # A tibble: 5,190 x 7
-##    artist     album                       track_n  line track_title                                        word    value
-##    &lt;chr&gt;      &lt;chr&gt;                         &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                              &lt;chr&gt;   &lt;dbl&gt;
-##  1 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) mmm        NA
-##  2 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) brown      NA
-##  3 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) eyes       NA
-##  4 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) caramel    NA
-##  5 Ed Sheeran No.6 Collaborations Project       2     1 South of the Border (Ft. Camila Cabello &amp; Cardi B) thighs     NA
-##  6 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hair       NA
-##  7 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) wedding    NA
-##  8 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) ring       NA
-##  9 Ed Sheeran No.6 Collaborations Project       2     2 South of the Border (Ft. Camila Cabello &amp; Cardi B) hey        NA
-## 10 Ed Sheeran No.6 Collaborations Project       2     3 South of the Border (Ft. Camila Cabello &amp; Cardi B) lookin     NA
-## # … with 5,180 more rows
+## # A tibble: 4,761 x 7
+##   artist     album                      track_n  line track_title                  word        value
+##   &lt;chr&gt;      &lt;chr&gt;                        &lt;int&gt; &lt;int&gt; &lt;chr&gt;                        &lt;chr&gt;       &lt;dbl&gt;
+## 1 Ed Sheeran No.6 Collaborations Proje…       1     2 Beautiful People (Ft. Khali… l.a            NA
+## 2 Ed Sheeran No.6 Collaborations Proje…       1     2 Beautiful People (Ft. Khali… saturday       NA
+## 3 Ed Sheeran No.6 Collaborations Proje…       1     2 Beautiful People (Ft. Khali… night          NA
+## 4 Ed Sheeran No.6 Collaborations Proje…       1     2 Beautiful People (Ft. Khali… summer         NA
+## 5 Ed Sheeran No.6 Collaborations Proje…       1     3 Beautiful People (Ft. Khali… sundown        NA
+## 6 Ed Sheeran No.6 Collaborations Proje…       1     4 Beautiful People (Ft. Khali… lamborghin…    NA
+## # … with 4,755 more rows
 ```
 ]
 
@@ -1060,15 +964,15 @@ sheeran_lyrics %&gt;%
 ## # A tibble: 4 x 2
 ##   album                       total_sentiment
 ##   &lt;chr&gt;                                 &lt;dbl&gt;
-## 1 No.6 Collaborations Project             -13
-## 2 Plus                                     48
-## 3 Multiply                                134
-## 4 Divide                                  138
+## 1 Multiply                                -46
+## 2 No.6 Collaborations Project              65
+## 3 Plus                                     70
+## 4 Divide                                  195
 ```
 
 ---
 
-&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-45-1.png" width="100%" /&gt;
+&lt;img src="u3_d05-text-analysis_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 

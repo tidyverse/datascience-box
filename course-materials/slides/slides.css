@@ -136,15 +136,15 @@ a, a > code {
   margin-left: -1.5em
 }
 
-.discussion, .your-turn, .tip {
+.question, .your-turn, .tip {
   padding: 5px 5px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.discussion{
-  border-left: solid 5px #A7D5E8;
-  background-color: #E7E7E7;
+.question{
+  border-left: solid 5px #1E5C65;
+  background-color: #d2dee0;
 }
 
 .your-turn {

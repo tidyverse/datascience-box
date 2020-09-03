@@ -115,7 +115,7 @@ fisheries %>%
 
 ---
 
-.discussion[
+.question[
 The (not-so-great) visualization below shows the distribution of fishery harvest 
 of countries for 2016, by capture and aquaculture. What are some ways you would 
 improve this visualization? Note that countries whose total harvest was less 
@@ -306,7 +306,7 @@ include_graphics("img/anti-join.gif")
 
 ---
 
-.discussion[
+.question[
 We want to keep all rows and columns from `fisheries` and add a column for 
 corresponding continents. Which join function should we use?
 ]
@@ -332,7 +332,7 @@ fisheries <- left_join(fisheries, continents)
 
 --
 
-.discussion[
+.question[
 How does `left_join()` know to join the two data frames by `country`?
 ]
 
@@ -389,7 +389,7 @@ fisheries %>%
 
 ---
 
-.discussion[
+.question[
 What does the following code do?
 ]
 
@@ -525,7 +525,7 @@ include_graphics("img/connect-the-dots-australia.png")
 
 ## A few fixes for better matching
 
-.discussion[
+.question[
 What does the following code do?
 ]
 
@@ -596,7 +596,7 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
 
 ---
 
-.discussion[
+.question[
 What is misleading about the following map?
 ]
 
