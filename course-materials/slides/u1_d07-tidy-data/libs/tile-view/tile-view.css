@@ -1,0 +1,52 @@
+.remark__tile-view * {
+  box-sizing: border-box;
+}
+
+.remark__tile-view {
+  background: lightgray;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3em;
+  font-size: 18px;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+
+.remark__tile-view__header {
+  text-align: center;
+}
+
+.remark__tile-view__tiles {
+  display: grid;
+  /* Set column width in JS */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  justify-items: center;
+}
+
+.remark__tile-view__tile {
+  position: relative;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.remark__tile-view__slide-container {
+  margin: 0 auto;
+}
+
+.remark__tile-view__tile--current {
+  background: #ffd863;
+  border: 5px solid #ffd863;
+  margin: calc(0.5em - 5px);
+  border-radius: 0;
+}
+
+.remark__tile-view__tile--seen {
+  opacity: 0.5;
+}
+
+.remark__tile-view__tile:hover {
+  /* background: #993d70; */
+  background: #44bc96;
+  opacity: 1;
+}

@@ -22,6 +22,10 @@ library(knitr)
 library(skimr)
 library(scales)
 library(patchwork)
+
+# xaringanExtra
+xaringanExtra::use_xaringan_extra()
+xaringanExtra::use_panelset()
 ```
 
 ## A grammar of data tidying
@@ -77,7 +81,7 @@ we will convert the data from the long format to wide format.
 
 But before we do so... 
 
-.discussion[
+.question[
 If the long data will have a row for each year/faculty type combination, 
 and there are 5 faculty types and 11 years of data, how many rows will the data have?
 ]
@@ -95,7 +99,7 @@ include_graphics("img/pivot.gif")
 ## `pivot_*()` functions
 
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.width="50%"}
 include_graphics("img/tidyr-longer-wider.gif")
 ```
 
@@ -149,11 +153,11 @@ staff_long
 
 ---
 
-.discussion[
+.question[
 This doesn't look quite right, how would you fix it?
 ]
 
-```{r fig.width=8, fig.height=3}
+```{r out.width="70%"}
 staff_long %>%
   ggplot(aes(x = percentage, y = year, color = faculty_type)) +
   geom_col(position = "dodge")
@@ -161,7 +165,7 @@ staff_long %>%
 
 ---
 
-```{r fig.width=8, fig.height=3}
+```{r out.width="80%"}
 staff_long %>%
   ggplot(aes(x = percentage, y = year, fill = faculty_type)) +
   geom_col(position = "dodge")
@@ -171,7 +175,7 @@ staff_long %>%
 
 ## Some improvement...
 
-```{r fig.width=8, fig.height=3}
+```{r out.width="80%"}
 staff_long %>%
   ggplot(aes(x = percentage, y = year, fill = faculty_type)) +
   geom_col()
@@ -181,7 +185,7 @@ staff_long %>%
 
 ## More improvement
 
-```{r fig.width=8, fig.height=3}
+```{r out.width="80%"}
 staff_long %>%
   ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
   geom_line()
@@ -189,11 +193,11 @@ staff_long %>%
 
 ---
 
-.discussion[
+.question[
 What is the difference between these two plots?
 ]
 
-```{r echo=FALSE, fig.width=6, fig.height=3}
+```{r echo=FALSE, out.width="70%", fig.asp=0.7}
 p1 <- staff_long %>%
   ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
   geom_line() +
@@ -211,7 +215,8 @@ p1 + p2 +
 
 ## Make year numeric again!
 
-```{r fig.width=6, fig.height=2}
+.small[
+```{r out.width="70%"}
 staff_long <- staff_long %>%
   mutate(year = as.numeric(year))
 
@@ -219,14 +224,15 @@ staff_long %>%
   ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
   geom_line()
 ```
+]
 
 ---
 
-.discussion[
+.question[
 How would you go about creating the following plot?
 ]
 
-```{r echo=FALSE, fig.width=6, fig.height=3}
+```{r echo=FALSE, out.width="80%"}
 staff_long %>%
   mutate(part_time = if_else(faculty_type == "Part-Time Faculty",
                              "Part-Time Faculty", 
@@ -439,7 +445,7 @@ rel_inc
 
 ## Rename columns
 
-.small[
+.midi[
 ```{r}
 rel_inc %>%
   rename(
@@ -451,7 +457,7 @@ rel_inc %>%
 
 --
 
-.discussion[
+.question[
 If we want a new variable called `income` with levels such as "Less than $30,000", "$30,000-$49,999", ... etc. which function should we use?
 ]
 
@@ -459,7 +465,7 @@ If we want a new variable called `income` with levels such as "Less than $30,000
 
 ## Pivot longer
 
-.small[
+.midi[
 ```{r}
 rel_inc %>%
   rename(
@@ -478,7 +484,7 @@ rel_inc %>%
 
 ## Calculate frequencies
 
-.small[
+.midi[
 ```{r}
 rel_inc %>%
   rename(
@@ -514,9 +520,9 @@ rel_inc_long <- rel_inc %>%
 
 ---
 
-## Start plotting
+## Religion
 
-```{r fig.height=2}
+```{r out.width="80%"}
 ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
   geom_col()
 ```
@@ -525,8 +531,11 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
 
 ## Reverse religion order
 
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency)) + #<<
+```{r out.width="80%"}
+rel_inc_long <- rel_inc_long %>%
+  mutate(religion = fct_rev(religion))
+
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) + #<<
   geom_col()
 ```
 
@@ -534,30 +543,66 @@ ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency)) + #<<
 
 ## Add income
 
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) + #<<
+```{r out.width="80%"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + #<<
   geom_col() 
 ```
 
 ---
 
-## Dodge bars
+## Fix income level ordering
+
+```{r}
+rel_inc_long <- rel_inc_long %>%
+  mutate(
+    income = fct_relevel(income, "$100,000 or more", #<<
+                         "$50,000-$99,999", "$30,000-$49,999", #<<
+                         "Less than $30,000") #<<
+    )
+```
+
+---
+
+## Plot again
+
+```{r}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
+  geom_col()
+```
+
+---
+
+## Fill bars
 
 .small[
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") #<<
+```{r out.width="80%"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") #<<
 ```
 ]
 
 ---
 
+## Change colors
+
+.small[
+```{r out.width="80%"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() #<<
+```
+]
+
+---
+
+
 ## Change theme
 
 .small[
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+```{r out.width="80%"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
   theme_minimal() #<<
 ```
 ]
@@ -566,10 +611,11 @@ ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
 
 ## Move legend to the bottom
 
-.small[
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+.midi[
+```{r bottom-legend, fig.show="hide"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
   theme_minimal() +
   theme(legend.position = "bottom") #<<
 ```
@@ -577,46 +623,66 @@ ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
 
 ---
 
-## Prettier colors
+## Move legend to the bottom (plot)
+
+```{r ref.label = "bottom-legend", echo=FALSE, out.width="80%"}
+```
+
+---
+
+## Legend adjustments
 
 .small[
-```{r fig.height=2}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+```{r legend-adjust, fig.show="hide"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
   theme_minimal() +
-  theme(legend.position = "bottom") +
-  scale_fill_viridis_d() #<<
+  theme(
+    legend.position = "bottom", 
+    legend.key.size = unit(0.3, "cm"), #<<
+    legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt") #<<
+    ) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) #<<
 ```
 ]
 
 ---
 
-## Fix labels
+## Legend adjustments (plot)
 
-```{r eval=FALSE}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
-  theme_minimal() +
-  theme(legend.position = "bottom") +
-  scale_fill_viridis_d() +
-  labs( #<<
-    x = "Frequency", y = "", #<<
-    title = "Income distribution by religious group", #<<
-    caption = "Source: pewforum.org/religious-landscape-study/income-distribution" #<<
-    ) #<<
+```{r ref.label = "legend-adjust", echo=FALSE, out.width="80%"}
 ```
 
 ---
 
-```{r echo=FALSE}
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
-  theme_minimal() +
-  theme(legend.position = "bottom") +
+## Fix labels
+
+.midi[
+```{r fix-labels, fig.show="hide"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
   scale_fill_viridis_d() +
-  labs( 
-    x = "Frequency", y = "", 
-    title = "Income distribution by religious group", 
-    caption = "Source: pewforum.org/religious-landscape-study/income-distribution" 
-    ) 
+  theme_minimal() +
+  theme(
+    legend.position = "bottom", 
+    legend.key.size = unit(0.3, "cm"), #<<
+    legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt") #<<
+    ) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+  labs(
+    x = "Frequency", y = "", #<<
+    title = "Income distribution by religious group", #<<
+    subtitle = "Source: Pew Research Center, Religious Landscape Study", #<<
+    fill = "Income"
+    )
 ```
+]
+
+---
+
+## Fix labels (plot)
+
+```{r ref.label = "fix-labels", echo=FALSE, out.width="80%"}
+```
+

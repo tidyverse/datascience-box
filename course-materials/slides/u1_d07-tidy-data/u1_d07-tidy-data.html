@@ -6,6 +6,12 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -75,14 +81,13 @@ staff
 
 ```
 ## # A tibble: 5 x 12
-##   faculty_type `1975` `1989` `1993` `1995` `1999` `2001` `2003` `2005` `2007` `2009`
-##   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Full-Time T…   29     27.6   25     24.8   21.8   20.3   19.3   17.8   17.2   16.8
-## 2 Full-Time T…   16.1   11.4   10.2    9.6    8.9    9.2    8.8    8.2    8      7.6
-## 3 Full-Time N…   10.3   14.1   13.6   13.6   15.2   15.5   15     14.8   14.9   15.1
-## 4 Part-Time F…   24     30.4   33.1   33.2   35.5   36     37     39.3   40.5   41.1
-## 5 Graduate St…   20.5   16.5   18.1   18.8   18.7   19     20     19.9   19.5   19.4
-## # … with 1 more variable: `2011` &lt;dbl&gt;
+##   faculty_type          `1975` `1989` `1993` `1995` `1999` `2001` `2003` `2005` `2007` `2009` `2011`
+##   &lt;chr&gt;                  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Full-Time Tenured Fa…   29     27.6   25     24.8   21.8   20.3   19.3   17.8   17.2   16.8   16.7
+## 2 Full-Time Tenure-Tra…   16.1   11.4   10.2    9.6    8.9    9.2    8.8    8.2    8      7.6    7.4
+## 3 Full-Time Non-Tenure…   10.3   14.1   13.6   13.6   15.2   15.5   15     14.8   14.9   15.1   15.4
+## 4 Part-Time Faculty       24     30.4   33.1   33.2   35.5   36     37     39.3   40.5   41.1   41.3
+## 5 Graduate Student Emp…   20.5   16.5   18.1   18.8   18.7   19     20     19.9   19.5   19.4   19.3
 ```
 
 ---
@@ -95,7 +100,7 @@ we will convert the data from the long format to wide format.
 
 But before we do so... 
 
-.discussion[
+.question[
 If the long data will have a row for each year/faculty type combination, 
 and there are 5 faculty types and 11 years of data, how many rows will the data have?
 ]
@@ -111,7 +116,7 @@ class: middle
 ## `pivot_*()` functions
 
 
-![](img/tidyr-longer-wider.gif)&lt;!-- --&gt;
+&lt;img src="img/tidyr-longer-wider.gif" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -150,19 +155,15 @@ staff %&gt;%
 
 ```
 ## # A tibble: 55 x 3
-##    faculty_type              year  percentage
-##    &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
-##  1 Full-Time Tenured Faculty 1975        29  
-##  2 Full-Time Tenured Faculty 1989        27.6
-##  3 Full-Time Tenured Faculty 1993        25  
-##  4 Full-Time Tenured Faculty 1995        24.8
-##  5 Full-Time Tenured Faculty 1999        21.8
-##  6 Full-Time Tenured Faculty 2001        20.3
-##  7 Full-Time Tenured Faculty 2003        19.3
-##  8 Full-Time Tenured Faculty 2005        17.8
-##  9 Full-Time Tenured Faculty 2007        17.2
-## 10 Full-Time Tenured Faculty 2009        16.8
-## # … with 45 more rows
+##   faculty_type              year  percentage
+##   &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
+## 1 Full-Time Tenured Faculty 1975        29  
+## 2 Full-Time Tenured Faculty 1989        27.6
+## 3 Full-Time Tenured Faculty 1993        25  
+## 4 Full-Time Tenured Faculty 1995        24.8
+## 5 Full-Time Tenured Faculty 1999        21.8
+## 6 Full-Time Tenured Faculty 2001        20.3
+## # … with 49 more rows
 ```
 
 ---
@@ -183,24 +184,20 @@ staff_long
 
 ```
 ## # A tibble: 55 x 3
-##    faculty_type              year  percentage
-##    &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
-##  1 Full-Time Tenured Faculty 1975        29  
-##  2 Full-Time Tenured Faculty 1989        27.6
-##  3 Full-Time Tenured Faculty 1993        25  
-##  4 Full-Time Tenured Faculty 1995        24.8
-##  5 Full-Time Tenured Faculty 1999        21.8
-##  6 Full-Time Tenured Faculty 2001        20.3
-##  7 Full-Time Tenured Faculty 2003        19.3
-##  8 Full-Time Tenured Faculty 2005        17.8
-##  9 Full-Time Tenured Faculty 2007        17.2
-## 10 Full-Time Tenured Faculty 2009        16.8
-## # … with 45 more rows
+##   faculty_type              year  percentage
+##   &lt;chr&gt;                     &lt;chr&gt;      &lt;dbl&gt;
+## 1 Full-Time Tenured Faculty 1975        29  
+## 2 Full-Time Tenured Faculty 1989        27.6
+## 3 Full-Time Tenured Faculty 1993        25  
+## 4 Full-Time Tenured Faculty 1995        24.8
+## 5 Full-Time Tenured Faculty 1999        21.8
+## 6 Full-Time Tenured Faculty 2001        20.3
+## # … with 49 more rows
 ```
 
 ---
 
-.discussion[
+.question[
 This doesn't look quite right, how would you fix it?
 ]
 
@@ -211,7 +208,7 @@ staff_long %&gt;%
   geom_col(position = "dodge")
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-8-1.png" width="2400" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -222,7 +219,7 @@ staff_long %&gt;%
   geom_col(position = "dodge")
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-9-1.png" width="2400" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -235,7 +232,7 @@ staff_long %&gt;%
   geom_col()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-10-1.png" width="2400" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -248,20 +245,21 @@ staff_long %&gt;%
   geom_line()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-11-1.png" width="2400" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-.discussion[
+.question[
 What is the difference between these two plots?
 ]
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-12-1.png" width="1800" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Make year numeric again!
 
+.small[
 
 ```r
 staff_long &lt;- staff_long %&gt;%
@@ -272,15 +270,16 @@ staff_long %&gt;%
   geom_line()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-13-1.png" width="1800" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-.discussion[
+.question[
 How would you go about creating the following plot?
 ]
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-14-1.png" width="1800" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -330,7 +329,7 @@ staff_long %&gt;%
 
 ---
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-17-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -358,11 +357,11 @@ staff_long %&gt;%
 
 ---
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-19-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-20-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -416,21 +415,15 @@ rel_inc &lt;- read_excel("data/relig-income.xlsx") # directly from Excel!
 
 ```
 ## # A tibble: 12 x 6
-##    `Religious trad… `Less than $30,… `$30,000-$49,99… `$50,000-$99,99… `$100,000 or mo…
-##    &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 "Buddhist"                  0.36              0.18            0.32             0.13 
-##  2 "Catholic"                  0.36              0.19            0.26             0.19 
-##  3 "Evangelical Pr…            0.35              0.22            0.28             0.14 
-##  4 "Hindu"                     0.17              0.13            0.34             0.36 
-##  5 "Historically B…            0.53              0.22            0.17             0.08 
-##  6 "Jehovah's Witn…            0.48              0.25            0.22             0.04 
-##  7 "Jewish"                    0.16              0.15            0.24             0.44 
-##  8 "Mainline Prote…            0.290             0.2             0.28             0.23 
-##  9 "Mormon"                    0.27              0.2             0.33             0.2  
-## 10 "Muslim"                    0.34              0.17            0.290            0.2  
-## 11 "Orthodox Chris…            0.18              0.17            0.36             0.290
-## 12 "Unaffiliated (…            0.33              0.2             0.26             0.21 
-## # … with 1 more variable: `Sample Size` &lt;dbl&gt;
+##   `Religious trad… `Less than $30,… `$30,000-$49,99… `$50,000-$99,99… `$100,000 or mo… `Sample Size`
+##   &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Buddhist                     0.36             0.18             0.32             0.13           233
+## 2 Catholic                     0.36             0.19             0.26             0.19          6137
+## 3 Evangelical Pro…             0.35             0.22             0.28             0.14          7462
+## 4 Hindu                        0.17             0.13             0.34             0.36           172
+## 5 Historically Bl…             0.53             0.22             0.17             0.08          1704
+## 6 Jehovah's Witne…             0.48             0.25             0.22             0.04           208
+## # … with 6 more rows
 ```
 ]
 
@@ -438,7 +431,7 @@ rel_inc &lt;- read_excel("data/relig-income.xlsx") # directly from Excel!
 
 ## Rename columns
 
-.small[
+.midi[
 
 ```r
 rel_inc %&gt;%
@@ -450,26 +443,21 @@ rel_inc %&gt;%
 
 ```
 ## # A tibble: 12 x 6
-##    religion     `Less than $30,0… `$30,000-$49,99… `$50,000-$99,99… `$100,000 or mo…     n
-##    &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt;
-##  1 "Buddhist"               0.36              0.18            0.32             0.13    233
-##  2 "Catholic"               0.36              0.19            0.26             0.19   6137
-##  3 "Evangelica…             0.35              0.22            0.28             0.14   7462
-##  4 "Hindu"                  0.17              0.13            0.34             0.36    172
-##  5 "Historical…             0.53              0.22            0.17             0.08   1704
-##  6 "Jehovah's …             0.48              0.25            0.22             0.04    208
-##  7 "Jewish"                 0.16              0.15            0.24             0.44    708
-##  8 "Mainline P…             0.290             0.2             0.28             0.23   5208
-##  9 "Mormon"                 0.27              0.2             0.33             0.2     594
-## 10 "Muslim"                 0.34              0.17            0.290            0.2     205
-## 11 "Orthodox C…             0.18              0.17            0.36             0.290   155
-## 12 "Unaffiliat…             0.33              0.2             0.26             0.21   6790
+##   religion             `Less than $30,00… `$30,000-$49,999` `$50,000-$99,99… `$100,000 or mor…     n
+##   &lt;chr&gt;                             &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt;
+## 1 Buddhist                           0.36              0.18             0.32              0.13   233
+## 2 Catholic                           0.36              0.19             0.26              0.19  6137
+## 3 Evangelical Protest…               0.35              0.22             0.28              0.14  7462
+## 4 Hindu                              0.17              0.13             0.34              0.36   172
+## 5 Historically Black …               0.53              0.22             0.17              0.08  1704
+## 6 Jehovah's Witness                  0.48              0.25             0.22              0.04   208
+## # … with 6 more rows
 ```
 ]
 
 --
 
-.discussion[
+.question[
 If we want a new variable called `income` with levels such as "Less than $30,000", "$30,000-$49,999", ... etc. which function should we use?
 ]
 
@@ -477,7 +465,7 @@ If we want a new variable called `income` with levels such as "Less than $30,000
 
 ## Pivot longer
 
-.small[
+.midi[
 
 ```r
 rel_inc %&gt;%
@@ -494,19 +482,15 @@ rel_inc %&gt;%
 
 ```
 ## # A tibble: 48 x 4
-##    religion                   n income            proportion
-##    &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
-##  1 Buddhist                 233 Less than $30,000       0.36
-##  2 Buddhist                 233 $30,000-$49,999         0.18
-##  3 Buddhist                 233 $50,000-$99,999         0.32
-##  4 Buddhist                 233 $100,000 or more        0.13
-##  5 Catholic                6137 Less than $30,000       0.36
-##  6 Catholic                6137 $30,000-$49,999         0.19
-##  7 Catholic                6137 $50,000-$99,999         0.26
-##  8 Catholic                6137 $100,000 or more        0.19
-##  9 Evangelical Protestant  7462 Less than $30,000       0.35
-## 10 Evangelical Protestant  7462 $30,000-$49,999         0.22
-## # … with 38 more rows
+##   religion     n income            proportion
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Buddhist   233 Less than $30,000       0.36
+## 2 Buddhist   233 $30,000-$49,999         0.18
+## 3 Buddhist   233 $50,000-$99,999         0.32
+## 4 Buddhist   233 $100,000 or more        0.13
+## 5 Catholic  6137 Less than $30,000       0.36
+## 6 Catholic  6137 $30,000-$49,999         0.19
+## # … with 42 more rows
 ```
 ]
 
@@ -514,7 +498,7 @@ rel_inc %&gt;%
 
 ## Calculate frequencies
 
-.small[
+.midi[
 
 ```r
 rel_inc %&gt;%
@@ -532,19 +516,15 @@ rel_inc %&gt;%
 
 ```
 ## # A tibble: 48 x 5
-##    religion                   n income            proportion frequency
-##    &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
-##  1 Buddhist                 233 Less than $30,000       0.36        84
-##  2 Buddhist                 233 $30,000-$49,999         0.18        42
-##  3 Buddhist                 233 $50,000-$99,999         0.32        75
-##  4 Buddhist                 233 $100,000 or more        0.13        30
-##  5 Catholic                6137 Less than $30,000       0.36      2209
-##  6 Catholic                6137 $30,000-$49,999         0.19      1166
-##  7 Catholic                6137 $50,000-$99,999         0.26      1596
-##  8 Catholic                6137 $100,000 or more        0.19      1166
-##  9 Evangelical Protestant  7462 Less than $30,000       0.35      2612
-## 10 Evangelical Protestant  7462 $30,000-$49,999         0.22      1642
-## # … with 38 more rows
+##   religion     n income            proportion frequency
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Buddhist   233 Less than $30,000       0.36        84
+## 2 Buddhist   233 $30,000-$49,999         0.18        42
+## 3 Buddhist   233 $50,000-$99,999         0.32        75
+## 4 Buddhist   233 $100,000 or more        0.13        30
+## 5 Catholic  6137 Less than $30,000       0.36      2209
+## 6 Catholic  6137 $30,000-$49,999         0.19      1166
+## # … with 42 more rows
 ```
 ]
 
@@ -569,7 +549,7 @@ rel_inc_long &lt;- rel_inc %&gt;%
 
 ---
 
-## Start plotting
+## Religion
 
 
 ```r
@@ -577,7 +557,7 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
   geom_col()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-29-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -585,11 +565,14 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
 
 
 ```r
-*ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency)) +
+rel_inc_long &lt;- rel_inc_long %&gt;%
+  mutate(religion = fct_rev(religion))
+
+*ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
   geom_col()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-30-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -597,95 +580,163 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
 
 
 ```r
-*ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
+*ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
   geom_col() 
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-31-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Dodge bars
+## Fix income level ordering
+
+
+```r
+rel_inc_long &lt;- rel_inc_long %&gt;%
+  mutate(
+*   income = fct_relevel(income, "$100,000 or more",
+*                        "$50,000-$99,999", "$30,000-$49,999",
+*                        "Less than $30,000")
+    )
+```
+
+---
+
+## Plot again
+
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
+  geom_col()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Fill bars
 
 .small[
 
 ```r
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-* geom_col(position = "dodge")
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+* geom_col(position = "fill")
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-32-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
+
+## Change colors
+
+.small[
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+* scale_fill_viridis_d()
+```
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
 
 ## Change theme
 
 .small[
 
 ```r
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
 * theme_minimal()
 ```
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-33-1.png" width="1500" /&gt;
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 ## Move legend to the bottom
 
-.small[
+.midi[
 
 ```r
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
   theme_minimal() +
 * theme(legend.position = "bottom")
 ```
-
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-34-1.png" width="1500" /&gt;
 ]
 
 ---
 
-## Prettier colors
+## Move legend to the bottom (plot)
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Legend adjustments
 
 .small[
 
 ```r
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
   theme_minimal() +
-  theme(legend.position = "bottom") +
-* scale_fill_viridis_d()
+  theme(
+    legend.position = "bottom", 
+*   legend.key.size = unit(0.3, "cm"),
+*   legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt")
+    ) +
+* guides(fill = guide_legend(nrow = 2, byrow = TRUE))
 ```
-
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-35-1.png" width="1500" /&gt;
 ]
+
+---
+
+## Legend adjustments (plot)
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Fix labels
 
+.midi[
 
 ```r
-ggplot(rel_inc_long, aes(y = fct_rev(religion), x = frequency, fill = income)) +
-  geom_col(position = "dodge") +
-  theme_minimal() +
-  theme(legend.position = "bottom") +
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
   scale_fill_viridis_d() +
-* labs(
+  theme_minimal() +
+  theme(
+    legend.position = "bottom", 
+*   legend.key.size = unit(0.3, "cm"),
+*   legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt")
+    ) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+  labs(
 *   x = "Frequency", y = "",
 *   title = "Income distribution by religious group",
-*   caption = "Source: pewforum.org/religious-landscape-study/income-distribution"
-*   )
+*   subtitle = "Source: Pew Research Center, Religious Landscape Study",
+    fill = "Income"
+    )
 ```
+]
 
 ---
 
-&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-37-1.png" width="1500" /&gt;
+## Fix labels (plot)
+
+&lt;img src="u1_d07-tidy-data_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

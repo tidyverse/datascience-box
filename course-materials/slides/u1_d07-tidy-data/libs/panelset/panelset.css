@@ -1,0 +1,94 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
+
+.panelset {
+  width: 100%;
+  position: relative;
+  --panel-tabs-border-bottom: #ddd;
+  --panel-tab-color: currentColor;
+  --panel-tab-color-active: currentColor;
+  --panel-tab-color-hover: currentColor;
+  --panel-tab-background-color: unset;
+  --panel-tab-background-color-active: unset;
+  --panel-tab-background-color-hover: unset;
+  --panel-tab-border-color-active: currentColor;
+  --panel-tab-border-color-hover: currentColor;
+  --panel-tab-inactive-opacity: 0.5;
+  --panel-tab-font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+}
+
+.panelset * {
+  box-sizing: border-box;
+}
+
+.panelset .panel-tabs {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+          align-items: center;
+  border-bottom: 2px solid var(--panel-tabs-border-bottom);
+  padding: 0;
+}
+
+.panelset .panel-tabs * {
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.panelset .panel-tabs .panel-tab {
+  min-height: 50px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  padding: 0.5em 1em;
+  font-family: var(--panel-tab-font-family);
+  opacity: var(--panel-tab-inactive-opacity);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: var(--panel-tab-color);
+  background-color: var(--panel-tab-background-color);
+  list-style: none;
+}
+
+.panelset .panel-tabs .panel-tab > a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.panelset .panel-tabs .panel-tab:hover {
+  border-bottom-color: var(--panel-tab-border-color-hover);
+  color: var(--panel-tab-color-hover);
+  background-color: var(--panel-tab-background-color-hover);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.panelset .panel-tabs .panel-tab:focus {
+  outline: none;
+  color: var(--panel-tab-color-hover);
+  border-bottom-color: var(--panel-tab-border-color-hover);
+  background-color: var(--panel-tab-background-color-hover);
+}
+
+.panelset .panel-tabs .panel-tab.panel-tab-active {
+  border-top-color: var(--panel-tab-border-color-active);
+  color: var(--panel-tab-color-active);
+  background-color: var(--panel-tab-background-color-active);
+  opacity: 1;
+}
+
+.panelset .panel {
+  display: none;
+}
+
+.panelset .panel-active {
+  display: block;
+}
