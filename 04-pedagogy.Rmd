@@ -9,12 +9,12 @@ The following resources describe the pedagogy used in designing and teaching a c
 > Mine Çetinkaya-Rundel & Victoria Ellison (In press), A fresh look at introductory data science, *Journal of Statistics Education*.
 > [doi.org/10.1080/10691898.2020.1804497](https://doi.org/10.1080/10691898.2020.1804497).
 
-> Talk: The art and science of teaching data science [Slides](https://speakerdeck.com/minecr/the-art-and-science-of-teaching-data-science-university-of-glasgow)
+> Talk: The art and science of teaching data science [[Slides]](https://speakerdeck.com/minecr/the-art-and-science-of-teaching-data-science-university-of-glasgow)
 
-> Talk: Data Science in a Box [Slides](https://speakerdeck.com/minecr/data-science-in-a-box) [Video](https://www.youtube.com/watch?v=tYGLYdeFJMc)
+> Talk: Data Science in a Box [[Slides]](https://speakerdeck.com/minecr/data-science-in-a-box) [[Video]](https://www.youtube.com/watch?v=tYGLYdeFJMc)
 
 > Talk: Let them eat cake (first)!
-> [Slides]<https://speakerdeck.com/minecr/let-them-eat-cake-first>) [Video](https://www.youtube.com/embed/RsVOrpXAPXo?start=1009)
+> [[Slides]](https://speakerdeck.com/minecr/let-them-eat-cake-first) [[Video]](https://www.youtube.com/embed/RsVOrpXAPXo?start=1009)
 
 ## Teaching the tidyverse
 
