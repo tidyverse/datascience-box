@@ -10,12 +10,20 @@ Statistical inference is introduced from a simulation based perspective, and the
 **Unit 2 - Deck 1: The language of models**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d1-language-of-models/u2_d1-language-of-models.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d1-language-of-models)
+
+::: {.reading}
+[IMS :: Sec 3.1 - Fitting a line, residuals, and correlation](https://openintro-ims.netlify.app/intro-linear-models.html#fit-line-res-cor)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 2 - Deck 2: Linear models with a single predictor**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d2-linear-model-single-predictor/u2_d2-linear-model-single-predictor.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d2-linear-model-single-predictor)
+
+::: {.reading}
+[IMS :: Sec 3.2 - Least squares regression](https://openintro-ims.netlify.app/intro-linear-models.html#least-squares-regression)
+:::
 :::
 
 ::: {.slide-deck}
@@ -28,12 +36,20 @@ Statistical inference is introduced from a simulation based perspective, and the
 **Unit 2 - Deck 4: Linear models with multiple predictors**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d4-linear-model-multiple-predictors/u2_d4-linear-model-multiple-predictors.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d4-linear-model-multiple-predictors)
+
+::: {.reading}
+[IMS :: Sec 4.1 - Regression with multiple predictors](https://openintro-ims.netlify.app/multi-logistic-models.html#regression-multiple-predictors)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 2 - Deck 5: Model selection**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d5-model-selection/u2_d5-model-selection.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d5-model-selection)
+
+::: {.reading}
+[IMS :: Sec 4.2 - Model selection](https://openintro-ims.netlify.app/multi-logistic-models.html#model-selection)
+:::
 :::
 
 ::: {.slide-deck}
@@ -46,18 +62,30 @@ Statistical inference is introduced from a simulation based perspective, and the
 **Unit 2 - Deck 7: Logistic regression and classification**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d7-logistic-regression/u2_d7-logistic-regression.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d7-logistic-regression)
+
+::: {.reading}
+[IMS :: Sec 4.5 - Logistic regression](https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 2 - Deck 8: Quantifying uncertainty**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d8-quantifying-uncertainty/u2_d8-quantifying-uncertainty.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d8-quantifying-uncertainty)
+
+::: {.reading}
+[IMS :: Sec 5.2 - Bootstrap confidence intervals](https://openintro-ims.netlify.app/intro-stat-inference.html#boot-ci)
+:::
 :::
 
 ::: {.slide-deck}
 **Unit 2 - Deck 9: Hypothesis testing with randomization**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d9-hypothesis-testing/u2_d9-hypothesis-testing.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d9-hypothesis-testing)
+
+::: {.reading}
+[IMS :: Sec 5.1 - Randomization tests](https://openintro-ims.netlify.app/intro-stat-inference.html#inf-rand)
+:::
 :::
 
 ::: {.slide-deck}
