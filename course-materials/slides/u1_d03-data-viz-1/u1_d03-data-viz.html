@@ -88,6 +88,10 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
 &lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -243,6 +247,10 @@ What does each column represent?]
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point()
+```
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
 &lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;

@@ -17,11 +17,149 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(patchwork)
 library(knitr)
 library(DT)
 library(here)
+library(scales)
 ```
+
+class: middle
+
+# Why should you care about data types?
+
+---
+
+## Example: Cat lovers
+
+A survey asked respondents their name and number of cats. The instructions said to enter the number of cats as a numerical value.
+
+```{r message=FALSE}
+cat_lovers <- read_csv("data/cat-lovers.csv")
+```
+
+```{r echo=FALSE}
+cat_lovers
+```
+
+---
+
+## Oh why won't you work?!
+
+```{r}
+cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+```{r eval=FALSE}
+?mean
+```
+
+```{r echo=FALSE, caption="Help for mean", out.width="80%", fig.align="center"}
+include_graphics("img/mean-help.png")
+```
+
+---
+
+## Oh why won't you still work??!!
+
+```{r}
+cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats, na.rm = TRUE))
+```
+
+---
+
+## Take a breath and look at your data
+
+.question[
+What is the type of the `number_of_cats` variable?
+]
+
+```{r}
+glimpse(cat_lovers)
+```
+
+---
+
+## Let's take another look
+
+.small[
+```{r echo=FALSE}
+cat_lovers %>%
+  datatable()
+```
+]
+
+---
+
+## You might need to babysit your respondents
+
+.midi[
+```{r}
+cat_lovers %>%
+  mutate(number_of_cats = case_when(
+    name == "Ginger Clark" ~ 2,
+    name == "Doug Bass"    ~ 3,
+    TRUE                   ~ as.numeric(number_of_cats)
+    )) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+]
+
+---
+
+## Always you need to respect data types
+
+```{r}
+cat_lovers %>%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    ) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+## Now that we know what we're doing...
+
+```{r}
+cat_lovers <- cat_lovers %>% #<<
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    )
+```
+
+---
+
+## Moral of the story
+
+- If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
+- Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
+
+---
+
+class: middle
+
+.hand-blue[now that we have a good motivation for]  
+.hand-blue[learning about data types in R]
+
+<br>
+
+.hand-blue[let's learn about data types in R!]
+
+---
 
 class: middle
 
@@ -285,125 +423,6 @@ typeof(c(1, "a"))
 
 ---
 
-## Example: Cat lovers
-
-A survey asked respondents their name and number of cats. The instructions said to enter the number of cats as a numerical value.
-
-```{r message=FALSE}
-cat_lovers <- read_csv("data/cat-lovers.csv")
-```
-
-```{r echo=FALSE}
-cat_lovers
-```
-
----
-
-## Oh why won't you work?!
-
-```{r}
-cat_lovers %>%
-  summarise(mean = mean(number_of_cats))
-```
-
----
-
-```{r eval=FALSE}
-?mean
-```
-
-```{r echo=FALSE, caption="Help for mean", out.width="80%", fig.align="center"}
-include_graphics("img/mean-help.png")
-```
-
----
-
-## Oh why won't you still work??!!
-
-```{r}
-cat_lovers %>%
-  summarise(mean_cats = mean(number_of_cats, na.rm = TRUE))
-```
-
----
-
-## Take a breath and look at your data
-
-.question[
-What is the type of the `number_of_cats` variable?
-]
-
-```{r}
-glimpse(cat_lovers)
-```
-
----
-
-## Let's take another look
-
-.small[
-```{r echo=FALSE}
-cat_lovers %>%
-  datatable()
-```
-]
-
----
-
-## You might need to babysit your respondents
-
-```{r}
-cat_lovers %>%
-  mutate(number_of_cats = case_when(
-    name == "Ginger Clark" ~ 2,
-    name == "Doug Bass"    ~ 3,
-    TRUE                   ~ as.numeric(number_of_cats)
-    )) %>%
-  summarise(mean_cats = mean(number_of_cats))
-```
-
----
-
-## Always you need to respect data types
-
-```{r}
-cat_lovers %>%
-  mutate(
-    number_of_cats = case_when(
-      name == "Ginger Clark" ~ "2",
-      name == "Doug Bass"    ~ "3",
-      TRUE                   ~ number_of_cats
-      ),
-    number_of_cats = as.numeric(number_of_cats)
-    ) %>%
-  summarise(mean_cats = mean(number_of_cats))
-```
-
----
-
-## Now that we know what we're doing...
-
-```{r}
-cat_lovers <- cat_lovers %>% #<<
-  mutate(
-    number_of_cats = case_when(
-      name == "Ginger Clark" ~ "2",
-      name == "Doug Bass"    ~ "3",
-      TRUE                   ~ number_of_cats
-      ),
-    number_of_cats = as.numeric(number_of_cats)
-    )
-```
-
----
-
-## Moral of the story
-
-- If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
-- Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
-
----
-
 class: middle
 
 # Data "set"
@@ -653,9 +672,9 @@ include_graphics("img/forcats-part-of-tidyverse.png")
 ]
 
 ```{r fig.height=3, fig.width=9, echo=FALSE, message=FALSE, warning=FALSE}
-library(scales)
 hotels <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv")
 hotels %>%
+  mutate(arrival_date_month = fct_relevel(arrival_date_month, month.name)) %>%
   group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month
   summarise(mean_adr = mean(adr)) %>%       # calculate mean_adr for each group
   ggplot(aes(
@@ -701,7 +720,6 @@ class: middle
 .hand-blue[
 we're just going to scratch the surface of working with dates in R here...
 ]
-
 
 ---
 

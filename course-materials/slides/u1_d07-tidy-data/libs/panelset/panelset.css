@@ -4,14 +4,14 @@
   width: 100%;
   position: relative;
   --panel-tabs-border-bottom: #ddd;
-  --panel-tab-color: currentColor;
-  --panel-tab-color-active: currentColor;
-  --panel-tab-color-hover: currentColor;
-  --panel-tab-background-color: unset;
-  --panel-tab-background-color-active: unset;
-  --panel-tab-background-color-hover: unset;
-  --panel-tab-border-color-active: currentColor;
-  --panel-tab-border-color-hover: currentColor;
+  --panel-tab-foreground: currentColor;
+  --panel-tab-background: unset;
+  --panel-tab-active-foreground: currentColor;
+  --panel-tab-active-background: unset;
+  --panel-tab-hover-foreground: currentColor;
+  --panel-tab-hover-background: unset;
+  --panel-tab-active-border-color: currentColor;
+  --panel-tab-hover-border-color: currentColor;
   --panel-tab-inactive-opacity: 0.5;
   --panel-tab-font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 }
@@ -23,6 +23,7 @@
 .panelset .panel-tabs {
   display: -webkit-box;
   display: flex;
+  flex-wrap: wrap;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-direction: row;
@@ -30,8 +31,11 @@
           justify-content: start;
   -webkit-box-align: center;
           align-items: center;
-  border-bottom: 2px solid var(--panel-tabs-border-bottom);
-  padding: 0;
+  overflow-y: visible;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 2px 0;
+  box-shadow: inset 0 -2px 0px var(--panel-tabs-border-bottom);
 }
 
 .panelset .panel-tabs * {
@@ -53,9 +57,10 @@
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
-  color: var(--panel-tab-color);
-  background-color: var(--panel-tab-background-color);
+  color: var(--panel-tab-foreground);
+  background-color: var(--panel-tab-background);
   list-style: none;
+  z-index: 5;
 }
 
 .panelset .panel-tabs .panel-tab > a {
@@ -63,25 +68,30 @@
   text-decoration: none;
 }
 
+.panelset .panel-tabs .panel-tab > a:focus {
+  outline: none;
+}
+
 .panelset .panel-tabs .panel-tab:hover {
-  border-bottom-color: var(--panel-tab-border-color-hover);
-  color: var(--panel-tab-color-hover);
-  background-color: var(--panel-tab-background-color-hover);
+  border-bottom-color: var(--panel-tab-hover-border-color);
+  color: var(--panel-tab-hover-foreground);
+  background-color: var(--panel-tab-hover-background);
   opacity: 1;
   cursor: pointer;
+  z-index: 10;
 }
 
 .panelset .panel-tabs .panel-tab:focus {
   outline: none;
-  color: var(--panel-tab-color-hover);
-  border-bottom-color: var(--panel-tab-border-color-hover);
-  background-color: var(--panel-tab-background-color-hover);
+  color: var(--panel-tab-hover-foreground);
+  border-bottom-color: var(--panel-tab-hover-border-color);
+  background-color: var(--panel-tab-hover-background);
 }
 
 .panelset .panel-tabs .panel-tab.panel-tab-active {
-  border-top-color: var(--panel-tab-border-color-active);
-  color: var(--panel-tab-color-active);
-  background-color: var(--panel-tab-background-color-active);
+  border-top-color: var(--panel-tab-active-border-color);
+  color: var(--panel-tab-active-foreground);
+  background-color: var(--panel-tab-active-background);
   opacity: 1;
 }
 

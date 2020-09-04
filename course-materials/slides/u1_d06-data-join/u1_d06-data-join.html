@@ -164,6 +164,19 @@ fisheries %&gt;%
 ```
 
 ```
+## Warning: Predicate functions must be wrapped in `where()`.
+## 
+##   # Bad
+##   data %&gt;% select(is.numeric)
+## 
+##   # Good
+##   data %&gt;% select(where(is.numeric))
+## 
+## ℹ Please update your code.
+## This message is displayed once per session.
+```
+
+```
 ## # A tibble: 1 x 3
 ##   capture aquaculture   total
 ##     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;

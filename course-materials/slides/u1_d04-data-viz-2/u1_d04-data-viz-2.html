@@ -83,6 +83,10 @@ ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
 ```
 
+```
+## Warning: Removed 6 rows containing non-finite values (stat_bin).
+```
+
 &lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-2-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -93,6 +97,10 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ```r
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_density()
+```
+
+```
+## Warning: Removed 6 rows containing non-finite values (stat_density).
 ```
 
 &lt;img src="u1_d04-data-viz-2_files/figure-html/unnamed-chunk-3-1.png" width="75%" style="display: block; margin: auto;" /&gt;

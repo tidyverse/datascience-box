@@ -14,7 +14,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width = "100%",
                       fig.align = "center",
                       dpi = 300,
-                      warning = FALSE,
                       message = FALSE)
 # set seed
 set.seed(1234)
