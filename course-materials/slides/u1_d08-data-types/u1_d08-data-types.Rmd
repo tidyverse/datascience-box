@@ -17,9 +17,7 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(knitr)
 library(DT)
-library(here)
 library(scales)
 ```
 
@@ -163,18 +161,17 @@ class: middle
 
 class: middle
 
-# Data classes and types
+# Data types
 
 ---
 
 ## Data types in R
 
-* **logical**
-* **double**
-* **integer**
-* **character**
-* **lists**
-* and some more, but we won't be focusing on those
+- **logical**
+- **double**
+- **integer**
+- **character**
+- and some more, but we won't be focusing on those
 
 ---
 
@@ -218,58 +215,6 @@ typeof(1:3)
 
 ---
 
-## Lists
-
-**Lists** are 1d objects that can contain any combination of R objects
-
-.pull-left[
-.midi[
-```{r}
-mylist <- list(
-  "A", 
-  1:4, 
-  c(TRUE, FALSE), 
-  (1:4)/2
-  )
-mylist
-```
-]
-]
-.pull-right[
-```{r}
-str(mylist)
-```
-]
-
----
-
-## Named lists
-
-Because of their more complex structure we often want to name the elements of a list (we 
-can also do this with vectors). This can make reading and accessing the list more 
-straight forward.
-
-.pull-left[
-```{r}
-myotherlist <- list(
-  A = "hello", 
-  B = 1:4, 
-  "knock knock" = "who's there?"
-  )
-```
-]
-.pull-right[
-.midi[
-```{r}
-str(myotherlist)
-names(myotherlist)
-myotherlist$B
-```
-]
-]
-
----
-
 ## Concatenation
 
 Vectors can be constructed using the `c()` function.
@@ -277,117 +222,66 @@ Vectors can be constructed using the `c()` function.
 ```{r}
 c(1, 2, 3)
 c("Hello", "World!")
-c(1, c(2, c(3)))
+c(c("hi", "hello"), c("bye", "jello"))
 ```
 
 ---
 
+## Converting between types
 
-## Vectors vs. lists
+.hand[with intention...]
 
 .pull-left[
-```{r, error=TRUE}
-x <- c(8,4,7)
-```
 ```{r}
-x[1]
-```
-```{r}
-x[[1]]
+x <- 1:3
+x
+typeof(x)
+y <- as.character(x)
+y
+typeof(y)
 ```
 ]
 --
 .pull-right[
 ```{r}
-y <- list(8,4,7)
-```
-```{r}
-y[2]
-```
-```{r}
-y[[2]]
+x <- c(TRUE, FALSE)
+x
+typeof(x)
+y <- as.numeric(x)
+y
+typeof(y)
 ```
 ]
 
---
-
-<br>
-
-**Note:** When using tidyverse code you'll rarely need to refer to elements using square brackets, but it's good to be aware of this syntax, especially since you might encounter it when searching for help online.
-
 ---
 
-```{r echo=FALSE, caption="Hadley Wickham's tweet on indexing with salt and pepper shakers", out.width="80%", fig.align="center"}
-include_graphics("img/hadley-salt-pepper.png")
-```
+## Converting between types
 
----
+.hand[without intention...]
 
-## Type coercion
+R will happily convert between various types without complaint when different types of data are concatenated in a vector, and that's not always a great thing!
 
-R will happily convert between the various types without complaint.
-
+.pull-left[
 ```{r}
 c(1, "Hello")
 c(FALSE, 3L)
-c(1.2, 3L)
-```
-
---
-
-...and that's not alwas a great thing!
-
----
-
-## Missing Values
-
-R uses `NA` to represent missing values in its data structures.
-
-```{r}
-typeof(NA)
-```
-
----
-
-## `NA`s are special `r emo::ji('snowflake')`s
-
-```{r}
-x <- c(1, 2, 3, 4, NA)
-```
-
-```{r}
-mean(x)
-mean(x, na.rm = TRUE)
-summary(x)
-```
-
-
----
-
-## Other Special Values
-
-`NaN` - Not a number
-
-`Inf` - Positive infinity
-
-`-Inf` - Negative infinity
-
---
-
-.pull-left[
-```{r}
-pi / 0
-0 / 0
-1/0 + 1/0
 ```
 ]
 .pull-right[
 ```{r}
-1/0 - 1/0
-NaN / NA
-NaN * NA
+c(1.2, 3L)
+c(2L, "two")
 ```
 ]
+
+---
+
+## Explicit vs. implicit coercion
+
+Let's give formal names to what we've seen so far:
+
+- **Explicit coercion** is when you call a function like `as.logical()`, `as.numeric()`, `as.integer()`, `as.double()`, or `as.character()`.
+- **Implicit coercion** happens when you use a vector in a specific context that expects a certain type of vector. 
 
 ---
 
@@ -425,198 +319,241 @@ typeof(c(1, "a"))
 
 class: middle
 
-# Data "set"
+# Special values
 
 ---
 
-## Data "sets" in R
+## Special values
 
-- "set" is in quotation marks because it is not a formal data class
+- `NA`: Not available
+- `NaN`: Not a number
+- `Inf`: Positive infinity
+- `-Inf`: Negative infinity
+
 --
 
-- A tidy data "set" can be one of the following types:
-    + `tibble`
-    + `data.frame`
---
-- We'll often work with `tibble`s:
-    + `readr` package (e.g. `read_csv` function) loads data as a `tibble` by default
-    + `tibble`s are part of the tidyverse, so they work well with other packages we are using
-    + they make minimal assumptions about your data, so are less likely to cause hard to track bugs in your code
+.pull-left[
+```{r}
+pi / 0
+0 / 0
+```
+]
+.pull-right[
+```{r}
+1/0 - 1/0
+1/0 + 1/0
+```
+]
 
 ---
 
-## Data frames
+## `NA`s are special `r emo::ji('snowflake')`s
 
-- A data frame is the most commonly used data structure in R: it is a list of equal length vectors. 
---
+```{r}
+x <- c(1, 2, 3, 4, NA)
+```
 
-- Each vector is treated as a column and elements of the vectors as rows.
---
-
-- A tibble is a type of data frame that makes your life (i.e. data analysis) easier.
+```{r}
+mean(x)
+mean(x, na.rm = TRUE)
+summary(x)
+```
 
 ---
 
-## Constructing data frames
+## `NA`s are logical
 
-- Most often a data frame will be constructed by reading in from a file
-- But we can also create them from scratch.
+R uses `NA` to represent missing values in its data structures.
 
+```{r}
+typeof(NA)
+```
+
+---
+
+## Mental model for `NA`s
+
+- Unlike `NaN`, `NA`s are genuinely unknown values
+- But that doesn't mean they can't function in a logical way
+- Let's think about why `NA`s are logical...
+
+--
+
+.question[
+Why do the following give different answers?
+]
+.pull-left[
+```{r}
+# TRUE or NA
+TRUE | NA
+```
+]
+.pull-right[
+```{r}
+# FALSE or NA
+FALSE | NA
+```
+]
+
+$\rightarrow$ See next slide for answers...
+
+---
+
+- `NA` is unknown, so it could be `TRUE` or `FALSE`
+
+.pull-left[
 .midi[
-.pull-left[
+- `TRUE` or `TRUE` is `TRUE` and `TRUE` or `FALSE` is also `TRUE`, and since both are `TRUE`
 ```{r}
-df <- tibble(
-  x = 1:3, 
-  y = c("a", "b", "c")
-  )
-class(df)
-glimpse(df)
+TRUE | TRUE
+FALSE | TRUE
 ```
 ]
+]
+
 .pull-right[
+.midi[
+- `FALSE` or `TRUE` is `TRUE` and `FALSE` or `FALSE` is also `FALSE`, so you you can't tell which should be the right answer
 ```{r}
-df <- tribble(
-  ~x, ~y,
-  1,  "a",
-  2,  "b",
-  3,  "c"
-)
-df
+FALSE | TRUE
+FALSE | FALSE
 ```
 ]
 ]
 
----
-
-## Working with data frames in pipelines
-
-.question[
-How many respondents have below average number of cats?
-]
-
---
-
-```{r}
-mean_cats <- cat_lovers %>%
-  summarise(mean_cats = mean(number_of_cats))
-
-cat_lovers %>%
-  filter(number_of_cats < mean_cats) %>%
-  nrow()
-```
-
---
-
-.question[
-Do you believe this number? Why, why not?
-]
-
----
-
-## A result of a pipeline is always a data frame
-
-```{r}
-mean_cats
-class(mean_cats)
-```
-
----
-
-## `pull()` can be your new best friend
-
-But use it sparingly!
-
-```{r}
-mean_cats <- cat_lovers %>%
-  summarise(mean_cats = mean(number_of_cats)) %>%
-  pull() #<<
-mean_cats
-class(mean_cats)
-```
-
-```{r}
-cat_lovers %>%
-  filter(number_of_cats < mean_cats) %>%
-  nrow()
-```
-
---
-
-.pull-left[
-```{r}
-mean_cats
-```
-]
-.pull-right[
-```{r}
-class(mean_cats)
-```
-]
-
----
-
-## to conlcude discussion on data frames / tibbles...
-
-.pull-left[
-```{r echo=FALSE, out.width="60%",fig.align="center"}
-include_graphics("img/tibble-part-of-tidyverse.png")
-```
-]
-.pull-right[
-- **tibble** is also the name of the Tidyverse package that implements this data type
-- But you rarely need to directly load this package since `library(tidyverse)` takes care of it
-- And you rarely need to use functions from this package for data wrangling and visualisation, except when you're manually creating your data frames for a short example with `tibble()` or `tribble()`
-]
-
----
-
-## Recap
-
-- Always best to think of data as part of a tibble
-    + This plays nicely with the `tidyverse` as well
-    + Rows are observations, columns are variables
---
-- Be careful about data types / classes
-    + Sometimes `R` makes silly assumptions about your data class 
-        + Using `tibble`s help, but it might not solve all issues
-        + Think about your data in context, e.g. 0/1 variable is most likely a `factor`
-    + If a plot/output is not behaving the way you expect, first
-    investigate the data class
-    + If you are absolutely sure of a data class, overwrite it in your
-    tibble so that you don't need to keep having to keep track of it
-        + `mutate` the variable with the correct class
-        
----
-
-## Two data types worth knowing your way around
-
-- .huge-blue[factors]
-
-- .huge-blue[dates]
+- Doesn't make sense for mathematical operations but make sense in the context of missing data
 
 ---
 
 class: middle
 
-# Factors
+# Data classes
 
+---
+
+## Data classes
+
+We talked about *types* so far, next we'll introduce the concept of *classes*
+
+- Vectors are like Lego building blocks
+- We stick them together to build more complicated constructs, e.g. *representations of data*
+- The **class** attribute relates to the S3 class of an object which determines its behaviour
+  - You don't need to worry about what S3 classes really mean, but you can read more about it [here](https://adv-r.hadley.nz/s3.html#s3-classes) if you're curious
+- Examples: factors, dates, and data frames
+  
 ---
 
 ## Factors
 
-Factor objects are how R stores data for categorical variables (fixed numbers of discrete values).
+R uses factors to handle categorical variables, variables that have a fixed and known set of possible values
 
 ```{r}
-(x = factor(c("BS", "MS", "PhD", "MS")))
+x <- factor(c("BS", "MS", "PhD", "MS"))
+x
 ```
 
-```{r}
-glimpse(x)
-```
-
+.pull-left[
 ```{r}
 typeof(x)
 ```
+]
+.pull-right[
+```{r}
+class(x)
+```
+]
+
+
+---
+
+## More on factors
+
+We can think of factors like character (level labels) and an integer (level numbers) glued together
+
+```{r}
+glimpse(x)
+as.integer(x)
+```
+
+---
+
+## Dates
+
+```{r}
+y <- as.Date("2020-01-01")
+y
+typeof(y)
+class(y)
+```
+
+---
+
+## More on dates
+
+We can think of factors like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
+
+```{r}
+as.integer(y)
+as.integer(y) / 365 # roughly 50 yrs
+```
+
+---
+
+## Data frames
+
+We can think of data frames like like vectors of equal length glued together
+
+```{r}
+df <- data.frame(x = 1:2, y = 3:4)
+df
+```
+
+.pull-left[
+```{r}
+typeof(df)
+```
+]
+.pull-right[
+```{r}
+class(df)
+```
+]
+
+---
+
+## Lists
+
+Lists are a generic vector container vectors of any type can go in them
+
+```{r}
+l <- list(
+  x = 1:4,
+  y = c("hi", "hello", "jello"),
+  z = c(TRUE, FALSE)
+)
+l
+```
+
+---
+
+## Lists and data frames
+
+- A data frame is a special list containing vectors of equal length
+- When we use the `pull()` function, we extract a vector from the data frame
+
+```{r}
+df
+
+df %>%
+  pull(y)
+```
+
+
+---
+
+class: middle
+
+# Working with factors
 
 ---
 
@@ -639,7 +576,7 @@ ggplot(cat_lovers, mapping = aes(x = handedness)) +
 
 ## Use forcats to manipulate factors
 
-```{r fig.retina=3, fig.height=2, fig.width=6}
+```{r out.width="70%"}
 cat_lovers %>%
   mutate(handedness = fct_infreq(handedness)) %>% #<<
   ggplot(mapping = aes(x = handedness)) +
@@ -658,20 +595,20 @@ cat_lovers %>%
 include_graphics("img/forcats-part-of-tidyverse.png")
 ```
 ]
-
-- R uses factors to handle categorical variables, variables that have a fixed and known set of possible values
 - Factors are useful when you have true categorical data and you want to override the ordering of character vectors to improve display
 - They are also useful in modeling scenarios
 - The **forcats** package provides a suite of useful tools that solve common problems with factors
 
 ---
 
+.small[
 .your-turn[
-- [RStudio Cloud](http://rstd.io/dsbox-cloud) > start `AE 06 - Hotels + Data types` > open `hotels-forcats.Rmd` and knit.
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 06 - Hotels + Data types` > `hotels-forcats.Rmd` > knit
 - Recreate the following. The x-axis first, then, as a stretch goal, the y-axis.
 ]
+]
 
-```{r fig.height=3, fig.width=9, echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, out.width="100%", fig.asp=0.4}
 hotels <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv")
 hotels %>%
   mutate(arrival_date_month = fct_relevel(arrival_date_month, month.name)) %>%
@@ -689,15 +626,16 @@ hotels %>%
   labs(x = "Arrival month",                 # customize labels
        y = "Mean ADR (average daily rate)",
        title = "Comparison of resort and city hotel prices across months",
-       subtitle = "Resort hotel prices soar in the summer while city hotel prices remain relatively constant throughout the year",
-       color = "Hotel type")
+       subtitle = "Resort hotel prices soar in the summer while city hotel prices remain\nrelatively constant throughout the year",
+       color = "Hotel type") +
+  scale_x_discrete(guide = guide_axis(check.overlap = TRUE))
 ```
 
 ---
 
 class: middle
 
-# Dates
+# Working with dates
 
 ---
 
@@ -734,7 +672,7 @@ hotels %>%
 
 ---
 
-### Step 1. Put together dates.
+## Step 1. Put together dates.
 
 .midi[
 ```{r}
@@ -750,7 +688,7 @@ hotels %>%
 
 ---
 
-### Step 2. Count number of bookings per date.
+## Step 2. Count number of bookings per date.
 
 .midi[
 ```{r}
@@ -762,16 +700,15 @@ hotels %>%
 
 ---
 
-### Step 3. Visualise number of bookings per date.
+## Step 3. Visualise number of bookings per date.
 
 .midi[
-```{r fig.height=3, fig.width=9}
+```{r out.width="70%"}
 hotels %>%
   mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
   count(arrival_date) %>%
   ggplot(aes(x = arrival_date, y = n, group = 1)) +
-  geom_line() +
-  ylim(0, 450)
+  geom_line()
 ```
 ]
 
@@ -784,7 +721,7 @@ Why does the plot start with August when we know our data start in July? And why
 ]
 
 .midi[
-```{r fig.height=3, fig.width=9, echo=FALSE}
+```{r out.width="70%", echo=FALSE}
 hotels %>%
   mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
   count(arrival_date) %>%
@@ -796,7 +733,7 @@ hotels %>%
 
 ---
 
-### Step 1. `REVISED` Put together dates `as dates`.
+## Step 1. `REVISED` Put together dates `as dates`.
 
 .midi[
 ```{r}
@@ -812,7 +749,7 @@ hotels %>%
 
 ---
 
-### Step 2. Count number of bookings per date.
+## Step 2. Count number of bookings per date.
 
 .midi[
 ```{r}
@@ -824,30 +761,28 @@ hotels %>%
 
 ---
 
-### Step 3a. Visualise number of bookings per date.
+## Step 3a. Visualise number of bookings per date.
 
 .midi[
-```{r fig.height=3, fig.width=9}
+```{r out.width="70%"}
 hotels %>%
   mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
   count(arrival_date) %>%
   ggplot(aes(x = arrival_date, y = n, group = 1)) +
-  geom_line() +
-  ylim(0, 450)
+  geom_line()
 ```
 ]
 
 ---
 
-### Step 3b. Visualise using a smooth curve.
+## Step 3b. Visualise using a smooth curve.
 
 .midi[
-```{r fig.height=3, fig.width=9, message=FALSE}
+```{r out.width="70%", message = FALSE}
 hotels %>%
   mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
   count(arrival_date) %>%
   ggplot(aes(x = arrival_date, y = n, group = 1)) +
-  geom_smooth() + #<<
-  ylim(0, 450)
+  geom_smooth() #<<
 ```
 ]
