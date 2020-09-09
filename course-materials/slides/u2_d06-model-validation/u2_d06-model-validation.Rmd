@@ -1,0 +1,353 @@
+---
+title: "Model validation and logistic regression <br> `r emo::ji('check')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(here)
+library(DT)
+library(modelr)
+library(openintro)
+```
+
+class: middle
+
+# From last time
+
+---
+
+.small[
+```{r}
+full_model <- lm(score ~ rank + ethnicity + gender + language + 
+                         age + cls_perc_eval + cls_did_eval + 
+                         cls_students + cls_level + cls_profs + 
+                         cls_credits + bty_avg, data = evals)
+
+selected_model <- step(full_model, direction = "backward")
+```
+]
+
+---
+
+class: middle
+
+# Model validation
+
+---
+
+## Overfitting
+
+- The data we are using to construct our models come from a larger population.
+- Ultimately we want our model to tell us how the population works, not just the sample we have.
+- If the model we fit is too tailored to our sample, it might not perform as well with the remaining population. This means the model is "overfitting" our data.
+- We measure this using **model validation** techniques.
+- Note: Overfitting is not a huge concern with linear models with low level 
+interactions, however it can be with more complex and flexible models. The 
+following is just an example of model validation, even though we're using it 
+in a scenario where the concern for overfitting is not high.
+
+---
+
+## Model validation
+
+- One commonly used model validation technique is to partition your data 
+into training and testing set
+- That is, fit the model on the training data
+- And test it on the testing data
+- Evaluate model performance using $RMSE$, root-mean squared error
+
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}} $$
+
+.question[
+Do you think we should prefer low or high RMSE?
+]
+
+---
+
+## Random sampling and reproducibility
+
+Gotta set a seed!
+
+```{r}
+set.seed(3518)
+```
+
+- We will be taking random samples, but we want the analysis to be 
+reproducible (across different people running the sama analysis as well as 
+for the same person running the analysis at different times)
+- So we need to tell R where to start the (pseudo) random number generation
+
+
+
+---
+
+## Cross validation
+
+More specifically, **k-fold cross validation**:
+
+- Split your data into k folds
+- Use 1 fold for testing and the remaining (k - 1) folds for training
+- Repeat k times
+
+---
+
+## Aside -- the modulo operator
+
+```{r}
+9 %% 5
+```
+
+--
+
+.pull-left[
+```{r echo=FALSE}
+df <- tibble(obs = 1:8, fold = as.integer(c(1,2,3,4,5,1,2,3)))
+df
+```
+]
+
+--
+
+.pull-right[
+.midi[
+```{r}
+(1:8) %% 5
+((1:8) - 1) %% 5
+(((1:8) - 1) %% 5) + 1
+```
+]
+]
+
+---
+
+## Prepping your data for 5-fold CV
+
+```{r}
+evals_cv <- evals %>%
+  sample_n(nrow(evals)) %>%               # scramble rows
+  rowid_to_column() %>%                   # add id column
+  mutate( fold = ((rowid - 1) %% 5) + 1 ) # add fold column
+
+evals_cv %>% 
+  count(fold)
+```
+
+---
+
+## CV 1
+
+```{r}
+test_fold <- 1
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% filter(fold != test_fold)
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+(rmse_test1 <- rmse(mod, test))
+```
+
+---
+
+## RMSE on training vs. testing
+
+.question[
+Would you expect the RMSE to be higher for your training data or your testing data? Why?
+]
+
+---
+
+## RMSE on training vs. testing
+
+RMSE for testing:
+.small[
+```{r}
+(rmse_test1 <- rmse(mod, test))
+```
+]
+
+RMSE for training:
+.small[
+```{r}
+(rmse_train1 <- rmse(mod, train))
+```
+]
+
+---
+
+## CV 2
+
+```{r}
+test_fold <- 2
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% filter(fold != test_fold)
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test2 <- rmse(mod, test))
+(rmse_train2 <- rmse(mod, train))
+```
+
+---
+
+## CV 3
+
+```{r}
+test_fold <- 3
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% filter(fold != test_fold)
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test3 <- rmse(mod, test))
+(rmse_train3 <- rmse(mod, train))
+```
+
+---
+
+## CV 4
+
+```{r}
+test_fold <- 4
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% filter(fold != test_fold)
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test4 <- rmse(mod, test))
+(rmse_train4 <- rmse(mod, train))
+```
+
+---
+
+## CV 5
+
+```{r}
+test_fold <- 5
+test <- evals_cv %>% filter(fold == test_fold)
+train <- evals_cv %>% filter(fold != test_fold)
+mod <- lm(score ~ ethnicity + gender + language + age + cls_perc_eval + 
+    cls_credits + bty_avg, data = train)
+```
+
+```{r}
+(rmse_test5 <- rmse(mod, test))
+(rmse_train5 <- rmse(mod, train))
+```
+
+---
+
+## Putting it altogether
+
+```{r echo=FALSE}
+rmse_evals <- tibble(
+  test_fold  = 1:5,
+  rmse_train = c(rmse_train1, rmse_train2, rmse_train3, rmse_train4, rmse_train5),
+  rmse_test  = c(rmse_test1, rmse_test2, rmse_test3, rmse_test4, rmse_test5)
+)
+
+ggplot(data = rmse_evals, mapping = aes(x = test_fold, y = rmse_test)) +
+  geom_point() +
+  geom_line() +
+  ylim(0, 1)
+```
+
+---
+
+## How does RMSE compare to y?
+
+- `score` summary stats:
+
+```{r echo=FALSE}
+evals %>%
+  summarise(min = min(score), max = max(score), 
+            mean = mean(score), med = median(score),
+            sd = sd(score), IQR = IQR(score))
+```
+
+- `rmse_test` summary stats:
+
+```{r echo=FALSE}
+rmse_evals %>%
+  summarise(min = min(rmse_test), max = max(rmse_test), 
+            mean = mean(rmse_test), med = median(rmse_test),
+            sd = sd(rmse_test), IQR = IQR(rmse_test))
+```
+
+---
+
+class: middle
+
+# Prediction
+
+---
+
+## New observation
+
+To make a prediction for a new observation we need to create a data frame with that observation.
+
+.question[
+Suppose we want to make a prediction for a 37 year old white woman professor who received her education at an English speaking country and who teaches a multi credit course. 80% of her classes tend to fill out evaluations, and she's average looiking (beauty score = 2.5).
+
+The following won't work. Why? How would you correct it?
+]
+
+```{r}
+new_prof <- data_frame(ethnicity = "white",
+                       sex = "woman",
+                       language = "English",
+                       age = 35, 
+                       cls_perc_eval = 0.80,
+                       cls_credits = "multi-credit",
+                       bty_avg = 2.5)
+```
+
+---
+
+## New observation, corrected
+
+```{r}
+new_prof <- data_frame(ethnicity = "not minority",
+                       gender = "female",
+                       language = "english",
+                       age = 35, 
+                       cls_perc_eval = 0.80,
+                       cls_credits = "multi credit",
+                       bty_avg = 2.5)
+```
+
+---
+
+## Prediction
+
+```{r}
+predict(selected_model, newdata = new_prof)
+```
+
+---
+
+## Uncertainty around prediction
+
+Prediction interval around $\hat{y}$ for new data (score for a prof with given characteristics):
+
+```{r}
+predict(selected_model, newdata = new_prof, interval = "prediction")
+```

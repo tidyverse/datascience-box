@@ -151,7 +151,7 @@ If the variable names are malformatted, use `janitor::clean_names()`
 fav_food
 ```
 
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 library(janitor)
 fav_food %>% clean_names()  
 ```
@@ -227,7 +227,7 @@ knitr::include_graphics("img/central-park-coords.png")
 ## Make a plot
 
 .small[
-```{r fig.retina=3, fig.height=2, fig.width=5}
+```{r out.width="80%"}
 ggplot(squirrels, aes(x = long, y = lat)) +
   geom_point(alpha = 0.2)
 ```
@@ -243,7 +243,7 @@ than inside the park.
 ## Try the easy solution first
 
 .small[
-```{r fig.retina=3, fig.height=2, fig.width=5}
+```{r out.width="80%"}
 squirrels <- squirrels %>%
   separate(hectare, into = c("NS", "EW"), sep = 2, remove = FALSE) %>%
   mutate(where = if_else(NS %in% c("01", "42") | EW %in% c("A", "I"), "perimeter", "inside")) 
@@ -257,7 +257,7 @@ ggplot(squirrels, aes(x = long, y = lat, color = where)) +
 
 ## Then go deeper...
 
-```{r echo=FALSE, fig.retina=3, fig.height=2.75, fig.width=5, message=FALSE}
+```{r echo=FALSE, message=FALSE}
 hectare_counts <- squirrels %>%
   group_by(hectare) %>%
   summarise(n = n()) 

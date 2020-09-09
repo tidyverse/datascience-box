@@ -55,7 +55,7 @@ cat_lovers %>%
 ```
 
 ```{r echo=FALSE, caption="Help for mean", out.width="80%", fig.align="center"}
-include_graphics("img/mean-help.png")
+knitr::include_graphics("img/mean-help.png")
 ```
 
 ---
@@ -592,7 +592,7 @@ cat_lovers %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="70%"}
-include_graphics("img/forcats-part-of-tidyverse.png")
+knitr::include_graphics("img/forcats-part-of-tidyverse.png")
 ```
 ]
 - Factors are useful when you have true categorical data and you want to override the ordering of character vectors to improve display
@@ -643,7 +643,7 @@ class: middle
 
 .pull-left[
 ```{r echo=FALSE, out.width="70%", fig.align="center"}
-include_graphics("img/lubridate-not-part-of-tidyverse.png")
+knitr::include_graphics("img/lubridate-not-part-of-tidyverse.png")
 ```
 ]
 .pull-right[

@@ -474,7 +474,7 @@ ggplot(hotels, aes(x = hotel, fill = deposit_type)) %>%
 
 `r emo::ji("white_check_mark")`
 
-```{r fig.width=10, fig.height=2, dpi=300}
+```{r out.width="40%"}
 ggplot(hotels, aes(x = hotel, fill = deposit_type)) +
   geom_bar()
 ```

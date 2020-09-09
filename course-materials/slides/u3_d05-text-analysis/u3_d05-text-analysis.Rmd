@@ -189,7 +189,7 @@ top20_songs %>%
 ## Visualizing commonalities: bar chart
 
 .midi[
-```{r echo=FALSE, fig.height=3.9, fig.width=7}
+```{r echo=FALSE}
 top20_songs %>%
   ggplot(aes(x = fct_reorder(word, n), y = n)) +
   geom_col() +
@@ -214,7 +214,7 @@ ggplot(top20_songs, aes(x = fct_reorder(word, n), y = n)) +
 
 ## Visualizing commonalities: wordcloud
 
-```{r echo=FALSE, fig.height=3}
+```{r echo=FALSE, out.width="80%"}
 set.seed(1234)
 wordcloud(words = top20_songs$word, 
           freq = top20_songs$n, 
@@ -347,7 +347,7 @@ sheeran_lyrics %>%
 
 ---
 
-```{r echo=FALSE, message=FALSE, fig.height=4, fig.width=7}
+```{r echo=FALSE, message=FALSE, out.width="80%"}
 sheeran_lyrics %>%
   anti_join(stop_words) %>%
   count(word)%>%
@@ -499,7 +499,7 @@ class: middle
 ### Step 1: Create a bar chart
 
 .midi[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = word, y = n, fill = sentiment)) +
   geom_col()
@@ -511,7 +511,7 @@ sheeran_top10 %>%
 ### Step 2: Order bars by frequency
 
 .midi[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col()
@@ -523,7 +523,7 @@ sheeran_top10 %>%
 ### Step 3: Facet by sentiment
 
 .midi[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col() +
@@ -536,7 +536,7 @@ sheeran_top10 %>%
 ### Step 4: Free the scales!
 
 .midi[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col() +
@@ -549,7 +549,7 @@ sheeran_top10 %>%
 ### Step 4: Flip the coordinates
 
 .midi[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col() +
@@ -563,7 +563,7 @@ sheeran_top10 %>%
 ### Step 5: Clean up labels
 
 .small[
-```{r message=FALSE, fig.height=3, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col() +
@@ -578,7 +578,7 @@ sheeran_top10 %>%
 ### Step 6: Remove redundant info
 
 .small[
-```{r message=FALSE, fig.height=2.8, fig.width=7}
+```{r message=FALSE, out.width="80%"}
 sheeran_top10 %>%
   ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
   geom_col() +
@@ -621,7 +621,7 @@ sheeran_lyrics %>%
 
 ---
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=9, fig.asp = 0.65, out.width="100%"}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 sheeran_lyrics %>%
   anti_join(stop_words) %>%
   left_join(get_sentiments("afinn")) %>%

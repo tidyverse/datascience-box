@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Linear models with multiple predictors   🤹‍♀</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/pymjs/pym.v1.js"></script>
+    <script src="libs/widgetframe-binding/widgetframe.js"></script>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Linear models with multiple predictors <br> 🤹‍♀
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# The linear model with multiple predictors
+
+---
+
+## The data
+
+
+```r
+pp &lt;- read_csv(
+  "data/paris-paintings.csv", 
+  na = c("n/a", "", "NA")
+  )
+```
+
+---
+
+## Data transformation
+
+
+```r
+pp &lt;-pp %&gt;%
+  mutate(
+    log_price = log(price),
+    artistliving = factor(artistliving)
+  )
+```
+
+---
+
+## Multiple predictors
+
+- Response variable: `log_price` = log_price
+- Explanatory variables: Width and height
+
+
+```r
+m_wi_hgt &lt;- lm(log_price ~ Width_in + Height_in, data = pp)
+tidy(m_wi_hgt)
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
+## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
+```
+
+---
+
+##  Linear model with multiple predictors
+
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
+## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
+```
+
+&lt;br&gt;
+
+`$$\widehat{log_price} = 4.77 + 0.0269~width - 0.0133~height$$`
+
+---
+
+## Visualizing models with multiple predictors
+
+<div id="htmlwidget-8f836166d559454ecd73" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8f836166d559454ecd73">{"x":{"url":"u2_d04-linear-model-multiple-predictors_files/figure-html//widgets/widget_plotly.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+class: middle
+
+# Exploration: Price, surface area, and living artist
+
+---
+
+## Price, surface area, and living artist
+
+- Explore the relationship between price of paintings and surface area, conditioned 
+on whether or not the artist is still living
+- First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+
+```r
+pp &lt;- pp %&gt;%
+  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
+
+pp %&gt;%
+  count(artistliving)
+```
+
+```
+## # A tibble: 2 x 2
+##   artistliving     n
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 Deceased      2937
+## 2 Living         456
+```
+]
+
+---
+
+## Typical surface area
+
+.question[
+What is the typical surface area for paintings?
+]
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-surf-artistliving-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+--
+
+Less than 1000 square inches (~ 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
+
+---
+
+## Narrowing the scope
+
+For simplicity let's focus on the paintings with `Surface &lt; 5000`:
+
+
+```r
+pp_Surf_lt_5000 &lt;- pp %&gt;%
+  filter(Surface &lt; 5000)
+```
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-surf-lt-5000-artistliving-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Facet to get a better look
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-surf-lt-5000-artistliving-facet-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+class: middle
+
+# Side-step: Weights of books
+
+---
+
+.question[
+Suppose we want to predict weight of books from their volume and cover type 
+(hardback vs. paperback). Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which weight changes as volume 
+increases would be the same for hardback and paperback books and interaction 
+effects would mean the rate at which weight changes as volume 
+increases would be different for hardback and paperback books.
+]
+
+<div class="countdown" id="timer_5f581ccd" style="right:0;bottom:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+The `allbacks` data frame gives measurements on the volume and weight of 15 books, some of which are softback and some of which are hardback.
+
+.small[
+
+```r
+library(DAAG)
+as_tibble(allbacks)
+```
+
+```
+## # A tibble: 15 x 4
+##   volume  area weight cover
+##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;
+## 1    885   382    800 hb   
+## 2   1016   468    950 hb   
+## 3   1125   387   1050 hb   
+## 4    239   371    350 hb   
+## 5    701   371    750 hb   
+## 6    641   367    600 hb   
+## # … with 9 more rows
+```
+]
+
+.footnote[
+The bookshelf of J. H. Maindonald at Australian National University.
+]
+
+---
+
+
+```r
+ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal()
+```
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-6-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-7-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## In pursuit of Occam's razor
+
+- Occam's Razor states that among competing hypotheses that predict equally 
+well, the one with the fewest assumptions should be selected.
+- Model selection follows this principle.
+- We only want to add another variable to the model if the addition of that
+variable brings something valuable in terms of predictive power to the model.
+- In other words, we prefer the simplest best model, i.e. **parsimonious** model.
+
+---
+
+.question[
+Visually, which of the two models is preferable under Occam's razor?
+]
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-8-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-9-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## R-squared
+
+- `\(R^2\)` is the percentage of variability in the response variable explained by 
+the regression model.
+
+
+```r
+glance(m_main)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(m_int)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+
+--
+- Clearly the model with interactions has a higher `\(R^2\)`.
+
+--
+- However using `\(R^2\)` for model selection in models with multiple explanatory 
+variables is not a good idea as `\(R^2\)` increases when **any** variable is added 
+to the model.
+
+---
+
+## Adjusted R-squared
+
+... a (more) objective measure for model selection
+
+- Adjusted `\(R^2\)` doesn't increase if the new variable does not provide any new 
+informaton or is completely unrelated, as it applies a penalty for number of 
+variables included in the model.
+- This makes adjusted `\(R^2\)` a preferable metric for model selection in multiple
+regression models.
+
+---
+
+## Comparing models
+
+.pull-left[
+
+```r
+glance(m_main)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(m_int)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+]
+.pull-right[
+
+```r
+glance(m_main)$adj.r.squared
+```
+
+```
+## [1] 0.9153905
+```
+
+```r
+glance(m_int)$adj.r.squared
+```
+
+```
+## [1] 0.9105447
+```
+]
+
+--
+
+.small[
+
+```r
+# Is R-sq higher for int model?
+glance(m_int)$r.squared &gt; glance(m_main)$r.squared 
+```
+
+```
+## [1] TRUE
+```
+
+```r
+# Is R-sq adj. higher for int model?
+glance(m_int)$adj.r.squared &gt; glance(m_main)$adj.r.squared
+```
+
+```
+## [1] FALSE
+```
+]
+
+---
+
+class: middle
+
+# Back to exploration: Price, surface area, and living artist
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+.pull-left[
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-main-effects-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-interaction-effects-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: log_price
+- Explanatory variables: Surface area and artist living (0/1 variable)
+
+.midi[
+
+```r
+m_main &lt;- lm(log_price ~ Surface + artistliving, 
+             data = pp_Surf_lt_5000)
+tidy(m_main)
+```
+
+```
+## # A tibble: 3 x 5
+##   term               estimate std.error statistic  p.value
+##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)        4.88     0.0424       115.   0.      
+## 2 Surface            0.000265 0.0000415      6.39 1.85e-10
+## 3 artistlivingLiving 0.137    0.0970         1.41 1.57e- 1
+```
+]
+
+
+--
+
+$$ \widehat{log_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
+
+---
+
+## Solving the model
+
+- Non-living artist: Plug in 0 for `artistliving`
+
+`\(\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 0\)`  
+`\(= 4.88 + 0.000265~surface\)`
+
+--
+- Living artist: Plug in 1 for `artistliving`
+
+`\(\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 1\)`   
+`\(= 5.017 + 0.000265~surface\)`
+
+---
+
+## Visualizing main effects
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+- **Same slope:** Rate of change in price as the surface area increases does 
+not vary between paintings by living and non-living artists.
+- **Different intercept:** Paintings by living artists are consistently more 
+expensive than paintings by non-living artists.
+
+---
+
+## Interpreting main effects
+
+.midi[
+
+```r
+tidy(m_main) %&gt;% 
+  mutate(exp_estimate = exp(estimate)) %&gt;%
+  select(term, estimate, exp_estimate)
+```
+
+```
+## # A tibble: 3 x 3
+##   term               estimate exp_estimate
+##   &lt;chr&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)        4.88           132.  
+## 2 Surface            0.000265         1.00
+## 3 artistlivingLiving 0.137            1.15
+```
+]
+
+- All else held constant, for each additional square inch in painting's surface area, the price of the painting is predicted, on average, to be higher by a factor of 1.
+- All else held constant, paintings by a living artist are predicted, on average, to be higher by a factor of 1.15 compared to paintings by an artist who is no longer alive.
+- Paintings that are by an artist who is not alive and that have a surface area of 0 square inches are predicted, on average, to be 132 livres.
+
+---
+
+## 
+
+.question[
+Why is our linear regression model different from what we got from `geom_smooth(method = "lm")`?
+]
+
+.pull-left[
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-main-effects3-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## What went ~wrong~ diferently?
+
+- The way we specified our model only lets `artistliving` affect the intercept.
+- Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
+
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colors
++ Same slope and different intercept for both colors
++ Different slope and different intercept for both colors
+]
+
+---
+
+## Interaction: surface * artist living
+
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: log_price
+- Explanatory variables: Surface area, artist living (0/1 variable), and 
+their interaction
+
+.midi[
+
+```r
+m_int &lt;- lm(log_price ~ Surface + artistliving + 
+              Surface * artistliving, 
+            data = pp_Surf_lt_5000)
+tidy(m_int)
+```
+
+```
+## # A tibble: 4 x 5
+##   term                        estimate std.error statistic    p.value
+##   &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept)                 4.91     0.0432       114.   0         
+## 2 Surface                     0.000206 0.0000442      4.65 0.00000337
+## 3 artistlivingLiving         -0.126    0.119         -1.06 0.289     
+## 4 Surface:artistlivingLiving  0.000479 0.000126       3.81 0.000139
+```
+]
+
+---
+
+## Linear model with interaction effects
+
+.midi[
+
+```
+## # A tibble: 4 x 5
+##   term                        estimate std.error statistic    p.value
+##   &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept)                 4.91     0.0432       114.   0         
+## 2 Surface                     0.000206 0.0000442      4.65 0.00000337
+## 3 artistlivingLiving         -0.126    0.119         -1.06 0.289     
+## 4 Surface:artistlivingLiving  0.000479 0.000126       3.81 0.000139
+```
+]
+
+$$ \widehat{log_price} = 4.91 + 0.00021~surface - 0.126~artistliving $$
+$$+ ~ 0.00048~surface \times artistliving $$
+
+---
+
+## Interpretation of interaction effects
+
+- Rate of change in price as the surface area of the painting increases does 
+vary between paintings by living and non-living artists (different slopes), 
+- Some paintings by living artists are more expensive than paintings by
+non-living artists, and some are not (different intercept).
+
+.small[
+.pull-left[
+- Non-living artist: 
+`\(\widehat{log_price} = 4.91 + 0.00021~surface\)`
+`\(- 0.126 \times 0 + 0.00048~surface \times 0\)`
+`\(= 4.91 + 0.00021~surface\)`
+- Living artist: 
+`\(\widehat{log_price} = 4.91 + 0.00021~surface\)`
+`\(- 0.126 \times 1 + 0.00048~surface \times 1\)`
+`\(= 4.91 + 0.00021~surface\)`
+`\(- 0.126 + 0.00048~surface\)`
+`\(= 4.784 + 0.00069~surface\)`
+]
+.pull-right[
+&lt;img src="u2_d04-linear-model-multiple-predictors_files/figure-html/viz-interaction-effects2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted `\(R^2\)`, so we 
+should indeed use the model with the interactions.
+
+
+```r
+glance(m_main)$adj.r.squared
+```
+
+```
+## [1] 0.01258977
+```
+
+```r
+glance(m_int)$adj.r.squared
+```
+
+```
+## [1] 0.01676753
+```
+
+---
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

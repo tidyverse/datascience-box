@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Model selection   ⛏</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Model selection <br> ⛏
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Model selection
+
+---
+
+## Backwards elimination
+
+- Start with **full** model (including all candidate explanatory variables and 
+all candidate interactions)
+- Remove one variable at a time, record the adjusted R-squared for each of 
+the resulting models, and selected the model with the highest adjusted 
+R-squared
+- Continue until adjusted R-squared does not increase
+
+---
+
+## Forward selection
+
+- Start with **empty** model
+- Add one variable (or interaction effect) at a time, record the adjusted R-squared
+for each of the resulting models, and select the model with the highest adjusted 
+R-squared
+- Continue until adjusted R-squared does not increase
+
+---
+
+class: middle
+
+# Predicting professor evaluation scores
+
+---
+
+## Starting small: score ~ cls_did_eval + cls_students + cls_perc_eval
+
+.question[
+What percent of the variability in evaluation scores is explained by the model?
+]
+
+
+```r
+full_model &lt;- lm(score ~ cls_did_eval + cls_students + cls_perc_eval, 
+                 data = evals)
+glance(full_model)$r.squared
+```
+
+```
+## [1] 0.04463827
+```
+
+```r
+glance(full_model)$adj.r.squared
+```
+
+```
+## [1] 0.03839408
+```
+
+---
+
+
+```r
+library(GGally)
+evals %&gt;%
+  select(score, cls_did_eval, cls_students, cls_perc_eval) %&gt;%
+  ggpairs()
+```
+
+&lt;img src="u2_d05-model-selection_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[
+Suppose we definitely want to keep `cls_did_eval` in the model. Which of the 
+other two variables (`cls_students` or `cls_perc_eval`) is least likely to 
+be effective in increasing the model's predictive power?
+]
+
+&lt;img src="u2_d05-model-selection_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Full model
+
+
+```r
+full_model &lt;- lm(score ~ cls_did_eval + cls_students + cls_perc_eval, 
+                 data = evals)
+glance(full_model)$adj.r.squared
+```
+
+```
+## [1] 0.03839408
+```
+
+---
+
+## Step 1:
+
+.midi[
+
+```r
+# Remove cls_did_eval
+s1_stu_perc &lt;- lm(score ~ cls_students + cls_perc_eval, data = evals)
+glance(s1_stu_perc)$adj.r.squared
+```
+
+```
+## [1] 0.03970295
+```
+]
+
+--
+
+.midi[
+
+```r
+# Remove cls_students
+s1_did_perc &lt;- lm(score ~ cls_did_eval + cls_perc_eval, data = evals)
+glance(s1_did_perc)$adj.r.squared
+```
+
+```
+## [1] 0.04038255
+```
+]
+
+--
+
+.midi[
+
+```r
+# Remove cls_perc_eval
+s1_did_stu &lt;- lm(score ~ cls_did_eval + cls_students, data = evals)
+glance(s1_did_stu)$adj.r.squared
+```
+
+```
+## [1] 0.02206412
+```
+]
+
+---
+
+.question[
+Given the following adjusted R-squared values, which model should be selected 
+in step 1 of backwards selection?
+]
+
+.pull-left[
+.midi[
+
+```r
+# full model
+glance(full_model)$adj.r.squared
+```
+
+```
+## [1] 0.03839408
+```
+
+```r
+# remove cls_did_eval
+glance(s1_stu_perc)$adj.r.squared
+```
+
+```
+## [1] 0.03970295
+```
+]
+]
+.pull-right[
+.midi[
+
+```r
+# remove cls_students
+glance(s1_did_perc)$adj.r.squared
+```
+
+```
+## [1] 0.04038255
+```
+
+```r
+# remove cls_perc_eval
+glance(s1_did_stu)$adj.r.squared
+```
+
+```
+## [1] 0.02206412
+```
+]
+]
+
+-- 
+
+Removing `cls_students` (number of students in the class) resulted in the 
+highest increase in adjusted R-squared, so the model with only `cls_did_eval` 
+and `cls_perc_eval` (number and percentage of students who completed evaluations, 
+respectively) should be selected.
+
+---
+
+## Step 2:
+
+.midi[
+
+```r
+# Remove cls_did_eval
+s2_perc &lt;- lm(score ~ cls_perc_eval, data = evals)
+glance(s2_perc)$adj.r.squared
+```
+
+```
+## [1] 0.0321918
+```
+]
+
+--
+
+.midi[
+
+```r
+# Remove cls_perc_eval
+s2_did &lt;- lm(score ~ cls_did_eval, data = evals)
+glance(s2_did)$adj.r.squared
+```
+
+```
+## [1] 0.001785817
+```
+]
+
+--
+
+No further variables should be dropped since dropping any results in a decrease 
+in adjusted R-squared. The model selected in the previous step should be the 
+final model.
+
+---
+
+.question[
+Given the following adjusted R-squared values, which model should be selected 
+in step 2 of backwards selection?
+]
+
+.midi[
+
+```r
+glance(s1_did_perc)$adj.r.squared   # result of step 1
+```
+
+```
+## [1] 0.04038255
+```
+
+```r
+glance(s2_perc)$adj.r.squared       # remove cls_did_eval
+```
+
+```
+## [1] 0.0321918
+```
+
+```r
+glance(s2_did)$adj.r.squared        # remove cls_perc_eval
+```
+
+```
+## [1] 0.001785817
+```
+]
+
+---
+
+## A more realistic view: score ~ lots of variables
+
+.question[
+What percent of the variability in evaluation scores is explained by the model?
+]
+
+
+```r
+full_model &lt;- lm(score ~ rank + ethnicity + gender + language + 
+                         age + cls_perc_eval + cls_did_eval + 
+                         cls_students + cls_level + cls_profs + 
+                         cls_credits + bty_avg, data = evals)
+glance(full_model)$r.squared
+```
+
+```
+## [1] 0.1644844
+```
+
+```r
+glance(full_model)$adj.r.squared
+```
+
+```
+## [1] 0.1402935
+```
+
+---
+
+## Step 1
+
+.question[
+Given that the adjusted R-squared of the full model was 
+0.1403, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+
+```
+##                  remove  adj_r_sq
+## 1      Remove cls_profs 0.1421861
+## 2      Remove cls_level 0.1421402
+## 3   Remove cls_students 0.1417622
+## 4   Remove cls_did_eval 0.1412172
+## 5           Remove rank 0.1411612
+## 6       Remove language 0.1394539
+## 7            Remove age 0.1335545
+## 8  Remove cls_perc_eval 0.1327868
+## 9      Remove ethnicity 0.1315126
+## 10        Remove gender 0.1187067
+## 11       Remove bty_avg 0.1167521
+## 12   Remove cls_credits 0.1064986
+```
+]
+
+--
+
+Remove `cls_profs`
+
+
+
+
+---
+
+## Step 2
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 1 was 
+0.1422, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+
+```
+##                  remove  adj_r_sq
+## 1      Remove cls_level 0.1440279
+## 2   Remove cls_students 0.1436292
+## 3   Remove cls_did_eval 0.1430683
+## 4           Remove rank 0.1430338
+## 5       Remove language 0.1413483
+## 6            Remove age 0.1354387
+## 7  Remove cls_perc_eval 0.1346490
+## 8      Remove ethnicity 0.1329036
+## 9         Remove gender 0.1206345
+## 10       Remove bty_avg 0.1187028
+## 11   Remove cls_credits 0.1078673
+```
+]
+
+--
+
+Remove `cls_level`
+
+
+
+
+---
+
+## Step 3
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 2 was 
+0.144, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+
+```
+##                  remove  adj_r_sq
+## 1   Remove cls_students 0.1453492
+## 2           Remove rank 0.1449127
+## 3   Remove cls_did_eval 0.1447562
+## 4       Remove language 0.1432477
+## 5            Remove age 0.1373512
+## 6  Remove cls_perc_eval 0.1365466
+## 7      Remove ethnicity 0.1344170
+## 8         Remove gender 0.1225800
+## 9        Remove bty_avg 0.1206257
+## 10   Remove cls_credits 0.1076556
+```
+]
+
+--
+
+Remove `cls_students`
+
+
+
+
+---
+
+## Step 4
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 3 was 
+0.1453, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+
+```
+##                 remove  adj_r_sq
+## 1          Remove rank 0.1460182
+## 2      Remove language 0.1447481
+## 3  Remove cls_did_eval 0.1438580
+## 4           Remove age 0.1386350
+## 5     Remove ethnicity 0.1351413
+## 6        Remove gender 0.1244603
+## 7       Remove bty_avg 0.1220691
+## 8 Remove cls_perc_eval 0.1216699
+## 9   Remove cls_credits 0.1091884
+```
+]
+
+--
+
+Remove `rank`
+
+
+
+---
+
+## Step 5
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 3 was 
+0.146, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+
+```
+##                 remove  adj_r_sq
+## 1  Remove cls_did_eval 0.1445918
+## 2      Remove language 0.1438694
+## 3           Remove age 0.1413297
+## 4     Remove ethnicity 0.1340922
+## 5        Remove gender 0.1245329
+## 6       Remove bty_avg 0.1218780
+## 7 Remove cls_perc_eval 0.1216232
+## 8   Remove cls_credits 0.1010876
+```
+]
+
+--
+
+None, stick with model from Step 4.
+
+---
+
+## Final model
+
+
+```
+## # A tibble: 9 x 2
+##   term                  estimate
+##   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 (Intercept)            3.41   
+## 2 ethnicitynot minority  0.202  
+## 3 gendermale             0.177  
+## 4 languagenon-english   -0.151  
+## 5 age                   -0.00487
+## 6 cls_perc_eval          0.00549
+## # … with 3 more rows
+```
+
+---
+
+## Model selection and interaction effects
+
+Model selection for models including interaction effects must follow the 
+following two principles:
+
+- If an interaction is included in the model, the main effects of both of 
+those variables must also be in the model.
+- If a main effect is not in the model, then its interaction should not be 
+in the model.
+
+---
+
+## Other model selection criteria
+
+- Adjusted R-squared is one model selection criterion
+- There are others out there (many many others!), we'll discuss one more in 
+this course, and you'll learn about others in future stats courses
+
+---
+
+## Akaike Information Criterion
+
+$$ AIC = -2log(L) + 2k $$
+
+- `\(L\)`: likelihood	of the	model
+    - Likelihood of seeing these data	given	the estimated model parameters
+    - Won't go into calculating it in this course (but you will in future courses)
+- Used for model selection, lower the better
+    - Value is not informative on its own
+- Applies	a	penalty	for	number of parameters in the	model, `\(k\)`
+    - Different penalty than adjusted `\(R^2\)` but similar idea
+
+
+```r
+glance(full_model)$AIC
+```
+
+```
+## [1] 695.747
+```
+
+---
+
+## Model selection -- a little faster
+
+`step()` function selects a model by AIC:
+
+.midi[
+
+```r
+selected_model &lt;- step(full_model, direction = "backward")
+```
+
+
+```r
+tidy(selected_model) %&gt;% select(term, estimate)
+```
+
+```
+## # A tibble: 8 x 2
+##   term                  estimate
+##   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 (Intercept)            3.45   
+## 2 ethnicitynot minority  0.205  
+## 3 gendermale             0.185  
+## 4 languagenon-english   -0.161  
+## 5 age                   -0.00501
+## 6 cls_perc_eval          0.00509
+## # … with 2 more rows
+```
+]
+
+---
+
+## AIC comparison
+
+
+```r
+glance(full_model)$AIC
+```
+
+```
+## [1] 695.747
+```
+
+
+```r
+glance(selected_model)$AIC
+```
+
+```
+## [1] 687.5724
+```
+
+---
+
+## Parsimony
+
+.pull-left[
+.question[
+Take a look at the variables in the full and the selected model. Can you guess
+why some of them may have been dropped? Remember: We like parsimonous models.
+]
+]
+.pull-right[
+.small[
+| variable     | selected    |
+| ------------ | :----------:|
+| rank         |             |
+| ethnicity    | x           |
+| gender       | x           |
+| language     | x           |
+| age          | x           |
+| cls_perc_eval| x           |
+| cls_did_eval |             |
+| cls_students |             |
+| cls_level    |             |
+| cls_profs    |             |
+| cls_credits  | x           |
+| bty_avg      | x           |
+]
+]
+
+---
+
+## Interpretation
+
+.question[
+Interpret the slope of `bty_avg` and `gender` in the selected model.
+]
+
+.midi[
+
+```
+## # A tibble: 8 x 2
+##   term                  estimate
+##   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 (Intercept)            3.45   
+## 2 ethnicitynot minority  0.205  
+## 3 gendermale             0.185  
+## 4 languagenon-english   -0.161  
+## 5 age                   -0.00501
+## 6 cls_perc_eval          0.00509
+## # … with 2 more rows
+```
+]
+
+--
+.midi[
+- All else held constant, for each additional point in beauty score, the 
+evaluation score of the professor is predicted to be higher, on average, 
+by 0.06 points.
+]
+
+--
+.midi[
+- All else held constant, male professors are predicted to score higher on their 
+evaluation score than female professors by 0.185 points.
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

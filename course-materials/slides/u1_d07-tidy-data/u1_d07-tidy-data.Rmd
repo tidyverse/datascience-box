@@ -54,7 +54,7 @@ and other academic professionals.
 by the AAUP shows trends in instructional staff employees between 1975 
 and 2011, and contains an image very similar to the one given below.
 
-```{r echo=FALSE,out.width="70%",fig.align="center"}
+```{r echo=FALSE,out.width="70%"}
 include_graphics("img/staff-employment.png")
 ```
 
@@ -90,7 +90,7 @@ and there are 5 faculty types and 11 years of data, how many rows will the data 
 
 class: middle
 
-```{r echo=FALSE,out.width="80%",fig.align="center"}
+```{r echo=FALSE,out.width="80%"}
 include_graphics("img/pivot.gif")
 ```
 
@@ -175,7 +175,7 @@ staff_long %>%
 
 ## Some improvement...
 
-```{r out.width="80%"}
+```{r}
 staff_long %>%
   ggplot(aes(x = percentage, y = year, fill = faculty_type)) +
   geom_col()
@@ -185,7 +185,7 @@ staff_long %>%
 
 ## More improvement
 
-```{r out.width="80%"}
+```{r}
 staff_long %>%
   ggplot(aes(x = year, y = percentage, group = faculty_type, color = faculty_type)) +
   geom_line()
@@ -418,7 +418,7 @@ class: middle
 
 ---
 
-```{r echo=FALSE, out.width="85%", fig.align="center"}
+```{r echo=FALSE, out.width="85%"}
 include_graphics("img/relig-income.png")
 ```
 
@@ -531,7 +531,7 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
 
 ## Reverse religion order
 
-```{r out.width="80%"}
+```{r out.width="75%"}
 rel_inc_long <- rel_inc_long %>%
   mutate(religion = fct_rev(religion))
 
@@ -565,7 +565,7 @@ rel_inc_long <- rel_inc_long %>%
 
 ## Plot again
 
-```{r}
+```{r out.width="80%"}
 ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
   geom_col()
 ```

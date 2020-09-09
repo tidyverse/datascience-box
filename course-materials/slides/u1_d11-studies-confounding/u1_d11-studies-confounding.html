@@ -309,7 +309,7 @@ class: middle
 
 --
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -342,7 +342,7 @@ class: middle
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -386,7 +386,7 @@ class: middle
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -430,7 +430,7 @@ class: middle
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -470,104 +470,6 @@ the apparent relationship between the other two variables.
 ## 6 Admitted Male   A    
 ## # … with 4,520 more rows
 ```
-
----
-
-## Skim the data
-
-
-```r
-library(skimr)
-*skim(ucbadmit)
-```
-
-
-&lt;table style='width: auto;'
-        class='table table-condensed'&gt;
-&lt;caption&gt;Data summary&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Name &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ucbadmit &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Number of rows &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 4526 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Number of columns &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; _______________________ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Column type frequency: &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; factor &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; ________________________ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Group variables &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; None &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-**Variable type: factor**
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; skim_variable &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; n_missing &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; complete_rate &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; ordered &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; n_unique &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; top_counts &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; admit &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Rej: 2771, Adm: 1755 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; gender &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Mal: 2691, Fem: 1835 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; dept &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; A: 933, C: 918, D: 792, F: 714 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 
 ---
 
@@ -631,7 +533,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   labs(y = "", title = "Admit by gender")
 ```
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -731,7 +633,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
        title = "Admit by gender by department")
 ```
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -749,14 +651,14 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   theme(legend.position = "bottom")
 ```
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-23-1.png" width="55%" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d11-studies-confounding_files/figure-html/unnamed-chunk-24-1.png" width="55%" style="display: block; margin: auto;" /&gt;
 
 ---
 

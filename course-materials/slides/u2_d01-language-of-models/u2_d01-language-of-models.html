@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>The language of models   📈</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# The language of models <br> 📈
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# The language of models
+
+---
+
+## Modeling
+
+- Use models to explain the relationship between variables and to make predictions
+- For now we will focus on **linear** models (but remember there are *many* *many* other types of models too!)
+
+---
+class: middle
+
+# Data: Paris Paintings
+
+---
+
+## Paris Paintings
+
+
+```r
+pp &lt;- read_csv(
+  "data/paris-paintings.csv", 
+  na = c("n/a", "", "NA")
+)
+```
+
+---
+
+## Meet the data curators
+
+.center[
+![](img/sandra-van-ginhoven.png) ![](img/hilary-coe-cronheim.png)
+
+Sandra van Ginhoven &amp;nbsp; &amp;nbsp; Hilary Coe Cronheim
+
+PhD students in the Duke Art, Law, and Markets Initiative in 2013
+]
+
+- Source: Printed catalogues of 28 auction sales in Paris, 1764- 1780
+- 3,393 paintings, their prices, and descriptive details from sales catalogues over 60 variables
+
+---
+
+## Auctions today
+
+&lt;img src="img/auction-video.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.tiny[
+https://www.youtube.com/watch?v=apaE1Q7r4so
+]
+
+---
+
+## Auctions back in the day
+
+&lt;img src="img/old-auction.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Pierre-Antoine de Machy, Public Sale at the Hôtel Bullion, Musée Carnavalet, Paris (18th century)
+
+---
+
+## Paris auction market
+
+&lt;img src="img/auction-trend-paris.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Depart pour la chasse
+
+&lt;img src="img/depart-pour-la-chasse.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Auction catalog text
+
+.pull-left[
+&lt;img src="img/auction-catalogue.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+.small[
+Two paintings very rich in composition, of a beautiful execution, and whose merit is very remarkable, each 17 inches 3 lines high, 23 inches wide; the first, painted on wood, comes from the Cabinet of Madame la Comtesse de Verrue; it represents a departure for the hunt: it shows in the front a child on a white horse, a man who gives the horn to gather the dogs, a falconer and other figures nicely distributed across the width of the painting; two horses drinking from a fountain; on the right in the corner a lovely country house topped by a terrace, on which people are at the table, others who play instruments; trees and fabriques pleasantly enrich the background.
+]
+]
+
+---
+
+&lt;img src="img/painting1.png" width="80%" style="display: block; margin: auto;" /&gt;&lt;img src="img/painting2.png" width="80%" style="display: block; margin: auto;" /&gt;&lt;img src="img/painting3.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+pp %&gt;% 
+  filter(name == "R1777-89a") %&gt;% 
+  select(name:endbuyer) %&gt;% 
+  glimpse()
+```
+
+```
+## Rows: 1
+## Columns: 21
+## $ name              &lt;chr&gt; "R1777-89a"
+## $ sale              &lt;chr&gt; "R1777"
+## $ lot               &lt;chr&gt; "89"
+## $ position          &lt;dbl&gt; 0.3755274
+## $ dealer            &lt;chr&gt; "R"
+## $ year              &lt;dbl&gt; 1777
+## $ origin_author     &lt;chr&gt; "D/FL"
+## $ origin_cat        &lt;chr&gt; "D/FL"
+## $ school_pntg       &lt;chr&gt; "D/FL"
+## $ diff_origin       &lt;dbl&gt; 0
+## $ logprice          &lt;dbl&gt; 8.575462
+## $ price             &lt;dbl&gt; 5300
+## $ count             &lt;dbl&gt; 1
+## $ subject           &lt;chr&gt; "D\u008epart pour la chasse"
+## $ authorstandard    &lt;chr&gt; "Wouwerman, Philips"
+## $ artistliving      &lt;dbl&gt; 0
+## $ authorstyle       &lt;chr&gt; NA
+## $ author            &lt;chr&gt; "Philippe Wouwermans"
+## $ winningbidder     &lt;chr&gt; "Langlier, Jacques for Poullain, Antoine"
+## $ winningbiddertype &lt;chr&gt; "DC"
+## $ endbuyer          &lt;chr&gt; "C"
+```
+
+---
+
+class: middle
+
+# Modeling the relationship between variables
+
+---
+
+## Heights
+
+.question[
+Describe the distribution of heights of paintings.
+]
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-dist-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Widths
+
+.question[
+Describe the distribution of widths of paintings.
+]
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/width-dist-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Models as functions
+
+- We can represent relationships between variables using **functions**
+- A function is a mathematical concept: the relationship between an output
+and one or more inputs. 
+    - Plug in the inputs and receive back the output
+    - Example: the formula `\(y = 3x + 7\)` is a function with input `\(x\)` and output `\(y\)`,
+    when `\(x\)` is `\(5\)`, the output `\(y\)` is `\(22\)`
+    ```
+    y = 3 * 5 + 7 = 22
+    ```
+
+---
+
+## Height as a function of width
+
+.question[
+Describe the relationship between height and width of paintings.
+]
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Visualizing the linear model
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm") # lm for linear model
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-code-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## ... without the measure of uncertainty
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-no-se-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## ... with different cosmetic choices
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, 
+              # color       # line type # line weight
+              col = "pink", lty = 2,    lwd = 3)
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-pink-line-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Other smoothing methods: gam
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "gam")
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-gam-smooth-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Other smoothing methods: loess
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-loess-smooth-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Vocabulary
+
+- **Response variable:** Variable whose behavior or variation you are trying to 
+understand, on the y-axis (dependent variable)
+- **Explanatory variables:** Other variables that you want to use to explain the 
+variation in the response, on the x-axis (independent variables)
+- **Predicted value:** Output of the **model function**
+    - The model function gives the typical (expected) value of the response 
+    variable *conditioning* on the explanatory variables
+- **Residuals:** A measure of how far each case is from its predicted value 
+(based on a particular model)
+    - Residual = Observed value - Predicted value
+    - Tells how far above/below the expected value each case is
+
+---
+
+## Residuals
+
+.question[
+What does a negative residual mean? Which paintings on the plot have have 
+negative residuals, those below or above the line?
+]
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-no-se2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[
+The plot below displays the relationship between height and width of paintings. The only difference from the previous plots is that it uses a smaller alpha value, making the points somewhat transparent. What feature is apparent in this plot that was not (as) apparent in the previous plots? What might be the reason for this feature?
+]
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-plot-alpha-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Landscape paintings
+
+- Landscape painting is the depiction in art of landscapes – natural scenery 
+such as mountains, valleys, trees, rivers, and forests, especially where the 
+main subject is a wide view – with its elements arranged into a coherent
+composition.&lt;sup&gt;1&lt;/sup&gt;
+    - Landscape paintings tend to be wider than they are long.
+- Portrait painting is a genre in painting, where the intent is to depict a 
+human subject.&lt;sup&gt;2&lt;/sup&gt;
+    - Portrait paintings tend to be longer than they are wide.
+
+.footnote[
+[1] Source: Wikipedia, [Landscape painting](https://en.wikipedia.org/wiki/Landscape_painting)
+
+[2] Source: Wikipedia, [Portait painting](https://en.wikipedia.org/wiki/Portrait_painting)
+]
+
+---
+
+## Multiple explanatory variables
+
+.question[
+How, if at all, the relatonship between width and height of paintings vary by 
+whether or not they have any landscape elements?
+]
+.small[
+&lt;img src="u2_d01-language-of-models_files/figure-html/height-width-landscape-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## ... and the code
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in, 
+                      color = factor(landsALL))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(color = "landscape")
+```
+
+---
+
+## Extending regression lines
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE, fullrange = TRUE) +
+  labs(color = "landscape")
+```
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/extrapolation-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Models - upsides and downsides
+
+- Models can sometimes reveal patterns that are not evident in a graph of the
+data. This is a great advantage of modeling over simple visual inspection of
+data. 
+- There is a real risk, however, that a model is imposing structure that is
+not really there on the scatter of data, just as people imagine animal shapes in
+the stars. A skeptical approach is always warranted.
+
+---
+
+## Variation around the model...
+
+is just as important as the model, if not more!  
+
+*Statistics is the explanation of variation in the context of what remains
+unexplained.*
+
+- The scatter suggests that there might be other factors that account for large 
+parts of painting-to-painting variability, or perhaps just that randomness plays 
+a big role.
+- Adding more explanatory variables to a model can sometimes usefully reduce
+the size of the scatter around the model. (We'll talk more about this later.)
+
+---
+
+## How do we use models?
+
+- Explanation: Characterize the relationship between `\(y\)` and `\(x\)` via *slopes* 
+for numerical explanatory variables or *differences* for categorical explanatory 
+variables
+- Prediction: Plug in `\(x\)`, get the predicted `\(y\)`
+
+---
+
+class: middle
+
+# Interpreting models
+
+---
+
+## Height &amp; width
+
+
+```r
+m_ht_wt &lt;- lm(Height_in ~ Width_in, data = pp)
+tidy(m_ht_wt)
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    3.62    0.254        14.3 8.82e-45
+## 2 Width_in       0.781   0.00950      82.1 0.
+```
+
+--
+
+`$$\widehat{Height_{in}} = 3.62 + 0.78~Width_{in}$$`
+
+--
+
+- **Slope:** For each additional inch the painting is wider, the height is 
+expected to be higher, on average, by 0.78 inches.
+
+--
+- **Intercept:** Paintings that are 0 inches wide are expected to be 3.62 
+inches high, on average.
+    - Does this make sense?
+
+---
+
+## broom `\(\in\)` tidyverse
+
+.pull-left[
+&lt;img src="img/broom-part-of-tidyverse.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+- **broom** follows tidyverse principles and tidies up regression output
+- `tidy`: Constructs a tidy data frame summarizing model's statistical findings
+- `glance`: Constructs a concise one-row summary of the model
+- `augment`: Adds columns (e.g. predictions, residuals) to the original data that was modeled
+]
+
+.footnote[
+[broom.tidyverse.org](https://broom.tidyverse.org)
+]
+
+---
+
+## Linear model with a single predictor
+
+- We're interested in `\(\beta_0\)` (population parameter for the intercept) and 
+`\(\beta_1\)` (population parameter for the slope) in the following model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x $$
+
+--
+- Tough luck, you can't have them...
+
+--
+- So we use sample statistics to estimate them:
+
+$$ \hat{y} = b_0 + b_1~x $$
+
+---
+
+## Least squares regression
+
+- The regression line minimizes the sum of squared residuals.
+
+--
+- If `\(e_i = y - \hat{y}\)`, then, the regression line minimizes 
+`\(\sum_{i = 1}^n e_i^2\)`.
+
+---
+
+## Visualizing residuals
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/vis-res-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/vis-res-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+&lt;img src="u2_d01-language-of-models_files/figure-html/vis-res-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Properties of the least squares regression line
+
+- The regression line goes through the center of mass point, the coordinates corresponding to average `\(x\)` and average `\(y\)`: `\((\bar{x}, \bar{y})\)`:  
+`$$\hat{y} = b_0 + b_1 x ~ \rightarrow ~ b_0 = \hat{y} - b_1 x$$`
+- The slope has the same sign as the correlation coefficient:  
+`$$b_1 = r \frac{s_y}{s_x}$$`
+- The sum of the residuals is zero:  
+`$$\sum_{i = 1}^n e_i = 0$$`
+- The residuals and `\(x\)` values are uncorrelated.
+
+---
+
+## Height &amp; landscape features
+
+
+```r
+m_ht_lands &lt;- lm(Height_in ~ factor(landsALL), data = pp)
+tidy(m_ht_lands)
+```
+
+```
+## # A tibble: 2 x 5
+##   term              estimate std.error statistic  p.value
+##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)          22.7      0.328      69.1 0.      
+## 2 factor(landsALL)1    -5.65     0.532     -10.6 7.97e-26
+```
+
+--
+
+`$$\widehat{Height_{in}} = 22.68 - 5.65~landsALL$$`
+
+---
+
+## Height &amp; landscape features (cont.)
+
+- **Slope:** Paintings with landscape features are expected, on average,
+to be 5.65 inches shorter than paintings that without landscape features.
+    - Compares baseline level (`landsALL = 0`) to other level
+    (`landsALL = 1`).
+- **Intercept:** Paintings that don't have landscape features are expected, on 
+average, to be 22.68 inches tall.
+
+---
+
+## Categorical predictor with 2 levels
+
+
+```
+## # A tibble: 8 x 3
+##   name     price landsALL
+##   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 L1764-2    360        0
+## 2 L1764-3      6        0
+## 3 L1764-4     12        1
+## 4 L1764-5a     6        1
+## 5 L1764-5b     6        1
+## 6 L1764-6      9        0
+## # … with 2 more rows
+```
+
+---
+
+## Relationship between height and school
+
+.small[
+
+```r
+m_ht_sch &lt;- lm(Height_in ~ school_pntg, data = pp)
+tidy(m_ht_sch)
+```
+
+```
+## # A tibble: 7 x 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
+## 3 school_pntgF       10.2       10.0     1.02  0.309  
+## 4 school_pntgG        1.65      11.9     0.139 0.889  
+## 5 school_pntgI       10.3       10.0     1.02  0.306  
+## 6 school_pntgS       30.4       11.4     2.68  0.00744
+## # … with 1 more row
+```
+]
+
+- When the categorical explanatory variable has many levels, they're encoded to
+**dummy variables**.
+- Each coefficient describes the expected difference between heights in that 
+particular school compared to the baseline level.
+
+---
+
+## Categorical predictor with &gt;2 levels
+
+
+```
+## # A tibble: 7 x 7
+## # Groups:   school_pntg [7]
+##   school_pntg  D_FL     F     G     I     S     X
+##   &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1 A               0     0     0     0     0     0
+## 2 D/FL            1     0     0     0     0     0
+## 3 F               0     1     0     0     0     0
+## 4 G               0     0     1     0     0     0
+## 5 I               0     0     0     1     0     0
+## 6 S               0     0     0     0     1     0
+## # … with 1 more row
+```
+
+---
+
+## The linear model with multiple predictors
+
+- Population model:
+
+$$ \hat{y} = \beta_0 + \beta_1~x_1 + \beta_2~x_2 + \cdots + \beta_k~x_k $$
+
+--
+
+- Sample model that we use to estimate the population model:
+  
+$$ \hat{y} = b_0 + b_1~x_1 + b_2~x_2 + \cdots + b_k~x_k $$
+
+---
+
+## Correlation does not imply causation!
+
+Remember this when interpreting model coefficients
+
+&lt;br&gt;
+
+&lt;img src="img/cell_phones.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: XKCD, [Cell phones](https://xkcd.com/925/)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

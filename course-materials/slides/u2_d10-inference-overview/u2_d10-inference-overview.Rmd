@@ -225,7 +225,7 @@ What would you expect the center of the null distribution to be?
 
 --
 
-```{r}
+```{r out.width="70%"}
 ggplot(data = null_dist, mapping = aes(x = stat)) +
   geom_histogram(binwidth = 0.05) +
   labs(title = "Null distribution")
@@ -241,7 +241,7 @@ simulations was the simulated difference in sample proportion at least as extrem
 as the observed difference in sample proportions?
 ]
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.width="80%"}
 ggplot(data = null_dist, mapping = aes(x = stat)) +
   geom_histogram(binwidth = 0.05) +
   labs(title = "Null distribution")
@@ -284,14 +284,11 @@ class: middle
 ## What do you want to do?
 
 - Estimation -> Confidence interval
-
 - Decision -> Hypothesis test
-
 - First step: Ask the following questions
-
-  1. How many variables?
-  2. What types of variables?
-  3. What is the research question?
+  - How many variables?
+  - What types of variables?
+  - What is the research question?
 
 ---
 
@@ -304,13 +301,9 @@ class: middle
 ## Confidence intervals
 
 - Bootstrap
-
 - Bounds: cutoff values for the middle XX% of the distribution
-
 - Interpretation: We are XX% confident that the true population parameter is in the interval.
-
 - Definition of confidence level: XX% of random samples of size n are expected to produce confidence intervals that contain the true population parameter.
-
 - `infer::generate(reps, type = "bootstrap")`
 
 ---
@@ -338,27 +331,48 @@ What happens to the width of the confidence interval as the confidence level inc
 
 ## Sample size and width of intervals
 
-```{r echo = FALSE, warning=FALSE, message=FALSE, fig.width=10, fig.height=7}
+```{r echo = FALSE, warning=FALSE, message=FALSE}
 set.seed(20171107)
 acs_emp <- acs12 %>% filter(employment == "employed", income > 0)
 acs_10 <- acs_emp %>% sample_n(10) %>%
   specify(response = income) %>%
   generate(1000, type = "bootstrap") %>%
   calculate(stat = "median")
+ggplot(acs_10, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 10")
+```
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
 acs_100 <- acs_emp %>% sample_n(100) %>%
   specify(response = income) %>%
   generate(1000, type = "bootstrap") %>%
   calculate(stat = "median")
+ggplot(acs_100, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 100")
+```
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
 acs_500 <- acs_emp %>% sample_n(500) %>%
   specify(response = income) %>%
   generate(1000, type = "bootstrap") %>%
   calculate(stat = "median")
-p1 <- ggplot(acs_10, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 10")
-p2 <- ggplot(acs_100, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 100")
-p3 <- ggplot(acs_500, aes(x = stat)) + geom_histogram(binwidth = 5000) + xlim(0, 120000) + ggtitle("Sample size = 500")
-gridExtra::grid.arrange(p1, p2, p3, ncol = 1)
+ggplot(acs_500, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 500")
 ```
-
 
 ---
 
@@ -367,7 +381,7 @@ gridExtra::grid.arrange(p1, p2, p3, ncol = 1)
 - Two sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - \alpha$
 - One sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - (2 \times \alpha)$
 
-```{r echo = FALSE, message=FALSE, fig.width=10, fig.height=4}
+```{r echo = FALSE, message=FALSE, out.width="60%"}
 par(mfrow = c(1,2))
 normTail(U = 1.96, L = -1.96, df = 100, col = "#56B4E9", axes = FALSE)
 text(x = 0, y = 0.15, "0.95", col = "#56B4E9", cex = 2)
@@ -412,51 +426,33 @@ class: middle
 ## Hypothesis testing
 
 - Set the hypotheses.
-
 - Calculate the observed sample statistic.
-
 - Calculate the p-value.
-
 - Make a conclusion, about the hypotheses, in context of the data and the research question.
-
 - `infer::hypothesize(null = "point")` and `infer::generate(reps, type = "simulate")` or `infer::generate(reps, type = "bootstrap")`
-
 - `infer::hypothesize(null = "independence")` and `infer::generate(reps, type = "permute")`
   
 ---
 
 ## Hypothesis testing exercises
 
-.small[
 .question[
-`r emo::ji("busts_in_silhouette")`
 Describe the simulation process for tesing for the parameter assigned to your team.
 
 - Note any assumptions you make in terms of sample size, observed sample statistic, etc.
 - Imagine using index cards or chips to represent the data. 
 - Specify whether the null hypothesis would be independence or point.
 - Specify whether the simulation type would be bootstrap, simulate, or permute.
-
-> **Panda Express, BME, get MECT, Duke Squirrels, Team Power:** single standard deviation
-
-> **ACE, Kimchi Stew, Databaes, HJC, 23, 24/7, five squared:** single population mean
-
-> **Team Untitled, R we done yet?, Blue Wombats, Cosmic:** difference between two population proportions
-
-> **InterstellR, Tequila Mockingbird, Sweeter than SugR:** difference between two population medians
-
-> **The Data Wranglers, Git R Done, Migos, Six Squared:** single population median
-]]
+]
 
 ---
 
 ## Testing errors
 
 - Type 1: Reject $H_0$ when you shouldn't have
-    + P(Type 1 error) = $\alpha$
-    
+    - P(Type 1 error) = $\alpha$
 - Type 2: Fail to reject $H_0$ when you should have
-    + P(Type 2 error) is harder to calculate, but increases as $\alpha$ decreases
+    - P(Type 2 error) is harder to calculate, but increases as $\alpha$ decreases
 
 --
 
@@ -474,9 +470,7 @@ Which is worse: Type 1 or Type 2 error?
 ## Probabilities of testing errors
 
 - P(Type 1 error) = $\alpha$
-
 - P(Type 2 error) = 1 - Power
-
 - Power = P(correctly rejecting the null hypothesis)
 
 --

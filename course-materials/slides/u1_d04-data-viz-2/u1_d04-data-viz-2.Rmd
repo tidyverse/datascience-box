@@ -30,16 +30,16 @@ class: middle
 
 ## Number of variables involved
 
--   Univariate data analysis - distribution of single variable
--   Bivariate data analysis - relationship between two variables
--   Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+- Univariate data analysis - distribution of single variable
+- Bivariate data analysis - relationship between two variables
+- Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
 
 ---
 
 ## Types of variables
 
--   **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
--   If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
 
 ---
 
@@ -51,16 +51,12 @@ class: middle
 
 ## Describing shapes of numerical distributions
 
--   shape:
-
-    -   skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
-    -   modality: unimodal, bimodal, multimodal, uniform
-
--   center: mean (`mean`), median (`median`), mode (not always useful)
-
--   spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
-
--   unusal observations
+- shape:
+    - skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    - modality: unimodal, bimodal, multimodal, uniform
+- center: mean (`mean`), median (`median`), mode (not always useful)
+- spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+- unusal observations
 
 ---
 
@@ -165,9 +161,9 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
 
 Time to actually play around with the Star Wars dataset!
 
--   Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
--   Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
--   Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
+- Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 03 - StarWars + Data visualization`.
+- Open the R Markdown document and complete the exercise (and if time allows, the stretch goal exercise).
+- Once done, place a green sticky on your laptop. If you have questions, place a pink sticky. ]
 
 ---
 

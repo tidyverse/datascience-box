@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Communicating data science results effectively   🗞</title>
+    <title>Communicating data science results effectively   📰</title>
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Communicating data science results effectively <br> 🗞
+# Communicating data science results effectively <br> 📰
 ### 
 
 ---
@@ -181,16 +181,6 @@ fav_food %&gt;% clean_names()
 ```
 
 ```
-## Warning in stringr::str_replace_all(str = string, pattern = replace): partial argument match of
-## 'str' to 'string'
-```
-
-```
-## Warning in stringr::str_replace(str = transliterated_names, pattern = "\\A[\\h\\s\\p{Punctuation}\
-## \p{Symbol}\\p{Separator}\\p{Other}]*(.*)$", : partial argument match of 'str' to 'string'
-```
-
-```
 ## # A tibble: 5 x 4
 ##   student_id full_name        favourite_food     meal_plan          
 ##        &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;              
@@ -233,7 +223,7 @@ dim(squirrels)
 ```
 
 ```
-## [1] 3023   35
+## [1] 3023   38
 ```
 
 ---
@@ -247,22 +237,22 @@ squirrels %&gt;% head()
 ```
 
 ```
-## # A tibble: 6 x 35
-##    long   lat unique_squirrel… hectare shift date       hectare_squirre… age   primary_fur_col…
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;                &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;           
-## 1 -74.0  40.8 13A-PM-1014-04   13A     PM    2018-10-14                4 &lt;NA&gt;  Gray            
-## 2 -74.0  40.8 15F-PM-1010-06   15F     PM    2018-10-10                6 Adult Gray            
-## 3 -74.0  40.8 19C-PM-1018-02   19C     PM    2018-10-18                2 Adult Gray            
-## 4 -74.0  40.8 21B-AM-1019-04   21B     AM    2018-10-19                4 &lt;NA&gt;  &lt;NA&gt;            
-## 5 -74.0  40.8 23A-AM-1018-02   23A     AM    2018-10-18                2 Juve… Black           
-## 6 -74.0  40.8 38H-PM-1012-01   38H     PM    2018-10-12                1 Adult Gray            
-## # … with 26 more variables: highlight_fur_color &lt;chr&gt;,
+## # A tibble: 6 x 38
+##    long   lat unique_squirrel… hectare NS    EW    shift date       hectare_squirre… age  
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;date&gt;                &lt;dbl&gt; &lt;chr&gt;
+## 1 -74.0  40.8 13A-PM-1014-04   13A     13    A     PM    2018-10-14                4 &lt;NA&gt; 
+## 2 -74.0  40.8 15F-PM-1010-06   15F     15    F     PM    2018-10-10                6 Adult
+## 3 -74.0  40.8 19C-PM-1018-02   19C     19    C     PM    2018-10-18                2 Adult
+## 4 -74.0  40.8 21B-AM-1019-04   21B     21    B     AM    2018-10-19                4 &lt;NA&gt; 
+## 5 -74.0  40.8 23A-AM-1018-02   23A     23    A     AM    2018-10-18                2 Juve…
+## 6 -74.0  40.8 38H-PM-1012-01   38H     38    H     PM    2018-10-12                1 Adult
+## # … with 28 more variables: primary_fur_color &lt;chr&gt;, highlight_fur_color &lt;chr&gt;,
 ## #   combination_of_primary_and_highlight_color &lt;chr&gt;, color_notes &lt;chr&gt;, location &lt;chr&gt;,
 ## #   above_ground_sighter_measurement &lt;chr&gt;, specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
 ## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;, other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
 ## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;, approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;,
 ## #   runs_from &lt;lgl&gt;, other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;, community_districts &lt;dbl&gt;,
-## #   borough_boundaries &lt;dbl&gt;, city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+## #   borough_boundaries &lt;dbl&gt;, city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;, where &lt;chr&gt;
 ```
 ]
 
@@ -277,22 +267,22 @@ squirrels %&gt;% tail()
 ```
 
 ```
-## # A tibble: 6 x 35
-##    long   lat unique_squirrel… hectare shift date       hectare_squirre… age   primary_fur_col…
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;                &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;           
-## 1 -74.0  40.8 6D-PM-1020-01    06D     PM    2018-10-20                1 Adult Gray            
-## 2 -74.0  40.8 21H-PM-1018-01   21H     PM    2018-10-18                1 Juve… Gray            
-## 3 -74.0  40.8 31D-PM-1006-02   31D     PM    2018-10-06                2 Adult Gray            
-## 4 -74.0  40.8 37B-AM-1018-04   37B     AM    2018-10-18                4 Adult Gray            
-## 5 -74.0  40.8 21C-PM-1006-01   21C     PM    2018-10-06                1 Adult Gray            
-## 6 -74.0  40.8 7G-PM-1018-04    07G     PM    2018-10-18                4 Adult Gray            
-## # … with 26 more variables: highlight_fur_color &lt;chr&gt;,
+## # A tibble: 6 x 38
+##    long   lat unique_squirrel… hectare NS    EW    shift date       hectare_squirre… age  
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;date&gt;                &lt;dbl&gt; &lt;chr&gt;
+## 1 -74.0  40.8 6D-PM-1020-01    06D     06    D     PM    2018-10-20                1 Adult
+## 2 -74.0  40.8 21H-PM-1018-01   21H     21    H     PM    2018-10-18                1 Juve…
+## 3 -74.0  40.8 31D-PM-1006-02   31D     31    D     PM    2018-10-06                2 Adult
+## 4 -74.0  40.8 37B-AM-1018-04   37B     37    B     AM    2018-10-18                4 Adult
+## 5 -74.0  40.8 21C-PM-1006-01   21C     21    C     PM    2018-10-06                1 Adult
+## 6 -74.0  40.8 7G-PM-1018-04    07G     07    G     PM    2018-10-18                4 Adult
+## # … with 28 more variables: primary_fur_color &lt;chr&gt;, highlight_fur_color &lt;chr&gt;,
 ## #   combination_of_primary_and_highlight_color &lt;chr&gt;, color_notes &lt;chr&gt;, location &lt;chr&gt;,
 ## #   above_ground_sighter_measurement &lt;chr&gt;, specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
 ## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;, other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
 ## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;, approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;,
 ## #   runs_from &lt;lgl&gt;, other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;, community_districts &lt;dbl&gt;,
-## #   borough_boundaries &lt;dbl&gt;, city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+## #   borough_boundaries &lt;dbl&gt;, city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;, where &lt;chr&gt;
 ```
 ]
 
@@ -822,7 +812,7 @@ ggplot(squirrels, aes(x = long, y = lat)) +
   geom_point(alpha = 0.2)
 ```
 
-&lt;img src="u1_d12-effective-communication_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d12-effective-communication_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 --
@@ -845,7 +835,7 @@ ggplot(squirrels, aes(x = long, y = lat, color = where)) +
   geom_point(alpha = 0.2)
 ```
 
-&lt;img src="u1_d12-effective-communication_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d12-effective-communication_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---

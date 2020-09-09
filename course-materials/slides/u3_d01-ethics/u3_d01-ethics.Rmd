@@ -40,7 +40,7 @@ What is the difference between these two pictures? Which presents a better way t
 
 <br>
 
-```{r echo=FALSE, out.width=850, fig.align="center"}
+```{r echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/axis-start-at-0.png")
 ```
 
@@ -54,7 +54,7 @@ Ingraham, C. (2019) ["You’ve been reading charts wrong. Here’s how a pro doe
 What is wrong with this picture? How would you correct it?
 ]
 
-```{r echo=FALSE, out.width=850, fig.align="center"}
+```{r echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/cost_of_gas.png")
 ```
 
@@ -64,7 +64,7 @@ knitr::include_graphics("img/cost_of_gas.png")
 Do you recognize this map? What does it show?
 ]
 
-```{r echo=FALSE, out.width=700, fig.align="center"}
+```{r echo=FALSE, out.width=700}
 knitr::include_graphics("img/election-2016-county.png")
 ```
 
@@ -77,13 +77,13 @@ Gamio, L. (2016) ["Election maps are telling you big lies about small things"](h
 ---
 
 .pull-left[
-```{r echo=FALSE, out.width=350, fig.align="center"}
+```{r echo=FALSE, out.width=350}
 knitr::include_graphics("img/citizens-for-trump.png")
 ```
 ]
 --
 .pull-right[
-```{r echo=FALSE, out.width=350, fig.align="center"}
+```{r echo=FALSE, out.width=350}
 knitr::include_graphics("img/counties-for-trump.png")
 ```
 ]
@@ -94,7 +94,7 @@ Credit: Alberto Cairo, [Visual Trumpery talk](https://visualtrumperytour.wordpre
 
 ---
 
-```{r echo=FALSE, out.width=800, fig.align="center"}
+```{r echo=FALSE, out.width=800}
 knitr::include_graphics("img/cairo-vote-percentages.png")
 ```
 
@@ -104,7 +104,7 @@ Credit: Alberto Cairo, [Visual Trumpery talk](https://visualtrumperytour.wordpre
 
 ---
 
-```{r echo=FALSE, out.width=900, fig.align="center"}
+```{r echo=FALSE, out.width=900}
   knitr::include_graphics("img/cairo-what-matters.png")
 ```
 
@@ -213,7 +213,7 @@ class: middle
 
 ## Google Translate
 
-```{r echo=FALSE, out.width=900, fig.align="center"}
+```{r echo=FALSE, out.width=900}
 knitr::include_graphics("img/google-translate-gender-bias.png")
 ```
 
@@ -260,7 +260,9 @@ knitr::include_graphics("img/guardian-facial-recognition.png")
 
 ## Criminal Sentencing
 
-![](img/propublica-criminal-sentencing.png)
+```{r out.width="60%", echo=FALSE}
+knitr::include_graphics("img/propublica-criminal-sentencing.png")
+```
 
 There’s software used across the country to predict future criminals. And it’s biased against blacks.
 .small[

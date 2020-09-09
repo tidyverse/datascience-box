@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Quantifying uncertainty   👢</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Quantifying uncertainty <br> 👢
+### 
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Inference
+
+---
+
+- Statistical inference is the process of using sample data to make conclusions 
+about the underlying population the sample came from.
+- Similar to tasting a spoonful of soup while cooking to make an inference about the entire pot.
+
+&lt;img src="img/photo-1571942676516-bcab84649e44.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Estimation
+
+So far we have done lots of estimation (mean, median, slope, etc.), i.e.
+- used data from samples to calculate sample statistics
+- which can then be used as estimates for population parameters
+
+---
+
+.question[
+If you want to catch a fish, do you prefer a spear or a net?
+]
+
+&lt;br&gt;
+
+.pull-left[
+&lt;img src="img/spear.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="img/net.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.question[
+If you want to estimate a population parameter, do you prefer to report a range 
+of values the parameter might be in, or a single value?
+]
+
+&lt;br&gt;
+
+--
+
+- If we report a point estimate, we probably won’t hit the exact population 
+parameter.
+- If we report a range of plausible values we have a good shot at capturing 
+the parameter.
+
+---
+
+&lt;img src="img/2019-11-18-bcc-poll-tracker.png" width="450" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [General election poll tracker: How do the parties compare?](https://www.bbc.co.uk/news/uk-politics-49798197), 18 Nov 2019.
+]
+
+---
+
+class: middle
+
+# Confidence intervals
+
+---
+
+## Confidence intervals
+
+A plausible range of values for the population parameter is a **confidence interval**.
+
+--
+- In order to construct a confidence interval we need to quantify the variability 
+of our sample statistic.
+
+--
+- For example, if we want to construct a confidence interval for a population mean, 
+we need to come up with a plausible range of values around our observsed sample mean.
+
+--
+- This range will depend on how precise and how accurate our sample mean is as an 
+estimate of the population mean.
+
+--
+- Quantifying this requires a measurement of how much we would expect the sample 
+mean to vary from sample to sample.
+
+---
+
+.question[
+Suppose we split the class in half down the middle of the classroom and ask 
+each student their heights. Then, we calculate the mean height of students 
+on each side of the classroom. Would you expect these two means to be exactly 
+equal, close but not equal, or wildly different?
+]
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.question[
+Suppose you randomly sample 50 students and 5 of them are left handed. If you 
+were to take another random sample of 50 students, how many would you expect to 
+be left handed? Would you be surprised if only 3 of them were left handed? Would 
+you be surprised if 40 of them were left handed?
+]
+
+---
+
+## Quantifying the variability of a sample statistic
+
+We can quantify the variability of sample statistics using
+
+- simulation: via bootstrapping (today)
+
+or
+
+- theory: via Central Limit Theorem (in Stat 2!)
+
+---
+
+class: middle
+
+# Bootstrapping
+
+---
+
+## Bootstrapping
+
+&lt;img src="img/boot.png" style="float:right"&gt;
+
+- The term **bootstrapping** comes from the phrase "pulling oneself up by one’s 
+bootstraps", which is a metaphor for accomplishing an impossible task without 
+any outside help.
+- In this case the impossible task is estimating a population parameter, and we’ll 
+accomplish it using data from only the given sample.
+- Note that this notion of saying something about a population parameter using 
+only information from an observed sample is the crux of statistical inference, 
+it is not limited to bootstrapping.
+
+---
+
+## Rent in Edinburgh
+
+.question[
+Take a guess! How much does a typical 3 BR flat in Edinburgh rents for?
+]
+
+---
+
+## Sample
+
+Fifteen 3 BR flats in Edinburgh were randomly selected on rightmove.co.uk.
+
+
+```r
+library(tidyverse)
+edi_3br &lt;- read_csv2("data/edi-3br.csv") # ; separated
+```
+
+.small[
+
+```
+## # A tibble: 15 x 4
+##   flat_id  rent title                       address                                    
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                       &lt;chr&gt;                                      
+## 1 flat_01   825 3 bedroom apartment to rent Burnhead Grove, Edinburgh, Midlothian, EH16
+## 2 flat_02  2400 3 bedroom flat to rent      Simpson Loan, Quartermile, Edinburgh, EH3  
+## 3 flat_03  1900 3 bedroom flat to rent      FETTES ROW, NEW TOWN, EH3 6SE              
+## 4 flat_04  1500 3 bedroom apartment to rent Eyre Crescent, Edinburgh, Midlothian       
+## 5 flat_05  3250 3 bedroom flat to rent      Walker Street, Edinburgh                   
+## 6 flat_06  2145 3 bedroom flat to rent      George Street, City Centre, Edinburgh, EH2 
+## # … with 9 more rows
+```
+]
+
+---
+
+## Observed sample
+
+&lt;img src="u2_d08-quantifying-uncertainty_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Observed sample
+
+Sample mean ≈ £1895 😱
+
+&lt;br&gt;
+
+&lt;img src="img/rent-bootsamp.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Bootstrap population
+
+Generated assuming there are more flats like the ones in the observed sample... Population mean = ❓
+
+&lt;br&gt;
+
+&lt;img src="img/rent-bootpop.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Bootstrapping scheme
+
+1. Take a bootstrap sample - a random sample taken **with replacement** from the 
+original sample, of the same size as the original sample.
+2. Calculate the bootstrap statistic - a statistic such as mean, median, 
+proportion, slope, etc. computed on the bootstrap samples.
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap statistics.
+4. Calculate the bounds of the XX% confidence interval as the middle XX% 
+of the bootstrap distribution.
+
+---
+
+## Let's bootstrap
+
+&lt;iframe src="https://wheeldecide.com/e.php?c1=825+&amp;c2=2400&amp;c3=1900&amp;c4=1500&amp;c5=3250&amp;c6=2145&amp;c7=1500&amp;c8=1950&amp;c9=1725&amp;c10=2995&amp;c11=1400&amp;c12=1995&amp;c13=1250&amp;c14=1995&amp;c15=1600&amp;time=5" width="500" height="500" scrolling="no" frameborder="0" align="center"&gt;&lt;/iframe&gt;
+
+---
+
+class: middle
+
+# Bootstrapping in R
+
+---
+
+## Two ways
+
+1. Using `for` loops
+2. Using the **infer** package
+
+
+---
+
+## Bootstrapping with `for` loops
+
+.question[
+Work in groups to explain what is happening in each line of the code below.
+]
+
+
+```r
+set.seed(9014)
+
+boot_df &lt;- tibble(
+  replicate = 1:100,
+  stat = rep(NA, 100)
+  )
+
+for (i in 1:100){
+   boot_df$stat[i] &lt;- edi_3br %&gt;% 
+     sample_n(15, replace = TRUE) %&gt;% 
+     summarise(stat = mean(rent)) %&gt;% 
+     pull()
+}
+```
+
+---
+
+## Bootstrap results
+
+
+```r
+ggplot(boot_df, aes(x = stat)) +
+  geom_histogram(binwidth = 100)
+```
+
+&lt;img src="u2_d08-quantifying-uncertainty_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+.small[
+
+```r
+boot_df %&gt;%
+  summarise(
+    lower = quantile(stat, 0.025),
+    upper = quantile(stat, 0.975),
+    )
+```
+]
+]
+.pull-right[
+
+```
+## # A tibble: 1 x 2
+##   lower upper
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 1594. 2292.
+```
+]
+
+---
+
+## infer `\(\in\)` tidymodels
+
+.pull-left[
+&lt;img src="img/infer-part-of-tidymodels.png" width="350" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+The objective of `infer` is to perform statistical inference using an expressive statistical grammar that coheres with the `tidyverse` design framework.
+
+```r
+library(infer)
+```
+]
+
+.footnote[
+[infer.netlify.com](https://infer.netlify.com/)
+]
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+```
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+```
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## Generate bootstrap means
+
+
+
+
+
+```r
+# save resulting bootstrap distribution
+boot_df &lt;- edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent) %&gt;% 
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %&gt;% 
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## The bootstrap sample
+
+.question[
+How many observations are there in `boot_df`? What does each observation represent?
+]
+
+
+```r
+boot_df
+```
+
+```
+## # A tibble: 15,000 x 2
+##   replicate  stat
+##       &lt;int&gt; &lt;dbl&gt;
+## 1         1 1793.
+## 2         2 1938.
+## 3         3 2175 
+## 4         4 2159.
+## 5         5 2084 
+## 6         6 1761 
+## # … with 14,994 more rows
+```
+
+---
+
+## Visualize the bootstrap distribution
+
+
+```r
+ggplot(data = boot_df, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 100) +
+  labs(title = "Bootstrap distribution of means")
+```
+
+&lt;img src="u2_d08-quantifying-uncertainty_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Calculate the confidence interval
+
+A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution.
+
+
+```r
+boot_df %&gt;%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+```
+## # A tibble: 1 x 2
+##   lower upper
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 1603. 2213.
+```
+
+---
+
+## Visualize the confidence interval
+
+
+
+&lt;img src="u2_d08-quantifying-uncertainty_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Interpret the confidence interval
+
+.question[
+The 95% confidence interval for the mean rent of three bedroom flats in 
+Edinburgh was calculated as (1603, 2213). Which of the 
+following is the correct interpretation of this interval?
+
+&lt;br&gt;
+
+**(a)** 95% of the time the mean rent of three bedroom flats in this sample is between £1603 and £2213.
+
+**(b)** 95% of all three bedroom flats in Edinburgh have rents between £1603 and £2213.
+
+**(c)** We are 95% confident that the mean rent of all three bedroom flats is between £1603 and £2213.
+
+**(d)** We are 95% confident that the mean rent of three bedroom flats in this sample is between £1603 and £2213.
+]
+
+---
+
+class: middle
+
+# Accuracy vs. precision
+
+---
+
+## Confidence level
+
+**We are 95% confident that ...**
+
+- Suppose we took many samples from the original population and built a 95% confidence interval based on each sample.
+- Then about 95% of those intervals would contain the true population parameter.
+
+---
+
+## Commonly used confidence levels
+
+.question[
+Which line (orange dash/dot, blue dash, green dot) represents which confidence level?
+]
+
+&lt;img src="u2_d08-quantifying-uncertainty_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Precision vs. accuracy
+
+.question[
+If we want to be very certain that we capture the population parameter, should 
+we use a wider interval or a narrower interval? What drawbacks are associated 
+with using a wider interval?
+]
+
+--
+
+![garfield](img/garfield.png)
+
+--
+
+.question[
+How can we get best of both worlds -- high precision and high accuracy?
+]
+
+---
+
+## Changing confidence level
+
+.question[
+How would you modify the following code to calculate a 90% confidence interval? 
+How would you modify it for a 99% confidence interval?
+]
+
+
+```r
+edi_3br %&gt;%
+  specify(response = rent) %&gt;% 
+  generate(reps = 15000, type = "bootstrap") %&gt;% 
+  calculate(stat = "mean") %&gt;%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+---
+
+## Recap
+
+- Sample statistic `\(\ne\)` population parameter, but if the sample is good, it can be a good estimate.
+- We report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population.
+- Since we can't continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability.
+- We can do this for any sample statistic:
+  - For a mean: `calculate(stat = "mean")`
+  - For a median: `calculate(stat = "median")`
+  - Learn about calculating bootstrap intervals for other statistics 
+  in your homework.
+  
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

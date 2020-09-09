@@ -1,0 +1,603 @@
+---
+title: "Model selection <br> `r emo::ji('pick')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(here)
+library(DT)
+library(modelr)
+library(openintro)
+```
+
+class: middle
+
+# Model selection
+
+---
+
+## Backwards elimination
+
+- Start with **full** model (including all candidate explanatory variables and 
+all candidate interactions)
+- Remove one variable at a time, record the adjusted R-squared for each of 
+the resulting models, and selected the model with the highest adjusted 
+R-squared
+- Continue until adjusted R-squared does not increase
+
+---
+
+## Forward selection
+
+- Start with **empty** model
+- Add one variable (or interaction effect) at a time, record the adjusted R-squared
+for each of the resulting models, and select the model with the highest adjusted 
+R-squared
+- Continue until adjusted R-squared does not increase
+
+---
+
+class: middle
+
+# Predicting professor evaluation scores
+
+---
+
+## Starting small: score ~ cls_did_eval + cls_students + cls_perc_eval
+
+.question[
+What percent of the variability in evaluation scores is explained by the model?
+]
+
+```{r}
+full_model <- lm(score ~ cls_did_eval + cls_students + cls_perc_eval, 
+                 data = evals)
+glance(full_model)$r.squared
+glance(full_model)$adj.r.squared
+```
+
+---
+
+```{r message=FALSE, cache=TRUE, out.width="80%"}
+library(GGally)
+evals %>%
+  select(score, cls_did_eval, cls_students, cls_perc_eval) %>%
+  ggpairs()
+```
+
+---
+
+.question[
+Suppose we definitely want to keep `cls_did_eval` in the model. Which of the 
+other two variables (`cls_students` or `cls_perc_eval`) is least likely to 
+be effective in increasing the model's predictive power?
+]
+
+```{r echo=FALSE,message=FALSE, cache=TRUE, out.width="80%"}
+library(GGally)
+evals %>%
+  select(score, cls_did_eval, cls_students, cls_perc_eval) %>%
+  ggpairs()
+```
+
+---
+
+## Full model
+
+```{r}
+full_model <- lm(score ~ cls_did_eval + cls_students + cls_perc_eval, 
+                 data = evals)
+glance(full_model)$adj.r.squared
+```
+
+---
+
+## Step 1:
+
+.midi[
+```{r}
+# Remove cls_did_eval
+s1_stu_perc <- lm(score ~ cls_students + cls_perc_eval, data = evals)
+glance(s1_stu_perc)$adj.r.squared
+```
+]
+
+--
+
+.midi[
+```{r}
+# Remove cls_students
+s1_did_perc <- lm(score ~ cls_did_eval + cls_perc_eval, data = evals)
+glance(s1_did_perc)$adj.r.squared
+```
+]
+
+--
+
+.midi[
+```{r}
+# Remove cls_perc_eval
+s1_did_stu <- lm(score ~ cls_did_eval + cls_students, data = evals)
+glance(s1_did_stu)$adj.r.squared
+```
+]
+
+---
+
+.question[
+Given the following adjusted R-squared values, which model should be selected 
+in step 1 of backwards selection?
+]
+
+.pull-left[
+.midi[
+```{r}
+# full model
+glance(full_model)$adj.r.squared
+# remove cls_did_eval
+glance(s1_stu_perc)$adj.r.squared
+```
+]
+]
+.pull-right[
+.midi[
+```{r}
+# remove cls_students
+glance(s1_did_perc)$adj.r.squared
+# remove cls_perc_eval
+glance(s1_did_stu)$adj.r.squared
+```
+]
+]
+
+-- 
+
+Removing `cls_students` (number of students in the class) resulted in the 
+highest increase in adjusted R-squared, so the model with only `cls_did_eval` 
+and `cls_perc_eval` (number and percentage of students who completed evaluations, 
+respectively) should be selected.
+
+---
+
+## Step 2:
+
+.midi[
+```{r}
+# Remove cls_did_eval
+s2_perc <- lm(score ~ cls_perc_eval, data = evals)
+glance(s2_perc)$adj.r.squared
+```
+]
+
+--
+
+.midi[
+```{r}
+# Remove cls_perc_eval
+s2_did <- lm(score ~ cls_did_eval, data = evals)
+glance(s2_did)$adj.r.squared
+```
+]
+
+--
+
+No further variables should be dropped since dropping any results in a decrease 
+in adjusted R-squared. The model selected in the previous step should be the 
+final model.
+
+---
+
+.question[
+Given the following adjusted R-squared values, which model should be selected 
+in step 2 of backwards selection?
+]
+
+.midi[
+```{r}
+glance(s1_did_perc)$adj.r.squared   # result of step 1
+glance(s2_perc)$adj.r.squared       # remove cls_did_eval
+glance(s2_did)$adj.r.squared        # remove cls_perc_eval
+```
+]
+
+---
+
+## A more realistic view: score ~ lots of variables
+
+.question[
+What percent of the variability in evaluation scores is explained by the model?
+]
+
+```{r}
+full_model <- lm(score ~ rank + ethnicity + gender + language + 
+                         age + cls_perc_eval + cls_did_eval + 
+                         cls_students + cls_level + cls_profs + 
+                         cls_credits + bty_avg, data = evals)
+glance(full_model)$r.squared
+glance(full_model)$adj.r.squared
+```
+
+---
+
+## Step 1
+
+.question[
+Given that the adjusted R-squared of the full model was 
+`r glance(full_model)$adj.r.squared %>% round(4)`, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+```{r echo=FALSE}
+evals_sub <- evals %>%
+  select(score, rank, ethnicity, gender, language, age, 
+         cls_perc_eval, cls_did_eval, cls_students, cls_level, 
+         cls_profs, cls_credits, bty_avg)
+
+result <- data.frame(
+  remove = rep(NA, ncol(evals_sub)-1),
+  adj_r_sq = rep(NA, ncol(evals_sub)-1)
+)
+
+for(i in 1:(ncol(evals_sub)-1)){
+  
+  col_to_remove <- i+1
+  result$remove[i] <- paste("Remove", names(evals_sub)[col_to_remove])
+  
+  evals_step1_mod <- evals_sub[,-col_to_remove]
+  m <- lm(score ~ ., data = evals_step1_mod)
+  result$adj_r_sq[i] <- glance(m)$adj.r.squared
+}
+
+result %>%
+  arrange(desc(adj_r_sq)) %>%
+  print()
+```
+]
+
+--
+
+Remove `cls_profs`
+
+```{r include=FALSE}
+step1 <- lm(score ~ rank + ethnicity + gender + language + 
+                    age + cls_perc_eval + cls_did_eval + 
+                    cls_students + cls_level + 
+                    cls_credits + bty_avg, data = evals)
+```
+
+
+---
+
+## Step 2
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 1 was 
+`r glance(step1)$adj.r.squared %>% round(4)`, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+```{r echo=FALSE}
+evals_sub <- evals %>%
+  select(score, rank, ethnicity, gender, language, age, 
+         cls_perc_eval, cls_did_eval, cls_students, cls_level, 
+         cls_credits, bty_avg)
+
+result <- data.frame(
+  remove = rep(NA, ncol(evals_sub)-1),
+  adj_r_sq = rep(NA, ncol(evals_sub)-1)
+)
+
+for(i in 1:(ncol(evals_sub)-1)){
+  
+  col_to_remove <- i+1
+  result$remove[i] <- paste("Remove", names(evals_sub)[col_to_remove])
+  
+  evals_step1_mod <- evals_sub[,-col_to_remove]
+  m <- lm(score ~ ., data = evals_step1_mod)
+  result$adj_r_sq[i] <- glance(m)$adj.r.squared
+}
+
+result %>%
+  arrange(desc(adj_r_sq)) %>%
+  print()
+```
+]
+
+--
+
+Remove `cls_level`
+
+```{r include=FALSE}
+step2 <- lm(score ~ rank + ethnicity + gender + language + 
+                    age + cls_perc_eval + cls_did_eval + 
+                    cls_students + 
+                    cls_credits + bty_avg, data = evals)
+```
+
+
+---
+
+## Step 3
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 2 was 
+`r glance(step2)$adj.r.squared %>% round(4)`, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+```{r echo=FALSE}
+evals_sub <- evals %>%
+  select(score, rank, ethnicity, gender, language, age, 
+         cls_perc_eval, cls_did_eval, cls_students, cls_credits, bty_avg)
+
+result <- data.frame(
+  remove = rep(NA, ncol(evals_sub)-1),
+  adj_r_sq = rep(NA, ncol(evals_sub)-1)
+)
+
+for(i in 1:(ncol(evals_sub)-1)){
+  
+  col_to_remove <- i+1
+  result$remove[i] <- paste("Remove", names(evals_sub)[col_to_remove])
+  
+  evals_step1_mod <- evals_sub[,-col_to_remove]
+  m <- lm(score ~ ., data = evals_step1_mod)
+  result$adj_r_sq[i] <- glance(m)$adj.r.squared
+}
+
+result %>%
+  arrange(desc(adj_r_sq)) %>%
+  print()
+```
+]
+
+--
+
+Remove `cls_students`
+
+```{r include=FALSE}
+step3 <- lm(score ~ rank + ethnicity + gender + language + 
+                    age + cls_perc_eval + cls_did_eval + 
+                    cls_credits + bty_avg, data = evals)
+```
+
+
+---
+
+## Step 4
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 3 was 
+`r glance(step3)$adj.r.squared %>% round(4)`, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+```{r echo=FALSE}
+evals_sub <- evals %>%
+  select(score, rank, ethnicity, gender, language, age, 
+         cls_perc_eval, cls_did_eval, cls_credits, bty_avg)
+
+result <- data.frame(
+  remove = rep(NA, ncol(evals_sub)-1),
+  adj_r_sq = rep(NA, ncol(evals_sub)-1)
+)
+
+for(i in 1:(ncol(evals_sub)-1)){
+  
+  col_to_remove <- i+1
+  result$remove[i] <- paste("Remove", names(evals_sub)[col_to_remove])
+  
+  evals_step1_mod <- evals_sub[,-col_to_remove]
+  m <- lm(score ~ ., data = evals_step1_mod)
+  result$adj_r_sq[i] <- glance(m)$adj.r.squared
+}
+
+result %>%
+  arrange(desc(adj_r_sq)) %>%
+  print()
+```
+]
+
+--
+
+Remove `rank`
+
+```{r include=FALSE}
+step4 <- lm(score ~ ethnicity + gender + language + 
+                    age + cls_perc_eval + cls_did_eval + 
+                    cls_credits + bty_avg, data = evals)
+```
+
+---
+
+## Step 5
+
+.question[
+Given that the adjusted R-squared of the model selected in Step 3 was 
+`r glance(step4)$adj.r.squared %>% round(4)`, 
+which of the following models should be selected in the first step of backwards 
+selection?
+]
+
+.midi[
+```{r echo=FALSE}
+evals_sub <- evals %>%
+  select(score, ethnicity, gender, language, age, 
+         cls_perc_eval, cls_did_eval, cls_credits, bty_avg)
+
+result <- data.frame(
+  remove = rep(NA, ncol(evals_sub)-1),
+  adj_r_sq = rep(NA, ncol(evals_sub)-1)
+)
+
+for(i in 1:(ncol(evals_sub)-1)){
+  
+  col_to_remove <- i+1
+  result$remove[i] <- paste("Remove", names(evals_sub)[col_to_remove])
+  
+  evals_step1_mod <- evals_sub[,-col_to_remove]
+  m <- lm(score ~ ., data = evals_step1_mod)
+  result$adj_r_sq[i] <- glance(m)$adj.r.squared
+}
+
+result %>%
+  arrange(desc(adj_r_sq)) %>%
+  print()
+```
+]
+
+--
+
+None, stick with model from Step 4.
+
+---
+
+## Final model
+
+```{r echo=FALSE}
+tidy(step4)  %>% select(term, estimate)
+```
+
+---
+
+## Model selection and interaction effects
+
+Model selection for models including interaction effects must follow the 
+following two principles:
+
+- If an interaction is included in the model, the main effects of both of 
+those variables must also be in the model.
+- If a main effect is not in the model, then its interaction should not be 
+in the model.
+
+---
+
+## Other model selection criteria
+
+- Adjusted R-squared is one model selection criterion
+- There are others out there (many many others!), we'll discuss one more in 
+this course, and you'll learn about others in future stats courses
+
+---
+
+## Akaike Information Criterion
+
+$$ AIC = -2log(L) + 2k $$
+
+- $L$: likelihood	of the	model
+    - Likelihood of seeing these data	given	the estimated model parameters
+    - Won't go into calculating it in this course (but you will in future courses)
+- Used for model selection, lower the better
+    - Value is not informative on its own
+- Applies	a	penalty	for	number of parameters in the	model, $k$
+    - Different penalty than adjusted $R^2$ but similar idea
+
+```{r aic-full-model}
+glance(full_model)$AIC
+```
+
+---
+
+## Model selection -- a little faster
+
+`step()` function selects a model by AIC:
+
+.midi[
+```{r results="hide"}
+selected_model <- step(full_model, direction = "backward")
+```
+
+```{r}
+tidy(selected_model) %>% select(term, estimate)
+```
+]
+
+---
+
+## AIC comparison
+
+```{r}
+glance(full_model)$AIC
+```
+
+```{r}
+glance(selected_model)$AIC
+```
+
+---
+
+## Parsimony
+
+.pull-left[
+.question[
+Take a look at the variables in the full and the selected model. Can you guess
+why some of them may have been dropped? Remember: We like parsimonous models.
+]
+]
+.pull-right[
+.small[
+| variable     | selected    |
+| ------------ | :----------:|
+| rank         |             |
+| ethnicity    | x           |
+| gender       | x           |
+| language     | x           |
+| age          | x           |
+| cls_perc_eval| x           |
+| cls_did_eval |             |
+| cls_students |             |
+| cls_level    |             |
+| cls_profs    |             |
+| cls_credits  | x           |
+| bty_avg      | x           |
+]
+]
+
+---
+
+## Interpretation
+
+.question[
+Interpret the slope of `bty_avg` and `gender` in the selected model.
+]
+
+.midi[
+```{r echo=FALSE}
+tidy(selected_model) %>% select(term, estimate)
+```
+]
+
+--
+.midi[
+- All else held constant, for each additional point in beauty score, the 
+evaluation score of the professor is predicted to be higher, on average, 
+by 0.06 points.
+]
+
+--
+.midi[
+- All else held constant, male professors are predicted to score higher on their 
+evaluation score than female professors by 0.185 points.
+]

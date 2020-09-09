@@ -1,0 +1,631 @@
+---
+title: "Linear models with multiple predictors <br> `r emo::ji('woman_juggling')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(broom)
+library(here)
+library(plotly)
+library(widgetframe)
+```
+
+class: middle
+
+# The linear model with multiple predictors
+
+---
+
+## The data
+
+```{r load-pp, message=FALSE}
+pp <- read_csv(
+  "data/paris-paintings.csv", 
+  na = c("n/a", "", "NA")
+  )
+```
+
+---
+
+## Data transformation
+
+```{r transform-pp, message=FALSE}
+pp <-pp %>%
+  mutate(
+    log_price = log(price),
+    artistliving = factor(artistliving)
+  )
+```
+
+---
+
+## Multiple predictors
+
+- Response variable: `log_price` = log_price
+- Explanatory variables: Width and height
+
+```{r model-price-width-height}
+m_wi_hgt <- lm(log_price ~ Width_in + Height_in, data = pp)
+tidy(m_wi_hgt)
+```
+
+---
+
+##  Linear model with multiple predictors
+
+```{r model-price-width-height-tidy, echo=FALSE}
+tidy(m_wi_hgt)
+```
+
+<br>
+
+$$\widehat{log_price} = 4.77 + 0.0269~width - 0.0133~height$$
+
+---
+
+## Visualizing models with multiple predictors
+
+```{r plotly, echo=FALSE, warning=FALSE, cache=TRUE}
+p <- plot_ly(pp, x = ~Width_in, y = ~Height_in, z = ~log_price,
+        marker = list(size = 3,
+                       color = "lightgray",
+                       alpha = 0.5,
+                       line = list(color = "gray",
+                                   width = 2))) %>%
+  add_markers() %>%
+  plotly::layout(scene = list(xaxis = list(title = "Width (in)"),
+                      yaxis = list(title = "Height (in)"),
+                      zaxis = list(title = "log_price"))) %>%
+  config(displayModeBar = FALSE)
+frameWidget(p, width = "100%", height = "100%")
+```
+
+---
+
+class: middle
+
+# Exploration: Price, surface area, and living artist
+
+---
+
+## Price, surface area, and living artist
+
+- Explore the relationship between price of paintings and surface area, conditioned 
+on whether or not the artist is still living
+- First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+```{r}
+pp <- pp %>%
+  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
+
+pp %>%
+  count(artistliving)
+```
+]
+
+---
+
+## Typical surface area
+
+.question[
+What is the typical surface area for paintings?
+]
+
+```{r viz-surf-artistliving, echo=FALSE,warning=FALSE, out.width="80%"}
+ggplot(data = pp, 
+       mapping = aes(x = Surface, fill = artistliving)) +
+  geom_histogram(binwidth = 500) + 
+  facet_grid(artistliving ~ .) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  labs(y = "") +
+  geom_vline(xintercept = 1000) +
+  geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")
+```
+
+--
+
+Less than 1000 square inches (~ 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
+
+---
+
+## Narrowing the scope
+
+For simplicity let's focus on the paintings with `Surface < 5000`:
+
+```{r surf-lt-5000, out.width="90%"}
+pp_Surf_lt_5000 <- pp %>%
+  filter(Surface < 5000)
+```
+
+```{r viz-surf-lt-5000-artistliving, echo=FALSE, warning=FALSE, out.width="80%"}
+ggplot(data = pp_Surf_lt_5000, 
+       mapping = aes(y = log_price, x = Surface, 
+                     color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  labs(color = "Living artist") +
+  theme_minimal()
+```
+
+---
+
+## Facet to get a better look
+
+```{r viz-surf-lt-5000-artistliving-facet, echo=FALSE, warning=FALSE, out.width="80%"}
+ggplot(data = pp_Surf_lt_5000, 
+       mapping = aes(y = log_price, x = Surface, 
+                     color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  facet_wrap(~artistliving) +
+  labs(color = "Living artist") +
+  theme_minimal()
+```
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+class: middle
+
+# Side-step: Weights of books
+
+---
+
+.question[
+Suppose we want to predict weight of books from their volume and cover type 
+(hardback vs. paperback). Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which weight changes as volume 
+increases would be the same for hardback and paperback books and interaction 
+effects would mean the rate at which weight changes as volume 
+increases would be different for hardback and paperback books.
+]
+
+```{r echo=FALSE}
+countdown(minutes = 3)
+```
+
+---
+
+The `allbacks` data frame gives measurements on the volume and weight of 15 books, some of which are softback and some of which are hardback.
+
+.small[
+```{r}
+library(DAAG)
+as_tibble(allbacks)
+```
+]
+
+.footnote[
+The bookshelf of J. H. Maindonald at Australian National University.
+]
+
+---
+
+```{r out.width="80%"}
+ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal()
+```
+
+---
+
+```{r echo=FALSE, out.width="55%"}
+m_main <- lm(weight ~ volume + cover, data = allbacks)
+m_main_aug <- augment(m_main)
+
+ggplot() +
+  geom_point(allbacks, 
+             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
+  geom_line(m_main_aug, 
+              mapping = aes(x = volume, y = .fitted, color = cover)) +
+  theme_minimal() +
+  labs(title = "Main effects, parallel slopes", 
+       subtitle = "weight-hat = volume + cover")
+```
+
+
+```{r echo=FALSE, out.width="55%"}
+m_int <- lm(weight ~ volume + cover + volume*cover, data = allbacks)
+m_int_aug <- augment(m_int)
+
+ggplot() +
+  geom_point(data = allbacks, 
+             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
+  geom_line(data = m_int_aug, 
+            mapping = aes(x = volume, y = .fitted, color = cover)) +
+  theme_minimal() +
+  labs(title = "Interaction effects, not parallel slopes", 
+       subtitle = "weight-hat = volume + cover + volume * cover")
+```
+
+---
+
+## In pursuit of Occam's razor
+
+- Occam's Razor states that among competing hypotheses that predict equally 
+well, the one with the fewest assumptions should be selected.
+- Model selection follows this principle.
+- We only want to add another variable to the model if the addition of that
+variable brings something valuable in terms of predictive power to the model.
+- In other words, we prefer the simplest best model, i.e. **parsimonious** model.
+
+---
+
+.question[
+Visually, which of the two models is preferable under Occam's razor?
+]
+
+```{r echo=FALSE, out.width="55%"}
+m_main <- lm(weight ~ volume + cover, data = allbacks)
+m_main_aug <- augment(m_main)
+
+ggplot() +
+  geom_point(allbacks, 
+             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
+  geom_line(m_main_aug, 
+              mapping = aes(x = volume, y = .fitted, color = cover)) +
+  theme_minimal() +
+  labs(title = "Main effects, parallel slopes", 
+       subtitle = "weigmainht-hat = volume + cover")
+```
+
+
+```{r echo=FALSE, out.width="55%"}
+m_int <- lm(weight ~ volume + cover + volume*cover, data = allbacks)
+m_int_aug <- augment(m_int)
+
+ggplot() +
+  geom_point(data = allbacks, 
+             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
+  geom_line(data = m_int_aug, 
+            mapping = aes(x = volume, y = .fitted, color = cover)) +
+  theme_minimal() +
+  labs(title = "Interaction effects, not parallel slopes", 
+       subtitle = "weight-hat = volume + cover + volume * cover")
+```
+
+---
+
+## R-squared
+
+- $R^2$ is the percentage of variability in the response variable explained by 
+the regression model.
+
+```{r}
+glance(m_main)$r.squared
+glance(m_int)$r.squared
+```
+
+--
+- Clearly the model with interactions has a higher $R^2$.
+
+--
+- However using $R^2$ for model selection in models with multiple explanatory 
+variables is not a good idea as $R^2$ increases when **any** variable is added 
+to the model.
+
+---
+
+## Adjusted R-squared
+
+... a (more) objective measure for model selection
+
+- Adjusted $R^2$ doesn't increase if the new variable does not provide any new 
+informaton or is completely unrelated, as it applies a penalty for number of 
+variables included in the model.
+- This makes adjusted $R^2$ a preferable metric for model selection in multiple
+regression models.
+
+---
+
+## Comparing models
+
+.pull-left[
+```{r}
+glance(m_main)$r.squared
+glance(m_int)$r.squared
+```
+]
+.pull-right[
+```{r}
+glance(m_main)$adj.r.squared
+glance(m_int)$adj.r.squared
+```
+]
+
+--
+
+.small[
+```{r}
+# Is R-sq higher for int model?
+glance(m_int)$r.squared > glance(m_main)$r.squared 
+# Is R-sq adj. higher for int model?
+glance(m_int)$adj.r.squared > glance(m_main)$adj.r.squared
+```
+]
+
+---
+
+class: middle
+
+# Back to exploration: Price, surface area, and living artist
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+.pull-left[
+```{r viz-main-effects, out.width="80%", echo=FALSE}
+m_main <- lm(log_price ~ Surface + artistliving, data = pp_Surf_lt_5000)
+m_main_aug <- augment(m_main)
+ggplot(data = m_main_aug, 
+       mapping = aes(y = log_price, x = Surface, color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted), size = 1.2) +
+  labs(x = "Surface", y = "log_price", color = "Living artist", 
+       title = "Main effects") +
+  theme_minimal()
+```
+]
+.pull-right[
+```{r viz-interaction-effects, out.width="80%", echo=FALSE}
+ggplot(data = pp_Surf_lt_5000,
+       mapping = aes(y = log_price, x = Surface, 
+                     color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(y = "log_price", color = "Living artist", title = "Interaction effects") +
+  theme_minimal()
+```
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: log_price
+- Explanatory variables: Surface area and artist living (0/1 variable)
+
+.midi[
+```{r model-main-effects}
+m_main <- lm(log_price ~ Surface + artistliving, 
+             data = pp_Surf_lt_5000)
+tidy(m_main)
+```
+]
+
+
+--
+
+$$ \widehat{log_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
+
+---
+
+## Solving the model
+
+- Non-living artist: Plug in 0 for `artistliving`
+
+$\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 0$  
+$= 4.88 + 0.000265~surface$
+
+--
+- Living artist: Plug in 1 for `artistliving`
+
+$\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 1$   
+$= 5.017 + 0.000265~surface$
+
+---
+
+## Visualizing main effects
+
+```{r out.width="60%", echo = FALSE}
+ggplot(data = m_main_aug, 
+       mapping = aes(y = log_price, x = Surface, color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted)) +
+  labs(x = "Surface", y = "log_price", color = "Living artist") +
+  theme_minimal()
+```
+
+- **Same slope:** Rate of change in price as the surface area increases does 
+not vary between paintings by living and non-living artists.
+- **Different intercept:** Paintings by living artists are consistently more 
+expensive than paintings by non-living artists.
+
+---
+
+## Interpreting main effects
+
+.midi[
+```{r exp-coefs}
+tidy(m_main) %>% 
+  mutate(exp_estimate = exp(estimate)) %>%
+  select(term, estimate, exp_estimate)
+```
+]
+
+- All else held constant, for each additional square inch in painting's surface area, the price of the painting is predicted, on average, to be higher by a factor of 1.
+- All else held constant, paintings by a living artist are predicted, on average, to be higher by a factor of 1.15 compared to paintings by an artist who is no longer alive.
+- Paintings that are by an artist who is not alive and that have a surface area of 0 square inches are predicted, on average, to be 132 livres.
+
+---
+
+## 
+
+.question[
+Why is our linear regression model different from what we got from `geom_smooth(method = "lm")`?
+]
+
+.pull-left[
+```{r echo=FALSE, out.width="80%"}
+ggplot(pp_Surf_lt_5000, aes(x = Surface, y = log_price, color = artistliving)) + 
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  labs(x = "Surface", y = "log_price", color = "Living artist") +
+  theme_minimal()
+```
+]
+.pull-right[
+```{r viz-main-effects3, echo=FALSE, out.width="80%"}
+m_pr <- lm(log_price ~ Surface + artistliving, data = pp_Surf_lt_5000)
+m_pr_aug <- augment(m_pr)
+ggplot(data = m_pr_aug, mapping = aes(y = log_price, x = Surface, color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted)) +
+  labs(x = "Surface", y = "log_price", color = "Living artist") +
+  theme_minimal()
+```
+]
+
+---
+
+## What went ~wrong~ diferently?
+
+- The way we specified our model only lets `artistliving` affect the intercept.
+- Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
+
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colors
++ Same slope and different intercept for both colors
++ Different slope and different intercept for both colors
+]
+
+---
+
+## Interaction: surface * artist living
+
+```{r out.width="80%", echo = FALSE}
+m_int <- lm(log_price ~ Surface * artistliving, data = pp_Surf_lt_5000)
+m_int_aug <- augment(m_int)
+ggplot(data = m_int_aug, 
+       mapping = aes(y = log_price, x = Surface, color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted)) +
+  labs(x = "Surface", y = "log_price", color = "Living artist") +
+  theme_minimal()
+```
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: log_price
+- Explanatory variables: Surface area, artist living (0/1 variable), and 
+their interaction
+
+.midi[
+```{r model-interaction-effects}
+m_int <- lm(log_price ~ Surface + artistliving + 
+              Surface * artistliving, 
+            data = pp_Surf_lt_5000)
+tidy(m_int)
+```
+]
+
+---
+
+## Linear model with interaction effects
+
+.midi[
+```{r model-interaction-effects-tidy, echo=FALSE}
+tidy(m_int)
+```
+]
+
+$$ \widehat{log_price} = 4.91 + 0.00021~surface - 0.126~artistliving $$
+$$+ ~ 0.00048~surface \times artistliving $$
+
+---
+
+## Interpretation of interaction effects
+
+- Rate of change in price as the surface area of the painting increases does 
+vary between paintings by living and non-living artists (different slopes), 
+- Some paintings by living artists are more expensive than paintings by
+non-living artists, and some are not (different intercept).
+
+.small[
+.pull-left[
+- Non-living artist: 
+$\widehat{log_price} = 4.91 + 0.00021~surface$
+$- 0.126 \times 0 + 0.00048~surface \times 0$
+$= 4.91 + 0.00021~surface$
+- Living artist: 
+$\widehat{log_price} = 4.91 + 0.00021~surface$
+$- 0.126 \times 1 + 0.00048~surface \times 1$
+$= 4.91 + 0.00021~surface$
+$- 0.126 + 0.00048~surface$
+$= 4.784 + 0.00069~surface$
+]
+.pull-right[
+```{r viz-interaction-effects2, out.width="80%", echo = FALSE}
+ggplot(data = pp_Surf_lt_5000,
+       aes(y = log_price, x = Surface, color = artistliving)) +
+  geom_point(alpha = 0.3) +
+  stat_smooth(method = "lm", fullrange = TRUE) +
+  theme_minimal()
+```
+]
+]
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted $R^2$, so we 
+should indeed use the model with the interactions.
+
+```{r}
+glance(m_main)$adj.r.squared
+glance(m_int)$adj.r.squared
+```
+
+---
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.

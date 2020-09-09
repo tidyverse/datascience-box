@@ -260,7 +260,7 @@ ggplot(data = null_dist, mapping = aes(x = stat)) +
   labs(title = "Null distribution")
 ```
 
-&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -272,7 +272,7 @@ simulations was the simulated difference in sample proportion at least as extrem
 as the observed difference in sample proportions?
 ]
 
-&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -319,14 +319,11 @@ class: middle
 ## What do you want to do?
 
 - Estimation -&gt; Confidence interval
-
 - Decision -&gt; Hypothesis test
-
 - First step: Ask the following questions
-
-  1. How many variables?
-  2. What types of variables?
-  3. What is the research question?
+  - How many variables?
+  - What types of variables?
+  - What is the research question?
 
 ---
 
@@ -339,13 +336,9 @@ class: middle
 ## Confidence intervals
 
 - Bootstrap
-
 - Bounds: cutoff values for the middle XX% of the distribution
-
 - Interpretation: We are XX% confident that the true population parameter is in the interval.
-
 - Definition of confidence level: XX% of random samples of size n are expected to produce confidence intervals that contain the true population parameter.
-
 - `infer::generate(reps, type = "bootstrap")`
 
 ---
@@ -375,6 +368,17 @@ What happens to the width of the confidence interval as the confidence level inc
 
 &lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
+---
+
+## Sample size and width of intervals
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Sample size and width of intervals
+
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -383,7 +387,7 @@ What happens to the width of the confidence interval as the confidence level inc
 - Two sided alternative HT with `\(\alpha\)` `\(\rightarrow\)` `\(CL = 1 - \alpha\)`
 - One sided alternative HT with `\(\alpha\)` `\(\rightarrow\)` `\(CL = 1 - (2 \times \alpha)\)`
 
-&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u2_d10-inference-overview_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -416,51 +420,33 @@ class: middle
 ## Hypothesis testing
 
 - Set the hypotheses.
-
 - Calculate the observed sample statistic.
-
 - Calculate the p-value.
-
 - Make a conclusion, about the hypotheses, in context of the data and the research question.
-
 - `infer::hypothesize(null = "point")` and `infer::generate(reps, type = "simulate")` or `infer::generate(reps, type = "bootstrap")`
-
 - `infer::hypothesize(null = "independence")` and `infer::generate(reps, type = "permute")`
   
 ---
 
 ## Hypothesis testing exercises
 
-.small[
 .question[
-👥
 Describe the simulation process for tesing for the parameter assigned to your team.
 
 - Note any assumptions you make in terms of sample size, observed sample statistic, etc.
 - Imagine using index cards or chips to represent the data. 
 - Specify whether the null hypothesis would be independence or point.
 - Specify whether the simulation type would be bootstrap, simulate, or permute.
-
-&gt; **Panda Express, BME, get MECT, Duke Squirrels, Team Power:** single standard deviation
-
-&gt; **ACE, Kimchi Stew, Databaes, HJC, 23, 24/7, five squared:** single population mean
-
-&gt; **Team Untitled, R we done yet?, Blue Wombats, Cosmic:** difference between two population proportions
-
-&gt; **InterstellR, Tequila Mockingbird, Sweeter than SugR:** difference between two population medians
-
-&gt; **The Data Wranglers, Git R Done, Migos, Six Squared:** single population median
-]]
+]
 
 ---
 
 ## Testing errors
 
 - Type 1: Reject `\(H_0\)` when you shouldn't have
-    + P(Type 1 error) = `\(\alpha\)`
-    
+    - P(Type 1 error) = `\(\alpha\)`
 - Type 2: Fail to reject `\(H_0\)` when you should have
-    + P(Type 2 error) is harder to calculate, but increases as `\(\alpha\)` decreases
+    - P(Type 2 error) is harder to calculate, but increases as `\(\alpha\)` decreases
 
 --
 
@@ -478,9 +464,7 @@ Which is worse: Type 1 or Type 2 error?
 ## Probabilities of testing errors
 
 - P(Type 1 error) = `\(\alpha\)`
-
 - P(Type 2 error) = 1 - Power
-
 - Power = P(correctly rejecting the null hypothesis)
 
 --

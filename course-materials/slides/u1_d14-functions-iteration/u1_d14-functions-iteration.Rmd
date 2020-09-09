@@ -110,7 +110,7 @@ class: middle
 
 --
 
-```{r echo=FALSE, out.width="70%", fig.align="center"}
+```{r echo=FALSE, out.width="70%"}
 knitr::include_graphics("img/funct-all-things.png")
 ```
 

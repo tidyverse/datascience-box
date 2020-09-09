@@ -298,7 +298,7 @@ knitr::include_graphics("img/lego-steps-commit-messages.png")
 
 ## Why do we need version control?
 
-```{r echo=FALSE, fig.align = "center"}
+```{r echo=FALSE, fig.align = "center", out.width="40%"}
 knitr::include_graphics("img/phd_comics_vc.gif")
 ```
 

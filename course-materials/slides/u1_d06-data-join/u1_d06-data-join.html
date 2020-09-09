@@ -164,19 +164,6 @@ fisheries %&gt;%
 ```
 
 ```
-## Warning: Predicate functions must be wrapped in `where()`.
-## 
-##   # Bad
-##   data %&gt;% select(is.numeric)
-## 
-##   # Good
-##   data %&gt;% select(where(is.numeric))
-## 
-## ℹ Please update your code.
-## This message is displayed once per session.
-```
-
-```
 ## # A tibble: 1 x 3
 ##   capture aquaculture   total
 ##     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
@@ -646,7 +633,7 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
   geom_col()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -659,7 +646,7 @@ ggplot(fisheries_summary,
   geom_col()
 ```
 
-&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d06-data-join_files/figure-html/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 

@@ -34,14 +34,11 @@ class: middle
 ## What do you want to do?
 
 - Estimation -> Confidence interval
-
 - Decision -> Hypothesis test
-
 - First step: Ask the following questions
-
-  1. How many variables?
-  2. What type(s) of variable(s)?
-  3. What is the research question?
+  - How many variables?
+  - What type(s) of variable(s)?
+  - What is the research question?
 
 ---
 
@@ -135,7 +132,6 @@ of the bootstrap distribution.
 From the documentation of `set.seed`:
 
 - `set.seed` uses a single integer argument to set as many seeds as are required. There is no guarantee that different values of seed will seed the RNG differently, although any exceptions would be extremely rare.
-
 - Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default.
 
 ```{r}
@@ -217,7 +213,7 @@ a distribution of bootstrap means.
 
 ## Computation for HT for a mean
 
-```{r fig.height=2}
+```{r out.width="50%"}
 boot_means_shifted <- ncbirths %>%
   filter(!is.na(weeks)) %>% # remove NAs
   specify(response = weeks) %>%
@@ -243,18 +239,6 @@ boot_means_shifted %>%
 --
 
 Since p-value less than the significance level, we reject the null hypothesis. The data provide convincing evidence that the average length of gestation of births in NC is different than 40.
-
----
-
-## Exercises
-
-Go to RStudio Cloud, make a copy of **NC Births**, and answer the following questions.
-
-1. Do these data provide convincing evidence of a difference in length in gestation between mature and younger moms? Use a significance level of 10%.
-
-2. Estimate the difference in average lengths of gestation between mature and younger moms. Use a significance level equivalent to the hypothesis test above.
-
-3. Do the results of the hypothesis test agree with the result of the confidence interval?
 
 ---
 

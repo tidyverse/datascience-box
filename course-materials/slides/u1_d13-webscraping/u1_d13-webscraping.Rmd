@@ -23,7 +23,7 @@ library(rvest)
 library(DT)
 ```
 
-class: center, middle
+class: middle
 
 # Scraping the web
 
@@ -49,7 +49,7 @@ but it's time-consuming and prone to errors
 
 ---
 
-class: center, middle
+class: middle
 
 # Web Scraping with rvest
 
@@ -145,7 +145,7 @@ up with the appropriate CSS selector for your needs
 
 ---
 
-class: center, middle
+class: middle
 
 # Top 250 movies on IMDB
 
@@ -289,7 +289,7 @@ How would you go about creating this visualization: Visualize the average yearly
 --
 
 .small[
-```{r echo=FALSE, fig.retina=3, fig.height=2}
+```{r echo=FALSE, out.width="90%"}
 imdb_top_250 %>% 
   group_by(year) %>%
   summarise(avg_score = mean(score)) %>%

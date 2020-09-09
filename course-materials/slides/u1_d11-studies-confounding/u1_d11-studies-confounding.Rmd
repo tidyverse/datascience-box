@@ -94,7 +94,7 @@ Souce: [Study: Cereal Keeps Girls Slim](https://www.cbsnews.com/news/study-cerea
 
 ## Correlation != causation
 
-```{r echo=FALSE, out.height="50%", out.width="80%", fig.align="center"}
+```{r echo=FALSE, out.height="50%", out.width="80%"}
 knitr::include_graphics("img/xkcdcorrelation.png")
 ```
 
@@ -106,7 +106,7 @@ Randall Munroe CC BY-NC 2.5 http://xkcd.com/552/
 
 ## Stu!dies and conclusions
 
-```{r echo=FALSE, out.height="50%", out.width="80%", fig.align="center"}
+```{r echo=FALSE, out.height="50%", out.width="80%"}
 knitr::include_graphics("img/random_sample_assign_grid.png")
 ```
 
@@ -230,7 +230,7 @@ df %>%
 
 --
 
-```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center"}
+```{r echo=FALSE, out.width = "80%"}
 ggplot(data = df) +
   geom_point(aes(x = x, y = y), color = "darkgray") +
   theme_minimal()
@@ -248,7 +248,7 @@ df %>%
   column_spec(1, bold = T, border_right = T)
 ```
 
-```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+```{r echo=FALSE, message=FALSE, out.width = "80%"}
 ggplot(data = df) +
   geom_point(aes(x = x, y = y), color = "darkgray") +
   geom_smooth(aes(x = x, y = x), color = "darkgray") +
@@ -267,7 +267,7 @@ df %>%
   column_spec(1, bold = T, border_right = T)
 ```
 
-```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+```{r echo=FALSE, message=FALSE, out.width = "80%"}
 ggplot(data = df) +
   geom_point(aes(x = x, y = y, color = z)) +
   geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
@@ -286,7 +286,7 @@ df %>%
   column_spec(1, bold = T, border_right = T)
 ```
 
-```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+```{r echo=FALSE, message=FALSE, out.width = "80%"}
 ggplot(data = df) +
   geom_point(aes(x = x, y = y, color = z)) +
   geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
@@ -325,15 +325,6 @@ ucbadmit
 
 ---
 
-## Skim the data
-
-```{r message=FALSE}
-library(skimr)
-skim(ucbadmit) #<<
-```
-
----
-
 ## Overall gender distribution
 
 .question[
@@ -364,7 +355,7 @@ ucbadmit %>%
 
 ## Overall gender distribution
 
-```{r fig.height=2, fig.width=5}
+```{r out.width = "80%"}
 ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   geom_bar(position = "fill") + 
   labs(y = "", title = "Admit by gender")
@@ -419,7 +410,7 @@ ucbadmit %>%
 
 ## Gender distribution, by department
 
-```{r fig.width=8, fig.height=2.75}
+```{r out.width = "80%"}
 ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   geom_bar(position = "fill") +
   facet_grid(. ~ dept) +
@@ -432,7 +423,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
 ## Gender distribution, by department
 
 .small[
-```{r fig.width=7, fig.height=3}
+```{r}
 ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   geom_bar(position = "fill") +
   scale_y_continuous(labels = percent) +
@@ -445,7 +436,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
 
 ---
 
-```{r echo=FALSE, fig.height=1.5, fig.width=7}
+```{r echo=FALSE, out.width="55%"}
 ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   geom_bar(position = "fill") +
   labs(x = "", y = "", fill = "", title = "Admissions by gender") +
@@ -453,7 +444,7 @@ ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   scale_y_continuous(labels = percent)
 ```
 
-```{r echo=FALSE, fig.height=2.5, fig.width=7}
+```{r echo=FALSE, out.width="55%"}
 ggplot(ucbadmit, mapping = aes(x = gender, fill = admit)) +
   geom_bar(position = "fill") +
   facet_wrap(. ~ dept) +

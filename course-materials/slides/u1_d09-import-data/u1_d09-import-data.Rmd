@@ -342,7 +342,7 @@ sales
 ## vroom vroom!!
 
 .pull-left[
-```{r echo=FALSE, out.width="80%", fig.align="center"}
+```{r echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/vroom.png")
 ```
 ]

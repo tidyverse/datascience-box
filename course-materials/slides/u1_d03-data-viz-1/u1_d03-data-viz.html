@@ -41,9 +41,9 @@ class: middle
 
 ## What is EDA?
 
--   Exploratory data analysis (EDA) is an approach to analyzing data sets to summarize its main characteristics.
--   Often, this is visual. That's what we're focusing on today.
--   But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis. That's what we'll focus on next.
+- Exploratory data analysis (EDA) is an approach to analyzing data sets to summarize its main characteristics.
+- Often, this is visual. That's what we're focusing on today.
+- But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis. That's what we'll focus on next.
 
 ---
 
@@ -57,18 +57,22 @@ class: middle
 
 &gt; *"The simple graph has brought more information to the data analyst's mind than any other device." --- John Tukey*
 
--   Data visualization is the creation and study of the visual representation of data.
--   There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations (**ggplot2** is one of them, and that's what we're going to use).
+- Data visualization is the creation and study of the visual representation of data.
+- There are many tools for visualizing data (R is one of them), and many approaches/systems within R for making data visualizations (**ggplot2** is one of them, and that's what we're going to use).
 
 ---
 
 ## ggplot2 `\(\in\)` tidyverse
 
 .pull-left[
-
 &lt;img src="img/ggplot2-part-of-tidyverse.png" width="80%" style="display: block; margin: auto;" /&gt;
+] 
+.pull-right[ 
+- **ggplot2** is tidyverse's data visualization package - The `gg` in "ggplot2" stands for Grammar of Graphics 
+- It is inspired by the book **Grammar of Graphics** by Leland Wilkinson
+]
 
-] .pull-right[ - **ggplot2** is tidyverse's data visualization package - The `gg` in "ggplot2" stands for Grammar of Graphics - It is inspired by the book **Grammar of Graphics** by Leland Wilkinson] ---
+---
 
 ## Grammar of Graphics
 
@@ -96,10 +100,12 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-.question[ - What are the functions doing the plotting?
+.question[ 
+- What are the functions doing the plotting?
 - What is the dataset being plotted?
 - Which variable is on the x-axis and which variable is on the y-axis?
-- What does the warning mean?]
+- What does the warning mean?
+]
 
 
 ```r
@@ -116,7 +122,9 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-.question[ What does `geom_smooth()` do?]
+.question[
+What does `geom_smooth()` do?
+]
 
 
 ```r
@@ -133,9 +141,9 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Hello ggplot2!
 
--   `ggplot()` is the main function in ggplot2
--   Plots are constructed in layers
--   Structure of the code for plots can be summarized as
+- `ggplot()` is the main function in ggplot2
+- Plots are constructed in layers
+- Structure of the code for plots can be summarized as
 
 
 ```r
@@ -145,14 +153,14 @@ ggplot(data = [dataset],
    other options
 ```
 
--   To use ggplot2 functions, first load tidyverse
+- To use ggplot2 functions, first load tidyverse
 
 
 ```r
 library(tidyverse)
 ```
 
--   For help with the ggplot2, see [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
+- For help with the ggplot2, see [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
 
 ---
 
@@ -164,8 +172,8 @@ class: middle
 
 ## Dataset terminology
 
--   Each row is an **observation**
--   Each column is a **variable**
+- Each row is an **observation**
+- Each column is a **variable**
 
 .small[
 
@@ -229,9 +237,11 @@ glimpse(starwars)
 
 ## What's in the Star Wars data?
 
-.question[ How many rows and columns does this dataset have?
+.question[
+How many rows and columns does this dataset have?
 What does each row represent?
-What does each column represent?]
+What does each column represent?
+]
 
 
 ```r
@@ -259,13 +269,13 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## What's that warning?
 
--   Not all characters have height and mass information (hence 28 of them not plotted)
+- Not all characters have height and mass information (hence 28 of them not plotted)
 
 &lt;!-- --&gt;
 
     ## Warning: Removed 28 rows containing missing values (geom_point).
 
--   Going forward I'll supress the warning to save room on slides, but it's important to note it
+- Going forward I'll supress the warning to save room on slides, but it's important to note it
 
 ---
 
@@ -289,9 +299,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Mass vs. height
 
-.question[ How would you describe this relationship?
+.question[ 
+How would you describe this relationship?
 What other variables would help us understand data points that don't follow the overall trend?
-Who is the not so tall but really chubby character?]
+Who is the not so tall but really chubby character?
+]
 
 .small[
 
@@ -310,14 +322,12 @@ Who is the not so tall but really chubby character?]
 
 We can map additional variables to various features of the plot:
 
--   aesthetics
-
-    -   shape
-    -   colour
-    -   size
-    -   alpha (transparency)
-
--   faceting: small multiples displaying different subsets
+- aesthetics
+    - shape
+    - colour
+    - size
+    - alpha (transparency)
+- faceting: small multiples displaying different subsets
 
 ---
 
@@ -331,10 +341,10 @@ class: middle
 
 Visual characteristics of plotting characters that can be **mapped to a specific variable** in the data are
 
--   `color`
--   `size`
--   `shape`
--   `alpha` (transparency)
+- `color`
+- `size`
+- `shape`
+- `alpha` (transparency)
 
 ---
 
@@ -380,20 +390,16 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 
 ## Aesthetics summary
 
--   Continuous variable are measured on a continuous scale
--   Discrete variables are measured (or often counted) on a discrete scale
+- Continuous variable are measured on a continuous scale
+- Discrete variables are measured (or often counted) on a discrete scale
 
-+------------+--------------------------+-----------------------------------------+
-| aesthetics | discrete                 | continuous                              |
-+============+==========================+=========================================+
-| color      | rainbow of colors        | gradient                                |
-+------------+--------------------------+-----------------------------------------+
-| size       | discrete steps           | linear mapping between radius and value |
-+------------+--------------------------+-----------------------------------------+
-| shape      | different shape for each | shouldn't (and doesn't) work            |
-+------------+--------------------------+-----------------------------------------+
+aesthetics | discrete                 | continuous                              
+-----------|--------------------------|-----------------------------------------
+color      | rainbow of colors        | gradient
+size       | discrete steps           | linear mapping between radius and value 
+shape      | different shape for each | shouldn't (and doesn't) work            
 
--   Use aesthetics for mapping features of a plot to a variable, define the features in the geom for customization **not** mapped to a variable
+- Use aesthetics for mapping features of a plot to a variable, define the features in the geom for customization **not** mapped to a variable
 
 ---
 
@@ -405,8 +411,8 @@ class: middle
 
 ## Faceting
 
--   Smaller plots that display different subsets of the data
--   Useful for exploring conditional relationships and large data
+- Smaller plots that display different subsets of the data
+- Useful for exploring conditional relationships and large data
 
 ---
 
@@ -425,8 +431,10 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Dive further...
 
-.question[ In the next few slides describe what each plot displays.
-Think about how the code relates to the output.]
+.question[
+In the next few slides describe what each plot displays.
+Think about how the code relates to the output.
+]
 
 --
 
@@ -470,13 +478,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Facet summary
 
--   `facet_grid()`:
-
-    -   2d grid
-    -   `rows ~ cols`
-    -   use `.` for no split
-
--   `facet_wrap()`: 1d ribbon wrapped into 2d
+- `facet_grid()`:
+    - 2d grid
+    - `rows ~ cols`
+    - use `.` for no split
+- `facet_wrap()`: 1d ribbon wrapped into 2d
 
 ---
 
@@ -534,8 +540,10 @@ datasaurus_dozen %&gt;%
 
 ---
 
-.question[ How similar do the relationships between `x` and `y` in the thirteen datasets look?
-How similar are they based on summary stats?]
+.question[
+How similar do the relationships between `x` and `y` in the thirteen datasets look?
+How similar are they based on summary stats?
+]
 
 &lt;img src="u1_d03-data-viz_files/figure-html/datasaurus-plot-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -549,7 +557,6 @@ quartet
 ```
 
 .pull-left[
-
 
 ```
 ##    set  x     y
@@ -576,9 +583,8 @@ quartet
 ## 21  II  7  7.26
 ## 22  II  5  4.74
 ```
-
-] .pull-right[
-
+] 
+.pull-right[
 
 ```
 ##    set  x     y
@@ -605,7 +611,6 @@ quartet
 ## 43  IV  8  7.91
 ## 44  IV  8  6.89
 ```
-
 ]
 
 ---
@@ -652,7 +657,9 @@ ggplot(quartet, aes(x = x, y = y)) +
 
 ## Age at first kiss
 
-.question[ Do you see anything out of the ordinary?]
+.question[ 
+Do you see anything out of the ordinary?
+]
 
 &lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -660,7 +667,9 @@ ggplot(quartet, aes(x = x, y = y)) +
 
 ## Facebook visits
 
-.question[ How are people reporting lower vs. higher values of FB visits?]
+.question[ 
+How are people reporting lower vs. higher values of FB visits?
+]
 
 &lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>

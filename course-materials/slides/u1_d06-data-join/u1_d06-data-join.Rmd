@@ -44,7 +44,7 @@ class: middle
 Fisheries and Aquaculture Department of the Food and Agriculture Organization of 
 the United Nations collects data on fisheries production of countries.
 
-```{r echo=FALSE, out.width="60%", fig.align="center"}
+```{r echo=FALSE, out.width="60%"}
 include_graphics("img/fisheries-data.png")
 ```
 .center[
@@ -122,7 +122,7 @@ improve this visualization? Note that countries whose total harvest was less
 than 100,000 tons are not included in the visualization.
 ]
 
-```{r echo=FALSE, out.width="60%", fig.align="center"}
+```{r echo=FALSE, out.width="60%"}
 include_graphics("img/fisheries.png")
 ```
 
@@ -431,7 +431,7 @@ fisheries_summary <- fisheries %>%
 
 ## Visualize continent summary stats
 
-```{r fig.height=4,fig.width=10}
+```{r out.width="80%"}
 ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
   geom_col()
 ```
@@ -440,7 +440,7 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
 
 ## Improve visualization
 
-```{r fig.height=4,fig.width=10}
+```{r out.width="80%"}
 ggplot(fisheries_summary, 
        aes(x = fct_reorder(continent, mean_ap), y = mean_ap)) + #<<
   geom_col()
@@ -517,7 +517,7 @@ map_data("world")[1:14,]
 
 ## Connect the dots
 
-```{r echo=FALSE, out.width="50%", fig.align="center"}
+```{r echo=FALSE, out.width="50%"}
 include_graphics("img/connect-the-dots-australia.png")
 ```
 
@@ -545,7 +545,7 @@ world_map <- map_data("world") %>%
 ## Map the world
 
 .midi[
-```{r fig.height=5, fig.width=12}
+```{r}
 ggplot(world_map, aes(x = long, y = lat, group = group)) +
   geom_polygon(fill = "gray") +
   theme_minimal()
@@ -586,7 +586,7 @@ glimpse(fisheries_map)
 ## Mapping fisheries
 
 .midi[
-```{r fig.height=4.5, fig.width=12}
+```{r fig.asp=0.4}
 ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = capture)) +
   scale_fill_viridis_c() +
@@ -600,7 +600,7 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
 What is misleading about the following map?
 ]
 
-```{r echo=FALSE, fig.height=4.5, fig.width=12, fig.align="center"}
+```{r echo=FALSE, fig.asp=0.4}
 ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = capture)) +
   scale_fill_viridis_c() +
@@ -634,7 +634,7 @@ ggplot() +
 
 ---
 
-```{r echo=FALSE, fig.height=6, fig.width=11, fig.align="center"}
+```{r echo=FALSE, fig.asp=0.8}
 ggplot() +
   geom_polygon(world_map, 
                mapping = aes(x = long, y = lat, group = group), 
@@ -678,7 +678,7 @@ ggplot() +
 
 ---
 
-```{r echo=FALSE, fig.height=6, fig.width=11, fig.align="center"}
+```{r echo=FALSE, fig.asp=0.8}
 ggplot() +
   geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
   geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(capture))) +
@@ -719,7 +719,7 @@ ggplot() +
 
 ---
 
-```{r echo=FALSE, fig.height=6, fig.width=11, fig.align="center"}
+```{r echo=FALSE, fig.asp=0.8}
 ggplot() +
   geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
   geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(aquaculture+1))) +
@@ -737,7 +737,7 @@ ggplot() +
 
 ---
 
-```{r echo=FALSE, fig.height=6, fig.width=11, fig.align="center"}
+```{r echo=FALSE}
 fisheries_map <- fisheries_map %>%
   mutate(
     aquaculture_perc = aquaculture / total
