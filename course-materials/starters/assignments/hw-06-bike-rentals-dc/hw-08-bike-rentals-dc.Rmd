@@ -1,0 +1,22 @@
+---
+title: "HW 08 - Bike rentals in DC"
+author: "YOUR NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(broom)
+```
+
+### Ex. 1
+
+
+### Ex. 2
+
+
+### Ex. 3
+
+
+...

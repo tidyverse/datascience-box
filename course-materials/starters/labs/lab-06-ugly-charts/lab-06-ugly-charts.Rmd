@@ -1,0 +1,30 @@
+---
+title: "Lab 06 - Ugly charts"
+author: "YOUR TEAM NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+```
+
+```{r load-data, message=FALSE}
+staff <- read_csv("data/instructional-staff.csv")
+fisheries <- read_csv("data/fisheries.csv")
+```
+
+
+### Exercise 1
+
+
+
+### Exercise 2
+
+
+
+### Exercise 3
+
+

@@ -1,0 +1,39 @@
+---
+title: "HW 10 - Wrap up"
+author: "YOUR NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+## Part 1 - Bootstrapping the GSS
+
+```{r load-packages-1, message = FALSE}
+library(tidyverse)
+library(infer)
+library(dsbox)
+```
+
+### Ex. 1
+
+
+### Ex. 2
+
+
+### Ex. 3
+
+
+...
+
+
+## Part 2 - You gotta pick a package or two
+
+```{r load-package-2}
+#library(___)
+```
+
+...
+
+
+## Part 3 - Mirror, mirror on the wall, who's the ugliest of them all?
+
+...

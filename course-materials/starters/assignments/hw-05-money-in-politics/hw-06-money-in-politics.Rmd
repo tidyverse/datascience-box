@@ -1,0 +1,62 @@
+---
+title: "HW 06 - Money in politics"
+author: "YOUR NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(rvest)
+library(scales)
+```
+
+### Ex. 1
+
+```{r read-pac-2020}
+
+```
+
+...
+
+
+### Ex. 2
+
+```{r read-pacs}
+
+```
+
+...
+
+### Ex. 3
+
+```{r read-pac-all}
+
+```
+
+...
+
+### Ex. 4
+
+```{r separate}
+
+```
+
+### Ex. 5
+
+```{r parse-currency}
+
+```
+
+
+### Ex. 6
+
+```{r uk-canada}
+
+```
+
+### Ex. 7
+
+```{r uk-dems-repubs}
+
+```

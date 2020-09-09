@@ -1,0 +1,58 @@
+---
+title: "Lab 09 - Modeling course evaluations, Pt. 1"
+author: "YOUR TEAM NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+library(broom)
+```
+
+```{r load-data, message=FALSE}
+
+```
+
+### Exercise 1
+
+
+### Exercise 2
+
+
+### Exercise 3
+
+
+### Exercise 4
+
+
+### Exercise 5
+
+
+### Exercise 6
+
+
+### Exercise 7
+
+
+### Exercise 8
+
+
+### Exercise 9
+
+
+### Exercise 10
+
+
+### Exercise 11
+
+
+### Exercise 12
+
+
+### Exercise 13
+
+
+### Exercise 14

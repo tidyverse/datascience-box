@@ -1,0 +1,41 @@
+---
+title: "Lab 07 - Simpson's paradox"
+author: "YOUR TEAM NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+library(mosaicData) 
+```
+
+### Exercise 1
+
+
+
+### Exercise 2
+
+
+
+### Exercise 3
+
+
+
+### Exercise 4
+
+
+
+### Exercise 5
+
+
+
+### Exercise 6
+
+
+
+### Exercise 7
+
+

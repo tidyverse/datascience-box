@@ -1,0 +1,51 @@
+---
+title: "HW 04 - Legos and instructors"
+author: "YOUR FIRST AND LAST NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Lego sales
+
+
+### Ex. 1
+
+(Type your answer to Ex. 1 here. Add code chunks as needed. Don't forget 
+to label your code chunk. Do not use spaces in code chunk labels.)
+
+### Ex. 2
+
+(Type your answer to Ex. 2 here. Add code chunks as needed. Don't forget 
+to label your code chunk. Do not use spaces in code chunk labels.)
+
+### Ex. 3
+
+(Type your answer to Ex. 3 here. Add code chunks as needed. Don't forget 
+to label your code chunk. Do not use spaces in code chunk labels.)
+
+### Ex. 4
+
+...
+
+### Ex. 5
+
+...
+
+### Ex. 6
+
+...
+
+### Ex. 7
+
+...
+
+## Instructional staff employment trends
+
+### Ex. 8
+
+...

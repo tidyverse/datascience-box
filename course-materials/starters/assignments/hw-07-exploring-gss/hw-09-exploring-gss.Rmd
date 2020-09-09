@@ -1,0 +1,24 @@
+---
+title: "HW 09 - Exploring the GSS"
+author: "YOUR NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(broom)
+library(dsbox)
+```
+
+
+### Ex. 1
+
+
+### Ex. 2
+
+
+### Ex. 3
+
+
+...

@@ -1,0 +1,51 @@
+---
+title: "Lab 08 - UoE Art Collection"
+author: "YOUR TEAM NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+options(width=200)
+```
+
+### Load packages and data
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+library(skimr)
+```
+
+```{r load-data, message=FALSE}
+uoe_art <- read_csv("data/uoe-art.csv")
+```
+
+### Exercise 10
+
+```{r}
+uoe_art <- uoe_art %>%
+  separate(title, into = c("___", "___"), sep = "___") %>%
+  mutate(year = str_remove(date, "___") %>% as.numeric()) %>%
+  select(title, artist, year, link)
+```
+
+### Exercise 11
+
+
+
+### Exercise 12
+
+
+
+### Exercise 13
+
+
+
+### Exercise 14
+
+
+
+### Exercise 15
+
+
+

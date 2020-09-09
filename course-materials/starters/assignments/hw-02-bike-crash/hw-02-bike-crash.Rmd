@@ -1,0 +1,54 @@
+---
+title: "HW 02 - Bike crashes"
+author: "YOUR FIRST AND LAST NAME"
+date: "TODAY'S DATE"
+output: github_document
+---
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+### Ex 1. 
+
+YOUR RESPONSE FOR EXERCISE 1 GOES HERE.
+
+mghgmhg 
+
+### Ex 2. 
+
+YOUR RESPONSE FOR EXERCISE 2 GOES HERE.
+
+
+### Ex 3. 
+
+YOUR RESPONSE FOR EXERCISE 2 GOES HERE.
+
+```{r filter-residential-youngdriver}
+# your code for exercise 3 goes here
+```
+
+
+### Ex 4.
+
+YOUR RESPONSE FOR EXERCISE 3 GOES HERE.
+
+```{r label-me-1}
+# your code for exercise 4 goes here
+```
+
+
+### Ex 5.
+
+YOUR RESPONSE FOR EXERCISE 4 GOES HERE.
+
+```{r label-me-2, fig.width=4, fig.height=4}
+# your code for exercise 5 goes here
+```
+
+
+### Ex 6.
+
+YOUR RESPONSE FOR EXERCISE 6 GOES HERE.
+
