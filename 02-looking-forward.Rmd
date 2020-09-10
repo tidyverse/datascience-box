@@ -80,5 +80,5 @@ Workflows for data science projects, closing issues with commits, gh-pages
 
 Pick a package and do something with it, make an ugly plot!
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-08/hw-08-wrap-up.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-08)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-08/hw-08-wrap-up.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-08-wrap-up)
 :::
