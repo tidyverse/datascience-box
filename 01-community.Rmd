@@ -9,7 +9,7 @@ We now have a `dsbox` Slack channel, you can join [here](https://join.slack.com/
 The Slack channel is a place for discussion on using these or similar materials in data science courses.
 Please make sure to review the [Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) before joining.
 
-[^community-1]: If the link has expired, please email me at <cetinkaya.mine@gmail.com> to request a new one.
+[^community-1]: If the link has expired, please email me at [cetinkaya.mine\@gmail.com](mailto:cetinkaya.mine@gmail.com){.email} to request a new one.
 
 Other great venues for questions are the [RStudio Community under Teaching](https://community.rstudio.com/c/teaching) or [\#rstats](https://twitter.com/search?q=%23rstats) Twitter.
 
