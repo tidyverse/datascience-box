@@ -339,7 +339,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 
 ## Aesthetics summary
 
-- Continuous variable are measured on a continuous scale
+- Continuous variables are measured on a continuous scale
 - Discrete variables are measured (or often counted) on a discrete scale
 
 aesthetics | discrete                 | continuous                              
