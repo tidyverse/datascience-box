@@ -468,9 +468,10 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
 ```
 
 ---
+
 ## Anscombe's quartet
 
-```{r quartet-for-show, eval=FALSE}
+```{r quartet-for-show, eval=FALSE, echo=FALSE}
 library(Tmisc)
 quartet
 ```
