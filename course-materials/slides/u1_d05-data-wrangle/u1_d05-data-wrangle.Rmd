@@ -897,7 +897,7 @@ hotels %>%
 
 .tip[
 `summarise()` changes the data frame entirely, it collapses rows down to a single 
-summary statistics, and removes all columns that are irrelevant to the calculation.
+summary statistic, and removes all columns that are irrelevant to the calculation.
 ]
 
 ---
