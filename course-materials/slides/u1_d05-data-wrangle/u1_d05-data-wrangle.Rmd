@@ -230,7 +230,7 @@ select(.data = hotels, lead_time)
 - Start with the function (a verb): `select()`
 - First argument is `.data` (the data frame we're working with) = `hotels`
 - Second argument is variable we want to select: `lead_time`
-- The result is a data frame with 119,300 and 1 column: --dplyr functions always 
+- The result is a data frame with 119,300 rows and 1 column: --dplyr functions always 
 expect a data frame and always yield a data frame.
 ]
 
