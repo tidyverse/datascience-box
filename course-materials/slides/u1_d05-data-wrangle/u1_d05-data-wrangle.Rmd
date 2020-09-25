@@ -230,7 +230,7 @@ select(.data = hotels, lead_time)
 - Start with the function (a verb): `select()`
 - First argument is `.data` (the data frame we're working with) = `hotels`
 - Second argument is variable we want to select: `lead_time`
-- The result is a data frame with 119,300 and 1 column: --dplyr functions always 
+- The result is a data frame with 119,300 rows and 1 column: --dplyr functions always 
 expect a data frame and always yield a data frame.
 ]
 
@@ -391,7 +391,7 @@ knitr::include_graphics("img/magrittr.jpg")
 
 ## How does a pipe work?
 
-- You can think about the following sequence of actions - find key, 
+- You can think about the following sequence of actions - find keys, 
 unlock car, start car, drive to work, park.
 
 --
@@ -704,7 +704,7 @@ operator    | definition                   || operator     | definition
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 1 - 4.
@@ -815,7 +815,7 @@ hotels %>%
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 5 and 6.
@@ -897,7 +897,7 @@ hotels %>%
 
 .tip[
 `summarise()` changes the data frame entirely, it collapses rows down to a single 
-summary statistics, and removes all columns that are irrelevant to the calculation.
+summary statistic, and removes all columns that are irrelevant to the calculation.
 ]
 
 ---
@@ -974,7 +974,7 @@ hotels %>%
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 7 and 8.
