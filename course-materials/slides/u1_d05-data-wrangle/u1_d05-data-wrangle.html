@@ -281,7 +281,7 @@ glimpse(hotels)
 ## $ company                        &lt;chr&gt; "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "N…
 ## $ days_in_waiting_list           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 ## $ customer_type                  &lt;chr&gt; "Transient", "Transient", "Transient", "Transient", "Trans…
-## $ adr                            &lt;dbl&gt; 0.00, 0.00, 75.00, 75.00, 98.00, 98.00, 107.00, 103.00, 82…
+## $ adr                            &lt;dbl&gt; 0, 0, 75, 75, 98, 98, 107, 103, 82, 106, 123, 145, 97, 155…
 ## $ required_car_parking_spaces    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 ## $ total_of_special_requests      &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 3, 1, 0, 3, 0, 0, 0, 1…
 ## $ reservation_status             &lt;chr&gt; "Check-Out", "Check-Out", "Check-Out", "Check-Out", "Check…
@@ -320,7 +320,7 @@ select(.data = hotels, lead_time)
 - Start with the function (a verb): `select()`
 - First argument is `.data` (the data frame we're working with) = `hotels`
 - Second argument is variable we want to select: `lead_time`
-- The result is a data frame with 119,300 and 1 column: --dplyr functions always 
+- The result is a data frame with 119,300 rows and 1 column: --dplyr functions always 
 expect a data frame and always yield a data frame.
 ]
 
@@ -589,7 +589,7 @@ Any guesses as to why the package is called magrittr?
 
 ## How does a pipe work?
 
-- You can think about the following sequence of actions - find key, 
+- You can think about the following sequence of actions - find keys, 
 unlock car, start car, drive to work, park.
 
 --
@@ -633,7 +633,7 @@ hotels %&gt;%
 ## 
 ## Coefficients:
 ## (Intercept)    lead_time  
-##    93.16876      0.01925
+##     93.1688       0.0193
 ```
 
 ---
@@ -1150,7 +1150,7 @@ operator    | definition                   || operator     | definition
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 1 - 4.
@@ -1418,7 +1418,7 @@ hotels %&gt;%
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 5 and 6.
@@ -1569,7 +1569,7 @@ hotels %&gt;%
 
 .tip[
 `summarise()` changes the data frame entirely, it collapses rows down to a single 
-summary statistics, and removes all columns that are irrelevant to the calculation.
+summary statistic, and removes all columns that are irrelevant to the calculation.
 ]
 
 ---
@@ -1697,7 +1697,7 @@ hotels %&gt;%
 
 .your-turn[
 
-Time to actually play around with the Star Wars dataset!
+Time to actually play around with the Hotels dataset!
 
 - Go to RStudio Cloud ([rstd.io/dsbox-cloud](http://rstd.io/dsbox-cloud)) and start `AE 04 - Hotels + Data wrangling`.
 - Open the R Markdown document and complete Exercises 7 and 8.

@@ -96,7 +96,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -135,7 +135,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -219,11 +219,11 @@ glimpse(starwars)
 ## Columns: 14
 ## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Organa", "Owen Lars",…
 ## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 228, 180, 173, 175, …
-## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.0, 84.0, NA, 112.0,…
+## $ mass       &lt;dbl&gt; 77, 75, 32, 136, 49, 120, 75, 32, 84, 77, 84, NA, 112, 80, 74, 1358, 77, 110, …
 ## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", NA, "black", "auburn…
 ## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "light", "white, red…
 ## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue", "red", "brown", "b…
-## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, 41.9, 64.0, 200.0, …
+## $ birth_year &lt;dbl&gt; 19, 112, 33, 42, 19, 52, 47, NA, 24, 57, 42, 64, 200, 29, 44, 600, 21, NA, 896…
 ## $ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female", "none", "male", "m…
 ## $ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "feminine", "masculine", "…
 ## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "Tatooine", "Tatooine…
@@ -263,7 +263,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -291,7 +291,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -307,7 +307,7 @@ Who is the not so tall but really chubby character?
 
 .small[
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -357,7 +357,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Mass vs. height + gender
@@ -370,7 +370,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -384,13 +384,13 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 * geom_point(size = 2)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Aesthetics summary
 
-- Continuous variable are measured on a continuous scale
+- Continuous variables are measured on a continuous scale
 - Discrete variables are measured (or often counted) on a discrete scale
 
 aesthetics | discrete                 | continuous                              
@@ -425,7 +425,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      subtitle = "Faceted by gender")
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -452,7 +452,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(gender ~ .)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -462,7 +462,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(. ~ gender)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -472,7 +472,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_wrap(~ eye_color)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-23-1.png" width="95%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -545,71 +545,68 @@ How similar do the relationships between `x` and `y` in the thirteen datasets lo
 How similar are they based on summary stats?
 ]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/datasaurus-plot-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/datasaurus-plot-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
+
 ## Anscombe's quartet
 
 
-```r
-library(Tmisc)
-quartet
-```
 
 .pull-left[
 
 ```
-##    set  x     y
-## 1    I 10  8.04
-## 2    I  8  6.95
-## 3    I 13  7.58
-## 4    I  9  8.81
-## 5    I 11  8.33
-## 6    I 14  9.96
-## 7    I  6  7.24
-## 8    I  4  4.26
-## 9    I 12 10.84
-## 10   I  7  4.82
-## 11   I  5  5.68
-## 12  II 10  9.14
-## 13  II  8  8.14
-## 14  II 13  8.74
-## 15  II  9  8.77
-## 16  II 11  9.26
-## 17  II 14  8.10
-## 18  II  6  6.13
-## 19  II  4  3.10
-## 20  II 12  9.13
-## 21  II  7  7.26
-## 22  II  5  4.74
+##    set  x    y
+## 1    I 10  8.0
+## 2    I  8  7.0
+## 3    I 13  7.6
+## 4    I  9  8.8
+## 5    I 11  8.3
+## 6    I 14 10.0
+## 7    I  6  7.2
+## 8    I  4  4.3
+## 9    I 12 10.8
+## 10   I  7  4.8
+## 11   I  5  5.7
+## 12  II 10  9.1
+## 13  II  8  8.1
+## 14  II 13  8.7
+## 15  II  9  8.8
+## 16  II 11  9.3
+## 17  II 14  8.1
+## 18  II  6  6.1
+## 19  II  4  3.1
+## 20  II 12  9.1
+## 21  II  7  7.3
+## 22  II  5  4.7
 ```
 ] 
 .pull-right[
 
 ```
-##    set  x     y
-## 23 III 10  7.46
-## 24 III  8  6.77
-## 25 III 13 12.74
-## 26 III  9  7.11
-## 27 III 11  7.81
-## 28 III 14  8.84
-## 29 III  6  6.08
-## 30 III  4  5.39
-## 31 III 12  8.15
-## 32 III  7  6.42
-## 33 III  5  5.73
-## 34  IV  8  6.58
-## 35  IV  8  5.76
-## 36  IV  8  7.71
-## 37  IV  8  8.84
-## 38  IV  8  8.47
-## 39  IV  8  7.04
-## 40  IV  8  5.25
-## 41  IV 19 12.50
-## 42  IV  8  5.56
-## 43  IV  8  7.91
-## 44  IV  8  6.89
+##    set  x    y
+## 23 III 10  7.5
+## 24 III  8  6.8
+## 25 III 13 12.7
+## 26 III  9  7.1
+## 27 III 11  7.8
+## 28 III 14  8.8
+## 29 III  6  6.1
+## 30 III  4  5.4
+## 31 III 12  8.2
+## 32 III  7  6.4
+## 33 III  5  5.7
+## 34  IV  8  6.6
+## 35  IV  8  5.8
+## 36  IV  8  7.7
+## 37  IV  8  8.8
+## 38  IV  8  8.5
+## 39  IV  8  7.0
+## 40  IV  8  5.2
+## 41  IV 19 12.5
+## 42  IV  8  5.6
+## 43  IV  8  7.9
+## 44  IV  8  6.9
 ```
 ]
 
@@ -651,7 +648,7 @@ ggplot(quartet, aes(x = x, y = y)) +
   facet_wrap(~ set, ncol = 4)
 ```
 
-&lt;img src="u1_d03-data-viz_files/figure-html/quartet-plot-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/quartet-plot-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -661,7 +658,7 @@ ggplot(quartet, aes(x = x, y = y)) +
 Do you see anything out of the ordinary?
 ]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -671,7 +668,7 @@ Do you see anything out of the ordinary?
 How are people reporting lower vs. higher values of FB visits?
 ]
 
-&lt;img src="u1_d03-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="u1_d03-data-viz-1_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

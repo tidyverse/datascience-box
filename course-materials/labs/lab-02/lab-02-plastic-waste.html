@@ -522,11 +522,11 @@ counter-reset: subitem;
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>plastic_waste <span class="op">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(plastic_waste_per_cap <span class="op">&gt;</span><span class="st"> </span><span class="fl">3.5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 10
-##   code  entity continent  year gdp_per_cap plastic_waste_p…
-##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
-## 1 TTO   Trini… North Am…  2010      31261.              3.6
-## # … with 4 more variables: mismanaged_plastic_waste_per_cap &lt;dbl&gt;,
-## #   mismanaged_plastic_waste &lt;dbl&gt;, coastal_pop &lt;dbl&gt;, total_pop &lt;dbl&gt;</code></pre>
+##   code  entity continent  year gdp_per_cap plastic_waste_p… mismanaged_plas…
+##   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 TTO   Trini… North Am…  2010      31261.              3.6             0.19
+## # … with 3 more variables: mismanaged_plastic_waste &lt;dbl&gt;, coastal_pop &lt;dbl&gt;,
+## #   total_pop &lt;dbl&gt;</code></pre>
 <p>Did you expect this result? You might consider doing some research on Trinidad and Tobago to see why plastic waste per capita is so high there, or whether this is a data error.</p>
 <ol style="list-style-type: decimal">
 <li>Plot, using histograms, the distribution of plastic waste per capita faceted by continent. What can you say about how the continents compare to each other in terms of their plastic waste per capita?</li>
