@@ -62,7 +62,7 @@ These are independent modules that educators can choose to include in their intr
 
 Workflows for data science projects
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-12/lab-12-work-on-projects.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-12)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-12/lab-12-work-on-projects.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-12)
 :::
 
 ::: {.lab}
@@ -70,7 +70,7 @@ Workflows for data science projects
 
 Workflows for data science projects, closing issues with commits, gh-pages
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-13/lab-13-collaborating-on-github.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-13)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-13/lab-13-collaborating-on-github.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-13)
 :::
 
 ## Homework assignments
@@ -80,5 +80,5 @@ Workflows for data science projects, closing issues with commits, gh-pages
 
 Pick a package and do something with it, make an ugly plot!
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-08/hw-08-wrap-up.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-08-wrap-up)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-08/hw-08-wrap-up.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-08-wrap-up)
 :::

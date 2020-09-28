@@ -180,7 +180,7 @@ You can join the workspace and play around with the application exercises.
 
 Introduction to R, R Markdown, Git, and GitHub
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-01/lab-01-hello-r.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-01) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-01-hello-r)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-01/lab-01-hello-r.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-01) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-01-hello-r)
 :::
 
 ::: {.lab}
@@ -188,7 +188,7 @@ Introduction to R, R Markdown, Git, and GitHub
 
 Introduction to working with data in R with the tidyverse
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-02/lab-02-plastic-waste.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-02) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-02-plastic-waste)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-02/lab-02-plastic-waste.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-02) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-02-plastic-waste)
 :::
 
 ::: {.lab}
@@ -196,7 +196,7 @@ Introduction to working with data in R with the tidyverse
 
 Data wrangling and tidying
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-03/lab-03-nobel-laureates.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-03) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-03-nobel-laureates)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-03/lab-03-nobel-laureates.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-03) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-03-nobel-laureates)
 :::
 
 ::: {.lab}
@@ -204,7 +204,7 @@ Data wrangling and tidying
 
 Visualizing spatial data
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-04/lab-04-viz-sp-data.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-04)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-04/lab-04-viz-sp-data.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-04)
 :::
 
 ::: {.lab}
@@ -212,7 +212,7 @@ Visualizing spatial data
 
 Wrangling spatial data
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-05/lab-05-wrangle-sp-data.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-05)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-05/lab-05-wrangle-sp-data.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-05)
 :::
 
 ::: {.lab}
@@ -220,7 +220,7 @@ Wrangling spatial data
 
 Critiquing and improving data visualisations
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-06/lab-06-ugly-charts.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-06) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-06-ugly-charts)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-06/lab-06-ugly-charts.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-06) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-06-ugly-charts)
 :::
 
 ::: {.lab}
@@ -228,7 +228,7 @@ Critiquing and improving data visualisations
 
 Data visualisation, confounding, multivariable relationships
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-07/lab-07-simpsons-paradox.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-07) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-07-simpsons-paradox)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-07/lab-07-simpsons-paradox.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-07) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-07-simpsons-paradox)
 :::
 
 ::: {.lab}
@@ -236,7 +236,7 @@ Data visualisation, confounding, multivariable relationships
 
 Web scraping, function, iteration
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-08/lab-08-uoe-art.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-08-uoe-art)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-08/lab-08-uoe-art.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-08-uoe-art)
 :::
 
 ## Homework assignments
@@ -246,7 +246,7 @@ Web scraping, function, iteration
 
 Introduction to working with data in R with the tidyverse
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-01/hw-01-airbnb-edi.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-01) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-01-airbnb-edi)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-01/hw-01-airbnb-edi.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-01) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-01-airbnb-edi)
 :::
 
 ::: {.homework}
@@ -254,7 +254,7 @@ Introduction to working with data in R with the tidyverse
 
 Data wrangling, tidying, and visualization
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-02/hw-02-bike-crash.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-02) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-02-bike-crash)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-02/hw-02-bike-crash.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-02) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-02-bike-crash)
 :::
 
 ::: {.homework}
@@ -262,7 +262,7 @@ Data wrangling, tidying, and visualization
 
 Data wrangling, summarizing, and visualization
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-03/hw-03-college-majors.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-03) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-03-college-majors)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-03/hw-03-college-majors.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-03) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-03-college-majors)
 :::
 
 ::: {.homework}
@@ -270,7 +270,7 @@ Data wrangling, summarizing, and visualization
 
 Data wrangling, summarizing, and visualization
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-04/hw-04-legos-instructors.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-04) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-04-legos-instructors)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-04/hw-04-legos-instructors.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-04) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-04-legos-instructors)
 :::
 
 ::: {.homework}
@@ -278,5 +278,5 @@ Data wrangling, summarizing, and visualization
 
 Web scraping, functions, and iteration
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-05/hw-05-money-in-politics.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-05) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-05-money-in-politics)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-05/hw-05-money-in-politics.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-05) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-05-money-in-politics)
 :::

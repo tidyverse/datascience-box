@@ -107,7 +107,7 @@ Statistical inference is introduced from a simulation based perspective, and the
 
 Simple linear regression, prediction
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-09/lab-09-modelling-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-09) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-09-model-course-evals)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-09/lab-09-modelling-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-09) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-09-model-course-evals)
 :::
 
 ::: {.lab}
@@ -115,7 +115,7 @@ Simple linear regression, prediction
 
 Simple and multiple linear regression, model selection
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-10/lab-10-mlr-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-10)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-10/lab-10-mlr-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-10)
 :::
 
 ::: {.lab}
@@ -123,7 +123,7 @@ Simple and multiple linear regression, model selection
 
 Inference with bootstrap intervals and randomization testing
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/labs/lab-11/lab-11-inference-smoking.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/labs/lab-11)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-11/lab-11-inference-smoking.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-11)
 :::
 
 ## Homework assignments
@@ -133,7 +133,7 @@ Inference with bootstrap intervals and randomization testing
 
 Modeling and visualization
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-06/hw-06-bike-rentals-dc.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-06) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-06-bike-rentals-dc)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-06/hw-06-bike-rentals-dc.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-06) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-06-bike-rentals-dc)
 :::
 
 ::: {.homework}
@@ -141,5 +141,5 @@ Modeling and visualization
 
 Inference with bootstrap intervals and randomization testing
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/assignments/hw-07/hw-07-exploring-gss.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/assignments/hw-07) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-07-exploring-gss)
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-07/hw-07-exploring-gss.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-07) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-07-exploring-gss)
 :::
