@@ -77,7 +77,7 @@ staff
 
 In order to recreate this visualization we need to first reshape the data to have 
 one variable for faculty type and one variable for year. In other words, 
-we will convert the data from the long format to wide format. 
+we will convert the data from the wide format to long format. 
 
 But before we do so... 
 
@@ -533,9 +533,9 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
 
 ```{r out.width="75%"}
 rel_inc_long <- rel_inc_long %>%
-  mutate(religion = fct_rev(religion))
+  mutate(religion = fct_rev(religion)) #<<
 
-ggplot(rel_inc_long, aes(y = religion, x = frequency)) + #<<
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) + 
   geom_col()
 ```
 
@@ -666,8 +666,8 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
   theme_minimal() +
   theme(
     legend.position = "bottom", 
-    legend.key.size = unit(0.3, "cm"), #<<
-    legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt") #<<
+    legend.key.size = unit(0.3, "cm"), 
+    legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "pt") 
     ) +
   guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
   labs(
