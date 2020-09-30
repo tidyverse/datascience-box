@@ -118,9 +118,9 @@ staff
 In order to recreate this visualization we need to first reshape the data to have one variable for faculty type and one variable for year. In other words, 
 we will convert the data from wide format to long format. 
 
-But before we do so, a thought exercise: If the long data will have a row for 
-each year/faculty type combination, and there are 5 faculty types and 11 
-years of data, how many rows will the data have?
+But before we do so, a thought exercise: *How many rows will the long-format data have?*
+It will have a row for each combinatior of year and faculty type.
+If there are 5 faculty types and 11 years of data, how many rows will we have?
 
 We do the wide to long conversion using a new function: `pivot_longer()`. 
 The animation below show how this function works, as well as its counterpart 
