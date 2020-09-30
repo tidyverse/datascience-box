@@ -119,7 +119,7 @@ In order to recreate this visualization we need to first reshape the data to hav
 we will convert the data from wide format to long format. 
 
 But before we do so, a thought exercise: *How many rows will the long-format data have?*
-It will have a row for each combinatior of year and faculty type.
+It will have a row for each combination of year and faculty type.
 If there are 5 faculty types and 11 years of data, how many rows will we have?
 
 We do the wide to long conversion using a new function: `pivot_longer()`. 
