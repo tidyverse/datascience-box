@@ -101,7 +101,7 @@ and 2011, and contains an image very similar to the one given below.
 knitr::include_graphics("img/staff-employment.png")
 ```
 
-Let's start by loadong the data used to create this plot.
+Let's start by loading the data used to create this plot.
 
 ```{r load-data-staff, message=FALSE, eval=TRUE}
 staff <- read_csv("data/instructional-staff.csv")
@@ -116,13 +116,13 @@ staff
 ```
 
 In order to recreate this visualization we need to first reshape the data to have one variable for faculty type and one variable for year. In other words, 
-we will convert the data from the long format to wide format. 
+we will convert the data from wide format to long format. 
 
-But before we do so, a thought exercise: If the long data will have a row for 
-each year/faculty type combination, and there are 5 faculty types and 11 
-years of data, how many rows will the data have?
+But before we do so, a thought exercise: *How many rows will the long-format data have?*
+It will have a row for each combination of year and faculty type.
+If there are 5 faculty types and 11 years of data, how many rows will we have?
 
-We do the wide to long converstion using a new function: `pivot_longer()`. 
+We do the wide to long conversion using a new function: `pivot_longer()`. 
 The animation below show how this function works, as well as its counterpart 
 `pivot_wider()`.
 
@@ -163,7 +163,7 @@ staff_long %>%
   geom_line()
 ```
 
-But note that this resuls in a message as well as an unexpected plot. The 
+But note that this results in a message as well as an unexpected plot. The 
 message is saying that there is only one observation for each faculty type 
 year combination. We can fix this using the `group` aesthetic following.
 
