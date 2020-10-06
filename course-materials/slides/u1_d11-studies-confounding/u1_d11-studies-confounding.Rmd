@@ -88,7 +88,7 @@ Souce: [Study: Cereal Keeps Girls Slim](https://www.cbsnews.com/news/study-cerea
 - Being slim causes girls to eat breakfast
 
 --
-- A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that make it seem like there is a relationship between them
+- A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that makes it seem like there is a relationship between them
 
 ---
 
@@ -104,7 +104,7 @@ Randall Munroe CC BY-NC 2.5 http://xkcd.com/552/
 
 ---
 
-## Stu!dies and conclusions
+## Studies and conclusions
 
 ```{r echo=FALSE, out.height="50%", out.width="80%"}
 knitr::include_graphics("img/random_sample_assign_grid.png")
@@ -122,8 +122,8 @@ class: middle
 
 **Notation**: $P(A | B)$: Probability of event A given event B
 
-- What is the probability that it be unseasonably warm tomorrow?
-- What is the probability that it be unseasonably warm tomorrow, given that it it was unseasonably warm tomorrow?
+- What is the probability that it will be unseasonably warm tomorrow?
+- What is the probability that it will be unseasonably warm tomorrow, given that it was unseasonably warm today?
 
 ---
 
@@ -300,7 +300,7 @@ ggplot(data = df) +
 
 - Not considering an important variable when studying a relationship can result 
 in **Simpson's paradox**.
-- Simpson's paradox illustrates the effect the omission of an explanatory 
+- Simpson's paradox illustrates the effect that omission of an explanatory 
 variable can have on the measure of association between another explanatory 
 variable and a response variable. 
 - In other words, the inclusion of a third variable in the analysis can change 
@@ -310,7 +310,7 @@ the apparent relationship between the other two variables.
 
 ## Berkeley admission data
 
-- Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a gender bias in graduate admissions.
+- Study carried out by the Graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a gender bias in graduate admissions.
 - The data come from six departments. For confidentiality we'll call them A-F. 
 - We have information on whether the applicant was male or female and whether they were admitted or rejected. 
 - First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
@@ -612,4 +612,3 @@ ucbadmit %>%
 
 - `count()` ungroups after itself
 - `summarise()` peels off one layer of grouping
-- The question mark just means that the number of groups is unkown right now, it will only be computed when/if the next line is executed
