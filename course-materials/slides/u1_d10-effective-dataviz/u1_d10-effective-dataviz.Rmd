@@ -151,7 +151,7 @@ ggplot(data = brexit, aes(x = opinion)) +
 
 ## Order by frequency
 
-`fct_infreq`: Reorder factors levels by frequency
+`fct_infreq`: Reorder factors' levels by frequency
 
 ```{r out.width="75%"}
 ggplot(data = brexit, aes(x = fct_infreq(opinion))) +
@@ -184,7 +184,7 @@ ggplot(data = brexit, aes(x = region)) +
 `fct_relevel`: Reorder factor levels using a custom order
 
 .midi[
-```{r eval=FALSE}
+```{r eval=TRUE}
 brexit <- brexit %>%
   mutate(
     region = fct_relevel(
