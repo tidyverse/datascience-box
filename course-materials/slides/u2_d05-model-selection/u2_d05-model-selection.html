@@ -4,6 +4,8 @@
     <title>Model selection   ⛏</title>
     <meta charset="utf-8" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+    <script src="libs/anchor-sections/anchor-sections.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
@@ -80,7 +82,7 @@ glance(full_model)$r.squared
 ```
 
 ```
-## [1] 0.04463827
+## [1] 0.045
 ```
 
 ```r
@@ -88,7 +90,7 @@ glance(full_model)$adj.r.squared
 ```
 
 ```
-## [1] 0.03839408
+## [1] 0.038
 ```
 
 ---
@@ -125,7 +127,7 @@ glance(full_model)$adj.r.squared
 ```
 
 ```
-## [1] 0.03839408
+## [1] 0.038
 ```
 
 ---
@@ -141,7 +143,7 @@ glance(s1_stu_perc)$adj.r.squared
 ```
 
 ```
-## [1] 0.03970295
+## [1] 0.04
 ```
 ]
 
@@ -156,7 +158,7 @@ glance(s1_did_perc)$adj.r.squared
 ```
 
 ```
-## [1] 0.04038255
+## [1] 0.04
 ```
 ]
 
@@ -171,7 +173,7 @@ glance(s1_did_stu)$adj.r.squared
 ```
 
 ```
-## [1] 0.02206412
+## [1] 0.022
 ```
 ]
 
@@ -191,7 +193,7 @@ glance(full_model)$adj.r.squared
 ```
 
 ```
-## [1] 0.03839408
+## [1] 0.038
 ```
 
 ```r
@@ -200,7 +202,7 @@ glance(s1_stu_perc)$adj.r.squared
 ```
 
 ```
-## [1] 0.03970295
+## [1] 0.04
 ```
 ]
 ]
@@ -213,7 +215,7 @@ glance(s1_did_perc)$adj.r.squared
 ```
 
 ```
-## [1] 0.04038255
+## [1] 0.04
 ```
 
 ```r
@@ -222,7 +224,7 @@ glance(s1_did_stu)$adj.r.squared
 ```
 
 ```
-## [1] 0.02206412
+## [1] 0.022
 ```
 ]
 ]
@@ -247,7 +249,7 @@ glance(s2_perc)$adj.r.squared
 ```
 
 ```
-## [1] 0.0321918
+## [1] 0.032
 ```
 ]
 
@@ -262,7 +264,7 @@ glance(s2_did)$adj.r.squared
 ```
 
 ```
-## [1] 0.001785817
+## [1] 0.0018
 ```
 ]
 
@@ -286,7 +288,7 @@ glance(s1_did_perc)$adj.r.squared   # result of step 1
 ```
 
 ```
-## [1] 0.04038255
+## [1] 0.04
 ```
 
 ```r
@@ -294,7 +296,7 @@ glance(s2_perc)$adj.r.squared       # remove cls_did_eval
 ```
 
 ```
-## [1] 0.0321918
+## [1] 0.032
 ```
 
 ```r
@@ -302,7 +304,7 @@ glance(s2_did)$adj.r.squared        # remove cls_perc_eval
 ```
 
 ```
-## [1] 0.001785817
+## [1] 0.0018
 ```
 ]
 
@@ -324,7 +326,7 @@ glance(full_model)$r.squared
 ```
 
 ```
-## [1] 0.1644844
+## [1] 0.16
 ```
 
 ```r
@@ -332,7 +334,7 @@ glance(full_model)$adj.r.squared
 ```
 
 ```
-## [1] 0.1402935
+## [1] 0.14
 ```
 
 ---
@@ -341,7 +343,7 @@ glance(full_model)$adj.r.squared
 
 .question[
 Given that the adjusted R-squared of the full model was 
-0.1403, 
+0.14, 
 which of the following models should be selected in the first step of backwards 
 selection?
 ]
@@ -349,19 +351,19 @@ selection?
 .midi[
 
 ```
-##                  remove  adj_r_sq
-## 1      Remove cls_profs 0.1421861
-## 2      Remove cls_level 0.1421402
-## 3   Remove cls_students 0.1417622
-## 4   Remove cls_did_eval 0.1412172
-## 5           Remove rank 0.1411612
-## 6       Remove language 0.1394539
-## 7            Remove age 0.1335545
-## 8  Remove cls_perc_eval 0.1327868
-## 9      Remove ethnicity 0.1315126
-## 10        Remove gender 0.1187067
-## 11       Remove bty_avg 0.1167521
-## 12   Remove cls_credits 0.1064986
+##                  remove adj_r_sq
+## 1      Remove cls_profs     0.14
+## 2      Remove cls_level     0.14
+## 3   Remove cls_students     0.14
+## 4   Remove cls_did_eval     0.14
+## 5           Remove rank     0.14
+## 6       Remove language     0.14
+## 7            Remove age     0.13
+## 8  Remove cls_perc_eval     0.13
+## 9      Remove ethnicity     0.13
+## 10        Remove gender     0.12
+## 11       Remove bty_avg     0.12
+## 12   Remove cls_credits     0.11
 ```
 ]
 
@@ -378,7 +380,7 @@ Remove `cls_profs`
 
 .question[
 Given that the adjusted R-squared of the model selected in Step 1 was 
-0.1422, 
+0.14, 
 which of the following models should be selected in the first step of backwards 
 selection?
 ]
@@ -386,18 +388,18 @@ selection?
 .midi[
 
 ```
-##                  remove  adj_r_sq
-## 1      Remove cls_level 0.1440279
-## 2   Remove cls_students 0.1436292
-## 3   Remove cls_did_eval 0.1430683
-## 4           Remove rank 0.1430338
-## 5       Remove language 0.1413483
-## 6            Remove age 0.1354387
-## 7  Remove cls_perc_eval 0.1346490
-## 8      Remove ethnicity 0.1329036
-## 9         Remove gender 0.1206345
-## 10       Remove bty_avg 0.1187028
-## 11   Remove cls_credits 0.1078673
+##                  remove adj_r_sq
+## 1      Remove cls_level     0.14
+## 2   Remove cls_students     0.14
+## 3   Remove cls_did_eval     0.14
+## 4           Remove rank     0.14
+## 5       Remove language     0.14
+## 6            Remove age     0.14
+## 7  Remove cls_perc_eval     0.13
+## 8      Remove ethnicity     0.13
+## 9         Remove gender     0.12
+## 10       Remove bty_avg     0.12
+## 11   Remove cls_credits     0.11
 ```
 ]
 
@@ -414,7 +416,7 @@ Remove `cls_level`
 
 .question[
 Given that the adjusted R-squared of the model selected in Step 2 was 
-0.144, 
+0.14, 
 which of the following models should be selected in the first step of backwards 
 selection?
 ]
@@ -422,17 +424,17 @@ selection?
 .midi[
 
 ```
-##                  remove  adj_r_sq
-## 1   Remove cls_students 0.1453492
-## 2           Remove rank 0.1449127
-## 3   Remove cls_did_eval 0.1447562
-## 4       Remove language 0.1432477
-## 5            Remove age 0.1373512
-## 6  Remove cls_perc_eval 0.1365466
-## 7      Remove ethnicity 0.1344170
-## 8         Remove gender 0.1225800
-## 9        Remove bty_avg 0.1206257
-## 10   Remove cls_credits 0.1076556
+##                  remove adj_r_sq
+## 1   Remove cls_students     0.15
+## 2           Remove rank     0.14
+## 3   Remove cls_did_eval     0.14
+## 4       Remove language     0.14
+## 5            Remove age     0.14
+## 6  Remove cls_perc_eval     0.14
+## 7      Remove ethnicity     0.13
+## 8         Remove gender     0.12
+## 9        Remove bty_avg     0.12
+## 10   Remove cls_credits     0.11
 ```
 ]
 
@@ -449,7 +451,7 @@ Remove `cls_students`
 
 .question[
 Given that the adjusted R-squared of the model selected in Step 3 was 
-0.1453, 
+0.15, 
 which of the following models should be selected in the first step of backwards 
 selection?
 ]
@@ -457,16 +459,16 @@ selection?
 .midi[
 
 ```
-##                 remove  adj_r_sq
-## 1          Remove rank 0.1460182
-## 2      Remove language 0.1447481
-## 3  Remove cls_did_eval 0.1438580
-## 4           Remove age 0.1386350
-## 5     Remove ethnicity 0.1351413
-## 6        Remove gender 0.1244603
-## 7       Remove bty_avg 0.1220691
-## 8 Remove cls_perc_eval 0.1216699
-## 9   Remove cls_credits 0.1091884
+##                 remove adj_r_sq
+## 1          Remove rank     0.15
+## 2      Remove language     0.14
+## 3  Remove cls_did_eval     0.14
+## 4           Remove age     0.14
+## 5     Remove ethnicity     0.14
+## 6        Remove gender     0.12
+## 7       Remove bty_avg     0.12
+## 8 Remove cls_perc_eval     0.12
+## 9   Remove cls_credits     0.11
 ```
 ]
 
@@ -482,7 +484,7 @@ Remove `rank`
 
 .question[
 Given that the adjusted R-squared of the model selected in Step 3 was 
-0.146, 
+0.15, 
 which of the following models should be selected in the first step of backwards 
 selection?
 ]
@@ -490,15 +492,15 @@ selection?
 .midi[
 
 ```
-##                 remove  adj_r_sq
-## 1  Remove cls_did_eval 0.1445918
-## 2      Remove language 0.1438694
-## 3           Remove age 0.1413297
-## 4     Remove ethnicity 0.1340922
-## 5        Remove gender 0.1245329
-## 6       Remove bty_avg 0.1218780
-## 7 Remove cls_perc_eval 0.1216232
-## 8   Remove cls_credits 0.1010876
+##                 remove adj_r_sq
+## 1  Remove cls_did_eval     0.14
+## 2      Remove language     0.14
+## 3           Remove age     0.14
+## 4     Remove ethnicity     0.13
+## 5        Remove gender     0.12
+## 6       Remove bty_avg     0.12
+## 7 Remove cls_perc_eval     0.12
+## 8   Remove cls_credits     0.10
 ```
 ]
 
@@ -564,7 +566,7 @@ glance(full_model)$AIC
 ```
 
 ```
-## [1] 695.747
+## [1] 696
 ```
 
 ---
@@ -608,7 +610,7 @@ glance(full_model)$AIC
 ```
 
 ```
-## [1] 695.747
+## [1] 696
 ```
 
 
@@ -617,7 +619,7 @@ glance(selected_model)$AIC
 ```
 
 ```
-## [1] 687.5724
+## [1] 688
 ```
 
 ---
