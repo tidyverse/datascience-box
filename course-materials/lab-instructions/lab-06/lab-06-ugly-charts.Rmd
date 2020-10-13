@@ -88,7 +88,7 @@ can't figure out on its own (a "merge conflict"), then one that it can figure ou
 
 Doing this will require some tight choreography, so pay attention.
 
-Take turns in completing the exercise, only one member at a time. **Others should just watch, not doing anything on their own checkouts (including pull)** until they are instructed to.
+Take turns in completing the exercise, only one member at a time. **Others should just watch, not doing anything on their own projects (this includes not even pulling changes!)** until they are instructed to.
 
 - **Before starting**: everyone should have the repo cloned and know which role number(s) they are.
 
