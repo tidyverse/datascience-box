@@ -52,7 +52,7 @@ This is the second week you're working in teams, so we're going to make things a
 ## Merges and merge conflicts
 
 - Pushing to a repo replaces the code on GitHub with the code you have on your computer. 
-- If someone else has made a change that you haven't incorporated into your repo, GitHub will stop you from pushing because it would lose their work!
+- If a collaborator has made a change to your repo on GitHub that you haven't incorporated into your local work, GitHub will stop you from pushing to the repo because this could overwrite your collaborator's work!
 - So you need to explicitly "merge" your collaborators' work before you push.
 - If the changes are in different files, or different parts of the same file,
   git merges the work for you automatically when you *pull*.
