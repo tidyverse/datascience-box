@@ -444,7 +444,7 @@ src: local('Source Code Pro Regular'), local('SourceCodePro-Regular'), url(data:
 @charset "UTF-8";
 
 html {
-font-size: 12px;
+font-size: 14px;
 }
 body {
 font-family: 'Source Sans Pro', sans-serif;
@@ -511,9 +511,6 @@ code {
 font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
 font-size: 15px;
 line-height: 1.6;
-}
-pre code {
-font-size: 15px;
 }
 .marginnote code,
 .sidenote code {
@@ -582,17 +579,17 @@ counter-reset: subitem;
 <h3>Packages</h3>
 <p>In this lab we will work with the <code>tidyverse</code> and <code>mosaicData</code> packages.</p>
 <p>This is the first time we’re using the <code>mosaicData</code> package, you need to make sure to install it first by running <code>install.packages(&quot;mosaicData&quot;)</code> in the console.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">library</span>(mosaicData) </span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaicData) </span></code></pre></div>
 <p>Note that these packages are also loaded in your R Markdown document.</p>
 </div>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>The data is in the <code>mosaicData</code> package. You can load it with</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">data</span>(Whickham)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Whickham)</span></code></pre></div>
 <p>Take a peek at the codebook with</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>?Whickham</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>?Whickham</span></code></pre></div>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
@@ -603,8 +600,8 @@ counter-reset: subitem;
 <li><p>What would you expect the relationship between smoking status and health outcome to be?</p></li>
 <li><p>Create a visualization depicting the relationship between smoking status and health outcome. Briefly describe the relationship, and evaluate whether this meets your expectations. Additionally, calculate the relevant conditional probabilities to help your narrative. Here is some code to get you started:</p></li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>Whickham <span class="op">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(smoker, outcome)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(smoker, outcome)</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Create a new variable called <code>age_cat</code> using the following scheme:</li>
 </ol>
@@ -616,8 +613,8 @@ counter-reset: subitem;
 <ol start="7" style="list-style-type: decimal">
 <li>Re-create the visualization depicting the relationship between smoking status and health outcome, faceted by <code>age_cat</code>. What changed? What might explain this change? Extend the contingency table from earlier by breaking it down by age category and use it to help your narrative.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>Whickham <span class="op">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">count</span>(smoker, age_cat, outcome)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(smoker, age_cat, outcome)</span></code></pre></div>
 </div>
 
 

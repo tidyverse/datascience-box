@@ -444,7 +444,7 @@ src: local('Source Code Pro Regular'), local('SourceCodePro-Regular'), url(data:
 @charset "UTF-8";
 
 html {
-font-size: 12px;
+font-size: 14px;
 }
 body {
 font-family: 'Source Sans Pro', sans-serif;
@@ -512,9 +512,6 @@ font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, mon
 font-size: 15px;
 line-height: 1.6;
 }
-pre code {
-font-size: 15px;
-}
 .marginnote code,
 .sidenote code {
 font-size: 1rem;
@@ -576,9 +573,9 @@ counter-reset: subitem;
 <div id="packages" class="section level3">
 <h3>Packages</h3>
 <p>In this lab we will work with the <strong>tidyverse</strong>, <strong>infer</strong>, and <strong>openintro</strong> packages. We can install and load them with the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">library</span>(infer)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">library</span>(openintro)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div>
 </div>
 </div>
 <div id="housekeeping" class="section level2">
@@ -621,7 +618,7 @@ counter-reset: subitem;
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>Load the <code>ncbirths</code> data from the <code>openintro</code> package:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">data</span>(ncbirths)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ncbirths)</span></code></pre></div>
 <p>We have observations on 13 different variables, some categorical and some numerical. The meaning of each variable is as follows.</p>
 <table>
 <colgroup>
@@ -727,9 +724,9 @@ counter-reset: subitem;
 <li><p>Before moving forward, save a version of the dataset omitting observations where there are NAs for <code>habit</code>. You can call this version <code>ncbirths_habitgiven</code>.</p></li>
 </ol>
 <p>The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following to first group the data by the <code>habit</code> variable, and then calculate the mean <code>weight</code> in these groups using.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>ncbirths_habitgiven <span class="op">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(habit) <span class="op">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_weight =</span> <span class="kw">mean</span>(weight))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ncbirths_habitgiven <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(habit) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span></code></pre></div>
 <p>There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test .</p>
 <ol start="7" style="list-style-type: decimal">
 <li><p>Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.</p></li>
