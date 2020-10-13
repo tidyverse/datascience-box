@@ -55,19 +55,22 @@ This is the second week you're working in teams, so we're going to make things a
 - If a collaborator has made a change to your repo on GitHub that you haven't incorporated into your local work, GitHub will stop you from pushing to the repo because this could overwrite your collaborator's work!
 - So you need to explicitly "merge" your collaborator's work before you can push.
 - If your and your collaborator's changes are in different files or in different parts of the same file, git merges the work for you automatically when you *pull*.
-- If you both changed the same part of a file, git will produce a **merge conflict** because it doesn't know how which change to you want to keep and which change you want to overwrite.
+- If you both changed the same part of a file, git will produce a **merge conflict** because it doesn't know how which change you want to keep and which change you want to overwrite.
   
 Git will put conflict markers in your code that look like:
 
 ```
 <<<<<<< HEAD
-See also: [re docs](https://docs.python.org/3/library/re.html)  
+See also: [dplyr documentation](https://dplyr.tidyverse.org/)  
 =======
-See also [re docs](https://docs.python.org/3/library/re.html)  
->>>>>>> master
+See also [ggplot2 documentation](https://ggplot2.tidyverse.org/)  
+>>>>>>> some1alpha2numeric3string4
 ```
 
-The `===`s separate *your* changes (top) from *their* changes (bottom)
+The `===`s separate *your* changes (top) from *their* changes (bottom). 
+Note that on top you see the word `HEAD`, which indicates that these are your changes. 
+And at the bottom you see `some1alpha2numeric3string4` (well, it probably looks more like `28e7b2ceb39972085a0860892062810fb812a08f`). 
+This is the *hash* (a unique identifier) of the commit your collaborator made with the conflicting change. 
 
 Your job is to *reconcile* the changes: edit the file so that it incorporates
 the best of both versions and delete the `<<<`, `===`, and `>>>` lines. Then
@@ -76,7 +79,7 @@ Stage and Commit the result.
 ### Setup
 
 - Clone the repo and open the .Rmd file.
-- Assign the numbers 1, 2, 3, and 4 to each of the team members. Some people will need to have multiple numbers.
+- Assign the numbers 1, 2, 3, and 4 to each of the team members. If your team has less than 4 people, some people will need to have multiple numbers. If your team has more than 4 people, some people will need to share some numbers.
 
 ### Let's cause a merge conflict!
 
@@ -87,7 +90,7 @@ Doing this will require some tight choreography, so pay attention.
 
 Take turns in completing the exercise, only one member at a time. **Others should just watch, not doing anything on their own checkouts (including pull)** until they are instructed to.
 
-- **Before starting**: everyone should have the repo checked out and know which role number(s) they are.
+- **Before starting**: everyone should have the repo cloned and know which role number(s) they are.
 
 - **Role 1:**
 
@@ -101,7 +104,7 @@ Take turns in completing the exercise, only one member at a time. **Others shoul
   * Change the team name to some other word.
   * Knit, commit, push. You should get an error.
   * Pull. Take a look at the document with the merge conflict.
-  * Clear the merge conflict by choosing the correct/preferred change.
+  * Clear the merge conflict by editing the document to choose the correct/preferred change.
   * Knit.
   * **Click the Stage checkbox** for all files in your Git tab. Make sure they
     all have check marks, not filled-in boxes.
@@ -135,7 +138,6 @@ Take turns in completing the exercise, only one member at a time. **Others shoul
 - Knit, Commit, and Push often to minimize merge conflicts and/or to make merge conflicts easier to resolve.
 - If you find yourself in a situation that is difficult to resolve, ask questions ASAP. Don't let it linger and get bigger.
 
-(Optional further reading: [Merge conflicts in the classroom](https://github.blog/2018-08-22-merge-conflicts-in-the-classroom/).)
 
 ## Packages
 
