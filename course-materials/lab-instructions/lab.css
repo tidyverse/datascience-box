@@ -8,7 +8,7 @@
 /* Tufte CSS styles */
 
 html {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 body {
@@ -90,19 +90,15 @@ code {
 	line-height: 1.6;
 }
 
-pre code {
-	font-size: 15px;
-}
-
 .marginnote code,
 .sidenote code {
 	font-size: 1rem;
 }
 
 pre {
-		width: 100%;
-		font-size: 16px;
-		overflow-x: auto;
+	width: 100%;
+	font-size: 16px;
+	overflow-x: auto;
 }
 
 /* Exercise counter */
