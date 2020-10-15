@@ -5,7 +5,7 @@ Have questions?
 Is something you need missing?
 Want to exchange ideas with others teaching similar courses?
 
-We now have a `dsbox` Slack channel, you can join [here](https://join.slack.com/t/dsboxworkspace/shared_invite/zt-gro0x0hh-x9JzHN0oLQayP2G0g~6Zhg).[^community-1]
+We now have a `dsbox` Slack channel, you can join [here](https://join.slack.com/t/dsboxworkspace/shared_invite/zt-ifip3301-817tTF7Fz9oTDWrbbJ1Fmg).[^community-1]
 The Slack channel is a place for discussion on using these or similar materials in data science courses.
 Please make sure to review the [Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) before joining.
 
