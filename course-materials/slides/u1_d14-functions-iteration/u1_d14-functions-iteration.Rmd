@@ -133,7 +133,7 @@ additional data on each art piece in the Edinburgh College of Art Collection?
 
 ## Why functions?
 
-- Automate common tasks in a power powerful and general way than copy-and-pasting:
+- Automate common tasks in a more powerful and general way than copy-and-pasting:
     - You can give a function an evocative name that makes your code easier to understand.
     - As requirements change, you only need to update code in one place, instead of many.
     - You eliminate the chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another).
@@ -237,7 +237,7 @@ scrape_art_info <-
 ## Turn your code into a function
 
 - Pick a short but evocative **name**, preferably a verb.
-- List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+- List inputs, or **arguments**, to the function inside `function`. If we had more arguments the call would look like `function(x, y, z)`.
 
 <br>
 
@@ -257,7 +257,7 @@ scrape_art_info <- function(x){
 
 - Pick a short but informative **name**, preferably a verb.
 - List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
-- Place the **code** you have developed in body of the function, a `{` block that immediately follows `function(...)`.
+- Place the **code** you have developed in body of the function, a `{}` block that immediately follows `function(...)`.
 
 ```{r eval=FALSE}
 scrape_art_info <- function(x){
@@ -441,7 +441,7 @@ scrape_art_info(uoe_art$link[3])
 ```
 ]
 - What else do we need to do?
-  - Run the `scrape_art_info()` function to all 2909 links
+  - Run the `scrape_art_info()` function on all 2909 links
   - Combine the resulting data frames from each run into one giant data frame with 2909 rows
   
 ---
@@ -454,7 +454,7 @@ You now have a function that will scrape the relevant info on art pieces given t
 
 --
 
-From the data frame you constucted in lab yesterday: `uoe_art$link`
+From the data frame you constructed in lab yesterday: `uoe_art$link`
 
 ---
 
@@ -517,7 +517,7 @@ Functions for looping over an object and returning a value (of a specific type):
 
 * `map()` - returns a list
 * `map_lgl()` - returns a logical vector
-* `map_int()` - returns a integer vector
+* `map_int()` - returns an integer vector
 * `map_dbl()` - returns a double vector
 * `map_chr()` - returns a character vector
 * `map_df()` / `map_dfr()` - returns a data frame by row binding
