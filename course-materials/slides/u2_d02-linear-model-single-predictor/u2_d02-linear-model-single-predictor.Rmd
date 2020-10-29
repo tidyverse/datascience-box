@@ -372,11 +372,11 @@ model.
 
 ---
 
-## Height vs. lanscape features
+## Height vs. landscape features
 
 .question[
 Which of the following is the correct interpretation of $R^2$ of the model 
-below.
+below?
 ]
 
 .small[
@@ -424,7 +424,7 @@ class: middle
 
 ## Not-so-tidy regression output
 
-- You might come accross these in your googling adventures, but we'll try to stay away from them
+- You might come across these in your googling adventures, but we'll try to stay away from them
 - Not because they are wrong, but because they don't result in tidy data frames as results.
 
 ---
@@ -464,7 +464,7 @@ What makes a data frame tidy?
 
 ## Tidy regression output
 
-Achieved with functions from the broom package:
+Achieved with functions from the **broom** package:
 
 - `tidy`: Constructs a data frame that summarizes the model's statistical findings: coefficient estimates, *standard errors, test statistics, p-values*.
 - `glance`: Constructs a concise one-row summary of the model. This typically contains values such as $R^2$, adjusted $R^2$, *and residual standard error that are computed once for the entire model*.
