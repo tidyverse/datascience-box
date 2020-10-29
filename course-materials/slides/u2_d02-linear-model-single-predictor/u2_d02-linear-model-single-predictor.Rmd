@@ -464,7 +464,7 @@ What makes a data frame tidy?
 
 ## Tidy regression output
 
-Achieved with functions from the `broom` package:
+**broom**
 
 - `tidy`: Constructs a data frame that summarizes the model's statistical findings: coefficient estimates, *standard errors, test statistics, p-values*.
 - `glance`: Constructs a concise one-row summary of the model. This typically contains values such as $R^2$, adjusted $R^2$, *and residual standard error that are computed once for the entire model*.
