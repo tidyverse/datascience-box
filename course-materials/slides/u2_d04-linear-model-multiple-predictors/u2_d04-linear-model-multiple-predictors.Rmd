@@ -73,7 +73,7 @@ tidy(m_wi_hgt)
 
 <br>
 
-$$\widehat{log_price} = 4.77 + 0.0269~width - 0.0133~height$$
+$$\widehat{log\_price} = 4.77 + 0.0269~width - 0.0133~height$$
 
 ---
 
@@ -302,7 +302,7 @@ ggplot() +
               mapping = aes(x = volume, y = .fitted, color = cover)) +
   theme_minimal() +
   labs(title = "Main effects, parallel slopes", 
-       subtitle = "weigmainht-hat = volume + cover")
+       subtitle = "weight-hat = volume + cover")
 ```
 
 
@@ -347,7 +347,7 @@ to the model.
 ... a (more) objective measure for model selection
 
 - Adjusted $R^2$ doesn't increase if the new variable does not provide any new 
-informaton or is completely unrelated, as it applies a penalty for number of 
+information or is completely unrelated, as it applies a penalty for number of 
 variables included in the model.
 - This makes adjusted $R^2$ a preferable metric for model selection in multiple
 regression models.
@@ -438,7 +438,7 @@ tidy(m_main)
 
 --
 
-$$ \widehat{log_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
+$$ \widehat{log\_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
 
 ---
 
@@ -446,13 +446,13 @@ $$ \widehat{log_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
 
 - Non-living artist: Plug in 0 for `artistliving`
 
-$\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 0$  
+$\widehat{log\_price} = 4.88 + 0.000265~surface + 0.137 \times 0$  
 $= 4.88 + 0.000265~surface$
 
 --
 - Living artist: Plug in 1 for `artistliving`
 
-$\widehat{log_price} = 4.88 + 0.000265~surface + 0.137 \times 1$   
+$\widehat{log\_price} = 4.88 + 0.000265~surface + 0.137 \times 1$   
 $= 5.017 + 0.000265~surface$
 
 ---
@@ -520,7 +520,7 @@ ggplot(data = m_pr_aug, mapping = aes(y = log_price, x = Surface, color = artist
 
 ---
 
-## What went ~wrong~ diferently?
+## What went ~wrong~ differently?
 
 - The way we specified our model only lets `artistliving` affect the intercept.
 - Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
@@ -574,7 +574,7 @@ tidy(m_int)
 ```
 ]
 
-$$ \widehat{log_price} = 4.91 + 0.00021~surface - 0.126~artistliving $$
+$$ \widehat{log\_price} = 4.91 + 0.00021~surface - 0.126~artistliving $$
 $$+ ~ 0.00048~surface \times artistliving $$
 
 ---
@@ -582,18 +582,18 @@ $$+ ~ 0.00048~surface \times artistliving $$
 ## Interpretation of interaction effects
 
 - Rate of change in price as the surface area of the painting increases does 
-vary between paintings by living and non-living artists (different slopes), 
+vary between paintings by living and non-living artists (different slopes) 
 - Some paintings by living artists are more expensive than paintings by
 non-living artists, and some are not (different intercept).
 
 .small[
 .pull-left[
 - Non-living artist: 
-$\widehat{log_price} = 4.91 + 0.00021~surface$
+$\widehat{log\_price} = 4.91 + 0.00021~surface$
 $- 0.126 \times 0 + 0.00048~surface \times 0$
 $= 4.91 + 0.00021~surface$
-- Living artist: 
-$\widehat{log_price} = 4.91 + 0.00021~surface$
+- Living artist:  
+$\widehat{log\_price} = 4.91 + 0.00021~surface$
 $- 0.126 \times 1 + 0.00048~surface \times 1$
 $= 4.91 + 0.00021~surface$
 $- 0.126 + 0.00048~surface$
