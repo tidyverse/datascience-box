@@ -21,19 +21,10 @@ jobs:
     
       - uses: r-lib/actions/setup-pandoc@v1
     
-      - name: Install rmarkdown, tidyverse, dsbox
+      - name: Install packages
         run: |
-          install.packages("remotes")
-          remotes::install_cran(c("rmarkdown", "tidyverse", "here"))
-          remotes::install_github(c("rstudio-education/dsbox", "rundel/checklist"))
-        shell: Rscript {0}
-    
-      - name: Install Missing Packages
-        run: |
-          missing = checklist::missing_pkgs(dir = here::here("course-materials/"))
-          if (length(missing) > 0)
-            install.packages(pkgs = missing)
-        shell: Rscript {0}
+          R -e 'install.packages("renv")'
+          R -e 'renv::restore()'
     
       - name: Render Rmarkdown files
         run: |
