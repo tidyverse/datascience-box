@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - 'couse-materials/'
+      - 'couse-materials/*'
 
 name: Render course materials
 
