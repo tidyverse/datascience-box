@@ -29,6 +29,7 @@ jobs:
       - name: Render Rmarkdown files
         run: |
           RMD_PATH=($(git diff-tree --no-commit-id --name-only -r HEAD | grep '^course-materials/.*\\.[rR]md$'))
+          echo ${RMD_PATH[*]}
           Rscript -e 'for (file in commandArgs(TRUE)) rmarkdown::render(file)' ${RMD_PATH[*]}
     
       - name: Commit results
