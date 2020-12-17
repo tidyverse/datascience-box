@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - 'course-materials/*'
+      - 'course-materials/**/*.Rmd'
 
 name: Render course materials
 
