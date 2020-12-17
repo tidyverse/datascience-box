@@ -2,7 +2,7 @@
 local({
 
   # the requested version of renv
-  version <- "0.11.0"
+  version <- "0.12.3"
 
   # the project directory
   project <- getwd()
@@ -84,11 +84,19 @@ local({
   
   renv_bootstrap_download <- function(version) {
   
-    methods <- list(
-      renv_bootstrap_download_cran_latest,
-      renv_bootstrap_download_cran_archive,
-      renv_bootstrap_download_github
-    )
+    # if the renv version number has 4 components, assume it must
+    # be retrieved via github
+    nv <- numeric_version(version)
+    components <- unclass(nv)[[1]]
+  
+    methods <- if (length(components) == 4L) {
+      list(renv_bootstrap_download_github)
+    } else {
+      list(
+        renv_bootstrap_download_cran_latest,
+        renv_bootstrap_download_cran_archive
+      )
+    }
   
     for (method in methods) {
       path <- tryCatch(method(version), error = identity)
@@ -102,19 +110,12 @@ local({
   
   renv_bootstrap_download_cran_latest <- function(version) {
   
-    # check for renv on CRAN matching this version
-    db <- as.data.frame(available.packages(), stringsAsFactors = FALSE)
-  
-    entry <- db[db$Package %in% "renv" & db$Version %in% version, ]
-    if (nrow(entry) == 0) {
-      fmt <- "renv %s is not available from your declared package repositories"
-      stop(sprintf(fmt, version))
-    }
+    repos <- renv_bootstrap_download_cran_latest_find(version)
   
     message("* Downloading renv ", version, " from CRAN ... ", appendLF = FALSE)
   
     info <- tryCatch(
-      download.packages("renv", destdir = tempdir()),
+      download.packages("renv", repos = repos, destdir = tempdir(), quiet = TRUE),
       condition = identity
     )
   
@@ -125,6 +126,37 @@ local({
   
     message("OK")
     info[1, 2]
+  
+  }
+  
+  renv_bootstrap_download_cran_latest_find <- function(version) {
+  
+    # check for renv on CRAN matching this version
+    all <- unique(c(
+      getOption("repos"),
+      getOption("renv.bootstrap.repos", default = "https://cloud.r-project.org")
+    ))
+  
+    for (repos in all) {
+  
+      db <- tryCatch(
+        as.data.frame(available.packages(repos = repos), stringsAsFactors = FALSE),
+        error = identity
+      )
+  
+      if (inherits(db, "error"))
+        next
+  
+      entry <- db[db$Package %in% "renv" & db$Version %in% version, ]
+      if (nrow(entry) == 0)
+        next
+  
+      return(repos)
+  
+    }
+  
+    fmt <- "renv %s is not available from your declared package repositories"
+    stop(sprintf(fmt, version))
   
   }
   
@@ -261,8 +293,11 @@ local({
       return(path)
   
     path <- Sys.getenv("RENV_PATHS_LIBRARY_ROOT", unset = NA)
-    if (!is.na(path))
-      return(file.path(path, basename(project)))
+    if (!is.na(path)) {
+      id <- substring(renv_bootstrap_hash_text(project), 1L, 8L)
+      name <- paste(basename(project), id, sep = "-")
+      return(file.path(path, name))
+    }
   
     file.path(project, "renv/library")
   
@@ -283,8 +318,8 @@ local({
       paste("renv", loadedversion, sep = "@")
   
     fmt <- paste(
-      "renv %1$s was loaded from project library, but renv %2$s is recorded in lockfile.",
-      "Use `renv::record(\"%3$s\")` to record this version in the lockfile.",
+      "renv %1$s was loaded from project library, but this project is configured to use renv %2$s.",
+      "Use `renv::record(\"%3$s\")` to record renv %1$s in the lockfile.",
       "Use `renv::restore(packages = \"renv\")` to install renv %2$s into the project library.",
       sep = "\n"
     )
@@ -293,6 +328,16 @@ local({
     warning(msg, call. = FALSE)
   
     FALSE
+  
+  }
+  
+  renv_bootstrap_hash_text <- function(text) {
+  
+    hashfile <- tempfile("renv-hash-")
+    on.exit(unlink(hashfile), add = TRUE)
+  
+    writeLines(text, con = hashfile)
+    tools::md5sum(hashfile)
   
   }
   
@@ -325,7 +370,13 @@ local({
   if (renv_bootstrap_load(project, libpath, version))
     return(TRUE)
 
-  # load failed; attempt to bootstrap
+  # load failed; inform user we're about to bootstrap
+  prefix <- paste("# Bootstrapping renv", version)
+  postfix <- paste(rep.int("-", 77L - nchar(prefix)), collapse = "")
+  header <- paste(prefix, postfix)
+  message(header)
+
+  # perform bootstrap
   bootstrap(version, libpath)
 
   # exit early if we're just testing bootstrap
@@ -334,7 +385,7 @@ local({
 
   # try again to load
   if (requireNamespace("renv", lib.loc = libpath, quietly = TRUE)) {
-    message("Successfully installed and loaded renv ", version, ".")
+    message("* Successfully installed and loaded renv ", version, ".")
     return(renv::load())
   }
 
