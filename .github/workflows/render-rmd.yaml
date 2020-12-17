@@ -21,7 +21,7 @@ jobs:
         run: |
           install.packages("remotes")
           remotes::install_cran(c("rmarkdown", "tidyverse", "here"))
-          remotes::install_github("rstudio-education/dsbox")
+          remotes::install_github(c("rstudio-education/dsbox", "rundel/checklist"))
         shell: Rscript {0}
       - name: Install Missing Packages
         run: |
