@@ -25,7 +25,7 @@ jobs:
         run: |
          #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
          install.packages(c("rmarkdown", "remotes"))
-         remotes::install_github("rundel/checklist")
+         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox"))
         shell: Rscript {0}
     
       - name: Render Rmarkdown files
@@ -34,7 +34,7 @@ jobs:
           print(x)
           x = x[grepl("course-materials/.*\\.[Rr]md", x)]
           print(x)
-          z = lapply(x, rmarkdown::render)
+          z = lapply(x, checklist::check_rmd_renders, install_missing = TRUE)
           
         shell: Rscript {0}
     
