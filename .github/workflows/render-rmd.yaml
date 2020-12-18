@@ -1,7 +1,7 @@
 on:
   push:
-    paths:
-      - 'course-materials/**/*.Rmd'
+    branches: master
+    paths: course-materials/**
 
 name: Render course materials
 
@@ -25,7 +25,7 @@ jobs:
         run: |
          #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
          install.packages(c("rmarkdown", "remotes"))
-         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox"))
+         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox", "hadley/emo"))
         shell: Rscript {0}
     
       - name: Render Rmarkdown files
