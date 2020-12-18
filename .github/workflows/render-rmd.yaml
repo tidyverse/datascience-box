@@ -32,8 +32,10 @@ jobs:
         run: |
           x = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
           print(x)
-          print(str(x))
-          print("hello")
+          x = x[grepl("course-materials/.*/\\.[Rr]md", x)]
+          print(x)
+          lapply(x, rmarkdown::render)
+          
         shell: Rscript {0}
     
       - name: Commit results
