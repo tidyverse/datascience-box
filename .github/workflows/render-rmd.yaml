@@ -23,7 +23,7 @@ jobs:
     
       - name: Install packages
         run: |
-          R -e 'install.packages(c("rmarkdown", "tidyverse", "renv", "remotes")'
+          R -e 'install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))'
           R -e 'remotes::install_github("rundel/checklist")'
     
       - name: Render Rmarkdown files
