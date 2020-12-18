@@ -3,6 +3,10 @@ on:
     branches: master
     paths: 
     - 'course-materials/**'
+  pull_request:
+    branches: master
+    paths: 
+    - 'course-materials/**'
 
 name: Render course materials
 
