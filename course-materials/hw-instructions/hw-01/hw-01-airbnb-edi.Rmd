@@ -92,6 +92,7 @@ Let's deconstruct this code:
 
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes again.*
 
-4  Create a similar visualization, this time showing the distribution of review scores (`review_scores_rating`) across neighborhoods. In your answer, include a brief interpretation of how Airbnb guests rate properties in general and how the neighborhoods compare to each other in terms of their ratings.
+4 Create a similar visualization, this time showing the distribution of review scores (`review_scores_rating`) across neighborhoods.
+In your answer, include a brief interpretation of how Airbnb guests rate properties in general and how the neighborhoods compare to each other in terms of their ratings.
 
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes again.*
