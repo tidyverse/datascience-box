@@ -23,14 +23,13 @@ jobs:
     
       - name: Install packages
         run: |
-          R -e 'install.packages("renv")'
-          R -e 'renv::restore()'
+          R -e 'install.packages(c("rmarkdown", "tidyverse", "renv", "remotes")'
+          R -e 'remotes::install_github("rundel/checklist")'
     
       - name: Render Rmarkdown files
         run: |
           RMD_PATH=($(git diff-tree --no-commit-id --name-only -r HEAD | grep '^course-materials/.*\\.[rR]md$'))
-          Rscript -e 'cat("HERE:", Sys.getenv("RMD_PATH"))'
-          Rscript -e 'for (file in commandArgs(TRUE)) rmarkdown::render(file)' ${RMD_PATH[*]}
+          Rscript -e 'cat(system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE))'
     
       - name: Commit results
         run: |
