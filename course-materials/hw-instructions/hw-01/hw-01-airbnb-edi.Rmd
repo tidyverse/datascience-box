@@ -43,7 +43,7 @@ The output will be in the file markdown `.md` file with the same name.
 ## Packages
 
 We'll use the **tidyverse** package for this analysis, and the data is in the **dsbox** package.
-Run the following code in the Console to load these packages.
+Run the following code in the Console to load the packages.
 
 ```{r load-packages, message=FALSE}
 library(tidyverse)
