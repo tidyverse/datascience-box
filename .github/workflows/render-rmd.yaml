@@ -32,9 +32,9 @@ jobs:
         run: |
           x = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
           print(x)
-          x = x[grepl("course-materials/.*/\\.[Rr]md", x)]
+          x = x[grepl("course-materials/.*\\.[Rr]md", x)]
           print(x)
-          lapply(x, rmarkdown::render)
+          z = lapply(x, rmarkdown::render)
           
         shell: Rscript {0}
     
