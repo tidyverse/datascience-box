@@ -8,7 +8,7 @@ name: Render course materials
 
 jobs:
   render:
-    name: Render Rmarkdown files
+    name: Render R Markdown files
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -22,14 +22,14 @@ jobs:
     
       - uses: r-lib/actions/setup-pandoc@v1
     
-      - name: Install Packages
+      - name: Install packages
         run: |
          #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
          install.packages(c("rmarkdown", "remotes"))
          remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox", "hadley/emo"))
         shell: Rscript {0}
     
-      - name: Render Rmarkdown files
+      - name: Render R Markdown files
         run: |
           changed_files = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
           changed_rmd_files = changed_files[grepl("course-materials/.*\\.[Rr]md", changed_files)]
