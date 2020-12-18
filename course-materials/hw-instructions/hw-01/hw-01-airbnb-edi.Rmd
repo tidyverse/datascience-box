@@ -47,7 +47,7 @@ Run the following code in the Console to load these packages.
 
 ```{r load-packages, message=FALSE}
 library(tidyverse)
-library(dsbox)
+library(dsbox
 ```
 
 ## Data
