@@ -21,18 +21,18 @@ jobs:
     
       - uses: r-lib/actions/setup-pandoc@v1
     
-      - name: Render Rmarkdown files
+      - name: Install Packages
         run: |
-         install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
+         #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
+         install.packages(c("rmarkdown", "remotes"))
          remotes::install_github("rundel/checklist")
         shell: Rscript {0}
     
       - name: Render Rmarkdown files
         run: |
-          Rscript -e 'cat(system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE))'
-    
-      - name: Render Rmarkdown files
-        run: |
+          x = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
+          print(x)
+          print(str(x))
           print("hello")
         shell: Rscript {0}
     
