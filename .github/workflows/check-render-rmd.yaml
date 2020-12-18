@@ -1,0 +1,37 @@
+on:
+  pull_request:
+    branches: master
+    paths: 
+    - 'course-materials/**'
+
+name: Check course materials render
+
+jobs:
+  render:
+    name: Render Rmarkdown files
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2 # This is important to set for `git diff-tree` to work below
+    
+      - uses: r-lib/actions/setup-r@v1
+    
+      - uses: r-lib/actions/setup-pandoc@v1
+    
+      - name: Install Packages
+        run: |
+         #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
+         install.packages(c("rmarkdown", "remotes"))
+         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox", "hadley/emo"))
+        shell: Rscript {0}
+    
+      - name: Render Rmarkdown files
+        run: |
+          changed_files = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
+          changed_rmd_files = changed_files[grepl("course-materials/.*\\.[Rr]md", changed_files)]
+          lapply(changed_rmd_files, checklist::check_rmd_renders, install_missing = TRUE)
+        shell: Rscript {0}
