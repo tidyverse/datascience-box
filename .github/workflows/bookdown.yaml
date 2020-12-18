@@ -1,7 +1,8 @@
 on:
   push:
     branches: master
-    paths: !course-materials/**
+    paths-ignore: 
+    - 'course-materials/**'
 
 name: Build book
 

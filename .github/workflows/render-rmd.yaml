@@ -1,7 +1,8 @@
 on:
   push:
     branches: master
-    paths: course-materials/**
+    paths: 
+    - 'course-materials/**'
 
 name: Render course materials
 
