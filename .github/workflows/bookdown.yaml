@@ -1,6 +1,7 @@
 on:
   push:
     branches: master
+    paths: !course-materials/**
 
 name: bookdown
 
