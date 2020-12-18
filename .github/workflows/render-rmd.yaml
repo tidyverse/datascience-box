@@ -31,11 +31,11 @@ jobs:
     
       - name: Render Rmarkdown files
         run: |
-          x = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
-          print(x)
-          x = x[grepl("course-materials/.*\\.[Rr]md", x)]
-          print(x)
-          z = lapply(x, checklist::check_rmd_renders, install_missing = TRUE)
+          changed_files = system("git diff-tree --no-commit-id --name-only -r HEAD", intern=TRUE, wait=TRUE)
+          print(changed_files)
+          changed_rmd_files = changed_files[grepl("course-materials/.*\\.[Rr]md", x)]
+          print(changed_rmd_files)
+          lapply(changed_rmd_files, checklist::check_rmd_renders, install_missing = TRUE)
           
         shell: Rscript {0}
     
@@ -43,5 +43,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git commit ${RMD_PATH[*]/.Rmd/.md} -m 'Re-build Rmarkdown files' || echo "No changes to commit"
+          git add .
+          git commit -m 'Re-build Rmarkdown files' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
