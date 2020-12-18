@@ -3,7 +3,7 @@ on:
     branches: master
     paths: !course-materials/**
 
-name: bookdown
+name: Build book
 
 jobs:
   build:
