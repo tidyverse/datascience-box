@@ -221,7 +221,7 @@ dn_lq_ak_mindist <- dn_lq_ak %>%
 
 8.  Describe the distribution of the distances Denny's and the nearest La Quinta locations in Alaska.
     Also include an appripriate visualization and relevant summary statistics.
-    
+
 9.  Repeat the same analysis for North Carolina: (i) filter Denny's and La Quinta Data Frames for NC, (ii) join these data frames to get a completelist of all possible pairings, (iii) calculate the distances between all possible pairings of Denny's and La Quinta in NC, (iv) find the minimum distance between each Denny's and La Quinta location, (v) visualize and describe the distribution of these shortest distances using appropriate summary statistics.
 
 10. Repeat the same analysis for Texas.
