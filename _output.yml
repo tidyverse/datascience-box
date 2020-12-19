@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  css: [css/style.css, css/dsbox.css]
+  css: [css/style.css, css/dsbox.css, css/fontawesome/css/all.css]
   config:
     toc:
       collapse: section
