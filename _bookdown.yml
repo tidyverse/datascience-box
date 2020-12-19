@@ -15,6 +15,7 @@ rmd_files: [
   
   "02-hello-world.Rmd",
   "02-exploring-data.Rmd",
+  "02-ethics.Rmd",
   "02-making-rigorous-conclusions.Rmd",
   "02-looking-forward.Rmd",
   "02-interactive-tutorials.Rmd",

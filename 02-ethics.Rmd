@@ -1,0 +1,145 @@
+# Ethics {#ethics}
+
+In this part we introduce modelling and statistical inference for making data-based conclusions.
+We discuss building, interpreting, and selecting models, visualizing interaction effects, and prediction and model validation.
+Statistical inference is introduced from a simulation based perspective, and the Central Limit Theorem is discussed very briefly to lay the foundation for future coursework in statistics.
+
+## Slides & application exercises
+
+::: {.slide-deck}
+**Unit 2 - Deck 1: The language of models**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d01-language-of-models/u2_d01-language-of-models.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d01-language-of-models)
+
+::: {.reading}
+[IMS :: Sec 3.1 - Fitting a line, residuals, and correlation](https://openintro-ims.netlify.app/intro-linear-models.html#fit-line-res-cor)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 2: Linear models with a single predictor**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d02-linear-model-single-predictor/u2_d02-linear-model-single-predictor.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d02-linear-model-single-predictor)
+
+::: {.reading}
+[IMS :: Sec 3.2 - Least squares regression](https://openintro-ims.netlify.app/intro-linear-models.html#least-squares-regression)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 3: Modeling non-linear relationships**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d03-modeling-non-linear-relationships/u2_d03-modeling-non-linear-relationships.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d03-modeling-non-linear-relationships)
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 4: Linear models with multiple predictors**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d04-linear-model-multiple-predictors/u2_d04-linear-model-multiple-predictors.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d04-linear-model-multiple-predictors)
+
+::: {.reading}
+[IMS :: Sec 4.1 - Regression with multiple predictors](https://openintro-ims.netlify.app/multi-logistic-models.html#regression-multiple-predictors)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 5: Model selection**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d05-model-selection/u2_d05-model-selection.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d05-model-selection)
+
+::: {.reading}
+[IMS :: Sec 4.2 - Model selection](https://openintro-ims.netlify.app/multi-logistic-models.html#model-selection)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 6: Model validation**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d06-model-validation/u2_d06-model-validation.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d06-model-validation)
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 7: Logistic regression and classification**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d07-logistic-regression/u2_d07-logistic-regression.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d07-logistic-regression)
+
+::: {.reading}
+[IMS :: Sec 4.5 - Logistic regression](https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 8: Quantifying uncertainty**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d08-quantifying-uncertainty/u2_d08-quantifying-uncertainty.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d08-quantifying-uncertainty)
+
+::: {.reading}
+[IMS :: Sec 5.2 - Bootstrap confidence intervals](https://openintro-ims.netlify.app/intro-stat-inference.html#boot-ci)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 9: Hypothesis testing with randomization**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d09-hypothesis-testing/u2_d09-hypothesis-testing.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d09-hypothesis-testing)
+
+::: {.reading}
+[IMS :: Sec 5.1 - Randomization tests](https://openintro-ims.netlify.app/intro-stat-inference.html#inf-rand)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 10: Inference overview**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d10-inference-overview/u2_d10-inference-overview.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d10-inference-overview)
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 11: Simulation based inference review**
+
+[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2_d11-sim-inf-review/u2_d11-sim-inf-review.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2_d11-sim-inf-review)
+:::
+
+## Labs
+
+::: {.lab}
+**Lab 9: Grading the professor, Pt. 1**
+
+Simple linear regression, prediction
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-09/lab-09-modelling-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-09) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/labs/lab-09-model-course-evals)
+:::
+
+::: {.lab}
+**Lab 10: Grading the professor, Pt. 2**
+
+Simple and multiple linear regression, model selection
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-10/lab-10-mlr-course-evals.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-10)
+:::
+
+::: {.lab}
+**Lab 11: So what if you smoke when pregnant?**
+
+Inference with bootstrap intervals and randomization testing
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-11/lab-11-inference-smoking.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-11)
+:::
+
+## Homework assignments
+
+::: {.homework}
+**HW 6: Bike rentals in DC**
+
+Modeling and visualization
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-06/hw-06-bike-rentals-dc.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-06) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-06-bike-rentals-dc)
+:::
+
+::: {.homework}
+**HW 7: Exploring the General Social Survey**
+
+Inference with bootstrap intervals and randomization testing
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-07/hw-07-exploring-gss.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-07) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-07-exploring-gss)
+:::
