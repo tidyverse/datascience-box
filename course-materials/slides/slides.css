@@ -1,181 +1,210 @@
+/* Custom fonts */
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 @import url(https://fonts.googleapis.com/css?family=Fira+Mono|Open+Sans);
 
-body { 
-  font-family: 'Source Sans Pro'; sans-serif;
-  color: #333333;
+/* Turn off slide numbers */
+/* Don't want them on videos! */
+.remark-slide-number {
+  display: none;
 }
-p {
-  padding: 0;
-  margin: 0px;
+
+/* colors */
+:root {
+  --dark-blue: #002b36;
+  --light-blue: #A7D5E8;
+  --green: #8fada7;
+  --gray: #A7A7A7;
+  --pink: #E9AFA3;
+  --yellow: #e9d968;
+  --beige: #fdf6e3;
+  --green-faint: #8fada750;
+  --light-blue-faint: #A7D5E850;
+  --pink-faint: #E9AFA350;
 }
-h2 {
-  font-family: 'Source Sans Pro', sans-serif;
+
+/* Font colors */
+.dark-blue {
+  color: var(--dark-blue);
+}
+.light-blue {
+  color: var(--light-blue);
+}
+.green {
+  color: var(--green);
+}
+.gray {
+  color: var(--gray);
+}
+.pink {
+  color: var(--pink);
+}
+.yellow {
+  color: var(--yellow);
+}
+
+
+/* Title slide customization */
+.title-slide h1, h2, h3 {
+  text-align: left;
   font-weight: bold;
-  color: #A7D5E8;
-  font-size: 12px;
-  margin: 0 0 0.5em 0;
-}
-h1, h3 {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: bold;
-  color: #A7D5E8;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-a, a > code {
-  font-family: 'Fira Mono', monospace;
-  color: #1E5C65;
-  text-decoration: none;
+  font-family: Raleway;
 }
 
-.remark-slide-content{
-  font-size: 26px;
+.title-slide h2 {
+  color: var(--green);
 }
 
-
-/* Sections */
-.inverse {
-  background-color: #A7D5E8;
-  color: #ffffff;
-}
-.inverse h1, .inverse h2, .inverse h3 {
-  color: #f3f3f3;
+.title-slide h3 {
+  color: var(--beige);
+  font-size: 130%;
 }
 
+.title-slide a {
+  color: var(--gray);
+}
 
+/* Alignment */
+.right{
+  text-align: right;
+}
+.center{
+  text-align: center;
+}
+
+/* Margins around headers */
+/* To make the most of the slide real estate */
+
+h1, h2, h3 {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
 /* Font sizes */
-.large { font-size: 130% }
+.huge {
+   font-family: 'Montserrat', sans-serif;
+   font-size: 400%;
+   font-weight: bold;
+}
+.larger { font-size: 250% }
+.large { font-size: 150% }
 .midi { font-size: 85% }
 .small { font-size: 70% }
-.xsmall { font-size: 60% }
+.xsmall { font-size: 65% }
 .tiny { font-size: 50% }
 
+.midi .remark-code { font-size: 85%; }
+.small .remark-code { font-size: 70%; }
+.xsmall .remark-code { font-size: 65%; }
+.tiny .remark-code { font-size: 50%; }
 
+/* Huge numbers */
 
-/* Code formatting */
-.remark-code-line-highlighted {
-  background-color: #A7D5E8;
+.huge-blue-number {
+ font-family: 'Montserrat', sans-serif;
+ font-size: 1700%;
+ font-weight: bold;
+ color: var(--light-blue);
+}
+.huge-pink-number {
+ font-family: 'Montserrat', sans-serif;
+ font-size: 1700%;
+ font-weight: bold;
+ color: var(--pink);
 }
 
-.remark-code { 
-  font-family: 'Fira Mono', monospace;
-  font-size: 80%;
+/* Handwriting */
+.hand{
+  font-family: 'Gochi Hand', cursive;
+  font-size: 125%;
 }
 
-.remark-inline-code { 
-  font-family: 'Fira Mono', monospace;
-  font-size: 100%;
-  color: #869496;
-}
+/*Alternative two-column layouts*/
 
-
-/* Two-column layout */
-.left-column {
-  color: #777;
-  width: 20%;
-  height: 92%;
+  /*Left 70% - Right 30% */
+.pull-left-wide {
+  width: 70%;
   float: left;
 }
-.left-column h2:last-of-type, .left-column h3:last-child {
-  color: #000;
-}
-.right-column {
-  width: 75%;
+.pull-right-narrow {
+  width: 27%;
   float: right;
-  padding-top: 1em;
 }
-.center {
-  text-align:center;
-}
-.pull-left {
-  float: left;
-  width: 47%;
-}
-.pull-right {
-  float: right;
-  width: 47%;
-}
-.pull-right ~ * {
+.pull-right-narrow ~ * {
   clear: both;
+}
+
+  /*Left 30% - Right 70% */
+.pull-left-narrow {
+  width: 30%;
+  float: left;
+}
+.pull-right-wide {
+  width: 67%;
+  float: right;
+}
+.pull-right-wide ~ * {
+  clear: both;
+}
+
+/* Footnote */
+.footnote {
+  padding-left: 30px;
+}
+
+
+/* Square bullets for lists */
+
+ul{
+  list-style-type: square;
+}
+
+/* Footer */
+div.my-footer {
+    border-top: 1px solid var(--gray);
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    width: 90%;
+}
+div.my-footer span {
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    color: #8A8A8A;
+}
+div.my-footer a {
+    font-size: 20px;
+    color: #8A8A8A;
 }
 
 
 /* Custom boxes */
 
-.question {
-  border-left: solid 5px #1E5C65;
-  background-color: #1E5C6530;
-  padding: 10px 16px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  font-size: 90%;
-  color: #1E5C65;
-}
-
-.alert {
-  border-right: solid 5px #A7D5E8;
-  background-color: #A7D5E830;
-  padding: 1px 16px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
-.instructions {
-  border-left: solid 5px #FFD748;
-  background-color: #FFD74850;
-  padding: 10px 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.instructions li::before {
-  content: ">"; 
-  color: #FFD748;
-  display: inline-block; 
-  margin-left: -1.5em
-}
-
 .question, .your-turn, .tip {
-  padding: 5px 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  color: white;
 }
 
 .question{
-  border-left: solid 5px #1E5C65;
-  background-color: #d2dee0;
-}
-
-.your-turn {
-  border-left: solid 5px #FFD748;
-  background-color: #fff9e5;
-}
-.your-turn:before{
-  content: "Your turn!";
-  font-size: 150%;
-  font-weight: bold;
-  color: #FFD748;
-  margin-bottom: 10px;
-}
-.your-turn ul li:before {
-  content: "✚"; 
-  color: #FFD748; 
-  display: inline-block; 
-  width: 1.5em;
-  margin-left: -1.5em
+  border-left: solid 5px var(--green);
+  background-color: var(--green-faint);
 }
 
 .tip {
-  border-right: solid 5px #F26BAA;
-  background-color: #E7E7E7;
+  border-left: solid 5px var(--pink);
+  background-color: var(--pink-faint);
 }
-.tip:before{
-  content: "Tip:";
-  font-size: 120%;
-  font-weight: bold;
-  color: #F26BAA;
-  margin-bottom: 5px;
+
+.your-turn {
+  border-left: solid 5px var(--light-blue);
 }
 
 
@@ -185,71 +214,18 @@ blockquote {
   padding-left: 1em;
 }
 
-
-/* Lists */
-ul {
-  list-style: none;
-}
-ul li:before {
-  content: "✚"; 
-  color: #A7D5E8; 
-  display: inline-block; 
-  width: 1.5em;
-  margin-left: -1.5em
-}
-ul li{
-  margin: 10px 0;
-}
-
-
-
 /* Embedded images */
 img, video, iframe {
   max-width: 100%;
 }
 
-
-/* Tables */
-table {
-  margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
-}
-table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
-thead, tfoot, tr:nth-child(even) { background: #eee }
-
-/* Footer */
-div.my-footer {
-    background-color: #ffffff;
-    border-top: 1px solid #A7D5E8;
-    position: absolute;
-    bottom: 0px;
-    left: 80px;
-    height: 35px;
-    width: 100%;
-}
-div.my-footer span {
-    font-size: 12pt;
-    position: absolute;
-    color: #333333;
-    left: 20px;
-    bottom: 10px;
-}
-div.my-footer a {
-    font-size: 12pt;
-    color: #333333;
-}
-
-
-/* Footnote */
-.footnote {
+/* Image overlay */
+.imageoverlay {
   position: absolute;
-  bottom: 3em;
-  padding-right: 4em;
-  font-size: 70%;
+  top: 10%;
+  left: 65%;
+  border: 1px solid #ddd;
 }
-
 
 /* Logo */
 .remark-slide-content:after {
@@ -264,19 +240,6 @@ div.my-footer a {
     background-image: url("dsbox-hex.png");
 }
 
-
-/* Slide number */
-.remark-slide-number {
-  color: #333333;
-  opacity: 1;
-  font-size: 12pt;
-}
-
-.title-slide .remark-slide-number {
-  display: none;
-}
-
-
 /* Media */
 @page { margin: 0; }
 @media print {
@@ -289,54 +252,7 @@ div.my-footer a {
   }
 }
 
-/* Image overlay */
-.imageoverlay {
-  position: absolute;
-  top: 10%;
-  left: 65%;
-  border: 1px solid #ddd;
-}
-
-
-/* What is this? */
-.element.style {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 685px;
-    width: 700px;
-}
-
-
-/* Handwriting */
-
-.hand{
-  font-family: 'Gochi Hand', cursive;
-  font-size: 125%;
-}
-.hand-blue{
-  font-family: 'Gochi Hand', cursive;
-  color: #A7D5E8;
-  font-size: 125%;
-}
-.hand-pink{
-  font-family: 'Gochi Hand', cursive;
-  color: #F26BAA;
-  font-size: 125%;
-}
-
-/* Custom fonts */
-
-.huge-blue {
- font-family: 'Montserrat', sans-serif;
- font-size: 400%;
- font-weight: bold;
- color: #A7D5E8;
-}
-
-.huge-pink {
- font-family: 'Montserrat', sans-serif;
- font-size: 400%;
- font-weight: bold;
- color: #F26BAA;
+/* Datatable headers */
+div.datatables {
+    color: #fff;
 }
