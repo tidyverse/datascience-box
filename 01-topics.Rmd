@@ -5,8 +5,8 @@ The course content is organized in three units:
 ```{r topic-flow, fig.align="center", echo=FALSE}
 library(DiagrammeR)
 
-welcome_border <- "#333333"
-welcome_fill   <- "#d8d8d8"
+hello_border <- "#333333"
+hello_fill   <- "#d8d8d8"
 explore_border <- "#57707a"
 explore_fill   <- "#A7D5E8"
 ethics_border  <- "#6e8796"
@@ -17,9 +17,9 @@ further_border <- "#FFD748"
 further_fill   <- "#faebb4"
 
 topic_flow <- create_graph() %>%
-  # Welcome ----
+  # Hello world ----
   add_node(
-    label = "Welcome",
+    label = "Hello\nworld",
     node_aes = node_aes(
       x = 2, y = 2,
       shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
@@ -38,11 +38,11 @@ topic_flow <- create_graph() %>%
     )
   ) %>%
   add_edge(
-    from = "Welcome", to = "Exploring\ndata",
+    from = "Hello\nworld", to = "Exploring\ndata",
     edge_aes = edge_aes(arrowhead = "normal")
   ) %>%
   add_edge(
-    from = "Exploring\ndata", to = "Welcome",
+    from = "Exploring\ndata", to = "Hello\nworld",
     edge_aes = edge_aes(arrowhead = "normal")
   ) %>%
   add_node(
@@ -184,7 +184,7 @@ topic_flow <- create_graph() %>%
 render_graph(topic_flow)
 ```
 
-**Unit 1 - Welcome:** This unit is an introduction to the content, pedagogy, and toolkit of the course.
+**Unit 1 - Hello world:** This unit is an introduction to the content, pedagogy, and toolkit of the course.
 
 **Unit 2 - Exploring data:** This unit focuses on data visualization and data wrangling.
 Specifically we cover fundamentals of data and data visualization, confounding variables, and Simpson's paradox as well as the concept of tidy data, data import, data cleaning, and data curation.
