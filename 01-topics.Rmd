@@ -24,7 +24,7 @@ topic_flow <- create_graph() %>%
       x = 2, y = 2,
       shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
       fontsize = 12, fontcolor = "black",
-      color = welcome_border, penwidth = 2, fillcolor = welcome_fill
+      color = hello_border, penwidth = 2, fillcolor = hello_fill
     )
   ) %>%
   # Exploring data ----
