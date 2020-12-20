@@ -1,20 +1,25 @@
----
-title: "Cumulative deaths from COVID-19"
-author: "Mine Çetinkaya-Rundel"
-output: github_document
----
+Cumulative deaths from COVID-19
+================
+Mine Çetinkaya-Rundel
 
 ## Introduction
 
-Countries around the world are responding to an outbreak of respiratory illness caused by a novel coronavirus, COVID-19.
-The outbreak first started in Wuhan, China, but cases have been identified in a growing number of other locations internationally, including the United States.
-In this report we explore how the trajectory of the cumulative deaths in a number of countries.
+Countries around the world are responding to an outbreak of respiratory
+illness caused by a novel coronavirus, COVID-19. The outbreak first
+started in Wuhan, China, but cases have been identified in a growing
+number of other locations internationally, including the United States.
+In this report we explore how the trajectory of the cumulative deaths in
+a number of countries.
 
-The data come from the **coronavirus** package, which pulls data from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus repository.
-The coronavirus package provides a tidy format dataset of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic.
-The package is available on GitHub [here](https://github.com/RamiKrispin/coronavirus) and is updated daily.
+The data come from the **coronavirus** package, which pulls data from
+the Johns Hopkins University Center for Systems Science and Engineering
+(JHU CCSE) Coronavirus repository. The coronavirus package provides a
+tidy format dataset of the 2019 Novel Coronavirus COVID-19 (2019-nCoV)
+epidemic. The package is available on GitHub
+[here](https://github.com/RamiKrispin/coronavirus) and is updated daily.
 
-For our analysis, in addition to the coronavirus package, we will use the following packages for data wrangling and visualisation.
+For our analysis, in addition to the coronavirus package, we will use
+the following packages for data wrangling and visualisation.
 
 -   **tidyverse** for data wrangling and visualization
 -   **lubridate** package for handling dates
@@ -22,9 +27,10 @@ For our analysis, in addition to the coronavirus package, we will use the follow
 -   **scales** package for formatting axis labels
 -   **ggrepel** package for pretty printing of country labels
 
-We will make use of the **DT** package for interactive display of tabular output in the Appendix.
+We will make use of the **DT** package for interactive display of
+tabular output in the Appendix.
 
-```{r load-packages, warning=FALSE, message=FALSE}
+``` r
 library(coronavirus) # devtools::install_github("RamiKrispin/coronavirus")
 library(tidyverse)
 library(lubridate)
@@ -36,15 +42,18 @@ library(DT)
 
 ## Data prep
 
-The data frame called `coronavirus` in the coronavirus package provides a daily summary of the Coronavirus (COVID-19) cases by country.
-Each row in the data frame represents a country (or, where relevant, state/province).
-A full list of the countries in the data frame is provided in the [Appendix].
-Note that the data provided in this package provides daily number of deaths, confirmed cases, and recovered cases.
-For this report, we will focus on the deaths.
+The data frame called `coronavirus` in the coronavirus package provides
+a daily summary of the Coronavirus (COVID-19) cases by country. Each row
+in the data frame represents a country (or, where relevant,
+state/province). A full list of the countries in the data frame is
+provided in the [Appendix](#appendix). Note that the data provided in
+this package provides daily number of deaths, confirmed cases, and
+recovered cases. For this report, we will focus on the deaths.
 
-We will start by making our selection for the countries we want to explore.
+We will start by making our selection for the countries we want to
+explore.
 
-```{r select-countries}
+``` r
 countries <- c(
   "China",
   "France",
@@ -54,10 +63,11 @@ countries <- c(
 )
 ```
 
-In the following code chunk we filter the data frame for deaths in the countries we specified above and calculate cumulative number of deaths.
+In the following code chunk we filter the data frame for deaths in the
+countries we specified above and calculate cumulative number of deaths.
 We will only visualise data since 10th confirmed death.
 
-```{r prep-country-data}
+``` r
 country_data <- coronavirus %>%
   # filter for deaths in countries of interest
   filter(
@@ -90,9 +100,12 @@ country_data <- coronavirus %>%
   ungroup()
 ```
 
-We also need to take a note of the "as of date" for the data so that we can properly label our visualisation.
+    ## `summarise()` regrouping output by 'country' (override with `.groups` argument)
 
-```{r record-as-of-date}
+We also need to take a note of the “as of date” for the data so that we
+can properly label our visualisation.
+
+``` r
 as_of_date <- country_data %>% 
   summarise(max(date)) %>% 
   pull()
@@ -100,14 +113,16 @@ as_of_date <- country_data %>%
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
 ```
 
-These data are as of `r as_of_date_formatted`.
+These data are as of Sun, Aug 16, 2020.
 
 ## Visualisation
 
-The following visualisation shows the number of cumulative cases vs. days elapsed since the 10th confirmed death in each country.
-The time span plotted for each country varies since some countries started seeing (and reporting) deaths from COVID-19 much later than others.
+The following visualisation shows the number of cumulative cases
+vs. days elapsed since the 10th confirmed death in each country. The
+time span plotted for each country varies since some countries started
+seeing (and reporting) deaths from COVID-19 much later than others.
 
-```{r visualise, warning=FALSE}
+``` r
 ggplot(data = country_data,
        mapping = aes(x = days_elapsed, 
                      y = cumulative_cases, 
@@ -137,14 +152,10 @@ ggplot(data = country_data,
   )
 ```
 
+![](covid_files/figure-gfm/visualise-1.png)<!-- -->
+
 ## Appendix
 
 A list of countries in the `coronavirus` data frame is provided below.
 
-```{r list-countries, echo=FALSE}
-coronavirus %>%
-  select(country) %>%
-  arrange(country) %>%
-  distinct() %>%
-  datatable()
-```
+![](covid_files/figure-gfm/list-countries-1.png)<!-- -->
