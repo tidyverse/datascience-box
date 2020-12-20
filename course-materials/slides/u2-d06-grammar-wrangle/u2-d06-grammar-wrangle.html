@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Grammar of data wrangling</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Grammar of data wrangling
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Grammar of data wrangling
+
+---
+
+## A grammar of data wrangling...
+
+... based on the concepts of functions as verbs that manipulate data frames
+
+.pull-left[
+&lt;img src="img/dplyr-part-of-tidyverse.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+.midi[
+- `select`: pick columns by name
+- `arrange`: reorder rows
+- `slice`: pick rows using index(es)
+- `filter`: pick rows matching criteria
+- `distinct`: filter for unique rows
+- `mutate`: add new variables
+- `summarise`: reduce variables to values
+- `group_by`: for grouped operations
+- ... (many more)
+]
+]
+
+---
+
+## Rules of **dplyr** functions
+
+- First argument is *always* a data frame
+- Subsequent arguments say what to do with that data frame
+- Always return a data frame
+- Don't modify in place
+
+---
+
+## Data: Hotel bookings
+
+- Data from two hotels: one resort and one city hotel
+- Observations: Each row represents a hotel booking
+- Goal for original data collection: Development of prediction models to classify a hotel booking's likelihood to be cancelled ([Antonia et al., 2019](https://www.sciencedirect.com/science/article/pii/S2352340918315191#bib5))
+
+
+```r
+hotels &lt;- read_csv("data/hotels.csv")
+```
+
+.footnote[
+Source: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-11/readme.md)
+]
+
+---
+
+## First look: Variables
+
+
+```r
+names(hotels)
+```
+
+```
+##  [1] "hotel"                         
+##  [2] "is_canceled"                   
+##  [3] "lead_time"                     
+##  [4] "arrival_date_year"             
+##  [5] "arrival_date_month"            
+##  [6] "arrival_date_week_number"      
+##  [7] "arrival_date_day_of_month"     
+##  [8] "stays_in_weekend_nights"       
+##  [9] "stays_in_week_nights"          
+## [10] "adults"                        
+## [11] "children"                      
+## [12] "babies"                        
+## [13] "meal"                          
+## [14] "country"                       
+## [15] "market_segment"                
+## [16] "distribution_channel"          
+## [17] "is_repeated_guest"             
+## [18] "previous_cancellations"        
+...
+```
+
+---
+
+## Second look: Overview
+
+
+```r
+glimpse(hotels)
+```
+
+```
+## Rows: 119,390
+## Columns: 32
+## $ hotel                          &lt;chr&gt; "Resort Hotel", "Resort…
+## $ is_canceled                    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ lead_time                      &lt;dbl&gt; 342, 737, 7, 13, 14, 14…
+## $ arrival_date_year              &lt;dbl&gt; 2015, 2015, 2015, 2015,…
+## $ arrival_date_month             &lt;chr&gt; "July", "July", "July",…
+## $ arrival_date_week_number       &lt;dbl&gt; 27, 27, 27, 27, 27, 27,…
+## $ arrival_date_day_of_month      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ stays_in_weekend_nights        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ stays_in_week_nights           &lt;dbl&gt; 0, 0, 1, 1, 2, 2, 2, 2,…
+## $ adults                         &lt;dbl&gt; 2, 2, 1, 1, 2, 2, 2, 2,…
+## $ children                       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ babies                         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ meal                           &lt;chr&gt; "BB", "BB", "BB", "BB",…
+## $ country                        &lt;chr&gt; "PRT", "PRT", "GBR", "G…
+## $ market_segment                 &lt;chr&gt; "Direct", "Direct", "Di…
+## $ distribution_channel           &lt;chr&gt; "Direct", "Direct", "Di…
+...
+```
+
+---
+
+## Select a single column
+
+View only `lead_time` (number of days between booking and arrival date):
+
+
+```r
+select(hotels, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # … with 119,384 more rows
+```
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+*select(
+  hotels, 
+  lead_time
+  )
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+* hotels,
+  lead_time
+  )
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+* lead_time
+  )
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+- Second argument: variable we want to select, `lead_time`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+  lead_time
+  )
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # … with 119,384 more rows
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+- Second argument: variable we want to select, `lead_time`
+- Result: data frame with 119390 rows and 1 column
+]
+
+---
+
+.tip[
+dplyr functions always expect a data frame and always yield a data frame.
+]
+
+
+```r
+select(hotels, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # … with 119,384 more rows
+```
+
+---
+
+## Select multiple columns
+
+
+View only the `hotel` type and `lead_time`:
+
+--
+
+.pull-left[
+
+```r
+select(hotels, hotel, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+## 4 Resort Hotel        13
+## 5 Resort Hotel        14
+## 6 Resort Hotel        14
+## # … with 119,384 more rows
+```
+]
+--
+.pull-right[
+.question[
+What if we wanted to select these columns, and then arrange the data in descending order of lead time?
+]
+]
+
+---
+
+## Data wrangling, step-by-step
+
+.pull-left[
+Select:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+## 4 Resort Hotel        13
+## 5 Resort Hotel        14
+## 6 Resort Hotel        14
+## # … with 119,384 more rows
+```
+]
+
+--
+.pull-right[
+Select, then arrange:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # … with 119,384 more rows
+```
+]
+
+---
+
+class: middle
+
+# Pipes
+
+---
+
+## What is a pipe?
+
+In programming, a pipe is a technique for passing information from one process to another.
+
+--
+
+.pull-left[
+- Start with the data frame `hotels`, and pass it to the `select()` function,
+]
+.pull-right[
+.small[
+
+```r
+*hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # … with 119,384 more rows
+```
+]
+]
+
+---
+
+## What is a pipe?
+
+In programming, a pipe is a technique for passing information from one process to another.
+
+.pull-left[
+- Start with the data frame `hotels`, and pass it to the `select()` function,
+- then we select the variables `hotel` and `lead_time`,
+]
+.pull-right[
+.small[
+
+```r
+hotels %&gt;%
+* select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # … with 119,384 more rows
+```
+]
+]
+
+---
+
+## What is a pipe?
+
+In programming, a pipe is a technique for passing information from one process to another.
+
+.pull-left[
+- Start with the data frame `hotels`, and pass it to the `select()` function,
+- then we select the variables `hotel` and `lead_time`,
+- and then we arrange the data frame by `lead_time` in descending order.
+]
+.pull-right[
+.small[
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time) %&gt;% 
+* arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # … with 119,384 more rows
+```
+]
+]
+
+---
+
+## Aside
+
+The pipe operator is implemented in the package **magrittr**, though we don't need to load this package explicitly since **tidyverse** does this for us.
+
+--
+
+.question[
+Any guesses as to why the package is called magrittr?
+]
+
+--
+
+.pull-left[
+&lt;img src="img/magritte.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="img/magrittr.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## How does a pipe work?
+
+- You can think about the following sequence of actions - find keys, 
+unlock car, start car, drive to work, park.
+
+--
+- Expressed as a set of nested functions in R pseudocode this would look like:
+
+```r
+park(drive(start_car(find("keys")), to = "work"))
+```
+
+--
+- Writing it out using pipes give it a more natural (and easier to read) 
+structure:
+
+```r
+find("keys") %&gt;%
+  start_car() %&gt;%
+  drive(to = "work") %&gt;%
+  park()
+```
+
+---
+
+## A note on piping and layering
+
+- `%&gt;%` used mainly in **dplyr** pipelines, *we pipe the output of the previous line of code as the first input of the next line of code*
+
+--
+- `+` used in **ggplot2** plots is used for "layering", *we create the plot in layers, separated by `+`*
+
+---
+
+## dplyr
+
+.midi[
+❌
+
+
+```r
+hotels +
+  select(hotel, lead_time)
+```
+
+```
+## Error in select(hotel, lead_time): object 'hotel' not found
+```
+
+✅
+
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time)
+```
+
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+...
+```
+]
+
+---
+
+## ggplot2
+
+.midi[
+❌
+
+
+```r
+ggplot(hotels, aes(x = hotel, fill = deposit_type)) %&gt;%
+  geom_bar()
+```
+
+```
+## Error: `mapping` must be created by `aes()`
+## Did you use %&gt;% instead of +?
+```
+
+✅
+
+
+```r
+ggplot(hotels, aes(x = hotel, fill = deposit_type)) +
+  geom_bar()
+```
+
+&lt;img src="u2-d06-grammar-wrangle_files/figure-html/unnamed-chunk-23-1.png" width="25%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Code styling
+
+Many of the styling principles are consistent across `%&gt;%` and `+`:
+
+- always a space before
+- always a line break after (for pipelines with more than 2 lines)
+
+❌
+
+
+```r
+ggplot(hotels,aes(x=hotel,y=deposit_type))+geom_bar()
+```
+
+✅
+
+
+```r
+ggplot(hotels, aes(x = hotel, y = deposit_type)) + 
+  geom_bar()
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

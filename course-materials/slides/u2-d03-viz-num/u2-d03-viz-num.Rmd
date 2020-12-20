@@ -1,0 +1,444 @@
+---
+title: "Visualising numerical data"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(openintro)
+loans_full_schema <- loans_full_schema %>%
+  mutate(grade = factor(grade, ordered = TRUE))
+```
+
+class: middle
+
+# Terminology
+
+---
+
+## Number of variables involved
+
+- Univariate data analysis - distribution of single variable
+- Bivariate data analysis - relationship between two variables
+- Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
+
+---
+
+## Data: Lending Club
+
+.pull-left-wide[
+
+- Thousands of loans made through the Lending Club, which is a platform that allows individuals to lend to other individuals
+
+- Not all loans are created equal -- ease of getting a loan depends on (apparent) ability to pay back the loan
+
+- Data includes loans *made*, these are not loan applications
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("img/lending-club.png")
+```
+]
+
+---
+
+## Take a peek at data
+
+```{r output.lines=18}
+library(openintro)
+glimpse(loans_full_schema)
+```
+
+---
+
+## Selected variables
+
+```{r}
+loans <- loans_full_schema %>%
+  select(loan_amount, interest_rate, term, grade, 
+         state, annual_income, homeownership, debt_to_income)
+glimpse(loans)
+```
+
+---
+
+## Selected variables
+
+<br>
+
+.midi[
+variable        | description
+----------------|-------------
+`loan_amount`   |	Amount of the loan received, in US dollars
+`interest_rate` |	Interest rate on the loan, in an annual percentage
+`term`	        | The length of the loan, which is always set as a whole number of months
+`grade`	        | Loan grade, which takes a values A through G and represents the quality of the loan and its likelihood of being repaid
+`state`         |	US state where the borrower resides
+`annual_income` |	Borrower’s annual income, including any second income, in US dollars
+`homeownership`	| Indicates whether the person owns, owns but has a mortgage, or rents
+`debt_to_income` | Debt-to-income ratio
+]
+
+---
+
+## Variable types
+
+<br>
+
+variable        | type
+----------------|-------------
+`loan_amount`   |	numerical, continuous
+`interest_rate` |	numerical, continuous
+`term`	        | numerical, discrete
+`grade`	        | categorical, ordinal
+`state`         |	categorical, not ordinal
+`annual_income` |	numerical, continuous
+`homeownership`	| categorical, not ordinal
+`debt_to_income` | numerical, continuous
+
+---
+
+class: middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+- shape:
+    - skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    - modality: unimodal, bimodal, multimodal, uniform
+- center: mean (`mean`), median (`median`), mode (not always useful)
+- spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+- unusual observations
+
+---
+
+class: middle
+
+# Histogram
+
+---
+
+## Histogram
+
+```{r message = TRUE, out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram()
+```
+
+---
+
+## Histograms and binwidth
+
+.panelset[
+.panel[.panel-name[binwidth = 1000]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 1000)
+```
+]
+.panel[.panel-name[binwidth = 5000]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000)
+```
+]
+.panel[.panel-name[binwidth = 20000]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 20000)
+```
+]
+]
+
+---
+
+## Customizing histograms
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-custom, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000) +
+  labs( #<<
+    x = "Loan amount ($)", #<<
+    y = "Frequency", #<<
+    title = "Amounts of Lending Club loans" #<<
+  ) #<<
+```
+]
+]
+
+---
+
+## Fill with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-fill", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-fill, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = loan_amount, 
+                  fill = homeownership)) + #<<
+  geom_histogram(binwidth = 5000,
+                 alpha = 0.5) + #<<
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  )
+```
+]
+]
+
+---
+
+## Facet with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist-facet", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r hist-facet, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = loan_amount, fill = homeownership)) + 
+  geom_histogram(binwidth = 5000) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  ) +
+  facet_wrap(~ homeownership, nrow = 3) #<<
+```
+]
+]
+
+---
+
+class: middle
+
+# Density plot
+
+---
+
+## Density plot
+
+```{r}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density()
+```
+
+---
+
+## Density plots and adjusting bandwidth
+
+.panelset[
+.panel[.panel-name[adjust = 0.5]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 0.5)
+```
+]
+.panel[.panel-name[adjust = 1]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 1) # default bandwidth
+```
+]
+.panel[.panel-name[adjust = 2]
+```{r out.width = "50%"}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2)
+```
+]
+]
+
+---
+
+## Customizing density plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "density-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r density-custom, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2) +
+  labs( #<<
+    x = "Loan amount ($)", #<<
+    y = "Density", #<<
+    title = "Amounts of Lending Club loans" #<<
+  ) #<<
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "density-cat", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r density-cat, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = loan_amount, 
+                  fill = homeownership)) + #<<
+  geom_density(adjust = 2, 
+               alpha = 0.5) + #<<
+  labs(
+    x = "Loan amount ($)",
+    y = "Density",
+    title = "Amounts of Lending Club loans", 
+    fill = "Homeownership" #<<
+  )
+```
+]
+]
+
+---
+
+class: middle
+
+# Box plot
+
+---
+
+## Box plot
+
+```{r}
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot()
+```
+
+---
+
+## Box plot and outliers
+
+```{r}
+ggplot(loans, aes(x = annual_income)) +
+  geom_boxplot()
+```
+
+---
+
+## Customizing box plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "box-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r box-custom, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = NULL,
+    title = "Interest rates of Lending Club loans"
+  ) +
+  theme( #<<
+    axis.ticks.y = element_blank(), #<<
+    axis.text.y = element_blank() #<<
+  ) #<<
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "box-cat", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r box-cat, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(x = interest_rate,
+                  y = grade)) + #<<
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = "Grade",
+    title = "Interest rates of Lending Club loans",
+    subtitle = "by grade of loan" #<<
+  )
+```
+]
+]
+
+---
+
+class: middle
+
+# Relationships numerical variables
+
+---
+
+## Scatterplot
+
+```{r warning = FALSE}
+ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
+  geom_point()
+```
+
+---
+
+## Hex plot
+
+```{r warning = FALSE}
+ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
+  geom_hex()
+```
+
+---
+
+## Hex plot
+
+```{r warning = FALSE}
+ggplot(loans %>% filter(debt_to_income < 100), 
+       aes(x = debt_to_income, y = interest_rate)) +
+  geom_hex()
+```

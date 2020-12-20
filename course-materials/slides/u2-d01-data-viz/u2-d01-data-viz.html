@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data and visualisation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data and visualisation
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# What is in a dataset?
+
+---
+
+## Dataset terminology
+
+- Each row is an **observation**
+- Each column is a **variable**
+
+.small[
+
+
+```r
+starwars
+```
+
+```
+## # A tibble: 87 x 14
+##   name  height  mass hair_color skin_color eye_color birth_year
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
+## 1 Luke…    172    77 blond      fair       blue            19  
+## 2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112  
+## 3 R2-D2     96    32 &lt;NA&gt;       white, bl… red             33  
+## 4 Dart…    202   136 none       white      yellow          41.9
+## 5 Leia…    150    49 brown      light      brown           19  
+## 6 Owen…    178   120 brown, gr… light      blue            52  
+## # … with 81 more rows, and 7 more variables: sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+]
+
+---
+
+## Luke Skywalker
+
+![luke-skywalker](img/luke-skywalker.png)
+
+---
+
+## What's in the Star Wars data?
+
+Take a `glimpse` at the data:
+
+
+```r
+glimpse(starwars)
+```
+
+```
+## Rows: 87
+## Columns: 14
+## $ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth …
+## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, …
+## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0,…
+## $ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, g…
+## $ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "li…
+## $ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown",…
+## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, …
+## $ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "…
+## $ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "mas…
+## $ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine"…
+## $ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human"…
+## $ films      &lt;list&gt; [&lt;"The Empire Strikes Back", "Revenge of t…
+## $ vehicles   &lt;list&gt; [&lt;"Snowspeeder", "Imperial Speeder Bike"&gt;,…
+## $ starships  &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "…
+```
+
+---
+
+.question[
+How many rows and columns does this dataset have?
+What does each row represent?
+What does each column represent?
+]
+
+
+```r
+?starwars
+```
+
+&lt;img src="img/starwars-help.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[
+How many rows and columns does this dataset have?
+]
+
+.pull-left[
+
+```r
+nrow(starwars) # number of rows
+```
+
+```
+## [1] 87
+```
+
+```r
+ncol(starwars) # number of columns
+```
+
+```
+## [1] 14
+```
+
+```r
+dim(starwars)  # dimensions (row column)
+```
+
+```
+## [1] 87 14
+```
+]
+
+---
+
+class: middle
+
+# Exploratory data analysis
+
+---
+
+## What is EDA?
+
+- Exploratory data analysis (EDA) is an approach to analysing data sets to summarize its main characteristics
+- Often, this is visual -- this is what we'll focus on first
+- But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis -- this is what we'll focus on next
+
+---
+
+## Mass vs. height
+
+.question[ 
+How would you describe the relationship between mass and height of Starwars characters?
+What other variables would help us understand data points that don't follow the overall trend?
+Who is the not so tall but really chubby character?
+]
+
+&lt;img src="u2-d01-data-viz_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Jabba!
+
+&lt;img src="img/jabbaplot.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+# Data visualization
+
+---
+
+## Data visualization
+
+&gt; *"The simple graph has brought more information to the data analyst's mind than any other device." --- John Tukey*
+
+- Data visualization is the creation and study of the visual representation of data
+- Many tools for visualizing data -- R is one of them
+- Many approaches/systems within R for making data visualizations -- **ggplot2** is one of them, and that's what we're going to use
+
+---
+
+## ggplot2 `\(\in\)` tidyverse
+
+.pull-left[
+&lt;img src="img/ggplot2-part-of-tidyverse.png" width="80%" style="display: block; margin: auto;" /&gt;
+] 
+.pull-right[ 
+- **ggplot2** is tidyverse's data visualization package 
+- `gg` in "ggplot2" stands for Grammar of Graphics 
+- Inspired by the book **Grammar of Graphics** by Leland Wilkinson
+]
+
+---
+
+## Grammar of Graphics
+
+.pull-left-narrow[
+A grammar of graphics is a tool that enables us to concisely describe the components of a graphic
+]
+.pull-right-wide[
+&lt;img src="img/grammar-of-graphics.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[ Source: [BloggoType](http://bloggotype.blogspot.com/2016/08/holiday-notes2-grammar-of-graphics.html)]
+
+---
+
+## Mass vs. height
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Starwars characters",
+       x = "Height (cm)", y = "Weight (kg)")
+```
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
+&lt;img src="u2-d01-data-viz_files/figure-html/mass-height-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[ 
+- What are the functions doing the plotting?
+- What is the dataset being plotted?
+- Which variables map to which features (aesthetics) of the plot?
+- What does the warning mean?&lt;sup&gt;+&lt;/sup&gt;
+]
+
+
+```r
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Starwars characters",
+       x = "Height (cm)", y = "Weight (kg)")
+```
+
+```
+## Warning: Removed 28 rows containing missing values (geom_point).
+```
+
+.footnote[
+&lt;sup&gt;+&lt;/sup&gt;Suppressing warning to subsequent slides to save space
+]
+
+---
+
+## Hello ggplot2!
+
+.pull-left-wide[
+- `ggplot()` is the main function in ggplot2
+- Plots are constructed in layers
+- Structure of the code for plots can be summarized as
+
+
+```r
+ggplot(data = [dataset], 
+       mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+- The ggplot2 package comes with the tidyverse
+
+
+```r
+library(tidyverse)
+```
+
+- For help with ggplot2, see [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
+]
+
+---
+
+class: middle
+
+# Why do we visualize?
+
+---
+
+## Anscombe's quartet
+
+
+
+.pull-left[
+
+```
+##    set  x     y
+## 1    I 10  8.04
+## 2    I  8  6.95
+## 3    I 13  7.58
+## 4    I  9  8.81
+## 5    I 11  8.33
+## 6    I 14  9.96
+## 7    I  6  7.24
+## 8    I  4  4.26
+## 9    I 12 10.84
+## 10   I  7  4.82
+## 11   I  5  5.68
+## 12  II 10  9.14
+## 13  II  8  8.14
+## 14  II 13  8.74
+## 15  II  9  8.77
+## 16  II 11  9.26
+## 17  II 14  8.10
+## 18  II  6  6.13
+## 19  II  4  3.10
+## 20  II 12  9.13
+## 21  II  7  7.26
+## 22  II  5  4.74
+```
+] 
+.pull-right[
+
+```
+##    set  x     y
+## 23 III 10  7.46
+## 24 III  8  6.77
+## 25 III 13 12.74
+## 26 III  9  7.11
+## 27 III 11  7.81
+## 28 III 14  8.84
+## 29 III  6  6.08
+## 30 III  4  5.39
+## 31 III 12  8.15
+## 32 III  7  6.42
+## 33 III  5  5.73
+## 34  IV  8  6.58
+## 35  IV  8  5.76
+## 36  IV  8  7.71
+## 37  IV  8  8.84
+## 38  IV  8  8.47
+## 39  IV  8  7.04
+## 40  IV  8  5.25
+## 41  IV 19 12.50
+## 42  IV  8  5.56
+## 43  IV  8  7.91
+## 44  IV  8  6.89
+```
+]
+
+---
+
+## Summarising Anscombe's quartet
+
+
+```r
+quartet %&gt;%
+  group_by(set) %&gt;%
+  summarise(
+    mean_x = mean(x), 
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    r = cor(x, y)
+  )
+```
+
+```
+## # A tibble: 4 x 6
+##   set   mean_x mean_y  sd_x  sd_y     r
+##   &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 I          9   7.50  3.32  2.03 0.816
+## 2 II         9   7.50  3.32  2.03 0.816
+## 3 III        9   7.5   3.32  2.03 0.816
+## 4 IV         9   7.50  3.32  2.03 0.817
+```
+
+---
+
+## Visualizing Anscombe's quartet
+
+&lt;img src="u2-d01-data-viz_files/figure-html/quartet-plot-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Age at first kiss
+
+.question[ 
+Do you see anything out of the ordinary?
+]
+
+&lt;img src="u2-d01-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Facebook visits
+
+.question[ 
+How are people reporting lower vs. higher values of FB visits?
+]
+
+&lt;img src="u2-d01-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

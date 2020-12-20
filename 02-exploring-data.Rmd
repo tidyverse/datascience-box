@@ -12,67 +12,214 @@ You can join the workspace and play around with the application exercises.
 
 ## Slides & application exercises
 
-::: {.slide-deck}
-**Unit 1 - Deck 3: Data and visualization**
+### Visualising data
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d03-data-viz-1/u1_d03-data-viz-1.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d03-data-viz-1)
+::: {.slide-deck}
+**Unit 2 - Deck 1: Data and visualisation**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d01-data-viz/u2-d01-data-viz.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d01-data-viz)
+:::
+
+::: {.video}
+[Video](https://youtu.be/FddF4b_GuTI)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 2: Visualising data with ggplot2**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d02-ggplot2/u2-d02-ggplot2.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d02-ggplot2)
+:::
+
+::: {.video}
+[Video](https://youtu.be/s2NF2J36ljE)
+:::
+
+::: {.reading}
+R4DS :: [Chp 3 - Data visualization](https://r4ds.had.co.nz/data-visualisation.html)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 3: Visualising numerical data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d03-viz-num/u2-d03-viz-num.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d03-viz-num)
+:::
+
+::: {.video}
+[Video](https://youtu.be/waBabVTI8ec)
+:::
+
+::: {.reading}
+IMS :: [Sec 2.1 - Exploring numerical data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html#numerical-data)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 4: Visualising categorical data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d04-viz-cat/u2-d04-viz-cat.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d04-viz-cat)
+:::
+
+::: {.video}
+[Video](https://youtu.be/21h3rEO8k2E)
+:::
+
+::: {.reading}
+IMS :: [Sec 2.2 - Exploring categorical data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html#categorical-data)
+:::
+:::
 
 ::: {.application-exercise}
-[Star Wars + Data visualisation](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz)
+**StarWars + Dataviz**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz/ae-03-starwars-dataviz.Rmd)
+:::
+
+::: {.video}
+[Video](https://youtu.be/3UaLPtCKkXQ)
+:::
+:::
+
+### Wrangling and tidying data
+
+::: {.slide-deck}
+**Unit 2 - Deck 5: Tidy data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d05-tidy-data/u2-d05-tidy-data#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d05-tidy-data)
+:::
+
+::: {.video}
+[Video](https://youtu.be/Ux85eR3h9hw)
 :::
 
 ::: {.reading}
-[R4DS :: Chp 3 - Data visualization](https://r4ds.had.co.nz/data-visualisation.html)
+JSS :: [Tidy data](https://www.jstatsoft.org/article/view/v059i10)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 1 - Deck 4: Building plots for various data types**
+**Unit 2 - Deck 6: Grammar of data wrangling**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d04-data-viz-2/u1_d04-data-viz-2.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d04-data-viz-2)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d06-grammar-wrangle/u2-d06-grammar-wrangle#1)
+:::
 
-::: {.reading}
-[IMS :: Chp 2 - Summarizing and visualizing data](https://openintro-ims.netlify.app/summarizing-visualizing-data.html)
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d06-grammar-wrangle)
+:::
+
+::: {.video}
+[Video](https://youtu.be/ZCaYBES_VEk)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 1 - Deck 5: Tidy data and data wrangling**
+**Unit 2 - Deck 7: Working with a single data frame**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d05-data-wrangle/u1_d05-data-wrangle.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d05-data-wrangle)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d07-single-df/u2-d07-single-df#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d07-single-df)
+:::
+
+::: {.video}
+[Video](https://youtu.be/0229Uq2hkJo)
+:::
+
+::: {.reading}
+R4DS :: [Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 8: Working with multiple data frames**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d08-multi-df/u2-d08-multi-df#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d08-multi-df)
+:::
+
+::: {.video}
+[Video](https://youtu.be/VdV5ABsaf5Y)
+:::
+
+::: {.reading}
+R4DS :: [Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 9: Tidying data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d09-tidying/u2-d09-tidying#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d09-tidying)
+:::
+
+::: {.video}
+[Video](https://youtu.be/x3KM5uxaFdI)
+:::
+
+::: {.reading}
+R4DS :: [Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
+:::
+:::
 
 ::: {.application-exercise}
-[Hotels + Data wrangling](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling)
+**Hotels + Data wrangling**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling/ae-04-hotels-datawrangling.Rmd)
 :::
 
-::: {.reading}
-[R4DS :: Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
-:::
-:::
-
-::: {.slide-deck}
-**Unit 1 - Deck 6: Joining data from multiple sources**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d06-data-join/u1_d06-data-join.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d06-data-join)
-
-::: {.application-exercise}
-[Fisheries + Data joins](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-fisheries-datajoins)
-:::
-
-::: {.reading}
-[R4DS :: Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+::: {.video}
+[Video](https://youtu.be/BXlOd4EYQrI)
 :::
 :::
 
-::: {.slide-deck}
-**Unit 1 - Deck 7: Data tidying and reshaping**
+### Importing and recoding data
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d07-tidy-data/u1_d07-tidy-data.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d07-tidy-data)
+### Communicating data science results effectively
 
-::: {.reading}
-[R4DS :: Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
-:::
-:::
+### Web scraping and programming
+
+```{=html}
+<!-- 
 
 ::: {.slide-deck}
 **Unit 1 - Deck 8: Data types and recoding**
@@ -158,6 +305,8 @@ You can join the workspace and play around with the application exercises.
 :::
 :::
 
+-->
+```
 ## Labs
 
 ::: {.lab}
