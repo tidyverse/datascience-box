@@ -100,12 +100,9 @@ This is a draft of the introduction section of your project as well as a data an
 
     what are the cases, what are the variables, etc.).
 
--   **Section 2 - Data:** Place your data in the \`/data\` folder, and add dimensions
-
-    and codebook to the README in that folder.
-    Then print out the output of
-
-    `glimpse()` or `skim()` of your data frame.
+-   **Section 2 - Data:** Place your data in the \`/data\` folder, and add dimensions and codebook to the README in that folder.
+    Then print out the output of and codebook to the README in that folder.
+    Then print out the output of `glimpse()` or `skim()` of your data frame.
 
 -   **Section 3 - Data analysis plan:**
 
