@@ -1,12 +1,23 @@
 ---
-title: "PROJECT TITLE"
-author: "NAME HERE"
-date: "TODAY'S DATE"
+title: "Project proposal"
+author: "Team name"
 output: github_document
 ---
 
-## Section 1. Introduction
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(broom)
+```
 
-## Section 2. Data analysis plan
+## 1. Introduction
 
-## Section 3. Data
+
+
+## 2. Data
+
+
+
+## 3. Data analysis plan
+
+
+
