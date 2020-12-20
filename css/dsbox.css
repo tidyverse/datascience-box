@@ -4,7 +4,7 @@
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
   margin-left: 10px;
-  border: 1pt solid #80D4E6;
+  border: 1pt solid #a8a8a8;
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("application-exercise.png");
 }
@@ -13,7 +13,7 @@
   clear: right;
   display: block;
   font-weight: bold;
-  color: #A7D5E8;
+  color: #80D4E6;
 }
 
 .reading {
