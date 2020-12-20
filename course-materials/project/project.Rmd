@@ -2,7 +2,7 @@
 title: "Showcase your inner data scientist"
 output: 
   html_document: 
-    css: hw.css
+    css: project.css
     theme: yeti
     toc: true
     toc_float: true
@@ -102,7 +102,8 @@ This is a draft of the introduction section of your project as well as a data an
 
 -   **Section 2 - Data:** Place your data in the \`/data\` folder, and add dimensions
 
-    and codebook to the README in that folder. Then print out the output of
+    and codebook to the README in that folder.
+    Then print out the output of
 
     `glimpse()` or `skim()` of your data frame.
 
@@ -154,23 +155,15 @@ The presentation line-up will be generated randomly.
 
 The grading scheme for the presentation is as follows:
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Total                                                                                                                                                                                                          | 50 pts    |
-+================================================================================================================================================================================================================+===========+
-| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Total                                                                                                                                                                                                          | 50 pts |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts  |
+| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts  |
+| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts  |
+| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts  |
+| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts |
+| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts |
+| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts |
 
 ### Executive summary
 
@@ -201,31 +194,28 @@ Style and format does count for this assignment, so please take the time to make
 
 -   Set aside time to work together and apart (physically).
 
--   When you're done, review the documents on GitHub to make sure you're happy with the final state of your work. Then go get some rest!
+-   When you're done, review the documents on GitHub to make sure you're happy with the final state of your work.
+    Then go get some rest!
 
--   Code: In your presentation your code should be hidden (`echo = FALSE`) so that your document is neat and easy to read. However your document should include all your code such that if I re-knit your R Markdown file I should be able to obtain the results you presented.
+-   Code: In your presentation your code should be hidden (`echo = FALSE`) so that your document is neat and easy to read.
+    However your document should include all your code such that if I re-knit your R Markdown file I should be able to obtain the results you presented.
 
     -   Exception: If you want to highlight something specific about a piece of code, you're welcomed to show that portion.
 
--   Teamwork: You are to complete the assignment as a team. All team members are expected to contribute equally to the completion of this assignment and team evaluations will be given at its completion - anyone judged to not have sufficient contributed to the final product will have their grade penalized. While different teams members may have different backgrounds and abilities, it is the responsibility of every team member to understand how and why all code and approaches in the assignment works.
+-   Teamwork: You are to complete the assignment as a team.
+    All team members are expected to contribute equally to the completion of this assignment and team evaluations will be given at its completion - anyone judged to not have sufficient contributed to the final product will have their grade penalized.
+    While different teams members may have different backgrounds and abilities, it is the responsibility of every team member to understand how and why all code and approaches in the assignment works.
 
 ## Marking
 
-+-------------------------------------+--------------------------------+
-| Total                               | 100 pts                        |
-+=====================================+================================+
-| Proposal                            | 10 pts                         |
-+-------------------------------------+--------------------------------+
-| Presentation                        | 50 pts                         |
-+-------------------------------------+--------------------------------+
-| Executive summary                   | 15 pts                         |
-+-------------------------------------+--------------------------------+
-| Reproducibility and organization    | 10 pts                         |
-+-------------------------------------+--------------------------------+
-| Team peer evaluation                | 10 pts                         |
-+-------------------------------------+--------------------------------+
-| Classmates' evaluation              | 5 pts                          |
-+-------------------------------------+--------------------------------+
+| Total                            | 100 pts |
+|----------------------------------|---------|
+| Proposal                         | 10 pts  |
+| Presentation                     | 50 pts  |
+| Executive summary                | 15 pts  |
+| Reproducibility and organization | 10 pts  |
+| Team peer evaluation             | 10 pts  |
+| Classmates' evaluation           | 5 pts   |
 
 ### Criteria
 
