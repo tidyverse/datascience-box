@@ -13,21 +13,6 @@ You can join the workspace and play around with the application exercises.
 ## Slides & application exercises
 
 ::: {.slide-deck}
-**Unit 1 - Deck 2: Meet the toolkit**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d02-meet-the-toolkit/u1_d02-meet-the-toolkit.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d02-meet-the-toolkit)
-
-::: {.application-exercise}
-[Bechdel + R Markdown](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown)
-:::
-
-::: {.reading}
--   [R4DS :: Chp 2 - Introduction](https://r4ds.had.co.nz/explore-intro.html)
--   [IMS :: Sec 1.1 & 1.2 - Case study & Data basics](https://openintro-ims.netlify.app/getting-started-with-data.html#basic-stents-strokes)
-:::
-:::
-
-::: {.slide-deck}
 **Unit 1 - Deck 3: Data and visualization**
 
 [[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d03-data-viz-1/u1_d03-data-viz-1.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d03-data-viz-1)
