@@ -1,32 +1,46 @@
+## Scrape the list of top 250 movies from https://www.imdb.com/chart/top
+
 # Load packages ---------------------------------------------------------------
+
 library(tidyverse)
 library(rvest)
 
-# Read html page --------------------------------------------------------------
-page <- read_html("http://www.imdb.com/chart/top")
+# Read html page ---------------------------------------------------------------
 
-# Titles ----------------------------------------------------------------------
+page <- read_html("https://www.imdb.com/chart/top")
+
+# Titles -----------------------------------------------------------------------
+
 titles <- page %>%
   html_nodes(".titleColumn a") %>%
   html_text()
 
-# Years -----------------------------------------------------------------------
+# Years-------------------------------------------------------------------------
+
 years <- page %>%
   html_nodes(".secondaryInfo") %>%
   html_text() %>%
-  str_remove("\\(") %>% # remove (
-  str_remove("\\)") %>% # remove )
+  str_remove("\\(") %>%
+  str_remove("\\)") %>%
   as.numeric()
 
-# Scores ----------------------------------------------------------------------
+# Scores -----------------------------------------------------------------------
+
 scores <- page %>%
-  html_nodes("#main strong") %>%
+  html_nodes("strong") %>%
   html_text() %>%
   as.numeric()
 
-# Create data frame -----------------------------------------------------------
+# Put it all in a data frame ---------------------------------------------------
+
 imdb_top_250 <- tibble(
-  title = titles, 
-  year = years, 
-  score = scores
+  title = titles,
+  rating = ratings,
+  year = years
 )
+
+# Add rank ---------------------------------------------------------------------
+
+imdb_top_250 <- imdb_top_250 %>%
+  mutate(rank = 1:nrow(imdb_top_250)) %>%
+  relocate(rank)
