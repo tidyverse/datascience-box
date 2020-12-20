@@ -125,12 +125,17 @@ The grading scheme for the project proposal is as follows.
 Note that after you receive feedback for your proposal you can improve it based on the feedback and re-submit it.
 If you re-submit, your final score for the proposal will be the average of two scores you receive (first and second submission).
 
-| Total                                | 10 pts |
-|--------------------------------------|--------|
-| Data                                 | 3 pts  |
-| Proposal                             | 5 pts  |
-| Workflow, organization, code quality | 1 pt   |
-| Teamwork                             | 1 pt   |
++-----------------------------------------------------------+----------+
+| Total                                                     | 10 pts   |
++===========================================================+==========+
+| Data                                                      | 3 pts    |
++-----------------------------------------------------------+----------+
+| Proposal                                                  | 5 pts    |
++-----------------------------------------------------------+----------+
+| Workflow, organization, code quality                      | 1 pt     |
++-----------------------------------------------------------+----------+
+| Teamwork                                                  | 1 pt     |
++-----------------------------------------------------------+----------+
 
 ### Presentation
 
@@ -152,15 +157,23 @@ The presentation line-up will be generated randomly.
 
 The grading scheme for the presentation is as follows:
 
-| Total                                                                                                                                                                                                          | 50 pts |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts  |
-| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts  |
-| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts  |
-| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts  |
-| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts |
-| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts |
-| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Total                                                                                                                                                                                                          | 50 pts    |
++================================================================================================================================================================================================================+===========+
+| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts     |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts     |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts     |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts     |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts    |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts    |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts    |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
 
 ### Executive summary
 
@@ -205,14 +218,21 @@ Style and format does count for this assignment, so please take the time to make
 
 ## Marking
 
-| Total                            | 100 pts |
-|----------------------------------|---------|
-| Proposal                         | 10 pts  |
-| Presentation                     | 50 pts  |
-| Executive summary                | 15 pts  |
-| Reproducibility and organization | 10 pts  |
-| Team peer evaluation             | 10 pts  |
-| Classmates' evaluation           | 5 pts   |
++----------------------------------------------------------+-----------+
+| Total                                                    | 100 pts   |
++==========================================================+===========+
+| Proposal                                                 | 10 pts    |
++----------------------------------------------------------+-----------+
+| Presentation                                             | 50 pts    |
++----------------------------------------------------------+-----------+
+| Executive summary                                        | 15 pts    |
++----------------------------------------------------------+-----------+
+| Reproducibility and organization                         | 10 pts    |
++----------------------------------------------------------+-----------+
+| Team peer evaluation                                     | 10 pts    |
++----------------------------------------------------------+-----------+
+| Classmates' evaluation                                   | 5 pts     |
++----------------------------------------------------------+-----------+
 
 ### Criteria
 
