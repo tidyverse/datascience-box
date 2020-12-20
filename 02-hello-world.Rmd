@@ -73,6 +73,14 @@ Please make sure to consider this before using this activity.
 :::
 :::
 
+::: {.application-exercise}
+**Bechdel + R Markdown**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/ae-02-bechdel-rmarkdown.Rmd)
+:::
+:::
+
 ::: {.slide-deck}
 **Unit 1 - Deck 3: Meet the toolkit - Version control**
 
