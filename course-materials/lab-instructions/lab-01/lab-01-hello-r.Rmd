@@ -18,7 +18,7 @@ The main goal of this lab is to introduce you to R and RStudio, which we will be
 git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
 ```
 
-An additional goal is to introduce you to git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
+An additional goal is to introduce you to Git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer.
 Before we get to that stage, however, you need to build some basic fluency in R.
@@ -26,7 +26,51 @@ Today we begin with the fundamental building blocks of R and RStudio: the interf
 
 And to make versioning simpler, this is a solo lab.
 Additionally, we want to make sure everyone gets a significant amount of time at the steering wheel.
-Next week you'll learn about collaborating on GitHub and produce a single lab report for your team.
+In future labs you'll learn about collaborating on GitHub and produce a single lab report for your team.
+
+## Connecting GitHub and RStudio Cloud
+
+You should have already received an invitation to join the GitHub organization for this course.
+You need to accept the invitation before moving on to the next step.
+
+To connect your RStudio and GitHub accounts by following the steps below:
+
+-   Click on your name on the top right corner to open the right menu.
+-   Then, click on Authentication.
+
+```{r github-auth-1, echo = FALSE}
+knitr::include_graphics("img/github-auth-1.png")
+```
+
+-   In the Authentication window, check the box for *Enabled*.
+
+```{r github-auth-2, echo = FALSE}
+knitr::include_graphics("img/github-auth-2.png")
+```
+
+-   In the next window, click on the green box that says "Authorize rstudio".
+
+```{r github-auth-3, echo = FALSE}
+knitr::include_graphics("img/github-auth-3.png")
+```
+
+-   Back in the Authentication window, check the box for *Private repo access also enabled*, and once again, on the green box that says "Authorize rstudio" in the next window. At this point you should also make sure that the course organization shows up for you under *Organization access*. If it does not, this means you have not yet accepted the GitHub invitation to join the course, and you should go back and do that.
+
+```{r github-auth-4, echo = FALSE}
+knitr::include_graphics("img/github-auth-4.png")
+```
+
+-   Once you're done, both of these boxes should be checked.
+
+```{r github-auth-5, echo = FALSE}
+knitr::include_graphics("img/github-auth-5.png")
+```
+
+-   To confirm that you've successfully linked up your GitHub and RStudio Cloud accounts, [GitHub settings \> Applications](https://github.com/settings/applications). You should see RStudio listed as an authorized app under *Authorized OAuth Apps*. If you don't this is a good time to ask a question.
+
+```{r github-auth-6, echo = FALSE}
+knitr::include_graphics("img/github-auth-6.png")
+```
 
 ## Getting started
 
@@ -34,14 +78,6 @@ Each of your assignments will begin with the following steps.
 You saw these once in class yesterday, they're outlined in detail here again.
 Going forward each lab will start with a "Getting started" section but details will be a bit more sparse than this.
 You can always refer back to this lab for a detailed list of the steps involved for getting started with an assignment.
-
-The following screencast also walks you through these steps:
-
-::: {style="position:relative;height:0;padding-bottom:40%"}
-<iframe width="600" height="320" src="https://www.youtube.com/embed/8Ta_SJq3MrU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-
-</iframe>
-:::
 
 -   Click on the assignment link that you should have received in your email to create your GitHub repository (which we'll refer to as "repo" going forward) for the assignment. This repo contains a template you can build on to complete your assignment.
 
@@ -65,70 +101,9 @@ knitr::include_graphics("img/paste-gh-repo-url.png")
 
 -   Hit OK, and you're good to go!
 
-### Packages
-
-In this lab we will work with two packages: `datasauRus` which contains the dataset, and `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way.
-
-Install these packages by running the following in the console.
-
-```{r eval = FALSE}
-install.packages("tidyverse")
-install.packages("datasauRus")
-```
-
-Now that the necessary packages are installed, you should be able to Knit your document and see the results.
-
-If you'd like to run your code in the Console as well you'll also need to load the packages there.
-To do so, run the following in the console.
-
-```{r message=FALSE}
-library(tidyverse) 
-library(datasauRus)
-```
-
-Note that the packages are also loaded with the same commands in your R Markdown document.
-
-### Housekeeping
-
-```{marginfigure}
-Your email address is the address tied to your GitHub account and your name should be first and last name.
-```
-
-Before we can get started we need to take care of some required housekeeping.
-Specifically, we need to configure your git so that RStudio can communicate with GitHub.
-This requires two pieces of information: your email address and your name.
-
-To do so, run the following:
-
-```{r eval=FALSE}
-usethis::use_git_config(user.name = "your name", user.email = "your email")
-```
-
-For example, for me this looks like:
-
-```{r eval=FALSE}
-usethis::use_git_config(user.name = "Mine Cetinkaya-Rundel", user.email = "cetinkaya.mine@gmail.com")
-```
-
 ## Warm up
 
 Before we introduce the data, let's warm up with some simple exercises.
-The following video is an overview of some of these warm-up exercises.
-
-::: {style="position:relative;height:0;padding-bottom:40%"}
-<iframe width="600" height="320" src="https://www.youtube.com/embed/XE8h8jIyu04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-
-</iframe>
-:::
-
-### Project name
-
-Currently your project is called *Untitled Project*.
-Update the name of your project to be "Lab 01 - Hello R".
-
-```{r untitled-project, fig.fullwidth=TRUE, echo = FALSE}
-knitr::include_graphics("img/untitled-project.png")
-```
 
 ```{marginfigure}
 The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
@@ -174,10 +149,22 @@ This might feel cumbersome.
 Bear with me... We *will* teach you how to save your password so you don't have to enter it every time.
 But for this one assignment you'll have to manually enter each time you push in order to gain some experience with it.
 
-### Thought exercise
+## Packages
 
-For which of the above steps (changing project name, making updates to the document, committing, and pushing changes) do you need to have an internet connection?
-Discuss with your classmates.
+In this lab we will work with two packages: `datasauRus` which contains the dataset, and `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way.
+
+These packages are already installed for you.
+You should be able to Knit your document and see the results.
+
+If you'd like to run your code in the Console as well you'll also need to load the packages there.
+To do so, run the following in the console.
+
+```{r message=FALSE}
+library(tidyverse) 
+library(datasauRus)
+```
+
+Note that the packages are also loaded with the same commands in your R Markdown document.
 
 ## The data
 
@@ -195,7 +182,7 @@ This command must be ran in the Console.
 
 ## Exercises
 
-1.  Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report. When you're done, commit your changes with the commit message "Added answer for Ex 1", and push.
+1.  Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report.
 
 Let's take a look at what these datasets are.
 To do so we can make a *frequency table* of the dataset variable:
@@ -213,6 +200,8 @@ Matejka, Justin, and George Fitzmaurice. "Same stats, different graphs: Generati
 The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).
 The other Dozen were generated using simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice.
 In the paper, the authors simulate a variety of datasets that have the same summary statistics as the Datasaurus but have very different distributions.
+
+🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 2.  Plot `y` vs. `x` for the `dino` dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset.
 
@@ -268,21 +257,21 @@ dino_data %>%
   summarize(r = cor(x, y))
 ```
 
-*This is a good place to pause, commit changes with the commit message "Added answer for Ex 2", and push.*
+🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 3.  Plot `y` vs. `x` for the `star` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
 
-*This is another good place to pause, commit changes with the commit message "Added answer for Ex 3", and push.*
+🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 4.  Plot `y` vs. `x` for the `circle` dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between `x` and `y` for this dataset. How does this value compare to the `r` of `dino`?
 
-*You should pause again, commit changes with the commit message "Added answer for Ex 4", and push.*
+🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ```{marginfigure}
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-5. Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
+5.  Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
 
 ```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
@@ -340,4 +329,4 @@ Play around with these until you're happy with the look.
 Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
 ```
 
-*Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1! `r emo::ji("muscle")`", and push. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*

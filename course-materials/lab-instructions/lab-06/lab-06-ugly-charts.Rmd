@@ -25,126 +25,6 @@ The learning goals for this lab are:
 -   Data visualization best practices
 -   Reshaping data
 
-## Getting started
-
-Go to the course GitHub organization and locate your lab repo.
-Grab the URL of the repo, and clone it in RStudio.
-Refer to Lab 01 if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
-
-First, open the R Markdown document and Knit it.
-Make sure it compiles without errors.
-The output will be in the file markdown `.md` file with the same name.
-
-### Housekeeping
-
-```{marginfigure}
-Your email address is the address tied to your GitHub account and your name should be first and last name.
-```
-
-Before we can get started we need to take care of some required housekeeping.
-Specifically, we need to do some configuration so that RStudio can communicate with GitHub.
-This requires two pieces of information: your email address and your name.
-
-Run the following (but update it for your name and email!) in the Console to configure git:
-
-```{r git-config, eval=FALSE}
-library(usethis)
-use_git_config(user.name = "Your Name", 
-               user.email = "your.email@address.com")
-```
-
-### Workflow
-
-This is the second week you're working in teams, so we're going to make things a little more interesting and let all of you make changes and push those changes to your team repository.
-Sometimes things will go swimmingly, and sometimes you'll run into merge conflicts.
-So our first task today is to walk you through a merge conflict!
-
-## Merges and merge conflicts
-
--   Pushing to a repo replaces the code on GitHub with the code you have on your computer.
--   If a collaborator has made a change to your repo on GitHub that you haven't incorporated into your local work, GitHub will stop you from pushing to the repo because this could overwrite your collaborator's work!
--   So you need to explicitly "merge" your collaborator's work before you can push.
--   If your and your collaborator's changes are in different files or in different parts of the same file, git merges the work for you automatically when you *pull*.
--   If you both changed the same part of a file, git will produce a **merge conflict** because it doesn't know how which change you want to keep and which change you want to overwrite.
-
-Git will put conflict markers in your code that look like:
-
-    <<<<<<< HEAD 
-    See also: [dplyr documentation](https://dplyr.tidyverse.org/)   
-    ======= 
-    See also [ggplot2 documentation](https://ggplot2.tidyverse.org/)  
-    >>>>>>> some1alpha2numeric3string4
-
-The `===`s separate *your* changes (top) from *their* changes (bottom).
-Note that on top you see the word `HEAD`, which indicates that these are your changes.
-And at the bottom you see `some1alpha2numeric3string4` (well, it probably looks more like `28e7b2ceb39972085a0860892062810fb812a08f`).
-This is the *hash* (a unique identifier) of the commit your collaborator made with the conflicting change.
-
-Your job is to *reconcile* the changes: edit the file so that it incorporates the best of both versions and delete the `<<<`, `===`, and `>>>` lines.
-Then Stage and Commit the result.
-
-### Setup
-
--   Clone the repo and open the .Rmd file.
--   Assign the numbers 1, 2, 3, and 4 to each of the team members. If your team has fewer than 4 people, some people will need to have multiple numbers. If your team has more than 4 people, some people will need to share some numbers.
-
-### Let's cause a merge conflict!
-
-Our goal is to see two different types of merges: first we'll see a type of merge that git can't figure out on its own how to do on its own (a **merge conflict**) and requires human intervention, then another type of where that git can figure out how to do without human intervention.
-
-Doing this will require some tight choreography, so pay attention!
-
-Take turns in completing the exercise, only one member at a time.
-**Others should just watch, not doing anything on their own projects (this includes not even pulling changes!)** until they are instructed to.
-If you feel like you won't be able to resist the urge to touch your computer when it's not your turn, we recommend putting your hands in your pockets or sitting on them!
-
-**Before starting**: everyone should have the repo cloned and know which role number(s) they are.
-
-**Role 1:**
-
--   Change the team name to your actual team name.
--   Knit, commit, push.
-
-🛑 Wait for instructions before moving on to the next step.
-
-**Role 2:**
-
--   Change the team name to some other word.
--   Knit, commit, push. You should get an error.
--   Pull. Take a look at the document with the merge conflict.
--   Clear the merge conflict by editing the document to choose the correct/preferred change.
--   Knit.
--   **Click the Stage checkbox** for all files in your Git tab. Make sure they all have check marks, not filled-in boxes.
--   Commit and push.
-
-🛑 Wait for instructions before moving on to the next step.
-
-**Role 3:**
-
--   Add a label to the first code chunk
--   Knit, commit, push. You should get an error.
--   Pull. No merge conflicts should occur, but you should see a message about merging.
--   Now push.
-
-🛑 Wait for instructions before moving on to the next step.
-
-**Role 4:**
-
--   Add a different label to the first code chunk.
--   Knit, commit, push. You should get an error.
--   Pull. Take a look at the document with the merge conflict. Clear the merge conflict by choosing the correct/preferred change. Commit, and push.
-
-🛑 Wait for instructions before moving on to the next step.
-
-**Everyone:** Pull, and observe the changes in your document.
-
-### Tips for collaborating via GitHub
-
--   Always pull first before you start working.
--   Resolve a merge conflict (commit and push) *before* continuing your work. Never do new work while resolving a merge conflict.
--   Knit, commit, and push often to minimize merge conflicts and/or to make merge conflicts easier to resolve.
--   If you find yourself in a situation that is difficult to resolve, ask questions ASAP. Don't let it linger and get bigger.
-
 ## Packages
 
 Run the following code in the Console to load this package.
@@ -238,7 +118,7 @@ staff_long %>%
     What changes would you propose making to this plot to tell this story.
     (You don't need to implement these changes now, you will get to do that as part of this week's homework. But work as a team to come up with ideas and list them as bullet points. The more precise you are, the easier your homework will be.)
 
-`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ### Fisheries
 
@@ -259,14 +139,14 @@ knitr::include_graphics("img/fisheries.png")
 fisheries <- read_csv("data/fisheries.csv")
 ```
 
-`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ## Wrapping up
 
 Go back through your write up to make sure you're following coding style guidelines we discussed in class.
 Make any edits as needed.
 
-Also, make sure all of your R chunks are properly labeled, and your figures are reasonably sized.
+Also, make sure all of your R chunks are properly labelled, and your figures are reasonably sized.
 
 Once the team leader for the week pushes their final changes, others should *pull* the changes and knit the R Markdown document to confirm that they can reproduce the report.
 

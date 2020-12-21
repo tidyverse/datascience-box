@@ -1,5 +1,5 @@
 ---
-title: "Lab 04 - La Quinta is Spanish for 'next to Denny's', Pt. 1"
+title: "Lab 04 - La Quinta is Spanish for next to Denny's, Pt. 1"
 subtitle: "Visualizing spatial data"
 output: 
   tufte::tufte_html:
@@ -10,18 +10,11 @@ link-citations: yes
 ---
 
 ```{r include=FALSE}
-library(tufte)
-library(knitr)
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  digits = 2
-  )
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
 ```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
-include_graphics("img/mitch-hedgeberg-lqd.jpg")
+knitr::include_graphics("img/mitch-hedgeberg-lqd.jpg")
 ```
 
 Have you ever taken a road trip in the US and thought to yourself "I wonder what La Quinta means".
@@ -39,9 +32,7 @@ In this lab we focus on visualization and analysis of these data.
 However note that the data scraping was also done in R, and we we will discuss web scraping using R later in the course.
 But for now we focus on the data that has already been scraped and tidied for you.
 
-## Getting started
-
-### Packages
+## Packages
 
 In this lab we will use the **tidyverse** and **dsbox** packages.
 
@@ -49,34 +40,6 @@ In this lab we will use the **tidyverse** and **dsbox** packages.
 library(tidyverse) 
 library(dsbox) 
 ```
-
-## Housekeeping
-
-### Project name
-
-Currently your project is called *Untitled Project*.
-Update the name of your project to be "Lab 03 - Visualizing spatial data".
-
-### Warm up
-
-**Pick one team member to complete the steps in this section while the others contribute to the discussion but do not actually touch the files on their computer.**
-
-Before we introduce the data, let's warm up with some simple exercises.
-
-### YAML
-
-Open the R Markdown (Rmd) file in your project, change the author name to your **team** name, and knit the document.
-
-### Commiting and pushing changes
-
--   Go to the **Git** pane in your RStudio.
--   View the **Diff** and confirm that you are happy with the changes.
--   Add a commit message like "Update team name" in the **Commit message** box and hit **Commit**.
--   Click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your password.
-
-### Pulling changes
-
-Now, the remaining team members who have not been concurrently making these changes on their projects should click on the **Pull** button in their Git pane and observe that the changes are now reflected on their projects as well.
 
 ## The data
 
@@ -101,6 +64,8 @@ Along with the name of the state we have the two-letter abbreviation and we have
 2.  What are the dimensions of the La Quinta's dataset?
     What does each row in the dataset represent?
     What are the variables?
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 We would like to limit our analysis to Denny's and La Quinta locations in the United States.
 
@@ -158,7 +123,9 @@ lq %>%
   ))
 ```
 
-`r newthought('Going forward')` we will work with the data from the United States only.
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+Going forward we will work with the data from the United States only.
 All Denny's locations are in the United States, so we don't need to worry about them.
 However we do need to filter the La Quinta dataset for locations in United States.
 
@@ -227,3 +194,5 @@ You can also choose different themes to change the overall look of your plots, s
 
 That's it for now!
 In the next lab we will take a more quantitative approach to answering these questions.
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
