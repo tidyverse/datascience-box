@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Functions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Functions
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# First Minister's COVID speeches
+
+---
+
+## 🏁 Start with
+
+&lt;img src="img/fm-speeches.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## End with 🛑
+
+
+```
+## # A tibble: 141 x 6
+##    title      date       location   abstract      text  url      
+##    &lt;chr&gt;      &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;         &lt;lis&gt; &lt;chr&gt;    
+##  1 Coronavir… 2020-10-26 St Andrew… Statement gi… &lt;chr… https://…
+##  2 Coronavir… 2020-10-23 St Andrew… Statement gi… &lt;chr… https://…
+##  3 Coronavir… 2020-10-22 St Andrew… Statement gi… &lt;chr… https://…
+##  4 Coronavir… 2020-10-21 St Andrew… Statement gi… &lt;chr… https://…
+##  5 Coronavir… 2020-10-20 St Andrew… Statement gi… &lt;chr… https://…
+##  6 Coronavir… 2020-10-19 St Andrew… Statement gi… &lt;chr… https://…
+##  7 Coronavir… 2020-10-16 St Andrew… Statement gi… &lt;chr… https://…
+##  8 Coronavir… 2020-10-15 Scottish … Statement gi… &lt;chr… https://…
+##  9 Coronavir… 2020-10-14 St Andrew… Statement gi… &lt;chr… https://…
+## 10 Coronavir… 2020-10-13 St Andrew… Statement gi… &lt;chr… https://…
+## 11 Coronavir… 2020-10-12 St Andrew… Statement gi… &lt;chr… https://…
+## 12 Coronavir… 2020-10-09 St Andrew… Statement gi… &lt;chr… https://…
+## 13 Coronavir… 2020-10-07 Scottish … Statement gi… &lt;chr… https://…
+## 14 Coronavir… 2020-10-06 St Andrew… Statement gi… &lt;chr… https://…
+## 15 Coronavir… 2020-10-05 St Andrew… Statement gi… &lt;chr… https://…
+## # … with 126 more rows
+```
+
+
+---
+
+#### .center[
+[www.gov.scot/collections/first-ministers-speeches](https://www.gov.scot/collections/first-ministers-speeches/)
+]
+
+&lt;img src="img/fm-speeches-annotated.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/fm-speech-oct-26-annotated.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Plan
+
+1. Scrape `title`, `date`, `location`, `abstract`, and `text` from a few COVID-19 speech pages to develop the code
+
+2. Write a function that scrapes `title`, `date`, `location`, `abstract`, and `text` from COVID-19 speech pages
+
+3. Scrape the `url`s of COVID-19 speeches from the main page
+
+4. Use this function to scrape from each individual COVID-19 speech from these `url`s and create a data frame with the columns `title`, `date`, `location`, `abstract`, `text`, and `url`
+
+---
+
+class: middle
+
+# Scrape data from a few COVID-19 speech pages
+
+---
+
+## Read page for 26 Oct speech
+
+
+```r
+url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+speech_page &lt;- read_html(url)
+```
+
+
+
+.pull-left[
+
+```r
+speech_page
+```
+
+```
+## {html_document}
+## &lt;html dir="ltr" lang="en"&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html ...
+## [2] &lt;body class="fontawesome site-header__container"&gt;\n\n\n\n\ ...
+```
+]
+.pull-right[
+&lt;img src="img/fm-speech-oct-26.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Extract title
+
+.pull-left-wide[
+&lt;br&gt;&lt;br&gt;
+
+```r
+title &lt;- speech_page %&gt;%
+    html_node(".article-header__title") %&gt;%
+    html_text()
+
+title
+```
+
+```
+## [1] "Coronavirus (COVID-19) update: First Minister's speech 26 October"
+```
+]
+.pull-right-narrow[
+&lt;img src="img/title.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Extract date
+
+.pull-left-wide[
+
+```r
+library(lubridate)
+
+speech_page %&gt;%
+    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_text() 
+```
+
+```
+## [1] "26 Oct 2020"
+```
+
+```r
+date &lt;- speech_page %&gt;%
+    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_text() %&gt;%
+    dmy()
+date
+```
+
+```
+## [1] "2020-10-26"
+```
+]
+.pull-right-narrow[
+&lt;img src="img/date.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Extract location
+
+.pull-left-wide[
+
+```r
+location &lt;- speech_page %&gt;%
+    html_node(".content-data__list+ .content-data__list strong") %&gt;%
+    html_text()
+
+location
+```
+
+```
+## [1] "St Andrew's House, Edinburgh"
+```
+]
+.pull-right-narrow[
+&lt;img src="img/location.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Extract abstract
+
+.pull-left-wide[
+
+```r
+abstract &lt;- speech_page %&gt;%
+    html_node(".leader--first-para p") %&gt;%
+    html_text()
+
+abstract
+```
+
+```
+## [1] "Statement given by First Minister Nicola Sturgeon at a media briefing in St Andrew's House on Monday 26 October 2020."
+```
+]
+.pull-right-narrow[
+&lt;img src="img/abstract.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Extract text
+
+.pull-left-wide[
+
+```r
+text &lt;- speech_page %&gt;% 
+    html_nodes("#preamble p") %&gt;%
+    html_text() %&gt;%
+    list()
+
+text
+```
+
+```
+## [[1]]
+##  [1] "\nGood afternoon, and thanks for joining us. I want to start with the usual daily report on the COVID statistics."                                                                                                                                                                                                                                                                                                                  
+##  [2] "The total number of positive cases reported yesterday was 1,122."                                                                                                                                                                                                                                                                                                                                                                   
+##  [3] "This represents 7.1% of the total number of tests carried out. 428 of the new cases were in Greater Glasgow and Clyde, 274 in Lanarkshire, 105 in Lothian and 97 in Ayrshire and Arran. "                                                                                                                                                                                                                                           
+##  [4] "The remaining cases were spread across the mainland health board regions. "                                                                                                                                                                                                                                                                                                                                                         
+##  [5] "The total number of confirmed cases is now 57,874."                                                                                                                                                                                                                                                                                                                                                                                 
+##  [6] "I can also confirm that 1,152 people are in hospital – that is an increase of 36 from yesterday"                                                                                                                                                                                                                                                                                                                                    
+##  [7] "90 people are in intensive care, which is four more than yesterday."                                                                                                                                                                                                                                                                                                                                                                
+##  [8] "And I regret to say that in the last 24 hours, one further death has been registered of a patient who first tested positive over the previous 28 days.  It is important though to remember that registration offices tend not to be open as normal over the weekend so the Sunday and Monday figures are often lower."                                                                                                              
+##  [9] "We also reported 11 deaths on Saturday, and one yesterday.  So since the last briefing on Friday, 13 additional deaths have been registered. That takes the total number of deaths, under this measurement, to 2,701."                                                                                                                                                                                                              
+## [10] "That reminds us again of how dangerous this virus can be and I want to send my condolences to everyone who has lost someone."                                                                                                                                                                                                                                                                                                       
+...
+```
+]
+.pull-right-narrow[
+&lt;img src="img/text.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Put it all in a data frame
+
+.pull-left[
+
+```r
+oct_26_speech &lt;- tibble(
+  title    = title,
+  date     = date,
+  location = location,
+  abstract = abstract,
+  text     = text,
+  url      = url
+)
+
+oct_26_speech
+```
+
+```
+## # A tibble: 1 x 6
+##   title       date       location   abstract     text  url       
+##   &lt;chr&gt;       &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;lis&gt; &lt;chr&gt;     
+## 1 Coronaviru… 2020-10-26 St Andrew… Statement g… &lt;chr… https://w…
+```
+]
+.pull-right[
+&lt;img src="img/fm-speech-oct-26.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Read page for 23 Oct speech
+
+
+```r
+url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page &lt;- read_html(url)
+```
+
+
+
+
+```r
+speech_page
+```
+
+```
+## {html_document}
+## &lt;html dir="ltr" lang="en"&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html ...
+## [2] &lt;body class="fontawesome site-header__container"&gt;\n\n\n\n\ ...
+```
+
+---
+
+## Extract components of 23 Oct speech
+
+
+```r
+title &lt;- speech_page %&gt;%
+  html_node(".article-header__title") %&gt;%
+  html_text()
+
+date &lt;- speech_page %&gt;%
+  html_node(".content-data__list:nth-child(1) strong") %&gt;%
+  html_text() %&gt;%
+  dmy()
+
+location &lt;- speech_page %&gt;%
+  html_node(".content-data__list+ .content-data__list strong") %&gt;%
+  html_text()
+
+abstract &lt;- speech_page %&gt;%
+  html_node(".leader--first-para p") %&gt;%
+  html_text()
+
+text &lt;- speech_page %&gt;%
+  html_nodes("#preamble p") %&gt;%
+  html_text() %&gt;%
+  list()
+```
+
+---
+
+## Put it all in a data frame
+
+.pull-left[
+
+```r
+oct_23_speech &lt;- tibble(
+  title    = title,
+  date     = date,
+  location = location,
+  abstract = abstract,
+  text     = text,
+  url      = url
+)
+
+oct_23_speech
+```
+
+```
+## # A tibble: 1 x 6
+##   title       date       location   abstract     text  url       
+##   &lt;chr&gt;       &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;lis&gt; &lt;chr&gt;     
+## 1 Coronaviru… 2020-10-23 St Andrew… Statement g… &lt;chr… https://w…
+```
+]
+.pull-right[
+&lt;img src="img/fm-speech-oct-23.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+.larger[
+.light-blue[
+.hand[
+this is getting tiring...
+]
+]
+]
+
+---
+
+class: middle
+
+# Functions
+
+---
+
+## When should you write a function?
+
+--
+.pull-left[
+&lt;img src="img/funct-all-things.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+--
+.pull-right[
+When you’ve copied and pasted a block of code more than twice.
+]
+
+---
+
+.question[
+How many times will we need to copy and paste the code we developed to scrape data on all of First Minister's COVID-19 speeches?
+]
+
+&lt;img src="img/search-result.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Why functions?
+
+- Automate common tasks in a more powerful and general way than copy-and-pasting:
+  - Give your function an evocative name that makes your code easier to understand
+  - As requirements change, only need to update code in one place, instead of many
+  - Eliminate chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another)
+
+--
+
+- Down the line: Improve your reach as a data scientist by writing functions (and packages!) that others use
+
+---
+
+.question[
+Assuming that the page structure is the same for each speech page, how many "things" do you need to know for each speech page to scrape the data we want from it? 
+]
+
+.pull-left-wide[
+.xsmall[
+
+```r
+url_23_oct &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page &lt;- read_html(url_23_oct)
+
+title &lt;- speech_page %&gt;%
+  html_node(".article-header__title") %&gt;%
+  html_text()
+
+date &lt;- speech_page %&gt;%
+  html_node(".content-data__list:nth-child(1) strong") %&gt;%
+  html_text() %&gt;%
+  dmy()
+
+location &lt;- speech_page %&gt;%
+  html_node(".content-data__list+ .content-data__list strong") %&gt;%
+  html_text()
+
+abstract &lt;- speech_page %&gt;%
+  html_node(".leader--first-para p") %&gt;%
+  html_text()
+
+text &lt;- speech_page %&gt;%
+  html_nodes("#preamble p") %&gt;%
+  html_text() %&gt;%
+  list()
+
+tibble(
+  title = title, date = date, location = location,
+  abstract = abstract, text = text, url= url
+)
+```
+]
+]
+
+---
+
+## Turn your code into a function
+
+- Pick a short but informative **name**, preferably a verb.
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+```r
+scrape_speech &lt;- 
+```
+
+---
+
+## Turn your code into a function
+
+- Pick a short but evocative **name**, preferably a verb.
+- List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+
+&lt;br&gt;
+
+
+```r
+scrape_speech &lt;- function(x){
+  
+  
+  
+  
+  
+}  
+```
+
+---
+
+## Turn your code into a function
+
+- Pick a short but informative **name**, preferably a verb.
+- List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+- Place the **code** you have developed in body of the function, a `{` block that immediately follows `function(...)`.
+
+
+```r
+scrape_speech &lt;- function(url){
+
+  # code we developed earlier to scrape info 
+  # on single art piece goes here
+  
+}
+```
+
+---
+
+## `scrape_speech()`
+
+.pull-left-wide[
+.small[
+
+```r
+scrape_speech &lt;- function(url) {
+  
+  speech_page &lt;- read_html(url)
+
+  title &lt;- speech_page %&gt;%
+    html_node(".article-header__title") %&gt;%
+    html_text()
+
+  date &lt;- speech_page %&gt;%
+    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_text() %&gt;%
+    dmy()
+
+  location &lt;- speech_page %&gt;%
+    html_node(".content-data__list+ .content-data__list strong") %&gt;%
+    html_text()
+
+  abstract &lt;- speech_page %&gt;%
+    html_node(".leader--first-para p") %&gt;%
+    html_text()
+
+  text &lt;- speech_page %&gt;%
+    html_nodes("#preamble p") %&gt;%
+    html_text() %&gt;%
+    list()
+
+  tibble(
+    title = title, date = date, location = location,
+    abstract = abstract, text = text, url = url
+  )
+}
+```
+]
+]
+
+---
+
+## Function in action
+
+
+```r
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/") %&gt;%
+  glimpse()
+```
+
+```
+## Rows: 1
+## Columns: 6
+## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Ministe…
+## $ date     &lt;date&gt; 2020-10-26
+## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu…
+## $ text     &lt;list&gt; [&lt;"\nGood afternoon, and thanks for joining …
+## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronaviru…
+```
+
+---
+
+## Function in action
+
+
+```r
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/") %&gt;%
+  glimpse()
+```
+
+```
+## Rows: 1
+## Columns: 6
+## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Ministe…
+## $ date     &lt;date&gt; 2020-10-23
+## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu…
+## $ text     &lt;list&gt; [&lt;"\nGood afternoon everyone. Thank you very…
+## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronaviru…
+```
+
+---
+
+## Function in action
+
+
+```r
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-22-october/") %&gt;%
+  glimpse()
+```
+
+```
+## Rows: 1
+## Columns: 6
+## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Ministe…
+## $ date     &lt;date&gt; 2020-10-22
+## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu…
+## $ text     &lt;list&gt; [&lt;"\nGood afternoon, let me start as usual w…
+## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronaviru…
+```
+
+---
+
+class: middle
+
+# Writing functions
+
+---
+
+## What goes in / what comes out?
+
+.pull-left-wide[
+- They take input(s) defined in the function definition
+
+
+```r
+function([inputs separated by commas]){
+  # what to do with those inputs
+}
+```
+
+- By default they return the last value computed in the function
+
+
+```r
+scrape_page &lt;- function(x){
+  # do bunch of stuff with the input...
+  
+  # return a tibble
+  tibble(...)
+}
+```
+
+- You can define more outputs to be returned in a list as well as nice print methods (but we won't go there for now...)
+]
+
+---
+
+.question[
+What is going on here?
+]
+
+
+```r
+add_2 &lt;- function(x){
+  x + 2
+  1000
+}
+```
+
+
+```r
+add_2(3)
+```
+
+```
+## [1] 1000
+```
+
+```r
+add_2(10)
+```
+
+```
+## [1] 1000
+```
+
+---
+
+## Naming functions
+
+&gt; "There are only two hard things in Computer Science: cache invalidation and naming things." - Phil Karlton
+
+---
+
+## Naming functions
+
+- Names should be short but clearly evoke what the function does
+
+--
+- Names should be verbs, not nouns
+
+--
+- Multi-word names should be separated by underscores (`snake_case` as opposed to `camelCase`)
+
+--
+- A family of functions should be named similarly (`scrape_page()`, `scrape_speech()` OR `str_remove()`, `str_replace()` etc.)
+
+--
+- Avoid overwriting existing (especially widely used) functions
+
+
+```r
+# JUST DON'T
+mean &lt;- function(x){ 
+  x * 3 
+  }
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

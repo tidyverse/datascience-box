@@ -1,0 +1,431 @@
+---
+title: "Simpson's paradox"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(kableExtra)
+library(dsbox)
+```
+
+class: middle
+
+# Case study: Berkeley admission data
+
+---
+
+## Berkeley admission data
+
+- Study carried out by the Graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a gender bias in graduate admissions.
+- The data come from six departments. For confidentiality we'll call them A-F. 
+- We have information on whether the applicant was male or female and whether they were admitted or rejected. 
+- First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
+
+---
+
+## Data
+
+.pull-left[
+```{r message=FALSE, echo=FALSE}
+ucbadmit %>%
+  print(n = 15)
+```
+]
+.pull-right[
+```{r message=FALSE, echo=FALSE}
+ucbadmit %>%
+  count(gender)
+
+ucbadmit %>%
+  count(dept)
+
+ucbadmit %>%
+  count(admit)
+```
+]
+
+---
+
+.question[
+What can you say about the overall gender distribution? Hint: Calculate the following probabilities: $P(Admit | Male)$ and $P(Admit | Female)$.
+]
+
+```{r}
+ucbadmit %>%
+  count(gender, admit)
+```
+
+---
+
+```{r ucbadmit-overall-prop}
+ucbadmit %>%
+  count(gender, admit) %>%
+  group_by(gender) %>%
+  mutate(prop_admit = n / sum(n))
+```
+
+- $P(Admit | Female)$ = 0.304
+- $P(Admit | Male)$ = 0.445
+
+---
+
+## Overall gender distribution
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label="gender-admit", echo = FALSE}
+```
+]
+
+.panel[.panel-name[Code]
+```{r gender-admit, fig.show = "hide"}
+ggplot(ucbadmit, aes(y = gender, fill = admit)) +
+  geom_bar(position = "fill") + 
+  labs(title = "Admit by gender",
+       y = NULL, x = NULL)
+```
+]
+
+]
+
+---
+
+.question[
+What can you say about the gender distribution by department ?
+]
+
+```{r}
+ucbadmit %>%
+  count(dept, gender, admit)
+```
+
+---
+
+.question[
+Let's try again... What can you say about the gender distribution by department?
+]
+
+```{r}
+ucbadmit %>%
+  count(dept, gender, admit) %>%
+  pivot_wider(names_from = dept, values_from = n)
+```
+
+---
+
+## Gender distribution, by department
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label="gender-dept-admit", echo = FALSE}
+```
+]
+
+.panel[.panel-name[Code]
+```{r gender-dept-admit, fig.show = "hide"}
+ggplot(ucbadmit, aes(y = gender, fill = admit)) +
+  geom_bar(position = "fill") +
+  facet_wrap(. ~ dept) +
+  scale_x_continuous(labels = label_percent()) +
+  labs(title = "Admissions by gender and department",
+       x = NULL, y = NULL, fill = NULL) +
+  theme(legend.position = "bottom")
+```
+]
+
+]
+
+---
+
+## Case for gender discrimination?
+
+.pull-left[
+```{r ref.label="gender-admit", echo=FALSE, out.width="100%"}
+```
+]
+.pull-right[
+```{r ref.label="gender-dept-admit", echo=FALSE, out.width="100%"}
+```
+]
+
+---
+
+## Closer look at departments
+
+.panelset[
+
+.panel[.panel-name[Output]
+```{r ref.label="gender-dept-admit-table", echo = FALSE}
+```
+]
+
+.panel[.panel-name[Code]
+```{r gender-dept-admit-table, eval = FALSE}
+ucbadmit %>%
+  count(dept, gender, admit) %>%
+  group_by(dept, gender) %>%
+  mutate(
+    n_applied  = sum(n),
+    prop_admit = n / n_applied
+    ) %>%
+  filter(admit == "Admitted") %>%
+  rename(n_admitted = n) %>%
+  select(-admit) %>%
+  print(n = 12)
+```
+]
+
+]
+
+---
+
+class: middle
+
+# Simpson's paradox
+
+---
+
+## Relationship between two variables
+
+.pull-left[
+```{r echo=FALSE, message=FALSE}
+df <- tribble(
+  ~x, ~y, ~z,
+  2,   4,  "A",
+  3,   3,  "A",
+  4,   2,  "A",
+  5,   1,  "A",
+  6,   11, "B",
+  7,   10, "B",
+  8,   9,  "B",
+  9,   8,  "B"
+)
+df
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+ggplot(df) +
+  geom_point(aes(x = x, y = y), color = "darkgray", size = 5) +
+  theme_minimal()
+```
+]
+
+---
+
+## Relationship between two variables
+
+.pull-left[
+```{r echo=FALSE, message=FALSE}
+df
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y), color = "darkgray", size = 5) +
+  geom_smooth(aes(x = x, y = x), color = "darkgray") +
+  theme_minimal()
+```
+]
+
+---
+
+## Considering a third variable
+
+.pull-left[
+```{r echo=FALSE, message=FALSE}
+df
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y, color = z), size = 5) +
+  geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
+  theme_minimal()
+```
+]
+
+---
+
+## Relationship between three variables
+
+.pull-left[
+```{r echo=FALSE, message=FALSE}
+df
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y, color = z), size = 5) +
+  geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
+  geom_smooth(aes(x = x, y = y, color = z), method = "lm") +
+  theme_minimal()
+```
+]
+
+---
+
+## Simpson's paradox
+
+- Not considering an important variable when studying a relationship can result in **Simpson's paradox**
+- Simpson's paradox illustrates the effect that omission of an explanatory variable can have on the measure of association between another explanatory variable and a response variable
+- The inclusion of a third variable in the analysis can change the apparent relationship between the other two variables
+
+---
+
+class: middle
+
+# Aside: `group_by()` and `count()`
+
+---
+
+## What does group_by() do?
+
+`group_by()` takes an existing data frame and converts it into a grouped data frame where subsequent operations are performed "once per group"
+
+.pull-left[
+```{r}
+ucbadmit
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>% 
+  group_by(gender)
+```
+]
+
+---
+
+## What does group_by() not do?
+
+`group_by()` does not sort the data, `arrange()` does
+
+.pull-left[
+```{r}
+ucbadmit %>% 
+  group_by(gender)
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>% 
+  arrange(gender)
+```
+]
+
+---
+
+## What does group_by() not do?
+
+`group_by()` does not create frequency tables, `count()` does
+
+.pull-left[
+```{r}
+ucbadmit %>% 
+  group_by(gender)
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>% 
+  count(gender)
+```
+]
+
+---
+
+## Undo grouping with ungroup()
+
+.pull-left[
+```{r}
+ucbadmit %>%
+  count(gender, admit) %>%
+  group_by(gender) %>%
+  mutate(prop_admit = n / sum(n)) %>%
+  select(gender, prop_admit)
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>%
+  count(gender, admit) %>%
+  group_by(gender) %>%
+  mutate(prop_admit = n / sum(n)) %>%
+  select(gender, prop_admit) %>%
+  ungroup()
+```
+]
+
+---
+
+## count() is a short-hand
+
+`count()` is a short-hand for `group_by()` and then `summarise()` to count the number of observations in each group
+
+.pull-left[
+```{r}
+ucbadmit %>%
+  group_by(gender) %>%
+  summarise(n = n()) 
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>%
+  count(gender)
+```
+]
+
+---
+
+## count can take multiple arguments
+
+.pull-left[
+```{r}
+ucbadmit %>%
+  group_by(gender, admit) %>%
+  summarise(n = n()) 
+```
+]
+.pull-right[
+```{r}
+ucbadmit %>%
+  count(gender, admit)
+```
+]
+
+---
+
+## `summarise()` after `group_by()`
+
+- `count()` ungroups after itself
+- `summarise()` peels off one layer of grouping by default, or you can specify a different behaviour
+
+
+```{r message=TRUE}
+ucbadmit %>%
+  group_by(gender, admit) %>%
+  summarise(n = n()) 
+```

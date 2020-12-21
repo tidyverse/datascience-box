@@ -1,0 +1,302 @@
+---
+title: "Iteration"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+library(lubridate)
+```
+
+class: middle
+
+# First Minister's COVID speeches
+
+---
+
+## 🏁 Start with
+
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/fm-speeches.png")
+```
+
+---
+
+## End with 🛑
+
+```{r echo=FALSE}
+covid_speeches <- read_rds("data/covid-speeches-scot.rds") %>%
+  print(n = 15)
+```
+
+
+---
+
+## Define `scrape_speech()`
+
+.pull-left-wide[
+.small[
+```{r}
+scrape_speech <- function(url) {
+  
+  speech_page <- read_html(url)
+
+  title <- speech_page %>%
+    html_node(".article-header__title") %>%
+    html_text()
+
+  date <- speech_page %>%
+    html_node(".content-data__list:nth-child(1) strong") %>%
+    html_text() %>%
+    dmy()
+
+  location <- speech_page %>%
+    html_node(".content-data__list+ .content-data__list strong") %>%
+    html_text()
+
+  abstract <- speech_page %>%
+    html_node(".leader--first-para p") %>%
+    html_text()
+
+  text <- speech_page %>%
+    html_nodes("#preamble p") %>%
+    html_text() %>%
+    list()
+
+  tibble(
+    title = title, date = date, location = location,
+    abstract = abstract, text = text, url = url
+  )
+}
+```
+]
+]
+
+---
+
+## Use `scrape_speech()`
+
+```{r}
+url_26_oct <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+scrape_speech(url = url_26_oct)
+
+url_23_oct <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+scrape_speech(url = url_23_oct)
+```
+
+---
+
+class: middle
+
+# Inputs
+
+---
+
+## Inputs
+
+.question[
+You now have a function that will scrape the relevant info on speeches given the URL of the page of the speech. Where can we get a list of URLs of each of the speeches?
+]
+
+```{r echo=FALSE}
+knitr::include_graphics("img/fm-speeches-links.png")
+```
+
+
+---
+
+## All URLs
+
+```{r output.lines=10}
+all_speeches_page <- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
+
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href")
+```
+
+---
+
+## COVID-19 URLs *fragments*
+
+```{r output.lines=10}
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19")
+```
+
+---
+
+## COVID-19 URLs
+
+```{r output.lines=10}
+all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19") %>%
+  str_c("https://www.gov.scot", .)
+```
+
+---
+
+## Save COVID-19 URLs
+
+```{r output.lines=10}
+covid_speech_urls <- all_speeches_page %>%
+  html_nodes(".collections-list a") %>%
+  html_attr("href") %>%
+  str_subset("covid-19") %>%
+  str_c("https://www.gov.scot", .)
+
+covid_speech_urls
+```
+
+---
+
+class: middle
+
+# Iteration
+
+---
+
+## Define the task
+
+- Goal: Scrape info on all COVID-19 speeches of the First Minister
+- So far:
+```{r eval=FALSE}
+scrape_speech(covid_speech_urls[1])
+scrape_speech(covid_speech_urls[2])
+scrape_speech(covid_speech_urls[3])
+```
+- What else do we need to do?
+  - Run the `scrape_speech()` function on all COVID-19 speech links
+  - Combine the resulting data frames from each run into one giant data frame
+
+---
+
+## Iteration
+
+.question[
+How can we tell R to apply the `scrape_speech()` function to each link in `covid_speech_urls`?
+]
+
+--
+
+- Option 1: Write a **for loop**, i.e. explicitly tell R to visit a link, apply the function, store the result, then visit the next link, apply the function, append the result to the stored result from the previous link, and so on and so forth.
+--
+
+- Option 2: **Map** the function to each element in the list of links, and let R take care of the storing and appending of results.
+--
+
+- We'll go with Option 2!
+
+---
+
+## How does mapping work?
+
+Suppose we have exam 1 and exam 2 scores of 4 students stored in a list...
+
+```{r}
+exam_scores <- list(
+  exam1 <- c(80, 90, 70, 50),
+  exam2 <- c(85, 83, 45, 60)
+)
+```
+
+--
+
+...and we find the mean score in each exam
+
+```{r}
+map(exam_scores, mean)
+```
+
+---
+
+...and suppose we want the results as a numeric (double) vector
+
+```{r}
+map_dbl(exam_scores, mean)
+```
+
+...or as a character string
+
+```{r}
+map_chr(exam_scores, mean)
+```
+
+---
+
+## `map_something`
+
+Functions for looping over an object and returning a value (of a specific type):
+
+* `map()` - returns a list
+* `map_lgl()` - returns a logical vector
+* `map_int()` - returns a integer vector
+* `map_dbl()` - returns a double vector
+* `map_chr()` - returns a character vector
+* `map_df()` / `map_dfr()` - returns a data frame by row binding
+* `map_dfc()` - returns a data frame by column binding
+* ...
+
+---
+
+## Go to each page, scrape speech
+
+- Map the `scrape_speech()` function
+- to each element of `covid_speech_urls`
+- and return a data frame by row binding
+
+```{r eval=FALSE}
+covid_speeches <- map_dfr(covid_speech_urls, scrape_speech)
+```
+
+---
+
+```{r include=FALSE}
+covid_speeches <- read_rds("data/covid-speeches-scot.rds")
+```
+
+```{r}
+covid_speeches %>%
+  print(n = 15)
+```
+
+---
+
+## What could go wrong?
+
+```{r eval=FALSE}
+covid_speeches <- map_dfr(covid_speech_urls, scrape_speech)
+```
+
+- This will take a while to run
+- If you get `HTTP Error 429 (Too many requests)` you might want to slow down your hits by modifying your function to slow it down by adding a random wait (sleep) time between hitting each link
+
+```{r eval=FALSE}
+scrape_speech <- function(url){
+  
+  # Sleep for randomly generated number of seconds
+  # Generated from a uniform distribution between 0 and 1
+  Sys.sleep(runif(1)) #<<
+  
+  # Rest of your function code goes here...
+}
+```

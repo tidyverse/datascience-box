@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Importing data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Importing data
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+class: middle
+
+# Reading rectangular data into R
+
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="img/readr.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="img/readxl.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.pull-left[
+## readr
+
+- `read_csv()` - comma delimited files
+- `read_csv2()` - semicolon separated files (common in countries where , is used as the decimal place)
+- `read_tsv()` - tab delimited files
+- `read_delim()` - reads in files with any delimiter
+- `read_fwf()` - fixed width files
+- ...
+]
+
+--
+.pull-right[
+## readxl
+
+- `read_excel()` - read xls or xlsx files
+- ...
+]
+
+---
+
+## Reading data
+
+
+```r
+nobel &lt;- read_csv(file = "data/nobel.csv")
+nobel
+```
+
+```
+## # A tibble: 935 x 26
+##      id firstname surname  year category affiliation city 
+##   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;
+## 1     1 Wilhelm … Röntgen  1901 Physics  Munich Uni… Muni…
+## 2     2 Hendrik … Lorentz  1902 Physics  Leiden Uni… Leid…
+## 3     3 Pieter    Zeeman   1902 Physics  Amsterdam … Amst…
+## 4     4 Henri     Becque…  1903 Physics  École Poly… Paris
+## 5     5 Pierre    Curie    1903 Physics  École muni… Paris
+## 6     6 Marie     Curie    1903 Physics  &lt;NA&gt;        &lt;NA&gt; 
+## # … with 929 more rows, and 19 more variables: country &lt;chr&gt;,
+## #   born_date &lt;date&gt;, died_date &lt;date&gt;, gender &lt;chr&gt;,
+## #   born_city &lt;chr&gt;, born_country &lt;chr&gt;,
+## #   born_country_code &lt;chr&gt;, died_city &lt;chr&gt;,
+## #   died_country &lt;chr&gt;, died_country_code &lt;chr&gt;,
+## #   overall_motivation &lt;chr&gt;, share &lt;dbl&gt;, motivation &lt;chr&gt;,
+## #   born_country_original &lt;chr&gt;, born_city_original &lt;chr&gt;,
+## #   died_country_original &lt;chr&gt;, died_city_original &lt;chr&gt;,
+## #   city_original &lt;chr&gt;, country_original &lt;chr&gt;
+```
+
+---
+
+## Writing data
+
+.pull-left[
+- Write a file
+
+
+```r
+df &lt;- tribble(
+  ~x, ~y,
+  1,  "a",
+  2,  "b",
+  3,  "c"
+)
+
+write_csv(df, file = "data/df.csv")
+```
+]
+
+--
+.pull-right[
+- Read it back in to inspect
+
+
+```r
+read_csv("data/df.csv")
+```
+
+```
+## # A tibble: 3 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 b    
+## 3     3 c
+```
+]
+
+---
+
+.your-turn[
+### .hand[Your turn!]
+
+- RStudio Cloud &gt; `AE 06 - Nobels and sales + Data import` &gt; open `nobels-csv.Rmd` and knit.
+- Read in the `nobels.csv` file from the `data-raw/` folder.
+- Split into two (STEM and non-STEM): 
+  - Create a new data frame, `nobel_stem`, that filters for the STEM fields 
+(Physics, Medicine, Chemistry, and Economics).
+  - Create another data frame, `nobel_nonstem`, that filters for the remaining 
+fields.  
+- Write out the two data frames to `nobel-stem.csv` and `nobel-nonstem.csv`, 
+respectively, to `data/`.
+
+**Hint:** Use the `%in%` operator when `filter()`ing.
+]
+
+---
+
+class: middle
+
+# Variable names
+
+---
+
+## Data with bad names
+
+
+```r
+edibnb_badnames &lt;- read_csv("data/edibnb-badnames.csv")
+names(edibnb_badnames)
+```
+
+```
+##  [1] "ID"                   "Price"               
+##  [3] "neighbourhood"        "accommodates"        
+##  [5] "Number of bathrooms"  "Number of Bedrooms"  
+##  [7] "n beds"               "Review Scores Rating"
+##  [9] "Number of reviews"    "listing_url"
+```
+
+--
+
+... but R doesn't allow spaces in variable names
+
+
+```r
+ggplot(edibnb_badnames, aes(x = Number of bathrooms, y = Price)) +
+  geom_point()
+```
+
+```
+## Error: &lt;text&gt;:1:40: unexpected symbol
+## 1: ggplot(edibnb_badnames, aes(x = Number of
+##                                            ^
+```
+
+---
+
+## Option 1 - Define column names
+
+.small[
+
+```r
+edibnb_col_names &lt;- read_csv("data/edibnb-badnames.csv",
+                             col_names = c("id", "price", 
+                                           "neighbourhood", "accommodates",
+                                           "bathroom", "bedroom", 
+                                           "bed", "review_scores_rating", 
+                                           "n_reviews", "url"))
+
+names(edibnb_col_names)
+```
+
+```
+##  [1] "id"                   "price"               
+##  [3] "neighbourhood"        "accommodates"        
+##  [5] "bathroom"             "bedroom"             
+##  [7] "bed"                  "review_scores_rating"
+##  [9] "n_reviews"            "url"
+```
+]
+
+---
+
+## Option 2 - Format text to snake_case
+
+
+```r
+edibnb_clean_names &lt;- read_csv("data/edibnb-badnames.csv") %&gt;%
+  janitor::clean_names()
+
+names(edibnb_clean_names)
+```
+
+```
+##  [1] "id"                   "price"               
+##  [3] "neighbourhood"        "accommodates"        
+##  [5] "number_of_bathrooms"  "number_of_bedrooms"  
+##  [7] "n_beds"               "review_scores_rating"
+##  [9] "number_of_reviews"    "listing_url"
+```
+
+---
+
+class: middle
+
+# Variable types
+
+---
+
+.question[
+Which type is `x`? Why?
+]
+
+.pull-left[
+&lt;img src="img/df-na.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+read_csv("data/df-na.csv")
+```
+
+
+```
+## # A tibble: 9 x 3
+##   x     y              z     
+##   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; 
+## 1 1     a              hi    
+## 2 &lt;NA&gt;  b              hello 
+## 3 3     Not applicable 9999  
+## 4 4     d              ola   
+## 5 5     e              hola  
+## 6 .     f              whatup
+## 7 7     g              wassup
+## 8 8     h              sup   
+## 9 9     i              &lt;NA&gt;
+```
+]
+
+---
+
+## Option 1. Explicit NAs
+
+
+```r
+read_csv("data/df-na.csv", 
+         na = c("", "NA", ".", "9999", "Not applicable"))
+```
+
+.pull-left[
+&lt;img src="img/df-na.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```
+## # A tibble: 9 x 3
+##       x y     z     
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1     1 a     hi    
+## 2    NA b     hello 
+## 3     3 &lt;NA&gt;  &lt;NA&gt;  
+## 4     4 d     ola   
+## 5     5 e     hola  
+## 6    NA f     whatup
+## 7     7 g     wassup
+## 8     8 h     sup   
+## 9     9 i     &lt;NA&gt;
+```
+]
+
+---
+
+## Option 2. Specify column types
+
+
+```r
+read_csv("data/df-na.csv", col_types = list(col_double(), 
+                                            col_character(), 
+                                            col_character()))
+```
+
+
+```
+## Warning: 1 parsing failure.
+## row col expected actual             file
+##   6   x a double      . 'data/df-na.csv'
+```
+
+```
+## # A tibble: 9 x 3
+##       x y              z     
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; 
+## 1     1 a              hi    
+## 2    NA b              hello 
+## 3     3 Not applicable 9999  
+## 4     4 d              ola   
+## 5     5 e              hola  
+## 6    NA f              whatup
+## 7     7 g              wassup
+## 8     8 h              sup   
+## 9     9 i              &lt;NA&gt;
+```
+
+---
+
+## Column types
+
+.small[
+**type function**  | **data type**
+------------------ | -------------
+`col_character()`  | character
+`col_date()`       | date
+`col_datetime()`   | POSIXct (date-time)
+`col_double()`     | double (numeric)
+`col_factor()`     | factor
+`col_guess()`      | let readr guess (default)
+`col_integer()`    | integer
+`col_logical()`    | logical
+`col_number()`     | numbers mixed with non-number characters
+`col_numeric()`    | double or integer
+`col_skip()`       | do not read
+`col_time()`       | time
+]
+
+---
+
+.question[
+Wondering where you remember these from?
+]
+
+
+```r
+read_csv("data/df-na.csv")
+```
+
+```
+## 
+## ── Column specification ─────────────────────────────────────────
+## cols(
+##   x = col_character(),
+##   y = col_character(),
+##   z = col_character()
+## )
+```
+
+```
+## # A tibble: 9 x 3
+##   x     y              z     
+##   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; 
+## 1 1     a              hi    
+## 2 &lt;NA&gt;  b              hello 
+## 3 3     Not applicable 9999  
+## 4 4     d              ola   
+...
+```
+
+---
+
+class:middle
+
+# Case study: Favourite foods
+
+---
+
+## Favourite foods
+
+&lt;img src="img/fav-food/fav-food.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+
+```r
+*fav_food &lt;- read_excel("data/favourite-food.xlsx")
+
+fav_food
+```
+
+```
+## # A tibble: 5 x 6
+##   `Student ID` `Full Name`  favourite.food  mealPlan  AGE   SES  
+##          &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
+## 1            1 Sunil Huffm… Strawberry yog… Lunch on… 4     High 
+## 2            2 Barclay Lynn French fries    Lunch on… 5     Midd…
+## 3            3 Jayendra Ly… N/A             Breakfas… 7     Low  
+## 4            4 Leon Rossini Anchovies       Lunch on… 99999 Midd…
+## 5            5 Chidiegwu D… Pizza           Breakfas… five  High
+```
+
+---
+
+## Variable names
+
+&lt;img src="img/fav-food/fav-food-names.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+
+```r
+fav_food &lt;- read_excel("data/favourite-food.xlsx") %&gt;%
+* janitor::clean_names()
+
+fav_food 
+```
+
+```
+## # A tibble: 5 x 6
+##   student_id full_name   favourite_food   meal_plan   age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
+## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
+## 3          3 Jayendra L… N/A              Breakfast … 7     Low  
+## 4          4 Leon Rossi… Anchovies        Lunch only  99999 Midd…
+## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+```
+
+---
+
+## Handling NAs
+
+&lt;img src="img/fav-food/fav-food-nas.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+
+```r
+fav_food &lt;- read_excel("data/favourite-food.xlsx",
+*                      na = c("N/A", "99999")) %&gt;%
+  janitor::clean_names()
+
+fav_food 
+```
+
+```
+## # A tibble: 5 x 6
+##   student_id full_name   favourite_food   meal_plan   age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
+## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
+## 3          3 Jayendra L… &lt;NA&gt;             Breakfast … 7     Low  
+## 4          4 Leon Rossi… Anchovies        Lunch only  &lt;NA&gt;  Midd…
+## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+```
+
+---
+
+## Make `age` numeric
+
+.pull-left-wide[
+
+```r
+fav_food &lt;- fav_food %&gt;%
+* mutate(
+*   age = if_else(age == "five", "5", age),
+*   age = as.numeric(age)
+*   )
+
+glimpse(fav_food) 
+```
+
+```
+## Rows: 5
+## Columns: 6
+## $ student_id     &lt;dbl&gt; 1, 2, 3, 4, 5
+## $ full_name      &lt;chr&gt; "Sunil Huffmann", "Barclay Lynn", "Jaye…
+## $ favourite_food &lt;chr&gt; "Strawberry yoghurt", "French fries", N…
+## $ meal_plan      &lt;chr&gt; "Lunch only", "Lunch only", "Breakfast …
+## $ age            &lt;dbl&gt; 4, 5, 7, NA, 5
+## $ ses            &lt;chr&gt; "High", "Middle", "Low", "Middle", "Hig…
+```
+]
+.pull-right-narrow[
+&lt;img src="img/fav-food/fav-food-age.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Socio-economic status
+
+.question[
+What order are the levels of `ses` listed in?
+]
+
+.pull-left-wide[
+
+```r
+fav_food %&gt;%
+  count(ses)
+```
+
+```
+## # A tibble: 3 x 2
+##   ses        n
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 High       2
+## 2 Low        1
+## 3 Middle     2
+```
+]
+.pull-right-narrow[
+&lt;img src="img/fav-food/fav-food-ses.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Make `ses` factor
+
+.pull-left-wide[
+
+```r
+fav_food &lt;- fav_food %&gt;%
+* mutate(ses = fct_relevel(ses, "Low", "Middle", "High"))
+
+fav_food %&gt;%
+  count(ses)
+```
+
+```
+## # A tibble: 3 x 2
+##   ses        n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Low        1
+## 2 Middle     2
+## 3 High       2
+```
+]
+
+---
+
+## Putting it altogether
+
+
+```r
+fav_food &lt;- read_excel("data/favourite-food.xlsx", na = c("N/A", "99999")) %&gt;%
+  janitor::clean_names() %&gt;%
+  mutate(
+    age = if_else(age == "five", "5", age), 
+    age = as.numeric(age),
+    ses = fct_relevel(ses, "Low", "Middle", "High")
+  )
+
+fav_food
+```
+
+```
+## # A tibble: 5 x 6
+##   student_id full_name   favourite_food   meal_plan     age ses  
+##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;dbl&gt; &lt;fct&gt;
+## 1          1 Sunil Huff… Strawberry yogh… Lunch only      4 High 
+## 2          2 Barclay Ly… French fries     Lunch only      5 Midd…
+## 3          3 Jayendra L… &lt;NA&gt;             Breakfast …     7 Low  
+## 4          4 Leon Rossi… Anchovies        Lunch only     NA Midd…
+## 5          5 Chidiegwu … Pizza            Breakfast …     5 High
+```
+
+---
+
+## Out and back in
+
+
+```r
+write_csv(fav_food, file = "data/fav-food-clean.csv")
+
+fav_food_clean &lt;- read_csv("data/fav-food-clean.csv")
+```
+
+---
+
+.question[
+What happened to `ses` again?
+]
+
+
+```r
+fav_food_clean %&gt;%
+  count(ses)
+```
+
+```
+## # A tibble: 3 x 2
+##   ses        n
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 High       2
+## 2 Low        1
+## 3 Middle     2
+```
+
+---
+
+## `read_rds()` and `write_rds()`
+
+- CSVs can be unreliable for saving interim results if there is specific variable type information you want to hold on to.
+- An alternative is RDS files, you can read and write them with `read_rds()` and `write_rds()`, respectively.
+
+
+```r
+read_rds(path)
+write_rds(x, path)
+```
+
+---
+
+## Out and back in, take 2
+
+
+```r
+write_rds(fav_food, file = "data/fav-food-clean.rds")
+
+fav_food_clean &lt;- read_rds("data/fav-food-clean.rds")
+
+fav_food_clean %&gt;%
+  count(ses)
+```
+
+```
+## # A tibble: 3 x 2
+##   ses        n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Low        1
+## 2 Middle     2
+## 3 High       2
+```
+
+---
+
+class: middle
+
+# Other types of data
+
+---
+
+## Other types of data
+
+- **googlesheets4:** Google Sheets
+- **haven**: SPSS, Stata, and SAS files
+- **DBI**, along with a database specific backend (e.g. RMySQL, RSQLite, RPostgreSQL etc): allows you to run SQL queries against a database and return a data frame
+- **jsonline**: JSON
+- **xml2**: xml
+- **rvest**: web scraping
+- **httr**: web APIs
+- **sparklyr**: data loaded into spark
+
+---
+
+.your-turn[
+### .hand[Your turn!]
+.midi[
+- RStudio Cloud &gt; `AE 06 - Nobels and sales + Data import` &gt; `sales-excel.Rmd`. 
+- Load the `sales.xlsx` file from the `data-raw/` folder, using appropriate arguments for the `read_excel()` function such that it looks like the output on the left.
+- **Stretch goal:** Manipulate the sales data such that it looks like the output on the right.
+]
+]
+
+.pull-left[
+
+```
+## # A tibble: 9 x 2
+##   id      n    
+##   &lt;chr&gt;   &lt;chr&gt;
+## 1 Brand 1 n    
+## 2 1234    8    
+## 3 8721    2    
+## 4 1822    3    
+## 5 Brand 2 n    
+## 6 3333    1    
+## # … with 3 more rows
+```
+]
+.pull-right[
+
+```
+## # A tibble: 7 x 3
+##   brand      id     n
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 Brand 1  1234     8
+## 2 Brand 1  8721     2
+## 3 Brand 1  1822     3
+## 4 Brand 2  3333     1
+## 5 Brand 2  2156     3
+## 6 Brand 2  3987     6
+## # … with 1 more row
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

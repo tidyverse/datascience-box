@@ -1,0 +1,654 @@
+---
+title: "Text analysis <br> `r emo::ji('page_with_curl')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+class: middle
+
+# Tidytext analysis
+
+---
+
+## Packages
+
+In addition to `tidyverse` we will be using four other packages today
+
+```{r message=FALSE}
+library(tidytext)
+library(genius)
+library(wordcloud)
+library(DT)
+```
+
+---
+
+## Tidytext
+
+- Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use.
+- Learn more at https://www.tidytextmining.com/.
+
+---
+
+## What is tidy text?
+
+```{r}
+text <- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+
+text
+```
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df <- tibble(line = 1:7, text = text)
+
+text_df
+```
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df %>%
+  unnest_tokens(word, text)
+```
+
+---
+
+class: middle
+
+# What are you listening to?
+
+---
+
+## From the "Getting to know you" survey
+
+> "What are your 3 - 5 most favorite songs right now?"
+
+.midi[
+```{r message=FALSE}
+listening <- read_csv("data/listening.csv")
+listening
+```
+]
+
+---
+
+## Looking for commonalities
+
+.midi[
+```{r}
+listening %>%
+  unnest_tokens(word, songs) %>%
+  count(word, sort = TRUE)
+```
+]
+
+---
+
+## Stop words
+
+- In computing, stop words are words which are filtered out before or after processing of natural language data (text).
+- They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+
+---
+
+## English stop words
+
+```{r}
+get_stopwords()
+```
+
+---
+
+## Spanish stop words
+
+```{r}
+get_stopwords(language = "es")
+```
+
+---
+
+## Various lexicons
+
+See `?get_stopwords` for more info.
+
+.midi[
+```{r}
+get_stopwords(source = "smart")
+```
+]
+
+---
+
+## Back to: Looking for commonalities
+
+.small[
+```{r}
+listening %>%
+  unnest_tokens(word, songs) %>%
+  anti_join(stop_words) %>%                           #<<
+  filter(!(word %in% c("1", "2", "3", "4", "5"))) %>% #<<
+  count(word, sort = TRUE)
+```
+]
+
+---
+
+## Top 20 common words in songs
+
+.pull-left[
+.small[
+```{r message=FALSE}
+top20_songs <- listening %>%
+  unnest_tokens(word, songs) %>%
+  anti_join(stop_words) %>%
+  filter(
+    !(word %in% c("1", "2", "3", "4", "5"))
+    ) %>%
+  count(word) %>%
+  top_n(20)
+```
+]
+]
+.pull-right[
+.midi[
+```{r}
+top20_songs %>%
+  arrange(desc(n))
+```
+]
+]
+---
+
+## Visualizing commonalities: bar chart
+
+.midi[
+```{r echo=FALSE}
+top20_songs %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n)) +
+  geom_col() +
+  labs(x = "Common words", y = "Count") +
+  coord_flip()
+```
+]
+
+---
+
+... the code
+
+```{r eval=FALSE}
+ggplot(top20_songs, aes(x = fct_reorder(word, n), y = n)) +
+  geom_col() +
+  labs(x = "Common words", y = "Count") +
+  coord_flip()
+```
+
+
+---
+
+## Visualizing commonalities: wordcloud
+
+```{r echo=FALSE, out.width="80%"}
+set.seed(1234)
+wordcloud(words = top20_songs$word, 
+          freq = top20_songs$n, 
+          colors = brewer.pal(5,"Blues"),
+          random.order = FALSE, 
+          rot.per = 0.35,
+          scale = c(2, 0.5))
+```
+
+---
+
+... and the code
+
+```{r eval=FALSE}
+set.seed(1234)
+wordcloud(words = top20_songs$word, 
+          freq = top20_songs$n, 
+          colors = brewer.pal(5,"Blues"),
+          random.order = FALSE)
+```
+
+---
+
+## Ok, so people like Ed Sheeran!
+
+```{r}
+str_subset(listening$songs, "Sheeran")
+```
+
+---
+
+## But I had to ask...
+
+--
+
+What is 1975?
+
+--
+
+```{r}
+str_subset(listening$songs, "1975")
+```
+
+---
+
+class: middle
+
+# Analyzing lyrics of one artist
+
+---
+
+## Let's get more data
+
+We'll use the **genius** package to get song lyric data from [Genius](https://genius.com/).
+
+- `genius_album()`: download lyrics for an entire album
+- `add_genius()`: download lyrics for multiple albums
+
+---
+
+## Ed's most recent-ish albums
+
+```{r cache=TRUE, message=FALSE, warning=FALSE}
+artist_albums <- tribble(
+  ~artist,      ~album,
+  "Ed Sheeran", "No.6 Collaborations Project",
+  "Ed Sheeran", "Divide",
+  "Ed Sheeran", "Multiply",
+  "Ed Sheeran", "Plus",
+)
+
+sheeran <- artist_albums %>%
+  add_genius(artist, album, "album")
+```
+
+---
+
+## Songs in the four albums
+
+.small[
+```{r echo=FALSE}
+sheeran %>%
+  distinct(album, track_title) %>%
+  datatable(options = list(dom = "p"))
+```
+]
+
+---
+
+## How long are Ed Sheeran's songs?
+
+Length measured by number of lines
+
+```{r}
+sheeran %>%
+  count(track_title, sort = TRUE)
+```
+
+---
+
+## Tidy up your lyrics!
+
+```{r}
+sheeran_lyrics <- sheeran %>%
+  unnest_tokens(word, lyric)
+
+sheeran_lyrics
+```
+
+---
+
+## What are the most common words?
+
+```{r}
+sheeran_lyrics %>%
+  count(word, sort = TRUE)
+```
+
+---
+
+## What a romantic!
+
+.midi[
+```{r}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE)
+```
+]
+
+---
+
+```{r echo=FALSE, message=FALSE, out.width="80%"}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  count(word)%>%
+  top_n(20) %>%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    labs(title = "Frequency of Ed Sheeran's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "") +
+    coord_flip()
+```
+
+---
+
+... and the code
+
+```{r eval=FALSE}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  count(word)%>%
+  top_n(20) %>%
+  ggplot(aes(fct_reorder(word, n), n)) +
+    geom_col() +
+    labs(title = "Frequency of Ed Sheeran's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "") +
+    coord_flip()
+```
+
+---
+
+class: middle
+
+# Sentiment analysis
+
+---
+
+## Sentiment analysis
+
+- One way to analyze the sentiment of a text is to consider the text as a combination of its individual words 
+- and the sentiment content of the whole text as the sum of the sentiment content of the individual words
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+```{r}
+get_sentiments("afinn")
+```
+]
+.pull-right[
+```{r}
+get_sentiments("bing") 
+```
+]
+
+---
+
+## Sentiment lexicons
+
+.pull-left[
+```{r}
+get_sentiments("nrc")
+```
+]
+.pull-right[
+```{r}
+get_sentiments("loughran") 
+```
+]
+
+---
+
+class: middle
+
+## Categorizing sentiments
+
+---
+
+## Sentiments in Sheeran's lyrics
+
+.midi[
+```{r}
+sheeran_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word, sort = TRUE)
+```
+]
+
+---
+
+class: middle
+
+**Goal:** Find the top 10 most common words with positive and negative sentiments.
+
+---
+
+### Step 1: Top 10 words for each sentiment
+
+.midi[
+```{r message=FALSE}
+sheeran_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  group_by(sentiment) %>%
+  top_n(10) 
+```
+]
+
+---
+
+### Step 2: `ungroup()`
+
+.midi[
+```{r message=FALSE}
+sheeran_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  group_by(sentiment) %>%
+  top_n(10) %>%
+  ungroup()
+```
+]
+
+---
+
+### Step 3: Save the result
+
+```{r message=FALSE}
+sheeran_top10 <- sheeran_lyrics %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment, word) %>%
+  group_by(sentiment) %>%
+  top_n(10) %>%
+  ungroup()
+```
+
+---
+
+class: middle
+
+**Goal:** Visualize the top 10 most common words with positive and negative sentiments.
+
+---
+
+### Step 1: Create a bar chart
+
+.midi[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = word, y = n, fill = sentiment)) +
+  geom_col()
+```
+]
+
+---
+
+### Step 2: Order bars by frequency
+
+.midi[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col()
+```
+]
+
+---
+
+### Step 3: Facet by sentiment
+
+.midi[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment)
+```
+]
+
+---
+
+### Step 4: Free the scales!
+
+.midi[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free")
+```
+]
+
+---
+
+### Step 4: Flip the coordinates
+
+.midi[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip()
+```
+]
+
+---
+
+### Step 5: Clean up labels
+
+.small[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip() +
+  labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "")
+```
+]
+
+---
+
+### Step 6: Remove redundant info
+
+.small[
+```{r message=FALSE, out.width="80%"}
+sheeran_top10 %>%
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+  geom_col() +
+  facet_wrap(~ sentiment, scales = "free") +
+  coord_flip() +
+  labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "") +
+  guides(fill = FALSE) 
+```
+]
+
+---
+
+class: middle
+
+## Scoring sentiments
+
+---
+
+## Assign a sentiment score
+
+.small[
+```{r}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  left_join(get_sentiments("afinn")) 
+```
+]
+
+---
+
+```{r message=FALSE}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  left_join(get_sentiments("afinn")) %>%
+  filter(!is.na(value)) %>%
+  group_by(album) %>%
+  summarise(total_sentiment = sum(value)) %>%
+  arrange(total_sentiment)
+```
+
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+sheeran_lyrics %>%
+  anti_join(stop_words) %>%
+  left_join(get_sentiments("afinn")) %>%
+  filter(!is.na(value)) %>%
+  group_by(album, track_title) %>%
+  summarise(total_sentiment = sum(value)) %>%
+  ungroup() %>%
+  arrange(total_sentiment) %>%
+  mutate(
+    track_title = str_remove(track_title, "by (.*)") %>% str_trim(),
+    track_title = str_remove(track_title, "\\(.*\\)") %>% str_trim(),
+    total_sentiment_sign = if_else(total_sentiment < 0, "negative", "positive")
+  ) %>%
+  ggplot(aes(x = reorder(track_title, total_sentiment), y = total_sentiment, fill = total_sentiment_sign)) +
+  geom_col() +
+  facet_wrap(~album, ncol = 2, scales = "free") +
+  guides(fill = FALSE) +
+  coord_flip() +
+  labs(x = "", y = "", 
+    title = "Total sentiment score of Ed Sheeran's tracks",
+    subtitle = "Scored with AFINN sentiment lexicon")
+```
+
+---
+
+## Acknowledgements
+
+- Julia Silge: https://github.com/juliasilge/tidytext-tutorial
+- Julia Silge and David Robinson: https://www.tidytextmining.com/
+- Josiah Parry: https://github.com/JosiahParry/genius
