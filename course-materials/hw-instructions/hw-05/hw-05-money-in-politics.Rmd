@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r photo, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Sharon McCutcheon on Unsplash"}
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Sharon McCutcheon on Unsplash", eval = TRUE}
 knitr::include_graphics("img/sharon-mccutcheon-rItGZ4vquWk-unsplash.jpg")
 ```
 
@@ -38,7 +38,8 @@ In order to complete this assignment you will need a Chrome browser with the [Se
 
 # Getting started
 
-Go to the course GitHub organization and locate your HW 5 repo, which should be named `hw-05-money-in-politics-YOUR_GITHUB_USERNAME`.
+Go to the course GitHub organization and locate your homework repo, which should be named `hw-04-money-in-politics-YOUR_GITHUB_USERNAME`.
+Grab the URL of the repo, and clone it in RStudio.
 First, open the R Markdown document `hw-05.Rmd` and Knit it.
 Make sure it compiles without errors.
 The output will be in the file markdown `.md` file with the same name.
@@ -55,6 +56,8 @@ Before we introduce the data, let's warm up with some simple exercises.
 ## Packages
 
 We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **robotstxt** package to check if we're allowed to scrape the data, the **rvest** package for data scraping, and the **scales** package for better formatting of labels on visualisations.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
 ```{r load-packages, message = FALSE, eval = TRUE}
 library(tidyverse)
@@ -219,4 +222,4 @@ pac_all %>%
   theme_minimal()
 ```
 
-🧶 ✅ ⬆️ *Knit your document, and commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

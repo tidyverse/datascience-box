@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Daniel Cheung on Unsplash"}
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Daniel Cheung on Unsplash", eval = TRUE}
 knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
 ```
 
@@ -27,6 +27,7 @@ This week we'll do some data gymnastics to refresh and review what we learned ov
 # Getting started
 
 Go to the course GitHub organization and locate your homework repo, which should be named `hw-04-legos-YOUR_GITHUB_USERNAME`.
+Grab the URL of the repo, and clone it in RStudio.
 First, open the R Markdown document `hw-04.Rmd` and Knit it.
 Make sure it compiles without errors.
 The output will be in the file markdown `.md` file with the same name.
@@ -42,7 +43,9 @@ Before we introduce the data, let's warm up with some simple exercises.
 
 ## Packages
 
-We'll use the **tidyverse** package for the analysis and the **fivethirthyeight** package for data.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
 ```{r load-packages, message = FALSE, eval = TRUE}
 library(tidyverse)
@@ -100,4 +103,4 @@ Note that the answers to all questions are within the context of this particular
 9.  Come up with a question you want to answer using these data, and write it down.
     Then, create a data visualization that answers the question, and explain how your visualization answers the question.
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

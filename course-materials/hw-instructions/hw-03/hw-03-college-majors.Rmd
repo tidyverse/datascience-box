@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Marleena Garris on Unsplash"}
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Marleena Garris on Unsplash", eval = TRUE}
 knitr::include_graphics("img/graduate.jpg")
 ```
 
@@ -26,7 +26,7 @@ The first step in the process of turning information into knowledge process is t
 In this assignment we explore data on college majors and earnings, specifically the data begin the FiveThirtyEight story ["The Economic Guide To Picking A College Major"](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/).
 
 These data originally come from the American Community Survey (ACS) 2010-2012 Public Use Microdata Series.
-While this is outside the scope of this assignment, if you are curious about howraw data from the ACS were cleaned and prepared, see [the code](https://github.com/fivethirtyeight/data/blob/master/college-majors/college-majors-rscript.R) FiveThirtyEight authors used.
+While this is outside the scope of this assignment, if you are curious about how raw data from the ACS were cleaned and prepared, see [the code](https://github.com/fivethirtyeight/data/blob/master/college-majors/college-majors-rscript.R) FiveThirtyEight authors used.
 
 We should also note that there are many considerations that go into picking a major.
 Earnings potential and employment prospects are two of them, and they are important, but they don't tell the whole story.
@@ -35,6 +35,7 @@ Keep this in mind as you analyze the data.
 # Getting started
 
 Go to the course GitHub organization and locate your homework repo, which should be named `hw-03-college-majors-YOUR_GITHUB_USERNAME`.
+Grab the URL of the repo, and clone it in RStudio.
 First, open the R Markdown document `hw-03.Rmd` and Knit it.
 Make sure it compiles without errors.
 The output will be in the file markdown `.md` file with the same name.
@@ -50,17 +51,19 @@ Before we introduce the data, let's warm up with some simple exercises.
 
 ## Packages
 
-We'll use the **tidyverse** package for the analysis, the **scales** package for formatting numeric values, and the **fivethirthyeight** package for data.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **scales** package for better formatting of labels on visualisations, and the data lives in the **fivethirtyeight** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
 ```{r load-packages, message = FALSE, eval = TRUE}
 library(tidyverse)
 library(scales)
-library(fivethirthyeight)
+library(fivethirtyeight)
 ```
 
 ## Data
 
-The data can be found in the **fivethirthyeight** package, and it's called `college_recent_grads`.
+The data can be found in the **fivethirtyeight** package, and it's called `college_recent_grads`.
 Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
 You can find out more about the dataset by inspecting its documentation, which you can access by running `?college_recent_grads` in the Console or using the Help menu in RStudio to search for `college_recent_grads`.
 You can also find this information [here](https://fivethirtyeight-r.netlify.app/reference/college_recent_grads.html).
@@ -275,4 +278,4 @@ college_recent_grads %>%
 
 10. Ask a question of interest to you, and answer it using summary statistic(s) and/or visualization(s).
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

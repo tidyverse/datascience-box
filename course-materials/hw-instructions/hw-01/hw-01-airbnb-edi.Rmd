@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Madeleine Kohler on Unsplash"}
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Madeleine Kohler on Unsplash", eval = TRUE}
 knitr::include_graphics("img/madeleine-kohler-90Qn643Pq9c-unsplash.jpg")
 ```
 
@@ -48,8 +48,9 @@ Before we introduce the data, let's warm up with some simple exercises.
 
 ## Packages
 
-We'll use the **tidyverse** package for this analysis, and the data is in the **dsbox** package.
-Run the following code in the Console to load these packages.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
@@ -107,7 +108,7 @@ ggplot(data = ___, mapping = aes(x = ___)) +
 Let's de-construct this code:
 
 -   `ggplot()` is the function we are using to build our plot, in layers.
--   In the first layer we always define the data frame as the first argument. Then, we define the mappings between the variables in the dataset and the **aes**thetics of the plot (e.g. x and y coordinates, colors, etc.).
+-   In the first layer we always define the data frame as the first argument. Then, we define the mappings between the variables in the dataset and the **aes**thetics of the plot (e.g. x and y coordinates, colours, etc.).
 -   In the next layer we represent the data with **geom**etric shapes, in this case with a histogram. You should decide what makes a reasonable bin width for the histogram by trying out a few options.
 -   In the final layer we facet the data by neighbourhood.
 
@@ -116,4 +117,4 @@ Let's de-construct this code:
 4.  Use a single pipeline to identity the neighbourhoods with the top five median listing prices. Then, in another pipeline filter the data for these five neighbourhoods and make ridge plots of the distributions of listing prices in these five neighbourhoods. In a third pipeline calculate the minimum, mean, median, standard deviation, IQR, and maximum listing price in each of these neighbourhoods. Use the visualisation and the summary statistics to describe the distribution of listing prices in the neighbourhoods. (Your answer will include three pipelines, one of which ends in a visualisation, and a narrative.)
 5.  Create a visualization that will help you compare the distribution of review scores (`review_scores_rating`) across neighbourhoods. You get to decide what type of visualisation to create and there is more than one correct answer! In your answer, include a brief interpretation of how Airbnb guests rate properties in general and how the neighbourhoods compare to each other in terms of their ratings.
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
