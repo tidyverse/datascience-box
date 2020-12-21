@@ -8,12 +8,22 @@ output:
 link-citations: yes
 ---
 
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  out.width = "80%",
+  fig.asp = 0.618,
+  fig.width = 10,
+  dpi = 300
+)
+```
+
 ```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Marleena Garris on Unsplash"}
 knitr::include_graphics("img/graduate.jpg")
 ```
 
 The first step in the process of turning information into knowledge process is to summarize and describe the raw information - the data.
-In this assignment we explore data on college majors and earnings, specifically the data begind the FiveThirtyEight story ["The Economic Guide To Picking A College Major"](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/).
+In this assignment we explore data on college majors and earnings, specifically the data begin the FiveThirtyEight story ["The Economic Guide To Picking A College Major"](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/).
 
 These data originally come from the American Community Survey (ACS) 2010-2012 Public Use Microdata Series.
 While this is outside the scope of this assignment, if you are curious about howraw data from the ACS were cleaned and prepared, see [the code](https://github.com/fivethirtyeight/data/blob/master/college-majors/college-majors-rscript.R) FiveThirtyEight authors used.
@@ -22,74 +32,44 @@ We should also note that there are many considerations that go into picking a ma
 Earnings potential and employment prospects are two of them, and they are important, but they don't tell the whole story.
 Keep this in mind as you analyze the data.
 
-# Packages
+# Getting started
 
-In this assignment we will work with the `tidyverse` as usual.
-In addition, we'll use the `scales` package for formatting numerical values, and the `fivethirtyeight` package for data.
-`tidyverse` and `scales` packages are already installed for you, so you can load them with the following:
+Go to the course GitHub organization and locate your homework repo, which should be named `hw-03-college-majors-YOUR_GITHUB_USERNAME`.
+First, open the R Markdown document `hw-03.Rmd` and Knit it.
+Make sure it compiles without errors.
+The output will be in the file markdown `.md` file with the same name.
 
-```{r message=FALSE}
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+-   Step 1. Update the YAML, changing the author name to your name, and **knit** the document.
+-   Step 2. Commit and push your changes to GitHub with a meaningful commit message.
+-   Step 3. Push your changes to GitHub.
+-   Step 4. Go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files. If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for the analysis, the **scales** package for formatting numeric values, and the **fivethirthyeight** package for data.
+
+```{r load-packages, message = FALSE, eval = TRUE}
 library(tidyverse)
 library(scales)
+library(fivethirthyeight)
 ```
 
-You'll first need to install the `fivethirtyeight` package by running the following in the console once:
+## Data
 
-```{r eval=FALSE}
-install.packages("fivethirtyeight")
-```
-
-and then you can load it as usual with:
-
-```{r message=FALSE}
-library(fivethirtyeight)
-```
-
-Note that these packages are also loaded in your R Markdown document.
-
-# The data
-
-The data frame we will be working with today is called `college_recent_grads` and it's in the `fivethirtyeight` package.
-
-To find out more about the dataset, type the following in your Console: `?college_recent_grads`.
-A question mark before the name of an object will always bring up its help file.
-This command must be ran in the Console.
-
-`college_recent_grads` is a tidy **data frame**, with each row representing an **observation** and each column representing a **variable**.
-
-To view the data, click on the name of the data frame in the Environment tab.
+The data can be found in the **fivethirthyeight** package, and it's called `college_recent_grads`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?college_recent_grads` in the Console or using the Help menu in RStudio to search for `college_recent_grads`.
+You can also find this information [here](https://fivethirtyeight-r.netlify.app/reference/college_recent_grads.html).
 
 You can also take a quick peek at your data frame and view its dimensions with the `glimpse` function.
 
 ```{r glimpse}
 glimpse(college_recent_grads)
 ```
-
-The description of the variables, i.e. the **codebook**, is given below.
-
-| Header                         | Description                                                                |
-|:-------------------------------|:---------------------------------------------------------------------------|
-| `rank`                         | Rank by median earnings                                                    |
-| `major_code`                   | Major code, FO1DP in ACS PUMS                                              |
-| `major`                        | Major description                                                          |
-| `major_category`               | Category of major from Carnevale et al                                     |
-| `total`                        | Total number of people with major                                          |
-| `sample_size`                  | Sample size (unweighted) of full-time, year-round ONLY (used for earnings) |
-| `men`                          | Male graduates                                                             |
-| `women`                        | Female graduates                                                           |
-| `sharewomen`                   | Women as share of total                                                    |
-| `employed`                     | Number employed (ESR == 1 or 2)                                            |
-| `employed_full_time`           | Employed 35 hours or more                                                  |
-| `employed_part_time`           | Employed less than 35 hours                                                |
-| `employed_full_time_yearround` | Employed at least 50 weeks (WKW == 1) and at least 35 hours (WKHP \>= 35)  |
-| `unemployed`                   | Number unemployed (ESR == 3)                                               |
-| `unemployment_rate`            | Unemployed / (Unemployed + Employed)                                       |
-| `median`                       | Median earnings of full-time, year-round workers                           |
-| `p25th`                        | 25th percentile of earnigns                                                |
-| `p75th`                        | 75th percentile of earnings                                                |
-| `college_jobs`                 | Number with job requiring a college degree                                 |
-| `non_college_jobs`             | Number with job not requiring a college degree                             |
-| `low_wage_jobs`                | Number in low-wage service jobs                                            |
 
 The `college_recent_grads` data frame is a trove of information.
 Let's think about some questions we might want to answer with these data:
@@ -101,7 +81,7 @@ Let's think about some questions we might want to answer with these data:
 
 In the next section we aim to answer these questions.
 
-# Data wrangling and visualization
+# Exercises
 
 ## Which major has the lowest unemployment rate?
 
@@ -232,6 +212,8 @@ college_recent_grads %>%
   count(major_category)
 ```
 
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
 ## All STEM fields aren't the same
 
 One of the sections of the [FiveThirtyEight story](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/) is "All STEM fields aren't the same".
@@ -253,7 +235,7 @@ college_recent_grads <- college_recent_grads %>%
   mutate(major_type = ifelse(major_category %in% stem_categories, "stem", "not stem"))
 ```
 
-Let's unpack this: with `mutate` we create a new variable called `major_type`, which is defined as `"stem"` if the `major_category` is in the nector called `stem_categories` we created earlier, and as `"not stem"` otherwise.
+Let's unpack this: with `mutate` we create a new variable called `major_type`, which is defined as `"stem"` if the `major_category` is in the vector called `stem_categories` we created earlier, and as `"not stem"` otherwise.
 
 `%in%` is a **logical operator**.
 Other logical operators that are commonly used are
@@ -271,7 +253,7 @@ Other logical operators that are commonly used are
 | `x & y`             | and                      |
 | `!x`                | not                      |
 
-We can use the logical operators to also `filter` our data for STEM majors whose median earnings is less than median for all majors's median earnings, which we found to be \$36,000 earlier.
+We can use the logical operators to also `filter` our data for STEM majors whose median earnings is less than median for all majors' median earnings, which we found to be \$36,000 earlier.
 
 ```{r}
 college_recent_grads %>%
@@ -281,12 +263,16 @@ college_recent_grads %>%
   )
 ```
 
-8.  Which STEM majors have median salaries equal to or less than the median for all majors's median earnings? Your output should only show the major name and median, 25th percentile, and 75th percentile earning for that major as and should be sorted such that the major with the highest median earning is on top.
+8.  Which STEM majors have median salaries equal to or less than the median for all majors' median earnings? Your output should only show the major name and median, 25th percentile, and 75th percentile earning for that major as and should be sorted such that the major with the highest median earning is on top.
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 ## What types of majors do women tend to major in?
 
-9.  Create a scatterplot of median income vs. proportion of women in that major, colored by whether the major is in a STEM field or not. Describe the association between these three variables.
+9.  Create a scatterplot of median income vs. proportion of women in that major, coloured by whether the major is in a STEM field or not. Describe the association between these three variables.
 
 ## Further exploration
 
 10. Ask a question of interest to you, and answer it using summary statistic(s) and/or visualization(s).
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
