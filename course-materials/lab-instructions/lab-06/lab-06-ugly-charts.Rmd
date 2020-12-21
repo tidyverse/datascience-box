@@ -115,8 +115,9 @@ staff_long %>%
     Also fix the title, axis labels, and legend label.
 
 2.  Suppose the objective of this plot was to show that the proportion of part-time faculty have gone up over time compared to other instructional staff types.
-    What changes would you propose making to this plot to tell this story.
-    (You don't need to implement these changes now, you will get to do that as part of this week's homework. But work as a team to come up with ideas and list them as bullet points. The more precise you are, the easier your homework will be.)
+    What changes would you propose making to this plot to tell this story and why.
+
+3.  Implement the changes you proposed in the previous exercise.
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -127,17 +128,22 @@ Fisheries and Aquaculture Department of the Food and Agriculture Organization of
 For each country tonnage from capture and aquaculture are listed.
 Note that countries whose total harvest was less than 100,000 tons are not included in the visualization.
 
-A researcher shared with you the following visualization they created based on these data `r emo::ji("flushed")`.
+A researcher shared with you the following visualization they created based on these data.
+😳
 
 ```{r echo=FALSE, fig.fullwidth=TRUE}
 knitr::include_graphics("img/fisheries.png")
 ```
 
-3.  Can you help them make improve it? First, brainstorm how you would improve it. Then create the improved visualization and write up the changes/decisions you made as bullet points. It's ok if some of your improvements are aspirational, i.e. you don't know how to implement it, but you think it's a good idea. Ask a tutor for help, but also keep an eye on the time. Implement what you can and leave note identifying the aspirational improvements.
+4.  Can you help them make improve it? First, brainstorm how you would improve it. Then create the improved visualization and write up the changes/decisions you made as bullet points. It's ok if some of your improvements are aspirational, i.e. you don't know how to implement it, but you think it's a good idea.
+
+Load the data.
 
 ```{r load-data-fisheries, eval=FALSE}
 fisheries <- read_csv("data/fisheries.csv")
 ```
+
+5.  Create a new data visualisation for these data that implements the improvements you proposed in the previous exercise (or many of them as you can).
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
