@@ -108,7 +108,7 @@ IMS :: [Sec 2.2 - Exploring categorical data](https://openintro-ims.netlify.app/
 **Unit 2 - Deck 5: Tidy data**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d05-tidy-data/u2-d05-tidy-data#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d05-tidy-data/u2-d05-tidy-data.html#1)
 :::
 
 ::: {.source}
@@ -128,7 +128,7 @@ JSS :: [Tidy data](https://www.jstatsoft.org/article/view/v059i10)
 **Unit 2 - Deck 6: Grammar of data wrangling**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d06-grammar-wrangle/u2-d06-grammar-wrangle#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d06-grammar-wrangle/u2-d06-grammar-wrangle.html#1)
 :::
 
 ::: {.source}
@@ -144,7 +144,7 @@ JSS :: [Tidy data](https://www.jstatsoft.org/article/view/v059i10)
 **Unit 2 - Deck 7: Working with a single data frame**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d07-single-df/u2-d07-single-df#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d07-single-df/u2-d07-single-df.html#1)
 :::
 
 ::: {.source}
@@ -164,7 +164,7 @@ R4DS :: [Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
 **Unit 2 - Deck 8: Working with multiple data frames**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d08-multi-df/u2-d08-multi-df#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d08-multi-df/u2-d08-multi-df.html#1)
 :::
 
 ::: {.source}
@@ -184,7 +184,7 @@ R4DS :: [Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
 **Unit 2 - Deck 9: Tidying data**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d09-tidying/u2-d09-tidying#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d09-tidying/u2-d09-tidying.html#1)
 :::
 
 ::: {.source}
@@ -214,99 +214,299 @@ R4DS :: [Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
 
 ### Importing and recoding data
 
+::: {.slide-deck}
+**Unit 2 - Deck 10: Data types**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d10-data-types/u2-d10-data-types.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d10-data-types)
+:::
+
+::: {.video}
+[Video](https://youtu.be/WsxLbtWbEfc)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 11: Data classes**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d11-data-classes/u2-d11-data-classes.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d11-data-classes)
+:::
+
+::: {.video}
+[Video](https://youtu.be/dozvSVQcqqg)
+:::
+
+::: {.reading}
+R4DS :: [Chp 15 - Factors](https://r4ds.had.co.nz/factors.html)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 12: Importing data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d12-data-import/u2-d12-data-import.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d12-data-import)
+:::
+
+::: {.video}
+[Video](https://youtu.be/tIMaRYiuEFA)
+:::
+
+::: {.reading}
+R4DS :: [Chp 11 - Data import](https://r4ds.had.co.nz/data-import.html)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 13: Recoding data**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d13-data-recode/u2-d13-data-recode.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d13-data-recode)
+:::
+
+::: {.video}
+[Video](https://youtu.be/O8qxV3N4D5Q)
+:::
+
+::: {.reading}
+R4DS :: [Sec 16.1 - 16.3 - Dates and times](https://r4ds.had.co.nz/dates-and-times.html)
+:::
+:::
+
+::: {.application-exercise}
+**Hotels + Data types**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-hotels-datatypes/ae-05-hotels-datatypes.Rmd)
+:::
+
+::: {.video}
+[Video](https://youtu.be/sByadx_cgDc)
+:::
+:::
+
+::: {.application-exercise}
+**Nobels + Sales + Data import**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-nobels-sales-dataimport/ae-06-nobels-sales-dataimport.Rmd)
+:::
+
+::: {.video}
+[Video](https://youtu.be/2vA6qizYnM8)
+:::
+:::
+
 ### Communicating data science results effectively
+
+::: {.slide-deck}
+**Unit 2 - Deck 14: Tips for effective data visualization**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d14-effective-dataviz/u2-d14-effective-dataviz.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d14-effective-dataviz)
+:::
+
+::: {.video}
+[Video](https://youtu.be/ZrifrBvFWgg)
+:::
+
+::: {.reading}
+IMS :: [Sec 2.3 - Effective data visualisation](https://openintro-ims.netlify.app/summarizing-visualizing-data.html#effective-data-visualization)
+:::
+:::
+
+::: {.application-exercise}
+**Brexit + Telling stories with dataviz**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-07-brexit-story-dataviz/ae-07-brexit-story-dataviz.Rmd)
+:::
+
+::: {.video}
+[Video](https://youtu.be/aPqnkcn13kQ)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 15: Scientific studies and confounding**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d15-studies-confounding/u2-d15-studies-confounding.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d15-studies-confounding)
+:::
+
+::: {.video}
+[Video](https://youtu.be/WnMzTBrZDcc)
+:::
+
+::: {.reading}
+-   IMS :: [Sec 1.3 - Sampling principles and strategies](https://openintro-ims.netlify.app/getting-started-with-data.html#sampling-principles-strategies)
+-   IMS :: [Sec 1.4 - Experiments](https://openintro-ims.netlify.app/getting-started-with-data.html#experiments)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 16: Simpson's paradox**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d16-simpsons-paradox/u2-d16-simpsons-paradox.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d16-simpsons-paradox)
+:::
+
+::: {.video}
+[Video](https://youtu.be/sdas62v0iJU)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 17: Doing data science**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d17-doing-data-science/u2-d17-doing-data-science.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d17-doing-data-science)
+:::
+
+::: {.video}
+[Video](https://youtu.be/b9lSW0kyqBg)
+:::
+
+::: {.reading}
+R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+:::
+:::
 
 ### Web scraping and programming
 
-```{=html}
-<!-- 
+::: {.slide-deck}
+**Unit 2 - Deck 18: Web scraping**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d18-web-scrape/u2-d18-web-scrape.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d18-web-scrape)
+:::
+
+::: {.video}
+[Video](https://youtu.be/99Hkmfb2i80)
+:::
+:::
 
 ::: {.slide-deck}
-**Unit 1 - Deck 8: Data types and recoding**
+**Unit 2 - Deck 19: Scraping top 250 movies on IMDB**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d08-data-types/u1_d08-data-types.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d08-data-types)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d18-web-scrape/u2-d18-web-scrape.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d18-web-scrape)
+:::
+
+::: {.video}
+[Video](https://youtu.be/YmKULNLsDsU)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 20: Web scraping considerations**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d20-considerations/u2-d20-considerations.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d20-considerations)
+:::
+
+::: {.video}
+[Video](https://youtu.be/LONRJHMvSyU)
+:::
+:::
 
 ::: {.application-exercise}
-[Hotels + Data types](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-hotels-datatypes)
+**IMDB + Web scraping**
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-08-imdb-webscraping/ae-08-imdb-webscraping.Rmd)
+:::
+
+::: {.video}
+[Video](https://youtu.be/PetWV5g1Xsc)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 2 - Deck 21: Functions**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d21-functions/u2-d21-functions.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d21-functions)
+:::
+
+::: {.video}
+[Video](https://youtu.be/6KWlPhPMluE)
 :::
 
 ::: {.reading}
--   [R4DS :: Chp 20.2 - Vector basics](https://r4ds.had.co.nz/vectors.html#vector-basics)
--   [R4DS :: Chp 20.3 - Important types of atomic vector](https://r4ds.had.co.nz/vectors.html#important-types-of-atomic-vector)
--   [R4DS :: Chp 15 - Factors](https://r4ds.had.co.nz/factors.html)
--   [R4DS :: Chp 16.2 - Creating date/times](https://r4ds.had.co.nz/dates-and-times.html#creating-datetimes)
--   [R4DS :: Chp 16.3 - Date-time components](https://r4ds.had.co.nz/dates-and-times.html#date-time-components)
+R4DS :: [Chp 19 - Functions](https://r4ds.had.co.nz/functions.html)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 1 - Deck 9: Importing data**
+**Unit 2 - Deck 22: Iteration**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d09-import-data/u1_d09-import-data.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d09-import-data)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d22-iteration/u2-d22-iteration.html#1)
+:::
 
-::: {.application-exercise}
-[Nobels & Sales + Data import](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-07-nobels-sales-dataimport)
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d22-iteration)
+:::
+
+::: {.video}
+[Video](https://youtu.be/x3UMny1fQhc)
 :::
 
 ::: {.reading}
-[R4DS :: Chp 11 - Data import](https://r4ds.had.co.nz/data-import.html)
+R4DS :: [Chp 20 - Iteration](https://r4ds.had.co.nz/iteration.html)
 :::
 :::
 
-::: {.slide-deck}
-**Unit 1 - Deck 10: Tips for effective data visualization**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d10-effective-dataviz/u1_d10-effective-dataviz.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d10-effective-dataviz)
-
-::: {.reading}
-[IMS :: Sec 2.3 - Effective data visualization](https://openintro-ims.netlify.app/summarizing-visualizing-data.html#effective-data-visualization)
-:::
-:::
-
-::: {.slide-deck}
-**Unit 1 - Deck 11: Scientific studies and confounding**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d11-studies-confounding/u1_d11-studies-confounding.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d11-studies-confounding)
-
-::: {.reading}
--   [IMS :: Sec 1.3 - Sampling principles and strategies](https://openintro-ims.netlify.app/getting-started-with-data.html#sampling-principles-strategies)
--   [IMS :: Sec 1.4 - Experiments](https://openintro-ims.netlify.app/getting-started-with-data.html#experiments)
-:::
-:::
-
-::: {.slide-deck}
-**Unit 1 - Deck 12: Communicating data science results effectively**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d12-effective-communication/u1_d12-effective-communication.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d12-effective-communication)
-:::
-
-::: {.slide-deck}
-**Unit 1 - Deck 13: Web scraping**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d13-webscraping/u1_d13-webscraping.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d13-webscraping)
-
-::: {.application-exercise}
-[IMDB + Web scraping](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-08-imdb-webscraping)
-:::
-:::
-
-::: {.slide-deck}
-**Unit 1 - Deck 14: Functions and iteration**
-
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1_d14-functions-iteration/u1_d14-functions-iteration.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1_d14-functions-iteration)
-
-::: {.application-exercise}
-[University of Edinburgh Art + Functions](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-uoeart-functions)
-:::
-
-::: {.reading}
--   [R4DS :: Chp 19 - Functions](https://r4ds.had.co.nz/functions.html)
--   [R4DS :: Sec 21.5 - The map functions](https://r4ds.had.co.nz/iteration.html#the-map-functions)
-:::
-:::
-
--->
-```
 ## Labs
 
 ::: {.lab}
