@@ -1,0 +1,48 @@
+---
+title: "HW 01 - Pet names"
+author: "Insert your name here"
+date: "Insert date here"
+output: github_document
+---
+
+## Load packages and data
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(openintro)
+```
+
+## Exercises
+
+### Exercise 1
+
+There are \_\_\_ pets in the dataset.
+
+### Exercise 2
+
+Remove this text, and add your answer for Exercise 2 here.
+
+### Exercise 3
+
+Remove this text, and add your answer for Exercise 3 here.
+
+```{r most-common-names}
+seattlepets %>%
+  count(animal_name, sort = TRUE)
+```
+
+### Exercise 4
+
+Remove this text, and add your answer for Exercise 4 here.
+
+```{r most-common-cat-dog-names}
+# remove this comment and add the code for Exercise 4 here
+```
+
+### Exercise 5
+
+Remove this text, and add your answer for Exercise 5 here.
+
+### Exercise 6
+
+Remove this text, and add your answer for Exercise 5 here.
