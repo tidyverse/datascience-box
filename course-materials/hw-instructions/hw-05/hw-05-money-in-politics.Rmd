@@ -170,10 +170,7 @@ The following exercises walk you through how to make these fixes to the data.
 **Note:** The figure you create might look slightly different than this one if the data on the website has been updated recently.
 ```
 
-4.  Recreate the following visualisation.
-    Once you have made the plot, write a brief interpretation of what the graph reveals.
-    Note that these are only UK contributions.
-    You will need to make use of functions from the **scales** package for axis labels as well as from **ggplot2**.
+4.  Recreate the following visualisation. Once you have made the plot, write a brief interpretation of what the graph reveals. Note that these are only UK contributions. You will need to make use of functions from the **scales** package for axis labels as well as from **ggplot2**.
 
 ```{r eval = TRUE, echo = FALSE, message = FALSE, fig.fullwidth = TRUE, fig.asp = 0.5}
 pac_all <- read_csv("data/pac-all.csv")
