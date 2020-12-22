@@ -1,0 +1,103 @@
+---
+title: "HW 03 - Road traffic accidents"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  out.width = "80%",
+  fig.asp = 0.618,
+  fig.width = 10,
+  dpi = 300
+)
+```
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Clark Van Der Beken on Unsplash", eval = TRUE}
+knitr::include_graphics("img/accident.jpg")
+```
+
+In this assignment we'll look at traffic accidents in Edinburgh.
+The data are made available [online](https://data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data/datafile/36f1658e-b709-47e7-9f56-cca7aefeb8fe/preview) by the UK Government.
+It covers all recorded accidents in Edinburgh in 2018 and some of the variables were modified for the purposes of this assignment.
+
+# Getting started
+
+```{marginfigure}
+**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means I didn't have your GitHub username as of when I assigned the homework. Please let me know your GitHub username asap, and I can create your repo.
+```
+
+Go to the course GitHub organization and locate your homework repo, which should be named `hw-03-accidents-YOUR_GITHUB_USERNAME`.
+Grab the URL of the repo, and clone it in RStudio.
+First, open the R Markdown document `hw-03.Rmd` and Knit it.
+Make sure it compiles without errors.
+The output will be in the file markdown `.md` file with the same name.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+-   Update the YAML, changing the author name to your name, and **knit** the document.
+-   Commit your changes with a meaningful commit message.
+-   Push your changes to GitHub.
+-   Go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files. If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r load-packages, message = FALSE, eval = TRUE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Data
+
+The data can be found in the **dsbox** package, and it's called `accidents`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?accidents` in the Console or using the Help menu in RStudio to search for `accidents`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/accidents.html).
+
+# Exercises
+
+1.  How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code.
+
+```{marginfigure}
+**Tired of typing your password?** Chances are your browser has already saved your password, but if not, you can ask Git to save (cache) your password for a period of time, where you indicate the period of time in seconds. For example, if you want it to cache your password for 1 hour, that would be 3,600 seconds. To do so, run the following *in the Console*: `usethis::use_git_config(credential.helper = "cache --timeout=3600")`. If you want to cache it for a longer time, you can adjust the number of seconds in the code.
+```
+
+1.  Run `View(accidents)` in your Console to view the data in the data viewer. What does each row in the dataset represent?
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+3.  Recreate the following plot, and describe in context of the data. In your answer, don't forget to label your R chunk as well (where it says `label-me-1`). Your label should be short, informative, shouldn't include spaces, and shouldn't shouldn't repeat a previous label.
+
+```{r eval = TRUE, echo = FALSE, fig.fullwidth = TRUE}
+accidents %>%
+  mutate(day_of_week_type = if_else(day_of_week %in% c("Saturday", "Sunday"), "Weekend", "Weekday")) %>%
+  ggplot(aes(x = time, fill = severity)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~day_of_week_type, ncol = 1) +
+  theme_minimal() +
+  scale_fill_viridis_d() +
+  labs(
+    title = "Number of accidents throughout the day",
+    subtitle = "By day of week and severity",
+    x = "Time of day",
+    y = "Density",
+    fill = "Severity"
+  )
+```
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+4.  Create another data visualisation based on these data and interpret it. You can choose any variables and any type of visualisation you like, but it must have at least three variables, e.g. a scatterplot of x vs. y isn't enough, but if points are coloured by z, that's fine. In your answer, don't forget to label your R chunk as well (where it says `label-me-2`).
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

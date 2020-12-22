@@ -1,0 +1,187 @@
+---
+title: "HW 09 - Modeling the GSS"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  out.width = "80%",
+  fig.asp = 0.618,
+  fig.width = 10,
+  dpi = 300
+)
+```
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo Mauro Mora on Unsplash", eval = TRUE}
+knitr::include_graphics("img/mauro-mora-31-pOduwZGE-unsplash.jpg")
+```
+
+In this assignment we continue our exploration of the 2016 GSS dataset from the previous homework.
+
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for modeling and inference, and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r load-packages, message = FALSE, eval = TRUE}
+library(tidyverse)
+library(tidymodels)
+library(dsbox)
+```
+
+## Data
+
+The data can be found in the **dsbox** package, and it's called `gss16`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?gss16` in the Console or using the Help menu in RStudio to search for `gss16`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/gss16.html).
+
+# Exercises
+
+## Scientific research
+
+In this section we're going to build a model to predict whether someone agrees or doesn't agree with the following statement:
+
+> Even if it brings no immediate benefits, scientific research that advances the frontiers of knowledge is necessary and should be supported by the federal government.
+
+The responses to the question on the GSS about this statement are in the `advfront` variable.
+
+```{marginfigure}
+It's important that you don't recode the NAs, just the remaining levels.
+```
+
+1.  Re-level the `advfront` variable such that it has two levels: `Strongly agree` and "`Agree"` combined into a new level called `agree` and the remaining levels (except `NA`s) combined into "`Not agree"`. Then, re-order the levels in the following order: `"Agree"` and `"Not agree"`. Finally, `count()` how many times each new level appears in the `advfront` variable.
+
+```{marginfigure}
+You can do this in various ways. One option is to use the `str_detect()` function to detect the existence of words like liberal or conservative. Note that these sometimes show up with lowercase first letters and sometimes with upper case first letters. To detect either in the `str_detect()` function, you can use "[Ll]iberal" and "[Cc]onservative". But feel free to solve the problem however you like, this is just one option!
+```
+
+2.  Combine the levels of the `polviews` variable such that levels that have the word "liberal" in them are lumped into a level called `"Liberal"` and those that have the word conservative in them are lumped into a level called `"Conservative"`. Then, re-order the levels in the following order: `"Conservative"` , `"Moderate"`, and `"Liberal"`. Finally, `count()` how many times each new level appears in the `polviews` variable.
+3.  Create a new data frame called `gss16_advfront` that includes the variables `advfront`, `educ`, `polviews`, and `wrkstat`. Then, use the `drop_na()` function to remove rows that contain `NA`s from this new data frame. Sample code is provided below.
+
+```{r eval=FALSE}
+gss16_advfront <- gss16 %>%
+  select(___, ___, ___, ___) %>%
+  drop_na()
+```
+
+4.  Split the data into training (75%) and testing (25%) data sets. Make sure to set a seed before you do the `initial_split()`. Call the training data `gss16_train` and the testing data `gss16_test`. Sample code is provided below. Use these specific names to make it easier to follow the rest of the instructions.
+
+```{r eval=FALSE}
+set.seed(___)
+gss16_split <- initial_split(gss16_advfront)
+gss16_train <- training(gss16_split)
+gss16_test  <- testing(gss16_split)
+```
+
+5.  Create a recipe with the following steps for predicting `advfront` from `polviews`, `wrkstat`, and `educ`.
+    Name this recipe `gss16_rec_1`.
+    (We'll create one more recipe later, that's why we're naming this recipe `_1`.) Sample code is provided below.
+
+    -   `step_other()` to pool values that occur less than 10% of the time (`threshold = 0.10`) in the `wrkstat` variable into `"Other"`.
+
+    -   `step_dummy()` to create dummy variables for `all_nominal()` variables that are predictors, i.e. `all_predictors()`
+
+```{r eval=FALSE}
+gss16_rec_1 <- recipe(___ ~ ___, data = ___) %>%
+  step_other(wrkstat, threshold = ___, other = "Other") %>%
+  step_dummy(all_nominal(), -all_outcomes())
+```
+
+6.  Specify a logistic regression model using `"glm"` as the engine. Name this specification `gss16_spec`. Sample code is provided below.
+
+```{r eval=FALSE}
+gss16_spec <- ___() %>%
+  set_engine("___")
+```
+
+7.  Build a workflow that uses the recipe you defined (`gss16_rec`) and the model you specified (`gss16_spec`). Name this workflow `gss16_wflow_1`. Sample code is provided below.
+
+```{r eval=FALSE}
+gss16_wflow_1 <- workflow() %>%
+  add_model(___) %>%
+  add_recipe(___)
+```
+
+8.  Perform 5-fold cross validation.
+    specifically,
+
+    -   split the training data into 5 folds (don't forget to set a seed first!),
+
+    -   apply the workflow you defined earlier to the folds with `fit_resamples()`, and
+
+    -   `collect_metrics()` and comment on the consistency of metrics across folds (you can get the area under the ROC curve and the accuracy for each fold by setting `summarize = FALSE` in `collect_metrics()`)
+
+    -   report the average area under the ROC curve and the accuracy for all cross validation folds `collect_metrics()`
+
+```{r eval=FALSE}
+set.seed(___)
+gss16_folds <- vfold_cv(___, v = ___)
+
+gss16_fit_rs_1 <- gss16_wflow_1 %>%
+  fit_resamples(___)
+
+collect_metrics(___, summarize = FALSE)
+collect_metrics(___)
+```
+
+9.  Now, try a different, simpler model: predict `advfront` from only `polviews` and `educ`.
+    Specifically,
+
+    -   update the recipe to reflect this simpler model specification (and name it `gss16_rec_2`),
+    -   redefine the workflow with the new recipe (and name this new workflow `gss16_wflow_2`),
+    -   perform cross validation, and
+    -   report the average area under the ROC curve and the accuracy for all cross validation folds `collect_metrics()`.
+
+10. Comment on which model performs better (one including `wrkstat`, model 1, or the one excluding `wrkstat`, model 2) on the training data based on area under the ROC curve.
+
+11. Fit both models to the testing data, plot the ROC curves for the predictions for both models, and calculate the areas under the ROC curve.
+    Does your answer to the previous exercise hold for the testing data as well?
+    Explain your reasoning.
+    Note: If you haven't yet done so, you'll need to first train your workflows on the training data with the following, and then use these fit objects to calculate predictions for the test data.
+
+```{r eval=FALSE}
+gss16_fit_1 <- gss16_wflow_1 %>%
+  fit(gss16_train)
+
+gss16_fit_2 <- gss16_wflow_2 %>%
+  fit(gss16_train)
+```
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+## Harassment at work
+
+In 2016, the GSS added a new question on harassment at work.
+The question is phrased as the following.
+
+> Over the past five years, have you been harassed by your superiors or co-workers at your job, for example, have you experienced any bullying, physical or psychological abuse?
+
+Answers to this question are stored in the `harass5` variable in our dataset.
+
+12. Create a subset of the data that only contains `Yes` and `No` answers for the harassment question. How many responses chose each of these answers?
+13. Describe how bootstrapping can be used to estimate the proportion of Americans who have been harassed by their superiors or co-workers at their job.
+14. Calculate a 95% bootstrap confidence interval for the proportion of Americans who have been harassed by their superiors or co-workers at their job. Interpret this interval in context of the data.
+15. Would you expect a 90% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

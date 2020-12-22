@@ -1,0 +1,102 @@
+---
+title: "HW 05 - Legos"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  out.width = "80%",
+  fig.asp = 0.618,
+  fig.width = 10,
+  dpi = 300
+)
+```
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width = 3, fig.cap = "Photo by Daniel Cheung on Unsplash", eval = TRUE}
+knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
+```
+
+This week we'll do some data gymnastics to refresh and review what we learned over the past few weeks using (simulated) data from Lego sales in 2018 for a sample of customers who bought Legos in the US.
+
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r load-packages, message = FALSE, eval = TRUE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Data
+
+The data can be found in the **dsbox** package, and it's called `lego_sales`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?lego_sales` in the Console or using the Help menu in RStudio to search for `lego_sales`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/lego_sales.html).
+
+# Exercises
+
+Answer the following questions using pipelines.
+For each question, state your answer in a sentence, e.g. "In this sample, the first three common names of purchasers are ...".
+Note that the answers to all questions are within the context of this particular sample of sales, i.e. you shouldn't make inferences about the population of all Lego sales based on this sample.
+
+1.  What are the three most common first names of purchasers?
+
+2.  What are the three most common themes of Lego sets purchased?
+
+3.  Among the most common theme of Lego sets purchased, what is the most common subtheme?
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+```{marginfigure}
+**Hint:** Use the `case_when()` function.
+```
+
+4.  Create a new variable called `age_group` and group the ages into the following categories: "18 and under", "19 - 25", "26 - 35", "36 - 50", "51 and over".
+
+```{marginfigure}
+**Hint:** You will need to consider quantity of purchases.
+```
+
+5.  Which age group has purchased the highest number of Lego sets.
+
+```{marginfigure}
+**Hint:** You will need to consider quantity of purchases as well as price of lego sets.
+```
+
+6.  Which age group has spent the most money on Legos?
+
+```{marginfigure}
+**Hint:** The [`str_sub()`](https://stringr.tidyverse.org/reference/str_sub.html) function will be helpful here!
+```
+
+7.  Which Lego theme has made the most money for Lego?
+
+8.  Which area code has spent the most money on Legos?
+    In the US the area code is the first 3 digits of a phone number.
+
+9.  Come up with a question you want to answer using these data, and write it down.
+    Then, create a data visualization that answers the question, and explain how your visualization answers the question.
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
