@@ -82,7 +82,7 @@ Please make sure to consider this before using this activity.
 :::
 
 ::: {.slide-deck}
-**Unit 1 - Deck 3: Meet the toolkit - Version control**
+**Unit 1 - Deck 3: Meet the toolkit - Version control and collaboration**
 
 ::: {.slides}
 [Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d03-toolkit-git/u1-d03-toolkit-git.html#1)
