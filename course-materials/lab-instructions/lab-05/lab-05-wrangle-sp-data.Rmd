@@ -9,28 +9,49 @@ output:
 link-citations: yes
 ---
 
-```{r include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
-```
-
-```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
+```{r fig.margin = TRUE, echo = FALSE}
 knitr::include_graphics("img/mitch-hedgeberg-lqd.jpg")
 ```
 
 In this lab we revisit the Denny's and La Quinta Inn and Suites data we visualized in the previous lab.
 
-## Packages and data
+# Learning goals
 
-In this lab we will use the **tidyverse** and **dsbox** packages.
+-   Working with spatial data
+-   Writing and using a custom function
 
-```{r}
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r message = FALSE}
 library(tidyverse) 
-library(dsbox)
+library(dsbox) 
 ```
 
-The datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
+## Data
 
-## Exercises
+Remember that the datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
+Since the datasets are distributed with the package, we don't need to load them separately; they become available to us when we load the package.
+You can find out more about the datasets by inspecting their documentation, which you can access by running `?dennys` and `?laquinta` in the Console or using the Help menu in RStudio to search for `dennys` or `laquinta`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/dennys.html) and [here](https://rstudio-education.github.io/dsbox/reference/laquinta.html).
+
+# Exercises
 
 1.  Filter the Denny's dataframe for Alaska (AK) and save the result as `dn_ak`. How many Denny's locations are there in Alaska?
 
@@ -153,14 +174,13 @@ This function takes five arguments:
 7.  Calculate the minimum distance between a Denny's and La Quinta for each Denny's location.
     To do so we group by Denny's locations and calculate a new variable that stores the information for the minimum distance.
 
-```{r}
+```{r eval = FALSE}
 dn_lq_ak_mindist <- dn_lq_ak %>%
   group_by(address.x) %>%
   summarise(closest = min(distance))
 ```
 
-8.  Describe the distribution of the distances Denny's and the nearest La Quinta locations in Alaska.
-    Also include an appripriate visualization and relevant summary statistics.
+8.  Describe the distribution of the distances Denny's and the nearest La Quinta locations in Alaska. Also include an appripriate visualization and relevant summary statistics.
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -173,4 +193,4 @@ dn_lq_ak_mindist <- dn_lq_ak %>%
 12. Among the states you examined, where is Mitch Hedberg's joke most likely to hold true?
     Explain your reasoning.
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

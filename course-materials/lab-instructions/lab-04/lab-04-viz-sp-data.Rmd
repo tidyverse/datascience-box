@@ -9,11 +9,11 @@ output:
 link-citations: yes
 ---
 
-```{r include=FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
+```{r fig.margin = TRUE, echo = FALSE}
 knitr::include_graphics("img/mitch-hedgeberg-lqd.jpg")
 ```
 
@@ -32,21 +32,47 @@ In this lab we focus on visualization and analysis of these data.
 However note that the data scraping was also done in R, and we we will discuss web scraping using R later in the course.
 But for now we focus on the data that has already been scraped and tidied for you.
 
+# Learning goals
+
+-   Visualising spatial data
+-   Joining data frames
+
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+-   Update the YAML, changing the author name to your name, and **knit** the document.
+-   Commit your changes with a meaningful commit message.
+-   Push your changes to GitHub.
+-   Go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files. If anything is missing, commit and push again.
+
 ## Packages
 
-In this lab we will use the **tidyverse** and **dsbox** packages.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
-```{r eval = TRUE, message = FALSE}
+```{r message = FALSE}
 library(tidyverse) 
 library(dsbox) 
 ```
 
-## The data
+## Data
 
 The datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
 Note that these data were scraped from [here](https://locations.dennys.com/) and [here](https://www.lq.com/en/findandbook/hotel-listings.html), respectively.
 
-To help with our analysis we will also use a dataset on US states:
+The datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
+Since the datasets are distributed with the package, we don't need to load them separately; they become available to us when we load the package.
+You can find out more about the datasets by inspecting their documentation, which you can access by running `?dennys` and `?laquinta` in the Console or using the Help menu in RStudio to search for `dennys` or `laquinta`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/dennys.html) and [here](https://rstudio-education.github.io/dsbox/reference/laquinta.html).
+
+To help with our analysis we will also use a dataset on US states, which is located in your repository's `data` folder.
 
 ```{r}
 states <- read_csv("data/states.csv")
@@ -55,7 +81,7 @@ states <- read_csv("data/states.csv")
 Each observation in this dataset represents a state, including DC.
 Along with the name of the state we have the two-letter abbreviation and we have the geographic area of the state (in square miles).
 
-## Exercises
+# Exercises
 
 1.  What are the dimensions of the Denny's dataset?
     (Hint: Use inline R code and functions like `nrow` and `ncol` to compose your answer.) What does each row in the dataset represent?
@@ -113,7 +139,7 @@ dn %>%
     You'll need to refer to your notes from Exercise 7 about which country the non-US locations are in.
     Here is some starter code to get you going:
 
-```{r eval=FALSE}
+```{r eval = FALSE}
 lq %>%
   mutate(country = case_when(
     state %in% state.abb     ~ "United States",
@@ -137,7 +163,7 @@ lq <- lq %>%
 9.  Which states have the most and fewest Denny's locations? What about La Quinta? Is this surprising? Why or why not?
 
 Next, let's calculate which states have the most Denny's locations *per thousand square miles*.
-This requires *join*ining information from the frequency tables you created in Exercise 8 with information from the `states` data frame.
+This requires *joinining* information from the frequency tables you created in Exercise 8 with information from the `states` data frame.
 
 First, we count how many observations are in each state, which will give us a data frame with two variables: `state` and `n`.
 Then, we join this data frame with the `states` data frame.
@@ -195,4 +221,4 @@ You can also choose different themes to change the overall look of your plots, s
 That's it for now!
 In the next lab we will take a more quantitative approach to answering these questions.
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

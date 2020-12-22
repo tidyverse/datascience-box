@@ -139,10 +139,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="learning-goals" class="section level1">
 <h1>Learning goals</h1>
 <ul>
-<li>Manipulate and transform data to prepare it for visualization.</li>
-<li>Recreate visualizations.</li>
-<li>Summarise data.</li>
-<li>Get more practice working as a team.</li>
+<li>Collaborating on GitHub and resolving merge conflicts</li>
+<li>Replicating published results</li>
+<li>Data wrangling and visualisation</li>
 </ul>
 </div>
 <div id="lab-prep" class="section level1">
@@ -240,19 +239,25 @@ See also [ggplot2 documentation](https://ggplot2.tidyverse.org/)
 </div>
 <div id="getting-started" class="section level1">
 <h1>Getting started</h1>
-<div id="repository" class="section level2">
-<h2>Repository</h2>
-<p><strong>EVERYONE:</strong> Go to course <a href="https://github.com/ids-s1-20">GitHub organization</a> and locate your Lab 03 repo, which should be named <code>lab-03-nobel-laureates-YOUR_TEAMNAME</code>. Grab the URL of the repo, and clone it in RStudio Cloud. Refer to <a href="https://ids-s1-20.github.io/homework/hw-00/hw-00-pet-names.html">HW 00</a> if you would like to see step-by-step instructions for cloning a repo into an RStudio project.</p>
-<p>First, open the R Markdown document <code>lab-03.Rmd</code> and knit it. Make sure it compiles without errors. The output will be a markdown document (<code>.md</code>) file with the same name.</p>
+<p>Go to the course GitHub organization and locate your lab repo, which should be named <code>lab-03-nobel-laureates-YOUR_GITHUB_USERNAME</code>. Grab the URL of the repo, and clone it in RStudio. First, open the R Markdown document <code>lab-03.Rmd</code> and Knit it. Make sure it compiles without errors. The output will be in the file markdown <code>.md</code> file with the same name.</p>
+<div id="warm-up" class="section level2">
+<h2>Warm up</h2>
+<p>Before we introduce the data, let’s warm up with some simple exercises.</p>
+<ul>
+<li>Update the YAML, changing the author name to your name, and <strong>knit</strong> the document.</li>
+<li>Commit your changes with a meaningful commit message.</li>
+<li>Push your changes to GitHub.</li>
+<li>Go to your repo on GitHub and confirm that your changes are visible in your Rmd <strong>and</strong> md files. If anything is missing, commit and push again.</li>
+</ul>
 </div>
 <div id="packages" class="section level2">
 <h2>Packages</h2>
-<p>Before getting started with the Exercises, run the following code in the Console to load this package.</p>
+<p>We’ll use the <strong>tidyverse</strong> package for much of the data wrangling. This package is already installed for you. You can load them by running the following in your Console:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 </div>
-<div id="data-nobel-laureates" class="section level2">
-<h2>Data: Nobel laureates</h2>
-<p>The dataset for this assignment can be found as a csv file in the `data` folder of your repository. You can read it in using the following.</p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The dataset for this assignment can be found as a CSv (comma separated values) file in the <code>data</code> folder of your repository. You can read it in using the following.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nobel <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/nobel.csv&quot;</span>)</span></code></pre></div>
 <p>The variable descriptions are as follows:</p>
 <ul>
@@ -351,7 +356,7 @@ See also [ggplot2 documentation](https://ggplot2.tidyverse.org/)
 <ol start="6" style="list-style-type: decimal">
 <li>In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the <code>count()</code> function) for their birth country (<code>born_country</code>) and arrange the resulting data frame in descending order of number of observations for each country. Which country is the most common?</li>
 </ol>
-<p>🧶 ✅ ⬆️ Knit, <em>commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
+<p>🧶 ✅ ⬆️ Knit, <em>commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you’re happy with the final state of your work.</em></p>
 <p>Now go back through your write up to make sure you’ve answered all questions and all of your R chunks are properly labelled. Once you decide as a team that you’re done with this lab, all members of the team should pull the changes and knit the R Markdown document to confirm that they can reproduce the report.</p>
 </div>
 </div>

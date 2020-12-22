@@ -1,5 +1,5 @@
 ---
-title: "Lab 06 - Ugly chartss"
+title: "Lab 06 - Take a sad plot and make it better"
 output: 
   tufte::tufte_html:
     css: ../lab.css
@@ -19,41 +19,64 @@ Your visualization should be accompanied by a brief paragraph describing the cho
 
 On the due date you will give a brief presentation describing one of your improved visualizations and the reasoning for the choices you made.
 
-The learning goals for this lab are:
+# Learning goals
 
 -   Telling a story with data
 -   Data visualization best practices
 -   Reshaping data
 
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
 ## Packages
 
-Run the following code in the Console to load this package.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
 
-```{r load-packages, message=FALSE, eval=TRUE}
-library(tidyverse)
+```{r eval = TRUE, message = FALSE}
+library(tidyverse) 
+library(dsbox) 
 ```
 
-## Take a sad plot and make it better
+## Data
 
-### Instructional staff employment trends
+The datasets we'll use are called `instructors` and `fisheries` from the **dsbox** package.
+Since the datasets are distributed with the package, we don't need to load them separately; they become available to us when we load the package.
+You can find out more about the datasets by inspecting their documentation, which you can access by running `?instructors` and `?fisheries` in the Console or using the Help menu in RStudio to search for `instructors` or `fisheries`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/instructors.html) and [here](https://rstudio-education.github.io/dsbox/reference/fisheries.html).
+
+# Exercises
+
+## Instructional staff employment trends
 
 The American Association of University Professors (AAUP) is a nonprofit membership association of faculty and other academic professionals.
 [This report](https://www.aaup.org/sites/default/files/files/AAUP_Report_InstrStaff-75-11_apr2013.pdf) compiled by the AAUP shows trends in instructional staff employees between 1975 and 2011, and contains an image very similar to the one given below.
 
-```{r echo=FALSE, fig.fullwidth=TRUE}
+```{r echo=FALSE, fig.fullwidth = TRUE}
 knitr::include_graphics("img/staff-employment.png")
 ```
 
 Let's start by loading the data used to create this plot.
 
-```{r load-data-staff, message=FALSE, eval=TRUE}
+```{r load-data-staff, message = FALSE}
 staff <- read_csv("data/instructional-staff.csv")
 ```
 
 Each row in this dataset represents a faculty type, and the columns are the years for which we have data.
 The values are percentage of hires of that type of faculty for each year.
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 staff
 ```
 
@@ -66,13 +89,13 @@ If there are 5 faculty types and 11 years of data, how many rows will we have?
 We do the wide to long conversion using a new function: `pivot_longer()`.
 The animation below show how this function works, as well as its counterpart `pivot_wider()`.
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 knitr::include_graphics("img/tidyr-longer-wider.gif")
 ```
 
 The function has the following arguments:
 
-```{r eval=FALSE}
+```{r eval = FALSE}
 pivot_longer(data, cols, names_to = "name")
 ```
 
@@ -95,7 +118,7 @@ staff_long
 And now let's plot is as a line plot.
 A possible approach for creating a line plot where we color the lines by faculty type is the following:
 
-```{r eval=TRUE, fig.width=10}
+```{r fig.width = 10, fig.fullwidth = TRUE}
 staff_long %>%
   ggplot(aes(x = year, y = value, color = faculty_type)) +
   geom_line()
@@ -105,7 +128,7 @@ But note that this results in a message as well as an unexpected plot.
 The message is saying that there is only one observation for each faculty type year combination.
 We can fix this using the `group` aesthetic following.
 
-```{r eval=FALSE, fig.width=10}
+```{r fig.width = 10, fig.fullwidth = TRUE}
 staff_long %>%
   ggplot(aes(x = year, y = value, group = faculty_type, color = faculty_type)) +
   geom_line()
@@ -121,7 +144,7 @@ staff_long %>%
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-### Fisheries
+## Fisheries
 
 Fisheries and Aquaculture Department of the Food and Agriculture Organization of the United Nations collects data on fisheries production of countries.
 [This Wikipedia page](https://en.wikipedia.org/wiki/Fishing_industry_by_country) lists fishery production of countries for 2016.
@@ -131,7 +154,7 @@ Note that countries whose total harvest was less than 100,000 tons are not inclu
 A researcher shared with you the following visualization they created based on these data.
 😳
 
-```{r echo=FALSE, fig.fullwidth=TRUE}
+```{r echo=FALSE, fig.fullwidth = TRUE}
 knitr::include_graphics("img/fisheries.png")
 ```
 
@@ -139,15 +162,15 @@ knitr::include_graphics("img/fisheries.png")
 
 Load the data.
 
-```{r load-data-fisheries, eval=FALSE}
+```{r load-data-fisheries, eval = FALSE}
 fisheries <- read_csv("data/fisheries.csv")
 ```
 
 5.  Create a new data visualisation for these data that implements the improvements you proposed in the previous exercise (or many of them as you can).
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
 
-## Wrapping up
+# Wrapping up
 
 Go back through your write up to make sure you're following coding style guidelines we discussed in class.
 Make any edits as needed.
@@ -156,7 +179,7 @@ Also, make sure all of your R chunks are properly labelled, and your figures are
 
 Once the team leader for the week pushes their final changes, others should *pull* the changes and knit the R Markdown document to confirm that they can reproduce the report.
 
-## More ugly charts
+# More ugly charts
 
 Want to see more ugly charts?
 

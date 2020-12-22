@@ -28,7 +28,7 @@ And to make versioning simpler, this is a solo lab.
 Additionally, we want to make sure everyone gets a significant amount of time at the steering wheel.
 In future labs you'll learn about collaborating on GitHub and produce a single lab report for your team.
 
-## Connecting GitHub and RStudio Cloud
+# Connecting GitHub and RStudio Cloud
 
 You should have already received an invitation to join the GitHub organization for this course.
 You need to accept the invitation before moving on to the next step.
@@ -72,7 +72,7 @@ knitr::include_graphics("img/github-auth-5.png")
 knitr::include_graphics("img/github-auth-6.png")
 ```
 
-## Getting started
+# Getting started
 
 Each of your assignments will begin with the following steps.
 You saw these once in class yesterday, they're outlined in detail here again.
@@ -151,13 +151,9 @@ But for this one assignment you'll have to manually enter each time you push in 
 
 ## Packages
 
-In this lab we will work with two packages: `datasauRus` which contains the dataset, and `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way.
-
+In this lab we will work with two packages: **datasauRus** which contains the dataset we'll be using and **tidyverse** which is a collection of packages for doing data analysis in a "tidy" way.
 These packages are already installed for you.
-You should be able to Knit your document and see the results.
-
-If you'd like to run your code in the Console as well you'll also need to load the packages there.
-To do so, run the following in the console.
+You can load the packages by running the following in the Console.
 
 ```{r message=FALSE}
 library(tidyverse) 
@@ -166,7 +162,7 @@ library(datasauRus)
 
 Note that the packages are also loaded with the same commands in your R Markdown document.
 
-## The data
+## Data
 
 ```{marginfigure}
 If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone! Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
@@ -180,7 +176,7 @@ To find out more about the dataset, type the following in your Console: `?datasa
 A question mark before the name of an object will always bring up its help file.
 This command must be ran in the Console.
 
-## Exercises
+# Exercises
 
 1.  Based on the help file, how many rows and how many columns does the `datasaurus_dozen` file have? What are the variables included in the data frame? Add your responses to your lab report.
 
@@ -271,7 +267,7 @@ dino_data %>%
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-5.  Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
+5.  Finally, let's plot all datasets at once. In order to do this we will make use of faceting.
 
 ```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+

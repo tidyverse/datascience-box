@@ -8,7 +8,7 @@ output:
 link-citations: yes
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(eval = TRUE)
 ```
 
@@ -20,10 +20,9 @@ In this lab we will work with the data from this article to recreate some of the
 
 # Learning goals
 
--   Manipulate and transform data to prepare it for visualization.
--   Recreate visualizations.
--   Summarise data.
--   Get more practice working as a team.
+-   Collaborating on GitHub and resolving merge conflicts
+-   Replicating published results
+-   Data wrangling and visualisation
 
 # Lab prep
 
@@ -133,27 +132,34 @@ If you feel like you won't be able to resist the urge to touch your computer whe
 
 # Getting started
 
-## Repository
-
-**EVERYONE:** Go to course [GitHub organization](https://github.com/ids-s1-20) and locate your Lab 03 repo, which should be named `lab-03-nobel-laureates-YOUR_TEAMNAME`.
-Grab the URL of the repo, and clone it in RStudio Cloud.
-Refer to [HW 00](https://ids-s1-20.github.io/homework/hw-00/hw-00-pet-names.html) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
-
-First, open the R Markdown document `lab-03.Rmd` and knit it.
+Go to the course GitHub organization and locate your lab repo, which should be named `lab-03-nobel-laureates-YOUR_GITHUB_USERNAME`.
+Grab the URL of the repo, and clone it in RStudio.
+First, open the R Markdown document `lab-03.Rmd` and Knit it.
 Make sure it compiles without errors.
-The output will be a markdown document (`.md`) file with the same name.
+The output will be in the file markdown `.md` file with the same name.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+-   Update the YAML, changing the author name to your name, and **knit** the document.
+-   Commit your changes with a meaningful commit message.
+-   Push your changes to GitHub.
+-   Go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files. If anything is missing, commit and push again.
 
 ## Packages
 
-Before getting started with the Exercises, run the following code in the Console to load this package.
+We'll use the **tidyverse** package for much of the data wrangling.
+This package is already installed for you.
+You can load them by running the following in your Console:
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 ```
 
-## Data: Nobel laureates
+## Data
 
-The dataset for this assignment can be found as a csv file in the \`data\` folder of your repository.
+The dataset for this assignment can be found as a CSv (comma separated values) file in the `data` folder of your repository.
 You can read it in using the following.
 
 ```{r load-data, message = FALSE}
@@ -295,7 +301,7 @@ Note that your bar plot won't exactly match the one from the Buzzfeed article. T
 
 6.  In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the `count()` function) for their birth country (`born_country`) and arrange the resulting data frame in descending order of number of observations for each country. Which country is the most common?
 
-🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
 
 Now go back through your write up to make sure you've answered all questions and all of your R chunks are properly labelled.
 Once you decide as a team that you're done with this lab, all members of the team should pull the changes and knit the R Markdown document to confirm that they can reproduce the report.
