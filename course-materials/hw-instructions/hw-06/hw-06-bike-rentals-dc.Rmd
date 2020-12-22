@@ -143,8 +143,4 @@ dcbikeshare %>%
 
 15. According to this model, assuming everything else is the same, in which season does the model predict total daily bike rentals to be highest and which to be the lowest?
 
-16. Perform the first step of backward selection by fitting a series of models, each with one explanatory variable removed from the model you fit in the previous exercise.
-    Record adjusted $R^2$s of each of these models.
-    Which model of these models, if any, gives the highest improvement over the model in the previous exercise?
-
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
