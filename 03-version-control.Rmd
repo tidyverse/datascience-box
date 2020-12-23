@@ -69,7 +69,7 @@ If you would like to learn more about teaching with version control, I recommend
 
 > Beckman, M. D., Çetinkaya-Rundel, M., Horton, N. J., Rundel, C. W., Sullivan, A. J., & Tackett, M.
 > (2020).
-> Implementing version control with Git as a learning objective in statistics courses.
-> [arxiv.org/abs/2001.01988](https://arxiv.org/abs/2001.01988)
+> Implementing version control with Git and GitHub as a learning objective in statistics and data science courses.
+> [doi.org/10.1080/10691898.2020.1848485](https://doi.org/10.1080/10691898.2020.1848485)
 
 If you would like to learn more about using version control with R, I strongly recommend [Happy Git with R](https://happygitwithr.com/).
