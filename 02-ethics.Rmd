@@ -3,7 +3,7 @@
 This unit touches on data science ethics, specifically on issues of misrepresentation of data and results, data privacy, and algorithmic bias.
 Course lectures are supplemented with "guest lectures" from domain experts.
 
-## Slides & application exercises
+## Slides
 
 ::: {.slide-deck}
 **Unit 3 - Deck 1: Misrepresentation**

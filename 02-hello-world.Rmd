@@ -16,6 +16,11 @@ There are two options for a day one application exercise.
 Note that one of them uses COVID-19 data and depending on where, when, and to whom you're teaching, working with these data might not be the most pleasant experience for all students.
 Please make sure to consider this before using this activity.
 
+::: {.rstudio-cloud}
+The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK).
+You can join the workspace and play around with the sample application exercises.
+:::
+
 ::: {.slide-deck}
 **Unit 1 - Deck 1: Welcome**
 
@@ -95,9 +100,4 @@ Please make sure to consider this before using this activity.
 ::: {.video}
 [Video](https://youtu.be/124DQasLyNQ)
 :::
-:::
-
-::: {.rstudio-cloud}
-The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK).
-You can join the workspace and play around with the sample application exercises.
 :::

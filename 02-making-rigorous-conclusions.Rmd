@@ -4,6 +4,11 @@ In this part we introduce modelling and statistical inference for making data-ba
 We discuss building, interpreting, and selecting models, visualizing interaction effects, and prediction and model validation.
 Statistical inference is introduced from a simulation based perspective, and the Central Limit Theorem is discussed very briefly to lay the foundation for future coursework in statistics.
 
+::: {.rstudio-cloud}
+The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK).
+You can join the workspace and play around with the sample application exercises.
+:::
+
 ## Slides & application exercises
 
 ### Modelling data
