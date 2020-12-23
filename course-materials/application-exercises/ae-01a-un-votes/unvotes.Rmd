@@ -30,7 +30,7 @@ unvotes <- read_rds("data/unvotes.rds")
 
 ## UN voting patterns
 
-Let's create a data visualization that displays how the voting record of the UK & NI changed over time on a variety of issues, and compares it to two other countries: US and Turkey.
+Let's create a data visualisation that displays how the voting record of the UK & NI changed over time on a variety of issues, and compares it to two other countries: US and Turkey.
 
 We can easily change which countries are being plotted by changing which countries the code above `filter`s for.
 Note that the country name should be spelled and capitalized exactly the same way as it appears in the data.
