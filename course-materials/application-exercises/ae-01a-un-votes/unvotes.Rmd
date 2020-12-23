@@ -28,7 +28,7 @@ The data we're using originally come from the **unvotes** package, but it's been
 unvotes <- read_rds("data/unvotes.rds")
 ```
 
-## UN voting patterns {\#voting}
+## UN voting patterns
 
 Let's create a data visualization that displays how the voting record of the UK & NI changed over time on a variety of issues, and compares it to two other countries: US and Turkey.
 
@@ -56,13 +56,13 @@ unvotes %>%
   )
 ```
 
-## References {\#references}
+## References
 
 1.  David Robinson (2017). [unvotes](https://CRAN.R-project.org/package=unvotes): United Nations General Assembly Voting Data. R package version 0.2.0.
 2.  Erik Voeten "Data and Analyses of Voting in the UN General Assembly" Routledge Handbook of International Organization, edited by Bob Reinalda (published May 27, 2013).
 3.  Much of the analysis has been modeled on the examples presented in the [unvotes package vignette](https://cran.r-project.org/web/packages/unvotes/vignettes/unvotes.html).
 
-## Appendix {\#appendix}
+## Appendix
 
 Below is a list of countries in the dataset:
 

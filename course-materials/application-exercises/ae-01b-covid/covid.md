@@ -113,7 +113,7 @@ as_of_date <- country_data %>%
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
 ```
 
-These data are as of Sun, Aug 16, 2020.
+These data are as of Tue, Dec 22, 2020.
 
 ## Visualisation
 

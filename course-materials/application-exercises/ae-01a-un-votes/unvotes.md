@@ -32,7 +32,7 @@ the package) to help you get started with the analysis.
 unvotes <- read_rds("data/unvotes.rds")
 ```
 
-## UN voting patterns {\#voting}
+## UN voting patterns
 
 Let’s create a data visualization that displays how the voting record of
 the UK & NI changed over time on a variety of issues, and compares it to
@@ -66,7 +66,7 @@ unvotes %>%
 
 ![](unvotes_files/figure-gfm/plot-yearly-yes-issue-1.png)<!-- -->
 
-## References {\#references}
+## References
 
 1.  David Robinson (2017).
     [unvotes](https://CRAN.R-project.org/package=unvotes): United
@@ -78,7 +78,7 @@ unvotes %>%
     the [unvotes package
     vignette](https://cran.r-project.org/web/packages/unvotes/vignettes/unvotes.html).
 
-## Appendix {\#appendix}
+## Appendix
 
 Below is a list of countries in the dataset:
 
