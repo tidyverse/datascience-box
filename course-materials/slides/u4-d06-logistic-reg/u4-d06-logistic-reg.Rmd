@@ -1,0 +1,384 @@
+---
+title: "Logistic regression"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+library(ggridges)
+set.seed(1234)
+```
+
+class: middle
+
+# Predicting categorical data
+
+---
+
+## Spam filters
+
+.pull-left-narrow[
+- Data from 3921 emails and 21 variables on them
+- Outcome: whether the email is spam or not
+- Predictors: number of characters, whether the email had "Re:" in the subject, time at which email was sent, number of times the word "inherit" shows up in the email, etc.
+]
+.pull-right-wide[
+.small[
+```{r}
+library(openintro)
+glimpse(email)
+```
+]
+]
+
+---
+
+.question[
+Would you expect longer or shorter emails to be spam?
+]
+
+--
+
+.pull-left[
+```{r echo=FALSE, out.width="100%"}
+email %>%
+  ggplot(aes(x = num_char, y = spam, fill = spam, color = spam)) +
+  geom_density_ridges2(alpha = 0.5) +
+  labs(
+    x = "Number of characters (in thousands)", 
+    y = "Spam",
+    title = "Spam vs. number of characters"
+    ) +
+  guides(color = FALSE, fill = FALSE) +
+  scale_fill_manual(values = c("#E48957", "#CA235F")) +
+  scale_color_manual(values = c("#DEB4A0", "#CA235F"))
+```
+]
+.pull-right[
+```{r echo=FALSE}
+email %>% 
+  group_by(spam) %>% 
+  summarise(mean_num_char = mean(num_char))
+```
+]
+
+---
+
+.question[
+Would you expect emails that have subjects starting with "Re:", "RE:", "re:", or "rE:" to be spam or not?
+]
+
+--
+
+```{r echo=FALSE}
+email %>%
+  ggplot(aes(x = re_subj, fill = spam)) +
+  geom_bar(position = "fill") +
+  labs(
+    x = 'Whether “re:”, "RE:", etc. was in the email subject.', 
+    fill = "Spam", 
+    y = NULL,
+    title = 'Spam vs. "re:" in subject'
+    ) +
+  scale_fill_manual(values = c("#DEB4A0", "#CA235F"))
+```
+
+---
+
+## Modelling spam
+
+- Both number of characters and whether the message has "re:" in the subject might be related to whether the email is spam. How do we come up with a model that will let us explore this relationship?
+
+--
+- For simplicity, we'll focus on the number of characters (`num_char`) as predictor, but the model we describe can be expanded to take multiple predictors as well.
+
+---
+
+## Modelling spam
+
+This isn't something we can reasonably fit a linear model to -- we need something different!
+
+```{r echo=FALSE, out.width="70%"}
+means <- email %>%
+  group_by(spam) %>%
+  summarise(mean_num_char = mean(num_char)) %>%
+  mutate(group = 1)
+
+ggplot(email, aes(x = num_char, y = spam, color = spam)) +
+  geom_jitter(alpha = 0.2) +
+  geom_line(data = means, aes(x = mean_num_char, y = spam, group = group), color = "black", size = 1.5) +
+  labs(x = "Number of characters (in thousands)", y = "Spam") +
+  scale_color_manual(values = c("#DEB4A0", "#CA235F")) +
+  guides(color = FALSE)
+```
+
+---
+
+## Framing the problem
+
+- We can treat each outcome (spam and not) as successes and failures arising from separate Bernoulli trials
+  - Bernoulli trial: a random experiment with exactly two possible outcomes, "success" and "failure", in which the probability of success is the same every time the experiment is conducted
+
+--
+- Each Bernoulli trial can have a separate probability of success
+
+$$ y_i ∼ Bern(p) $$
+
+--
+- We can then use the predictor variables to model that probability of success, $p_i$
+
+--
+- We can't just use a linear model for $p_i$ (since $p_i$ must be between 0 and 1) but we can transform the linear model to have the appropriate range
+
+---
+
+## Generalized linear models
+
+- This is a very general way of addressing many problems in regression and the resulting models are called **generalized linear models (GLMs)**
+
+--
+- Logistic regression is just one example
+
+---
+
+## Three characteristics of GLMs
+
+All GLMs have the following three characteristics:
+
+1. A probability distribution describing a generative model for the outcome variable
+
+--
+2. A linear model:
+$$\eta = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k$$
+
+--
+3. A link function that relates the linear model to the parameter of the outcome distribution
+  
+---
+
+class: middle
+
+# Logistic regression
+
+---
+
+## Logistic regression
+
+- Logistic regression is a GLM used to model a binary categorical outcome using numerical and categorical predictors
+
+--
+- To finish specifying the Logistic model we just need to define a reasonable link function that connects $\eta_i$ to $p_i$: logit function
+
+--
+- **Logit function:** For $0\le p \le 1$
+
+$$logit(p) = \log\left(\frac{p}{1-p}\right)$$
+
+
+
+---
+
+## Logit function, visualised
+
+```{r echo=FALSE}
+d <- tibble(p = seq(0.001, 0.999, length.out = 1000)) %>%
+  mutate(logit_p = log(p/(1-p)))
+
+ggplot(d, aes(x = p, y = logit_p)) + 
+  geom_line() + 
+  xlim(0,1) + 
+  ylab("logit(p)") +
+  labs(title = "logit(p) vs. p")
+```
+
+---
+
+## Properties of the logit
+
+- The logit function takes a value between 0 and 1 and maps it to a value between $-\infty$ and $\infty$
+
+--
+- Inverse logit (logistic) function:
+$$g^{-1}(x) = \frac{\exp(x)}{1+\exp(x)} = \frac{1}{1+\exp(-x)}$$
+
+--
+- The inverse logit function takes a value between $-\infty$ and $\infty$ and maps it to a value between 0 and 1
+
+--
+- This formulation is also useful for interpreting the model, since the logit can be interpreted as the log odds of a success -- more on this later
+
+---
+
+## The logistic regression model
+
+- Based on the three GLM criteria we have
+  - $y_i \sim \text{Bern}(p_i)$
+  - $\eta_i = \beta_0+\beta_1 x_{1,i} + \cdots + \beta_n x_{n,i}$
+  - $\text{logit}(p_i) = \eta_i$
+
+--
+- From which we get
+
+$$p_i = \frac{\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}{1+\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}$$
+---
+
+## Modeling spam
+
+In R we fit a GLM in the same way as a linear model except we
+
+- specify the model with `logistic_reg()`
+- use `"glm"` instead of `"lm"` as the engine 
+- define `family = "binomial"` for the link function to be used in the model
+
+--
+
+```{r}
+spam_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(spam ~ num_char, data = email, family = "binomial")
+
+tidy(spam_fit)
+```
+
+---
+
+## Spam model
+
+```{r}
+tidy(spam_fit)
+```
+
+--
+
+Model:
+$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times \text{num_char}$$
+
+---
+
+## P(spam) for an email with 2000 characters 
+
+$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times 2$$
+--
+$$\frac{p}{1-p} = \exp(-1.9242) = 0.15 \rightarrow p = 0.15 \times (1 - p)$$
+--
+$$p = 0.15 - 0.15p \rightarrow 1.15p = 0.15$$
+--
+$$p = 0.15 / 1.15 = 0.13$$
+
+---
+
+.question[
+What is the probability that an email with 15000 characters is spam? What about an email with 40000 characters?
+]
+
+--
+
+.pull-left[
+```{r spam-predict-viz, echo=FALSE, out.width = "100%", fig.asp=0.5}
+newdata <- tibble(
+  num_char = c(2, 15, 40),
+  color    = c("#A7D5E8", "#e9d968", "#8fada7"),
+  shape    = c(22, 24, 23)
+  )
+
+y_hat <- predict(spam_fit, newdata, type = "raw")
+p_hat <- exp(y_hat) / (1 + exp(y_hat))
+
+newdata <- newdata %>%
+  bind_cols(
+    y_hat = y_hat,
+    p_hat = p_hat
+  )
+
+spam_aug <- augment(spam_fit$fit) %>%
+  mutate(prob = exp(.fitted) / (1 + exp(.fitted)))
+
+ggplot(spam_aug, aes(x = num_char)) +
+  geom_point(aes(y = as.numeric(spam)-1, color = spam), alpha = 0.3) +
+  scale_color_manual(values = c("#DEB4A0", "#CA235F")) +
+  scale_y_continuous(breaks = c(0, 1)) +
+  guides(color = FALSE) +
+  geom_line(aes(y = prob)) +
+  geom_point(data = newdata, aes(x = num_char, y = p_hat), 
+             fill = newdata$color, shape = newdata$shape, 
+             stroke = 1, size = 6) +
+  labs(
+    x = "Number of characters (in thousands)",
+    y = "Spam", 
+    title = "Spam vs. number of characters"
+  )
+```
+]
+.pull-right[
+- .light-blue[`r paste0(newdata$num_char[1], "K chars: P(spam) = ", round(newdata$p_hat[1], 2))`]
+- .yellow[`r paste0(newdata$num_char[2], "K chars, P(spam) = ", round(newdata$p_hat[2], 2))`]
+- .green[`r paste0(newdata$num_char[3], "K chars, P(spam) = ", round(newdata$p_hat[3], 2))`]
+]
+
+---
+
+.question[
+Would you prefer an email with 2000 characters to be labelled as spam or not? How about 40,000 characters?
+]
+
+```{r ref.label="spam-predict-viz", echo=FALSE, fig.asp=0.5}
+```
+
+---
+
+class: middle
+
+# Sensitivity and specificity
+
+---
+
+## False positive and negative
+
+|                         | Email is spam                 | Email is not spam             |
+|-------------------------|-------------------------------|-------------------------------|
+| Email labelled spam     | True positive                 | False positive (Type 1 error) |
+| Email labelled not spam | False negative (Type 2 error) | True negative                 |
+
+--
+- False negative rate = P(Labelled not spam | Email spam) = FN / (TP + FN) 
+
+- False positive rate = P(Labelled spam | Email not spam) = FP / (FP + TN)
+
+---
+
+## Sensitivity and specificity
+
+|                         | Email is spam                 | Email is not spam             |
+|-------------------------|-------------------------------|-------------------------------|
+| Email labelled spam     | True positive                 | False positive (Type 1 error) |
+| Email labelled not spam | False negative (Type 2 error) | True negative                 |
+
+--
+
+- Sensitivity = P(Labelled spam | Email spam) = TP / (TP + FN)
+  - Sensitivity = 1 − False negative rate
+  
+- Specificity = P(Labelled not spam | Email not spam) = TN / (FP + TN) 
+  - Specificity = 1 − False positive rate
+
+---
+
+.question[
+If you were designing a spam filter, would you want sensitivity and specificity to be high or low? What are the trade-offs associated with each decision? 
+]

@@ -1,0 +1,271 @@
+---
+title: "Scientific studies and confounding"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(kableExtra)
+library(dsbox)
+```
+
+class: middle
+
+# Scientific studies
+
+---
+
+## Scientific studies
+
+.pull-left[
+**Observational**  
+- Collect data in a way that does not interfere with how the data arise ("observe")
+- Establish associations
+]
+.pull-right[
+**Experimental**  
+- Randomly assign subjects to treatments
+- Establish causal connections
+]
+
+---
+
+.question[
+What type of study is the following, observational or experiment? What does that mean in terms of causal conclusions?
+
+*Researchers studying the relationship between exercising and energy levels asked participants in their study how many times a week they exercise and whether they have high or low energy when they wake up in the morning.*
+
+*Based on responses to the exercise question the researchers grouped people into three categories (no exercise, exercise 1-3 times a week, and exercise more than 3 times a week).* 
+
+*The researchers then compared the proportions of people who said they have high energy in the mornings across the three exercise categories.*
+]
+
+---
+
+.question[
+What type of study is the following, observational or experiment? What does that mean in terms of causal conclusions?
+
+*Researchers studying the relationship between exercising and energy levels randomly assigned participants in their study into three groups: no exercise, exercise 1-3 times a week, and exercise more than 3 times a week.* 
+
+*After one week, participants were asked whether they have high or low energy when they wake up in the morning.*
+
+*The researchers then compared the proportions of people who said they have high energy in the mornings across the three exercise categories.*
+]
+
+---
+
+class: middle
+
+# Case study: Breakfast cereal keeps girls slim
+
+---
+
+
+.midi[
+> *Girls who ate breakfast of any type had a lower average body mass index (BMI), a common obesity gauge, than those who said they didn't. The index was even lower for girls who said they ate cereal for breakfast, according to findings of the study conducted by the Maryland Medical Research Institute with funding from the National Institutes of Health (NIH) and cereal-maker General Mills.* [...]
+>
+> *The results were gleaned from a larger NIH survey of 2,379 girls in California, Ohio, and Maryland who were tracked between the ages of 9 and 19.* [...]
+>
+>*As part of the survey, the girls were asked once a year what they had eaten during the previous three days.* [...]
+]
+
+.footnote[
+Souce: [Study: Cereal Keeps Girls Slim](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/), Retrieved Sep 13, 2018.
+]
+
+---
+
+## Explanatory and response variables
+
+- Explanatory variable: Whether the participant ate breakfast or not
+
+- Reponse variable: BMI of the participant
+
+
+---
+
+## Three possible explanations
+
+--
+
+1. Eating breakfast causes girls to be slimmer 
+
+
+--
+2. Being slim causes girls to eat breakfast
+
+
+--
+3. A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that makes it seem like there is a relationship between them
+
+---
+
+## Correlation != causation
+
+```{r echo=FALSE, out.height="50%", out.width="80%"}
+knitr::include_graphics("img/xkcdcorrelation.png")
+```
+
+.footnote[
+Randall Munroe CC BY-NC 2.5 http://xkcd.com/552/
+]
+
+---
+
+## Studies and conclusions
+
+```{r echo=FALSE, out.height="50%", out.width="80%"}
+knitr::include_graphics("img/random_sample_assign_grid.png")
+```
+
+---
+
+class: middle
+
+# Case study: Climate change survey
+
+---
+
+## Survey question
+
+>A July 2019 YouGov survey asked 1633 GB and 1333 USA randomly selected adults 
+which of the following statements about the global environment best describes 
+their view:
+>
+>- The climate is changing and human activity is mainly responsible  
+>- The climate is changing and human activity is partly responsible, together with other factors  
+>- The climate is changing but human activity is not responsible at all  
+>- The climate is not changing  
+
+---
+
+## Survey data
+
+<br>
+
+.small[
+```{r echo=FALSE, message=FALSE}
+yougov_climate_table <- read_csv("data/yougov-climate.csv")
+
+response_levels <- names(yougov_climate_table)[-1]
+
+yougov_climate <- yougov_climate_table %>%
+  pivot_longer(cols = -country, names_to = "response", values_to = "count") %>%
+  uncount(count) %>%
+  mutate(response = fct_relevel(response, response_levels))
+```
+
+```{r climate-table, echo=FALSE}
+table(yougov_climate) %>% 
+  stats::addmargins() %>%
+  knitr::kable(format = "html", booktabs = TRUE) %>%
+  kableExtra::column_spec(column = 2:5, width = "0.5 in")
+```
+]
+
+.footnote[
+Source: [YouGov - International Climate Change Survey](https://d25d2506sfb94s.cloudfront.net/cumulus_uploads/document/epjj0nusce/YouGov%20-%20International%20climate%20change%20survey.pdf)
+]
+
+---
+
+.question[
+What percent of **all respondents** think the climate is changing and  
+human activity is mainly responsible?  
+]
+
+.small[
+```{r ref.label="climate-table", echo=FALSE}
+```
+]
+
+--
+
+```{r}
+(all <- 1340 / 2966)
+```
+
+
+---
+
+.question[
+What percent of **GB respondents** think the climate is changing and  
+human activity is mainly responsible?  
+]
+
+.small[
+```{r ref.label="climate-table", echo=FALSE}
+```
+]
+
+--
+
+```{r}
+(gb <- 833 / 1633)
+```
+
+---
+
+.question[
+What percent of **US respondents** think the climate is changing and  
+human activity is mainly responsible?  
+]
+
+.small[
+```{r ref.label="climate-table", echo=FALSE}
+```
+]
+
+--
+
+```{r}
+(us <- 507 / 1333)
+```
+
+---
+
+.question[
+Based on the percentages we calculated, does there appear to be a relationship 
+between country and beliefs about climate change? If yes, could there be another variable that explains this relationship?
+]
+
+.pull-left[
+```{r}
+all
+gb
+us
+```
+]
+
+---
+
+## Conditional probability
+
+**Notation**: $P(A | B)$: Probability of event A given event B
+
+- What is the probability that it will be unseasonably warm tomorrow?
+- What is the probability that it will be unseasonably warm tomorrow, given that it was unseasonably warm today?
+
+---
+
+## Independence
+
+- If knowing event A happened tells you something about event B happening, or vice versa, then events A and B are not independent
+
+- If not, they are said to be independent
+
+- $P(A | B) = P(A)$

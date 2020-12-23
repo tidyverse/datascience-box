@@ -1,0 +1,39 @@
+---
+title: "HW 02 - Road traffic accidents"
+author: "Insert your name here"
+date: "Insert date here"
+output: github_document
+---
+
+## Load packages and data
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(dsbox)
+```
+
+## Exercises
+
+### Exercise 1
+
+Remove this text, and add your answer for Exercise 1 here.
+
+### Exercise 2
+
+Remove this text, and add your answer for Exercise 2 here.
+
+### Exercise 3
+
+Remove this text, and add your answer for Exercise 3 here.
+
+```{r label-me-1}
+# remove this comment and add the code for Exercise 3 here
+```
+
+### Exercise 4
+
+Remove this text, and add your answer for Exercise 4 here.
+
+```{r label-me-2}
+# remove this comment and add the code for Exercise 4 here
+```

@@ -1,0 +1,443 @@
+---
+title: "More models with multiple predictors"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+library(widgetframe)
+library(patchwork)
+set.seed(1234)
+options(dplyr.print_min = 10, dplyr.print_max = 6)
+```
+
+class: middle
+
+# Two numerical predictors
+
+---
+
+## The data
+
+```{r load-pp, message=FALSE}
+pp <- read_csv(
+  "data/paris-paintings.csv",
+  na = c("n/a", "", "NA")
+) %>%
+  mutate(log_price = log(price))
+```
+
+---
+
+## Multiple predictors
+
+- Response variable: `log_price` 
+- Explanatory variables: Width and height
+
+```{r model-price-width-height}
+pp_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Width_in + Height_in, data = pp)
+tidy(pp_fit)
+```
+
+---
+
+##  Linear model with multiple predictors
+
+```{r model-price-width-height-tidy, echo=FALSE}
+tidy(pp_fit)
+```
+
+<br>
+
+$$\widehat{log\_price} = 4.77 + 0.0269 \times width - 0.0133 \times height$$
+
+---
+
+## Visualizing models with multiple predictors
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-wide[
+```{r plotly-plot, echo = FALSE, fig.align="center", warning=FALSE}
+p <- plot_ly(pp,
+  x = ~Width_in, y = ~Height_in, z = ~log_price,
+  marker = list(size = 3, color = "lightgray", alpha = 0.5, 
+                line = list(color = "gray", width = 2))) %>%
+  add_markers() %>%
+  plotly::layout(scene = list(
+    xaxis = list(title = "Width (in)"),
+    yaxis = list(title = "Height (in)"),
+    zaxis = list(title = "log_price")
+  )) %>%
+  config(displayModeBar = FALSE)
+frameWidget(p)
+```
+]
+]
+.panel[.panel-name[Code]
+```{r plotly-code, eval=FALSE}
+p <- plot_ly(pp,
+  x = ~Width_in, y = ~Height_in, z = ~log_price,
+  marker = list(size = 3, color = "lightgray", alpha = 0.5, 
+                line = list(color = "gray", width = 2))) %>%
+  add_markers() %>%
+  plotly::layout(scene = list(
+    xaxis = list(title = "Width (in)"),
+    yaxis = list(title = "Height (in)"),
+    zaxis = list(title = "log_price")
+  )) %>%
+  config(displayModeBar = FALSE)
+frameWidget(p)
+```
+]
+]
+
+---
+
+class: middle
+
+# Numerical and categorical predictors
+
+---
+
+## Price, surface area, and living artist
+
+- Explore the relationship between price of paintings and surface area, conditioned 
+on whether or not the artist is still living
+- First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+```{r}
+pp <- pp %>%
+  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
+
+pp %>%
+  count(artistliving)
+```
+]
+
+---
+
+## Typical surface area
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-narrow[
+Typical surface area appears to be less than 1000 square inches (~ 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
+]
+.pull-right-wide[
+```{r ref.label = "viz-surf-artistliving", echo = FALSE, warning = FALSE, out.width="90%"}
+```
+]
+]
+.panel[.panel-name[Code]
+```{r viz-surf-artistliving, fig.show = "hide"}
+ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
+  geom_histogram(binwidth = 500) + 
+  facet_grid(artistliving ~ .) +
+  scale_fill_manual(values = c("#E48957", "#071381")) +
+  guides(fill = FALSE) +
+  labs(x = "Surface area", y = NULL) +
+  geom_vline(xintercept = 1000) +
+  geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")
+```
+]
+]
+
+---
+
+## Narrowing the scope
+
+.panelset[
+.panel[.panel-name[Plot]
+For simplicity let's focus on the paintings with `Surface < 5000`:
+
+```{r ref.label = "viz-surf-lt-5000-artistliving", echo = FALSE, warning = FALSE, out.width = "55%"}
+```
+]
+.panel[.panel-name[Code]
+```{r viz-surf-lt-5000-artistliving, fig.show = "hide"}
+pp_Surf_lt_5000 <- pp %>%
+  filter(Surface < 5000)
+
+ggplot(data = pp_Surf_lt_5000, 
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
+  labs(color = "Artist", shape = "Artist") +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Facet to get a better look
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "viz-surf-lt-5000-artistliving-facet", echo = FALSE, warning = FALSE, out.width = "80%", fig.asp = 0.5}
+```
+]
+.panel[.panel-name[Code]
+```{r viz-surf-lt-5000-artistliving-facet, fig.show = "hide"}
+ggplot(data = pp_Surf_lt_5000, 
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~artistliving) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  labs(color = "Artist", shape = "Artist")
+```
+]
+]
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+## Two ways to model
+
+.pull-left-narrow[
+- **Main effects:** Assuming relationship between surface and logged price **does not vary** by whether or not the artist is living
+- **Interaction effects:** Assuming relationship between surface and logged price **varies** by whether or not the artist is living
+]
+.pull-right-wide[
+```{r pp-main-int-viz, echo=FALSE, out.width="70%", fig.asp = 0.9}
+pp_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Surface + artistliving, data = pp_Surf_lt_5000)
+pp_main_fit_aug <- augment(pp_main_fit$fit)
+
+pp_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Surface * artistliving, data = pp_Surf_lt_5000)
+pp_int_fit_aug <- augment(pp_int_fit$fit)
+
+p_main <- ggplot(
+  pp_main_fit_aug,
+  aes(y = log_price, x = Surface, color = artistliving)
+) +
+  geom_point(aes(shape = artistliving), alpha = 0.5) +
+  scale_x_continuous(breaks = c(0, 2500, 5000)) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  geom_line(aes(y = .fitted), size = 1.5) +
+  labs(y = "log_price", title = "Main effects", color = "Artist", shape = "Artist")
+
+p_int <- ggplot(
+  pp_int_fit_aug,
+  aes(y = log_price, x = Surface, color = artistliving)
+) +
+  geom_point(aes(shape = artistliving), alpha = 0.5) +
+  scale_x_continuous(breaks = c(0, 2500, 5000)) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  geom_line(aes(y = .fitted), size = 1.5) +
+  labs(y = "log_price", title = "Interaction effects", color = "Artist", shape = "Artist")
+
+p_main /
+  p_int  + 
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: `log_price`
+- Explanatory variables: `Surface` area and `artistliving`
+
+.midi[
+```{r model-main-effects}
+pp_main_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Surface + artistliving, data = pp_Surf_lt_5000)
+tidy(pp_main_fit)
+```
+]
+
+--
+
+$$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times artistliving$$
+
+---
+
+## Solving the model
+
+- Non-living artist: Plug in 0 for `artistliving`
+
+$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 0$  
+$= 4.88 + 0.000265 \times surface$
+
+--
+- Living artist: Plug in 1 for `artistliving`
+
+$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 1$   
+$= 5.017 + 0.000265 \times surface$
+
+---
+
+## Visualizing main effects
+
+.pull-left-narrow[
+- **Same slope:** Rate of change in price as the surface area increases does 
+not vary between paintings by living and non-living artists.
+- **Different intercept:** Paintings by living artists are consistently more 
+expensive than paintings by non-living artists.
+]
+.pull-right-wide[
+```{r out.width="100%", echo = FALSE}
+p_main
+```
+]
+
+---
+
+## Interpreting main effects
+
+.midi[
+```{r exp-coefs}
+tidy(pp_main_fit) %>% 
+  mutate(exp_estimate = exp(estimate)) %>%
+  select(term, estimate, exp_estimate)
+```
+]
+
+- All else held constant, for each additional square inch in painting's surface area, the price of the painting is predicted, on average, to be higher by a factor of 1.
+- All else held constant, paintings by a living artist are predicted, on average, to be higher by a factor of 1.15 compared to paintings by an artist who is no longer alive.
+- Paintings that are by an artist who is not alive and that have a surface area of 0 square inches are predicted, on average, to be 132 livres.
+
+---
+
+## Main vs. interaction effects
+
+- The way we specified our main effects model only lets `artistliving` affect the intercept.
+- Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
+
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colours
++ Same slope and different intercept for both colours
++ Different slope and different intercept for both colours
+]
+
+---
+
+## Interaction: `Surface * artistliving`
+
+```{r out.width="60%", echo = FALSE}
+p_int
+```
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: log_price
+- Explanatory variables: `Surface` area, `artistliving`, and their interaction
+
+.midi[
+```{r model-interaction-effects}
+pp_int_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Surface * artistliving, data = pp_Surf_lt_5000)
+tidy(pp_int_fit)
+```
+]
+
+---
+
+## Linear model with interaction effects
+
+.midi[
+```{r model-interaction-effects-tidy, echo=FALSE}
+tidy(pp_int_fit)
+```
+]
+
+$$\widehat{log\_price} = 4.91 + 0.00021 \times surface - 0.126 \times artistliving$$
+$$+ ~ 0.00048 \times surface * artistliving$$
+
+---
+
+## Interpretation of interaction effects
+
+- Rate of change in price as the surface area of the painting increases does 
+vary between paintings by living and non-living artists (different slopes), 
+- Some paintings by living artists are more expensive than paintings by
+non-living artists, and some are not (different intercept).
+
+.small[
+.pull-left[
+- Non-living artist: 
+$\widehat{log\_price} = 4.91 + 0.00021 \times surface$
+$- 0.126 \times 0 + 0.00048 \times surface \times 0$
+$= 4.91 + 0.00021 \times surface$
+- Living artist: 
+$\widehat{log\_price} = 4.91 + 0.00021 \times surface$
+$- 0.126 \times 1 + 0.00048 \times surface \times 1$
+$= 4.91 + 0.00021 \times surface$
+$- 0.126 + 0.00048 \times surface$
+$= 4.784 + 0.00069 \times surface$
+]
+.pull-right[
+```{r viz-interaction-effects2, out.width="80%", echo = FALSE}
+p_int
+```
+]
+]
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted $R^2$, so we 
+should indeed use the model with the interactions.
+
+```{r}
+glance(pp_main_fit)$adj.r.squared
+glance(pp_int_fit)$adj.r.squared
+```
+
+---
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.

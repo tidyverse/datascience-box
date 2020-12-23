@@ -1,0 +1,122 @@
+# Data science ethics {#ethics}
+
+This unit touches on data science ethics, specifically on issues of misrepresentation of data and results, data privacy, and algorithmic bias.
+Course lectures are supplemented with "guest lectures" from domain experts.
+
+## Slides, videos, and application exercises
+
+::: {.slide-deck}
+**Unit 3 - Deck 1: Misrepresentation**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d01-misrepresentation/u3-d01-misrepresentation.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d01-misrepresentation)
+:::
+
+::: {.video}
+[Video](https://youtu.be/C_-rTKfswUI)
+:::
+:::
+
+::: {.guest-lecture}
+**Alberto Cairo - How charts lie**
+
+::: {.video}
+[Video](https://youtu.be/Low28hx4wyk)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 3 - Deck 2: Data privacy**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d02-privacy/u3-d02-privacy.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d02-privacy)
+:::
+
+::: {.video}
+[Video](https://youtu.be/c4fvdoNbcSw)
+:::
+:::
+
+::: {.guest-lecture}
+**The Guardian - Cambridge Analytica whistleblower**
+
+::: {.video}
+[Video](https://youtu.be/FXdYSQ6nu-M)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 3 - Deck 3: Algorithmic bias**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d03-algorithmic-bias/u3-d03-algorithmic-bias.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d03-algorithmic-bias)
+:::
+
+::: {.video}
+[Video](https://youtu.be/c4fvdoNbcSw)
+:::
+:::
+
+::: {.guest-lecture}
+**Joy Buolamwini - How I'm fighting bias in algorithms**
+
+::: {.video}
+[Video](https://youtu.be/UG_X_7g63rY)
+:::
+:::
+
+::: {.guest-lecture}
+**Cathy O'Neil - Weapons of Math Destruction**
+
+::: {.video}
+[Video](https://youtu.be/TQHs8SA1qpk)
+:::
+:::
+
+::: {.guest-lecture}
+**Safiya Umoja Noble - Imagining a Future Free from the Algorithms of Oppression**
+
+::: {.video}
+[Video](https://youtu.be/tNi_U1Bb1S0)
+:::
+:::
+
+::: {.guest-lecture}
+**Kristian Lum - What's An Algorithm Got To Do With It**
+
+::: {.video}
+[Video](https://youtu.be/5zxDwA99soA)
+:::
+:::
+
+## Labs
+
+::: {.lab}
+**Lab 9: Conveying the right message through visualisation**
+
+Improving data visualisations to better convey the right message
+
+::: {.instructions}
+[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-09/lab-09-better-viz.html)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-09)
+:::
+
+::: {.starter}
+[Starter](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/lab/lab-09-better-viz)
+:::
+:::

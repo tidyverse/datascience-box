@@ -9,91 +9,85 @@ output:
 link-citations: yes
 ---
 
-```{r include=FALSE}
-library(tufte)
-library(knitr)
-options(
-  htmltools.dir.version = FALSE, # for blogdown
-  show.signif.stars = FALSE,     # for regression output
-  digits = 2
-  )
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-## Getting started
-
-```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
-include_graphics("img/whickham.png")
+```{r fig.margin = TRUE, eval = TRUE, echo = FALSE}
+knitr::include_graphics("img/whickham.png")
 ```
 
 A study of conducted in Whickham, England recorded participants' age, smoking status at baseline, and then 20 years later recorded their health outcome.
+In this lab we analyse the relationships between these variables, first two at a time, and then controlling for the third.
 
-### Packages
+# Learning goals
 
-In this lab we will work with the `tidyverse` and `mosaicData` packages.
+-   Visualising relationships between variables
+-   Discovering Simpson's paradox via visualisations
 
-This is the first time we're using the `mosaicData` package, you need to make 
-sure to install it first by running `install.packages("mosaicData")` in the 
-console.
+# Getting started
 
-```{r}
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation and the data lives in the **mosaicData** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r eval = TRUE, message = FALSE}
 library(tidyverse) 
 library(mosaicData) 
 ```
 
-Note that these packages are also loaded in your R Markdown document.
+## Data
 
-## The data
+The dataset we'll use is called Whickham from the **mosaicData** package.
+You can find out more about the dataset by inspecting their documentation, which you can access by running `?Whickham` in the Console or using the Help menu in RStudio to search for `Whickham`.
 
-The data is in the `mosaicData` package. You can load it with
+# Exercises
 
-```{r load-data}
-data(Whickham)
-```
+1.  What type of study do you think these data come from: observational or experiment?
+    Why?
 
-Take a peek at the codebook with
+2.  How many observations are in this dataset?
+    What does each observation represent?
 
-```{r eval=FALSE}
-?Whickham
-```
+3.  How many variables are in this dataset?
+    What type of variable is each?
+    Display each variable using an appropriate visualization.
 
-## Exercises
+4.  What would you expect the relationship between smoking status and health outcome to be?
 
-1. What type of study do you think these data comne from: observational 
-   or experiment? Why?
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-2. How many observations are in this dataset? What does each observation 
-   represent?
-
-3. How many variables are in this dataset? What type of variable is each? 
-   Display each variable using an appropriate visualization.
-
-4. What would you expect the relationship between smoking status and 
-   health outcome to be?
-
-5. Create a visualization depicting the relationship between smoking status 
-   and health outcome. Briefly describe the relationship, and evaluate whether 
-   this meets your expectations. Additionally, calculate the relevant
-   conditional probabilities to help your narrative. Here is some code to 
-   get you started:
+5.  Create a visualization depicting the relationship between smoking status and health outcome. Briefly describe the relationship, and evaluate whether this meets your expectations. Additionally, calculate the relevant conditional probabilities to help your narrative. Here is some code to get you started:
 
 ```{r}
 Whickham %>%
   count(smoker, outcome)
 ```
 
-6. Create a new variable called `age_cat` using the following scheme:
+6.  Create a new variable called `age_cat` using the following scheme:
 
-- `age <= 44 ~ "18-44"`
-- `age > 44 & age <= 64 ~ "45-64"`
-- `age > 64 ~ "65+"`
+-   `age <= 44 ~ "18-44"`
+-   `age > 44 & age <= 64 ~ "45-64"`
+-   `age > 64 ~ "65+"`
 
-7. Re-create the visualization depicting the relationship between smoking 
-status and health outcome, faceted by `age_cat`. What changed? What might 
-explain this change? Extend the contingency table from earlier by 
-breaking it down by age category and use it to help your narrative.
+7.  Re-create the visualization depicting the relationship between smoking status and health outcome, faceted by `age_cat`. What changed? What might explain this change? Extend the contingency table from earlier by breaking it down by age category and use it to help your narrative.
 
 ```{r}
 Whickham %>%
   count(smoker, age_cat, outcome)
 ```
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

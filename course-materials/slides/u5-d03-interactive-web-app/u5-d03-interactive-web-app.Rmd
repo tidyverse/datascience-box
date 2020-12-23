@@ -1,0 +1,52 @@
+---
+title: "Interactive web apps"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+## Shiny
+
+.pull-left[
+- Shiny is an R package that makes it easy to build interactive web apps straight from R
+- You can host standalone apps on a webpage or embed them in R Markdown documents or build dashboards
+- You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript actions
+- Learn more at [shiny.rstudio.com](https://shiny.rstudio.com/)
+]
+.pull-right[
+```{r echo=FALSE, fig.align = "left"}
+knitr::include_graphics("img/shiny.png")
+```
+]
+
+---
+
+## High level view
+
+- Every Shiny app has a webpage that the user visits, and behind this webpage there is a computer that serves this webpage by running R
+
+- When running your app locally, the computer serving your app is your computer
+
+- When your app is deployed, the computer serving your app is a web server
+
+---
+
+.center[
+[minecr.shinyapps.io/fm-speeches-covid19-simple](https://minecr.shinyapps.io/fm-speeches-covid19-simple/)
+]
+
+.center[
+<iframe width="1000" height="500" src="https://minecr.shinyapps.io/fm-speeches-covid19-simple/" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+]

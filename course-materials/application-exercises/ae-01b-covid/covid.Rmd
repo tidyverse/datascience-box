@@ -1,26 +1,26 @@
 ---
 title: "Cumulative deaths from COVID-19"
 author: "Mine Çetinkaya-Rundel"
-date: "`r Sys.Date()`"
-output: 
-  html_document: 
-    toc: yes
-    toc_float: yes
+output: github_document
 ---
 
 ## Introduction
 
-Countries around the world are responding to an outbreak of respiratory illness caused by a novel coronavirus, COVID-19. The outbreak first started in Wuhan, China, but cases have been identified in a growing number of other locations internationally, including the United States. In this report we explore how the trajectory of the cumulative deaths in a number of countries.
+Countries around the world are responding to an outbreak of respiratory illness caused by a novel coronavirus, COVID-19.
+The outbreak first started in Wuhan, China, but cases have been identified in a growing number of other locations internationally, including the United States.
+In this report we explore how the trajectory of the cumulative deaths in a number of countries.
 
-The data come from the **coronavirus** package, which pulls data from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus repository. The coronavirus package provides a tidy format dataset of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. The package is available on GitHub [here](https://github.com/RamiKrispin/coronavirus) and is updated daily.
+The data come from the **coronavirus** package, which pulls data from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus repository.
+The coronavirus package provides a tidy format dataset of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic.
+The package is available on GitHub [here](https://github.com/RamiKrispin/coronavirus) and is updated daily.
 
 For our analysis, in addition to the coronavirus package, we will use the following packages for data wrangling and visualisation.
 
-- **tidyverse** for data wrangling and visualization
-- **lubridate** package for handling dates
-- **glue** package for constructing text strings
-- **scales** package for formatting axis labels
-- **ggrepel** package for pretty printing of country labels
+-   **tidyverse** for data wrangling and visualization
+-   **lubridate** package for handling dates
+-   **glue** package for constructing text strings
+-   **scales** package for formatting axis labels
+-   **ggrepel** package for pretty printing of country labels
 
 We will make use of the **DT** package for interactive display of tabular output in the Appendix.
 
@@ -36,7 +36,11 @@ library(DT)
 
 ## Data prep
 
-The data frame called `coronavirus` in the coronavirus package provides a daily summary of the Coronavirus (COVID-19) cases by country. Each row in the data frame represents a country (or, where relevant, state/province). A full list of the countries in the data frame is provided in the [Appendix]. Note that the data provided in this package provides daily number of deaths, confirmed cases, and recovered cases. For this report, we will focus on the deaths. 
+The data frame called `coronavirus` in the coronavirus package provides a daily summary of the Coronavirus (COVID-19) cases by country.
+Each row in the data frame represents a country (or, where relevant, state/province).
+A full list of the countries in the data frame is provided in the [Appendix].
+Note that the data provided in this package provides daily number of deaths, confirmed cases, and recovered cases.
+For this report, we will focus on the deaths.
 
 We will start by making our selection for the countries we want to explore.
 
@@ -50,7 +54,8 @@ countries <- c(
 )
 ```
 
-In the following code chunk we filter the data frame for deaths in the countries we specified above and calculate cumulative number of deaths. We will only visualise data since 10th confirmed death. 
+In the following code chunk we filter the data frame for deaths in the countries we specified above and calculate cumulative number of deaths.
+We will only visualise data since 10th confirmed death.
 
 ```{r prep-country-data}
 country_data <- coronavirus %>%
@@ -99,7 +104,8 @@ These data are as of `r as_of_date_formatted`.
 
 ## Visualisation
 
-The following visualisation shows the number of cumulative cases vs. days elapsed since the 10th confirmed death in each country. The time span plotted for each country varies since some countries started seeing (and reporting) deaths from COVID-19 much later than others.
+The following visualisation shows the number of cumulative cases vs. days elapsed since the 10th confirmed death in each country.
+The time span plotted for each country varies since some countries started seeing (and reporting) deaths from COVID-19 much later than others.
 
 ```{r visualise, warning=FALSE}
 ggplot(data = country_data,

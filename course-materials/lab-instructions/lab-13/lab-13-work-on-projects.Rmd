@@ -1,0 +1,57 @@
+---
+title: "Lab 13 - Work on projects"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: yes
+link-citations: yes
+---
+
+This week you'll be working on your projects.
+Here are a few to do items to get you started.
+Once you complete these, use the rest of the time to, well, work on your project!
+
+-   Remind yourself of the project assignment
+
+-   Go to the course organization on GitHub and clone your project repo titled `project-TEAM_NAME`
+
+-   Add your project title and team name to the `README.Rmd` file in the repo and commit and push your changes.
+    Observe that these are updated in the README of the repo.
+
+-   Open the `presentation.Rmd` file, knit the document, and review the presentation format.
+    This is where your presentation will go.
+    Update the YAML with your project title, team name, etc. and commit and push your changes.
+
+-   Go to your project repo on GitHub, click on **Settings** on the top right corner, and scroll down to the section titled **GiHub Pages**.
+    Under **Source**, select `main` branch and the `root` folder.
+    This will give you a URL where the website for your project will be automatically built from the content in your README.
+    This might take a few minutes.
+
+    -   Once the website is built, pull changes to your project in RStudio.
+    -   Take a look at your rendered project website. Click on the link in the presentation section and you should be able to view the rendered slides. This is the link we will use to project your slides during the presentations.
+    -   On your repo you should see a text on top *No description, website, or topics provided.*. Next to it there's an **Edit** button. Add a short description as well as the URL of your project website here.
+    -   **Note:** This website is public, but your repository will remain private,unless... you as a team decide you would like to feature your repos in your personal GitHub profiles. If so, I will help you convert your repo to a public repo at the end of the semester. I will not add any marks to your repos so that your public work won't contain your score for the project.
+
+-   Add your dataset to the `data` folder and add your codebook to the README in that folder.
+
+    -   If in your proposal you were advised to update your codebook, make sure to make those updates.
+    -   If you had R scripts you used to scrape your data, add them to this folder as well.
+
+-   Add the content from your proposal to the `proposal.Rmd` file in the `proposal` folder.
+    Knit the document to make sure everything works and commit and push your proposal to your project repo.
+
+    -   **Important:** Your data now lives in a folder called `data` that is *not* inside your proposal folder. So you need to specify the path to your data with `"../data/name_of_datafile"` in your `read_csv()` (or similar) function.
+    -   You don't need to make further updates to your proposal at this point, even if your plans for the project change slightly.
+
+-   Load your data in your `presentation.Rmd`, knit, and make sure everything works.
+    Commit and push your updated proposal to your project repo.
+
+    -   **Important:** Same note as above! Your data now lives in a folder called `data` that is *not* inside your presentation folder. So you need to specify the path to your data with `"../data/name_of_datafile"` in your `read_csv()` (or similar) function.
+
+-   Now that all the logistical details are done, start working on your project.
+
+    -   Open issues for things you want to accomplish. Assign them to specific team member(s) if you like. And as you complete the tasks, close the issues. You can also use the issues for discussion on the specific tasks.
+
+-   **Strongly recommended:** Get a hold of the instructor or a TA and run your ideas by them.

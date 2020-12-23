@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Doing data science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Doing data science
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# What's in a data analysis?
+
+---
+
+## Five core activities of data analysis
+
+1. Stating and refining the question
+1. Exploring the data
+1. Building formal statistical models
+1. Interpreting the results
+1. Communicating the results
+
+.footnote[
+Roger D. Peng and Elizabeth Matsui. "The Art of Data Science." A Guide for Anyone Who Works with Data. Skybrude Consulting, LLC (2015).
+]
+
+---
+
+class: middle
+
+# Stating and refining the question
+
+---
+
+## Six types of questions
+
+1. **Descriptive:** summarize a characteristic of a set of data
+1. **Exploratory:** analyze to see if there are patterns, trends, or relationships between variables (hypothesis generating)
+1. **Inferential:** analyze patterns, trends, or relationships in representative data from a population
+1. **Predictive:** make predictions for individuals or groups of individuals
+1. **Causal:** whether changing one factor will change another factor, on average, in a population
+1. **Mechanistic:** explore "how" as opposed to whether
+
+.footnote[
+Jeffery T. Leek and Roger D. Peng. "What is the question?." Science 347.6228 (2015): 1314-1315.
+]
+
+---
+
+## Ex: COVID-19 and Vitamin D
+
+1. **Descriptive:** frequency of hospitalisations due to COVID-19 in a set of data collected from a group of individuals
+--
+
+1. **Exploratory:** examine relationships between a range of dietary factors and COVID-19 hospitalisations
+--
+
+1. **Inferential:** examine whether any relationship between taking Vitamin D supplements and COVID-19 hospitalisations found in the sample hold for the population at large
+
+--
+1. **Predictive:** what types of people will take Vitamin D supplements during the next year
+
+--
+1. **Causal:** whether people with COVID-19 who were randomly assigned to take Vitamin D supplements or those who were not are hospitalised
+
+--
+1. **Mechanistic:** how increased vitamin D intake leads to a reduction in the number of viral illnesses
+
+---
+
+## Questions to data science problems
+
+- Do you have appropriate data to answer your question?
+- Do you have information on confounding variables?
+- Was the data you're working with collected in a way that introduces bias?
+
+--
+
+.question[
+Suppose I want to estimate the average number of children in households in Edinburgh. I conduct a survey at an elementary school in Edinburgh and ask students at this elementary school how many children, including themselves, live in their house. Then, I take the average of the responses. Is this a biased or an unbiased estimate of the number of children in households in Edinburgh? If biased, will the value be an overestimate or underestimate?
+]
+
+---
+
+class: middle
+
+# Exploratory data analysis
+
+---
+
+## Checklist
+
+- Formulate your question
+- Read in your data
+- Check the dimensions
+- Look at the top and the bottom of your data
+- Validate with at least one external data source
+- Make a plot
+- Try the easy solution first
+
+---
+
+## Formulate your question
+
+- Consider scope:
+  - Are air pollution levels higher on the east coast than on the west coast?
+  - Are hourly ozone levels on average higher in New York City than they are in Los Angeles?
+  - Do counties in the eastern United States have higher ozone levels than counties in the western United States?
+- Most importantly: "Do I have the right data to answer this question?"
+
+---
+
+## Read in your data
+
+- Place your data in a folder called `data`
+- Read it into R with `read_csv()` or friends (`read_delim()`, `read_excel()`, etc.)
+
+
+```r
+library(readxl)
+fav_food &lt;- read_excel("data/favourite-food.xlsx")
+fav_food
+```
+
+```
+## # A tibble: 5 x 6
+##   `Student ID` `Full Name`  favourite.food  mealPlan  AGE   SES  
+##          &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
+## 1            1 Sunil Huffm… Strawberry yog… Lunch on… 4     High 
+## 2            2 Barclay Lynn French fries    Lunch on… 5     Midd…
+## 3            3 Jayendra Ly… N/A             Breakfas… 7     Low  
+## 4            4 Leon Rossini Anchovies       Lunch on… 99999 Midd…
+## 5            5 Chidiegwu D… Pizza           Breakfas… five  High
+```
+
+---
+
+## `clean_names()`
+
+If the variable names are malformatted, use `janitor::clean_names()`
+
+
+```r
+library(janitor)
+fav_food %&gt;% clean_names()  
+```
+
+```
+## # A tibble: 5 x 6
+##   student_id full_name   favourite_food   meal_plan   age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
+## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
+## 3          3 Jayendra L… N/A              Breakfast … 7     Low  
+## 4          4 Leon Rossi… Anchovies        Lunch only  99999 Midd…
+## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+```
+
+---
+
+## Case study: NYC Squirrels!
+
+- [The Squirrel Census](https://www.thesquirrelcensus.com/) is a multimedia science, design, and storytelling project focusing on the Eastern gray (*Sciurus carolinensis*). They count squirrels and present their findings to the public.
+- This table contains squirrel data for each of the 3,023 sightings, including location coordinates, age, primary and secondary fur color, elevation, activities, communications, and interactions between squirrels and with humans.
+
+
+```r
+#install_github("mine-cetinkaya-rundel/nycsquirrels18")
+library(nycsquirrels18)
+```
+
+---
+
+## Locate the codebook
+
+[mine-cetinkaya-rundel.github.io/nycsquirrels18/reference/squirrels.html](https://mine-cetinkaya-rundel.github.io/nycsquirrels18/reference/squirrels.html)
+
+&lt;br&gt;&lt;br&gt;
+
+--
+
+## Check the dimensions
+
+
+```r
+dim(squirrels)
+```
+
+```
+## [1] 3023   35
+```
+
+---
+
+## Look at the top...
+
+
+```r
+squirrels %&gt;% head()
+```
+
+```
+## # A tibble: 6 x 35
+##    long   lat unique_squirrel… hectare shift date      
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;    
+## 1 -74.0  40.8 13A-PM-1014-04   13A     PM    2018-10-14
+## 2 -74.0  40.8 15F-PM-1010-06   15F     PM    2018-10-10
+## 3 -74.0  40.8 19C-PM-1018-02   19C     PM    2018-10-18
+## 4 -74.0  40.8 21B-AM-1019-04   21B     AM    2018-10-19
+## 5 -74.0  40.8 23A-AM-1018-02   23A     AM    2018-10-18
+## 6 -74.0  40.8 38H-PM-1012-01   38H     PM    2018-10-12
+## # … with 29 more variables: hectare_squirrel_number &lt;dbl&gt;,
+## #   age &lt;chr&gt;, primary_fur_color &lt;chr&gt;,
+## #   highlight_fur_color &lt;chr&gt;,
+## #   combination_of_primary_and_highlight_color &lt;chr&gt;,
+## #   color_notes &lt;chr&gt;, location &lt;chr&gt;,
+## #   above_ground_sighter_measurement &lt;chr&gt;,
+## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
+## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;,
+## #   other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
+## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;,
+## #   approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;, runs_from &lt;lgl&gt;,
+## #   other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;,
+## #   community_districts &lt;dbl&gt;, borough_boundaries &lt;dbl&gt;,
+## #   city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+```
+
+---
+
+## ...and the bottom
+
+.small[
+
+```r
+squirrels %&gt;% tail()
+```
+
+```
+## # A tibble: 6 x 35
+##    long   lat unique_squirrel… hectare shift date      
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;    
+## 1 -74.0  40.8 6D-PM-1020-01    06D     PM    2018-10-20
+## 2 -74.0  40.8 21H-PM-1018-01   21H     PM    2018-10-18
+## 3 -74.0  40.8 31D-PM-1006-02   31D     PM    2018-10-06
+## 4 -74.0  40.8 37B-AM-1018-04   37B     AM    2018-10-18
+## 5 -74.0  40.8 21C-PM-1006-01   21C     PM    2018-10-06
+## 6 -74.0  40.8 7G-PM-1018-04    07G     PM    2018-10-18
+## # … with 29 more variables: hectare_squirrel_number &lt;dbl&gt;,
+## #   age &lt;chr&gt;, primary_fur_color &lt;chr&gt;,
+## #   highlight_fur_color &lt;chr&gt;,
+## #   combination_of_primary_and_highlight_color &lt;chr&gt;,
+## #   color_notes &lt;chr&gt;, location &lt;chr&gt;,
+## #   above_ground_sighter_measurement &lt;chr&gt;,
+## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
+## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;,
+## #   other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
+## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;,
+## #   approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;, runs_from &lt;lgl&gt;,
+## #   other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;,
+## #   community_districts &lt;dbl&gt;, borough_boundaries &lt;dbl&gt;,
+## #   city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+```
+]
+
+---
+
+## Validate with at least one external data source
+
+.pull-left[
+
+```
+## # A tibble: 3,023 x 2
+##     long   lat
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1 -74.0  40.8
+##  2 -74.0  40.8
+##  3 -74.0  40.8
+##  4 -74.0  40.8
+##  5 -74.0  40.8
+##  6 -74.0  40.8
+##  7 -74.0  40.8
+##  8 -74.0  40.8
+##  9 -74.0  40.8
+## 10 -74.0  40.8
+## 11 -74.0  40.8
+## 12 -74.0  40.8
+## 13 -74.0  40.8
+## 14 -74.0  40.8
+## 15 -74.0  40.8
+## # … with 3,008 more rows
+```
+]
+.pull-right[
+&lt;img src="img/central-park-coords.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Make a plot
+
+
+```r
+ggplot(squirrels, aes(x = long, y = lat)) +
+  geom_point(alpha = 0.2)
+```
+
+&lt;img src="u2-d17-doing-data-science_files/figure-html/unnamed-chunk-10-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+--
+
+.pull-left-wide[
+**Hypothesis:** There will be a higher density of sightings on the perimeter than inside the park.
+]
+
+---
+
+## Try the easy solution first
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d17-doing-data-science_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+squirrels &lt;- squirrels %&gt;%
+  separate(hectare, into = c("NS", "EW"), sep = 2, remove = FALSE) %&gt;%
+  mutate(where = if_else(NS %in% c("01", "42") | EW %in% c("A", "I"), "perimeter", "inside")) 
+
+ggplot(squirrels, aes(x = long, y = lat, color = where)) +
+  geom_point(alpha = 0.2)
+```
+]
+
+]
+
+---
+
+## Then go deeper...
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d17-doing-data-science_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+hectare_counts &lt;- squirrels %&gt;%
+  group_by(hectare) %&gt;%
+  summarise(n = n()) 
+
+hectare_centroids &lt;- squirrels %&gt;%
+  group_by(hectare) %&gt;%
+  summarise(
+    centroid_x = mean(long),
+    centroid_y = mean(lat)
+  )
+
+squirrels %&gt;%
+  left_join(hectare_counts, by = "hectare") %&gt;%
+  left_join(hectare_centroids, by = "hectare") %&gt;%
+  ggplot(aes(x = centroid_x, y = centroid_y, color = n)) +
+  geom_hex()
+```
+]
+
+]
+
+---
+
+## The squirrel is staring at me!
+
+
+```r
+squirrels %&gt;%
+  filter(str_detect(other_interactions, "star")) %&gt;%
+  select(shift, age, other_interactions)
+```
+
+```
+## # A tibble: 11 x 3
+##   shift age   other_interactions                                 
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                                              
+## 1 AM    Adult staring at us                                      
+## 2 PM    Adult he took 2 steps then turned and stared at me       
+## 3 PM    Adult stared                                             
+## 4 PM    Adult stared                                             
+## 5 PM    Adult stared                                             
+## 6 PM    Adult stared &amp; then went back up tree—then ran to differ…
+## # … with 5 more rows
+```
+
+---
+
+## Communicating for your audience
+
+- Avoid: Jargon, uninterpreted results, lengthy output
+- Pay attention to: Organization, presentation, flow
+- Don't forget about: Code style, coding best practices, meaningful commits
+- Be open to: Suggestions, feedback, taking (calculated) risks
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

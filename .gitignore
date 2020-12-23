@@ -5,3 +5,5 @@ _book
 _bookdown_files
 *.rds
 *.key
+*.docx
+.Rapp.history

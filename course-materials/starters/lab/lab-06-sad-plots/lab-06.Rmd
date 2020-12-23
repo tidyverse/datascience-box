@@ -1,0 +1,33 @@
+---
+title: "Lab 06 - Sad plots"
+author: "Insert your name here"
+date: "Insert date here"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message = FALSE}
+library(tidyverse) 
+library(dsbox) 
+```
+
+### Exercise 1
+
+Remove this text, and add your answer for Exercise 1 here.
+Add code chunks as needed.
+Don't forget to label your code chunk.
+Do not use spaces in code chunk labels.
+
+### Exercise 2
+
+Remove this text, and add your answer for Exercise 1 here.
+Add code chunks as needed.
+Don't forget to label your code chunk.
+Do not use spaces in code chunk labels.
+
+### Exercise 3
+
+...
+
+Add exercise headings as needed.

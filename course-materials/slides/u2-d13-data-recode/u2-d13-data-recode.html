@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Recoding data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Recoding data
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Case study: Religion and income
+
+---
+
+&lt;img src="img/relig-income.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [pewforum.org/religious-landscape-study/income-distribution](https://www.pewforum.org/religious-landscape-study/income-distribution/), Retrieved 14 April, 2020
+]
+
+---
+
+## Read data 
+
+
+```r
+library(readxl)
+rel_inc &lt;- read_excel("data/relig-income.xlsx")
+```
+
+.small[
+
+```
+## # A tibble: 12 x 6
+##   `Religious trad… `Less than $30,… `$30,000-$49,99…
+##   &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Buddhist                     0.36             0.18
+## 2 Catholic                     0.36             0.19
+## 3 Evangelical Pro…             0.35             0.22
+## 4 Hindu                        0.17             0.13
+## 5 Historically Bl…             0.53             0.22
+## 6 Jehovah's Witne…             0.48             0.25
+## # … with 6 more rows, and 3 more variables:
+## #   `$50,000-$99,999` &lt;dbl&gt;, `$100,000 or more` &lt;dbl&gt;, `Sample
+## #   Size` &lt;dbl&gt;
+```
+]
+
+---
+
+## Rename columns
+
+.midi[
+
+```r
+rel_inc %&gt;%
+  rename( 
+    religion = `Religious tradition`, 
+    n = `Sample Size` 
+  ) 
+```
+
+```
+## # A tibble: 12 x 6
+##   religion `Less than $30,… `$30,000-$49,99… `$50,000-$99,99…
+##   &lt;chr&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Buddhist             0.36             0.18             0.32
+## 2 Catholic             0.36             0.19             0.26
+## 3 Evangel…             0.35             0.22             0.28
+## 4 Hindu                0.17             0.13             0.34
+## 5 Histori…             0.53             0.22             0.17
+## 6 Jehovah…             0.48             0.25             0.22
+## # … with 6 more rows, and 2 more variables: `$100,000 or
+## #   more` &lt;dbl&gt;, n &lt;dbl&gt;
+```
+]
+
+---
+
+.question[
+If we want a new variable called `income` with levels such as "Less than $30,000", "$30,000-$49,999", ... etc. which function should we use?
+]
+
+
+```
+## # A tibble: 48 x 4
+##    religion                   n income            proportion
+##    &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
+##  1 Buddhist                 233 Less than $30,000       0.36
+##  2 Buddhist                 233 $30,000-$49,999         0.18
+##  3 Buddhist                 233 $50,000-$99,999         0.32
+##  4 Buddhist                 233 $100,000 or more        0.13
+##  5 Catholic                6137 Less than $30,000       0.36
+##  6 Catholic                6137 $30,000-$49,999         0.19
+##  7 Catholic                6137 $50,000-$99,999         0.26
+##  8 Catholic                6137 $100,000 or more        0.19
+##  9 Evangelical Protestant  7462 Less than $30,000       0.35
+## 10 Evangelical Protestant  7462 $30,000-$49,999         0.22
+## 11 Evangelical Protestant  7462 $50,000-$99,999         0.28
+## 12 Evangelical Protestant  7462 $100,000 or more        0.14
+## 13 Hindu                    172 Less than $30,000       0.17
+## 14 Hindu                    172 $30,000-$49,999         0.13
+## 15 Hindu                    172 $50,000-$99,999         0.34
+## # … with 33 more rows
+```
+
+---
+
+## Pivot longer
+
+.midi[
+
+```r
+rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer( 
+    cols = -c(religion, n),   # all but religion and n 
+    names_to = "income",  
+    values_to = "proportion" 
+  ) 
+```
+
+```
+## # A tibble: 48 x 4
+##   religion     n income            proportion
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;
+## 1 Buddhist   233 Less than $30,000       0.36
+## 2 Buddhist   233 $30,000-$49,999         0.18
+## 3 Buddhist   233 $50,000-$99,999         0.32
+## 4 Buddhist   233 $100,000 or more        0.13
+## 5 Catholic  6137 Less than $30,000       0.36
+## 6 Catholic  6137 $30,000-$49,999         0.19
+## # … with 42 more rows
+```
+]
+
+---
+
+## Calculate frequencies
+
+.midi[
+
+```r
+rel_inc %&gt;%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %&gt;%
+  mutate(frequency = round(proportion * n)) 
+```
+
+```
+## # A tibble: 48 x 5
+##   religion     n income            proportion frequency
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Buddhist   233 Less than $30,000       0.36        84
+## 2 Buddhist   233 $30,000-$49,999         0.18        42
+## 3 Buddhist   233 $50,000-$99,999         0.32        75
+## 4 Buddhist   233 $100,000 or more        0.13        30
+## 5 Catholic  6137 Less than $30,000       0.36      2209
+## 6 Catholic  6137 $30,000-$49,999         0.19      1166
+## # … with 42 more rows
+```
+]
+
+---
+
+## Save data
+
+
+```r
+rel_inc_long &lt;- rel_inc %&gt;% 
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %&gt;%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %&gt;%
+  mutate(frequency = round(proportion * n))
+```
+
+---
+
+## Barplot
+
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
+  geom_col()
+```
+
+&lt;img src="u2-d13-data-recode_files/figure-html/unnamed-chunk-10-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Recode religion
+
+.panelset[
+
+.panel[.panel-name[Recode]
+
+```r
+rel_inc_long &lt;- rel_inc_long %&gt;%
+  mutate(religion = case_when(
+    religion == "Evangelical Protestant"           ~ "Ev. Protestant",
+    religion == "Historically Black Protestant"    ~ "Hist. Black Protestant",
+    religion == 'Unaffiliated (religious "nones")' ~ "Unaffiliated",
+    TRUE                                           ~ religion
+  ))
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/unnamed-chunk-12-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+## Reverse religion order
+
+.panelset[
+
+.panel[.panel-name[Recode]
+
+```r
+rel_inc_long &lt;- rel_inc_long %&gt;%
+  mutate(religion = fct_rev(religion)) 
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/unnamed-chunk-14-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+## Add income
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/rel-income-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
+  geom_col() 
+```
+]
+
+]
+
+---
+
+## Fill bars
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/rel-income-fill-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill")
+```
+]
+
+]
+
+---
+
+## Change colors
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/rel-income-fill-viridis-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d()
+```
+]
+
+]
+
+---
+
+
+## Change theme
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/rel-income-fill-viridis-minimal-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() 
+```
+]
+
+]
+
+---
+
+## Move legend to the bottom
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/bottom-legend-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+]
+
+]
+
+---
+
+## Legend adjustments
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/unnamed-chunk-20-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) 
+```
+]
+
+]
+
+---
+
+## Fix labels
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d13-data-recode_files/figure-html/unnamed-chunk-21-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+  labs(
+    x = "Proportion", y = "", 
+    title = "Income distribution by religious group", 
+    subtitle = "Source: Pew Research Center, Religious Landscape Study", 
+    fill = "Income" 
+    )
+```
+]
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

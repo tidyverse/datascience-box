@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualising numerical data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualising numerical data
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Terminology
+
+---
+
+## Number of variables involved
+
+- Univariate data analysis - distribution of single variable
+- Bivariate data analysis - relationship between two variables
+- Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
+
+---
+
+## Data: Lending Club
+
+.pull-left-wide[
+
+- Thousands of loans made through the Lending Club, which is a platform that allows individuals to lend to other individuals
+
+- Not all loans are created equal -- ease of getting a loan depends on (apparent) ability to pay back the loan
+
+- Data includes loans *made*, these are not loan applications
+]
+.pull-right-narrow[
+&lt;img src="img/lending-club.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Take a peek at data
+
+
+```r
+library(openintro)
+glimpse(loans_full_schema)
+```
+
+```
+## Rows: 10,000
+## Columns: 55
+## $ emp_title                        &lt;chr&gt; "global config engine…
+## $ emp_length                       &lt;dbl&gt; 3, 10, 3, 1, 10, NA, …
+## $ state                            &lt;fct&gt; NJ, HI, WI, PA, CA, K…
+## $ homeownership                    &lt;fct&gt; MORTGAGE, RENT, RENT,…
+## $ annual_income                    &lt;dbl&gt; 90000, 40000, 40000, …
+## $ verified_income                  &lt;fct&gt; Verified, Not Verifie…
+## $ debt_to_income                   &lt;dbl&gt; 18.01, 5.04, 21.15, 1…
+## $ annual_income_joint              &lt;dbl&gt; NA, NA, NA, NA, 57000…
+## $ verification_income_joint        &lt;fct&gt; , , , , Verified, , N…
+## $ debt_to_income_joint             &lt;dbl&gt; NA, NA, NA, NA, 37.66…
+## $ delinq_2y                        &lt;int&gt; 0, 0, 0, 0, 0, 1, 0, …
+## $ months_since_last_delinq         &lt;int&gt; 38, NA, 28, NA, NA, 3…
+## $ earliest_credit_line             &lt;dbl&gt; 2001, 1996, 2006, 200…
+## $ inquiries_last_12m               &lt;int&gt; 6, 1, 4, 0, 7, 6, 1, …
+## $ total_credit_lines               &lt;int&gt; 28, 30, 31, 4, 22, 32…
+## $ open_credit_lines                &lt;int&gt; 10, 14, 10, 4, 16, 12…
+...
+```
+
+---
+
+## Selected variables
+
+
+```r
+loans &lt;- loans_full_schema %&gt;%
+  select(loan_amount, interest_rate, term, grade, 
+         state, annual_income, homeownership, debt_to_income)
+glimpse(loans)
+```
+
+```
+## Rows: 10,000
+## Columns: 8
+## $ loan_amount    &lt;int&gt; 28000, 5000, 2000, 21600, 23000, 5000, …
+## $ interest_rate  &lt;dbl&gt; 14.07, 12.61, 17.09, 6.72, 14.07, 6.72,…
+## $ term           &lt;dbl&gt; 60, 36, 36, 36, 36, 36, 60, 60, 36, 36,…
+## $ grade          &lt;ord&gt; C, C, D, A, C, A, C, B, C, A, C, B, C, …
+## $ state          &lt;fct&gt; NJ, HI, WI, PA, CA, KY, MI, AZ, NV, IL,…
+## $ annual_income  &lt;dbl&gt; 90000, 40000, 40000, 30000, 35000, 3400…
+## $ homeownership  &lt;fct&gt; MORTGAGE, RENT, RENT, RENT, RENT, OWN, …
+## $ debt_to_income &lt;dbl&gt; 18.01, 5.04, 21.15, 10.16, 57.96, 6.46,…
+```
+
+---
+
+## Selected variables
+
+&lt;br&gt;
+
+.midi[
+variable        | description
+----------------|-------------
+`loan_amount`   |	Amount of the loan received, in US dollars
+`interest_rate` |	Interest rate on the loan, in an annual percentage
+`term`	        | The length of the loan, which is always set as a whole number of months
+`grade`	        | Loan grade, which takes a values A through G and represents the quality of the loan and its likelihood of being repaid
+`state`         |	US state where the borrower resides
+`annual_income` |	Borrower’s annual income, including any second income, in US dollars
+`homeownership`	| Indicates whether the person owns, owns but has a mortgage, or rents
+`debt_to_income` | Debt-to-income ratio
+]
+
+---
+
+## Variable types
+
+&lt;br&gt;
+
+variable        | type
+----------------|-------------
+`loan_amount`   |	numerical, continuous
+`interest_rate` |	numerical, continuous
+`term`	        | numerical, discrete
+`grade`	        | categorical, ordinal
+`state`         |	categorical, not ordinal
+`annual_income` |	numerical, continuous
+`homeownership`	| categorical, not ordinal
+`debt_to_income` | numerical, continuous
+
+---
+
+class: middle
+
+# Visualizing numerical data
+
+---
+
+## Describing shapes of numerical distributions
+
+- shape:
+    - skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+    - modality: unimodal, bimodal, multimodal, uniform
+- center: mean (`mean`), median (`median`), mode (not always useful)
+- spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
+- unusual observations
+
+---
+
+class: middle
+
+# Histogram
+
+---
+
+## Histogram
+
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram()
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-5-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Histograms and binwidth
+
+.panelset[
+.panel[.panel-name[binwidth = 1000]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 1000)
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[binwidth = 5000]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000)
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[binwidth = 20000]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 20000)
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Customizing histograms
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_histogram(binwidth = 5000) +
+* labs(
+*   x = "Loan amount ($)",
+*   y = "Frequency",
+*   title = "Amounts of Lending Club loans"
+* )
+```
+]
+]
+
+---
+
+## Fill with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = loan_amount, 
+*                 fill = homeownership)) +
+  geom_histogram(binwidth = 5000,
+*                alpha = 0.5) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  )
+```
+]
+]
+
+---
+
+## Facet with a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = loan_amount, fill = homeownership)) + 
+  geom_histogram(binwidth = 5000) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Frequency",
+    title = "Amounts of Lending Club loans"
+  ) +
+* facet_wrap(~ homeownership, nrow = 3)
+```
+]
+]
+
+---
+
+class: middle
+
+# Density plot
+
+---
+
+## Density plot
+
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Density plots and adjusting bandwidth
+
+.panelset[
+.panel[.panel-name[adjust = 0.5]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 0.5)
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[adjust = 1]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 1) # default bandwidth
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[adjust = 2]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2)
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Customizing density plots
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = loan_amount)) +
+  geom_density(adjust = 2) +
+* labs(
+*   x = "Loan amount ($)",
+*   y = "Density",
+*   title = "Amounts of Lending Club loans"
+* )
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = loan_amount, 
+*                 fill = homeownership)) +
+  geom_density(adjust = 2, 
+*              alpha = 0.5) +
+  labs(
+    x = "Loan amount ($)",
+    y = "Density",
+    title = "Amounts of Lending Club loans", 
+*   fill = "Homeownership"
+  )
+```
+]
+]
+
+---
+
+class: middle
+
+# Box plot
+
+---
+
+## Box plot
+
+
+```r
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Box plot and outliers
+
+
+```r
+ggplot(loans, aes(x = annual_income)) +
+  geom_boxplot()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-19-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Customizing box plots
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-20-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = interest_rate)) +
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = NULL,
+    title = "Interest rates of Lending Club loans"
+  ) +
+* theme(
+*   axis.ticks.y = element_blank(),
+*   axis.text.y = element_blank()
+* )
+```
+]
+]
+
+---
+
+## Adding a categorical variable
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(loans, aes(x = interest_rate,
+*                 y = grade)) +
+  geom_boxplot() +
+  labs(
+    x = "Interest rate (%)",
+    y = "Grade",
+    title = "Interest rates of Lending Club loans",
+*   subtitle = "by grade of loan"
+  )
+```
+]
+]
+
+---
+
+class: middle
+
+# Relationships numerical variables
+
+---
+
+## Scatterplot
+
+
+```r
+ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
+  geom_point()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Hex plot
+
+
+```r
+ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
+  geom_hex()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Hex plot
+
+
+```r
+ggplot(loans %&gt;% filter(debt_to_income &lt; 100), 
+       aes(x = debt_to_income, y = interest_rate)) +
+  geom_hex()
+```
+
+&lt;img src="u2-d03-viz-num_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

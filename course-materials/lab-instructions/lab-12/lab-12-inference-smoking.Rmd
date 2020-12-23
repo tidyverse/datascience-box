@@ -1,0 +1,149 @@
+---
+title: "Lab 12 - Smoking during pregnacy"
+subtitle: "Simulation based inference"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../lab.css
+link-citations: yes
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+In 2004, the state of North Carolina released a large data set containing information on births recorded in this state.
+This data set is useful to researchers studying the relation between habits and practices of expectant mothers and the birth of their children.
+We will work with a random sample of observations from this data set.
+
+# Learning goals
+
+-   Constructing confidence intervals
+-   Conducting hypothesis tests
+-   Interpreting confidence intervals and results of hypothesis tests in context of the data
+
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for inference, and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r}
+library(tidyverse) 
+library(tidymodels)
+library(openintro)
+```
+
+## Data
+
+The data can be found in the **dsbox** package, and it's called `ncbirths`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?ncbirths` in the Console or using the Help menu in RStudio to search for `ncbirths`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/ncbirths.html).
+
+# Set a seed!
+
+In this lab we'll be generating random samples.
+The last thing you want is those samples to change every time you knit your document.
+So, you should set a seed.
+There's an R chunk in your R Markdown file set aside for this.
+Locate it and add a seed.
+Make sure all members in a team are using the same seed so that you don't get merge conflicts and your results match up for the narratives.
+
+# Exercises
+
+1.  What are the cases in this data set? How many cases are there in our sample?
+
+The first step in the analysis of a new dataset is getting acquainted with the data.
+Make summaries of the variables in your dataset, determine which variables are categorical and which are numerical.
+For numerical variables, are there outliers?
+If you aren't sure or want to take a closer look at the data, make a graph.
+
+## Baby weights
+
+A 1995 study suggests that average weight of Caucasian babies born in the US is 3,369 grams (7.43 pounds).[^lab-12-inference-smoking-1]
+In this dataset we only have information on mother's race, so we will make the simplifying assumption that babies of Caucasian mothers are also Caucasian, i.e. `whitemom = "white"`.
+
+We want to evaluate whether the average weight of Caucasian babies has changed since 1995.
+
+Our null hypothesis should state "there is nothing going on", i.e. no change since 1995: $H_0: \mu = 7.43~pounds$.
+
+Our alternative hypothesis should reflect the research question, i.e. some change since 1995.
+Since the research question doesn't state a direction for the change, we use a two sided alternative hypothesis: $H_A: \mu \ne 7.43~pounds$.
+
+3.  Create a filtered data frame called `ncbirths_white` that contain data only from white mothers.
+    Then, calculate the mean of the weights of their babies.
+
+4.  Are the conditions necessary for conducting simulation based inference satisfied?
+    Explain your reasoning.
+
+Let's discuss how this test would work.
+Our goal is to simulate a null distribution of sample means that is centred at the null value of 7.43 pounds.
+In order to do so, we
+
+-   take a bootstrap sample of from the original sample,
+-   calculate this bootstrap sample's mean,
+-   repeat these two steps a large number of times to create a bootstrap distribution of means centred at the observed sample mean,
+-   shift this distribution to be centred at the null value by subtracting / adding X to all bootstrap mean (X = difference between mean of bootstrap distribution and null value), and
+-   calculate the p-value as the proportion of bootstrap samples that yielded a sample mean at least as extreme as the observed sample mean.
+
+5.  Run the appropriate hypothesis test, visualize the null distribution, calculate the p-value, and interpret the results in context of the data and the hypothesis test.
+
+## Baby weight vs. smoking
+
+Consider the possible relationship between a mother's smoking habit and the weight of her baby.
+Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions.
+
+6.  Make side-by-side boxplots displaying the relationship between `habit` and `weight`.
+    What does the plot highlight about the relationship between these two variables?
+
+7.  Before moving forward, save a version of the dataset omitting observations where there are NAs for `habit`.
+    You can call this version `ncbirths_habitgiven`.
+
+The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following to first group the data by the `habit` variable, and then calculate the mean `weight` in these groups using.
+
+```{r habit-means, eval=FALSE}
+ncbirths_habitgiven %>%
+  group_by(habit) %>%
+  summarise(mean_weight = mean(weight))
+```
+
+There is an observed difference, but is this difference statistically significant?
+In order to answer this question we will conduct a hypothesis test .
+
+7.  Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.
+
+8.  Are the conditions necessary for conducting simulation based inference satisfied?
+    Explain your reasoning.
+
+9.  Run the appropriate hypothesis test, calculate the p-value, and interpret the results in context of the data and the hypothesis test.
+
+10. Construct a 95% confidence interval for the difference between the average weights of babies born to smoking and non-smoking mothers.
+
+## Baby weight vs. mother's age
+
+In this portion of the analysis we focus on two variables.
+The first one is `maturemom`.
+
+11. First, a non-inference task: Determine the age cutoff for younger and mature mothers. Use a method of your choice, and explain how your method works.
+
+The other variable of interest is `lowbirthweight`.
+
+12. Conduct a hypothesis test evaluating whether the proportion of low birth weight babies is higher for mature mothers. State the hypotheses, verify the conditions, run the test and calculate the p-value, and state your conclusion in context of the research question. Use $\alpha = 0.05$. If you find a significant difference, construct a confidence interval, at the equivalent level to the hypothesis test, for the difference between the proportions of low birth weight babies between mature and younger mothers, and interpret this interval in context of the data.
+
+[^lab-12-inference-smoking-1]: Wen, Shi Wu, Michael S. Kramer, and Robert H. Usher.
+    "Comparison of birth weight distributions between Chinese and Caucasian infants." American Journal of Epidemiology 141.12 (1995): 1177-1187.

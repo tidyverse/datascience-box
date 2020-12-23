@@ -6,7 +6,8 @@
 
 The following resources describe the pedagogy used in designing and teaching a course with the materials provided in this resources.
 
-> Mine Çetinkaya-Rundel & Victoria Ellison (In press), A fresh look at introductory data science, *Journal of Statistics Education*.
+> Mine Çetinkaya-Rundel & Victoria Ellison.
+> A fresh look at introductory data science, *Journal of Statistics Education*.
 > [doi.org/10.1080/10691898.2020.1804497](https://doi.org/10.1080/10691898.2020.1804497).
 
 > Talk: The art and science of teaching data science [[Slides]](https://speakerdeck.com/minecr/the-art-and-science-of-teaching-data-science-university-of-glasgow)

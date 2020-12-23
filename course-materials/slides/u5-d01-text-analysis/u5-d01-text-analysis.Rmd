@@ -1,0 +1,96 @@
+---
+title: "Text analysis"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidytext)
+```
+
+class: middle
+
+# Tidytext analysis
+
+---
+
+## Tidytext
+
+.pull-left[
+- Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use
+- Learn more at [tidytextmining.com](https://www.tidytextmining.com/)
+]
+.pull-right[
+```{r echo=FALSE, fig.align = "left"}
+knitr::include_graphics("img/tidytext.png")
+```
+]
+
+---
+
+## What is tidy text?
+
+.pull-left-wide[
+.small[
+```{r}
+text <- c("Oh! Get me away from here, I'm dying",
+          "Play me a song to set me free",
+          "Nobody writes them like they used to",
+          "So it may as well be me",
+          "Here on my own now after hours",
+          "Here on my own now on a bus",
+          "Think of it this way",
+          "You could either be successful or be us",
+          "With our winning smiles, and us",
+          "With our catchy tunes or worse",
+          "Now we're photogenic",
+          "You know, we don't stand a chance")
+
+text
+```
+]
+]
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df <- tibble(line = 1:12, text = text)
+
+text_df %>% print(n = 12)
+```
+
+---
+
+## What is tidy text?
+
+```{r}
+text_df %>%
+  unnest_tokens(word, text) %>%
+  print(n = 10)
+```
+
+---
+
+## Case study: FM's COVID-19 speeches
+
+<br>
+
+.title-slide[
+### [github.com/mine-cetinkaya-rundel/fm-speeches-covid19](https://github.com/mine-cetinkaya-rundel/fm-speeches-covid19)
+]

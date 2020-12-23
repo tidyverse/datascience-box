@@ -1,0 +1,40 @@
+---
+title: "Lab 08 - University of Edinburgh Art Collection"
+author: "Insert your name here"
+date: "Insert date here"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message = FALSE}
+library(tidyverse) 
+library(skimr)
+```
+
+```{r load-data, message = FALSE, eval = FALSE}
+# Remove eval = FALSE or set it to TRUE once data is ready to be loaded
+uoe_art <- read_csv("data/uoe-art.csv")
+```
+
+### Exercise 9
+
+```{r separate-title-date, error = TRUE}
+uoe_art <- uoe_art %>%
+  separate(title, into = c("title", "date"), sep = "\\(") %>%
+  mutate(year = str_remove(date, "\\)") %>% as.numeric()) %>%
+  select(title, artist, year, ___)
+```
+
+### Exercise 10
+
+Remove this text, and add your answer for Exercise 1 here.
+Add code chunks as needed.
+Don't forget to label your code chunk.
+Do not use spaces in code chunk labels.
+
+### Exercise 11
+
+...
+
+Add exercise headings as needed.

@@ -1,0 +1,33 @@
+---
+title: "Nobel winners"
+author: "Mine Çetinkaya-Rundel"
+output: github_document
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+```
+
+Let's first load the data:
+
+```{r label-me1, eval=FALSE}
+nobel <- ___(___)
+```
+
+Then let's split the data into two:
+
+```{r label-me2, eval=FALSE}
+# stem laureates
+___ <- nobel %>%
+  filter(___)
+
+# non-steam laureates
+___ <- nobel %>%
+  filter(___)
+```
+
+And finally write out the data:
+
+```{r label-me3}
+# add code for writing out the two data frames here
+```

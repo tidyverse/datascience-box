@@ -1,0 +1,133 @@
+---
+title: "Lab 10 - Grading the professor, Pt. 1"
+subtitle: "Modelling with a single predictor"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../lab.css
+link-citations: yes
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously.
+However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor.
+The article titled, "Beauty in the classroom: instructors' pulchritude and putative pedagogical productivity" (Hamermesh and Parker, 2005) found that instructors who are viewed to be better looking receive higher instructional ratings.
+(Daniel S. Hamermesh, Amy Parker, Beauty in the classroom: instructors pulchritude and putative pedagogical productivity, Economics of Education Review, Volume 24, Issue 4, August 2005, Pages 369-376, ISSN 0272-7757, 10.1016/j.econedurev.2004.07.013. <http://www.sciencedirect.com/science/article/pii/S0272775704001165>.)
+
+In this lab you will analyze the data from this study in order to learn what goes into a positive professor evaluation.
+
+The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin.
+In addition, six students rated the professors' physical appearance.
+(This is a slightly modified version of the original data set that was released as part of the replication data for Data Analysis Using Regression and Multilevel/Hierarchical Models (Gelman and Hill, 2007).) The result is a data frame where each row contains a different course and columns represent variables about the courses and professors.
+
+# Learning goals
+
+-   Fitting a linear regression with a single numerical and categorical predictor
+-   Interpreting regression output in context of the data
+-   Comparing models
+
+# Getting started
+
+Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document.
+Knit the document to make sure it compiles without errors.
+
+## Warm up
+
+Let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit, commit, and push your changes.
+Make sure to commit with a meaningful commit message.
+Then, go to your repo on GitHub and confirm that your changes are visible in your Rmd **and** md files.
+If anything is missing, commit and push again.
+
+## Packages
+
+We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for modeling and inference, and the data lives in the **dsbox** package.
+These packages are already installed for you.
+You can load them by running the following in your Console:
+
+```{r}
+library(tidyverse) 
+library(tidymodels)
+library(openintro)
+```
+
+## Data
+
+The data can be found in the **dsbox** package, and it's called `evals`.
+Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?evals` in the Console or using the Help menu in RStudio to search for `evals`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/evals.html).
+
+# Exercises
+
+## Exploratory Data Analysis
+
+1.  Visualize the distribution of `score`.
+    Is the distribution skewed?
+    What does that tell you about how students rate courses?
+    Is this what you expected to see?
+    Why, or why not?
+    Include any summary statistics and visualizations you use in your response.
+
+2.  Visualize and describe the relationship between `score` and `bty_avg`.
+
+```{marginfigure}
+**Hint:** See the help page for the function at http://ggplot2.tidyverse.org/reference/index.html.
+```
+
+3.  Recreate the scatterplot from Exercise 3, but this time use\
+    `geom_jitter()`? What does "jitter" mean? What was misleading about the initial scatterplot?
+
+🧶 ✅ ⬆️ *If you haven't done so recently, knit, commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+## Linear regression with a numerical predictor
+
+```{marginfigure}
+Linear model is in the form $\hat{y} = b_0 + b_1 x$.
+```
+
+4.  Let's see if the apparent trend in the plot is something more than natural variation.
+    Fit a linear model called `score_bty_fit` to predict average professor evaluation `score` by average beauty rating (`bty_avg`).
+    Based on the regression output, write the linear model.
+
+5.  Recreate the scatterplot from Exercise 3, and add the regression line to this plot in orange colour, with shading for the uncertainty of the line turned off.
+
+6.  Interpret the slope of the linear model in context of the data.
+
+7.  Interpret the intercept of the linear model in context of the data.
+    Comment on whether or not the intercept makes sense in this context.
+
+8.  Determine the $R^2$ of the model and interpret it in context of the data.
+
+🧶 ✅ ⬆️ *If you haven't done so recently, knit, commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+## Linear regression with a categorical predictor
+
+9.  Fit a new linear model called `score_bty_gender` to predict average professor evaluation `score` based on `gender` of the professor.
+    Based on the regression output, write the linear model and interpret the slope and intercept in context of the data.
+
+10. What is the equation of the line corresponding to male professors?
+    What is it for female professors?
+
+11. Fit a new linear model called `score_bty_rank` to predict average professor evaluation `score` based on `rank` of the professor.
+    Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
+
+12. Create a new variable called `rank_relevel` where `"tenure track"` is the baseline level.
+
+13. Fit a new linear model called `score_bty_rank_relevel` to predict average professor evaluation `score` based on `rank_relevel` of the professor.
+    This is the new (releveled) variable you created in Exercise 13.
+    Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
+    Also determine and interpret the $R^2$ of the model.
+
+14. Create another new variable called `tenure_eligible` that labels `"teaching"` faculty as `"no"` and labels `"tenure track"` and `"tenured"` faculty as `"yes"`.
+
+15. Fit a new linear model called `score_bty_tenure_eligible` to predict average professor evaluation `score` based on `tenure_eligible`ness of the professor.
+    This is the new (regrouped) variable you created in the previous exercise.
+    Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
+    Also determine and interpret the $R^2$ of the model.
+
+🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*

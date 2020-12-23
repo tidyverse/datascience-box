@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Logistic regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Logistic regression
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Predicting categorical data
+
+---
+
+## Spam filters
+
+.pull-left-narrow[
+- Data from 3921 emails and 21 variables on them
+- Outcome: whether the email is spam or not
+- Predictors: number of characters, whether the email had "Re:" in the subject, time at which email was sent, number of times the word "inherit" shows up in the email, etc.
+]
+.pull-right-wide[
+.small[
+
+```r
+library(openintro)
+glimpse(email)
+```
+
+```
+## Rows: 3,921
+## Columns: 21
+## $ spam         &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ to_multiple  &lt;fct&gt; 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,…
+## $ from         &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ cc           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1,…
+## $ sent_email   &lt;fct&gt; 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1,…
+## $ time         &lt;dttm&gt; 2012-01-01 06:16:41, 2012-01-01 07:03:59…
+## $ image        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,…
+## $ attach       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,…
+## $ dollar       &lt;dbl&gt; 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ winner       &lt;fct&gt; no, no, no, no, no, no, no, no, no, no, n…
+## $ inherit      &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ viagra       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ password     &lt;dbl&gt; 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ num_char     &lt;dbl&gt; 11.370, 10.504, 7.773, 13.256, 1.231, 1.0…
+## $ line_breaks  &lt;int&gt; 202, 202, 192, 255, 29, 25, 193, 237, 69,…
+## $ format       &lt;fct&gt; 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1,…
+## $ re_subj      &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,…
+## $ exclaim_subj &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ urgent_subj  &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ exclaim_mess &lt;dbl&gt; 0, 1, 6, 48, 1, 1, 1, 18, 1, 0, 2, 1, 0, …
+## $ number       &lt;fct&gt; big, small, small, small, none, none, big…
+```
+]
+]
+
+---
+
+.question[
+Would you expect longer or shorter emails to be spam?
+]
+
+--
+
+.pull-left[
+&lt;img src="u4-d06-logistic-reg_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```
+## # A tibble: 2 x 2
+##   spam  mean_num_char
+##   &lt;fct&gt;         &lt;dbl&gt;
+## 1 0             11.3 
+## 2 1              5.44
+```
+]
+
+---
+
+.question[
+Would you expect emails that have subjects starting with "Re:", "RE:", "re:", or "rE:" to be spam or not?
+]
+
+--
+
+&lt;img src="u4-d06-logistic-reg_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Modelling spam
+
+- Both number of characters and whether the message has "re:" in the subject might be related to whether the email is spam. How do we come up with a model that will let us explore this relationship?
+
+--
+- For simplicity, we'll focus on the number of characters (`num_char`) as predictor, but the model we describe can be expanded to take multiple predictors as well.
+
+---
+
+## Modelling spam
+
+This isn't something we can reasonably fit a linear model to -- we need something different!
+
+&lt;img src="u4-d06-logistic-reg_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Framing the problem
+
+- We can treat each outcome (spam and not) as successes and failures arising from separate Bernoulli trials
+  - Bernoulli trial: a random experiment with exactly two possible outcomes, "success" and "failure", in which the probability of success is the same every time the experiment is conducted
+
+--
+- Each Bernoulli trial can have a separate probability of success
+
+$$ y_i ∼ Bern(p) $$
+
+--
+- We can then use the predictor variables to model that probability of success, `\(p_i\)`
+
+--
+- We can't just use a linear model for `\(p_i\)` (since `\(p_i\)` must be between 0 and 1) but we can transform the linear model to have the appropriate range
+
+---
+
+## Generalized linear models
+
+- This is a very general way of addressing many problems in regression and the resulting models are called **generalized linear models (GLMs)**
+
+--
+- Logistic regression is just one example
+
+---
+
+## Three characteristics of GLMs
+
+All GLMs have the following three characteristics:
+
+1. A probability distribution describing a generative model for the outcome variable
+
+--
+2. A linear model:
+`$$\eta = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k$$`
+
+--
+3. A link function that relates the linear model to the parameter of the outcome distribution
+  
+---
+
+class: middle
+
+# Logistic regression
+
+---
+
+## Logistic regression
+
+- Logistic regression is a GLM used to model a binary categorical outcome using numerical and categorical predictors
+
+--
+- To finish specifying the Logistic model we just need to define a reasonable link function that connects `\(\eta_i\)` to `\(p_i\)`: logit function
+
+--
+- **Logit function:** For `\(0\le p \le 1\)`
+
+`$$logit(p) = \log\left(\frac{p}{1-p}\right)$$`
+
+
+
+---
+
+## Logit function, visualised
+
+&lt;img src="u4-d06-logistic-reg_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Properties of the logit
+
+- The logit function takes a value between 0 and 1 and maps it to a value between `\(-\infty\)` and `\(\infty\)`
+
+--
+- Inverse logit (logistic) function:
+`$$g^{-1}(x) = \frac{\exp(x)}{1+\exp(x)} = \frac{1}{1+\exp(-x)}$$`
+
+--
+- The inverse logit function takes a value between `\(-\infty\)` and `\(\infty\)` and maps it to a value between 0 and 1
+
+--
+- This formulation is also useful for interpreting the model, since the logit can be interpreted as the log odds of a success -- more on this later
+
+---
+
+## The logistic regression model
+
+- Based on the three GLM criteria we have
+  - `\(y_i \sim \text{Bern}(p_i)\)`
+  - `\(\eta_i = \beta_0+\beta_1 x_{1,i} + \cdots + \beta_n x_{n,i}\)`
+  - `\(\text{logit}(p_i) = \eta_i\)`
+
+--
+- From which we get
+
+`$$p_i = \frac{\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}{1+\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}$$`
+---
+
+## Modeling spam
+
+In R we fit a GLM in the same way as a linear model except we
+
+- specify the model with `logistic_reg()`
+- use `"glm"` instead of `"lm"` as the engine 
+- define `family = "binomial"` for the link function to be used in the model
+
+--
+
+
+```r
+spam_fit &lt;- logistic_reg() %&gt;%
+  set_engine("glm") %&gt;%
+  fit(spam ~ num_char, data = email, family = "binomial")
+
+tidy(spam_fit)
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -1.80     0.0716     -25.1  2.04e-139
+## 2 num_char     -0.0621   0.00801     -7.75 9.50e- 15
+```
+
+---
+
+## Spam model
+
+
+```r
+tidy(spam_fit)
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -1.80     0.0716     -25.1  2.04e-139
+## 2 num_char     -0.0621   0.00801     -7.75 9.50e- 15
+```
+
+--
+
+Model:
+`$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times \text{num_char}$$`
+
+---
+
+## P(spam) for an email with 2000 characters 
+
+`$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times 2$$`
+--
+`$$\frac{p}{1-p} = \exp(-1.9242) = 0.15 \rightarrow p = 0.15 \times (1 - p)$$`
+--
+`$$p = 0.15 - 0.15p \rightarrow 1.15p = 0.15$$`
+--
+`$$p = 0.15 / 1.15 = 0.13$$`
+
+---
+
+.question[
+What is the probability that an email with 15000 characters is spam? What about an email with 40000 characters?
+]
+
+--
+
+.pull-left[
+&lt;img src="u4-d06-logistic-reg_files/figure-html/spam-predict-viz-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+- .light-blue[2K chars: P(spam) = 0.13]
+- .yellow[15K chars, P(spam) = 0.06]
+- .green[40K chars, P(spam) = 0.01]
+]
+
+---
+
+.question[
+Would you prefer an email with 2000 characters to be labelled as spam or not? How about 40,000 characters?
+]
+
+&lt;img src="u4-d06-logistic-reg_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+# Sensitivity and specificity
+
+---
+
+## False positive and negative
+
+|                         | Email is spam                 | Email is not spam             |
+|-------------------------|-------------------------------|-------------------------------|
+| Email labelled spam     | True positive                 | False positive (Type 1 error) |
+| Email labelled not spam | False negative (Type 2 error) | True negative                 |
+
+--
+- False negative rate = P(Labelled not spam | Email spam) = FN / (TP + FN) 
+
+- False positive rate = P(Labelled spam | Email not spam) = FP / (FP + TN)
+
+---
+
+## Sensitivity and specificity
+
+|                         | Email is spam                 | Email is not spam             |
+|-------------------------|-------------------------------|-------------------------------|
+| Email labelled spam     | True positive                 | False positive (Type 1 error) |
+| Email labelled not spam | False negative (Type 2 error) | True negative                 |
+
+--
+
+- Sensitivity = P(Labelled spam | Email spam) = TP / (TP + FN)
+  - Sensitivity = 1 − False negative rate
+  
+- Specificity = P(Labelled not spam | Email not spam) = TN / (FP + TN) 
+  - Specificity = 1 − False positive rate
+
+---
+
+.question[
+If you were designing a spam filter, would you want sensitivity and specificity to be high or low? What are the trade-offs associated with each decision? 
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

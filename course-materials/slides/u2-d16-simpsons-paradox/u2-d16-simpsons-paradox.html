@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Simpson’s paradox</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Simpson’s paradox
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Case study: Berkeley admission data
+
+---
+
+## Berkeley admission data
+
+- Study carried out by the Graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a gender bias in graduate admissions.
+- The data come from six departments. For confidentiality we'll call them A-F. 
+- We have information on whether the applicant was male or female and whether they were admitted or rejected. 
+- First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
+
+---
+
+## Data
+
+.pull-left[
+
+```
+## # A tibble: 4,526 x 3
+##    admit    gender dept 
+##    &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+##  1 Admitted Male   A    
+##  2 Admitted Male   A    
+##  3 Admitted Male   A    
+##  4 Admitted Male   A    
+##  5 Admitted Male   A    
+##  6 Admitted Male   A    
+##  7 Admitted Male   A    
+##  8 Admitted Male   A    
+##  9 Admitted Male   A    
+## 10 Admitted Male   A    
+## 11 Admitted Male   A    
+## 12 Admitted Male   A    
+## 13 Admitted Male   A    
+## 14 Admitted Male   A    
+## 15 Admitted Male   A    
+## # … with 4,511 more rows
+```
+]
+.pull-right[
+
+```
+## # A tibble: 2 x 2
+##   gender     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Female  1835
+## 2 Male    2691
+```
+
+```
+## # A tibble: 6 x 2
+##   dept      n
+##   &lt;ord&gt; &lt;int&gt;
+## 1 A       933
+## 2 B       585
+## 3 C       918
+## 4 D       792
+## 5 E       584
+## 6 F       714
+```
+
+```
+## # A tibble: 2 x 2
+##   admit        n
+##   &lt;fct&gt;    &lt;int&gt;
+## 1 Rejected  2771
+## 2 Admitted  1755
+```
+]
+
+---
+
+.question[
+What can you say about the overall gender distribution? Hint: Calculate the following probabilities: `\(P(Admit | Male)\)` and `\(P(Admit | Female)\)`.
+]
+
+
+```r
+ucbadmit %&gt;%
+  count(gender, admit)
+```
+
+```
+## # A tibble: 4 x 3
+##   gender admit        n
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 Female Rejected  1278
+## 2 Female Admitted   557
+## 3 Male   Rejected  1493
+## 4 Male   Admitted  1198
+```
+
+---
+
+
+```r
+ucbadmit %&gt;%
+  count(gender, admit) %&gt;%
+  group_by(gender) %&gt;%
+  mutate(prop_admit = n / sum(n))
+```
+
+```
+## # A tibble: 4 x 4
+## # Groups:   gender [2]
+##   gender admit        n prop_admit
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;      &lt;dbl&gt;
+## 1 Female Rejected  1278      0.696
+## 2 Female Admitted   557      0.304
+## 3 Male   Rejected  1493      0.555
+## 4 Male   Admitted  1198      0.445
+```
+
+- `\(P(Admit | Female)\)` = 0.304
+- `\(P(Admit | Male)\)` = 0.445
+
+---
+
+## Overall gender distribution
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(ucbadmit, aes(y = gender, fill = admit)) +
+  geom_bar(position = "fill") + 
+  labs(title = "Admit by gender",
+       y = NULL, x = NULL)
+```
+]
+
+]
+
+---
+
+.question[
+What can you say about the gender distribution by department ?
+]
+
+
+```r
+ucbadmit %&gt;%
+  count(dept, gender, admit)
+```
+
+```
+## # A tibble: 24 x 4
+##   dept  gender admit        n
+##   &lt;ord&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 A     Female Rejected    19
+## 2 A     Female Admitted    89
+## 3 A     Male   Rejected   313
+## 4 A     Male   Admitted   512
+## 5 B     Female Rejected     8
+## 6 B     Female Admitted    17
+## # … with 18 more rows
+```
+
+---
+
+.question[
+Let's try again... What can you say about the gender distribution by department?
+]
+
+
+```r
+ucbadmit %&gt;%
+  count(dept, gender, admit) %&gt;%
+  pivot_wider(names_from = dept, values_from = n)
+```
+
+```
+## # A tibble: 4 x 8
+##   gender admit        A     B     C     D     E     F
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1 Female Rejected    19     8   391   244   299   317
+## 2 Female Admitted    89    17   202   131    94    24
+## 3 Male   Rejected   313   207   205   279   138   351
+## 4 Male   Admitted   512   353   120   138    53    22
+```
+
+---
+
+## Gender distribution, by department
+
+.panelset[
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(ucbadmit, aes(y = gender, fill = admit)) +
+  geom_bar(position = "fill") +
+  facet_wrap(. ~ dept) +
+  scale_x_continuous(labels = label_percent()) +
+  labs(title = "Admissions by gender and department",
+       x = NULL, y = NULL, fill = NULL) +
+  theme(legend.position = "bottom")
+```
+]
+
+]
+
+---
+
+## Case for gender discrimination?
+
+.pull-left[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Closer look at departments
+
+.panelset[
+
+.panel[.panel-name[Output]
+
+```
+## # A tibble: 12 x 5
+## # Groups:   dept, gender [12]
+##    dept  gender n_admitted n_applied prop_admit
+##    &lt;ord&gt; &lt;fct&gt;       &lt;int&gt;     &lt;int&gt;      &lt;dbl&gt;
+##  1 A     Female         89       108     0.824 
+##  2 A     Male          512       825     0.621 
+##  3 B     Female         17        25     0.68  
+##  4 B     Male          353       560     0.630 
+##  5 C     Female        202       593     0.341 
+##  6 C     Male          120       325     0.369 
+##  7 D     Female        131       375     0.349 
+##  8 D     Male          138       417     0.331 
+##  9 E     Female         94       393     0.239 
+## 10 E     Male           53       191     0.277 
+## 11 F     Female         24       341     0.0704
+## 12 F     Male           22       373     0.0590
+```
+]
+
+.panel[.panel-name[Code]
+
+```r
+ucbadmit %&gt;%
+  count(dept, gender, admit) %&gt;%
+  group_by(dept, gender) %&gt;%
+  mutate(
+    n_applied  = sum(n),
+    prop_admit = n / n_applied
+    ) %&gt;%
+  filter(admit == "Admitted") %&gt;%
+  rename(n_admitted = n) %&gt;%
+  select(-admit) %&gt;%
+  print(n = 12)
+```
+]
+
+]
+
+---
+
+class: middle
+
+# Simpson's paradox
+
+---
+
+## Relationship between two variables
+
+.pull-left[
+
+```
+## # A tibble: 8 x 3
+##       x     y z    
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1     2     4 A    
+## 2     3     3 A    
+## 3     4     2 A    
+## 4     5     1 A    
+## 5     6    11 B    
+## 6     7    10 B    
+## # … with 2 more rows
+```
+]
+.pull-right[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Relationship between two variables
+
+.pull-left[
+
+```
+## # A tibble: 8 x 3
+##       x     y z    
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1     2     4 A    
+## 2     3     3 A    
+## 3     4     2 A    
+## 4     5     1 A    
+## 5     6    11 B    
+## 6     7    10 B    
+## # … with 2 more rows
+```
+]
+.pull-right[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Considering a third variable
+
+.pull-left[
+
+```
+## # A tibble: 8 x 3
+##       x     y z    
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1     2     4 A    
+## 2     3     3 A    
+## 3     4     2 A    
+## 4     5     1 A    
+## 5     6    11 B    
+## 6     7    10 B    
+## # … with 2 more rows
+```
+]
+.pull-right[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Relationship between three variables
+
+.pull-left[
+
+```
+## # A tibble: 8 x 3
+##       x     y z    
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1     2     4 A    
+## 2     3     3 A    
+## 3     4     2 A    
+## 4     5     1 A    
+## 5     6    11 B    
+## 6     7    10 B    
+## # … with 2 more rows
+```
+]
+.pull-right[
+&lt;img src="u2-d16-simpsons-paradox_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Simpson's paradox
+
+- Not considering an important variable when studying a relationship can result in **Simpson's paradox**
+- Simpson's paradox illustrates the effect that omission of an explanatory variable can have on the measure of association between another explanatory variable and a response variable
+- The inclusion of a third variable in the analysis can change the apparent relationship between the other two variables
+
+---
+
+class: middle
+
+# Aside: `group_by()` and `count()`
+
+---
+
+## What does group_by() do?
+
+`group_by()` takes an existing data frame and converts it into a grouped data frame where subsequent operations are performed "once per group"
+
+.pull-left[
+
+```r
+ucbadmit
+```
+
+```
+## # A tibble: 4,526 x 3
+##   admit    gender dept 
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+## 1 Admitted Male   A    
+## 2 Admitted Male   A    
+## 3 Admitted Male   A    
+## 4 Admitted Male   A    
+## 5 Admitted Male   A    
+## 6 Admitted Male   A    
+## # … with 4,520 more rows
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;% 
+  group_by(gender)
+```
+
+```
+## # A tibble: 4,526 x 3
+## # Groups:   gender [2]
+##   admit    gender dept 
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+## 1 Admitted Male   A    
+## 2 Admitted Male   A    
+## 3 Admitted Male   A    
+## 4 Admitted Male   A    
+## 5 Admitted Male   A    
+## 6 Admitted Male   A    
+## # … with 4,520 more rows
+```
+]
+
+---
+
+## What does group_by() not do?
+
+`group_by()` does not sort the data, `arrange()` does
+
+.pull-left[
+
+```r
+ucbadmit %&gt;% 
+  group_by(gender)
+```
+
+```
+## # A tibble: 4,526 x 3
+## # Groups:   gender [2]
+##   admit    gender dept 
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+## 1 Admitted Male   A    
+## 2 Admitted Male   A    
+## 3 Admitted Male   A    
+## 4 Admitted Male   A    
+## 5 Admitted Male   A    
+## 6 Admitted Male   A    
+## # … with 4,520 more rows
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;% 
+  arrange(gender)
+```
+
+```
+## # A tibble: 4,526 x 3
+##   admit    gender dept 
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+## 1 Admitted Female A    
+## 2 Admitted Female A    
+## 3 Admitted Female A    
+## 4 Admitted Female A    
+## 5 Admitted Female A    
+## 6 Admitted Female A    
+## # … with 4,520 more rows
+```
+]
+
+---
+
+## What does group_by() not do?
+
+`group_by()` does not create frequency tables, `count()` does
+
+.pull-left[
+
+```r
+ucbadmit %&gt;% 
+  group_by(gender)
+```
+
+```
+## # A tibble: 4,526 x 3
+## # Groups:   gender [2]
+##   admit    gender dept 
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
+## 1 Admitted Male   A    
+## 2 Admitted Male   A    
+## 3 Admitted Male   A    
+## 4 Admitted Male   A    
+## 5 Admitted Male   A    
+## 6 Admitted Male   A    
+## # … with 4,520 more rows
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;% 
+  count(gender)
+```
+
+```
+## # A tibble: 2 x 2
+##   gender     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Female  1835
+## 2 Male    2691
+```
+]
+
+---
+
+## Undo grouping with ungroup()
+
+.pull-left[
+
+```r
+ucbadmit %&gt;%
+  count(gender, admit) %&gt;%
+  group_by(gender) %&gt;%
+  mutate(prop_admit = n / sum(n)) %&gt;%
+  select(gender, prop_admit)
+```
+
+```
+## # A tibble: 4 x 2
+## # Groups:   gender [2]
+##   gender prop_admit
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 Female      0.696
+## 2 Female      0.304
+## 3 Male        0.555
+## 4 Male        0.445
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;%
+  count(gender, admit) %&gt;%
+  group_by(gender) %&gt;%
+  mutate(prop_admit = n / sum(n)) %&gt;%
+  select(gender, prop_admit) %&gt;%
+  ungroup()
+```
+
+```
+## # A tibble: 4 x 2
+##   gender prop_admit
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 Female      0.696
+## 2 Female      0.304
+## 3 Male        0.555
+## 4 Male        0.445
+```
+]
+
+---
+
+## count() is a short-hand
+
+`count()` is a short-hand for `group_by()` and then `summarise()` to count the number of observations in each group
+
+.pull-left[
+
+```r
+ucbadmit %&gt;%
+  group_by(gender) %&gt;%
+  summarise(n = n()) 
+```
+
+```
+## # A tibble: 2 x 2
+##   gender     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Female  1835
+## 2 Male    2691
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;%
+  count(gender)
+```
+
+```
+## # A tibble: 2 x 2
+##   gender     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 Female  1835
+## 2 Male    2691
+```
+]
+
+---
+
+## count can take multiple arguments
+
+.pull-left[
+
+```r
+ucbadmit %&gt;%
+  group_by(gender, admit) %&gt;%
+  summarise(n = n()) 
+```
+
+```
+## # A tibble: 4 x 3
+## # Groups:   gender [2]
+##   gender admit        n
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 Female Rejected  1278
+## 2 Female Admitted   557
+## 3 Male   Rejected  1493
+## 4 Male   Admitted  1198
+```
+]
+.pull-right[
+
+```r
+ucbadmit %&gt;%
+  count(gender, admit)
+```
+
+```
+## # A tibble: 4 x 3
+##   gender admit        n
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 Female Rejected  1278
+## 2 Female Admitted   557
+## 3 Male   Rejected  1493
+## 4 Male   Admitted  1198
+```
+]
+
+---
+
+## `summarise()` after `group_by()`
+
+- `count()` ungroups after itself
+- `summarise()` peels off one layer of grouping by default, or you can specify a different behaviour
+
+
+
+```r
+ucbadmit %&gt;%
+  group_by(gender, admit) %&gt;%
+  summarise(n = n()) 
+```
+
+```
+## # A tibble: 4 x 3
+## # Groups:   gender [2]
+##   gender admit        n
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 Female Rejected  1278
+## 2 Female Admitted   557
+## 3 Male   Rejected  1493
+## 4 Male   Admitted  1198
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidying data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tidying data
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# .hand[We...]
+
+.huge[.green[have]] .hand[data organised in an unideal way for our analysis]
+
+.huge[.pink[want]] .hand[to reorganise the data to carry on with our analysis]
+
+---
+
+## Data: Sales
+
+
+
+
+&lt;br&gt;
+
+.pull-left[
+### .green[We have...]
+
+```
+## # A tibble: 2 x 4
+##   customer_id item_1 item_2       item_3
+##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+## 1           1 bread  milk         banana
+## 2           2 milk   toilet paper &lt;NA&gt;
+```
+]
+
+--
+.pull-right[
+### .pink[We want...]
+
+```
+## # A tibble: 6 x 3
+##   customer_id item_no item        
+##         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1           1 item_1  bread       
+## 2           1 item_2  milk        
+## 3           1 item_3  banana      
+## 4           2 item_1  milk        
+## 5           2 item_2  toilet paper
+## 6           2 item_3  &lt;NA&gt;
+```
+]
+
+---
+
+## A grammar of data tidying
+
+.pull-left[
+&lt;img src="img/tidyr-part-of-tidyverse.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+The goal of tidyr is to help you tidy your data via
+
+- pivoting for going between wide and long data
+- splitting and combining character columns
+- nesting and unnesting columns
+- clarifying how `NA`s should be treated
+]
+
+---
+
+class: middle
+
+# Pivoting data
+
+---
+
+## Not this...
+
+&lt;img src="img/pivot.gif" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## but this!
+
+.center[
+&lt;img src="img/tidyr-longer-wider.gif" width="45%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Wider vs. longer
+
+.pull-left[
+### .green[wider]
+more columns
+
+```
+## # A tibble: 2 x 4
+##   customer_id item_1 item_2       item_3
+##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+## 1           1 bread  milk         banana
+## 2           2 milk   toilet paper &lt;NA&gt;
+```
+]
+
+--
+.pull-right[
+### .pink[longer]
+more rows
+
+```
+## # A tibble: 6 x 3
+##   customer_id item_no item        
+##         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1           1 item_1  bread       
+## 2           1 item_2  milk        
+## 3           1 item_3  banana      
+## 4           2 item_1  milk        
+## 5           2 item_2  toilet paper
+## 6           2 item_3  &lt;NA&gt;
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+]
+.pull-right[
+
+```r
+pivot_longer(
+* data,
+  cols, 
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+* cols,
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+  cols, 
+* names_to = "name",
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+- `values_to`: name of the column where data in pivoted variables go (character string)
+]
+.pull-right[
+
+```r
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", 
+* values_to = "value"
+  )
+```
+]
+
+---
+
+## Customers `\(\rightarrow\)` purchases
+
+
+```r
+purchases &lt;- customers %&gt;%
+* pivot_longer(
+*   cols = item_1:item_3,  # variables item_1 to item_3
+*   names_to = "item_no",  # column names -&gt; new column called item_no
+*   values_to = "item"     # values in columns -&gt; new column called item
+*   )
+
+purchases
+```
+
+```
+## # A tibble: 6 x 3
+##   customer_id item_no item        
+##         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;       
+## 1           1 item_1  bread       
+## 2           1 item_2  milk        
+## 3           1 item_3  banana      
+## 4           2 item_1  milk        
+## 5           2 item_2  toilet paper
+## 6           2 item_3  &lt;NA&gt;
+```
+
+---
+
+## Why pivot?
+
+Most likely, because the next step of your analysis needs it
+
+--
+
+.pull-left[
+
+```r
+prices
+```
+
+```
+## # A tibble: 5 x 2
+##   item         price
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 avocado       0.5 
+## 2 banana        0.15
+## 3 bread         1   
+## 4 milk          0.8 
+## 5 toilet paper  3
+```
+]
+.pull-right[
+
+```r
+purchases %&gt;%
+* left_join(prices)
+```
+
+```
+## # A tibble: 6 x 4
+##   customer_id item_no item         price
+##         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
+## 1           1 item_1  bread         1   
+## 2           1 item_2  milk          0.8 
+## 3           1 item_3  banana        0.15
+## 4           2 item_1  milk          0.8 
+## 5           2 item_2  toilet paper  3   
+## 6           2 item_3  &lt;NA&gt;         NA
+```
+]
+
+---
+
+## Purchases `\(\rightarrow\)` customers
+
+.pull-left-narrow[
+- `data` (as usual)
+- `names_from`: which column in the long format contains the what should be column names in the wide format
+- `values_from`: which column in the long format contains the what should be values in the new columns in the wide format
+]
+.pull-right-wide[
+
+```r
+purchases %&gt;%
+* pivot_wider(
+*   names_from = item_no,
+*   values_from = item
+* )
+```
+
+```
+## # A tibble: 2 x 4
+##   customer_id item_1 item_2       item_3
+##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+## 1           1 bread  milk         banana
+## 2           2 milk   toilet paper &lt;NA&gt;
+```
+]
+
+---
+
+class: middle
+
+# Case study: Approval rating of Donald Trump
+
+---
+
+&lt;img src="img/trump-approval.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ratings/adults/)
+]
+
+---
+
+## Data
+
+
+
+
+```r
+trump
+```
+
+```
+## # A tibble: 2,702 x 4
+##    subgroup date       approval disapproval
+##    &lt;chr&gt;    &lt;date&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Voters   2020-10-04     44.7        52.2
+##  2 Adults   2020-10-04     43.2        52.6
+##  3 Adults   2020-10-03     43.2        52.6
+##  4 Voters   2020-10-03     45.0        51.7
+##  5 Adults   2020-10-02     43.3        52.4
+##  6 Voters   2020-10-02     44.5        52.1
+##  7 Voters   2020-10-01     44.1        52.8
+##  8 Adults   2020-10-01     42.7        53.3
+##  9 Adults   2020-09-30     42.2        53.7
+## 10 Voters   2020-09-30     44.2        52.7
+## # … with 2,692 more rows
+```
+
+---
+
+## Goal
+
+.pull-left-wide[
+&lt;img src="u2-d09-tidying_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+--
+.pull-right-narrow[
+**Aesthetic mappings:**  
+✅  x = `date`  
+❌      y = `rating_value`  
+❌      color = `rating_type`
+
+**Facet:**  
+✅  `subgroup` (Adults and Voters)
+]
+
+---
+
+## Pivot
+
+
+```r
+trump_longer &lt;- trump %&gt;%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  )
+
+trump_longer
+```
+
+```
+## # A tibble: 5,404 x 4
+##    subgroup date       rating_type rating_value
+##    &lt;chr&gt;    &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;
+##  1 Voters   2020-10-04 approval            44.7
+##  2 Voters   2020-10-04 disapproval         52.2
+##  3 Adults   2020-10-04 approval            43.2
+##  4 Adults   2020-10-04 disapproval         52.6
+##  5 Adults   2020-10-03 approval            43.2
+##  6 Adults   2020-10-03 disapproval         52.6
+##  7 Voters   2020-10-03 approval            45.0
+##  8 Voters   2020-10-03 disapproval         51.7
+...
+```
+
+---
+
+## Plot
+
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup)
+```
+
+&lt;img src="u2-d09-tidying_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+* scale_color_manual(values = c("darkgreen", "orange")) +
+* labs(
+*   x = "Date", y = "Rating",
+*   color = NULL,
+*   title = "How (un)popular is Donald Trump?",
+*   subtitle = "Estimates based on polls of all adults and polls of likely/registered voters",
+*   caption = "Source: FiveThirtyEight modeling estimates"
+* )
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d09-tidying_files/figure-html/unnamed-chunk-23-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+
+```r
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is Donald Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) + 
+* theme_minimal() +
+* theme(legend.position = "bottom")
+```
+]
+
+.panel[.panel-name[Plot]
+&lt;img src="u2-d09-tidying_files/figure-html/unnamed-chunk-24-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

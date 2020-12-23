@@ -1,0 +1,497 @@
+---
+title: "Importing data"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(skimr)
+library(knitr)
+library(DT)
+library(here)
+```
+
+class: middle
+
+# Reading rectangular data into R
+
+---
+
+class: middle
+
+.pull-left[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/readr.png")
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/readxl.png")
+```
+]
+
+---
+
+.pull-left[
+## readr
+
+- `read_csv()` - comma delimited files
+- `read_csv2()` - semicolon separated files (common in countries where , is used as the decimal place)
+- `read_tsv()` - tab delimited files
+- `read_delim()` - reads in files with any delimiter
+- `read_fwf()` - fixed width files
+- ...
+]
+
+--
+.pull-right[
+## readxl
+
+- `read_excel()` - read xls or xlsx files
+- ...
+]
+
+---
+
+## Reading data
+
+```{r}
+nobel <- read_csv(file = "data/nobel.csv")
+nobel
+```
+
+---
+
+## Writing data
+
+.pull-left[
+- Write a file
+
+```{r cache=TRUE}
+df <- tribble(
+  ~x, ~y,
+  1,  "a",
+  2,  "b",
+  3,  "c"
+)
+
+write_csv(df, file = "data/df.csv")
+```
+]
+
+--
+.pull-right[
+- Read it back in to inspect
+
+```{r}
+read_csv("data/df.csv")
+```
+]
+
+---
+
+.your-turn[
+### .hand[Your turn!]
+
+- RStudio Cloud > `AE 06 - Nobels and sales + Data import` > open `nobels-csv.Rmd` and knit.
+- Read in the `nobels.csv` file from the `data-raw/` folder.
+- Split into two (STEM and non-STEM): 
+  - Create a new data frame, `nobel_stem`, that filters for the STEM fields 
+(Physics, Medicine, Chemistry, and Economics).
+  - Create another data frame, `nobel_nonstem`, that filters for the remaining 
+fields.  
+- Write out the two data frames to `nobel-stem.csv` and `nobel-nonstem.csv`, 
+respectively, to `data/`.
+
+**Hint:** Use the `%in%` operator when `filter()`ing.
+]
+
+---
+
+class: middle
+
+# Variable names
+
+---
+
+## Data with bad names
+
+```{r message=FALSE}
+edibnb_badnames <- read_csv("data/edibnb-badnames.csv")
+names(edibnb_badnames)
+```
+
+--
+
+... but R doesn't allow spaces in variable names
+
+```{r error=TRUE}
+ggplot(edibnb_badnames, aes(x = Number of bathrooms, y = Price)) +
+  geom_point()
+```
+
+---
+
+## Option 1 - Define column names
+
+.small[
+```{r}
+edibnb_col_names <- read_csv("data/edibnb-badnames.csv",
+                             col_names = c("id", "price", 
+                                           "neighbourhood", "accommodates",
+                                           "bathroom", "bedroom", 
+                                           "bed", "review_scores_rating", 
+                                           "n_reviews", "url"))
+
+names(edibnb_col_names)
+```
+]
+
+---
+
+## Option 2 - Format text to snake_case
+
+```{r warning=FALSE}
+edibnb_clean_names <- read_csv("data/edibnb-badnames.csv") %>%
+  janitor::clean_names()
+
+names(edibnb_clean_names)
+```
+
+---
+
+class: middle
+
+# Variable types
+
+---
+
+.question[
+Which type is `x`? Why?
+]
+
+.pull-left[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/df-na.png")
+```
+]
+.pull-right[
+```{r eval=FALSE}
+read_csv("data/df-na.csv")
+```
+
+```{r echo=FALSE}
+read_csv("data/df-na.csv") %>% print(n = 10)
+```
+]
+
+---
+
+## Option 1. Explicit NAs
+
+```{r eval=FALSE}
+read_csv("data/df-na.csv", 
+         na = c("", "NA", ".", "9999", "Not applicable"))
+```
+
+.pull-left[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/df-na.png")
+```
+]
+.pull-right[
+```{r echo=FALSE,message=FALSE,}
+read_csv("data/df-na.csv", 
+  na = c("", "NA", ".", "9999",
+         "Not applicable")) %>% 
+  print(n = 10)
+```
+]
+
+---
+
+## Option 2. Specify column types
+
+```{r eval=FALSE}
+read_csv("data/df-na.csv", col_types = list(col_double(), 
+                                            col_character(), 
+                                            col_character()))
+```
+
+```{r echo=FALSE}
+read_csv("data/df-na.csv", col_types = list(col_double(), 
+                                            col_character(), 
+                                            col_character())) %>%
+  print(n = 10)
+```
+
+---
+
+## Column types
+
+.small[
+**type function**  | **data type**
+------------------ | -------------
+`col_character()`  | character
+`col_date()`       | date
+`col_datetime()`   | POSIXct (date-time)
+`col_double()`     | double (numeric)
+`col_factor()`     | factor
+`col_guess()`      | let readr guess (default)
+`col_integer()`    | integer
+`col_logical()`    | logical
+`col_number()`     | numbers mixed with non-number characters
+`col_numeric()`    | double or integer
+`col_skip()`       | do not read
+`col_time()`       | time
+]
+
+---
+
+.question[
+Wondering where you remember these from?
+]
+
+```{r message=TRUE, output.lines=7}
+read_csv("data/df-na.csv")
+```
+
+---
+
+class:middle
+
+# Case study: Favourite foods
+
+---
+
+## Favourite foods
+
+```{r echo=FALSE}
+knitr::include_graphics("img/fav-food/fav-food.png")
+```
+
+--
+
+```{r}
+fav_food <- read_excel("data/favourite-food.xlsx") #<<
+
+fav_food
+```
+
+---
+
+## Variable names
+
+```{r echo=FALSE}
+knitr::include_graphics("img/fav-food/fav-food-names.png")
+```
+
+--
+
+```{r warning=FALSE}
+fav_food <- read_excel("data/favourite-food.xlsx") %>%
+  janitor::clean_names() #<<
+
+fav_food 
+```
+
+---
+
+## Handling NAs
+
+```{r echo=FALSE}
+knitr::include_graphics("img/fav-food/fav-food-nas.png")
+```
+
+--
+
+```{r warning=FALSE}
+fav_food <- read_excel("data/favourite-food.xlsx",
+                       na = c("N/A", "99999")) %>% #<<
+  janitor::clean_names()
+
+fav_food 
+```
+
+---
+
+## Make `age` numeric
+
+.pull-left-wide[
+```{r warning=FALSE}
+fav_food <- fav_food %>%
+  mutate( #<<
+    age = if_else(age == "five", "5", age), #<<
+    age = as.numeric(age) #<<
+    ) #<<
+
+glimpse(fav_food) 
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE}
+knitr::include_graphics("img/fav-food/fav-food-age.png")
+```
+]
+
+---
+
+## Socio-economic status
+
+.question[
+What order are the levels of `ses` listed in?
+]
+
+.pull-left-wide[
+```{r}
+fav_food %>%
+  count(ses)
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE}
+knitr::include_graphics("img/fav-food/fav-food-ses.png")
+```
+]
+
+---
+
+## Make `ses` factor
+
+.pull-left-wide[
+```{r warning=FALSE}
+fav_food <- fav_food %>%
+  mutate(ses = fct_relevel(ses, "Low", "Middle", "High")) #<<
+
+fav_food %>%
+  count(ses)
+```
+]
+
+---
+
+## Putting it altogether
+
+```{r warning=FALSE}
+fav_food <- read_excel("data/favourite-food.xlsx", na = c("N/A", "99999")) %>%
+  janitor::clean_names() %>%
+  mutate(
+    age = if_else(age == "five", "5", age), 
+    age = as.numeric(age),
+    ses = fct_relevel(ses, "Low", "Middle", "High")
+  )
+
+fav_food
+```
+
+---
+
+## Out and back in
+
+```{r}
+write_csv(fav_food, file = "data/fav-food-clean.csv")
+
+fav_food_clean <- read_csv("data/fav-food-clean.csv")
+```
+
+---
+
+.question[
+What happened to `ses` again?
+]
+
+```{r}
+fav_food_clean %>%
+  count(ses)
+```
+
+---
+
+## `read_rds()` and `write_rds()`
+
+- CSVs can be unreliable for saving interim results if there is specific variable type information you want to hold on to.
+- An alternative is RDS files, you can read and write them with `read_rds()` and `write_rds()`, respectively.
+
+```{r eval=FALSE}
+read_rds(path)
+write_rds(x, path)
+```
+
+---
+
+## Out and back in, take 2
+
+```{r}
+write_rds(fav_food, file = "data/fav-food-clean.rds")
+
+fav_food_clean <- read_rds("data/fav-food-clean.rds")
+
+fav_food_clean %>%
+  count(ses)
+```
+
+---
+
+class: middle
+
+# Other types of data
+
+---
+
+## Other types of data
+
+- **googlesheets4:** Google Sheets
+- **haven**: SPSS, Stata, and SAS files
+- **DBI**, along with a database specific backend (e.g. RMySQL, RSQLite, RPostgreSQL etc): allows you to run SQL queries against a database and return a data frame
+- **jsonline**: JSON
+- **xml2**: xml
+- **rvest**: web scraping
+- **httr**: web APIs
+- **sparklyr**: data loaded into spark
+
+---
+
+.your-turn[
+### .hand[Your turn!]
+.midi[
+- RStudio Cloud > `AE 06 - Nobels and sales + Data import` > `sales-excel.Rmd`. 
+- Load the `sales.xlsx` file from the `data-raw/` folder, using appropriate arguments for the `read_excel()` function such that it looks like the output on the left.
+- **Stretch goal:** Manipulate the sales data such that it looks like the output on the right.
+]
+]
+
+.pull-left[
+```{r echo=FALSE}
+sales <- read_excel("data/sales.xlsx", skip = 3, col_names = c("id", "n"))
+sales
+```
+]
+.pull-right[
+```{r echo=FALSE}
+sales %>%
+  mutate(
+    is_brand_name = str_detect(id, "Brand"),
+    brand = if_else(is_brand_name, id, NA_character_)
+  ) %>%
+  fill(brand) %>%
+  filter(!is_brand_name) %>%
+  select(brand, id, n) %>%
+  mutate(
+    id = as.numeric(id),
+    n = as.numeric(n)
+  )
+```
+]

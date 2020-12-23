@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Misrepresentation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Misrepresentation
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Causality
+
+---
+
+&lt;img src="img/exercise-cancer-time.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Alice Park. [Exercise Can Lower Risk of Some Cancers By 20%](https://time.com/4330041/reduce-cancer-risk-exercise/). Time Magazine. 16 May 2016.
+]
+]
+
+---
+
+&lt;img src="img/exercise-cancer-latimes.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Melissa Healy. [Exercising drives down risk for 13 cancers, research shows
+](https://www.latimes.com/science/sciencenow/la-sci-sn-exercising-cancer-20160516-story.html).  
+Los Angeles Times. 16 May 2016.
+]
+]
+
+---
+
+## Original study
+
+Moore, Steven C., et al. **["Association of leisure-time physical activity with risk of 26 types of cancer in 1.44 million adults."](https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2521826)** JAMA internal medicine 176.6 (2016): 816-825.
+
+- **Volunteers** were **asked** about their physical activity level over the preceding year. 
+- Half exercised less than about 150 minutes per week, half exercised more. 
+- Compared to the bottom 10% of exercisers, the top 10% had lower rates of esophageal, liver, lung, endometrial, colon, and breast cancer.
+- Researchers found no association between exercising and 13 other cancers (e.g. pancreatic, ovarian, and brain).
+
+.footnote[
+.midi[
+Carl Bergstrom and Jevin West. [Calling Bullshit: The art of skepticism in a data-driven world](https://www.callingbullshit.org/).  
+Random House, 2020.  
+Sharon Begley. ["Does exercise prevent cancer?"](https://www.statnews.com/2016/05/16/exercise-prevent-cancer/). StatNews. 16 May 2016. 
+]
+]
+
+---
+
+class: middle
+
+# Axes and scale
+
+---
+
+.question[
+What is the difference between these two pictures? Which presents a better way to represent these data?
+]
+
+&lt;img src="img/axis-start-at-0.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Christopher Ingraham. ["You’ve been reading charts wrong. Here’s how a pro does it."](https://www.washingtonpost.com/business/2019/10/14/youve-been-reading-charts-wrong-heres-how-pro-does-it/).  
+The Washington Post. 14 October 2019.
+]
+]
+
+---
+
+.question[
+What is wrong with this picture? How would you correct it?
+]
+
+&lt;img src="img/cost_of_gas.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.pull-left-wide[
+&lt;img src="u3-d01-misrepresentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right-narrow[
+&lt;img src="img/cost_of_gas.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.question[
+What is wrong with this picture? How would you correct it?
+]
+
+&lt;img src="img/ga-dph-declining-bars.jpg" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Graph detective
+
+.center[
+&lt;iframe width="900" height="450" src="https://livefreeordichotomize.com/2020/05/17/graph-detective/" frameborder="0"&gt;&lt;/iframe&gt;  
+]
+
+.footnote[
+.midi[
+Lucy D'Agostino McGowan. [Graph detective](https://livefreeordichotomize.com/2020/05/17/graph-detective/). Live Free or Dichotomize. 17 May 2020.
+]
+]
+
+---
+
+class: middle
+
+# Maps and areas
+
+---
+
+.question[
+Do you recognize this map? What does it show?
+]
+
+&lt;img src="img/election-2016-county.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+.footnote[
+.midi[
+Lazaro Gamio. ["Election maps are telling you big lies about small things"](https://www.washingtonpost.com/graphics/politics/2016-election/how-election-maps-lie/).  
+The Washington Post. 1 Nov 2016.
+]
+]
+
+---
+
+.pull-left[
+&lt;img src="img/citizens-for-trump.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+--
+.pull-right[
+&lt;img src="img/counties-for-trump.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[
+.midi[
+Alberto Cairo. [Visual Trumpery talk](https://visualtrumperytour.wordpress.com/).
+]
+]
+
+---
+
+&lt;img src="img/cairo-vote-percentages.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Alberto Cairo. [Visual Trumpery talk](https://visualtrumperytour.wordpress.com/).
+]
+]
+
+---
+
+&lt;img src="img/cairo-what-matters.png" width="900" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Alberto Cairo. [Visual Trumpery talk](https://visualtrumperytour.wordpress.com/).
+]
+]
+
+---
+
+class: middle
+
+# Visualising uncertainty
+
+---
+
+On December 19, 2014, the front page of Spanish national newspaper El
+País read *"Catalan public opinion swings toward 'no' for independence, says survey"*.
+
+
+
+&lt;img src="u3-d01-misrepresentation_files/figure-html/catalan-misleading-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.midi[
+Alberto Cairo. [The truthful art: Data, charts, and maps for communication](http://www.thefunctionalart.com/p/the-truthful-art-book.html). New Riders, 2016.
+]
+]
+
+---
+
+.pull-left-wide[
+&lt;img src="u3-d01-misrepresentation_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right-narrow[
+&lt;img src="u3-d01-misrepresentation_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[
+.midi[
+Alberto Cairo. ["Uncertainty and Graphicacy: How Should Statisticians Journalists and Designers Reveal Uncertainty in Graphics for Public Consumption?"](https://ec.europa.eu/eurostat/cros/powerfromstatistics/OR/PfS-OutlookReport-Cairo.pdf), Power from Statistics: Data Information and Knowledge, 2017.
+]
+]
+
+---
+
+class: middle
+
+# Further reading
+
+---
+
+.pull-left[
+&lt;img src="img/cairo-how-charts-lie.jpg" width="350" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+.pull-right[
+[How Charts Lie](http://www.thefunctionalart.com/p/reviews.html)  
+Getting Smarter about Visual Information  
+
+by Alberto Cairo
+]
+
+---
+
+.pull-left[
+&lt;img src="img/calling-bullshit.png" width="350" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+.pull-right[
+[Calling Bullshit](https://www.callingbullshit.org/)  
+The Art of Skepticism in a  
+Data-Driven World   
+
+by Carl Bergstrom and Jevin West
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

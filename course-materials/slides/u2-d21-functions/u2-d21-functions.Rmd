@@ -1,0 +1,608 @@
+---
+title: "Functions"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+library(DT)
+```
+
+class: middle
+
+# First Minister's COVID speeches
+
+---
+
+## 🏁 Start with
+
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/fm-speeches.png")
+```
+
+---
+
+## End with 🛑
+
+```{r echo=FALSE}
+covid_speeches <- read_rds("data/covid-speeches-scot.rds") %>%
+  print(n = 15)
+```
+
+
+---
+
+#### .center[
+[www.gov.scot/collections/first-ministers-speeches](https://www.gov.scot/collections/first-ministers-speeches/)
+]
+
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/fm-speeches-annotated.png")
+```
+
+---
+
+```{r echo=FALSE, out.width="65%"}
+knitr::include_graphics("img/fm-speech-oct-26-annotated.png")
+```
+
+---
+
+## Plan
+
+1. Scrape `title`, `date`, `location`, `abstract`, and `text` from a few COVID-19 speech pages to develop the code
+
+2. Write a function that scrapes `title`, `date`, `location`, `abstract`, and `text` from COVID-19 speech pages
+
+3. Scrape the `url`s of COVID-19 speeches from the main page
+
+4. Use this function to scrape from each individual COVID-19 speech from these `url`s and create a data frame with the columns `title`, `date`, `location`, `abstract`, `text`, and `url`
+
+---
+
+class: middle
+
+# Scrape data from a few COVID-19 speech pages
+
+---
+
+## Read page for 26 Oct speech
+
+```{r eval=FALSE}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+speech_page <- read_html(url)
+```
+
+```{r include=FALSE}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
+speech_page <- read_html("data/oct-26.html")
+```
+
+.pull-left[
+```{r}
+speech_page
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/fm-speech-oct-26.png")
+```
+]
+
+---
+
+## Extract title
+
+.pull-left-wide[
+<br><br>
+```{r}
+title <- speech_page %>%
+    html_node(".article-header__title") %>%
+    html_text()
+
+title
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/title.png")
+```
+]
+
+---
+
+## Extract date
+
+.pull-left-wide[
+```{r}
+library(lubridate)
+
+speech_page %>%
+    html_node(".content-data__list:nth-child(1) strong") %>%
+    html_text() 
+
+date <- speech_page %>%
+    html_node(".content-data__list:nth-child(1) strong") %>%
+    html_text() %>%
+    dmy()
+date
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/date.png")
+```
+]
+
+---
+
+## Extract location
+
+.pull-left-wide[
+```{r}
+location <- speech_page %>%
+    html_node(".content-data__list+ .content-data__list strong") %>%
+    html_text()
+
+location
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/location.png")
+```
+]
+
+---
+
+## Extract abstract
+
+.pull-left-wide[
+```{r}
+abstract <- speech_page %>%
+    html_node(".leader--first-para p") %>%
+    html_text()
+
+abstract
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/abstract.png")
+```
+]
+
+---
+
+## Extract text
+
+.pull-left-wide[
+```{r output.lines=11}
+text <- speech_page %>% 
+    html_nodes("#preamble p") %>%
+    html_text() %>%
+    list()
+
+text
+```
+]
+.pull-right-narrow[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/text.png")
+```
+]
+
+---
+
+## Put it all in a data frame
+
+.pull-left[
+```{r}
+oct_26_speech <- tibble(
+  title    = title,
+  date     = date,
+  location = location,
+  abstract = abstract,
+  text     = text,
+  url      = url
+)
+
+oct_26_speech
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/fm-speech-oct-26.png")
+```
+]
+
+---
+
+## Read page for 23 Oct speech
+
+```{r eval=FALSE}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page <- read_html(url)
+```
+
+```{r include=FALSE}
+url <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page <- read_html("data/oct-23.html")
+```
+
+```{r}
+speech_page
+```
+
+---
+
+## Extract components of 23 Oct speech
+
+```{r}
+title <- speech_page %>%
+  html_node(".article-header__title") %>%
+  html_text()
+
+date <- speech_page %>%
+  html_node(".content-data__list:nth-child(1) strong") %>%
+  html_text() %>%
+  dmy()
+
+location <- speech_page %>%
+  html_node(".content-data__list+ .content-data__list strong") %>%
+  html_text()
+
+abstract <- speech_page %>%
+  html_node(".leader--first-para p") %>%
+  html_text()
+
+text <- speech_page %>%
+  html_nodes("#preamble p") %>%
+  html_text() %>%
+  list()
+```
+
+---
+
+## Put it all in a data frame
+
+.pull-left[
+```{r}
+oct_23_speech <- tibble(
+  title    = title,
+  date     = date,
+  location = location,
+  abstract = abstract,
+  text     = text,
+  url      = url
+)
+
+oct_23_speech
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/fm-speech-oct-23.png")
+```
+]
+
+---
+
+class: middle
+
+.larger[
+.light-blue[
+.hand[
+this is getting tiring...
+]
+]
+]
+
+---
+
+class: middle
+
+# Functions
+
+---
+
+## When should you write a function?
+
+--
+.pull-left[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/funct-all-things.png")
+```
+]
+--
+.pull-right[
+When you’ve copied and pasted a block of code more than twice.
+]
+
+---
+
+.question[
+How many times will we need to copy and paste the code we developed to scrape data on all of First Minister's COVID-19 speeches?
+]
+
+```{r echo=FALSE, out.width="55%"}
+knitr::include_graphics("img/search-result.png")
+```
+
+---
+
+## Why functions?
+
+- Automate common tasks in a more powerful and general way than copy-and-pasting:
+  - Give your function an evocative name that makes your code easier to understand
+  - As requirements change, only need to update code in one place, instead of many
+  - Eliminate chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another)
+
+--
+
+- Down the line: Improve your reach as a data scientist by writing functions (and packages!) that others use
+
+---
+
+.question[
+Assuming that the page structure is the same for each speech page, how many "things" do you need to know for each speech page to scrape the data we want from it? 
+]
+
+.pull-left-wide[
+.xsmall[
+```{r eval=FALSE}
+url_23_oct <- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
+speech_page <- read_html(url_23_oct)
+
+title <- speech_page %>%
+  html_node(".article-header__title") %>%
+  html_text()
+
+date <- speech_page %>%
+  html_node(".content-data__list:nth-child(1) strong") %>%
+  html_text() %>%
+  dmy()
+
+location <- speech_page %>%
+  html_node(".content-data__list+ .content-data__list strong") %>%
+  html_text()
+
+abstract <- speech_page %>%
+  html_node(".leader--first-para p") %>%
+  html_text()
+
+text <- speech_page %>%
+  html_nodes("#preamble p") %>%
+  html_text() %>%
+  list()
+
+tibble(
+  title = title, date = date, location = location,
+  abstract = abstract, text = text, url= url
+)
+```
+]
+]
+
+---
+
+## Turn your code into a function
+
+- Pick a short but informative **name**, preferably a verb.
+
+<br>
+<br>
+<br>
+<br>
+
+```{r eval=FALSE}
+scrape_speech <- 
+  
+  
+  
+  
+  
+  
+```
+
+---
+
+## Turn your code into a function
+
+- Pick a short but evocative **name**, preferably a verb.
+- List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+
+<br>
+
+```{r eval=FALSE}
+scrape_speech <- function(x){
+  
+  
+  
+  
+  
+}  
+```
+
+---
+
+## Turn your code into a function
+
+- Pick a short but informative **name**, preferably a verb.
+- List inputs, or **arguments**, to the function inside `function`. If we had more the call would look like `function(x, y, z)`.
+- Place the **code** you have developed in body of the function, a `{` block that immediately follows `function(...)`.
+
+```{r eval=FALSE}
+scrape_speech <- function(url){
+
+  # code we developed earlier to scrape info 
+  # on single art piece goes here
+  
+}
+```
+
+---
+
+## `scrape_speech()`
+
+.pull-left-wide[
+.small[
+```{r}
+scrape_speech <- function(url) {
+  
+  speech_page <- read_html(url)
+
+  title <- speech_page %>%
+    html_node(".article-header__title") %>%
+    html_text()
+
+  date <- speech_page %>%
+    html_node(".content-data__list:nth-child(1) strong") %>%
+    html_text() %>%
+    dmy()
+
+  location <- speech_page %>%
+    html_node(".content-data__list+ .content-data__list strong") %>%
+    html_text()
+
+  abstract <- speech_page %>%
+    html_node(".leader--first-para p") %>%
+    html_text()
+
+  text <- speech_page %>%
+    html_nodes("#preamble p") %>%
+    html_text() %>%
+    list()
+
+  tibble(
+    title = title, date = date, location = location,
+    abstract = abstract, text = text, url = url
+  )
+}
+```
+]
+]
+
+---
+
+## Function in action
+
+```{r}
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/") %>%
+  glimpse()
+```
+
+---
+
+## Function in action
+
+```{r}
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/") %>%
+  glimpse()
+```
+
+---
+
+## Function in action
+
+```{r}
+scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-22-october/") %>%
+  glimpse()
+```
+
+---
+
+class: middle
+
+# Writing functions
+
+---
+
+## What goes in / what comes out?
+
+.pull-left-wide[
+- They take input(s) defined in the function definition
+
+```{r eval=FALSE}
+function([inputs separated by commas]){
+  # what to do with those inputs
+}
+```
+
+- By default they return the last value computed in the function
+
+```{r eval=FALSE}
+scrape_page <- function(x){
+  # do bunch of stuff with the input...
+  
+  # return a tibble
+  tibble(...)
+}
+```
+
+- You can define more outputs to be returned in a list as well as nice print methods (but we won't go there for now...)
+]
+
+---
+
+.question[
+What is going on here?
+]
+
+```{r}
+add_2 <- function(x){
+  x + 2
+  1000
+}
+```
+
+```{r}
+add_2(3)
+add_2(10)
+```
+
+---
+
+## Naming functions
+
+> "There are only two hard things in Computer Science: cache invalidation and naming things." - Phil Karlton
+
+---
+
+## Naming functions
+
+- Names should be short but clearly evoke what the function does
+
+--
+- Names should be verbs, not nouns
+
+--
+- Multi-word names should be separated by underscores (`snake_case` as opposed to `camelCase`)
+
+--
+- A family of functions should be named similarly (`scrape_page()`, `scrape_speech()` OR `str_remove()`, `str_replace()` etc.)
+
+--
+- Avoid overwriting existing (especially widely used) functions
+
+```{r eval=FALSE}
+# JUST DON'T
+mean <- function(x){ 
+  x * 3 
+  }
+```

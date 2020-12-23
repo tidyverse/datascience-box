@@ -1,0 +1,452 @@
+---
+title: "Data types"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+library(scales)
+```
+
+class: middle
+
+# Why should you care about data types?
+
+---
+
+## Example: Cat lovers
+
+A survey asked respondents their name and number of cats. The instructions said to enter the number of cats as a numerical value.
+
+```{r message=FALSE}
+cat_lovers <- read_csv("data/cat-lovers.csv")
+```
+
+```{r echo=FALSE}
+cat_lovers
+```
+
+---
+
+## Oh why won't you work?!
+
+```{r}
+cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+```{r eval=FALSE}
+?mean
+```
+
+```{r echo=FALSE, caption="Help for mean", out.width="75%"}
+knitr::include_graphics("img/mean-help.png")
+```
+
+---
+
+## Oh why won't you still work??!!
+
+```{r}
+cat_lovers %>%
+  summarise(mean_cats = mean(number_of_cats, na.rm = TRUE))
+```
+
+---
+
+## Take a breath and look at your data
+
+.question[
+What is the type of the `number_of_cats` variable?
+]
+
+```{r}
+glimpse(cat_lovers)
+```
+
+---
+
+## Let's take another look
+
+.small[
+```{r echo=FALSE}
+cat_lovers %>%
+  datatable()
+```
+]
+
+---
+
+## Sometimes you might need to babysit your respondents
+
+.midi[
+```{r}
+cat_lovers %>%
+  mutate(number_of_cats = case_when(
+    name == "Ginger Clark" ~ 2,
+    name == "Doug Bass"    ~ 3,
+    TRUE                   ~ as.numeric(number_of_cats)
+    )) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+]
+
+---
+
+## Always you need to respect data types
+
+```{r}
+cat_lovers %>%
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    ) %>%
+  summarise(mean_cats = mean(number_of_cats))
+```
+
+---
+
+## Now that we know what we're doing...
+
+```{r}
+cat_lovers <- cat_lovers %>% #<<
+  mutate(
+    number_of_cats = case_when(
+      name == "Ginger Clark" ~ "2",
+      name == "Doug Bass"    ~ "3",
+      TRUE                   ~ number_of_cats
+      ),
+    number_of_cats = as.numeric(number_of_cats)
+    )
+```
+
+---
+
+## Moral of the story
+
+- If your data does not behave how you expect it to, type coercion upon reading in the data might be the reason.
+- Go in and investigate your data, apply the fix, *save your data*, live happily ever after.
+
+---
+
+class: middle
+
+.hand[.light-blue[now that we have a good motivation for]]  
+.hand[.light-blue[learning about data types in R]]
+
+<br>
+
+.large[
+.hand[.light-blue[let's learn about data types in R!]]
+]
+
+---
+
+class: middle
+
+# Data types
+
+---
+
+## Data types in R
+
+- **logical**
+- **double**
+- **integer**
+- **character**
+- and some more, but we won't be focusing on those
+
+---
+
+## Logical & character
+
+.pull-left[
+**logical** - boolean values `TRUE` and `FALSE`
+
+```{r}
+typeof(TRUE)
+```
+]
+.pull-right[
+**character** - character strings
+
+```{r}
+typeof("hello")
+```
+]
+
+---
+
+## Double & integer
+
+.pull-left[
+**double** - floating point numerical values (default numerical type)
+
+```{r}
+typeof(1.335)
+typeof(7)
+```
+]
+.pull-right[
+**integer** - integer numerical values (indicated with an `L`)
+
+```{r}
+typeof(7L)
+typeof(1:3)
+```
+]
+
+---
+
+## Concatenation
+
+Vectors can be constructed using the `c()` function.
+
+```{r}
+c(1, 2, 3)
+c("Hello", "World!")
+c(c("hi", "hello"), c("bye", "jello"))
+```
+
+---
+
+## Converting between types
+
+.hand[with intention...]
+
+.pull-left[
+```{r}
+x <- 1:3
+x
+typeof(x)
+```
+]
+--
+.pull-right[
+```{r}
+y <- as.character(x)
+y
+typeof(y)
+```
+]
+
+---
+
+## Converting between types
+
+.hand[with intention...]
+
+.pull-left[
+```{r}
+x <- c(TRUE, FALSE)
+x
+typeof(x)
+```
+]
+--
+.pull-right[
+```{r}
+y <- as.numeric(x)
+y
+typeof(y)
+```
+]
+
+---
+
+## Converting between types
+
+.hand[without intention...]
+
+R will happily convert between various types without complaint when different types of data are concatenated in a vector, and that's not always a great thing!
+
+.pull-left[
+```{r}
+c(1, "Hello")
+c(FALSE, 3L)
+```
+]
+--
+.pull-right[
+```{r}
+c(1.2, 3L)
+c(2L, "two")
+```
+]
+
+---
+
+## Explicit vs. implicit coercion
+
+Let's give formal names to what we've seen so far:
+
+--
+- **Explicit coercion** is when you call a function like `as.logical()`, `as.numeric()`, `as.integer()`, `as.double()`, or `as.character()`
+
+
+--
+- **Implicit coercion** happens when you use a vector in a specific context that expects a certain type of vector
+
+---
+
+.midi[
+.your-turn[
+### .hand[Your turn!]
+
+- RStudio Cloud > `AE 05 - Hotels + Data types` > open `type-coercion.Rmd` and knit.
+- What is the type of the given vectors? First, guess. Then, try it out in R. 
+If your guess was correct, great! If not, discuss why they have that type.
+]
+]
+
+--
+
+.small[
+**Example:** Suppose we want to know the type of `c(1, "a")`. First, I'd look at: 
+
+.pull-left[
+```{r}
+typeof(1)
+```
+]
+.pull-right[
+```{r}
+typeof("a")
+```
+]
+
+and make a guess based on these. Then finally I'd check:
+.pull-left[
+```{r}
+typeof(c(1, "a"))
+```
+]
+]
+
+---
+
+class: middle
+
+# Special values
+
+---
+
+## Special values
+
+- `NA`: Not available
+- `NaN`: Not a number
+- `Inf`: Positive infinity
+- `-Inf`: Negative infinity
+
+--
+
+.pull-left[
+```{r}
+pi / 0
+0 / 0
+```
+]
+.pull-right[
+```{r}
+1/0 - 1/0
+1/0 + 1/0
+```
+]
+
+---
+
+## `NA`s are special `r emo::ji('snowflake')`s
+
+```{r}
+x <- c(1, 2, 3, 4, NA)
+```
+
+```{r}
+mean(x)
+mean(x, na.rm = TRUE)
+summary(x)
+```
+
+---
+
+## `NA`s are logical
+
+R uses `NA` to represent missing values in its data structures.
+
+```{r}
+typeof(NA)
+```
+
+---
+
+## Mental model for `NA`s
+
+- Unlike `NaN`, `NA`s are genuinely unknown values
+- But that doesn't mean they can't function in a logical way
+- Let's think about why `NA`s are logical...
+
+--
+
+.question[
+Why do the following give different answers?
+]
+.pull-left[
+```{r}
+# TRUE or NA
+TRUE | NA
+```
+]
+.pull-right[
+```{r}
+# FALSE or NA
+FALSE | NA
+```
+]
+
+$\rightarrow$ See next slide for answers...
+
+---
+
+- `NA` is unknown, so it could be `TRUE` or `FALSE`
+
+.pull-left[
+.midi[
+- `TRUE | NA`
+```{r}
+TRUE | TRUE  # if NA was TRUE
+TRUE | FALSE # if NA was FALSE
+```
+]
+]
+.pull-right[
+.midi[
+- `FALSE | NA`
+```{r}
+FALSE | TRUE  # if NA was TRUE
+FALSE | FALSE # if NA was FALSE
+```
+]
+]
+
+- Doesn't make sense for mathematical operations 
+- Makes sense in the context of missing data

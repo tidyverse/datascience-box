@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Working with multiple data frames</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Working with multiple data frames
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# .hand[We...]
+
+.huge[.green[have]] .hand[multiple data frames]
+
+.huge[.pink[want]] .hand[to bring them together]
+
+---
+
+
+
+## Data: Women in science 
+
+Information on 10 women in science who changed the world
+
+.small[
+
+|name               |
+|:------------------|
+|Ada Lovelace       |
+|Marie Curie        |
+|Janaki Ammal       |
+|Chien-Shiung Wu    |
+|Katherine Johnson  |
+|Rosalind Franklin  |
+|Vera Rubin         |
+|Gladys West        |
+|Flossie Wong-Staal |
+|Jennifer Doudna    |
+]
+
+
+.footnote[
+Source: [Discover Magazine](https://www.discovermagazine.com/the-sciences/meet-10-women-in-science-who-changed-the-world)
+]
+
+---
+
+## Inputs
+
+.panelset[
+
+.panel[.panel-name[professions]
+
+```r
+professions
+```
+
+```
+## # A tibble: 10 x 2
+##    name               profession                        
+##    &lt;chr&gt;              &lt;chr&gt;                             
+##  1 Ada Lovelace       Mathematician                     
+##  2 Marie Curie        Physicist and Chemist             
+##  3 Janaki Ammal       Botanist                          
+##  4 Chien-Shiung Wu    Physicist                         
+##  5 Katherine Johnson  Mathematician                     
+##  6 Rosalind Franklin  Chemist                           
+##  7 Vera Rubin         Astronomer                        
+##  8 Gladys West        Mathematician                     
+##  9 Flossie Wong-Staal Virologist and Molecular Biologist
+## 10 Jennifer Doudna    Biochemist
+```
+]
+
+.panel[.panel-name[dates]
+
+```r
+dates
+```
+
+```
+## # A tibble: 8 x 3
+##   name               birth_year death_year
+##   &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Janaki Ammal             1897       1984
+## 2 Chien-Shiung Wu          1912       1997
+## 3 Katherine Johnson        1918       2020
+## 4 Rosalind Franklin        1920       1958
+## 5 Vera Rubin               1928       2016
+## 6 Gladys West              1930         NA
+## 7 Flossie Wong-Staal       1947         NA
+## 8 Jennifer Doudna          1964         NA
+```
+]
+
+.panel[.panel-name[works]
+
+```r
+works
+```
+
+```
+## # A tibble: 9 x 2
+##   name            known_for                                      
+##   &lt;chr&gt;           &lt;chr&gt;                                          
+## 1 Ada Lovelace    first computer algorithm                       
+## 2 Marie Curie     theory of radioactivity,  discovery of element…
+## 3 Janaki Ammal    hybrid species, biodiversity protection        
+## 4 Chien-Shiung Wu confim and refine theory of radioactive beta d…
+## 5 Katherine John… calculations of orbital mechanics critical to …
+## 6 Vera Rubin      existence of dark matter                       
+## 7 Gladys West     mathematical modeling of the shape of the Eart…
+## 8 Flossie Wong-S… first scientist to clone HIV and create a map …
+## 9 Jennifer Doudna one of the primary developers of CRISPR, a gro…
+```
+]
+
+]
+
+---
+
+## Desired output
+
+
+```
+## # A tibble: 10 x 5
+##    name     profession    birth_year death_year known_for        
+##    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            
+##  1 Ada Lov… Mathematician         NA         NA first computer a…
+##  2 Marie C… Physicist an…         NA         NA theory of radioa…
+##  3 Janaki … Botanist            1897       1984 hybrid species, …
+##  4 Chien-S… Physicist           1912       1997 confim and refin…
+##  5 Katheri… Mathematician       1918       2020 calculations of …
+##  6 Rosalin… Chemist             1920       1958 &lt;NA&gt;             
+##  7 Vera Ru… Astronomer          1928       2016 existence of dar…
+##  8 Gladys … Mathematician       1930         NA mathematical mod…
+##  9 Flossie… Virologist a…       1947         NA first scientist …
+## 10 Jennife… Biochemist          1964         NA one of the prima…
+```
+
+---
+
+## Inputs, reminder
+
+.pull-left[
+
+```r
+names(professions)
+```
+
+```
+## [1] "name"       "profession"
+```
+
+```r
+names(dates)
+```
+
+```
+## [1] "name"       "birth_year" "death_year"
+```
+
+```r
+names(works)
+```
+
+```
+## [1] "name"      "known_for"
+```
+]
+.pull-right[
+
+```r
+nrow(professions)
+```
+
+```
+## [1] 10
+```
+
+```r
+nrow(dates)
+```
+
+```
+## [1] 8
+```
+
+```r
+nrow(works)
+```
+
+```
+## [1] 9
+```
+]
+
+---
+
+class: middle
+
+# Joining data frames
+
+---
+
+## Joining data frames
+
+
+```r
+something_join(x, y)
+```
+
+- `left_join()`: all rows from x
+- `right_join()`: all rows from y
+- `full_join()`: all rows from both x and y
+- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x
+- `inner_join()`: all rows from x where there are matching values in y, return 
+all combination of multiple matches in the case of multiple matches
+- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
+- ...
+ 
+---
+
+## Setup
+
+For the next few slides...
+
+.pull-left[
+
+
+```r
+x
+```
+
+```
+## # A tibble: 3 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 x1     
+## 2     2 x2     
+## 3     3 x3
+```
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+## # A tibble: 3 x 2
+##      id value_y
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 y1     
+## 2     2 y2     
+## 3     4 y4
+```
+]
+
+---
+
+## `left_join()`
+
+.pull-left[
+&lt;img src="img/left-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+left_join(x, y)
+```
+
+```
+## # A tibble: 3 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     3 x3      &lt;NA&gt;
+```
+]
+
+---
+
+## `left_join()`
+
+
+```r
+professions %&gt;%
+* left_join(dates)
+```
+
+```
+## # A tibble: 10 x 4
+##    name           profession                birth_year death_year
+##    &lt;chr&gt;          &lt;chr&gt;                          &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Ada Lovelace   Mathematician                     NA         NA
+##  2 Marie Curie    Physicist and Chemist             NA         NA
+##  3 Janaki Ammal   Botanist                        1897       1984
+##  4 Chien-Shiung … Physicist                       1912       1997
+##  5 Katherine Joh… Mathematician                   1918       2020
+##  6 Rosalind Fran… Chemist                         1920       1958
+##  7 Vera Rubin     Astronomer                      1928       2016
+##  8 Gladys West    Mathematician                   1930         NA
+##  9 Flossie Wong-… Virologist and Molecular…       1947         NA
+## 10 Jennifer Doud… Biochemist                      1964         NA
+```
+
+---
+
+## `right_join()`
+
+.pull-left[
+&lt;img src="img/right-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+right_join(x, y)
+```
+
+```
+## # A tibble: 3 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     4 &lt;NA&gt;    y4
+```
+]
+
+---
+
+## `right_join()`
+
+
+
+```r
+professions %&gt;%
+* right_join(dates)
+```
+
+```
+## # A tibble: 8 x 4
+##   name           profession                 birth_year death_year
+##   &lt;chr&gt;          &lt;chr&gt;                           &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Janaki Ammal   Botanist                         1897       1984
+## 2 Chien-Shiung … Physicist                        1912       1997
+## 3 Katherine Joh… Mathematician                    1918       2020
+## 4 Rosalind Fran… Chemist                          1920       1958
+## 5 Vera Rubin     Astronomer                       1928       2016
+## 6 Gladys West    Mathematician                    1930         NA
+## 7 Flossie Wong-… Virologist and Molecular …       1947         NA
+## 8 Jennifer Doud… Biochemist                       1964         NA
+```
+
+---
+
+## `full_join()`
+
+.pull-left[
+&lt;img src="img/full-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+full_join(x, y)
+```
+
+```
+## # A tibble: 4 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     3 x3      &lt;NA&gt;   
+## 4     4 &lt;NA&gt;    y4
+```
+]
+
+---
+
+## `full_join()`
+
+
+```r
+dates %&gt;%
+* full_join(works)
+```
+
+```
+## # A tibble: 10 x 4
+##    name       birth_year death_year known_for                    
+##    &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                        
+##  1 Janaki Am…       1897       1984 hybrid species, biodiversity…
+##  2 Chien-Shi…       1912       1997 confim and refine theory of …
+##  3 Katherine…       1918       2020 calculations of orbital mech…
+##  4 Rosalind …       1920       1958 &lt;NA&gt;                         
+##  5 Vera Rubin       1928       2016 existence of dark matter     
+##  6 Gladys We…       1930         NA mathematical modeling of the…
+##  7 Flossie W…       1947         NA first scientist to clone HIV…
+##  8 Jennifer …       1964         NA one of the primary developer…
+##  9 Ada Lovel…         NA         NA first computer algorithm     
+## 10 Marie Cur…         NA         NA theory of radioactivity,  di…
+```
+
+---
+
+## `inner_join()`
+
+.pull-left[
+&lt;img src="img/inner-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+inner_join(x, y)
+```
+
+```
+## # A tibble: 2 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2
+```
+]
+
+---
+
+## `inner_join()`
+
+
+```r
+dates %&gt;%
+* inner_join(works)
+```
+
+```
+## # A tibble: 7 x 4
+##   name        birth_year death_year known_for                    
+##   &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                        
+## 1 Janaki Amm…       1897       1984 hybrid species, biodiversity…
+## 2 Chien-Shiu…       1912       1997 confim and refine theory of …
+## 3 Katherine …       1918       2020 calculations of orbital mech…
+## 4 Vera Rubin        1928       2016 existence of dark matter     
+## 5 Gladys West       1930         NA mathematical modeling of the…
+## 6 Flossie Wo…       1947         NA first scientist to clone HIV…
+## 7 Jennifer D…       1964         NA one of the primary developer…
+```
+
+---
+
+## `semi_join()`
+
+.pull-left[
+&lt;img src="img/semi-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+semi_join(x, y)
+```
+
+```
+## # A tibble: 2 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 x1     
+## 2     2 x2
+```
+]
+
+---
+
+## `semi_join()`
+
+
+```r
+dates %&gt;%
+* semi_join(works)
+```
+
+```
+## # A tibble: 7 x 3
+##   name               birth_year death_year
+##   &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Janaki Ammal             1897       1984
+## 2 Chien-Shiung Wu          1912       1997
+## 3 Katherine Johnson        1918       2020
+## 4 Vera Rubin               1928       2016
+## 5 Gladys West              1930         NA
+## 6 Flossie Wong-Staal       1947         NA
+## 7 Jennifer Doudna          1964         NA
+```
+
+---
+
+## `anti_join()`
+
+.pull-left[
+&lt;img src="img/anti-join.gif" width="80%" style="background-color: #FDF6E3" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+anti_join(x, y)
+```
+
+```
+## # A tibble: 1 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     3 x3
+```
+]
+
+---
+
+## `anti_join()`
+
+
+```r
+dates %&gt;%
+* anti_join(works)
+```
+
+```
+## # A tibble: 1 x 3
+##   name              birth_year death_year
+##   &lt;chr&gt;                  &lt;dbl&gt;      &lt;dbl&gt;
+## 1 Rosalind Franklin       1920       1958
+```
+
+---
+
+## Putting it altogether
+
+
+```r
+professions %&gt;%
+  left_join(dates) %&gt;%
+  left_join(works)
+```
+
+```
+## # A tibble: 10 x 5
+##    name     profession    birth_year death_year known_for        
+##    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            
+##  1 Ada Lov… Mathematician         NA         NA first computer a…
+##  2 Marie C… Physicist an…         NA         NA theory of radioa…
+##  3 Janaki … Botanist            1897       1984 hybrid species, …
+##  4 Chien-S… Physicist           1912       1997 confim and refin…
+##  5 Katheri… Mathematician       1918       2020 calculations of …
+##  6 Rosalin… Chemist             1920       1958 &lt;NA&gt;             
+##  7 Vera Ru… Astronomer          1928       2016 existence of dar…
+##  8 Gladys … Mathematician       1930         NA mathematical mod…
+##  9 Flossie… Virologist a…       1947         NA first scientist …
+## 10 Jennife… Biochemist          1964         NA one of the prima…
+```
+
+---
+
+class: middle
+
+# Case study: Student records
+
+---
+
+## Student records
+
+- Have:
+  - Enrolment: official university enrolment records
+  - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
+- Want: Survey info for all enrolled in class 
+
+--
+
+
+
+.pull-left[
+
+```r
+enrolment
+```
+
+```
+## # A tibble: 3 x 2
+##      id name           
+##   &lt;dbl&gt; &lt;chr&gt;          
+## 1     1 Dave Friday    
+## 2     2 Hermine        
+## 3     3 Sura Selvarajah
+```
+]
+.pull-right[
+
+```r
+survey
+```
+
+```
+## # A tibble: 4 x 3
+##      id name    username            
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;               
+## 1     2 Hermine bakealongwithhermine
+## 2     3 Sura    surasbakes          
+## 3     4 Peter   peter_bakes         
+## 4     5 Mark    thebakingbuddha
+```
+]
+
+---
+
+## Student records
+
+.panelset[
+
+.panel[.panel-name[In class]
+
+```r
+enrolment %&gt;% 
+* left_join(survey, by = "id")
+```
+
+```
+## # A tibble: 3 x 4
+##      id name.x          name.y  username            
+##   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;               
+## 1     1 Dave Friday     &lt;NA&gt;    &lt;NA&gt;                
+## 2     2 Hermine         Hermine bakealongwithhermine
+## 3     3 Sura Selvarajah Sura    surasbakes
+```
+]
+
+.panel[.panel-name[Survey missing]
+
+```r
+enrolment %&gt;% 
+* anti_join(survey, by = "id")
+```
+
+```
+## # A tibble: 1 x 2
+##      id name       
+##   &lt;dbl&gt; &lt;chr&gt;      
+## 1     1 Dave Friday
+```
+]
+
+.panel[.panel-name[Dropped]
+
+```r
+survey %&gt;% 
+* anti_join(enrolment, by = "id")
+```
+
+```
+## # A tibble: 2 x 3
+##      id name  username       
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;          
+## 1     4 Peter peter_bakes    
+## 2     5 Mark  thebakingbuddha
+```
+]
+
+]
+
+---
+
+class: middle
+
+# Case study: Grocery sales
+
+---
+
+## Grocery sales
+
+- Have:
+  - Purchases: One row per customer per item, listing purchases they made
+  - Prices: One row per item in the store, listing their prices
+- Want: Total revenue
+
+--
+
+
+
+.pull-left[
+
+```r
+purchases
+```
+
+```
+## # A tibble: 5 x 2
+##   customer_id item        
+##         &lt;dbl&gt; &lt;chr&gt;       
+## 1           1 bread       
+## 2           1 milk        
+## 3           1 banana      
+## 4           2 milk        
+## 5           2 toilet paper
+```
+]
+.pull-right[
+
+```r
+prices
+```
+
+```
+## # A tibble: 5 x 2
+##   item         price
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 avocado       0.5 
+## 2 banana        0.15
+## 3 bread         1   
+## 4 milk          0.8 
+## 5 toilet paper  3
+```
+]
+
+---
+
+## Grocery sales
+
+.panelset[
+
+.panel[.panel-name[Total revenue]
+.pull-left[
+
+```r
+purchases %&gt;% 
+* left_join(prices)
+```
+
+```
+## # A tibble: 5 x 3
+##   customer_id item         price
+##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+## 1           1 bread         1   
+## 2           1 milk          0.8 
+## 3           1 banana        0.15
+## 4           2 milk          0.8 
+## 5           2 toilet paper  3
+```
+]
+.pull-right[
+
+```r
+purchases %&gt;% 
+  left_join(prices) %&gt;%
+* summarise(total_revenue = sum(price))
+```
+
+```
+## # A tibble: 1 x 1
+##   total_revenue
+##           &lt;dbl&gt;
+## 1          5.75
+```
+]
+]
+
+.panel[.panel-name[Revenue per customer]
+
+.pull-left[
+
+```r
+purchases %&gt;% 
+  left_join(prices)
+```
+
+```
+## # A tibble: 5 x 3
+##   customer_id item         price
+##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+## 1           1 bread         1   
+## 2           1 milk          0.8 
+## 3           1 banana        0.15
+## 4           2 milk          0.8 
+## 5           2 toilet paper  3
+```
+]
+.pull-right[
+
+```r
+purchases %&gt;% 
+  left_join(prices) %&gt;%
+* group_by(customer_id) %&gt;%
+  summarise(total_revenue = sum(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   customer_id total_revenue
+##         &lt;dbl&gt;         &lt;dbl&gt;
+## 1           1          1.95
+## 2           2          3.8
+```
+]
+
+]
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,361 @@
+---
+title: "Recoding data"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+```
+
+class: middle
+
+# Case study: Religion and income
+
+---
+
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("img/relig-income.png")
+```
+
+.footnote[
+Source: [pewforum.org/religious-landscape-study/income-distribution](https://www.pewforum.org/religious-landscape-study/income-distribution/), Retrieved 14 April, 2020
+]
+
+---
+
+## Read data 
+
+```{r}
+library(readxl)
+rel_inc <- read_excel("data/relig-income.xlsx")
+```
+
+.small[
+```{r echo=FALSE}
+rel_inc
+```
+]
+
+---
+
+## Rename columns
+
+.midi[
+```{r}
+rel_inc %>%
+  rename( 
+    religion = `Religious tradition`, 
+    n = `Sample Size` 
+  ) 
+```
+]
+
+---
+
+.question[
+If we want a new variable called `income` with levels such as "Less than $30,000", "$30,000-$49,999", ... etc. which function should we use?
+]
+
+```{r echo=FALSE}
+rel_inc %>%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %>%
+  pivot_longer( 
+    cols = -c(religion, n),   # all but religion and n 
+    names_to = "income",  
+    values_to = "proportion" 
+  ) %>% 
+  print(n = 15)
+```
+
+---
+
+## Pivot longer
+
+.midi[
+```{r}
+rel_inc %>%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %>%
+  pivot_longer( 
+    cols = -c(religion, n),   # all but religion and n 
+    names_to = "income",  
+    values_to = "proportion" 
+  ) 
+```
+]
+
+---
+
+## Calculate frequencies
+
+.midi[
+```{r}
+rel_inc %>%
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %>%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %>%
+  mutate(frequency = round(proportion * n)) 
+```
+]
+
+---
+
+## Save data
+
+```{r}
+rel_inc_long <- rel_inc %>% 
+  rename(
+    religion = `Religious tradition`,
+    n = `Sample Size`
+  ) %>%
+  pivot_longer(
+    cols = -c(religion, n), 
+    names_to = "income", 
+    values_to = "proportion"
+  ) %>%
+  mutate(frequency = round(proportion * n))
+```
+
+---
+
+## Barplot
+
+```{r out.width="65%"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) +
+  geom_col()
+```
+
+---
+
+## Recode religion
+
+.panelset[
+
+.panel[.panel-name[Recode]
+```{r}
+rel_inc_long <- rel_inc_long %>%
+  mutate(religion = case_when(
+    religion == "Evangelical Protestant"           ~ "Ev. Protestant",
+    religion == "Historically Black Protestant"    ~ "Hist. Black Protestant",
+    religion == 'Unaffiliated (religious "nones")' ~ "Unaffiliated",
+    TRUE                                           ~ religion
+  ))
+```
+]
+
+.panel[.panel-name[Plot]
+```{r out.width="65%", echo=FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) + 
+  geom_col()
+```
+]
+
+]
+
+---
+
+## Reverse religion order
+
+.panelset[
+
+.panel[.panel-name[Recode]
+```{r}
+rel_inc_long <- rel_inc_long %>%
+  mutate(religion = fct_rev(religion)) 
+```
+]
+
+.panel[.panel-name[Plot]
+```{r out.width="65%", echo=FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency)) + 
+  geom_col()
+```
+]
+
+]
+
+---
+
+## Add income
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r rel-income, out.width = "65%", echo = FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) + 
+  geom_col() 
+```
+]
+
+.panel[.panel-name[Code]
+```{r ref.label = "rel-income", fig.show = "hide"}
+```
+]
+
+]
+
+---
+
+## Fill bars
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r rel-income-fill, out.width = "65%", echo = FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill")
+```
+]
+
+.panel[.panel-name[Code]
+```{r ref.label = "rel-income-fill", fig.show = "hide"}
+```
+]
+
+]
+
+---
+
+## Change colors
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r rel-income-fill-viridis, out.width = "65%", echo = FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d()
+```
+]
+
+.panel[.panel-name[Code]
+```{r ref.label = "rel-income-fill-viridis", fig.show = "hide"}
+```
+]
+
+]
+
+---
+
+
+## Change theme
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r rel-income-fill-viridis-minimal, out.width = "65%", echo = FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() 
+```
+]
+
+.panel[.panel-name[Code]
+```{r ref.label = "rel-income-fill-viridis-minimal", fig.show = "hide"}
+```
+]
+
+]
+
+---
+
+## Move legend to the bottom
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r bottom-legend, out.width = "65%", echo = FALSE}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+]
+
+.panel[.panel-name[Code]
+```{r ref.label = "bottom-legend", fig.show = "hide"}
+```
+]
+
+]
+
+---
+
+## Legend adjustments
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label = "legend-adjust", echo=FALSE, out.width="65%"}
+```
+]
+
+.panel[.panel-name[Code]
+```{r legend-adjust, fig.show="hide"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) 
+```
+]
+
+]
+
+---
+
+## Fix labels
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label = "fix-labels", echo=FALSE, out.width="65%"}
+```
+]
+
+.panel[.panel-name[Code]
+```{r fix-labels, fig.show="hide"}
+ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
+  geom_col(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+  labs(
+    x = "Proportion", y = "", 
+    title = "Income distribution by religious group", 
+    subtitle = "Source: Pew Research Center, Religious Landscape Study", 
+    fill = "Income" 
+    )
+```
+]
+
+]

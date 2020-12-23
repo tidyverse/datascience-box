@@ -3,20 +3,19 @@ SAMPLE TAKE HOME EXAM - STUDENT TEMPLATE
 \[ENTER NAME HERE\]
 Due: \[DUE DATE HERE\]
 
-Academic Honesty Statement
---------------------------
+## Academic Honesty Statement
 
 I, \_\_\_\_\_\_\_\_\_\_\_\_, hereby state that I have not communicated
 with or gained information in any way from my classmates or anyone other
 than the Professor or TA during this exam, and that all work is my own.
 
-Load packages
--------------
+## Load packages
 
-    # load required packages here
+``` r
+# load required packages here
+```
 
-Questions
----------
+## Questions
 
 ### Question 1
 

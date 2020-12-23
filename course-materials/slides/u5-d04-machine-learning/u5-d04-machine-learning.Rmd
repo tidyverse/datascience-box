@@ -1,0 +1,34 @@
+---
+title: "Machine learning"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+## Machine learning models for text data
+
+```{r echo=FALSE}
+knitr::include_graphics("img/unnamed-chunk-5-1.png")
+```
+
+---
+
+## Overview
+
+- Fit a classification model
+- Cross validate
+- See if we can do better with hyperparameter tuning
+- Predict!
+- Discuss shortcomings of our implementation

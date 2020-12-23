@@ -1,0 +1,411 @@
+---
+title: "Tidying data"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+options(
+  dplyr.print_min = 10, 
+  dplyr.print_max = 10
+  )
+```
+
+class: middle
+
+# .hand[We...]
+
+.huge[.green[have]] .hand[data organised in an unideal way for our analysis]
+
+.huge[.pink[want]] .hand[to reorganise the data to carry on with our analysis]
+
+---
+
+## Data: Sales
+
+```{r include=FALSE}
+customers <- read_csv("data/sales/customers.csv")
+prices <- read_csv("data/sales/prices.csv")
+```
+
+
+<br>
+
+.pull-left[
+### .green[We have...]
+```{r echo=FALSE}
+customers
+```
+]
+
+--
+.pull-right[
+### .pink[We want...]
+```{r echo=FALSE}
+customers %>%
+  pivot_longer(cols = item_1:item_3, names_to = "item_no", values_to = "item")
+```
+]
+
+---
+
+## A grammar of data tidying
+
+.pull-left[
+```{r dplyr-part-of-tidyverse, echo=FALSE, out.width="60%", caption = "tidyr is part of the tidyverse"}
+include_graphics("img/tidyr-part-of-tidyverse.png")
+```
+]
+.pull-right[
+The goal of tidyr is to help you tidy your data via
+
+- pivoting for going between wide and long data
+- splitting and combining character columns
+- nesting and unnesting columns
+- clarifying how `NA`s should be treated
+]
+
+---
+
+class: middle
+
+# Pivoting data
+
+---
+
+## Not this...
+
+```{r echo=FALSE,out.width="70%"}
+include_graphics("img/pivot.gif")
+```
+
+---
+
+## but this!
+
+.center[
+```{r echo=FALSE, out.width="45%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/tidyr-longer-wider.gif")
+```
+]
+
+---
+
+## Wider vs. longer
+
+.pull-left[
+### .green[wider]
+more columns
+```{r echo=FALSE}
+customers
+```
+]
+
+--
+.pull-right[
+### .pink[longer]
+more rows
+```{r echo=FALSE}
+customers %>%
+  pivot_longer(cols = item_1:item_3, names_to = "item_no", values_to = "item")
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, #<<
+  cols, 
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, #<<
+  names_to = "name", 
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", #<<
+  values_to = "value"
+  )
+```
+]
+
+---
+
+## `pivot_longer()`
+
+.pull-left[
+- `data` (as usual)
+- `cols`: columns to pivot into longer format 
+- `names_to`: name of the column where column names of pivoted variables go (character string)
+- `values_to`: name of the column where data in pivoted variables go (character string)
+]
+.pull-right[
+```{r eval=FALSE}
+pivot_longer(
+  data, 
+  cols, 
+  names_to = "name", 
+  values_to = "value" #<<
+  )
+```
+]
+
+---
+
+## Customers $\rightarrow$ purchases
+
+```{r}
+purchases <- customers %>%
+  pivot_longer( #<<
+    cols = item_1:item_3,  # variables item_1 to item_3 #<<
+    names_to = "item_no",  # column names -> new column called item_no #<<
+    values_to = "item"     # values in columns -> new column called item #<<
+    ) #<<
+
+purchases
+```
+
+---
+
+## Why pivot?
+
+Most likely, because the next step of your analysis needs it
+
+--
+
+.pull-left[
+```{r}
+prices
+```
+]
+.pull-right[
+```{r}
+purchases %>%
+  left_join(prices) #<<
+```
+]
+
+---
+
+## Purchases $\rightarrow$ customers
+
+.pull-left-narrow[
+- `data` (as usual)
+- `names_from`: which column in the long format contains the what should be column names in the wide format
+- `values_from`: which column in the long format contains the what should be values in the new columns in the wide format
+]
+.pull-right-wide[
+```{r}
+purchases %>%
+  pivot_wider( #<<
+    names_from = item_no, #<<
+    values_from = item #<<
+  ) #<<
+```
+]
+
+---
+
+class: middle
+
+# Case study: Approval rating of Donald Trump
+
+---
+
+```{r echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/trump-approval.png")
+```
+
+.footnote[
+Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ratings/adults/)
+]
+
+---
+
+## Data
+
+```{r include=FALSE}
+trump <- read_csv("data/trump/trump.csv")
+```
+
+```{r}
+trump
+```
+
+---
+
+## Goal
+
+.pull-left-wide[
+```{r echo=FALSE, out.width="100%"}
+trump %>%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  ) %>%
+  ggplot(aes(x = date, y = rating_value, 
+             color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is Donald Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) + 
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+]
+--
+.pull-right-narrow[
+**Aesthetic mappings:**  
+`r emo::ji("check")`  x = `date`  
+`r emo::ji("x")`      y = `rating_value`  
+`r emo::ji("x")`      color = `rating_type`
+
+**Facet:**  
+`r emo::ji("check")`  `subgroup` (Adults and Voters)
+]
+
+---
+
+## Pivot
+
+```{r output.lines=11}
+trump_longer <- trump %>%
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  )
+
+trump_longer
+```
+
+---
+
+## Plot
+
+```{r fig.asp = 0.5}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup)
+```
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+```{r "trump-plot", fig.show="hide"}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + #<<
+  labs( #<<
+    x = "Date", y = "Rating", #<<
+    color = NULL, #<<
+    title = "How (un)popular is Donald Trump?", #<<
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", #<<
+    caption = "Source: FiveThirtyEight modeling estimates" #<<
+  ) #<<
+```
+]
+
+.panel[.panel-name[Plot]
+```{r ref.label="trump-plot", echo = FALSE, out.width="75%"}
+```
+]
+
+]
+
+---
+
+.panelset[
+
+.panel[.panel-name[Code]
+```{r "trump-plot-2", fig.show="hide"}
+ggplot(trump_longer, 
+       aes(x = date, y = rating_value, 
+           color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is Donald Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) + 
+  theme_minimal() + #<<
+  theme(legend.position = "bottom") #<<
+```
+]
+
+.panel[.panel-name[Plot]
+```{r ref.label="trump-plot-2", echo = FALSE, out.width="75%", fig.width=6}
+```
+]
+
+]

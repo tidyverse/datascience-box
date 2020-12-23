@@ -1,10 +1,20 @@
 /* custom environments */
 
+.guest-lecture {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt dotted #a8a8a8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("microphone.png");
+}
+
+
 .application-exercise {
   padding: 1em 1em 1em 4em;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  border: 1pt solid #d8d8d8;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #a8a8a8;
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("application-exercise.png");
 }
@@ -13,7 +23,7 @@
   clear: right;
   display: block;
   font-weight: bold;
-  color: #A7D5E8;
+  color: #80D4E6;
 }
 
 .reading {
@@ -43,6 +53,74 @@
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("slide-deck.png");
 }
+
+.slides {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.slides:before {
+  content: "\f108";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+.instructions {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.instructions:before {
+  content: "\f15c";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+.starter {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.starter:before {
+  content: "\f09b";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+
+.source {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.source:before {
+  content: "\f1c9";
+  font-family: FontAwesome;
+  color: #a8a8a8;
+  left: 5px;
+  position: absolute;
+}
+
+.video {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.video:before {
+  content: "\f16a";
+  font-family: FontAwesome;
+  color: #c4302b;
+  left: 5px;
+  position: absolute;
+}
+
+
 
 .lab{
   padding: 1em 1em 1em 4em;

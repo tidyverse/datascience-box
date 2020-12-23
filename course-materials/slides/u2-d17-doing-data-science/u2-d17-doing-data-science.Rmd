@@ -1,0 +1,303 @@
+---
+title: "Doing data science"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+class: middle
+
+# What's in a data analysis?
+
+---
+
+## Five core activities of data analysis
+
+1. Stating and refining the question
+1. Exploring the data
+1. Building formal statistical models
+1. Interpreting the results
+1. Communicating the results
+
+.footnote[
+Roger D. Peng and Elizabeth Matsui. "The Art of Data Science." A Guide for Anyone Who Works with Data. Skybrude Consulting, LLC (2015).
+]
+
+---
+
+class: middle
+
+# Stating and refining the question
+
+---
+
+## Six types of questions
+
+1. **Descriptive:** summarize a characteristic of a set of data
+1. **Exploratory:** analyze to see if there are patterns, trends, or relationships between variables (hypothesis generating)
+1. **Inferential:** analyze patterns, trends, or relationships in representative data from a population
+1. **Predictive:** make predictions for individuals or groups of individuals
+1. **Causal:** whether changing one factor will change another factor, on average, in a population
+1. **Mechanistic:** explore "how" as opposed to whether
+
+.footnote[
+Jeffery T. Leek and Roger D. Peng. "What is the question?." Science 347.6228 (2015): 1314-1315.
+]
+
+---
+
+## Ex: COVID-19 and Vitamin D
+
+1. **Descriptive:** frequency of hospitalisations due to COVID-19 in a set of data collected from a group of individuals
+--
+
+1. **Exploratory:** examine relationships between a range of dietary factors and COVID-19 hospitalisations
+--
+
+1. **Inferential:** examine whether any relationship between taking Vitamin D supplements and COVID-19 hospitalisations found in the sample hold for the population at large
+
+--
+1. **Predictive:** what types of people will take Vitamin D supplements during the next year
+
+--
+1. **Causal:** whether people with COVID-19 who were randomly assigned to take Vitamin D supplements or those who were not are hospitalised
+
+--
+1. **Mechanistic:** how increased vitamin D intake leads to a reduction in the number of viral illnesses
+
+---
+
+## Questions to data science problems
+
+- Do you have appropriate data to answer your question?
+- Do you have information on confounding variables?
+- Was the data you're working with collected in a way that introduces bias?
+
+--
+
+.question[
+Suppose I want to estimate the average number of children in households in Edinburgh. I conduct a survey at an elementary school in Edinburgh and ask students at this elementary school how many children, including themselves, live in their house. Then, I take the average of the responses. Is this a biased or an unbiased estimate of the number of children in households in Edinburgh? If biased, will the value be an overestimate or underestimate?
+]
+
+---
+
+class: middle
+
+# Exploratory data analysis
+
+---
+
+## Checklist
+
+- Formulate your question
+- Read in your data
+- Check the dimensions
+- Look at the top and the bottom of your data
+- Validate with at least one external data source
+- Make a plot
+- Try the easy solution first
+
+---
+
+## Formulate your question
+
+- Consider scope:
+  - Are air pollution levels higher on the east coast than on the west coast?
+  - Are hourly ozone levels on average higher in New York City than they are in Los Angeles?
+  - Do counties in the eastern United States have higher ozone levels than counties in the western United States?
+- Most importantly: "Do I have the right data to answer this question?"
+
+---
+
+## Read in your data
+
+- Place your data in a folder called `data`
+- Read it into R with `read_csv()` or friends (`read_delim()`, `read_excel()`, etc.)
+
+```{r}
+library(readxl)
+fav_food <- read_excel("data/favourite-food.xlsx")
+fav_food
+```
+
+---
+
+## `clean_names()`
+
+If the variable names are malformatted, use `janitor::clean_names()`
+
+```{r message=FALSE, warning=FALSE}
+library(janitor)
+fav_food %>% clean_names()  
+```
+
+---
+
+## Case study: NYC Squirrels!
+
+- [The Squirrel Census](https://www.thesquirrelcensus.com/) is a multimedia science, design, and storytelling project focusing on the Eastern gray (*Sciurus carolinensis*). They count squirrels and present their findings to the public.
+- This table contains squirrel data for each of the 3,023 sightings, including location coordinates, age, primary and secondary fur color, elevation, activities, communications, and interactions between squirrels and with humans.
+
+```{r}
+#install_github("mine-cetinkaya-rundel/nycsquirrels18")
+library(nycsquirrels18)
+```
+
+---
+
+## Locate the codebook
+
+[mine-cetinkaya-rundel.github.io/nycsquirrels18/reference/squirrels.html](https://mine-cetinkaya-rundel.github.io/nycsquirrels18/reference/squirrels.html)
+
+<br><br>
+
+--
+
+## Check the dimensions
+
+```{r}
+dim(squirrels)
+```
+
+---
+
+## Look at the top...
+
+```{r}
+squirrels %>% head()
+```
+
+---
+
+## ...and the bottom
+
+.small[
+```{r}
+squirrels %>% tail()
+```
+]
+
+---
+
+## Validate with at least one external data source
+
+.pull-left[
+```{r echo=FALSE}
+squirrels %>%
+  select(long, lat) %>%
+  print(n = 15)
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/central-park-coords.png")
+```
+]
+
+---
+
+## Make a plot
+
+```{r out.width="45%"}
+ggplot(squirrels, aes(x = long, y = lat)) +
+  geom_point(alpha = 0.2)
+```
+
+--
+
+.pull-left-wide[
+**Hypothesis:** There will be a higher density of sightings on the perimeter than inside the park.
+]
+
+---
+
+## Try the easy solution first
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label="easy-solution", echo = FALSE}
+```
+]
+
+.panel[.panel-name[Code]
+```{r easy-solution, fig.show = "hide"}
+squirrels <- squirrels %>%
+  separate(hectare, into = c("NS", "EW"), sep = 2, remove = FALSE) %>%
+  mutate(where = if_else(NS %in% c("01", "42") | EW %in% c("A", "I"), "perimeter", "inside")) 
+
+ggplot(squirrels, aes(x = long, y = lat, color = where)) +
+  geom_point(alpha = 0.2)
+```
+]
+
+]
+
+---
+
+## Then go deeper...
+
+.panelset[
+
+.panel[.panel-name[Plot]
+```{r ref.label="hex-plot", echo = FALSE}
+```
+]
+
+.panel[.panel-name[Code]
+```{r hex-plot, fig.show = "hide"}
+hectare_counts <- squirrels %>%
+  group_by(hectare) %>%
+  summarise(n = n()) 
+
+hectare_centroids <- squirrels %>%
+  group_by(hectare) %>%
+  summarise(
+    centroid_x = mean(long),
+    centroid_y = mean(lat)
+  )
+
+squirrels %>%
+  left_join(hectare_counts, by = "hectare") %>%
+  left_join(hectare_centroids, by = "hectare") %>%
+  ggplot(aes(x = centroid_x, y = centroid_y, color = n)) +
+  geom_hex()
+```
+]
+
+]
+
+---
+
+## The squirrel is staring at me!
+
+```{r}
+squirrels %>%
+  filter(str_detect(other_interactions, "star")) %>%
+  select(shift, age, other_interactions)
+```
+
+---
+
+## Communicating for your audience
+
+- Avoid: Jargon, uninterpreted results, lengthy output
+- Pay attention to: Organization, presentation, flow
+- Don't forget about: Code style, coding best practices, meaningful commits
+- Be open to: Suggestions, feedback, taking (calculated) risks

@@ -4,7 +4,7 @@
 
 One of the design principles of this course is "cherish day one" -- get students from nothing to their first meaningful data visualization within the first 10 minutes of the course.
 Achieving this is possible, but requires careful consideration of the computing infrastructure.
-This section outlines how one can set up their course to run on RStudio Cloud, use GitHub for not only version control and collaboration but also the learning management system for the course, build their course materials with packages from the \*down universe (rmarkdown, blogdown, xaringan, etc.), and use Slack for course communication.
+This section outlines how one can set up their course to run on RStudio Cloud, use GitHub for not only version control and collaboration but also as the learning management system for the course, and build their course materials with packages from the `*down` universe (**rmarkdown**, **blogdown**, **xaringan**, etc.).
 Lastly, the alternative setups section describes other approaches to setting up the computing infrastructure that can be just as efficient and effective as the ones described in the main choices for the course, and discusses pros and cons.
 
 The RStudio IDE includes a viewable environment, a file browser, data viewer, and a plotting pane, which makes it less intimidating than the bare R shell.
@@ -13,7 +13,7 @@ Additionally, since it is a full fledged IDE, it also features integrated help, 
 [RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation.
 The main reason for this choice is reducing friction at first exposure to R.
 Local installation can be difficult to manage, both for the student and the instructor, and can shift the focus away from data science learning at the beginning of the course.
-In the pedagogical decisions section, we discuss in further detail the reasons for avoiding local installation at the beginning of the course and discuss when to introduce it later on in the course.
+We discuss in further detail the reasons for avoiding local installation at the beginning of the course in Section \@ref(design-principles).[^access-r-1]
 
 When you create an account on RStudio Cloud, you get a workspace of your own, and the projects you create here can be public or private.
 You can also add a new workspace and control its permissions, and the projects you create here can also be public or private.
@@ -98,31 +98,11 @@ This default has two advantages:
 2.  It means when a student creates a project in the workspace it's not, by default, visible to other students.
 
 When your project is ready to be shared with the students in your course, you can adjust the access level by clicking on the gear icon to reveal the settings menu.
+You should also check the "Make this project an assignment" box so that when a student starts their assignment RStudio Cloud automatically makes a copy of the project for them.
 
 ```{r rscloud-project-permissions, fig.align="center", echo=FALSE, fig.cap="Setting project permissions within a workspace"}
 include_graphics(path = "images/rscloud-project-permissions.png")
 ```
-
-### Copying
-
-When a student clicks on your shared project, they are notified that this is a temporary copy (with red blinking text), and are given the option to make their own permanent copy of the project.
-This is the first thing a student should do when they start working on a project.
-
-When a student makes a copy of a project, a new project where they are the owner and that is only visible to them (and the admins and moderators of the space) is created.
-This copy contains all documents included in the original project and has all the packages installed (but not loaded) as well.
-
-```{r rscloud-project-copy, fig.align="center", echo=FALSE, fig.cap="Making a copy of a project"}
-include_graphics(path = "images/rscloud-project-copy.png")
-```
-
-You will see in the above screenshot that the user (on the right) is not the admin of the course.
-This screenshot was taken when logged into the demo workspace as a student (contributor).
-I strongly recommend that instructors make a second account for themselves on RStudio Cloud and add that user as a contributor to the workspace to be able to see what your students see when they log in.
-It's a great way to test out functionality and resolve unexpected issues your students might encounter, before they encounter them.
-I recommend using an incognito browser window for the student account so that you can stay logged in both as a student and as the instructor at the same time and test the student view as you develop content as an instructor.
-
-One huge advantage of your students working in RStudio Cloud is that you as the instructor, and anyone with an admin and moderator role, can peek into student projects.
-While it is important for your students to learn to ask questions in a way that does not depend on someone else being able to see their work directly (and for this I strongly recommend teaching students to make [reprexes](https://www.tidyverse.org/help/#reprex)), it is sometimes, especially early on, nice to be able to peek into a student's project.
 
 ## Base project template
 
@@ -137,6 +117,10 @@ include_graphics(path = "images/rscloud-base-template.png")
 
 Note that a project must be shared with everyone in the space in order to be used as a template; only projects which are viewable by everyone in the space will appear in the templates list.
 
+You can update your base project as many times as you want throughout the semester.
+The base template is applied prospectively -- it only effects projects created after the template has been set.
+Therefore updating the base project will not break projects already created with the previous version of a base project.
+
 ## Git integration
 
 It is possible to create (clone) a new project in RStudio Cloud from a GitHub repository, just like in the RStudio IDE.
@@ -147,24 +131,32 @@ include_graphics(path = "images/rscloud-git-project.png")
 
 If you have a base project template set up for your workspace, this new project created from GitHub will also have the packages installed in the base project template.
 
-For more on using Git and GitHub in the classroom, see [here][version\_control].
+For more on using Git and GitHub in the classroom, see Section \@ref(version-control).
+
+## Troubleshooting
+
+I strongly recommend that you make a second account for themselves on RStudio Cloud and add that user as a contributor to the workspace to be able to see what your students see when they log in.
+It's a great way to test out functionality and resolve unexpected issues your students might encounter, before they encounter them.
+I recommend using an incognito browser window for the student account so that you can stay logged in both as a student and as the instructor at the same time and test the student view as you develop content as an instructor.
+
+One huge advantage of your students working in RStudio Cloud is that you as the instructor, and anyone with an admin and moderator role, can peek into student projects.
+While it is important for your students to learn to ask questions in a way that does not depend on someone else being able to see their work directly (and for this I strongly recommend teaching students to make [reprexes](https://www.tidyverse.org/help/#reprex)), it is sometimes, especially early on, nice to be able to peek into a student's project.
 
 ## Limits
 
-### Memory
+### Memory & CPU
 
-Each project on RStudio Cloud is allocated 1 GB of RAM.
-While this is a pretty generous limit, actions like joining large tables or fitting complicated models could exceed the limit.
+Each project on RStudio Cloud is allocated 1 GB of RAM and 1 CPU by default.
+While this is a pretty generous limit, actions like joining very large tables or fitting complicated models could exceed the limit.
 
 I recommend testing out the any work you assign, especially those using large datasets, in order to avoid unexpected hiccups due to out of memory issues.
 One challenge is that you might have no control over what issues students might run into if they are working on an open ended project using a dataset of their own choice.
 In these circumstances it's helpful to keep in the back of your mind that one way an out of memory issue can present itself is with the RStudio Cloud project crashing.
 
-### Users / projects
+### Other limits
 
-Another limit that you will most likely hit when setting up your course on RStudio Cloud is that each account is allocated one private space, with up to three members and five projects.
-Once you hit this limit RStudio Cloud will prompt you to submit a request to the RStudio Cloud team for more capacity.
-Rest assured that this request will be approved.
+For most up to date information on limits on free RStudio Cloud accounts, as well as any other technical details, see the [RStudio Cloud Guide](https://rstudio.cloud/learn/guide#limits).
+This document gets updated as changes are made to the user interface and/or the backend of RStudio Cloud and should be assumed to be more current than the information outlined here.
 
 ## Learn more
 
@@ -173,3 +165,8 @@ To see this all in action and learn more, watch the following RStudio Cloud webi
 -   [Teaching R online with RStudio Cloud](https://mine-cetinkaya-rundel.github.io/teach-r-online/) (July 2020)
 -   [Teaching R online with RStudio Cloud](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom) (March 2020)
 -   [RStudio Cloud in the Classroom](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom)
+
+[^access-r-1]: Note that as of August 2020 RStudio Cloud offers paid tiers as well, and you will likely need a paid subscription to teach with RStudio Cloud (unless you're teaching a short, small course).
+    Depending on your institution's IT infrastructure and your class size, RStudio Cloud may or may not be the most economically feasible solution for your teaching needs.
+    See Section \@ref(alternative-setups) for suggestions for other setups for providing server access to RStudio for your students.
+    Note that these alternatives generally require system infrastructure expertiose or IT professional time.
