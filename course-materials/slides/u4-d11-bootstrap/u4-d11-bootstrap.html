@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bootstrapping</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bootstrapping
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Rent in Edinburgh
+
+---
+
+## Rent in Edinburgh
+
+.question[
+Take a guess! How much does a typical 3 BR flat in Edinburgh rents for?
+]
+
+---
+
+## Sample
+
+Fifteen 3 BR flats in Edinburgh were randomly selected on rightmove.co.uk.
+
+
+```r
+library(tidyverse)
+edi_3br &lt;- read_csv2("data/edi-3br.csv") # ; separated
+```
+
+.small[
+
+```
+## # A tibble: 15 x 4
+##   flat_id  rent title               address                      
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;                        
+## 1 flat_01   825 3 bedroom apartmen… Burnhead Grove, Edinburgh, M…
+## 2 flat_02  2400 3 bedroom flat to … Simpson Loan, Quartermile, E…
+## 3 flat_03  1900 3 bedroom flat to … FETTES ROW, NEW TOWN, EH3 6SE
+## 4 flat_04  1500 3 bedroom apartmen… Eyre Crescent, Edinburgh, Mi…
+## 5 flat_05  3250 3 bedroom flat to … Walker Street, Edinburgh     
+## 6 flat_06  2145 3 bedroom flat to … George Street, City Centre, …
+## # … with 9 more rows
+```
+]
+
+---
+
+## Observed sample
+
+&lt;img src="u4-d11-bootstrap_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Observed sample
+
+Sample mean ≈ £1895 😱
+
+&lt;br&gt;
+
+&lt;img src="img/rent-bootsamp.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Bootstrap population
+
+Generated assuming there are more flats like the ones in the observed sample... Population mean = ❓
+
+&lt;img src="img/rent-bootpop.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Bootstrapping scheme
+
+1. Take a bootstrap sample - a random sample taken **with replacement** from the 
+original sample, of the same size as the original sample
+2. Calculate the bootstrap statistic - a statistic such as mean, median, 
+proportion, slope, etc. computed on the bootstrap samples
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap statistics
+4. Calculate the bounds of the XX% confidence interval as the middle XX% 
+of the bootstrap distribution
+
+---
+
+class: middle
+
+# Bootstrapping with tidymodels
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+```
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+```
+
+---
+
+## Generate bootstrap means
+
+
+```r
+edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent)
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap")
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## Generate bootstrap means
+
+
+
+
+
+```r
+# save resulting bootstrap distribution
+boot_df &lt;- edi_3br %&gt;%
+  # specify the variable of interest
+  specify(response = rent) %&gt;% 
+  # generate 15000 bootstrap samples
+  generate(reps = 15000, type = "bootstrap") %&gt;% 
+  # calculate the mean of each bootstrap sample
+  calculate(stat = "mean")
+```
+
+---
+
+## The bootstrap sample
+
+.question[
+How many observations are there in `boot_df`? What does each observation represent?
+]
+
+
+```r
+boot_df
+```
+
+```
+## # A tibble: 15,000 x 2
+##   replicate  stat
+##       &lt;int&gt; &lt;dbl&gt;
+## 1         1 1793.
+## 2         2 1938.
+## 3         3 2175 
+## 4         4 2159.
+## 5         5 2084 
+## 6         6 1761 
+## # … with 14,994 more rows
+```
+
+---
+
+## Visualize the bootstrap distribution
+
+
+```r
+ggplot(data = boot_df, mapping = aes(x = stat)) +
+  geom_histogram(binwidth = 100) +
+  labs(title = "Bootstrap distribution of means")
+```
+
+&lt;img src="u4-d11-bootstrap_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Calculate the confidence interval
+
+A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution.
+
+
+```r
+boot_df %&gt;%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+```
+## # A tibble: 1 x 2
+##   lower upper
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 1603. 2213.
+```
+
+---
+
+## Visualize the confidence interval
+
+
+
+&lt;img src="u4-d11-bootstrap_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Interpret the confidence interval
+
+.question[
+The 95% confidence interval for the mean rent of three bedroom flats in Edinburgh was calculated as (1603, 2213). Which of the following is the correct interpretation of this interval?
+
+**(a)** 95% of the time the mean rent of three bedroom flats in this sample is between £1603 and £2213.
+
+**(b)** 95% of all three bedroom flats in Edinburgh have rents between £1603 and £2213.
+
+**(c)** We are 95% confident that the mean rent of all three bedroom flats is between £1603 and £2213.
+
+**(d)** We are 95% confident that the mean rent of three bedroom flats in this sample is between £1603 and £2213.
+]
+
+---
+
+class: middle
+
+# Accuracy vs. precision
+
+---
+
+## Confidence level
+
+**We are 95% confident that ...**
+
+- Suppose we took many samples from the original population and built a 95% confidence interval based on each sample.
+- Then about 95% of those intervals would contain the true population parameter.
+
+---
+
+## Commonly used confidence levels
+
+.question[
+Which line (orange dash/dot, blue dash, green dot) represents which confidence level?
+]
+
+&lt;img src="u4-d11-bootstrap_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Precision vs. accuracy
+
+.question[
+If we want to be very certain that we capture the population parameter, should we use a wider or a narrower interval? What drawbacks are associated with using a wider interval?
+]
+
+--
+
+&lt;img src="img/garfield.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+.question[
+How can we get best of both worlds -- high precision and high accuracy?
+]
+
+---
+
+## Changing confidence level
+
+.question[
+How would you modify the following code to calculate a 90% confidence interval? 
+How would you modify it for a 99% confidence interval?
+]
+
+
+```r
+edi_3br %&gt;%
+  specify(response = rent) %&gt;% 
+  generate(reps = 15000, type = "bootstrap") %&gt;% 
+  calculate(stat = "mean") %&gt;%
+  summarize(lower = quantile(stat, 0.025),
+            upper = quantile(stat, 0.975))
+```
+
+---
+
+## Recap
+
+- Sample statistic `\(\ne\)` population parameter, but if the sample is good, it can be a good estimate
+- We report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population
+- Since we can't continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability
+- We can do this for any sample statistic:
+  - For a mean: `calculate(stat = "mean")`
+  - For a median: `calculate(stat = "median")`
+  - Learn about calculating bootstrap intervals for other statistics in your homework
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

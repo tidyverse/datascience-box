@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modeling non-linear relationships</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Modeling non-linear relationships
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Model checking
+
+---
+
+## Data: Paris Paintings
+
+
+```r
+pp &lt;- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
+```
+
+- Number of observations: 3393
+- Number of variables: 61
+
+---
+
+## "Linear" models
+
+- We're fitting a "linear" model, which assumes a linear relationship between our explanatory and response variables.
+- But how do we assess this?
+
+---
+
+## Graphical diagnostic: residuals plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ht_wt_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ Width_in, data = pp)
+
+*ht_wt_fit_aug &lt;- augment(ht_wt_fit$fit)
+
+ggplot(ht_wt_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted height", y = "Residuals")
+```
+]
+
+.panel[.panel-name[Augment]
+
+```r
+ht_wt_fit_aug
+```
+
+```
+## # A tibble: 3,135 x 9
+##    .rownames Height_in Width_in .fitted  .resid .std.resid
+##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+##  1 1                37     29.5   26.7  10.3        1.25  
+##  2 2                18     14     14.6   3.45       0.415 
+##  3 3                13     16     16.1  -3.11      -0.375 
+##  4 4                14     18     17.7  -3.68      -0.443 
+##  5 5                14     18     17.7  -3.68      -0.443 
+##  6 6                 7     10     11.4  -4.43      -0.534 
+##  7 7                 6     13     13.8  -7.77      -0.936 
+##  8 8                 6     13     13.8  -7.77      -0.936 
+##  9 9                15     15     15.3  -0.333     -0.0401
+## 10 10                9      7      9.09 -0.0870    -0.0105
+## # … with 3,125 more rows, and 3 more variables: .hat &lt;dbl&gt;,
+## #   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;
+```
+]
+]
+
+---
+
+## More on `augment()`
+
+
+```r
+glimpse(ht_wt_fit_aug)
+```
+
+```
+## Rows: 3,135
+## Columns: 9
+## $ .rownames  &lt;chr&gt; "1", "2", "3", "4", "5", "6", "7", "8", "9"…
+## $ Height_in  &lt;dbl&gt; 37, 18, 13, 14, 14, 7, 6, 6, 15, 9, 9, 16, …
+## $ Width_in   &lt;dbl&gt; 29.5, 14.0, 16.0, 18.0, 18.0, 10.0, 13.0, 1…
+## $ .fitted    &lt;dbl&gt; 26.65490, 14.55256, 16.11415, 17.67574, 17.…
+## $ .resid     &lt;dbl&gt; 10.3451004, 3.4474447, -3.1141481, -3.67574…
+## $ .std.resid &lt;dbl&gt; 1.24600543, 0.41522347, -0.37507338, -0.442…
+## $ .hat       &lt;dbl&gt; 0.0003991488, 0.0003961825, 0.0003611963, 0…
+## $ .sigma     &lt;dbl&gt; 8.303538, 8.305367, 8.305409, 8.305336, 8.3…
+## $ .cooksd    &lt;dbl&gt; 3.099689e-04, 3.416655e-05, 2.541574e-05, 3…
+```
+
+
+---
+
+## Looking for...
+
+- Residuals distributed randomly around 0
+- With no visible pattern along the x or y axes
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Not looking for...
+
+.large[
+**Fan shapes**
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Not looking for...
+
+.large[
+**Groups of patterns**
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Not looking for...
+
+.large[
+**Residuals correlated with predicted values**
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Not looking for...
+
+.large[
+**Any patterns!**
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-10-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.question[
+What patterns does the residuals plot reveal that should make us question whether a linear model is a good fit for modeling the relationship between height and width of paintings?
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+# Exploring linearity
+
+---
+
+## Data: Paris Paintings
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Price vs. width
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Focus on paintings with `Width_in &lt; 100`
+
+That is, paintings with width &lt; 2.54 m
+
+
+```r
+pp_wt_lt_100 &lt;- pp %&gt;% 
+  filter(Width_in &lt; 100)
+```
+
+---
+
+## Price vs. width
+
+.question[
+Which plot shows a more linear relationship?
+]
+
+.small[
+  
+.pull-left[
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+]
+
+---
+
+## Price vs. width, residuals
+
+.question[
+Which plot shows a residuals that are uncorrelated with predicted values from the model? Also, what is the unit of the residuals?
+]
+  
+.pull-left[
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Transforming the data
+
+- We saw that `price` has a right-skewed distribution, and the relationship between price and width of painting is non-linear.
+
+--
+- In these situations a transformation applied to the response variable may be useful.
+
+--
+- In order to decide which transformation to use, we should examine the distribution of the response variable.
+
+--
+- The extremely right skewed distribution suggests that a log transformation may 
+be useful.
+    - log = natural log, `\(ln\)`
+    - Default base of the `log` function in R is the natural log: &lt;br&gt;
+    `log(x, base = exp(1))`
+    
+---
+
+## Logged price vs. width
+
+.question[
+How do we interpret the slope of this model?
+]
+
+&lt;img src="u4-d03-modeling-nonlinear-relationships_files/figure-html/unnamed-chunk-19-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Models with log transformation
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(log(price) ~ Width_in, data = pp_wt_lt_100) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   4.67     0.0585      79.9  0.      
+## 2 Width_in      0.0192   0.00226      8.48 3.36e-17
+```
+
+---
+
+
+## Interpreting the slope
+
+$$ \widehat{log(price)} = 4.67 + 0.0192 Width $$
+
+--
+- For each additional inch the painting is wider, the log price of the painting is expected to be higher, on average, by 0.0192 livres.
+
+--
+- which is not a very useful statement...
+
+---
+
+## Working with logs
+
+- Subtraction and logs: `\(log(a) − log(b) = log(a / b)\)`
+
+--
+- Natural logarithm: `\(e^{log(x)} = x\)`
+
+--
+- We can use these identities to "undo" the log transformation
+
+---
+
+## Interpreting the slope
+
+The slope coefficient for the log transformed model is 0.0192, meaning the log price difference between paintings whose widths are one inch apart is predicted to be 0.0192 log livres.
+
+--
+
+.question[
+Using this information, and properties of logs that we just reviewed, fill in the blanks in the following alternate interpretation of the slope:
+
+&gt;For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+]
+
+
+---
+
+&gt;For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+
+
+$$ log(\text{price for width x+1}) - log(\text{price for width x}) = 0.0192 $$
+
+--
+
+$$ log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right) = 0.0192 $$
+
+--
+
+$$ e^{log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right)} = e^{0.0192} $$
+
+--
+
+$$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
+
+--
+
+For each additional inch the painting is wider, the price of the painting is expected to be higher, on average, by a factor of 1.02.
+
+---
+
+## Recap
+
+- Non-constant variance is one of the most common model violations, however it is usually fixable by transforming the response (y) variable.
+
+--
+- The most common transformation when the response variable is right skewed is the log transform: `\(log(y)\)`, especially useful when the response variable is 
+(extremely) right skewed.
+
+--
+- This transformation is also useful for variance stabilization.
+
+--
+- When using a log transformation on the response variable the interpretation of 
+the slope changes: *"For each unit increase in x, y is expected on average to be higher/lower &lt;br&gt; by a factor of `\(e^{b_1}\)`."*
+
+--
+- Another useful transformation is the square root: `\(\sqrt{y}\)`, especially 
+useful when the response variable is counts.
+
+---
+
+## Transform, or learn more?
+
+- Data transformations may also be useful when the relationship is non-linear
+- However in those cases a polynomial regression may be more appropriate
+  + This is beyond the scope of this course, but you’re welcomed to try it for your final project, and I’d be happy to provide further guidance
+
+---
+
+## Aside: when `\(y = 0\)`
+
+In some cases the value of the response variable might be 0, and
+
+
+```r
+log(0)
+```
+
+```
+## [1] -Inf
+```
+
+--
+
+The trick is to add a very small number to the value of the response variable for these cases so that the `log` function can still be applied:
+
+
+```r
+log(0 + 0.00001)
+```
+
+```
+## [1] -11.51293
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

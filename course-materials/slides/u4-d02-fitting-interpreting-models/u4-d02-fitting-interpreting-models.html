@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Fitting and interpreting models</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Fitting and interpreting models
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Models with numerical explanatory variables
+
+---
+
+## Data: Paris Paintings
+
+
+```r
+pp &lt;- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
+```
+
+- Number of observations: 3393
+- Number of variables: 61
+
+---
+
+## Goal: Predict height from width
+
+`$$\widehat{height}_{i} = \beta_0 + \beta_1 \times width_{i}$$`
+
+&lt;img src="u4-d02-fitting-interpreting-models_files/figure-html/height-width-plot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;img src="img/tidymodels.png" width="98%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Step 1: Specify model
+
+
+```r
+linear_reg()
+```
+
+```
+## Linear Regression Model Specification (regression)
+```
+
+---
+
+## Step 2: Set model fitting *engine*
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") # lm: linear model
+```
+
+```
+## Linear Regression Model Specification (regression)
+## 
+## Computational engine: lm
+```
+
+---
+
+## Step 3: Fit model &amp; estimate parameters
+
+... using **formula syntax**
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ Width_in, data = pp)
+```
+
+```
+## parsnip model object
+## 
+## Fit time:  1ms 
+## 
+## Call:
+## stats::lm(formula = Height_in ~ Width_in, data = data)
+## 
+## Coefficients:
+## (Intercept)     Width_in  
+##      3.6214       0.7808
+```
+
+---
+
+## A closer look at model output
+
+
+```
+## parsnip model object
+## 
+## Fit time:  26ms 
+## 
+## Call:
+## stats::lm(formula = Height_in ~ Width_in, data = data)
+## 
+## Coefficients:
+## (Intercept)     Width_in  
+##      3.6214       0.7808
+```
+
+.large[
+`$$\widehat{height}_{i} = 3.6214 + 0.7808 \times width_{i}$$`
+]
+
+---
+
+## A tidy look at model output
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ Width_in, data = pp) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    3.62    0.254        14.3 8.82e-45
+## 2 Width_in       0.781   0.00950      82.1 0.
+```
+
+.large[
+`$$\widehat{height}_{i} = 3.62 + 0.781 \times width_{i}$$`
+]
+
+---
+
+## Slope and intercept
+
+.large[
+`$$\widehat{height}_{i} = 3.62 + 0.781 \times width_{i}$$`
+]
+
+--
+
+- **Slope:** For each additional inch the painting is wider, the height is expected to be higher, on average, by 0.781 inches.
+
+--
+- **Intercept:** Paintings that are 0 inches wide are expected to be 3.62 inches high, on average. (Does this make sense?)
+
+---
+
+## Correlation does not imply causation
+
+Remember this when interpreting model coefficients
+
+&lt;img src="img/cell_phones.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: XKCD, [Cell phones](https://xkcd.com/925/)
+]
+
+---
+
+class: middle
+
+# Parameter estimation
+
+---
+
+## Linear model with a single predictor
+
+- We're interested in `\(\beta_0\)` (population parameter for the intercept) and `\(\beta_1\)` (population parameter for the slope) in the following model:
+
+`$$\hat{y}_{i} = \beta_0 + \beta_1~x_{i}$$`
+
+--
+- Tough luck, you can't have them...
+
+--
+- So we use sample statistics to estimate them:
+
+`$$\hat{y}_{i} = b_0 + b_1~x_{i}$$`
+
+---
+
+## Least squares regression
+
+- The regression line minimizes the sum of squared residuals.
+
+--
+- If `\(e_i = y_i - \hat{y}_i\)`, then, the regression line minimizes 
+`\(\sum_{i = 1}^n e_i^2\)`.
+
+---
+
+## Visualizing residuals
+
+&lt;img src="u4-d02-fitting-interpreting-models_files/figure-html/vis-res-1-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+&lt;img src="u4-d02-fitting-interpreting-models_files/figure-html/vis-res-2-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Visualizing residuals (cont.)
+
+&lt;img src="u4-d02-fitting-interpreting-models_files/figure-html/vis-res-3-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Properties of least squares regression
+
+- The regression line goes through the center of mass point, the coordinates corresponding to average `\(x\)` and average `\(y\)`, `\((\bar{x}, \bar{y})\)`:  
+
+`$$\bar{y} = b_0 + b_1 \bar{x} ~ \rightarrow ~ b_0 = \bar{y} - b_1 \bar{x}$$`
+
+--
+- The slope has the same sign as the correlation coefficient: `\(b_1 = r \frac{s_y}{s_x}\)`
+
+--
+- The sum of the residuals is zero: `\(\sum_{i = 1}^n e_i = 0\)`
+
+--
+- The residuals and `\(x\)` values are uncorrelated
+
+---
+
+class: middle
+
+# Models with categorical explanatory variables
+
+---
+
+## Categorical predictor with 2 levels
+
+.pull-left-narrow[
+.small[
+
+```
+## # A tibble: 3,393 x 3
+##    name      Height_in landsALL
+##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+##  1 L1764-2          37        0
+##  2 L1764-3          18        0
+##  3 L1764-4          13        1
+##  4 L1764-5a         14        1
+##  5 L1764-5b         14        1
+##  6 L1764-6           7        0
+##  7 L1764-7a          6        0
+##  8 L1764-7b          6        0
+##  9 L1764-8          15        0
+## 10 L1764-9a          9        0
+## 11 L1764-9b          9        0
+## 12 L1764-10a        16        1
+## 13 L1764-10b        16        1
+## 14 L1764-10c        16        1
+## 15 L1764-11         20        0
+## 16 L1764-12a        14        1
+## 17 L1764-12b        14        1
+## 18 L1764-13a        15        1
+## 19 L1764-13b        15        1
+## 20 L1764-14         37        0
+## # … with 3,373 more rows
+```
+]
+]
+.pull-right-wide[
+- `landsALL = 0`: No landscape features
+- `landsALL = 1`: Some landscape features
+]
+
+---
+
+## Height &amp; landscape features
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ factor(landsALL), data = pp) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term              estimate std.error statistic  p.value
+##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)          22.7      0.328      69.1 0.      
+## 2 factor(landsALL)1    -5.65     0.532     -10.6 7.97e-26
+```
+
+---
+
+## Height &amp; landscape features
+
+`$$\widehat{Height_{in}} = 22.7 - 5.645~landsALL$$`
+
+- **Slope:** Paintings with landscape features are expected, on average, to be 5.645 inches shorter than paintings that without landscape features
+  - Compares baseline level (`landsALL = 0`) to the other level (`landsALL = 1`)
+    
+- **Intercept:** Paintings that don't have landscape features are expected, on average, to be 22.7 inches tall
+
+---
+
+## Relationship between height and school
+
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ school_pntg, data = pp) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 7 x 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
+## 3 school_pntgF       10.2       10.0     1.02  0.309  
+## 4 school_pntgG        1.65      11.9     0.139 0.889  
+## 5 school_pntgI       10.3       10.0     1.02  0.306  
+## 6 school_pntgS       30.4       11.4     2.68  0.00744
+## 7 school_pntgX        2.87      10.3     0.279 0.780
+```
+
+---
+
+## Dummy variables
+
+
+```
+## # A tibble: 7 x 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
+## 3 school_pntgF       10.2       10.0     1.02  0.309  
+## 4 school_pntgG        1.65      11.9     0.139 0.889  
+## 5 school_pntgI       10.3       10.0     1.02  0.306  
+## 6 school_pntgS       30.4       11.4     2.68  0.00744
+## 7 school_pntgX        2.87      10.3     0.279 0.780
+```
+
+- When the categorical explanatory variable has many levels, they're encoded to **dummy variables**
+- Each coefficient describes the expected difference between heights in that particular school compared to the baseline level
+
+---
+
+## Categorical predictor with 3+ levels
+
+.pull-left-wide[
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; school_pntg &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; D_FL &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; F &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; G &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; I &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; S &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; X &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; A &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D/FL &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; G &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; I &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; S &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; X &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(68, 1, 84, 1) !important;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 10em; color: white !important;background-color: rgba(122, 209, 81, 1) !important;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.pull-right-narrow[
+.small[
+
+```
+## # A tibble: 3,393 x 3
+##    name      Height_in school_pntg
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
+##  1 L1764-2          37 F          
+##  2 L1764-3          18 I          
+##  3 L1764-4          13 D/FL       
+##  4 L1764-5a         14 F          
+##  5 L1764-5b         14 F          
+##  6 L1764-6           7 I          
+##  7 L1764-7a          6 F          
+##  8 L1764-7b          6 F          
+##  9 L1764-8          15 I          
+## 10 L1764-9a          9 D/FL       
+## 11 L1764-9b          9 D/FL       
+## 12 L1764-10a        16 X          
+## 13 L1764-10b        16 X          
+## 14 L1764-10c        16 X          
+## 15 L1764-11         20 D/FL       
+## 16 L1764-12a        14 D/FL       
+## 17 L1764-12b        14 D/FL       
+## 18 L1764-13a        15 D/FL       
+## 19 L1764-13b        15 D/FL       
+## 20 L1764-14         37 F          
+## # … with 3,373 more rows
+```
+]
+]
+
+---
+
+## Relationship between height and school
+
+.small[
+
+```
+## # A tibble: 7 x 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
+## 3 school_pntgF       10.2       10.0     1.02  0.309  
+## 4 school_pntgG        1.65      11.9     0.139 0.889  
+## 5 school_pntgI       10.3       10.0     1.02  0.306  
+## 6 school_pntgS       30.4       11.4     2.68  0.00744
+## 7 school_pntgX        2.87      10.3     0.279 0.780
+```
+
+- **Austrian school (A)** paintings are expected, on average, to be **14 inches** tall.
+- **Dutch/Flemish school (D/FL)** paintings are expected, on average, to be **2.33 inches taller** than *Austrian school* paintings.
+- **French school (F)** paintings are expected, on average, to be **10.2 inches taller** than *Austrian school* paintings.
+- **German school (G)** paintings are expected, on average, to be **1.65 inches taller** than *Austrian school* paintings.
+- **Italian school (I)** paintings are expected, on average, to be **10.3 inches taller** than *Austrian school* paintings.
+- **Spanish school (S)** paintings are expected, on average, to be **30.4 inches taller** than *Austrian school* paintings.
+- Paintings whose school is **unknown (X)** are expected, on average, to be **2.87 inches taller** than *Austrian school* paintings.
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+---
+title: "Prediction and overfitting"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+library(patchwork)
+library(skimr)
+set.seed(1234)
+options(
+  warnPartialMatchArgs = FALSE,
+  warnPartialMatchAttr = FALSE, 
+  warnPartialMatchDollar = FALSE,
+  width = 100
+)
+```
+
+class: middle
+
+# Prediction
+
+---
+
+## Goal: Building a spam filter
+
+- Data: Set of emails and we know if each email is spam/not and other features 
+- Use logistic regression to predict the probability that an incoming email is spam
+- Use model selection to pick the model with the best predictive performance
+
+--
+- Building a model to predict the probability that an email is spam is only half of the battle! We also need a decision rule about which emails get flagged as spam (e.g. what probability should we use as out cutoff?)
+
+--
+- A simple approach: choose a single threshold probability and any email that exceeds that probability is flagged as spam
+
+---
+
+## A multiple regression approach
+
+.panelset[
+.panel[.panel-name[Output]
+.small[
+```{r ref.label = "spam-mlr", echo = FALSE, warning = FALSE}
+```
+]
+]
+.panel[.panel-name[Code]
+```{r spam-mlr, results = "hide"}
+logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(spam ~ ., data = email, family = "binomial") %>%
+  tidy() %>%
+  print(n = 22)
+```
+]
+]
+
+---
+
+## Prediction
+
+- The mechanics of prediction is **easy**:
+  - Plug in values of predictors to the model equation
+  - Calculate the predicted value of the response variable, $\hat{y}$
+
+--
+- Getting it right is **hard**!
+  - There is no guarantee the model estimates you have are correct
+  - Or that your model will perform as well with new data as it did with your sample data
+
+---
+
+## Underfitting and overfitting
+
+```{r echo=FALSE, out.width="70%", warning = FALSE}
+lm_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(y4 ~ x2, data = association)
+
+loess_fit <- loess(y4 ~ x2, data = association)
+
+loess_overfit <- loess(y4 ~ x2, span = 0.05, data = association)
+
+association %>%
+  select(x2, y4) %>%
+  mutate(
+    Underfit = augment(lm_fit$fit) %>% select(.fitted) %>% pull(),
+    OK       = augment(loess_fit) %>% select(.fitted) %>% pull(),
+    Overfit  = augment(loess_overfit) %>% select(.fitted) %>% pull(),
+  ) %>%
+  pivot_longer(
+    cols      = Underfit:Overfit,
+    names_to  = "fit",
+    values_to = "y_hat"
+  ) %>%
+  mutate(fit = fct_relevel(fit, "Underfit", "OK", "Overfit")) %>%
+  ggplot(aes(x = x2)) +
+  geom_point(aes(y = y4), color = "darkgray") +
+  geom_line(aes(y = y_hat, group = fit, color = fit), size = 1) +
+  labs(x = NULL, y = NULL, color = NULL) +
+  scale_color_viridis_d(option = "plasma", end = 0.7)
+```
+
+---
+
+## Spending our data
+
+- Several steps to create a useful model: parameter estimation, model selection, performance assessment, etc.
+
+- Doing all of this on the entire data we have available can lead to **overfitting**
+
+- Allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far)
+
+---
+
+class: middle
+
+# Splitting data
+
+---
+
+## Splitting data
+
+- **Training set:**
+  - Sandbox for model building 
+  - Spend most of your time using the training set to develop the model
+  - Majority of the data (usually 80%)
+  
+- **Testing set:**
+  - Held in reserve to determine efficacy of one or two chosen models
+  - Critical to look at it once, otherwise it becomes part of the modeling process
+  - Remainder of the data (usually 20%)
+  
+---
+
+## Performing the split
+
+```{r}
+# Fix random numbers by setting the seed 
+# Enables analysis to be reproducible when random numbers are used 
+set.seed(1116)
+
+# Put 80% of the data into the training set 
+email_split <- initial_split(email, prop = 0.80)
+
+# Create data frames for the two sets:
+train_data <- training(email_split)
+test_data  <- testing(email_split)
+```
+
+---
+
+## Peek at the split
+
+.small[
+.pull-left[
+```{r}
+glimpse(train_data)
+```
+]
+.pull-right[
+```{r}
+glimpse(test_data)
+```
+]
+]
+
+---
+
+class: middle
+
+# Modeling workflow
+
+---
+
+## Fit a model to the training dataset
+
+```{r}
+email_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(spam ~ ., data = train_data, family = "binomial")
+```
+
+---
+
+## Categorical predictors
+
+```{r echo=FALSE, out.width="75%", fig.width=10}
+factor_predictors <- train_data %>%
+  select(where(is.factor), -spam) %>%
+  names()
+
+p_to_multiple <- ggplot(train_data, aes(x = to_multiple, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_from <- ggplot(train_data, aes(x = from, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_sent_email <- ggplot(train_data, aes(x = sent_email, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_winner <- ggplot(train_data, aes(x = winner, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_format <- ggplot(train_data, aes(x = format, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_re_subj <- ggplot(train_data, aes(x = re_subj, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_urgent_subj <- ggplot(train_data, aes(x = urgent_subj, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_number <- ggplot(train_data, aes(x = number, fill = spam)) +
+  geom_bar() +
+  scale_fill_manual(values = c("#E48957", "#CA235F"))
+
+p_to_multiple + p_from + p_sent_email + p_winner + p_format + p_re_subj + p_urgent_subj + p_number +
+  plot_layout(ncol = 4, guides = "collect") & 
+  theme(axis.title.y = element_blank())
+```
+
+---
+
+## `from` and `sent_email`
+
+.pull-left[
+- `from`: Whether the message was listed as from anyone (this is usually set by default for regular outgoing email)
+
+```{r}
+train_data %>%
+  count(spam, from)
+```
+]
+.pull-right[
+- `sent_email`: Indicator for whether the sender had been sent an email in the last 30 days
+
+```{r}
+train_data %>%
+  count(spam, sent_email)
+```
+]
+
+---
+
+## Numerical predictors
+
+.small[
+```{r echo=FALSE, highlight.output=c(14, 15)}
+options(width = 100)
+x <- train_data %>%
+  group_by(spam) %>%
+  select(where(is.numeric)) %>%
+  skim_without_charts()
+
+print(x, include_summary = FALSE)
+```
+]
+
+---
+
+## Fit a model to the training dataset
+
+```{r}
+email_fit <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(spam ~ . - from - sent_email - viagra, data = train_data, family = "binomial") #<<
+```
+
+.small[
+```{r}
+email_fit
+```
+]
+
+---
+
+## Predict outcome on the testing dataset
+
+```{r}
+predict(email_fit, test_data)
+```
+
+
+---
+
+## Predict probabilities on the testing dataset
+
+```{r}
+email_pred <- predict(email_fit, test_data, type = "prob") %>%
+  bind_cols(test_data %>% select(spam, time))
+
+email_pred
+```
+
+---
+
+## A closer look at predictions
+
+.pull-left-wide[
+```{r highlight.output=c(6, 10)}
+email_pred %>%
+  arrange(desc(.pred_1)) %>%
+  print(n = 10)
+```
+]
+
+---
+
+## Evaluate the performance
+
+**Receiver operating characteristic (ROC) curve**<sup>+</sup> which plot true positive rate vs. false positive rate (1 - specificity)
+
+.pull-left[
+```{r roc, fig.show="hide"}
+email_pred %>%
+  roc_curve(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  ) %>%
+  autoplot()
+```
+]
+.pull-right[
+```{r ref.label="roc", echo=FALSE, out.width="100%"}
+```
+]
+
+.footnote[
+.small[
+<sup>+</sup>Originally developed for operators of military radar receivers, hence the name.
+]
+]
+
+---
+
+## Evaluate the performance
+
+Find the area under the curve:
+
+.pull-left[
+```{r}
+email_pred %>%
+  roc_auc(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  )
+```
+]
+.pull-right[
+```{r ref.label="roc", echo=FALSE, out.width="100%"}
+```
+]

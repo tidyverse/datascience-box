@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Feature engineering</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Feature engineering
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Feature engineering
+
+---
+
+## Feature engineering
+
+- We prefer simple models when possible, but **parsimony** does not mean sacrificing accuracy (or predictive performance) in the interest of simplicity
+
+--
+- Variables that go into the model and how they are represented are just as critical to success of the model
+
+--
+- **Feature engineering** allows us to get creative with our predictors in an effort to make them more useful for our model (to increase its predictive performance) 
+
+---
+
+## Same training and testing sets as before
+
+
+```r
+# Fix random numbers by setting the seed 
+# Enables analysis to be reproducible when random numbers are used 
+set.seed(1116)
+
+# Put 80% of the data into the training set 
+email_split &lt;- initial_split(email, prop = 0.80)
+
+# Create data frames for the two sets:
+train_data &lt;- training(email_split)
+test_data  &lt;- testing(email_split)
+```
+
+---
+
+## A simple approach: `mutate()`
+
+
+```r
+train_data %&gt;%
+  mutate(
+    date = date(time),
+    dow  = wday(time),
+    month = month(time)
+    ) %&gt;%
+  select(time, date, dow, month) %&gt;%
+  sample_n(size = 5) # shuffle to show a variety
+```
+
+```
+## # A tibble: 5 x 4
+##   time                date         dow month
+##   &lt;dttm&gt;              &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 2012-03-18 16:47:58 2012-03-18     1     3
+## 2 2012-02-08 04:50:43 2012-02-08     4     2
+## 3 2012-03-16 15:06:21 2012-03-16     6     3
+## 4 2012-02-26 05:37:38 2012-02-26     1     2
+## 5 2012-01-21 15:08:13 2012-01-21     7     1
+```
+
+---
+
+## Modeling workflow, revisited
+
+- Create a **recipe** for feature engineering steps to be applied to the training data
+
+--
+- Fit the model to the training data after these steps have been applied
+
+--
+- Using the model estimates from the training data, predict outcomes for the test data
+
+--
+- Evaluate the performance of the model on the test data
+
+---
+
+class: middle
+
+# Building recipes
+
+---
+
+## Initiate a recipe
+
+
+```r
+email_rec &lt;- recipe(
+  spam ~ .,          # formula
+  data = train_data  # data to use for cataloguing names and types of variables
+  )
+
+summary(email_rec)
+```
+
+.xsmall[
+
+```
+## # A tibble: 21 x 4
+##    variable     type    role      source  
+##    &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   
+##  1 to_multiple  nominal predictor original
+##  2 from         nominal predictor original
+##  3 cc           numeric predictor original
+##  4 sent_email   nominal predictor original
+##  5 time         date    predictor original
+##  6 image        numeric predictor original
+##  7 attach       numeric predictor original
+##  8 dollar       numeric predictor original
+##  9 winner       nominal predictor original
+## 10 inherit      numeric predictor original
+## 11 viagra       numeric predictor original
+## 12 password     numeric predictor original
+## 13 num_char     numeric predictor original
+## 14 line_breaks  numeric predictor original
+## 15 format       nominal predictor original
+## 16 re_subj      nominal predictor original
+## 17 exclaim_subj numeric predictor original
+## 18 urgent_subj  nominal predictor original
+## 19 exclaim_mess numeric predictor original
+## 20 number       nominal predictor original
+## 21 spam         nominal outcome   original
+```
+]
+
+---
+
+## Remove certain variables
+
+
+```r
+email_rec &lt;- email_rec %&gt;%
+  step_rm(from, sent_email)
+```
+
+.small[
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         20
+## 
+## Operations:
+## 
+## Delete terms from, sent_email
+```
+]
+
+---
+
+## Feature engineer date
+
+
+```r
+email_rec &lt;- email_rec %&gt;%
+  step_date(time, features = c("dow", "month")) %&gt;%
+  step_rm(time)
+```
+
+.small[
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         20
+## 
+## Operations:
+## 
+## Delete terms from, sent_email
+## Date features from time
+## Delete terms time
+```
+]
+
+---
+
+## Discretize numeric variables
+
+
+```r
+email_rec &lt;- email_rec %&gt;%
+  step_cut(cc, attach, dollar, breaks = c(0, 1)) %&gt;%
+  step_cut(inherit, password, breaks = c(0, 1, 5, 10, 20))
+```
+
+.small[
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         20
+## 
+## Operations:
+## 
+## Delete terms from, sent_email
+## Date features from time
+## Delete terms time
+## Cut numeric for cc, attach, dollar
+## Cut numeric for inherit, password
+```
+]
+
+---
+
+## Create dummy variables
+
+
+```r
+email_rec &lt;- email_rec %&gt;%
+  step_dummy(all_nominal(), -all_outcomes())
+```
+
+.small[
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         20
+## 
+## Operations:
+## 
+## Delete terms from, sent_email
+## Date features from time
+## Delete terms time
+## Cut numeric for cc, attach, dollar
+## Cut numeric for inherit, password
+## Dummy variables from all_nominal(), -all_outcomes()
+```
+]
+
+---
+
+## Remove zero variance variables
+
+Variables that contain only a single value
+
+
+```r
+email_rec &lt;- email_rec %&gt;%
+  step_zv(all_predictors())
+```
+
+.small[
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         20
+## 
+## Operations:
+## 
+## Delete terms from, sent_email
+## Date features from time
+## Delete terms time
+## Cut numeric for cc, attach, dollar
+## Cut numeric for inherit, password
+## Dummy variables from all_nominal(), -all_outcomes()
+## Zero variance filter on all_predictors()
+```
+]
+
+---
+
+## All in one place
+
+
+```r
+email_rec &lt;- recipe(spam ~ ., data = email) %&gt;%
+  step_rm(from, sent_email) %&gt;%
+  step_date(time, features = c("dow", "month")) %&gt;%               
+  step_rm(time) %&gt;%
+  step_cut(cc, attach, dollar, breaks = c(0, 1)) %&gt;%
+  step_cut(inherit, password, breaks = c(0, 1, 5, 10, 20)) %&gt;%
+  step_dummy(all_nominal(), -all_outcomes()) %&gt;%
+  step_zv(all_predictors())
+```
+
+---
+
+class: middle
+
+# Building workflows
+
+---
+
+## Define model
+
+
+```r
+email_mod &lt;- logistic_reg() %&gt;% 
+  set_engine("glm")
+
+email_mod
+```
+
+```
+## Logistic Regression Model Specification (classification)
+## 
+## Computational engine: glm
+```
+
+---
+
+## Define workflow
+
+**Workflows** bring together models and recipes so that they can be easily applied to both the training and test data.
+
+
+```r
+email_wflow &lt;- workflow() %&gt;% 
+  add_model(email_mod) %&gt;% 
+  add_recipe(email_rec)
+```
+
+.small[
+
+```
+## ══ Workflow ════════════════════════════════════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: logistic_reg()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────────────────────────
+## 7 Recipe Steps
+## 
+## ● step_rm()
+## ● step_date()
+## ● step_rm()
+## ● step_cut()
+## ● step_cut()
+## ● step_dummy()
+## ● step_zv()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────────────────────────
+## Logistic Regression Model Specification (classification)
+## 
+## Computational engine: glm
+```
+]
+
+---
+
+## Fit model to training data
+
+
+```r
+email_fit &lt;- email_wflow %&gt;% 
+  fit(data = train_data)
+```
+
+---
+
+.small[
+
+```r
+tidy(email_fit) %&gt;% print(n = 31)
+```
+
+```
+## # A tibble: 31 x 5
+##    term               estimate  std.error statistic  p.value
+##    &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 (Intercept)        -0.950      0.272    -3.50    4.74e- 4
+##  2 image              -1.02       0.662    -1.54    1.23e- 1
+##  3 num_char            0.0405     0.0294    1.38    1.68e- 1
+##  4 line_breaks        -0.00588    0.00163  -3.61    3.08e- 4
+##  5 exclaim_subj        0.0843     0.268     0.315   7.53e- 1
+##  6 exclaim_mess        0.0112     0.00221   5.09    3.66e- 7
+##  7 to_multiple_X1     -3.17       0.453    -6.99    2.70e-12
+##  8 cc_X.1.68.         -0.0389     0.456    -0.0852  9.32e- 1
+##  9 attach_X.1.21.      1.84       0.398     4.63    3.67e- 6
+## 10 dollar_X.1.64.     -0.0217     0.230    -0.0941  9.25e- 1
+## 11 winner_yes          2.08       0.408     5.10    3.31e- 7
+## 12 inherit_X.1.5.    -10.5     1478.       -0.00710 9.94e- 1
+## 13 inherit_X.5.10.     1.94       1.27      1.52    1.28e- 1
+## 14 password_X.1.5.    -2.50       1.03     -2.43    1.50e- 2
+## 15 password_X.5.10.  -13.3      817.       -0.0162  9.87e- 1
+## 16 password_X.10.20. -15.1     1148.       -0.0132  9.89e- 1
+## 17 password_X.20.28. -14.9     1330.       -0.0112  9.91e- 1
+## 18 format_X1          -0.797      0.161    -4.95    7.35e- 7
+## 19 re_subj_X1         -3.03       0.441    -6.88    6.05e-12
+## 20 urgent_subj_X1      3.80       1.03      3.68    2.37e- 4
+## 21 number_small       -0.654      0.168    -3.89    9.84e- 5
+## 22 number_big          0.143      0.249     0.574   5.66e- 1
+## 23 time_dow_Mon       -0.310      0.320    -0.971   3.32e- 1
+## 24 time_dow_Tue        0.128      0.287     0.447   6.55e- 1
+## 25 time_dow_Wed       -0.141      0.283    -0.499   6.18e- 1
+## 26 time_dow_Thu       -0.0452     0.287    -0.157   8.75e- 1
+## 27 time_dow_Fri        0.119      0.283     0.421   6.74e- 1
+## 28 time_dow_Sat        0.352      0.301     1.17    2.42e- 1
+## 29 time_month_Feb      0.869      0.181     4.81    1.51e- 6
+## 30 time_month_Mar      0.464      0.184     2.52    1.18e- 2
+## 31 time_month_Apr    -13.9      990.       -0.0141  9.89e- 1
+```
+]
+
+---
+
+## Make predictions for test data
+
+
+```r
+email_pred &lt;- predict(email_fit, test_data, type = "prob") %&gt;% 
+  bind_cols(test_data) 
+
+email_pred
+```
+
+```
+## # A tibble: 784 x 23
+##   .pred_0 .pred_1 spam  to_multiple from     cc sent_email
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;       &lt;fct&gt; &lt;int&gt; &lt;fct&gt;     
+## 1   0.960 0.0404  0     0           1         0 0         
+## 2   0.937 0.0634  0     0           1         0 0         
+## 3   0.923 0.0766  0     0           1         0 1         
+## 4   0.999 0.00144 0     0           1         2 0         
+## 5   0.904 0.0955  0     0           1         0 0         
+## 6   0.908 0.0919  0     0           1         0 0         
+## # … with 778 more rows, and 16 more variables: time &lt;dttm&gt;,
+## #   image &lt;dbl&gt;, attach &lt;dbl&gt;, dollar &lt;dbl&gt;, winner &lt;fct&gt;,
+## #   inherit &lt;dbl&gt;, viagra &lt;dbl&gt;, password &lt;dbl&gt;, num_char &lt;dbl&gt;,
+## #   line_breaks &lt;int&gt;, format &lt;fct&gt;, re_subj &lt;fct&gt;,
+## #   exclaim_subj &lt;dbl&gt;, urgent_subj &lt;fct&gt;, exclaim_mess &lt;dbl&gt;,
+## #   number &lt;fct&gt;
+```
+
+---
+
+## Evaluate the performance
+
+.pull-left[
+
+```r
+email_pred %&gt;%
+  roc_curve(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  ) %&gt;%
+  autoplot()
+```
+]
+.pull-right[
+&lt;img src="u4-d08-feature-engineering_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Evaluate the performance
+
+.pull-left[
+
+```r
+email_pred %&gt;%
+  roc_auc(
+    truth = spam,
+    .pred_1,
+    event_level = "second"
+  )
+```
+
+```
+## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 roc_auc binary         0.829
+```
+]
+.pull-right[
+&lt;img src="u4-d08-feature-engineering_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle
+
+# Making decisions
+
+---
+
+## Cutoff probability: 0.5
+
+.panelset[
+.panel[.panel-name[Output]
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.5**.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is not spam &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is spam &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled not spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 703 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 67 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+cutoff_prob &lt;- 0.5
+email_pred %&gt;%
+  mutate(
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
+    ) %&gt;%
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+]
+]
+
+---
+
+## Cutoff probability: 0.25
+
+.panelset[
+.panel[.panel-name[Output]
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.25**.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is not spam &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is spam &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled not spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 659 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+cutoff_prob &lt;- 0.25
+email_pred %&gt;%
+  mutate(
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
+    ) %&gt;%
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+]
+]
+
+---
+
+## Cutoff probability: 0.75
+
+.panelset[
+.panel[.panel-name[Output]
+
+Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.75**.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is not spam &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Email is spam &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled not spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 706 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Email labelled spam &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+cutoff_prob &lt;- 0.75
+email_pred %&gt;%
+  mutate(
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
+    ) %&gt;%
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
+```
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

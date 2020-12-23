@@ -1,0 +1,469 @@
+---
+title: "Inference overview"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+library(DT)
+library(emo)
+library(openintro)
+```
+
+class: middle
+
+# Inference overview
+
+---
+
+## What do you want to do?
+
+- Estimation -> Confidence interval
+- Decision -> Hypothesis test
+- First step: Ask the following questions
+  - How many variables?
+  - What types of variables?
+  - What is the research question?
+
+---
+
+class: middle
+
+# Confidence intervals
+
+---
+
+## Confidence intervals
+
+- Bootstrap
+- Bounds: cutoff values for the middle XX% of the distribution
+- Interpretation: We are XX% confident that the true population parameter is in the interval.
+- Definition of confidence level: XX% of random samples of size n are expected to produce confidence intervals that contain the true population parameter.
+- `infer::generate(reps, type = "bootstrap")`
+
+---
+
+## Confidence intervals exercises
+
+.question[
+Describe the simulation process for estimating the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+
+]
+
+---
+
+## Accuracy vs. precision
+
+.question[
+What happens to the width of the confidence interval as the confidence level increases? Why? Should we always prefer a confidence interval with a higher confidence level?
+]
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+set.seed(20171107)
+acs_emp <- acs12 %>% filter(employment == "employed", income > 0)
+acs_10 <- acs_emp %>% sample_n(10) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+ggplot(acs_10, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 10")
+```
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+acs_100 <- acs_emp %>% sample_n(100) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+ggplot(acs_100, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 100")
+```
+
+---
+
+## Sample size and width of intervals
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+acs_500 <- acs_emp %>% sample_n(500) %>%
+  specify(response = income) %>%
+  generate(1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+ggplot(acs_500, aes(x = stat)) + 
+  geom_histogram(binwidth = 5000) + 
+  xlim(0, 120000) + 
+  ggtitle("Sample size = 500")
+```
+
+---
+
+## Equivalency of confidence and significance levels
+
+- Two sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - \alpha$
+- One sided alternative HT with $\alpha$ $\rightarrow$ $CL = 1 - (2 \times \alpha)$
+
+```{r echo = FALSE, message=FALSE, out.width="60%"}
+par(mfrow = c(1,2))
+normTail(U = 1.96, L = -1.96, df = 100, col = "#56B4E9", axes = FALSE)
+text(x = 0, y = 0.15, "0.95", col = "#56B4E9", cex = 2)
+text(x = -3, y = 0.05, "0.025", col = "#56B4E9", cex = 1.5)
+text(x = 3, y = 0.05, "0.025", col = "#56B4E9", cex = 1.5)
+#
+normTail(U = 1.65, L = -1.65, df = 100, col = "#56B4E9", axes = FALSE)
+normTail(U = 1.65, df = 100, col = "gray", add = TRUE, axes = FALSE)
+text(x = 0, y = 0.15, "0.90", col = "#56B4E9", cex = 2)
+text(x = -3, y = 0.05, "0.05", col = "#56B4E9", cex = 1.5)
+text(x = 3, y = 0.05, "0.05", col = "gray", cex = 1.5)
+```
+
+---
+
+## Interpretation of confidence intervals
+
+.question[
+Which of the following is more informative: 
+
+<ul>
+<li> The difference in price of a gallon of milk between Whole Foods and Harris Teeter is 30 cents.
+<li> A gallon of milk costs 30 cents more at Whole Foods compared to Harris Teeter.
+</ul>
+</div>
+]
+
+--
+
+.question[
+What does your answer tell you about interpretation of confidence intervals for differences between two population parameters?
+]
+
+---
+
+class: middle
+
+# Hypothesis tests
+
+---
+
+## Hypothesis testing
+
+- Set the hypotheses.
+- Calculate the observed sample statistic.
+- Calculate the p-value.
+- Make a conclusion, about the hypotheses, in context of the data and the research question.
+- `infer::hypothesize(null = "point")` and `infer::generate(reps, type = "simulate")` or `infer::generate(reps, type = "bootstrap")`
+- `infer::hypothesize(null = "independence")` and `infer::generate(reps, type = "permute")`
+  
+---
+
+## Hypothesis testing exercises
+
+.question[
+Describe the simulation process for tesing for the parameter assigned to your team.
+
+- Note any assumptions you make in terms of sample size, observed sample statistic, etc.
+- Imagine using index cards or chips to represent the data. 
+- Specify whether the null hypothesis would be independence or point.
+- Specify whether the simulation type would be bootstrap, simulate, or permute.
+]
+
+---
+
+## Testing errors
+
+- Type 1: Reject $H_0$ when you shouldn't have
+    - P(Type 1 error) = $\alpha$
+- Type 2: Fail to reject $H_0$ when you should have
+    - P(Type 2 error) is harder to calculate, but increases as $\alpha$ decreases
+
+--
+
+.question[
+In a court of law
+
+- Null hypothesis: Defendant is innocent
+- Alternative hypothesis: Defendant is guilty
+
+Which is worse: Type 1 or Type 2 error?
+]
+
+---
+
+## Probabilities of testing errors
+
+- P(Type 1 error) = $\alpha$
+- P(Type 2 error) = 1 - Power
+- Power = P(correctly rejecting the null hypothesis)
+
+--
+
+.question[
+Fill in the blanks in terms of correctly/incorrectly rejecting/failing to reject the null hypothesis:
+
+- $\alpha$ is the probability of ______.
+- 1 - Power is the probability of ______.
+]
+
+---
+
+class: middle
+
+# Examples
+
+---
+
+## What do you want to do?
+
+- Estimation -> Confidence interval
+- Decision -> Hypothesis test
+- First step: Ask the following questions
+  - How many variables?
+  - What type(s) of variable(s)?
+  - What is the research question?
+
+---
+
+## Data: NC births
+
+The dataset is in the `openintro` package.
+
+```{r}
+glimpse(ncbirths)
+```
+
+---
+
+## Length of gestation
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data = ncbirths, aes(x = weeks)) +
+  geom_histogram(binwidth = 1)
+```
+
+```{r echo=FALSE}
+ncbirths %>%
+  filter(!is.na(weeks)) %>%
+  summarise(
+    min = min(weeks),
+    xbar = round(mean(weeks), 2),
+    med = median(weeks),
+    s = round(sd(weeks), 2),
+    q1 = quantile(weeks, 0.25),
+    q3 = quantile(weeks, 0.75),
+    max = max(weeks)
+  )
+```
+
+
+---
+
+## Length of gestation
+
+.question[
+Assuming that this sample is representative of all births in NC, we are 95% confident that the average length of gestation for babies in NC is between ---- and ---- weeks.
+]
+
+--
+
+**(1) How many variables?**
+
+--
+
+1 variable: length of gestation, `weeks`
+
+--
+
+**(2) What type(s) of variable(s)?**
+
+--
+
+Numerical
+
+--
+
+**(3) What is the research question?**
+
+--
+
+Estimate the average length of gestation $\rightarrow$ confidence interval
+
+---
+
+## Simulation for CI for a mean
+
+**Goal:** Use bootstrapping to estimate the sampling variability of the mean, i.e. the variability of means taken from the same population with the same sample size.
+
+--
+
+1. Take a bootstrap sample - a random sample taken with replacement from the 
+original sample, of the same size as the original sample.
+
+2. Calculate the mean of the bootstrap sample.
+
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap means.
+
+4. Calculate the bounds of the 95% confidence interval as the middle 95% 
+of the bootstrap distribution.
+
+---
+
+## Set a seed first
+
+From the documentation of `set.seed`:
+
+- `set.seed` uses a single integer argument to set as many seeds as are required. There is no guarantee that different values of seed will seed the RNG differently, although any exceptions would be extremely rare.
+- Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default.
+
+```{r}
+set.seed(20180326)
+```
+
+---
+
+## Computation for CI for a mean
+
+```{r}
+boot_means <- ncbirths %>%
+  filter(!is.na(weeks)) %>% # remove NAs
+  specify(response = weeks) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+ggplot(data = boot_means, aes(x = stat)) +
+  geom_histogram(binwidth = 0.03)
+```
+
+---
+
+## Length of gestation
+
+```{r}
+boot_means %>%
+  summarise(
+    lower = quantile(stat, 0.025),
+    upper = quantile(stat, 0.975)
+  )
+```
+
+--
+
+Assuming that this sample is representative of all births in NC, we are 95% confident that the average length of gestation for babies in NC is between 38.1 and 38.5 weeks.
+
+---
+
+## Length of gestation, revisited
+
+.question[
+The average length of human gestation is 280 days, or 40 weeks, from the first day of the woman's last menstrual period. Do these data provide convincing evidence that average length of gestation for women in NC is different than 40 weeks? Use a significance level of 5%.
+]
+
+--
+
+$H_0: \mu = 40$  
+$H_A: \mu \ne 40$
+
+--
+
+- We just said, "we are 95% confident that the average length of gestation for babies in NC is between 38.1 and 38.5 weeks".
+
+- Since the null value is outside the CI, we would reject the null hypothesis in favor of the alternative.
+
+- But an alternative, more direct, way of answering this question is using a hypothesis test.
+
+---
+
+## Simulation for HT for a mean
+
+**Goal:** Use bootstrapping to generate a sampling distribution under the assumption of the null hypothesis being true. Then, calculate the p-value to make a decision on the hypotheses.
+
+--
+
+1. Take a bootstrap sample - a random sample taken with replacement from the 
+original sample, of the same size as the original sample.
+
+2. Calculate the mean of the bootstrap sample.
+
+3. Repeat steps (1) and (2) many times to create a bootstrap distribution - 
+a distribution of bootstrap means.
+
+4. Shift the bootstrap distribution to be centered at the null value by subtracting/adding the difference between the center of the bootstrap distribution and the null value to each bootstrap mean.
+
+5. Calculate the p-value as the proportion of simulations that yield a sample mean at least as extreme as the observed sample mean.
+
+---
+
+## Computation for HT for a mean
+
+```{r out.width="50%"}
+boot_means_shifted <- ncbirths %>%
+  filter(!is.na(weeks)) %>% # remove NAs
+  specify(response = weeks) %>%
+  hypothesize(null = "point", mu = 40) %>% # hypothesize step
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+ggplot(data = boot_means_shifted, aes(x = stat)) +
+  geom_histogram(binwidth = 0.03) +
+  geom_vline(xintercept = 38.33, color = "red") +
+  geom_vline(xintercept = 40 + (40 - 38.33), color = "red")
+```
+
+---
+
+## Length of gestation
+
+```{r}
+boot_means_shifted %>%
+  filter(stat <= 38.33) %>%
+  summarise(p_value = 2 * (n() / 1000))
+```
+
+--
+
+Since p-value less than the significance level, we reject the null hypothesis. The data provide convincing evidence that the average length of gestation of births in NC is different than 40.
+
+---
+
+## **infer** structure
+
+```{r eval=FALSE}
+df %>%
+  specify(response, explanatory) %>% # explanatory optional
+  generate(reps, type) %>% # type: bootstrap, simulate, or permute
+  calculate(stat)
+```
+
+- Always start with data frame
+- Result is always a data frame with a variable called `stat`
+   - See the documentation for `calculate` to see which `stat`istics can be calculated
+- For hypothesis testing add a `hypothesize()` step between `specify()` and `generate()`
+    - `null = "point"`, and then specify the null value
+    - `null = "independence"`

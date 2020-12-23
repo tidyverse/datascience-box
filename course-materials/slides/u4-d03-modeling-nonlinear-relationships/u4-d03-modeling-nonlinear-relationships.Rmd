@@ -1,0 +1,492 @@
+---
+title: "Modeling non-linear relationships"
+subtitle: "<br><br> Data Science in a Box"
+author: "[datasciencebox.org](https://datasciencebox.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../xaringan-themer.css", "../slides.css"]
+    lib_dir: libs
+    anchor_sections: FALSE
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(ggtext)
+library(knitr)
+library(kableExtra)
+set.seed(1234)
+options(dplyr.print_min = 10, dplyr.print_max = 6)
+```
+
+class: middle
+
+# Model checking
+
+---
+
+## Data: Paris Paintings
+
+```{r message=FALSE}
+pp <- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
+```
+
+- Number of observations: `r nrow(pp)`
+- Number of variables: `r ncol(pp)`
+
+---
+
+## "Linear" models
+
+- We're fitting a "linear" model, which assumes a linear relationship between our explanatory and response variables.
+- But how do we assess this?
+
+---
+
+## Graphical diagnostic: residuals plot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "residuals-plot", echo = FALSE, warning = FALSE, out.width = "60%"}
+```
+]
+.panel[.panel-name[Code]
+```{r residuals-plot, fig.show="hide"}
+ht_wt_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Height_in ~ Width_in, data = pp)
+
+ht_wt_fit_aug <- augment(ht_wt_fit$fit) #<<
+
+ggplot(ht_wt_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted height", y = "Residuals")
+```
+]
+
+.panel[.panel-name[Augment]
+```{r}
+ht_wt_fit_aug
+```
+]
+]
+
+---
+
+## More on `augment()`
+
+```{r}
+glimpse(ht_wt_fit_aug)
+```
+
+
+---
+
+## Looking for...
+
+- Residuals distributed randomly around 0
+- With no visible pattern along the x or y axes
+
+```{r out.width = "60%", echo=FALSE}
+df <- tibble(
+  fake_resid = rnorm(1000, mean = 0, sd = 30),
+  fake_predicted = runif(1000, min = 0, max = 200)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Fan shapes**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_resid = c(rnorm(100, mean = 0, sd = 1), 
+                 rnorm(100, mean = 0, sd = 15), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 20), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 50), 
+                 rnorm(100, mean = 0, sd = 35), 
+                 rnorm(100, mean = 0, sd = 40),
+                 rnorm(200, mean = 0, sd = 80)),
+  fake_predicted = seq(0.2, 200, 0.2)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Groups of patterns**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = c(
+    rnorm(500, mean = -20, sd = 10),
+    rnorm(500, mean = 10, sd = 10)
+  )
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Residuals correlated with predicted values**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = fake_predicted + rnorm(1000, mean = 0, sd = 50)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+.large[
+**Any patterns!**
+]
+
+```{r out.width = "60%", echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(-100, 100, 0.4),
+  fake_resid = -5*fake_predicted^2 - 3*fake_predicted + 20000 + rnorm(501, mean = 0, sd = 10000)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+.question[
+What patterns does the residuals plot reveal that should make us question whether a linear model is a good fit for modeling the relationship between height and width of paintings?
+]
+
+```{r out.width = "60%", echo=FALSE}
+ggplot(ht_wt_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted height", y = "Residuals")
+```
+
+---
+
+class: middle
+
+# Exploring linearity
+
+---
+
+## Data: Paris Paintings
+
+```{r echo=FALSE, out.width = "70%"}
+ggplot(data = pp, aes(x = price)) +
+  geom_histogram(binwidth = 1000) +
+  labs(title = "Prices of paintings")
+```
+
+---
+
+## Price vs. width
+
+```{r echo=FALSE, out.width = "70%", warning = FALSE}
+ggplot(data = pp, aes(x = Width_in, y = price)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Width (in)", y = "Price (livres)")
+```
+
+---
+
+## Focus on paintings with `Width_in < 100`
+
+That is, paintings with width < 2.54 m
+
+```{r}
+pp_wt_lt_100 <- pp %>% 
+  filter(Width_in < 100)
+```
+
+---
+
+## Price vs. width
+
+.question[
+Which plot shows a more linear relationship?
+]
+
+.small[
+  
+.pull-left[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+ggplot(data = pp_wt_lt_100, 
+       mapping = aes(x = Width_in, y = price)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Price vs. width", 
+    subtitle = "For width < 100 in",
+    x = "Width (inches)", 
+    y = "Price (livres)"
+    )
+```
+]
+
+.pull-right[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+ggplot(data = pp_wt_lt_100, 
+       mapping = aes(x = Width_in, y = log(price))) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Log(price) vs. width", 
+    subtitle = "For width < 100 in",
+    x = "Width (inches)", 
+    y = "Log(price) (log livres)"
+    )
+```
+]
+
+]
+
+---
+
+## Price vs. width, residuals
+
+.question[
+Which plot shows a residuals that are uncorrelated with predicted values from the model? Also, what is the unit of the residuals?
+]
+  
+.pull-left[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+price_wt_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(price ~ Width_in, data = pp_wt_lt_100)
+price_wt_fit_aug <- augment(price_wt_fit$fit)
+
+ggplot(data = price_wt_fit_aug, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Price vs. width, residuals", 
+    subtitle = "For width < 100 in",
+    x = "Predicted price (livres)", 
+    y = "Residuals"
+    )
+```
+]
+.pull-right[
+```{r message=FALSE, echo=FALSE, out.width = "100%"}
+pp_wt_lt_100 <- pp_wt_lt_100 %>% 
+  mutate(log_price = log(price))
+
+lprice_wt_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Width_in, data = pp_wt_lt_100)
+lprice_wt_fit_aug <- augment(lprice_wt_fit$fit)
+
+ggplot(data = lprice_wt_fit_aug, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Log(Price) vs. width, residuals", 
+    subtitle = "For width < 100 in",
+    x = "Predicted log(price) (log livres)", 
+    y = "Residuals"
+    )
+```
+]
+
+---
+
+## Transforming the data
+
+- We saw that `price` has a right-skewed distribution, and the relationship between price and width of painting is non-linear.
+
+--
+- In these situations a transformation applied to the response variable may be useful.
+
+--
+- In order to decide which transformation to use, we should examine the distribution of the response variable.
+
+--
+- The extremely right skewed distribution suggests that a log transformation may 
+be useful.
+    - log = natural log, $ln$
+    - Default base of the `log` function in R is the natural log: <br>
+    `log(x, base = exp(1))`
+    
+---
+
+## Logged price vs. width
+
+.question[
+How do we interpret the slope of this model?
+]
+
+```{r echo=FALSE, message=FALSE, out.width="60%"}
+ggplot(data = pp_wt_lt_100, mapping = aes(x = Width_in, y = log(price))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "#8E2C90", se = FALSE) +
+  labs(x = "Width (in)", y = "Log(price) (log livres)")
+```
+
+---
+
+## Models with log transformation
+
+```{r}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log(price) ~ Width_in, data = pp_wt_lt_100) %>%
+  tidy()
+```
+
+---
+
+
+## Interpreting the slope
+
+$$ \widehat{log(price)} = 4.67 + 0.0192 Width $$
+
+--
+- For each additional inch the painting is wider, the log price of the painting is expected to be higher, on average, by 0.0192 livres.
+
+--
+- which is not a very useful statement...
+
+---
+
+## Working with logs
+
+- Subtraction and logs: $log(a) − log(b) = log(a / b)$
+
+--
+- Natural logarithm: $e^{log(x)} = x$
+
+--
+- We can use these identities to "undo" the log transformation
+
+---
+
+## Interpreting the slope
+
+The slope coefficient for the log transformed model is 0.0192, meaning the log price difference between paintings whose widths are one inch apart is predicted to be 0.0192 log livres.
+
+--
+
+.question[
+Using this information, and properties of logs that we just reviewed, fill in the blanks in the following alternate interpretation of the slope:
+
+>For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+]
+
+
+---
+
+>For each additional inch the painting is wider, the price of the painting is expected to be `___` , on average, by a factor of `___`.
+
+
+$$ log(\text{price for width x+1}) - log(\text{price for width x}) = 0.0192 $$
+
+--
+
+$$ log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right) = 0.0192 $$
+
+--
+
+$$ e^{log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right)} = e^{0.0192} $$
+
+--
+
+$$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
+
+--
+
+For each additional inch the painting is wider, the price of the painting is expected to be higher, on average, by a factor of 1.02.
+
+---
+
+## Recap
+
+- Non-constant variance is one of the most common model violations, however it is usually fixable by transforming the response (y) variable.
+
+--
+- The most common transformation when the response variable is right skewed is the log transform: $log(y)$, especially useful when the response variable is 
+(extremely) right skewed.
+
+--
+- This transformation is also useful for variance stabilization.
+
+--
+- When using a log transformation on the response variable the interpretation of 
+the slope changes: *"For each unit increase in x, y is expected on average to be higher/lower <br> by a factor of $e^{b_1}$."*
+
+--
+- Another useful transformation is the square root: $\sqrt{y}$, especially 
+useful when the response variable is counts.
+
+---
+
+## Transform, or learn more?
+
+- Data transformations may also be useful when the relationship is non-linear
+- However in those cases a polynomial regression may be more appropriate
+  + This is beyond the scope of this course, but you’re welcomed to try it for your final project, and I’d be happy to provide further guidance
+
+---
+
+## Aside: when $y = 0$
+
+In some cases the value of the response variable might be 0, and
+
+```{r}
+log(0)
+```
+
+--
+
+The trick is to add a very small number to the value of the response variable for these cases so that the `log` function can still be applied:
+
+```{r}
+log(0 + 0.00001)
+```

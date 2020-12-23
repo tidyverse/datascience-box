@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Models with multiple predictors</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Models with multiple predictors
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# The linear model with multiple predictors
+
+---
+
+## Data: Book weight and volume
+
+The `allbacks` data frame gives measurements on the volume and weight of 15 books, some of which are paperback and some of which are hardback
+
+.pull-left[
+- Volume - cubic centimetres
+- Area - square centimetres
+- Weight - grams
+]
+.pull-right[
+.small[
+
+```
+## # A tibble: 15 x 4
+##    volume  area weight cover
+##     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;
+##  1    885   382    800 hb   
+##  2   1016   468    950 hb   
+##  3   1125   387   1050 hb   
+##  4    239   371    350 hb   
+##  5    701   371    750 hb   
+##  6    641   367    600 hb   
+##  7   1228   396   1075 hb   
+##  8    412     0    250 pb   
+##  9    953     0    700 pb   
+## 10    929     0    650 pb   
+## 11   1492     0    975 pb   
+## 12    419     0    350 pb   
+## 13   1010     0    950 pb   
+## 14    595     0    425 pb   
+## 15   1034     0    725 pb
+```
+]
+]
+
+.footnote[
+.small[
+These books are from the bookshelf of J. H. Maindonald at Australian National University.
+]
+]
+
+---
+
+## Book weight vs. volume
+
+.pull-left[
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(weight ~ volume, data = allbacks) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic    p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept)  108.      88.4         1.22 0.245     
+## 2 volume         0.709    0.0975      7.27 0.00000626
+```
+]
+.pull-right[
+&lt;img src="u4-d04-model-multiple-predictors_files/figure-html/unnamed-chunk-4-1.png" width="75%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Book weight vs. volume and cover
+
+.pull-left[
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(weight ~ volume + cover, data = allbacks) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic      p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)  198.      59.2         3.34 0.00584     
+## 2 volume         0.718    0.0615     11.7  0.0000000660
+## 3 coverpb     -184.      40.5        -4.55 0.000672
+```
+]
+.pull-right[
+&lt;img src="u4-d04-model-multiple-predictors_files/figure-html/unnamed-chunk-6-1.png" width="75%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Interpretation of estimates
+
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic      p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)  198.      59.2         3.34 0.00584     
+## 2 volume         0.718    0.0615     11.7  0.0000000660
+## 3 coverpb     -184.      40.5        -4.55 0.000672
+```
+
+--
+- **Slope - volume:** *All else held constant*, for each additional cubic centimetre books are larger in volume, we would expect the weight to be higher, on average, by 0.718 grams.
+
+--
+- **Slope - cover:** *All else held constant*, paperback books are weigh, on average, by 184 grams less than hardcover books.
+
+--
+- **Intercept:** Hardcover books with 0 volume are expected to weigh 198 grams, on average. (Doesn't make sense in context.)
+
+
+---
+
+## Main vs. interaction effects
+
+.question[
+Suppose we want to predict weight of books from their volume and cover type 
+(hardback vs. paperback). Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which weight changes as volume 
+increases would be the same for hardback and paperback books and interaction 
+effects would mean the rate at which weight changes as volume 
+increases would be different for hardback and paperback books.
+]
+
+---
+
+&lt;img src="u4-d04-model-multiple-predictors_files/figure-html/book-main-int-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## In pursuit of Occam's razor
+
+- Occam's Razor states that among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected.
+
+--
+- Model selection follows this principle.
+
+--
+- We only want to add another variable to the model if the addition of that variable brings something valuable in terms of predictive power to the model.
+
+--
+- In other words, we prefer the simplest best model, i.e. **parsimonious** model.
+
+---
+
+.pull-left[
+&lt;img src="u4-d04-model-multiple-predictors_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+.question[
+Visually, which of the two models is preferable under Occam's razor?
+]
+]
+
+---
+
+## R-squared
+
+- `\(R^2\)` is the percentage of variability in the response variable explained by 
+the regression model.
+
+
+```r
+glance(book_main_fit)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(book_int_fit)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+
+--
+- Clearly the model with interactions has a higher `\(R^2\)`.
+
+--
+- However using `\(R^2\)` for model selection in models with multiple explanatory variables is not a good idea as `\(R^2\)` increases when **any** variable is added to the model.
+
+---
+
+## Adjusted R-squared
+
+... a (more) objective measure for model selection
+
+- Adjusted `\(R^2\)` doesn't increase if the new variable does not provide any new 
+informaton or is completely unrelated, as it applies a penalty for number of 
+variables included in the model.
+- This makes adjusted `\(R^2\)` a preferable metric for model selection in multiple
+regression models.
+
+---
+
+## Comparing models
+
+.pull-left[
+
+```r
+glance(book_main_fit)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(book_int_fit)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+]
+.pull-right[
+
+```r
+glance(book_main_fit)$adj.r.squared
+```
+
+```
+## [1] 0.9153905
+```
+
+```r
+glance(book_int_fit)$adj.r.squared
+```
+
+```
+## [1] 0.9105447
+```
+]
+
+--
+
+.pull-left-wide[
+.small[
+- Is R-sq higher for int model?
+
+```r
+glance(book_int_fit)$r.squared &gt; glance(book_main_fit)$r.squared 
+```
+
+```
+## [1] TRUE
+```
+
+- Is R-sq adj. higher for int model?
+
+
+```r
+glance(book_int_fit)$adj.r.squared &gt; glance(book_main_fit)$adj.r.squared
+```
+
+```
+## [1] FALSE
+```
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

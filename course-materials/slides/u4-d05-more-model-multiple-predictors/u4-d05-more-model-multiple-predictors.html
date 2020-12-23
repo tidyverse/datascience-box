@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>More models with multiple predictors</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/pymjs/pym.v1.js"></script>
+    <script src="libs/widgetframe-binding/widgetframe.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# More models with multiple predictors
+## <br><br> Data Science in a Box
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Two numerical predictors
+
+---
+
+## The data
+
+
+```r
+pp &lt;- read_csv(
+  "data/paris-paintings.csv",
+  na = c("n/a", "", "NA")
+) %&gt;%
+  mutate(log_price = log(price))
+```
+
+---
+
+## Multiple predictors
+
+- Response variable: `log_price` 
+- Explanatory variables: Width and height
+
+
+```r
+pp_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(log_price ~ Width_in + Height_in, data = pp)
+tidy(pp_fit)
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
+## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
+```
+
+---
+
+##  Linear model with multiple predictors
+
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
+## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
+```
+
+&lt;br&gt;
+
+`$$\widehat{log\_price} = 4.77 + 0.0269 \times width - 0.0133 \times height$$`
+
+---
+
+## Visualizing models with multiple predictors
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-wide[
+
+```{=html}
+&lt;div id="htmlwidget-03839427d3b7c2e3fede" style="width:100%;height:1483.2px;" class="widgetframe html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-03839427d3b7c2e3fede"&gt;{"x":{"url":"u4-d05-more-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}&lt;/script&gt;
+```
+]
+]
+.panel[.panel-name[Code]
+
+```r
+p &lt;- plot_ly(pp,
+  x = ~Width_in, y = ~Height_in, z = ~log_price,
+  marker = list(size = 3, color = "lightgray", alpha = 0.5, 
+                line = list(color = "gray", width = 2))) %&gt;%
+  add_markers() %&gt;%
+  plotly::layout(scene = list(
+    xaxis = list(title = "Width (in)"),
+    yaxis = list(title = "Height (in)"),
+    zaxis = list(title = "log_price")
+  )) %&gt;%
+  config(displayModeBar = FALSE)
+frameWidget(p)
+```
+]
+]
+
+---
+
+class: middle
+
+# Numerical and categorical predictors
+
+---
+
+## Price, surface area, and living artist
+
+- Explore the relationship between price of paintings and surface area, conditioned 
+on whether or not the artist is still living
+- First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+
+```r
+pp &lt;- pp %&gt;%
+  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
+
+pp %&gt;%
+  count(artistliving)
+```
+
+```
+## # A tibble: 2 x 2
+##   artistliving     n
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 Deceased      2937
+## 2 Living         456
+```
+]
+
+---
+
+## Typical surface area
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-narrow[
+Typical surface area appears to be less than 1000 square inches (~ 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
+]
+.pull-right-wide[
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
+  geom_histogram(binwidth = 500) + 
+  facet_grid(artistliving ~ .) +
+  scale_fill_manual(values = c("#E48957", "#071381")) +
+  guides(fill = FALSE) +
+  labs(x = "Surface area", y = NULL) +
+  geom_vline(xintercept = 1000) +
+  geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")
+```
+
+```
+## Warning: Removed 176 rows containing non-finite values
+## (stat_bin).
+```
+]
+]
+
+---
+
+## Narrowing the scope
+
+.panelset[
+.panel[.panel-name[Plot]
+For simplicity let's focus on the paintings with `Surface &lt; 5000`:
+
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/unnamed-chunk-4-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+pp_Surf_lt_5000 &lt;- pp %&gt;%
+  filter(Surface &lt; 5000)
+
+ggplot(data = pp_Surf_lt_5000, 
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
+  labs(color = "Artist", shape = "Artist") +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Facet to get a better look
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = pp_Surf_lt_5000, 
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~artistliving) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  labs(color = "Artist", shape = "Artist")
+```
+]
+]
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+## Two ways to model
+
+.pull-left-narrow[
+- **Main effects:** Assuming relationship between surface and logged price **does not vary** by whether or not the artist is living
+- **Interaction effects:** Assuming relationship between surface and logged price **varies** by whether or not the artist is living
+]
+.pull-right-wide[
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/pp-main-int-viz-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: `log_price`
+- Explanatory variables: `Surface` area and `artistliving`
+
+.midi[
+
+```r
+pp_main_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(log_price ~ Surface + artistliving, data = pp_Surf_lt_5000)
+tidy(pp_main_fit)
+```
+
+```
+## # A tibble: 3 x 5
+##   term               estimate std.error statistic  p.value
+##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)        4.88     0.0424       115.   0.      
+## 2 Surface            0.000265 0.0000415      6.39 1.85e-10
+## 3 artistlivingLiving 0.137    0.0970         1.41 1.57e- 1
+```
+]
+
+--
+
+`$$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times artistliving$$`
+
+---
+
+## Solving the model
+
+- Non-living artist: Plug in 0 for `artistliving`
+
+`\(\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 0\)`  
+`\(= 4.88 + 0.000265 \times surface\)`
+
+--
+- Living artist: Plug in 1 for `artistliving`
+
+`\(\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 1\)`   
+`\(= 5.017 + 0.000265 \times surface\)`
+
+---
+
+## Visualizing main effects
+
+.pull-left-narrow[
+- **Same slope:** Rate of change in price as the surface area increases does 
+not vary between paintings by living and non-living artists.
+- **Different intercept:** Paintings by living artists are consistently more 
+expensive than paintings by non-living artists.
+]
+.pull-right-wide[
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Interpreting main effects
+
+.midi[
+
+```r
+tidy(pp_main_fit) %&gt;% 
+  mutate(exp_estimate = exp(estimate)) %&gt;%
+  select(term, estimate, exp_estimate)
+```
+
+```
+## # A tibble: 3 x 3
+##   term               estimate exp_estimate
+##   &lt;chr&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)        4.88           132.  
+## 2 Surface            0.000265         1.00
+## 3 artistlivingLiving 0.137            1.15
+```
+]
+
+- All else held constant, for each additional square inch in painting's surface area, the price of the painting is predicted, on average, to be higher by a factor of 1.
+- All else held constant, paintings by a living artist are predicted, on average, to be higher by a factor of 1.15 compared to paintings by an artist who is no longer alive.
+- Paintings that are by an artist who is not alive and that have a surface area of 0 square inches are predicted, on average, to be 132 livres.
+
+---
+
+## Main vs. interaction effects
+
+- The way we specified our main effects model only lets `artistliving` affect the intercept.
+- Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
+
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colours
++ Same slope and different intercept for both colours
++ Different slope and different intercept for both colours
+]
+
+---
+
+## Interaction: `Surface * artistliving`
+
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: log_price
+- Explanatory variables: `Surface` area, `artistliving`, and their interaction
+
+.midi[
+
+```r
+pp_int_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(log_price ~ Surface * artistliving, data = pp_Surf_lt_5000)
+tidy(pp_int_fit)
+```
+
+```
+## # A tibble: 4 x 5
+##   term                     estimate std.error statistic   p.value
+##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)              4.91     0.0432       114.     0.     
+## 2 Surface                  0.000206 0.0000442      4.65   3.37e-6
+## 3 artistlivingLiving      -0.126    0.119         -1.06   2.89e-1
+## 4 Surface:artistlivingLi…  0.000479 0.000126       3.81   1.39e-4
+```
+]
+
+---
+
+## Linear model with interaction effects
+
+.midi[
+
+```
+## # A tibble: 4 x 5
+##   term                     estimate std.error statistic   p.value
+##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)              4.91     0.0432       114.     0.     
+## 2 Surface                  0.000206 0.0000442      4.65   3.37e-6
+## 3 artistlivingLiving      -0.126    0.119         -1.06   2.89e-1
+## 4 Surface:artistlivingLi…  0.000479 0.000126       3.81   1.39e-4
+```
+]
+
+`$$\widehat{log\_price} = 4.91 + 0.00021 \times surface - 0.126 \times artistliving$$`
+`$$+ ~ 0.00048 \times surface * artistliving$$`
+
+---
+
+## Interpretation of interaction effects
+
+- Rate of change in price as the surface area of the painting increases does 
+vary between paintings by living and non-living artists (different slopes), 
+- Some paintings by living artists are more expensive than paintings by
+non-living artists, and some are not (different intercept).
+
+.small[
+.pull-left[
+- Non-living artist: 
+`\(\widehat{log\_price} = 4.91 + 0.00021 \times surface\)`
+`\(- 0.126 \times 0 + 0.00048 \times surface \times 0\)`
+`\(= 4.91 + 0.00021 \times surface\)`
+- Living artist: 
+`\(\widehat{log\_price} = 4.91 + 0.00021 \times surface\)`
+`\(- 0.126 \times 1 + 0.00048 \times surface \times 1\)`
+`\(= 4.91 + 0.00021 \times surface\)`
+`\(- 0.126 + 0.00048 \times surface\)`
+`\(= 4.784 + 0.00069 \times surface\)`
+]
+.pull-right[
+&lt;img src="u4-d05-more-model-multiple-predictors_files/figure-html/viz-interaction-effects2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted `\(R^2\)`, so we 
+should indeed use the model with the interactions.
+
+
+```r
+glance(pp_main_fit)$adj.r.squared
+```
+
+```
+## [1] 0.01258977
+```
+
+```r
+glance(pp_int_fit)$adj.r.squared
+```
+
+```
+## [1] 0.01676753
+```
+
+---
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
