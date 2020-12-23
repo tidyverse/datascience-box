@@ -21,6 +21,8 @@ The RStudio Cloud workspace for Data Science Course in a Box project is [here](h
 You can join the workspace and play around with the sample application exercises.
 :::
 
+## Slides, videos, and application exercises
+
 ::: {.slide-deck}
 **Unit 1 - Deck 1: Welcome**
 
