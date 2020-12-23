@@ -23,21 +23,12 @@ Pick a dataset, any dataset...
 That is your final project in a nutshell.
 More details below.
 
-PS: Please don't just make pie charts for your project.
-
 # May be too long, but please do read
 
 The final project for this class will consist of analysis on a dataset of your own choosing.
 The dataset may already exist, or you may collect your own data using a survey or by conducting an experiment.
 You can choose the data based on your interests or based on work in other courses or research projects.
 The goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (and beyond, if you like) and apply them to a novel dataset in a meaningful way.
-
-## Data
-
-In order for you to have the greatest chance of success with this project it is important that you choose a manageable dataset.
-This means that the data should be readily accessible and large enough that multiple relationships can be explored.
-As such, your dataset must have at least 50 observations and between 10 to 20 variables (exceptions can be made but you must speak with me first).
-The dataset's variables should include categorical variables, discrete numerical variables, and continuous numerical variables.
 
 The goal is not to do an exhaustive data analysis i.e., do not calculate every statistic and procedure you have learned for every variable, but rather let me know that you are proficient at asking meaningful questions and answering them with results of data analysis, that you are proficient in using R, and that you are proficient at interpreting and presenting the results.
 Focus on methods that help you begin to answer your research questions.
@@ -59,7 +50,7 @@ All analyses must be done in RStudio, using R.
 In order for you to have the greatest chance of success with this project it is important that you choose a manageable dataset.
 This means that the data should be readily accessible and large enough that multiple relationships can be explored.
 As such, your dataset must have at least 50 observations and between 10 to 20 variables (exceptions can be made but you must speak with me first).
-The variables in the data should include categorical variables, discrete numerical variables, and continuous numerical variables.
+The dataset's variables should include categorical variables, discrete numerical variables, and continuous numerical variables.
 
 If you are using a dataset that comes in a format that we haven't encountered in class, make sure that you are able to load it into R as this can be tricky depending on the source.
 If you are having trouble ask for help before it is too late.
@@ -157,23 +148,23 @@ The presentation line-up will be generated randomly.
 
 The grading scheme for the presentation is as follows:
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Total                                                                                                                                                                                                          | 50 pts    |
-+================================================================================================================================================================================================================+===========+
-| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts     |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
-| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Total                                                                                                                                                                                                          | 50 pts |
++================================================================================================================================================================================================================+========+
+| Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?                                                                                               | 6 pts  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Content: Did the team use appropriate statistical procedures and interpretations of results accurately?                                                                                                        | 10 pts |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? | 10 pts |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
+| Slides: Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?                                                                                       | 10 pts |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+
 
 ### Executive summary
 
