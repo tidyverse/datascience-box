@@ -1,84 +1,149 @@
 # Looking further {#looking-forward}
 
-In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, and Bayesian inference.
+In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, machine learning, and Bayesian inference.
 These are independent modules that educators can choose to include in their introductory data science curriculum depending on how much time they have left in the semester.
+Note that the slides in this unit are a bit more sparse than the others, and much of the content is delivered as live coding sessions.
 
 ## Slides & application exercises
 
 ::: {.slide-deck}
-**Unit 3 - Deck 1: Data science ethics**
+**Unit 5 - Deck 1: Text analysis**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d01-ethics/u3_d01-ethics.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d01-ethics)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d01-text-analysis/u5-d01-text-analysis.html#1)
+:::
 
-::: {.reading}
-[Modern Data Science with R :: Chp 6 - Professional Ethics](https://mdsr-book.github.io/excerpts/mdsr-ethics.pdf)
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d01-text-analysis)
+:::
+
+::: {.video}
+[Video](https://youtu.be/_YqEHZccujc)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 3 - Deck 2: Interactive data visualization**
+**Unit 5 - Deck 2: Comparing texts**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d02-shiny-1/u3_d2-shiny-1.pdf) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d02-shiny-1)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d02-comparing-texts/u5-d02-comparing-texts.html#1)
+:::
 
-::: {.reading}
-[Mastering Shiny :: Chp 2 - Your first Shiny app](https://mastering-shiny.org/basic-app.html)
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d02-comparing-texts)
+:::
+
+::: {.video}
+[Video](https://youtu.be/Q79feeFbsxM)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 3 - Deck 3: Interactive data visualization and reporting**
+**Unit 5 - Deck 3: Interactive web apps**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d03-shiny-2/u3_d3-shiny-2.pdf) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d03-shiny-2)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d03-interactive-web-app/u5-d03-interactive-web-app.html#1)
+:::
 
-::: {.reading}
--   [Mastering Shiny :: Chp 3 - Basic UI](https://mastering-shiny.org/basic-ui.html)
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d03-interactive-web-app)
+:::
 
--   [Mastering Shiny :: Chp 4 - Basic reactivity](https://mastering-shiny.org/basic-reactivity.html)
+::: {.video}
+[Video](https://youtu.be/gXBEOFWrxsk)
 :::
 :::
 
 ::: {.slide-deck}
-**Unit 3 - Deck 4: Bayesian inference**
+**Unit 5 - Deck 4: Machine learning**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d04-bayes-inf/u3_d04-bayes-inf.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d04-bayes-inf)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d04-machine-learning/u5-d04-machine-learning.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d04-machine-learning)
+:::
+
+::: {.video}
+[Video](https://youtu.be/IP5skNjwo7A)
+:::
 :::
 
 ::: {.slide-deck}
-**Unit 3 - Deck 5: Text analysis**
+**Unit 5 - Deck 5: Interactive data visualisation**
 
-[[Slides]](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3_d05-text-analysis/u3_d05-text-analysis.html#1) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3_d05-text-analysis)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d05-shiny-1/u5-d05-shiny-1.pdf)
+:::
+:::
 
-::: {.reading}
--   [Tidy Text Mining :: Chp 1 - The tidy text format](https://www.tidytextmining.com/tidytext.html)
+::: {.slide-deck}
+**Unit 5 - Deck 6: Interactive data visualisation and reporting**
 
--   [Tidy Text Mining :: Chp 2 - Sentiment analysis with tidy data](https://www.tidytextmining.com/sentiment.html)
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d05-shiny-2/u5-d05-shiny-2.pdf)
+:::
+:::
+
+::: {.slide-deck}
+**Unit 5 - Deck 7: Bayesian inference**
+
+::: {.slides}
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d07-bayes-inf/u5-d07-bayes-inf.html#1)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d07-bayes-inf)
 :::
 :::
 
 ## Labs
 
 ::: {.lab}
-**Lab 12: Working on projects**
+**Lab 13: Working on projects**
 
-Workflows for data science projects
+Fitting and interpreting simple linear regression models
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-12/lab-12-work-on-projects.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-12)
+::: {.instructions}
+[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-13/lab-13-work-on-projects.html)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-13)
+:::
 :::
 
 ::: {.lab}
-**Lab 13: Collaborating on GitHub**
+**Lab 14: Collaboration on GitHub**
 
-Workflows for data science projects, closing issues with commits, gh-pages
+Fitting and interpreting simple linear regression models
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-13/lab-13-collaborating-on-github.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-13)
+::: {.instructions}
+[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-14/lab-14-collaborating-on-github.html)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/lab-instructions/lab-14)
+:::
 :::
 
 ## Homework assignments
 
 ::: {.homework}
-**HW 8: Wrapping up**
+**HW 10: Wrapping up**
 
-Pick a package and do something with it, make an ugly plot!
+Model validation and inference
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-08/hw-08-wrap-up.html) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-08) [[Starter]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/assignments/hw-08-wrap-up)
+::: {.instructions}
+[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-10/hw-10-wrap-up.html)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/hw-instructions/hw-10)
+:::
+
+::: {.starter}
+[Starter](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/starters/hw/hw-10-wrap-up)
+:::
 :::
