@@ -25,7 +25,7 @@ library(DT)
 The data we're using originally come from the **unvotes** package, but it's been modified a bit (by joining the various data frames provided in the package) to help you get started with the analysis.
 
 ```{r load-data}
-unvotes <- read_rds("data/unvotes.rds")
+unvotes <- readRDS("data/unvotes.rds")
 ```
 
 ## UN voting patterns
