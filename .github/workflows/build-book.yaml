@@ -1,8 +1,10 @@
 on:
   push:
-    branches: master
+    branches:
+      - master
     paths-ignore: 
-    - 'course-materials/**'
+    - 'course-materials/**'  
+
 
 name: Build book
 
@@ -18,9 +20,8 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
 
-      - name: Install pandoc
-        run: |
-          brew install pandoc
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@master
 
       - name: Cache Renv packages
         uses: actions/cache@v1
@@ -30,7 +31,7 @@ jobs:
           restore-keys: r-
 
       - name: Cache bookdown results
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: _bookdown_files
           key: bookdown-${{ hashFiles('**/*Rmd') }}

@@ -1623,6 +1623,13 @@
       "Repository": "CRAN",
       "Hash": "f401be434f60d4549bda90b566ff6d3f"
     },
+    "unvotes": {
+      "Package": "unvotes",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a312edee26059e5e57500cc92c5ed71b"
+    },
     "usdata": {
       "Package": "usdata",
       "Version": "0.1.0",
