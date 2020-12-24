@@ -1,15 +1,5 @@
 /* custom environments */
 
-.guest-lecture {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  border: 1pt dotted #a8a8a8;
-  background: #ffffff 5px center/3em no-repeat;
-  background-image: url("microphone.png");
-}
-
-
 .application-exercise {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
@@ -25,6 +15,21 @@
   font-weight: bold;
   color: #80D4E6;
 }
+
+
+.slides {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.slides:before {
+  content: "\f108";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
 
 .reading {
   padding: 1em 1em 1em 4em;
@@ -54,17 +59,58 @@
   background-image: url("slide-deck.png");
 }
 
-.slides {
+.source {
   padding: 0em 1em 0em 2em;
   position: relative;
   font-size: 0.9em;
 }
-.slides:before {
-  content: "\f108";
+.source:before {
+  content: "\f1c9";
   font-family: FontAwesome;
-  color: #444B54;
+  color: #a8a8a8;
   left: 5px;
   position: absolute;
+}
+
+.guest-lecture {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt dotted #a8a8a8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("microphone.png");
+}
+
+.video {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.video:before {
+  content: "\f16a";
+  font-family: FontAwesome;
+  color: #c4302b;
+  left: 5px;
+  position: absolute;
+}
+
+
+.lab{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #FFD748;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("lab.png");
+}
+
+.homework{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #F26BAA;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("hw.png");
 }
 
 .instructions {
@@ -94,52 +140,6 @@
 }
 
 
-.source {
-  padding: 0em 1em 0em 2em;
-  position: relative;
-  font-size: 0.9em;
-}
-.source:before {
-  content: "\f1c9";
-  font-family: FontAwesome;
-  color: #a8a8a8;
-  left: 5px;
-  position: absolute;
-}
-
-.video {
-  padding: 0em 1em 0em 2em;
-  position: relative;
-  font-size: 0.9em;
-}
-.video:before {
-  content: "\f16a";
-  font-family: FontAwesome;
-  color: #c4302b;
-  left: 5px;
-  position: absolute;
-}
-
-
-
-.lab{
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  border: 1pt solid #FFD748;
-  background: #ffffff 5px center/3em no-repeat;
-  background-image: url("lab.png");
-}
-
-.homework{
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  border: 1pt solid #F26BAA;
-  background: #ffffff 5px center/3em no-repeat;
-  background-image: url("hw.png");
-}
-
 .tutorial{
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
@@ -149,6 +149,7 @@
   background-image: url("tutorial.png");
 }
 
+
 .exam{
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
@@ -157,6 +158,7 @@
   background: #ffffff 5px center/3em no-repeat;
   background-image: url("exam.png");
 }
+
 
 .rstudio-cloud {
   padding: 1em 1em 1em 4em;
@@ -173,15 +175,12 @@
   color: #A7D5E8;
 }
 
+/* overwrite bs4_book style */
 
-/* colors */
-
-h1 {
-  font-weight: bold;
-  color: #A7D5E8; 
+img.cover {
+  box-shadow: none;
 }
 
-h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  color: #1E5C65; 
+.inline-figure {
+  border: none;
 }
