@@ -43,7 +43,12 @@ jobs:
           R -e 'renv::restore()'
 
       - name: Build site
-        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
+        run: |
+         install.packages(c("bslib", "downlit"))
+         bookdown::render_book("index.Rmd", quiet = TRUE)
+        shell: Rscript {0}
+        
+        run: Rscript -e ''
 
       - name: Install npm
         uses: actions/setup-node@v1
