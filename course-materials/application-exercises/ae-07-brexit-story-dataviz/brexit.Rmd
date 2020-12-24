@@ -16,7 +16,7 @@ In September 2019, YouGov survey asked 1,639 GB adults the following question:
 > -   Wrong to leave  
 > -   Don't know
 
-The data from the survey are in `data/brexit.csv`.
+The data from the survey is in `data/brexit.csv`.
 
 ```{r message = FALSE}
 brexit <- read_csv("data/brexit.csv")
