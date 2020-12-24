@@ -44,7 +44,8 @@ jobs:
 
       - name: Build site
         run: |
-         install.packages(c("bslib", "downlit"))
+         remotes::install_github("rstudio/bslib")
+         install.packages("downlit")
          bookdown::render_book("index.Rmd", quiet = TRUE)
         shell: Rscript {0}
         
