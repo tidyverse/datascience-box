@@ -2,7 +2,7 @@
 
 The course content is organized in three units:
 
-```{r topic-flow, fig.align="center", echo=FALSE}
+```{r topic-flow, fig.align="center", echo=FALSE, fig.asp=0.3, out.width="100%"}
 library(DiagrammeR)
 
 hello_border <- "#333333"
