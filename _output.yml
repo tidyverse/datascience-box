@@ -1,5 +1,5 @@
 bookdown::bs4_book:
-  css: [css/style.css, css/dsbox.css, css/fontawesome/css/all.css]
+  css: [css/dsbox.css, css/fontawesome/css/all.css]
   theme:
     primary: "#1E5C65"
   repo: https://github.com/rstudio-education/datasciencebox/
