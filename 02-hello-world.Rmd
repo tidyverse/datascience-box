@@ -45,7 +45,7 @@ You can join the workspace and play around with the sample application exercises
 > **Option 1 - UN Votes**
 >
 > ::: {.source}
-> [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-01a-un-votes/ae-01a-un-votes.Rmd)
+> [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-01a-un-votes/unvotes.Rmd)
 > :::
 >
 > ::: {.video}
@@ -84,7 +84,7 @@ You can join the workspace and play around with the sample application exercises
 **Bechdel + R Markdown**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/ae-02-bechdel-rmarkdown.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/bechdel.Rmd)
 :::
 :::
 

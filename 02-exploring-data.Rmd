@@ -94,7 +94,7 @@ IMS :: [Sec 2.2 - Exploring categorical data](https://openintro-ims.netlify.app/
 **StarWars + Dataviz**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz/ae-03-starwars-dataviz.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-03-starwars-dataviz/starwars.Rmd)
 :::
 
 ::: {.video}
@@ -204,7 +204,7 @@ R4DS :: [Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
 **Hotels + Data wrangling**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling/ae-04-hotels-datawrangling.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-04-hotels-datawrangling/hotels-datawrangling.Rmd)
 :::
 
 ::: {.video}
@@ -294,7 +294,11 @@ R4DS :: [Sec 16.1 - 16.3 - Dates and times](https://r4ds.had.co.nz/dates-and-tim
 **Hotels + Data types**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-hotels-datatypes/ae-05-hotels-datatypes.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-hotels-datatypes/hotels-forcats.Rmd)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-05-hotels-datatypes/type-coercion.Rmd)
 :::
 
 ::: {.video}
@@ -306,7 +310,11 @@ R4DS :: [Sec 16.1 - 16.3 - Dates and times](https://r4ds.had.co.nz/dates-and-tim
 **Nobels + Sales + Data import**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-nobels-sales-dataimport/ae-06-nobels-sales-dataimport.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-nobels-sales-dataimport/nobels-csv.Rmd)
+:::
+
+::: {.source}
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-06-nobels-sales-dataimport/sales-excel.Rmd)
 :::
 
 ::: {.video}
@@ -340,7 +348,7 @@ IMS :: [Sec 2.3 - Effective data visualisation](https://openintro-ims.netlify.ap
 **Brexit + Telling stories with dataviz**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-07-brexit-story-dataviz/ae-07-brexit-story-dataviz.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-07-brexit-story-dataviz/brexit.Rmd)
 :::
 
 ::: {.video}
@@ -459,7 +467,7 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 **IMDB + Web scraping**
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-08-imdb-webscraping/ae-08-imdb-webscraping.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-08-imdb-webscraping)
 :::
 
 ::: {.video}
