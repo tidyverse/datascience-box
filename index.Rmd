@@ -1,5 +1,6 @@
 ---
-knit: "bookdown::render_book"
+knit: bookdown::render_book
+site: bookdown::bookdown_site
 title: "Data Science in a Box"
 author: "Mine Çetinkaya-Rundel"
 description: "Data Science in a Box contains the materials required to teach (or learn from) the course described above, all of which are freely-available and open-source."
@@ -8,7 +9,6 @@ github-repo: rstudio-education/datasciencebox
 twitter-handle: minebocek
 cover-image: dsbox.png
 url: 'https\://datasciencebox.org/'
-site: bookdown::bookdown_site
 documentclass: book
 link-citations: yes
 ---
@@ -28,7 +28,7 @@ In addition, out-of-class learning is supplemented with interactive [tutorials](
 The goal of the course is to bring students from zero to being able to work in a team on a fully reproducible data science project analysing a dataset of their choice and answering questions they care about.
 
 Data Science in a Box contains the materials required to teach (or learn from) the course described above, all of which are [freely-available and open-source](https://github.com/rstudio-education/datascience-box/blob/master/LICENSE.md).
-They include course materials such as slide decks, homework assignments, guided labs, sample exams, a final project assignment, as well as materials for instructors such as pedagogical tips, information on computing infrastructure, technology stack, and course logistics.
+They include course materials such as slide decks, lecture and live coding videos, homework assignments, guided labs, sample exams, a final project assignment, as well as materials for instructors such as pedagogical tips, information on computing infrastructure, technology stack, and course logistics.
 
 Majority of the materials linked live in the GitHub repo serving this website.
 You can access the repo [here](https://github.com/rstudio-education/datascience-box).
