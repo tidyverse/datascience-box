@@ -435,11 +435,12 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 **Unit 2 - Deck 19: Scraping top 250 movies on IMDB**
 
 ::: {.slides}
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d18-web-scrape/u2-d18-web-scrape.html#1)
+[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u2-d19-top-250-imdb/u2-d19-top-250-imdb.html#1)
 :::
 
 ::: {.source}
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d18-web-scrape)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d19-top-250-imdb)
+
 :::
 
 ::: {.video}
