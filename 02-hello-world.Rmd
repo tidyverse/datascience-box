@@ -8,6 +8,13 @@ A personal goal of mine is to get students to produce their first data visualiza
 The application exercise in this lecture is one way of achieving this goal.
 Slides for Day One of class are provided below.
 
+Traducao
+Eu recomendo comecar a aula com o pé direito, dedicando mais tempo de aula para introduzir o conteudo do curso ao inves das politicas do curso.
+E fazer os estudantes trabalharem com os dados o mais rapido possivel!
+Um objetivo pessoal meu é fazer com que os estudantes produzam sua primeira visualização de dados nos primeiros 10 minutos de aula.
+A aplicacao dos exercicios nesta aula eh um dos jeitos de alcancar este objetivo.
+Slides para a aula do primeiro dia estão abaixo.
+
 Note that getting students computing on Day One in class requires that they come to class equipped with a laptop or that you're holding your course online or in a computer lab.
 If teaching online, this is resolved automatically, of course.
 They do not need to do any preparation ahead of time, just need internet access.
