@@ -45,6 +45,7 @@ jobs:
       - name: Build site
         run: |
          install.packages("bslib")
+         install.packages("xml2")
          install.packages("downlit")
          bookdown::render_book("index.Rmd", quiet = TRUE)
         shell: Rscript {0}
