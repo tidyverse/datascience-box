@@ -8,7 +8,7 @@ This is best accomplished with a distributed version control system like Git
 This course adopts a top down approach to teaching Git -- students are *required* to use it for *all* assignments.
 These type of tools tend to suffer from delayed gratification as when they are first introduced students view them as a clunky addition to their workflow and it is not until weeks or even months later that they experience the value first hand.
 
-If this section doesn't convince you that you should be using Git and GitHub in your data science course, the section on [alternative setups][alternative_setups] describes how to leverage RStudio Cloud features for assignment dissemination, collection, and providing feedback.
+If this section doesn't convince you that you should be using Git and GitHub in your data science course, Chapter \@ref(alternative-setups) describes how to leverage RStudio Cloud features for assignment dissemination, collection, and providing feedback.
 You can also use your own institution's learning management system for this purpose as well.
 
 ## Git
@@ -54,7 +54,7 @@ In order to comply with Family Educational Rights and Privacy Act (FERPA) requir
 
 Setup and management for larger classes can be challenging due to the sheer number of components, however most actions can be scripted via the GitHub API which can dramatically reduce the course administrative workload.
 Two solutions to this problem are (1) GitHub Classroom and (2) ghclass.
-Use of ghclass, an R package for GitHub classroom tools is detailed below, and use of GitHub classroom is described in the [alternative setups][alternative_setups] section.
+Use of ghclass, an R package for GitHub classroom tools is detailed below, and use of GitHub classroom is described in Chapter \@ref(alternative-setups).
 
 ## ghclass
 
