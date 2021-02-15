@@ -1,4 +1,4 @@
-# Alternative setups {#alternative-setups}
+# Alternative setups {#alternative_setups}
 
 In this section we describe alternative setups for your course.
 
