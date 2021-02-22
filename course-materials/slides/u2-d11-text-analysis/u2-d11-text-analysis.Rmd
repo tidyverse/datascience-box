@@ -296,6 +296,7 @@ sheeran <- artist_albums %>%
 
 .small[
 ```{r echo=FALSE}
+options(htmltools.preserve.raw = FALSE)
 sheeran %>%
   distinct(album, track_title) %>%
   datatable(options = list(dom = "p"))

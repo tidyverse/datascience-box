@@ -86,6 +86,7 @@ glimpse(cat_lovers)
 
 .small[
 ```{r echo=FALSE}
+options(htmltools.preserve.raw = FALSE)
 cat_lovers %>%
   datatable()
 ```

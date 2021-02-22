@@ -428,6 +428,7 @@ imdb_top_250
 ---
 
 ```{r echo=FALSE}
+options(htmltools.preserve.raw = FALSE)
 imdb_top_250 %>% datatable(options(list(dom = "p", pageLength = 8)), height = 400)
 ```
 
