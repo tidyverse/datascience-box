@@ -25,8 +25,6 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
-# countdown
-library(countdown)
 # conflicted
 library(conflicted)
 conflict_prefer("filter", "dplyr")
@@ -57,11 +55,9 @@ knitr::knit_hooks$set(output = function(x, options) {
 ```
 
 layout: true
-  
-<div class="my-footer">
-<span>
-<a href="https://introds.org" target="_blank">introds.org</a>
-</span>
-</div> 
 
----
+::: {.my-footer}
+<a href="https://introds.org" target="_blank">introds.org</a>
+:::
+
+------------------------------------------------------------------------
