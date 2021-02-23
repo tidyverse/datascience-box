@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.3",
+    "Version": "4.0.4",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -33,14 +33,8 @@
     "Matrix": {
       "Package": "Matrix",
       "Version": "1.3-2",
-      "Source": "CRAN",
+      "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "Matrix",
-      "RemoteRef": "Matrix",
-      "RemoteRepos": "https://cran.rstudio.com",
-      "RemotePkgType": "macos",
-      "RemoteSha": "1.3-2",
       "Hash": "ff280503079ad8623d3c4b1519b24ea2"
     },
     "R6": {
@@ -353,10 +347,10 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "0.2.0",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "361811f31f71f8a617a9a68bf63f1f42"
+      "Hash": "3471fb65971f1a7b2d4ae7848cf2db8d"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -512,10 +506,15 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "bc4bac38960b446c183957bfd563e763"
+      "Version": "2.7.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "rmarkdown",
+      "RemoteUsername": "rstudio",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "e4552853aa0ca8a845e2563d97679752b346c80f",
+      "Hash": "e1712b09eadea59b6a49f6913281c18f"
     },
     "rprojroot": {
       "Package": "rprojroot",
@@ -540,8 +539,8 @@
       "RemoteRepo": "rstudioapi",
       "RemoteUsername": "rstudio",
       "RemoteRef": "HEAD",
-      "RemoteSha": "4baeb39146409abc03ba4108be09f7364a26dc31",
-      "Hash": "b857012b9a1d2b428582e608b14d8095"
+      "RemoteSha": "9d21f5063248bc1da2b9ebdddd5f6b6379955922",
+      "Hash": "fb40e48571cfed0cf953d4971ed70a0b"
     },
     "scales": {
       "Package": "scales",
@@ -573,10 +572,10 @@
     },
     "testthat": {
       "Package": "testthat",
-      "Version": "3.0.1",
+      "Version": "3.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "17826764cb92d8b5aae6619896e5a161"
+      "Hash": "495e0434d9305716b6a87031570ce109"
     },
     "tibble": {
       "Package": "tibble",

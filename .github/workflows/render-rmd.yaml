@@ -26,7 +26,7 @@ jobs:
         run: |
          #install.packages(c("rmarkdown", "tidyverse", "renv", "remotes"))
          install.packages(c("rmarkdown", "remotes"))
-         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox", "hadley/emo"))
+         remotes::install_github(c("rundel/checklist", "rstudio-education/dsbox", "hadley/emo", "yihui/xaringan"))
         shell: Rscript {0}
     
       - name: Render R Markdown files
