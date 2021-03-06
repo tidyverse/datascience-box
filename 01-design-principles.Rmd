@@ -27,7 +27,7 @@ Of course, we don't want students feeling like...
 include_graphics(path = "images/design-owl.jpg")
 ```
 
-The course goes starts out slow and emphasizes iteration.
+The course starts out slow and emphasizes iteration.
 Students are initially provided with lots of scaffolding, and then slowly we take away the scaffolding until they are starting with a blank slate for their final projects.
 
 ## Cherish day one
