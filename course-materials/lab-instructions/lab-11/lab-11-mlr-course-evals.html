@@ -33,6 +33,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -138,6 +139,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lab we revisit the professor evaluations data we modelled in the previous lab. In the last lab we modelled evaluation scores using a single predictor at a time. This time we will use multiple predictors to model evaluation scores.</p>
 <p>For context, review the previous lab’s introduction before continuing on to the exercises.</p>
+<div id="learning-goals" class="section level1">
+<h1>Learning goals</h1>
+<ul>
+<li>Fitting a linear regression with multiple predictors</li>
+<li>Interpreting regression output in context of the data</li>
+<li>Comparing models</li>
+</ul>
+</div>
 <div id="getting-started" class="section level1">
 <h1>Getting started</h1>
 <p>Go to the course GitHub organization and locate your homework repo, clone it in RStudio and open the R Markdown document. Knit the document to make sure it compiles without errors.</p>
@@ -154,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>The data can be found in the <strong>dsbox</strong> package, and it’s called <code>evals</code>. Since the dataset is distributed with the package, we don’t need to load it separately; it becomes available to us when we load the package. You can find out more about the dataset by inspecting its documentation, which you can access by running <code>?evals</code> in the Console or using the Help menu in RStudio to search for <code>evals</code>. You can also find this information <a href="https://rstudio-education.github.io/dsbox/reference/evals.html">here</a>.</p>
+<p>The data can be found in the <strong>openintro</strong> package, and it’s called <code>evals</code>. Since the dataset is distributed with the package, we don’t need to load it separately; it becomes available to us when we load the package. You can find out more about the dataset by inspecting its documentation, which you can access by running <code>?evals</code> in the Console or using the Help menu in RStudio to search for <code>evals</code>. You can also find this information <a href="https://www.openintro.org/data/index.php?data=evals">here</a>.</p>
 </div>
 </div>
 <div id="exercises" class="section level1">

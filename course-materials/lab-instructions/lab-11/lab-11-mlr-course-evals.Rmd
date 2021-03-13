@@ -52,10 +52,10 @@ library(openintro)
 
 ## Data
 
-The data can be found in the **dsbox** package, and it's called `evals`.
+The data can be found in the **openintro** package, and it's called `evals`.
 Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
 You can find out more about the dataset by inspecting its documentation, which you can access by running `?evals` in the Console or using the Help menu in RStudio to search for `evals`.
-You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/evals.html).
+You can also find this information [here](https://www.openintro.org/data/index.php?data=evals).
 
 # Exercises
 
