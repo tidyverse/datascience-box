@@ -57,10 +57,10 @@ library(openintro)
 
 ## Data
 
-The data can be found in the **dsbox** package, and it's called `evals`.
+The data can be found in the **dsbox** package, and it's called `instructors`.
 Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
-You can find out more about the dataset by inspecting its documentation, which you can access by running `?evals` in the Console or using the Help menu in RStudio to search for `evals`.
-You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/evals.html).
+You can find out more about the dataset by inspecting its documentation, which you can access by running `?instructors` in the Console or using the Help menu in RStudio to search for `instructors`.
+You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/instructors.html).
 
 # Exercises
 
@@ -79,7 +79,7 @@ You can also find this information [here](https://rstudio-education.github.io/ds
 **Hint:** See the help page for the function at http://ggplot2.tidyverse.org/reference/index.html.
 ```
 
-3.  Recreate the scatterplot from Exercise 3, but this time use\
+3.  Recreate the scatterplot from Exercise 2, but this time use\
     `geom_jitter()`? What does "jitter" mean? What was misleading about the initial scatterplot?
 
 🧶 ✅ ⬆️ *If you haven't done so recently, knit, commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
@@ -94,7 +94,7 @@ Linear model is in the form $\hat{y} = b_0 + b_1 x$.
     Fit a linear model called `score_bty_fit` to predict average professor evaluation `score` by average beauty rating (`bty_avg`).
     Based on the regression output, write the linear model.
 
-5.  Recreate the scatterplot from Exercise 3, and add the regression line to this plot in orange colour, with shading for the uncertainty of the line turned off.
+5.  Recreate the scatterplot from Exercise 2, and add the regression line to this plot in orange colour, with shading for the uncertainty of the line turned off.
 
 6.  Interpret the slope of the linear model in context of the data.
 
@@ -119,7 +119,7 @@ Linear model is in the form $\hat{y} = b_0 + b_1 x$.
 12. Create a new variable called `rank_relevel` where `"tenure track"` is the baseline level.
 
 13. Fit a new linear model called `score_bty_rank_relevel` to predict average professor evaluation `score` based on `rank_relevel` of the professor.
-    This is the new (releveled) variable you created in Exercise 13.
+    This is the new (releveled) variable you created in Exercise 12.
     Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
     Also determine and interpret the $R^2$ of the model.
 

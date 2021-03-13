@@ -33,6 +33,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -163,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>The data can be found in the <strong>dsbox</strong> package, and it’s called <code>evals</code>. Since the dataset is distributed with the package, we don’t need to load it separately; it becomes available to us when we load the package. You can find out more about the dataset by inspecting its documentation, which you can access by running <code>?evals</code> in the Console or using the Help menu in RStudio to search for <code>evals</code>. You can also find this information <a href="https://rstudio-education.github.io/dsbox/reference/evals.html">here</a>.</p>
+<p>The data can be found in the <strong>dsbox</strong> package, and it’s called <code>instructors</code>. Since the dataset is distributed with the package, we don’t need to load it separately; it becomes available to us when we load the package. You can find out more about the dataset by inspecting its documentation, which you can access by running <code>?instructors</code> in the Console or using the Help menu in RStudio to search for <code>instructors</code>. You can also find this information <a href="https://rstudio-education.github.io/dsbox/reference/instructors.html">here</a>.</p>
 </div>
 </div>
 <div id="exercises" class="section level1">
@@ -176,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> See the help page for the function at <a href="http://ggplot2.tidyverse.org/reference/index.html" class="uri">http://ggplot2.tidyverse.org/reference/index.html</a>.</span></span></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Recreate the scatterplot from Exercise 3, but this time use<br />
+<li>Recreate the scatterplot from Exercise 2, but this time use<br />
 <code>geom_jitter()</code>? What does “jitter” mean? What was misleading about the initial scatterplot?</li>
 </ol>
 <p>🧶 ✅ ⬆️ <em>If you haven’t done so recently, knit, commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
@@ -186,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;">Linear model is in the form <span class="math inline"><span class="math inline">\(\hat{y} = b_0 + b_1 x\)</span></span>.</span></span></p>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Let’s see if the apparent trend in the plot is something more than natural variation. Fit a linear model called <code>score_bty_fit</code> to predict average professor evaluation <code>score</code> by average beauty rating (<code>bty_avg</code>). Based on the regression output, write the linear model.</p></li>
-<li><p>Recreate the scatterplot from Exercise 3, and add the regression line to this plot in orange colour, with shading for the uncertainty of the line turned off.</p></li>
+<li><p>Recreate the scatterplot from Exercise 2, and add the regression line to this plot in orange colour, with shading for the uncertainty of the line turned off.</p></li>
 <li><p>Interpret the slope of the linear model in context of the data.</p></li>
 <li><p>Interpret the intercept of the linear model in context of the data. Comment on whether or not the intercept makes sense in this context.</p></li>
 <li><p>Determine the <span class="math inline">\(R^2\)</span> of the model and interpret it in context of the data.</p></li>
@@ -200,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>What is the equation of the line corresponding to male professors? What is it for female professors?</p></li>
 <li><p>Fit a new linear model called <code>score_bty_rank</code> to predict average professor evaluation <code>score</code> based on <code>rank</code> of the professor. Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.</p></li>
 <li><p>Create a new variable called <code>rank_relevel</code> where <code>&quot;tenure track&quot;</code> is the baseline level.</p></li>
-<li><p>Fit a new linear model called <code>score_bty_rank_relevel</code> to predict average professor evaluation <code>score</code> based on <code>rank_relevel</code> of the professor. This is the new (releveled) variable you created in Exercise 13. Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data. Also determine and interpret the <span class="math inline">\(R^2\)</span> of the model.</p></li>
+<li><p>Fit a new linear model called <code>score_bty_rank_relevel</code> to predict average professor evaluation <code>score</code> based on <code>rank_relevel</code> of the professor. This is the new (releveled) variable you created in Exercise 12. Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data. Also determine and interpret the <span class="math inline">\(R^2\)</span> of the model.</p></li>
 <li><p>Create another new variable called <code>tenure_eligible</code> that labels <code>&quot;teaching&quot;</code> faculty as <code>&quot;no&quot;</code> and labels <code>&quot;tenure track&quot;</code> and <code>&quot;tenured&quot;</code> faculty as <code>&quot;yes&quot;</code>.</p></li>
 <li><p>Fit a new linear model called <code>score_bty_tenure_eligible</code> to predict average professor evaluation <code>score</code> based on <code>tenure_eligible</code>ness of the professor. This is the new (regrouped) variable you created in the previous exercise. Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data. Also determine and interpret the <span class="math inline">\(R^2\)</span> of the model.</p></li>
 </ol>
