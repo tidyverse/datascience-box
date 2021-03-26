@@ -55,9 +55,11 @@ knitr::knit_hooks$set(output = function(x, options) {
 ```
 
 layout: true
+  
+<div class="my-footer">
+<span>
+<a href="https://datasciencebox.org" target="_blank">datasciencebox.org</a>
+</span>
+</div> 
 
-::: {.my-footer}
-<a href="https://introds.org" target="_blank">introds.org</a>
-:::
-
-------------------------------------------------------------------------
+---

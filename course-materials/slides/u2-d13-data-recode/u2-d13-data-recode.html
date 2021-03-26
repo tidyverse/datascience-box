@@ -30,7 +30,7 @@ layout: true
   
 &lt;div class="my-footer"&gt;
 &lt;span&gt;
-&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
 &lt;/span&gt;
 &lt;/div&gt; 
 
@@ -64,17 +64,17 @@ rel_inc &lt;- read_excel("data/relig-income.xlsx")
 
 ```
 ## # A tibble: 12 x 6
-##   `Religious trad… `Less than $30,… `$30,000-$49,99…
-##   &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Buddhist                     0.36             0.18
-## 2 Catholic                     0.36             0.19
-## 3 Evangelical Pro…             0.35             0.22
-## 4 Hindu                        0.17             0.13
-## 5 Historically Bl…             0.53             0.22
-## 6 Jehovah's Witne…             0.48             0.25
+##   `Religious tradition`      `Less than $30,000` `$30,000-$49,99…
+##   &lt;chr&gt;                                    &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Buddhist                                  0.36             0.18
+## 2 Catholic                                  0.36             0.19
+## 3 Evangelical Protestant                    0.35             0.22
+## 4 Hindu                                     0.17             0.13
+## 5 Historically Black Protes…                0.53             0.22
+## 6 Jehovah's Witness                         0.48             0.25
 ## # … with 6 more rows, and 3 more variables:
-## #   `$50,000-$99,999` &lt;dbl&gt;, `$100,000 or more` &lt;dbl&gt;, `Sample
-## #   Size` &lt;dbl&gt;
+## #   $50,000-$99,999 &lt;dbl&gt;, $100,000 or more &lt;dbl&gt;,
+## #   Sample Size &lt;dbl&gt;
 ```
 ]
 
@@ -94,16 +94,16 @@ rel_inc %&gt;%
 
 ```
 ## # A tibble: 12 x 6
-##   religion `Less than $30,… `$30,000-$49,99… `$50,000-$99,99…
-##   &lt;chr&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Buddhist             0.36             0.18             0.32
-## 2 Catholic             0.36             0.19             0.26
-## 3 Evangel…             0.35             0.22             0.28
-## 4 Hindu                0.17             0.13             0.34
-## 5 Histori…             0.53             0.22             0.17
-## 6 Jehovah…             0.48             0.25             0.22
-## # … with 6 more rows, and 2 more variables: `$100,000 or
-## #   more` &lt;dbl&gt;, n &lt;dbl&gt;
+##   religion     `Less than $30,… `$30,000-$49,99… `$50,000-$99,99…
+##   &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Buddhist                 0.36             0.18             0.32
+## 2 Catholic                 0.36             0.19             0.26
+## 3 Evangelical…             0.35             0.22             0.28
+## 4 Hindu                    0.17             0.13             0.34
+## 5 Historicall…             0.53             0.22             0.17
+## 6 Jehovah's W…             0.48             0.25             0.22
+## # … with 6 more rows, and 2 more variables:
+## #   $100,000 or more &lt;dbl&gt;, n &lt;dbl&gt;
 ```
 ]
 
