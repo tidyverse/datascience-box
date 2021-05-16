@@ -35,7 +35,7 @@ scores <- page %>%
 
 imdb_top_250 <- tibble(
   title = titles,
-  rating = ratings,
+  rating = scores,
   year = years
 )
 
