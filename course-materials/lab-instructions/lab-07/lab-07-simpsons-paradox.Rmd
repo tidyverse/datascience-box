@@ -1,5 +1,5 @@
 ---
-title: "Lab 05 - Smokers in Whickham"
+title: "Lab 07 - Smokers in Whickham"
 subtitle: "Simpson's paradox"
 output: 
   tufte::tufte_html:
