@@ -15,7 +15,7 @@ The course content is organized in five units:
 
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
-|1|Wk 1|W|Sept 1|[Welcome to data science!](../course-materials/slides/u1-d01-welcome/u1-d01-welcome.html)|Lecture| |
+|1|Wk 1|W|Sept 1|[Welcome to data science!](/slides/u1-d01-welcome/u1-d01-welcome.html)|Lecture| |
 |1|Wk 1|F|Sept 3|Meet the toolkit: Programming|Lecture| |
 |1|Wk 1|F|Sept 3|Meet the toolkit: Version control & collaboration|Lecture| |
 |1|Wk 2|M|Sept 6|Hello R|Lab| |
