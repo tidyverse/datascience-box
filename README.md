@@ -6,7 +6,7 @@ This course comes from the [datasciencebox.org](https://datasciencebox.org/) pro
 
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
-|1|1|W|Sept 1|[Welcome to data science!](u1-d01-welcome)|Lecture| |
+|1|1|W|Sept 1|[Welcome to data science!](course-materials/slides/u1-d01-welcome)|Lecture| |
 |1|1|F|Sept 3|Meet the toolkit: Programming|Lecture| |
 |1|1|F|Sept 3|Meet the toolkit: Version control & collaboration|Lecture| |
 |1|2|M|Sept 6|Hello R|Lab| |
