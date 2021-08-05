@@ -6,11 +6,11 @@ This course comes from the [datasciencebox.org](https://datasciencebox.org/) pro
 
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
-|1|1|W|Sept 1|Welcome to data science!|Lecture| |
+|1|1|W|Sept 1|[Welcome to data science!](u1-d01-welcome)|Lecture| |
 |1|1|F|Sept 3|Meet the toolkit: Programming|Lecture| |
 |1|1|F|Sept 3|Meet the toolkit: Version control & collaboration|Lecture| |
 |1|2|M|Sept 6|Hello R|Lab| |
-|1|2|M|Sept 6|Pet names|**Homework**|F, Sept 10|**
+|1|2|M|Sept 6|Pet names|**Homework**|F: Sept 10|
 |2|2|W|Sept 8|Data and visualisation|Lecture| |
 |2|2|W|Sept 8|Visualising data with ggplot2|Lecture| |
 |2|2|F|Sept 10|Visualising numerical data|Lecture| |
@@ -83,7 +83,7 @@ This course comes from the [datasciencebox.org](https://datasciencebox.org/) pro
 |5|13|F|Dec 3|Project presentations|Lab| |
 |5|13|TBD|TBD|Final Exam|Exam| |
 | | | | | | | |
-
+*M: Monday, W: Wednesday, F: Friday
 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/faea2121-c6bb-4355-bbf4-d5afb9dd0224/deploy-status)](https://app.netlify.com/sites/datasciencebox/deploys)
