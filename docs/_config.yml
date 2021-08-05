@@ -2,5 +2,6 @@ theme: jekyll-theme-slate
 title: DCS 210 Programming for Data Analysis and Visualization
 name: DCS 210 Programming for Data Analysis and Visualization
 description: Bates College Fall 2021
-url: https://laurielbaker.github.io/DCS-210
+url: https://laurielbaker.github.io
+baseurl: /DCS-210
 markdown: GFM
