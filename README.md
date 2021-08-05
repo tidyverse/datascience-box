@@ -3,6 +3,7 @@
 Hello and welcome to **DCS 210. Programming for Data Analysis and Visualisation**. This course will introduce students to data analysis and visualization with R. As an introduction to programming course, everyone is welcome. By the end of the course students will be able to gain insight from data, reproducibly (with literate programming and version control) and collaboratively, using modern programming tools and techniques.
 
 This course comes from the [datasciencebox.org](https://datasciencebox.org/) project which is released under a [Creative Commons Attribution Share Alike 4.0 International](LICENSE.md) license.
+
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
 |1|1|W|Sept 1|Welcome to data science!|Lecture| |
