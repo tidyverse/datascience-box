@@ -10,20 +10,38 @@ The course content is organized in five units:
 - **Unit 4 - Making rigorous conclusions:** In this unit we introduce modelling and statistical inference for making data-based conclusions. We discuss building, interpreting, and selecting models, visualizing interaction effects, and prediction and model validation. Statistical inference is introduced from a simulation based perspective, and the Central Limit Theorem is discussed very briefly to lay the foundation for future coursework in statistics.
 - **Unit 5 - Looking forward:** In the last unit we will explore a series of short modules. These will be chosen by you and could include modules such as interactive reporting and visualization with Shiny, text analysis, creating maps, and machine learning. 
 
+## Class Schedule
+
+This class meets Monday, Wednesday, and Friday from 2.40-4 in Rm X.
+
+**Mondays:**
+- Lab, or occasional lecture.
+- Weekly homework assigned due on Friday
+
+**Wednesdays:**
+- Lecture or Application Exercises
+
+**Fridays:**
+- Homework due.
+- Lecture.
+
 ## DCS Values, Goals, and Practices
 
 The primary purpose of Digital and Computational Studies is to bridge the liberal arts education to computing and the digital world.  In this, we are committed to actively creating digital and computational spaces that are radically inclusive. Our core commitment is to integrating equity and social justice throughout our curriculum, and engaging students in metacognition to support this work. Digital and Computational Studies Courses fall into a continuum of experiences that range from critical digital studies to programming, with an integrated core that embraces both.  Programming for Data Analysis and Visualization is an Integrated course. See the [DCS website](https://www.bates.edu/digital-computational-studies/values-goals-and-practices/) for details on DCS values, goals, and practices.
 
 ## Learning Objectives (Draft)
 This course is designed as a community learning journey. Together, we will:
+
 - Play with computational ideas creatively, using a growth mindset which values revision and experimentation and demonstrate community leadership skills as a collaborator that shares strengths, builds weaknesses, and contributes to a broader shared understanding. (Participate in teamwork in respectful ways that allow people to relax and play with ideas).
 - Recognize and translate between algebraic, numeric, visual, and verbal representations of data. 
 - Design models of and computationally investigate ideas in practical and professional spaces through and communicate the process and meaning to others.
 
 ## Course Materials required: 
 
-### Books: All books for this course are freely available online as e-books. We will be using two main texts:
-- [R for Data Science]( by Garrett Grolemund and Hadley Wickham
+### Books:
+
+All books for this course are freely available online as e-books. We will be using two main texts:
+- [R for Data Science](https://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham
 - [Introduction to Modern Statistics](https://openintro-ims.netlify.app/) by Mine Çetinkaya-Rundel and Johanna Hardin. 
 
 ### Technology:
@@ -51,7 +69,7 @@ If you anticipate or experience any barriers to learning in this course, please 
  
 The college prohibits discrimination on the basis of race, color, national or ethnic origin, religion, sex, sexual orientation, gender identity or gender expression, age, disability, genetic information or veteran status and other legally protected statuses in the recruitment and admission of its students, in the administration of its education policies and programs, or in the recruitment of its faculty and staff. Bates College adheres to all applicable state and federal equal opportunity laws and regulations. Violations of this policy can be reported to [Gwen Lexow](https://www.bates.edu/faculty-expertise/profile/gwen-l-lexow/), Director of Title IX and Civil Rights Compliance or through the Bates website: [www.bates.edu/sexual-respect/non-discrimination-policy/](www.bates.edu/sexual-respect/non-discrimination-policy/)
 
-## Tentative Course Schedule
+## Course Schedule
 
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
