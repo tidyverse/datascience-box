@@ -4,6 +4,8 @@ Hello and welcome to **DCS 210. Programming for Data Analysis and Visualisation*
 
 This course comes from the [datasciencebox.org](https://datasciencebox.org/) project which is released under a [Creative Commons Attribution Share Alike 4.0 International](LICENSE.md) license.
 
+## Course Schedule
+
 |Unit|Week|Day|Date|Title|Type|Due Date|
 |:----|:----|:----|:----|:----|:----|:----|
 |1|1|W|Sept 1|[Welcome to data science!](course-materials/slides/u1-d01-welcome/u1-d01-welcome.html)|Lecture| |
