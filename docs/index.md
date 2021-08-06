@@ -1,4 +1,5 @@
 ## Course Description
+
 Hello and welcome to **DCS 210. Programming for Data Analysis and Visualisation**. This course will introduce students to data analysis and visualization with R. As an introduction to programming course, everyone is welcome. By the end of the course students will be able to gain insight from data, reproducibly (with literate programming and version control) and collaboratively, using modern programming tools and techniques.
 
 The course content is organized in five units:
@@ -13,22 +14,20 @@ The course content is organized in five units:
 
 The primary purpose of Digital and Computational Studies is to bridge the liberal arts education to computing and the digital world.  In this, we are committed to actively creating digital and computational spaces that are radically inclusive. Our core commitment is to integrating equity and social justice throughout our curriculum, and engaging students in metacognition to support this work. Digital and Computational Studies Courses fall into a continuum of experiences that range from critical digital studies to programming, with an integrated core that embraces both.  Programming for Data Analysis and Visualization is an Integrated course. See the [DCS website](https://www.bates.edu/digital-computational-studies/values-goals-and-practices/) for details on DCS values, goals, and practices.
 
-## Learning Objectives
-(Draft)
-This course is designed as a community learning journey
-Together, we will:
+## Learning Objectives (Draft)
+This course is designed as a community learning journey. Together, we will:
 - Play with computational ideas creatively, using a growth mindset which values revision and experimentation and demonstrate community leadership skills as a collaborator that shares strengths, builds weaknesses, and contributes to a broader shared understanding. (Participate in teamwork in respectful ways that allow people to relax and play with ideas).
 - Recognize and translate between algebraic, numeric, visual, and verbal representations of data. 
 - Design models of and computationally investigate ideas in practical and professional spaces through and communicate the process and meaning to others.
 
 ## Course Materials required: 
 
-Books: All books for this course are freely available online as e-books. We will be using two main texts:
+### Books: All books for this course are freely available online as e-books. We will be using two main texts:
 - [R for Data Science]( by Garrett Grolemund and Hadley Wickham
 - [Introduction to Modern Statistics](https://openintro-ims.netlify.app/) by Mine Çetinkaya-Rundel and Johanna Hardin. 
 
-## Technology and texts: 
-- Bring a laptop to every class, we will be programming most days! We will initially be using RStudioCloud. If you have any difficulties with accessing one, let me know, or feel free to borrow a chrome book from the library. 
+### Technology:
+- Bring a laptop to every class, we will be programming most days! We will initially be using RStudioCloud, you will get an invitation to create an account. If you have any difficulties with accessing one, let me know, or feel free to borrow a chrome book from the library. 
 - Later on in the course when you're doing your group projects you may you want to install R and RStudio on your laptop.
 
 ## Grade: 
@@ -37,6 +36,7 @@ Books: All books for this course are freely available online as e-books. We will
 - 20% Final Project 
 - 10% Final Project Presentation
 - 10% Final Exam
+
 *Tutoring in the local school and completing a reflect can count for 5% credit on the course. This credit can be counted in place of a homework assignment. 
 
 Lower bound percent earned for letter grade:
