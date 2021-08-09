@@ -19,6 +19,7 @@ output:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(emo)
+packageVersion("xaringan")
 ```
 
 class: middle
