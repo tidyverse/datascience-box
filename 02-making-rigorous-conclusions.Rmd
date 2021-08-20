@@ -45,7 +45,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: {.reading}
-IMS :: [Chp 3 - Introduction to linear models](https://openintro-ims.netlify.app/intro-linear-models.html)
+IMS :: [Chp 7 - Linear regression with a single predictor](https://openintro-ims.netlify.app/model-slr.html)
 :::
 :::
 
@@ -81,7 +81,7 @@ IMS :: [Chp 3 - Introduction to linear models](https://openintro-ims.netlify.app
 :::
 
 ::: {.reading}
-IMS :: [Sec 4.1 - Regression with multiple predictors](https://openintro-ims.netlify.app/multi-logistic-models.html#regression-multiple-predictors)
+IMS :: [Chp 8 - Linear regression with multiple predictors](https://openintro-ims.netlify.app/model-mlr.html)
 :::
 :::
 
@@ -119,7 +119,7 @@ IMS :: [Sec 4.1 - Regression with multiple predictors](https://openintro-ims.net
 :::
 
 ::: {.reading}
-IMS :: [Sec 4.5 - Logistic regression](https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression)
+IMS :: [Chp 9 - Logistic regression](https://openintro-ims.netlify.app/model-logistic.html)
 :::
 :::
 
@@ -243,7 +243,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 :::
 
 ::: {.reading}
-IMS :: [Sec 5.2 - Bootstrap confidence intervals](https://openintro-ims.netlify.app/intro-stat-inference.html#boot-ci)
+IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.netlify.app/foundations-bootstrapping.html)
 :::
 :::
 
@@ -259,7 +259,7 @@ IMS :: [Sec 5.2 - Bootstrap confidence intervals](https://openintro-ims.netlify.
 :::
 
 ::: {.reading}
-[IMS :: Sec 5.1 - Randomization tests](https://openintro-ims.netlify.app/intro-stat-inference.html#inf-rand)
+[IMS :: Chp 11 - Hypothesis testing with randomization](https://openintro-ims.netlify.app/foundations-randomization.html)
 :::
 :::
 
