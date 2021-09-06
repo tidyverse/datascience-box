@@ -1,6 +1,6 @@
 ---
 title: "HW 01 - Pet names"
-subtitle: "Mett the toolkit"
+subtitle: "Meet the toolkit"
 output: 
   tufte::tufte_html:
     css: ../hw.css
