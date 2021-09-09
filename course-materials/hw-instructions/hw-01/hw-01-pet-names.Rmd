@@ -151,7 +151,7 @@ knitr::include_graphics("img/yaml-raw-to-rendered.png")
 
 Then Go to the **Git pane** in your RStudio.
 
-You should see that your Rmd (R Markdown) file and its output, your md file (Markdown), file are listed there as recently changed files.
+You should see that your Rmd (R Markdown) file and its output, your md file (Markdown), are listed there as recently changed files.
 
 Next, click on **Diff**.
 This will pop open a new window that shows you the **diff**erence between the last committed state of the document and its current state that includes your changes.
@@ -202,7 +202,7 @@ You should also load these packages in your Console, which you can do by sending
 knitr::include_graphics("img/load-packages-chunk.png")
 ```
 
-Note that these packages are also get loaded in your R Markdown environment when you **Knit** your R Markdown document.
+Note that these packages also get loaded in your R Markdown environment when you **Knit** your R Markdown document.
 
 # Data
 
@@ -233,12 +233,12 @@ You can find out more about the dataset by inspecting its documentation (which c
 
 2.  Again, according to the data dictionary, how many variables do we have for each pet?
 
-🧶 ✅ ⬆️ *Write your answer in your R Markdown document under Exercise 1, knit the document, commit your changes with a commit message that says "Completed Exercise 2", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ *Write your answer in your R Markdown document under Exercise 2, knit the document, commit your changes with a commit message that says "Completed Exercise 2", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 3.  What are the three most common pet names in Seattle? To do this you will need to count the frequencies of each pet name and display the results in descending order of frequency so that you can easily see the top three most popular names. The following code does exactly that.
 
 ```{marginfigure}
-The two lines of code can be read as "Start with the seattlepets data frame, and then count the animal_names, and display the results sorted in descending order. The "and then" in the previous sentence maps to %>%, the pipe operator, which takes what comes before it and plugs it in as the first argument of the function that comes after it.
+The two lines of code can be read as "Start with the seattlepets data frame, and then count the animal_names, and display the results sorted in descending order. The 'and then' in the previous sentence maps to %>%, the pipe operator, which takes what comes before it and plugs it in as the first argument of the function that comes after it."
 ```
 
 ```{r}
