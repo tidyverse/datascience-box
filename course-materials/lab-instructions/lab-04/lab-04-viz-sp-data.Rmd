@@ -67,7 +67,6 @@ library(dsbox)
 The datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
 Note that these data were scraped from [here](https://locations.dennys.com/) and [here](https://www.lq.com/en/findandbook/hotel-listings.html), respectively.
 
-The datasets we'll use are called `dennys` and `laquinta` from the **dsbox** package.
 Since the datasets are distributed with the package, we don't need to load them separately; they become available to us when we load the package.
 You can find out more about the datasets by inspecting their documentation, which you can access by running `?dennys` and `?laquinta` in the Console or using the Help menu in RStudio to search for `dennys` or `laquinta`.
 You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/dennys.html) and [here](https://rstudio-education.github.io/dsbox/reference/laquinta.html).
@@ -105,7 +104,7 @@ We would like to limit our analysis to Denny's and La Quinta locations in the Un
     Don't worry about whether you know how to implement this, just brainstorm some ideas.
     Write down at least one as your answer, but you're welcomed to write down a few options too.
 
-We will determine whether or not the establishment has a location outside the US using the `state` variable in the `dn` and `lq` datasets.
+We will determine whether or not the establishment has a location outside the US using the `state` variable in the `dennys` and `laquinta` datasets.
 We know exactly which states are in the US, and we have this information in the `states` dataframe we loaded.
 
 5.  Find the Denny's locations that are outside the US, if any. To do so, filter the Denny's locations for observations where `state` is not in `states$abbreviation`. The code for this is given below. Note that the `%in%` operator matches the states listed in the `state` variable to those listed in `states$abbreviation`. The `!` operator means **not**. Are there any Denny's locations outside the US?
@@ -115,18 +114,18 @@ We know exactly which states are in the US, and we have this information in the 
 ```
 
 ```{r}
-dn %>%
+dennys %>%
   filter(!(state %in% states$abbreviation))
 ```
 
-6.  Add a country variable to the Denny's dataset and set all observations equal to `"United States"`. Remember, you can use the `mutate` function for adding a variable. Make sure to save the result of this as `dn` again so that the stored data frame contains the new variable going forward.
+6.  Add a country variable to the Denny's dataset and set all observations equal to `"United States"`. Remember, you can use the `mutate` function for adding a variable. Make sure to save the result of this as `dennys` again so that the stored data frame contains the new variable going forward.
 
 ```{marginfigure}
 We don't need to tell R how many times to repeat the character string "United States" to fill in the data for all observations, R takes care of that automatically.
 ```
 
 ```{r}
-dn %>%
+dennys %>%
   mutate(country = "United States")
 ```
 
@@ -140,7 +139,7 @@ dn %>%
     Here is some starter code to get you going:
 
 ```{r eval = FALSE}
-lq %>%
+laquinta %>%
   mutate(country = case_when(
     state %in% state.abb     ~ "United States",
     state %in% c("ON", "BC") ~ "Canada",
@@ -156,14 +155,14 @@ All Denny's locations are in the United States, so we don't need to worry about 
 However we do need to filter the La Quinta dataset for locations in United States.
 
 ```{r}
-lq <- lq %>%
+laquinta <- laquinta %>%
   filter(country == "United States")
 ```
 
 9.  Which states have the most and fewest Denny's locations? What about La Quinta? Is this surprising? Why or why not?
 
 Next, let's calculate which states have the most Denny's locations *per thousand square miles*.
-This requires *joinining* information from the frequency tables you created in Exercise 8 with information from the `states` data frame.
+This requires *joining* information from the frequency tables you created in Exercise 8 with information from the `states` data frame.
 
 First, we count how many observations are in each state, which will give us a data frame with two variables: `state` and `n`.
 Then, we join this data frame with the `states` data frame.
@@ -171,7 +170,7 @@ However note that the variables in the `states` data frame that has the two-lett
 So when we're joining the two data frames we specify that the `state` variable from the Denny's data should be matched `by` the `abbreviation` variable from the `states` data:
 
 ```{r}
-dn %>%
+dennys %>%
   count(state) %>%
   inner_join(states, by = c("state" = "abbreviation"))
 ```
@@ -183,19 +182,19 @@ In the next exercise you will need to build on this pipe.
 
 Next, we put the two datasets together into a single data frame.
 However before we do so, we need to add an identifier variable.
-We'll call this `establishment` and set the value to `"Denny's"` and `"La Quinta"` for the `dn` and `lq` data frames, respectively.
+We'll call this `establishment` and set the value to `"Denny's"` and `"La Quinta"` for the `dennys` and `laquinta` data frames, respectively.
 
 ```{r}
-dn <- dn %>%
+dennys <- dennys %>%
   mutate(establishment = "Denny's")
-lq <- lq %>%
+laquinta <- laquinta %>%
   mutate(establishment = "La Quinta")
 ```
 
 Since the two data frames have the same columns, we can easily bind them with the `bind_rows` function:
 
 ```{r}
-dn_lq <- bind_rows(dn, lq)
+dn_lq <- bind_rows(dennys, laquinta)
 ```
 
 We can plot the locations of the two establishments using a scatter plot, and color the points by the establishment type.
