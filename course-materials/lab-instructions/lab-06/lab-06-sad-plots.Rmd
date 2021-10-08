@@ -106,7 +106,7 @@ pivot_longer(data, cols, names_to = "name")
 ```{r}
 staff_long <- staff %>%
   pivot_longer(cols = -faculty_type, names_to = "year") %>%
-  mutate(value = as.numeric(value))
+  mutate(year = as.numeric(year))
 ```
 
 Let's take a look at what the new longer data frame looks like.
