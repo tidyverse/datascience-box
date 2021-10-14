@@ -16,90 +16,90 @@ There are two options for a day one application exercise.
 Note that one of them uses COVID-19 data and depending on where, when, and to whom you're teaching, working with these data might not be the most pleasant experience for all students.
 Please make sure to consider this before using this activity.
 
-::: {.rstudio-cloud}
+::: rstudio-cloud
 The RStudio Cloud workspace for Data Science Course in a Box project is [here](https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK).
 You can join the workspace and play around with the sample application exercises.
 :::
 
 ## Slides, videos, and application exercises
 
-::: {.slide-deck}
+::: slide-deck
 **Unit 1 - Deck 1: Welcome**
 
-::: {.slides}
+::: slides
 [Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d01-welcome/u1-d01-welcome.html#1)
 :::
 
-::: {.source}
+::: source
 [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d01-welcome)
 :::
 
-::: {.video}
+::: video
 [Video](https://youtu.be/OJ1xR0ObhIw)
 :::
 :::
 
-::: {.application-exercise}
+::: application-exercise
 **First dataviz**
 
 > **Option 1 - UN Votes**
 >
-> ::: {.source}
+> ::: source
 > [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-01a-un-votes/unvotes.Rmd)
 > :::
 >
-> ::: {.video}
+> ::: video
 > [Video](https://youtu.be/r-uTBEclM1E)
 > :::
 
 > **Option 2 - COVID-19**
 >
-> ::: {.source}
+> ::: source
 > [Source](https://github.com/rstudio-education/datascience-box/blob/master/course-materials/application-exercises/ae-01b-covid/covid.Rmd)
 > :::
 :::
 
-::: {.slide-deck}
+::: slide-deck
 **Unit 1 - Deck 2: Meet the toolkit - Programming**
 
-::: {.slides}
+::: slides
 [Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d02-toolkit-r/u1-d02-toolkit-r.html#1)
 :::
 
-::: {.source}
+::: source
 [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d02-toolkit-r)
 :::
 
-::: {.video}
+::: video
 [Video](https://youtu.be/mTAZLFcpnLI)
 :::
 
-::: {.reading}
+::: reading
 -   R4DS :: [Chp 2 - Introduction](https://r4ds.had.co.nz/explore-intro.html)
--   IMS :: [Chp 1 - Hello data](https://openintro-ims.netlify.app/data-hello.html)
+-   IMS :: [Sec 1.1 & 1.2 - Case study & Data basics](https://openintro-ims.netlify.app/data-hello.html)
 :::
 :::
 
-::: {.application-exercise}
+::: application-exercise
 **Bechdel + R Markdown**
 
-::: {.source}
+::: source
 [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/bechdel.Rmd)
 :::
 :::
 
-::: {.slide-deck}
+::: slide-deck
 **Unit 1 - Deck 3: Meet the toolkit - Version control and collaboration**
 
-::: {.slides}
+::: slides
 [Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d03-toolkit-git/u1-d03-toolkit-git.html#1)
 :::
 
-::: {.source}
+::: source
 [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d03-toolkit-git)
 :::
 
-::: {.video}
+::: video
 [Video](https://youtu.be/124DQasLyNQ)
 :::
 :::
