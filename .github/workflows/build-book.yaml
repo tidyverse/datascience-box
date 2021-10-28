@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore: 
     - 'course-materials/**'  
 
