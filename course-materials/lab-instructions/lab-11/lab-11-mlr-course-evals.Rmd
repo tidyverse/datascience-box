@@ -69,7 +69,7 @@ You can also find this information [here](https://www.openintro.org/data/index.p
 
 ## Multiple linear regression
 
-3.  Fit a linear model (one you have fit before): `score_bty_gender_fit`, predicting average professor evaluation `score` based on average beauty rating (`bty_avg`) and `gender`.
+3.  Fit a linear model (one you have fit before): `score_bty_gen_fit`, predicting average professor evaluation `score` based on average beauty rating (`bty_avg`) and `gender`.
     Write the linear model, and note the $R^2$ and the adjusted $R^2$.
 
 4.  Interpret the slopes and intercept of `score_bty_gen_fit` in context of the data.
@@ -83,7 +83,7 @@ You can also find this information [here](https://www.openintro.org/data/index.p
 8.  How does the relationship between beauty and evaluation score vary between male and female professors?
 
 9.  How do the adjusted $R^2$ values of `score_bty_gen_fit` and `score_bty_fit` compare?
-    What does this tell us about how useful `gender` is in explaining the variability in evaluation scores when we already have information on the beuaty score of the professor.
+    What does this tell us about how useful `gender` is in explaining the variability in evaluation scores when we already have information on the beauty score of the professor.
 
 10. Compare the slopes of `bty_avg` under the two models (`score_bty_fit` and `score_bty_gen_fit`).
     Has the addition of `gender` to the model changed the parameter estimate (slope) for `bty_avg`?
