@@ -107,25 +107,25 @@ Linear model is in the form $\hat{y} = b_0 + b_1 x$.
 
 ## Linear regression with a categorical predictor
 
-9.  Fit a new linear model called `score_bty_gender` to predict average professor evaluation `score` based on `gender` of the professor.
+9.  Fit a new linear model called `score_gender_fit` to predict average professor evaluation `score` based on `gender` of the professor.
     Based on the regression output, write the linear model and interpret the slope and intercept in context of the data.
 
 10. What is the equation of the line corresponding to male professors?
     What is it for female professors?
 
-11. Fit a new linear model called `score_bty_rank` to predict average professor evaluation `score` based on `rank` of the professor.
+11. Fit a new linear model called `score_rank_fit` to predict average professor evaluation `score` based on `rank` of the professor.
     Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
 
 12. Create a new variable called `rank_relevel` where `"tenure track"` is the baseline level.
 
-13. Fit a new linear model called `score_bty_rank_relevel` to predict average professor evaluation `score` based on `rank_relevel` of the professor.
+13. Fit a new linear model called `score_rank_relevel_fit` to predict average professor evaluation `score` based on `rank_relevel` of the professor.
     This is the new (releveled) variable you created in Exercise 12.
     Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
     Also determine and interpret the $R^2$ of the model.
 
 14. Create another new variable called `tenure_eligible` that labels `"teaching"` faculty as `"no"` and labels `"tenure track"` and `"tenured"` faculty as `"yes"`.
 
-15. Fit a new linear model called `score_bty_tenure_eligible` to predict average professor evaluation `score` based on `tenure_eligible`ness of the professor.
+15. Fit a new linear model called `score_tenure_eligible_fit` to predict average professor evaluation `score` based on `tenure_eligible`ness of the professor.
     This is the new (regrouped) variable you created in the previous exercise.
     Based on the regression output, write the linear model and interpret the slopes and intercept in context of the data.
     Also determine and interpret the $R^2$ of the model.
