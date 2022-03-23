@@ -224,7 +224,11 @@ knitr::include_graphics("img/forcats-part-of-tidyverse.png")
 ]
 
 ```{r echo=FALSE, out.width="90%", fig.asp=0.4}
-hotels <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv")
+if (!file.exists("data/hotels")) {
+  download.file("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv", "data/hotels.csv")
+}
+hotels <- readr::read_csv("data/hotels.csv")  
+
 hotels %>%
   mutate(arrival_date_month = fct_relevel(arrival_date_month, month.name)) %>%
   group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month
