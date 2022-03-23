@@ -17,9 +17,10 @@ var markInterval = function(d, digits, interval, mark, decMark, precision) {
   return xv.join(decMark);
 };
 
-DTWidget.formatCurrency = function(data, currency, digits, interval, mark, decMark, before) {
+DTWidget.formatCurrency = function(data, currency, digits, interval, mark, decMark, before, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   var res = markInterval(d, digits, interval, mark, decMark);
   res = before ? (/^-/.test(res) ? '-' + currency + res.replace(/^-/, '') : currency + res) :
     res + currency;
@@ -32,21 +33,24 @@ DTWidget.formatString = function(data, prefix, suffix) {
   return prefix + d + suffix;
 };
 
-DTWidget.formatPercentage = function(data, digits, interval, mark, decMark) {
+DTWidget.formatPercentage = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d * 100, digits, interval, mark, decMark) + '%';
 };
 
-DTWidget.formatRound = function(data, digits, interval, mark, decMark) {
+DTWidget.formatRound = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d, digits, interval, mark, decMark);
 };
 
-DTWidget.formatSignif = function(data, digits, interval, mark, decMark) {
+DTWidget.formatSignif = function(data, digits, interval, mark, decMark, zeroPrint) {
   var d = parseFloat(data);
   if (isNaN(d)) return '';
+  if (zeroPrint !== null && d === 0.0) return zeroPrint;
   return markInterval(d, digits, interval, mark, decMark, true);
 };
 
@@ -66,6 +70,55 @@ DTWidget.formatDate = function(data, method, params) {
 };
 
 window.DTWidget = DTWidget;
+
+// A helper function to update the lims of the existing filters
+var set_filter_lims = function(td, new_vals) {
+  // Based on the filter type, set its new values
+  if (['factor', 'logical'].includes(td.getAttribute('data-type'))) {
+    // Reformat the new dropdown options for use with selectize
+    new_vals = new_vals.map(function(item) {return {text: item, value: item}});
+
+    // Find the selectize object
+    var dropdown = $(td).find('.selectized').eq(0)[0].selectize;
+
+    // Note the current values
+    var old_vals = dropdown.getValue();
+
+    // Remove the existing values
+    dropdown.clearOptions();
+
+    // Add the new options
+    dropdown.addOption(new_vals);
+
+    // Preserve the existing values
+    dropdown.setValue(old_vals);
+
+  } else if (['number', 'integer', 'date', 'time'].includes(td.getAttribute('data-type'))) {
+    // Note what the new limits will be just for this filter
+    var new_lims = [...new_vals];
+
+    // Determine the current values and limits
+    var slider = $(td).find('.noUi-target').eq(0);
+    var old_vals = slider.val().map(Number);
+    var old_lims = slider.noUiSlider('options').range;
+    old_lims = [old_lims.min, old_lims.max];
+
+    // Preserve the current values if filters have been applied; otherwise, apply no filtering
+    if (old_vals[0] != old_lims[0]) {
+      new_vals[0] = Math.max(old_vals[0], new_vals[0]);
+    }
+
+    if (old_vals[1] != old_lims[1]) {
+      new_vals[1] = Math.min(old_vals[1], new_vals[1]);
+    }
+
+    // Update the endpoints of the slider
+    slider.noUiSlider({
+      start: new_vals,
+      range: {'min': new_lims[0], 'max': new_lims[1]}
+    }, true);
+  }
+};
 
 var transposeArray2D = function(a) {
   return a.length === 0 ? a : HTMLWidgets.transposeArray2D(a);
@@ -132,16 +185,6 @@ HTMLWidgets.widget({
       maybeInstallCrosstalkPlugins();
       instance.ctfilterHandle.setGroup(crosstalkOptions.group);
       instance.ctselectHandle.setGroup(crosstalkOptions.group);
-    }
-
-    // If we are in a flexdashboard scroll layout then we:
-    //  (a) Always want to use pagination (otherwise we'll have
-    //      a "double scroll bar" effect on the phone); and
-    //  (b) Never want to fill the container (we want the pagination
-    //      level to determine the size of the container)
-    if (window.FlexDashboard && !window.FlexDashboard.isFillPage()) {
-      data.options.paging = true;
-      data.fillContainer = false;
     }
 
     // if we are in the viewer then we always want to fillContainer and
@@ -479,10 +522,10 @@ HTMLWidgets.widget({
             'background-color': '#fff',
             'border': '1px #ddd solid',
             'border-radius': '4px',
-            'padding': '20px 20px 10px 20px'
+            'padding': data.vertical ? '35px 20px': '20px 20px 10px 20px'
           });
           var $spans = $x0.children('span').css({
-            'margin-top': '10px',
+            'margin-top': data.vertical ? '0' : '10px',
             'white-space': 'nowrap'
           });
           var $span1 = $spans.first(), $span2 = $spans.last();
@@ -509,9 +552,9 @@ HTMLWidgets.widget({
               // first, make sure the slider div leaves at least 20px between
               // the two (slider value) span's
               $x0.width(Math.max(160, $span1.outerWidth() + $span2.outerWidth() + 20));
-              // then, if the input is really wide, make the slider the same
-              // width as the input
-              if ($x0.outerWidth() < $input.outerWidth()) {
+              // then, if the input is really wide or slider is vertical,
+              // make the slider the same width as the input
+              if ($x0.outerWidth() < $input.outerWidth() || data.vertical) {
                 $x0.outerWidth($input.outerWidth());
               }
               // make sure the slider div does not reach beyond the right margin
@@ -576,6 +619,10 @@ HTMLWidgets.widget({
           };
           var opts = type === 'date' ? { step: 60 * 60 * 1000 } :
                      type === 'integer' ? { step: 1 } : {};
+
+          opts.orientation = data.vertical ? 'vertical': 'horizontal';
+          opts.direction = data.vertical ? 'rtl': 'ltr';
+
           filter = $x.noUiSlider($.extend({
             start: [r1, r2],
             range: {min: r1, max: r2},
@@ -759,39 +806,44 @@ HTMLWidgets.widget({
           throw 'The editable parameter must be "cell", "row", "column", or "all"';
       }
       var disableCols = data.editable.disable ? data.editable.disable.columns : null;
+      var numericCols = data.editable.numeric;
+      var areaCols = data.editable.area;
       for (var i = 0; i < target.length; i++) {
         (function(cell, current) {
           var $cell = $(cell), html = $cell.html();
-          var _cell = table.cell(cell), value = _cell.data();
-          var $input = $('<input type="text">'), changed = false;
+          var _cell = table.cell(cell), value = _cell.data(), index = _cell.index().column;
+          var $input;
+          if (inArray(index, numericCols)) {
+            $input = $('<input type="number">');
+          } else if (inArray(index, areaCols)) {
+            $input = $('<textarea></textarea>');
+          } else {
+            $input = $('<input type="text">');
+          }
           if (!immediate) {
             $cell.data('input', $input).data('html', html);
             $input.attr('title', 'Hit Ctrl+Enter to finish editing, or Esc to cancel');
           }
           $input.val(value);
-          if (inArray(_cell.index().column, disableCols)) {
+          if (inArray(index, disableCols)) {
             $input.attr('readonly', '').css('filter', 'invert(25%)');
           }
           $cell.empty().append($input);
           if (cell === current) $input.focus();
           $input.css('width', '100%');
 
-          if (immediate) $input.on('change', function() {
-            changed = true;
+          if (immediate) $input.on('blur', function(e) {
             var valueNew = $input.val();
             if (valueNew != value) {
               _cell.data(valueNew);
               if (HTMLWidgets.shinyMode) {
-                changeInput('cell_edit', [cellInfo(cell)], 'DT.cellInfo', null, {priority: "event"});
+                changeInput('cell_edit', [cellInfo(cell)], 'DT.cellInfo', null, {priority: 'event'});
               }
               // for server-side processing, users have to call replaceData() to update the table
               if (!server) table.draw(false);
             } else {
               $cell.html(html);
             }
-            $input.remove();
-          }).on('blur', function() {
-            if (!changed) $input.trigger('change');
           }).on('keyup', function(e) {
             // hit Escape to cancel editing
             if (e.keyCode === 27) $input.trigger('blur');
@@ -1363,6 +1415,20 @@ HTMLWidgets.widget({
       table.ajax.reload(null, resetPaging);
     }
 
+    // update table filters (set new limits of sliders)
+    methods.updateFilters = function(newLims) {
+      // loop through each filter in the filter row
+      filterRow.each(function(i, td) {
+        var k = i;
+        if (filterRow.length > newLims.length) {
+          if (i === 0) return;  // first column is row names
+          k = i - 1;
+        }
+        // Update the filters to reflect the updated data
+        set_filter_lims(td, newLims[k]);
+      });
+    };
+
     table.shinyMethods = methods;
   },
   resize: function(el, width, height, instance) {
@@ -1386,6 +1452,12 @@ HTMLWidgets.widget({
     var framingHeight = dtWrapper.innerHeight() - dtScrollBody.innerHeight();
     var scrollBodyHeight = availableHeight - framingHeight;
 
+    // we need to set `max-height` to none as datatables library now sets this
+    // to a fixed height, disabling the ability to resize to fill the window,
+    // as it will be set to a fixed 100px under such circumstances, e.g., RStudio IDE,
+    // or FlexDashboard
+    // see https://github.com/rstudio/DT/issues/951#issuecomment-1026464509
+    dtScrollBody.css('max-height', 'none');
     // set the height
     dtScrollBody.height(scrollBodyHeight + 'px');
   },

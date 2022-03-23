@@ -31,7 +31,7 @@ In addition to `tidyverse` we will be using four other packages today
 
 ```{r message=FALSE}
 library(tidytext)
-library(genius)
+library(readxl)
 library(wordcloud)
 library(DT)
 ```
@@ -268,26 +268,17 @@ class: middle
 
 ## Let's get more data
 
-We'll use the **genius** package to get song lyric data from [Genius](https://genius.com/).
-
-- `genius_album()`: download lyrics for an entire album
-- `add_genius()`: download lyrics for multiple albums
-
 ---
 
-## Ed's most recent-ish albums
+## Ed's albums
 
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
-artist_albums <- tribble(
-  ~artist,      ~album,
-  "Ed Sheeran", "No.6 Collaborations Project",
-  "Ed Sheeran", "Divide",
-  "Ed Sheeran", "Multiply",
-  "Ed Sheeran", "Plus",
-)
-
-sheeran <- artist_albums %>%
-  add_genius(artist, album, "album")
+if (!file.exists("data/Lyrics.xlsx")) {
+  download.file("https://raw.githubusercontent.com/chitinglow/ed_sheeran_song_analysis/c3e0f8d1643dac23187588de74af57ea380b0657/Lyrics.xlsx",
+                "data/Lyrics.xlsx")
+}
+sheeran <- read_xlsx('data/Lyrics.xlsx') %>% 
+  rename(album = Album, track_title = Song_name, lyric = Lyrics)
 ```
 
 ---
