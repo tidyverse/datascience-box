@@ -72,7 +72,7 @@ test_data  <- testing(email_split)
 ```{r}
 train_data %>%
   mutate(
-    date = date(time),
+    date = lubridate::date(time),
     dow  = wday(time),
     month = month(time)
     ) %>%
