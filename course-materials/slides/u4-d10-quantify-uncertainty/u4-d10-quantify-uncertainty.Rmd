@@ -311,7 +311,7 @@ Generated assuming there are more students like the ones in the observed sample.
 ```{r echo=FALSE, warning=FALSE}
 elmhurst_boot %>% 
   slice_head(n = 50) %>%
-  hoist(splits, "data") %>% 
+  hoist(splits, "data", .remove = F) %>% 
   unnest(data) %>% 
   ggplot(aes(x = family_income, y = gift_aid)) +
   geom_jitter(alpha = 0.11, width = 30, height = 10) +
