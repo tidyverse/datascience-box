@@ -38,7 +38,7 @@ If anything is missing, commit and push again.
 
 ## Packages
 
-We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for inference, and the data lives in the **dsbox** package.
+We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for inference, and the data lives in the **openintro** package.
 These packages are already installed for you.
 You can load them by running the following in your Console:
 
@@ -50,10 +50,10 @@ library(openintro)
 
 ## Data
 
-The data can be found in the **dsbox** package, and it's called `ncbirths`.
+The data can be found in the **openintro** package, and it's called `ncbirths`.
 Since the dataset is distributed with the package, we don't need to load it separately; it becomes available to us when we load the package.
 You can find out more about the dataset by inspecting its documentation, which you can access by running `?ncbirths` in the Console or using the Help menu in RStudio to search for `ncbirths`.
-You can also find this information [here](https://rstudio-education.github.io/dsbox/reference/ncbirths.html).
+You can also find this information [here](https://www.openintro.org/data/index.php?data=ncbirths).
 
 # Set a seed!
 
