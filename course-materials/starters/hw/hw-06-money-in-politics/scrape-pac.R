@@ -49,19 +49,19 @@ scrape_pac <- function(url) {
 
 # test function ----------------------------------------------------------------
 
+url_2022 <- "___"
+pac_2022 <- scrape_pac(___)
+
 url_2020 <- "___"
 pac_2020 <- scrape_pac(___)
 
-url_2018 <- "___"
-pac_2018 <- scrape_pac(___)
-
-url_1998 <- "___"
-pac_1998 <- scrape_pac(___)
+url_2000 <- "___"
+pac_2000 <- scrape_pac(___)
 
 # list of urls -----------------------------------------------------------------
 
 # first part of url
-root <- "https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs?cycle="
+root <- "https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/"
 
 # second part of url (election years as a sequence)
 year <- seq(from = ___, to = ___, by = ___)
