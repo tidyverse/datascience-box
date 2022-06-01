@@ -386,7 +386,7 @@ ggplot(data = ht_wt_fit_aug) +
     x = "Width (inches)",
     y = "Height (inches)"
   ) +
-  guides(color = FALSE) +
+  guides(color = "none") +
   scale_color_manual(values = c("#260b27", "#e6b0e7")) +
   geom_text(aes(x = 0, y = 150), label = "Positive residual", color = "#e6b0e7", hjust = 0, size = 8) +
   geom_text(aes(x = 150, y = 25), label = "Negative residual", color = "#260b27", hjust = 0, size = 8)

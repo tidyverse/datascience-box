@@ -19,18 +19,18 @@ glimpse(theoffice)
 
     ## Rows: 55,130
     ## Columns: 12
-    ## $ index            <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
-    ## $ season           <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-    ## $ episode          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-    ## $ episode_name     <chr> "Pilot", "Pilot", "Pilot", "Pilot", "Pilot", "Pilot"…
-    ## $ director         <chr> "Ken Kwapis", "Ken Kwapis", "Ken Kwapis", "Ken Kwapi…
-    ## $ writer           <chr> "Ricky Gervais;Stephen Merchant;Greg Daniels", "Rick…
-    ## $ character        <chr> "Michael", "Jim", "Michael", "Jim", "Michael", "Mich…
-    ## $ text             <chr> "All right Jim. Your quarterlies look very good. How…
-    ## $ text_w_direction <chr> "All right Jim. Your quarterlies look very good. How…
-    ## $ imdb_rating      <dbl> 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.6, 7.…
-    ## $ total_votes      <int> 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706, 3706…
-    ## $ air_date         <fct> 2005-03-24, 2005-03-24, 2005-03-24, 2005-03-24, 2005…
+    ## $ index            <int> 1, 2, 3, 4, 5, 6, 7,…
+    ## $ season           <int> 1, 1, 1, 1, 1, 1, 1,…
+    ## $ episode          <int> 1, 1, 1, 1, 1, 1, 1,…
+    ## $ episode_name     <chr> "Pilot", "Pilot", "P…
+    ## $ director         <chr> "Ken Kwapis", "Ken K…
+    ## $ writer           <chr> "Ricky Gervais;Steph…
+    ## $ character        <chr> "Michael", "Jim", "M…
+    ## $ text             <chr> "All right Jim. Your…
+    ## $ text_w_direction <chr> "All right Jim. Your…
+    ## $ imdb_rating      <dbl> 7.6, 7.6, 7.6, 7.6, …
+    ## $ total_votes      <int> 3706, 3706, 3706, 37…
+    ## $ air_date         <fct> 2005-03-24, 2005-03-…
 
 Fix `air_date` for later use.
 
@@ -55,7 +55,7 @@ theoffice %>%
   distinct(season, episode)
 ```
 
-    ## # A tibble: 186 x 2
+    ## # A tibble: 186 × 2
     ##    season episode
     ##     <int>   <int>
     ##  1      1       1
@@ -173,21 +173,21 @@ office_fit <- office_wflow %>%
 tidy(office_fit)
 ```
 
-    ## # A tibble: 12 x 5
-    ##    term           estimate std.error statistic  p.value
-    ##    <chr>             <dbl>     <dbl>     <dbl>    <dbl>
-    ##  1 (Intercept)    6.39     0.323      19.8     9.73e-41
-    ##  2 season         0.0423   0.0240      1.76    8.03e- 2
-    ##  3 episode        0.0118   0.00427     2.77    6.47e- 3
-    ##  4 total_votes    0.000512 0.0000625   8.19    2.32e-13
-    ##  5 lines_jim      0.629    0.664       0.946   3.46e- 1
-    ##  6 lines_pam     -0.00587  0.717      -0.00818 9.93e- 1
-    ##  7 lines_michael -0.743    0.623      -1.19    2.35e- 1
-    ##  8 lines_dwight   0.348    0.545       0.639   5.24e- 1
-    ##  9 halloween_X1  -0.183    0.180      -1.01    3.12e- 1
-    ## 10 valentine_X1  -0.120    0.158      -0.759   4.49e- 1
-    ## 11 christmas_X1   0.246    0.137       1.79    7.56e- 2
-    ## 12 michael_X1     0.598    0.166       3.61    4.43e- 4
+    ## # A tibble: 12 × 5
+    ##    term   estimate std.error statistic  p.value
+    ##    <chr>     <dbl>     <dbl>     <dbl>    <dbl>
+    ##  1 (Inte…  6.34e+0 0.298       21.2    1.24e-43
+    ##  2 season  5.42e-2 0.0224       2.42   1.68e- 2
+    ##  3 episo…  1.25e-2 0.00439      2.85   5.05e- 3
+    ##  4 total…  3.72e-4 0.0000390    9.55   1.25e-16
+    ##  5 lines…  6.53e-1 0.679        0.962  3.38e- 1
+    ##  6 lines…  3.29e-2 0.696        0.0473 9.62e- 1
+    ##  7 lines…  1.11e-1 0.544        0.204  8.39e- 1
+    ##  8 lines…  8.06e-1 0.522        1.54   1.25e- 1
+    ##  9 hallo… -3.40e-3 0.181       -0.0188 9.85e- 1
+    ## 10 valen… -5.73e-2 0.180       -0.318  7.51e- 1
+    ## 11 chris…  2.85e-1 0.129        2.22   2.82e- 2
+    ## 12 micha…  5.85e-1 0.141        4.15   6.01e- 5
 
 ### Exercise 9 - Perform 5-fold cross validation and view model performance metrics.
 
@@ -198,14 +198,14 @@ folds
 ```
 
     ## #  5-fold cross-validation 
-    ## # A tibble: 5 x 2
+    ## # A tibble: 5 × 2
     ##   splits           id   
     ##   <list>           <chr>
-    ## 1 <split [112/28]> Fold1
-    ## 2 <split [112/28]> Fold2
-    ## 3 <split [112/28]> Fold3
-    ## 4 <split [112/28]> Fold4
-    ## 5 <split [112/28]> Fold5
+    ## 1 <split [111/28]> Fold1
+    ## 2 <split [111/28]> Fold2
+    ## 3 <split [111/28]> Fold3
+    ## 4 <split [111/28]> Fold4
+    ## 5 <split [112/27]> Fold5
 
 ``` r
 set.seed(456)
@@ -215,11 +215,12 @@ office_fit_rs <- office_wflow %>%
 collect_metrics(office_fit_rs)
 ```
 
-    ## # A tibble: 2 x 6
-    ##   .metric .estimator  mean     n std_err .config             
-    ##   <chr>   <chr>      <dbl> <int>   <dbl> <chr>               
-    ## 1 rmse    standard   0.362     5  0.0226 Preprocessor1_Model1
-    ## 2 rsq     standard   0.553     5  0.0782 Preprocessor1_Model1
+    ## # A tibble: 2 × 6
+    ##   .metric .estimator  mean     n std_err
+    ##   <chr>   <chr>      <dbl> <int>   <dbl>
+    ## 1 rmse    standard   0.367     5  0.0512
+    ## 2 rsq     standard   0.543     5  0.0386
+    ## # … with 1 more variable: .config <chr>
 
 ### Exercise 10 - Use your model to make predictions for the testing data and calculate the RMSE. Also use the model developed in the [cross validation lesson](https://ids-s1-20.github.io/slides/week-10/w10-d02-cross-validation/w10-d02-cross-validation.html) to make predictions for the testing data and calculate the RMSE as well. Which model did a better job in predicting IMDB scores for the testing data?
 
@@ -232,10 +233,10 @@ office_test_pred <- predict(office_fit, new_data = office_test) %>%
 rmse(office_test_pred, truth = imdb_rating, estimate = .pred)
 ```
 
-    ## # A tibble: 1 x 3
+    ## # A tibble: 1 × 3
     ##   .metric .estimator .estimate
     ##   <chr>   <chr>          <dbl>
-    ## 1 rmse    standard       0.444
+    ## 1 rmse    standard       0.401
 
 #### Old model
 
@@ -262,21 +263,21 @@ office_fit_old <- office_wflow_old %>%
 tidy(office_fit_old)
 ```
 
-    ## # A tibble: 12 x 5
-    ##    term                estimate std.error statistic  p.value
-    ##    <chr>                  <dbl>     <dbl>     <dbl>    <dbl>
-    ##  1 (Intercept)         6.50     0.234        27.7   5.68e-56
-    ##  2 season             -0.0240   0.0156       -1.54  1.27e- 1
-    ##  3 episode             0.0524   0.00841       6.23  6.12e- 9
-    ##  4 total_votes         0.000538 0.0000585     9.19  8.92e-16
-    ##  5 air_date_month_Feb -0.0927   0.119        -0.778 4.38e- 1
-    ##  6 air_date_month_Mar -0.249    0.133        -1.87  6.36e- 2
-    ##  7 air_date_month_Apr -0.238    0.124        -1.92  5.70e- 2
-    ##  8 air_date_month_May -0.192    0.154        -1.25  2.14e- 1
-    ##  9 air_date_month_Sep  0.660    0.161         4.11  7.02e- 5
-    ## 10 air_date_month_Oct  0.463    0.128         3.62  4.27e- 4
-    ## 11 air_date_month_Nov  0.368    0.122         3.00  3.20e- 3
-    ## 12 air_date_month_Dec  0.368    0.145         2.54  1.23e- 2
+    ## # A tibble: 12 × 5
+    ##    term   estimate std.error statistic  p.value
+    ##    <chr>     <dbl>     <dbl>     <dbl>    <dbl>
+    ##  1 (Inte…  7.20e+0 0.188        38.4   9.92e-72
+    ##  2 season -5.01e-2 0.0140       -3.57  5.04e- 4
+    ##  3 episo…  4.49e-2 0.00877       5.11  1.13e- 6
+    ##  4 total…  3.60e-4 0.0000404     8.89  4.99e-15
+    ##  5 air_d… -1.45e-1 0.139        -1.04  2.99e- 1
+    ##  6 air_d… -3.76e-1 0.134        -2.81  5.69e- 3
+    ##  7 air_d… -3.09e-1 0.131        -2.36  1.96e- 2
+    ##  8 air_d… -1.28e-1 0.162        -0.791 4.30e- 1
+    ##  9 air_d…  5.12e-1 0.178         2.88  4.63e- 3
+    ## 10 air_d…  2.70e-1 0.139         1.95  5.38e- 2
+    ## 11 air_d…  1.16e-1 0.126         0.924 3.57e- 1
+    ## 12 air_d…  4.07e-1 0.165         2.47  1.49e- 2
 
 ``` r
 office_test_pred_old <- predict(office_fit_old, new_data = office_test) %>%
@@ -285,7 +286,7 @@ office_test_pred_old <- predict(office_fit_old, new_data = office_test) %>%
 rmse(office_test_pred_old, truth = imdb_rating, estimate = .pred)
 ```
 
-    ## # A tibble: 1 x 3
+    ## # A tibble: 1 × 3
     ##   .metric .estimator .estimate
     ##   <chr>   <chr>          <dbl>
-    ## 1 rmse    standard       0.498
+    ## 1 rmse    standard       0.403

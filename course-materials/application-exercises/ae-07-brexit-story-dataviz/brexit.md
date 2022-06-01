@@ -12,7 +12,7 @@ question:
 > -   Wrong to leave  
 > -   Don’t know
 
-The data from the survey are in `data/brexit.csv`.
+The data from the survey is in `data/brexit.csv`.
 
 ``` r
 brexit <- read_csv("data/brexit.csv")
@@ -30,7 +30,7 @@ brexit <- brexit %>%
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1, labeller = label_wrap_gen(width = 12)) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
     title = "Was Britain right/wrong to vote to leave EU?",
     subtitle = "YouGov Survey Results, 2-3 September 2019",
@@ -63,7 +63,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
     nrow = 1, labeller = label_wrap_gen(width = 12),
     # ___
   ) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
     title = "Was Britain right/wrong to vote to leave EU?",
     subtitle = "YouGov Survey Results, 2-3 September 2019",

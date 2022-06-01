@@ -155,7 +155,7 @@ ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
   geom_histogram(binwidth = 500) + 
   facet_grid(artistliving ~ .) +
   scale_fill_manual(values = c("#E48957", "#071381")) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(x = "Surface area", y = NULL) +
   geom_vline(xintercept = 1000) +
   geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")

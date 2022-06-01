@@ -586,7 +586,7 @@ sheeran_top10 %>%
   facet_wrap(~ sentiment, scales = "free") +
   coord_flip() +
   labs(title = "Sentiments in Ed Sheeran's lyrics", x = "", y = "") +
-  guides(fill = FALSE) 
+  guides(fill = "none") 
 ```
 ]
 
@@ -639,7 +639,7 @@ sheeran_lyrics %>%
   ggplot(aes(x = reorder(track_title, total_sentiment), y = total_sentiment, fill = total_sentiment_sign)) +
   geom_col() +
   facet_wrap(~album, ncol = 2, scales = "free") +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   coord_flip() +
   labs(x = "", y = "", 
     title = "Total sentiment score of Ed Sheeran's tracks",

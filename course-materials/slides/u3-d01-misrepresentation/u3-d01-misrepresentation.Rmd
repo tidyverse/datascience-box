@@ -258,7 +258,7 @@ ggplot(catalan, aes(y = fct_rev(response), x = rate, color = response, group = r
                size = 1) +
   scale_color_manual(values = c("#5C8AA9", "#9D303A", "gray")) +
   scale_x_continuous(labels = label_percent(scale = 1)) +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_minimal(base_size = 16) +
   labs(
     title = "Do you want Catalonia\nto become an independent state?",
@@ -289,7 +289,7 @@ ggplot(catalan, aes(y = fct_rev(response), x = rate, color = response, group = r
   geom_point(size = 3) +
   scale_color_manual(values = c("#5C8AA9", "#9D303A", "gray")) +
   scale_x_continuous(labels = label_percent(scale = 1)) +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_minimal(base_size = 16) +
   labs(
     title = "Do you want Catalonia\nto become an independent state?",

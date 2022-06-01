@@ -113,7 +113,7 @@ If you like the [Dinner Party](https://www.imdb.com/title/tt1031477/) episode, I
 ggplot(office_ratings, aes(x = factor(season), y = imdb_rating, color = season)) +
   geom_boxplot() +
   geom_jitter() +
-  guides(color = FALSE) +
+  guides(color = "none") +
   labs(
     title = "The Office ratings",
     x = "Season",

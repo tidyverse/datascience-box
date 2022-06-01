@@ -100,8 +100,6 @@ country_data <- coronavirus %>%
   ungroup()
 ```
 
-    ## `summarise()` regrouping output by 'country' (override with `.groups` argument)
-
 We also need to take a note of the “as of date” for the data so that we
 can properly label our visualisation.
 
@@ -113,7 +111,7 @@ as_of_date <- country_data %>%
 as_of_date_formatted <- glue("{wday(as_of_date, label = TRUE)}, {month(as_of_date, label = TRUE)} {day(as_of_date)}, {year(as_of_date)}")
 ```
 
-These data are as of Tue, Dec 22, 2020.
+These data are as of Wed, Oct 13, 2021.
 
 ## Visualisation
 
@@ -135,7 +133,7 @@ ggplot(data = country_data,
   # add country labels, nudged above the lines
   geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
   # turn off legend
-  guides(color = FALSE) +
+  guides(color = "none") +
   # use pretty colors
   scale_color_viridis_d() +
   # better formatting for y-axis

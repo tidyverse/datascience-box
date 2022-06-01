@@ -120,7 +120,7 @@ ggplot(data = country_data,
   # add country labels, nudged above the lines
   geom_label_repel(nudge_y = 1, direction = "y", hjust = 1) + 
   # turn off legend
-  guides(color = FALSE) +
+  guides(color = "none") +
   # use pretty colors
   scale_color_viridis_d() +
   # better formatting for y-axis

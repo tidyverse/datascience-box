@@ -737,7 +737,7 @@ ggplot(
   geom_point() +
   facet_grid(species ~ sex) +
   scale_color_viridis_d() +
-  guides(color = FALSE) #<<
+  guides(color = "none") #<<
 ```
 ]
 .pull-right-wide[

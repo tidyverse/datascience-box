@@ -52,7 +52,7 @@ bechdel90_13 %>%
             med_intgross = median(intgross_2013, na.rm = TRUE))
 ```
 
-    ## # A tibble: 2 x 4
+    ## # A tibble: 2 × 4
     ##   binary med_budget med_domgross med_intgross
     ##   <chr>       <dbl>        <dbl>        <dbl>
     ## 1 FAIL    48385984.    57318606.    104475669
@@ -77,7 +77,7 @@ bechdel90_13 %>%
             med_intgross = median(intgross_2013, na.rm = TRUE))
 ```
 
-    ## # A tibble: 1 x 3
+    ## # A tibble: 1 × 3
     ##   med_budget med_domgross med_intgross
     ##        <int>        <dbl>        <dbl>
     ## 1   37878971     52270207     93523336
@@ -99,7 +99,7 @@ bechdel90_13 %>%
   select(title, roi, year)
 ```
 
-    ## # A tibble: 1,615 x 3
+    ## # A tibble: 1,615 × 3
     ##    title                     roi  year
     ##    <chr>                   <dbl> <int>
     ##  1 Paranormal Activity      671.  2007
@@ -138,12 +138,12 @@ bechdel90_13 %>%
   select(title, budget_2013, domgross_2013, year)
 ```
 
-    ## # A tibble: 3 x 4
-    ##   title                   budget_2013 domgross_2013  year
-    ##   <chr>                         <int>         <dbl> <int>
-    ## 1 Paranormal Activity          505595     121251476  2007
-    ## 2 The Blair Witch Project      839077     196538593  1999
-    ## 3 El Mariachi                   11622       3388636  1992
+    ## # A tibble: 3 × 4
+    ##   title         budget_2013 domgross_2013  year
+    ##   <chr>               <int>         <dbl> <int>
+    ## 1 Paranormal A…      505595     121251476  2007
+    ## 2 The Blair Wi…      839077     196538593  1999
+    ## 3 El Mariachi         11622       3388636  1992
 
 Zooming in on the movies with `roi < ___` provides a better view of how
 the medians across the categories compare:
