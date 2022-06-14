@@ -5,13 +5,13 @@ I've provided two sample take home exams.
 You probably wouldn't want to use them verbatim as exams, since they're now publicly available.
 But they might give you some idea about how to structure take home exams, how to write directions to reduce issues around plagiarism while still encouraging students to search for resources, etc.
 
-::: {.exam}
+::: exam
 **Exam 1**
 
 [[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-01/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-01)
 :::
 
-::: {.exam}
+::: exam
 **Exam 2**
 
 [[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-02/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-02)
