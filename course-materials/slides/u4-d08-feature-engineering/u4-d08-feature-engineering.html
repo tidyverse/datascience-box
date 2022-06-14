@@ -86,12 +86,23 @@ test_data  &lt;- testing(email_split)
 ```r
 train_data %&gt;%
   mutate(
-    date = date(time),
+    date = lubridate::date(time),
     dow  = wday(time),
     month = month(time)
     ) %&gt;%
   select(time, date, dow, month) %&gt;%
   sample_n(size = 5) # shuffle to show a variety
+```
+
+```
+## # A tibble: 5 × 4
+##   time                date         dow month
+##   &lt;dttm&gt;              &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 2012-03-15 14:51:35 2012-03-15     5     3
+## 2 2012-03-03 09:24:02 2012-03-03     7     3
+## 3 2012-01-18 11:55:23 2012-01-18     4     1
+## 4 2012-02-24 23:08:59 2012-02-24     6     2
+## 5 2012-01-11 08:18:51 2012-01-11     4     1
 ```
 
 ---
