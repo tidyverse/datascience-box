@@ -88,7 +88,7 @@ Since that means repeating a task many times, let's first write a function that 
 Confirm it works on a few others.
 Then iterate it over pages for all years.
 
-::: {.box}
+::: box
 Complete the following set of steps in the `scrape-pac.R` file in the `scripts` folder of your repository.
 This file already contains some starter code to help you out.
 :::
