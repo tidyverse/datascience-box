@@ -100,19 +100,15 @@ bechdel90_13 %>%
 ```
 
     ## # A tibble: 1,615 × 3
-    ##    title                     roi  year
-    ##    <chr>                   <dbl> <int>
-    ##  1 Paranormal Activity      671.  2007
-    ##  2 The Blair Witch Project  648.  1999
-    ##  3 El Mariachi              583.  1992
-    ##  4 Clerks.                  258.  1994
-    ##  5 In the Company of Men    231.  1997
-    ##  6 Napoleon Dynamite        227.  2004
-    ##  7 Once                     190.  2006
-    ##  8 The Devil Inside         155.  2012
-    ##  9 Primer                   142.  2004
-    ## 10 Fireproof                134.  2008
-    ## # … with 1,605 more rows
+    ##   title                     roi  year
+    ##   <chr>                   <dbl> <int>
+    ## 1 Paranormal Activity      671.  2007
+    ## 2 The Blair Witch Project  648.  1999
+    ## 3 El Mariachi              583.  1992
+    ## 4 Clerks.                  258.  1994
+    ## 5 In the Company of Men    231.  1997
+    ## 6 Napoleon Dynamite        227.  2004
+    ## # … with 1,609 more rows
 
 Below is a visualization of the return on investment by test result,
 however it’s difficult to see the distributions due to a few extreme
@@ -139,11 +135,11 @@ bechdel90_13 %>%
 ```
 
     ## # A tibble: 3 × 4
-    ##   title                  budget_2013 domgross_2013  year
-    ##   <chr>                        <int>         <dbl> <int>
-    ## 1 Paranormal Activity         505595     121251476  2007
-    ## 2 The Blair Witch Proje…      839077     196538593  1999
-    ## 3 El Mariachi                  11622       3388636  1992
+    ##   title                   budget_2013 domgross_2013  year
+    ##   <chr>                         <int>         <dbl> <int>
+    ## 1 Paranormal Activity          505595     121251476  2007
+    ## 2 The Blair Witch Project      839077     196538593  1999
+    ## 3 El Mariachi                   11622       3388636  1992
 
 Zooming in on the movies with `roi < ___` provides a better view of how
 the medians across the categories compare:

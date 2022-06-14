@@ -617,477 +617,1190 @@ definition of all variables is given in the <a href="#data-dictionary">Data dict
 you don’t need to familiarize yourself with all variables in order to
 work through these exercises.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(hotels)</span></code></pre></div>
-<table>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
 <tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">hotels</td>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+hotels
+</td>
 </tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">119390</td>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+119390
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">32</td>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+32
+</td>
 </tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="even">
-<td align="left">character</td>
-<td align="left">13</td>
+<tr>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+13
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Date</td>
-<td align="left">1</td>
+<tr>
+<td style="text-align:left;">
+Date
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">18</td>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+18
+</td>
 </tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
+<tr>
+<td style="text-align:left;">
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+</td>
+<td style="text-align:left;">
+</td>
 </tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
 </tr>
 </tbody>
 </table>
-<p>Data summary</p>
+
 <p><strong>Variable type: character</strong></p>
 <table>
 <thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">empty</th>
-<th align="right">n_unique</th>
-<th align="right">whitespace</th>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+empty
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
+<th style="text-align:right;">
+whitespace
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">hotel</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">10</td>
-<td align="right">12</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+hotel
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">arrival_date_month</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">9</td>
-<td align="right">0</td>
-<td align="right">12</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+arrival_date_month
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">meal</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">9</td>
-<td align="right">0</td>
-<td align="right">5</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+meal
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">country</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">178</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+country
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+178
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">market_segment</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">13</td>
-<td align="right">0</td>
-<td align="right">8</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+market_segment
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">distribution_channel</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">9</td>
-<td align="right">0</td>
-<td align="right">5</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+distribution_channel
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">reserved_room_type</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">10</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+reserved_room_type
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">assigned_room_type</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">12</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+assigned_room_type
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">deposit_type</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">10</td>
-<td align="right">10</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+deposit_type
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">agent</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">334</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+agent
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+334
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">company</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">353</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+company
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+353
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">customer_type</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="right">15</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+customer_type
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">reservation_status</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">7</td>
-<td align="right">9</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+reservation_status
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
 </tbody>
 </table>
+
 <p><strong>Variable type: Date</strong></p>
 <table>
 <thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">min</th>
-<th align="left">max</th>
-<th align="left">median</th>
-<th align="right">n_unique</th>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:left;">
+min
+</th>
+<th style="text-align:left;">
+max
+</th>
+<th style="text-align:left;">
+median
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">reservation_status_date</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">2014-10-17</td>
-<td align="left">2017-09-14</td>
-<td align="left">2016-08-07</td>
-<td align="right">926</td>
+<tr>
+<td style="text-align:left;">
+reservation_status_date
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+2014-10-17
+</td>
+<td style="text-align:left;">
+2017-09-14
+</td>
+<td style="text-align:left;">
+2016-08-07
+</td>
+<td style="text-align:right;">
+926
+</td>
 </tr>
 </tbody>
 </table>
+
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">is_canceled</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.37</td>
-<td align="right">0.48</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="left">▇▁▁▁▅</td>
+<tr>
+<td style="text-align:left;">
+is_canceled
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+▇▁▁▁▅
+</td>
 </tr>
-<tr class="even">
-<td align="left">lead_time</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">104.01</td>
-<td align="right">106.86</td>
-<td align="right">0.00</td>
-<td align="right">18.00</td>
-<td align="right">69.00</td>
-<td align="right">160</td>
-<td align="right">737</td>
-<td align="left">▇▂▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+lead_time
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+104.01
+</td>
+<td style="text-align:right;">
+106.86
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+18.00
+</td>
+<td style="text-align:right;">
+69.00
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+737
+</td>
+<td style="text-align:left;">
+▇▂▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">arrival_date_year</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2016.16</td>
-<td align="right">0.71</td>
-<td align="right">2015.00</td>
-<td align="right">2016.00</td>
-<td align="right">2016.00</td>
-<td align="right">2017</td>
-<td align="right">2017</td>
-<td align="left">▃▁▇▁▆</td>
+<tr>
+<td style="text-align:left;">
+arrival_date_year
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2016.16
+</td>
+<td style="text-align:right;">
+0.71
+</td>
+<td style="text-align:right;">
+2015.00
+</td>
+<td style="text-align:right;">
+2016.00
+</td>
+<td style="text-align:right;">
+2016.00
+</td>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+▃▁▇▁▆
+</td>
 </tr>
-<tr class="even">
-<td align="left">arrival_date_week_number</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">27.17</td>
-<td align="right">13.61</td>
-<td align="right">1.00</td>
-<td align="right">16.00</td>
-<td align="right">28.00</td>
-<td align="right">38</td>
-<td align="right">53</td>
-<td align="left">▅▇▇▇▅</td>
+<tr>
+<td style="text-align:left;">
+arrival_date_week_number
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+27.17
+</td>
+<td style="text-align:right;">
+13.61
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+16.00
+</td>
+<td style="text-align:right;">
+28.00
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:left;">
+▅▇▇▇▅
+</td>
 </tr>
-<tr class="odd">
-<td align="left">arrival_date_day_of_month</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">15.80</td>
-<td align="right">8.78</td>
-<td align="right">1.00</td>
-<td align="right">8.00</td>
-<td align="right">16.00</td>
-<td align="right">23</td>
-<td align="right">31</td>
-<td align="left">▇▇▇▇▆</td>
+<tr>
+<td style="text-align:left;">
+arrival_date_day_of_month
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15.80
+</td>
+<td style="text-align:right;">
+8.78
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+8.00
+</td>
+<td style="text-align:right;">
+16.00
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+▇▇▇▇▆
+</td>
 </tr>
-<tr class="even">
-<td align="left">stays_in_weekend_nights</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.93</td>
-<td align="right">1.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
-<td align="right">2</td>
-<td align="right">19</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+stays_in_weekend_nights
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">stays_in_week_nights</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.50</td>
-<td align="right">1.91</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
-<td align="right">2.00</td>
-<td align="right">3</td>
-<td align="right">50</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+stays_in_week_nights
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+1.91
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">adults</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.86</td>
-<td align="right">0.58</td>
-<td align="right">0.00</td>
-<td align="right">2.00</td>
-<td align="right">2.00</td>
-<td align="right">2</td>
-<td align="right">55</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+adults
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.86
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">children</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">0.10</td>
-<td align="right">0.40</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">10</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+children
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">babies</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.01</td>
-<td align="right">0.10</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">10</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+babies
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">is_repeated_guest</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.03</td>
-<td align="right">0.18</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+is_repeated_guest
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">previous_cancellations</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.09</td>
-<td align="right">0.84</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">26</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+previous_cancellations
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">previous_bookings_not_canceled</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.14</td>
-<td align="right">1.50</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">72</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+previous_bookings_not_canceled
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">booking_changes</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.22</td>
-<td align="right">0.65</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">21</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+booking_changes
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">days_in_waiting_list</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2.32</td>
-<td align="right">17.59</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">391</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+days_in_waiting_list
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.32
+</td>
+<td style="text-align:right;">
+17.59
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+391
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">adr</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">101.83</td>
-<td align="right">50.54</td>
-<td align="right">-6.38</td>
-<td align="right">69.29</td>
-<td align="right">94.58</td>
-<td align="right">126</td>
-<td align="right">5400</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+adr
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+101.83
+</td>
+<td style="text-align:right;">
+50.54
+</td>
+<td style="text-align:right;">
+-6.38
+</td>
+<td style="text-align:right;">
+69.29
+</td>
+<td style="text-align:right;">
+94.58
+</td>
+<td style="text-align:right;">
+126
+</td>
+<td style="text-align:right;">
+5400
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="odd">
-<td align="left">required_car_parking_spaces</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.06</td>
-<td align="right">0.25</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">8</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+required_car_parking_spaces
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
-<tr class="even">
-<td align="left">total_of_special_requests</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.57</td>
-<td align="right">0.79</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="left">▇▁▁▁▁</td>
+<tr>
+<td style="text-align:left;">
+total_of_special_requests
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
 </tr>
 </tbody>
 </table>
+
 <h3 id="exercise-2">Exercise 2.</h3>
 <p>Are people traveling on a whim? Let’s see…</p>
 <p>Fill in the blanks for filtering for hotel bookings where the guest

@@ -652,17 +652,16 @@ take a look at what it looks like:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dn_lq_ak <span class="ot">&lt;-</span> <span class="fu">full_join</span>(dn_ak, lq_ak, <span class="at">by =</span> <span class="st">&quot;state&quot;</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dn_lq_ak</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
-##   address.x    city.x state zip.x longitude.x latitude.x
-##   &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-## 1 2900 Denali  Ancho… AK    99503       -150.       61.2
-## 2 2900 Denali  Ancho… AK    99503       -150.       61.2
-## 3 3850 Debarr… Ancho… AK    99508       -150.       61.2
-## 4 3850 Debarr… Ancho… AK    99508       -150.       61.2
-## 5 1929 Airpor… Fairb… AK    99701       -148.       64.8
-## 6 1929 Airpor… Fairb… AK    99701       -148.       64.8
-## # … with 5 more variables: address.y &lt;chr&gt;,
-## #   city.y &lt;chr&gt;, zip.y &lt;chr&gt;, longitude.y &lt;dbl&gt;,
-## #   latitude.y &lt;dbl&gt;</code></pre>
+##   address.x   city.x state zip.x longitude.x latitude.x address.y
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+## 1 2900 Denali Ancho… AK    99503       -150.       61.2 3501 Min…
+## 2 2900 Denali Ancho… AK    99503       -150.       61.2 4920 Dal…
+## 3 3850 Debar… Ancho… AK    99508       -150.       61.2 3501 Min…
+## 4 3850 Debar… Ancho… AK    99508       -150.       61.2 4920 Dal…
+## 5 1929 Airpo… Fairb… AK    99701       -148.       64.8 3501 Min…
+## 6 1929 Airpo… Fairb… AK    99701       -148.       64.8 4920 Dal…
+## # … with 4 more variables: city.y &lt;chr&gt;, zip.y &lt;chr&gt;,
+## #   longitude.y &lt;dbl&gt;, latitude.y &lt;dbl&gt;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>How many observations are in the joined <code>dn_lq_ak</code> data
 frame? What are the names of the variables in this data frame.</li>

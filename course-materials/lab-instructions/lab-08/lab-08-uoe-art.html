@@ -656,31 +656,31 @@ identify the tags for the relevant nodes:</p>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;.iteminfo&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;h3 a&quot;</span>)</span></code></pre></div>
 <pre><code>## {xml_nodeset (10)}
-##  [1] &lt;a href=&quot;./record/21324?highlight=*:*&quot;&gt;Reclining ...
-##  [2] &lt;a href=&quot;./record/99439?highlight=*:*&quot;&gt;Untitled  ...
-##  [3] &lt;a href=&quot;./record/21073?highlight=*:*&quot;&gt;Portrait  ...
-##  [4] &lt;a href=&quot;./record/21158?highlight=*:*&quot;&gt;Seated Ma ...
-##  [5] &lt;a href=&quot;./record/21054?highlight=*:*&quot;&gt;Striding  ...
-##  [6] &lt;a href=&quot;./record/20721?highlight=*:*&quot;&gt;Riders fr ...
-##  [7] &lt;a href=&quot;./record/20633?highlight=*:*&quot;&gt;Figure of ...
-##  [8] &lt;a href=&quot;./record/22040?highlight=*:*&quot;&gt;William S ...
-##  [9] &lt;a href=&quot;./record/112501?highlight=*:*&quot;&gt;Untitled ...
-## [10] &lt;a href=&quot;./record/22479?highlight=*:*&quot;&gt;Untitled  ...</code></pre>
+##  [1] &lt;a href=&quot;./record/21197?highlight=*:*&quot;&gt;Portrait of a Woma ...
+##  [2] &lt;a href=&quot;./record/50508?highlight=*:*&quot;&gt;Unknown            ...
+##  [3] &lt;a href=&quot;./record/99439?highlight=*:*&quot;&gt;Untitled - Woman a ...
+##  [4] &lt;a href=&quot;./record/50548?highlight=*:*&quot;&gt;Unknown            ...
+##  [5] &lt;a href=&quot;./record/21836?highlight=*:*&quot;&gt;Untitled           ...
+##  [6] &lt;a href=&quot;./record/21881?highlight=*:*&quot;&gt;Untitled           ...
+##  [7] &lt;a href=&quot;./record/53591?highlight=*:*&quot;&gt;Unknown            ...
+##  [8] &lt;a href=&quot;./record/53718?highlight=*:*&quot;&gt;Plate              ...
+##  [9] &lt;a href=&quot;./record/21557?highlight=*:*&quot;&gt;Untitled           ...
+## [10] &lt;a href=&quot;./record/102730?highlight=*:*&quot;&gt;Pekin knot sample ...</code></pre>
 <p>Then we extract the text with <code>html_text()</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>page <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;.iteminfo&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;h3 a&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Reclining Male Nude                                                                            (1949)&quot;                           
-##  [2] &quot;Untitled - Woman and Man                                                                            (1981)&quot;                      
-##  [3] &quot;Portrait of Man in a Cap                                                                            (1950)&quot;                      
-##  [4] &quot;Seated Male Nude                                                                            (1958)&quot;                              
-##  [5] &quot;Striding Male Nude                                                                            (1950)&quot;                            
-##  [6] &quot;Riders from South Frieze of the Parthenon                                                                            (1836-1837)&quot;
-##  [7] &quot;Figure of a river-god from west pediment                                    &quot;                                                    
-##  [8] &quot;William Shakespeare Otelo                                                                            (1983)&quot;                     
-##  [9] &quot;Untitled                                    &quot;                                                                                    
-## [10] &quot;Untitled                                                                            (12 Jun 2014)&quot;</code></pre>
+<pre><code>##  [1] &quot;Portrait of a Woman                                                                            (1953)&quot;     
+##  [2] &quot;Unknown                                                                            (1957)&quot;                 
+##  [3] &quot;Untitled - Woman and Man                                                                            (1981)&quot;
+##  [4] &quot;Unknown                                    &quot;                                                               
+##  [5] &quot;Untitled                                                                            (1971)&quot;                
+##  [6] &quot;Untitled                                                                            (Unknown)&quot;             
+##  [7] &quot;Unknown                                                                            (1968)&quot;                 
+##  [8] &quot;Plate                                    &quot;                                                                 
+##  [9] &quot;Untitled                                                                            (Unknown)&quot;             
+## [10] &quot;Pekin knot sample                                    &quot;</code></pre>
 <p>And get rid of all the spurious white space in the text with
 <code>str_squish()</code>, which reduces repeated whitespace inside a
 string.</p>
@@ -692,16 +692,16 @@ how it’s different from <code>str_trim()</code>.</span></span></p>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;h3 a&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_squish</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;Reclining Male Nude (1949)&quot;                           
-##  [2] &quot;Untitled - Woman and Man (1981)&quot;                      
-##  [3] &quot;Portrait of Man in a Cap (1950)&quot;                      
-##  [4] &quot;Seated Male Nude (1958)&quot;                              
-##  [5] &quot;Striding Male Nude (1950)&quot;                            
-##  [6] &quot;Riders from South Frieze of the Parthenon (1836-1837)&quot;
-##  [7] &quot;Figure of a river-god from west pediment&quot;             
-##  [8] &quot;William Shakespeare Otelo (1983)&quot;                     
-##  [9] &quot;Untitled&quot;                                             
-## [10] &quot;Untitled (12 Jun 2014)&quot;</code></pre>
+<pre><code>##  [1] &quot;Portrait of a Woman (1953)&quot;     
+##  [2] &quot;Unknown (1957)&quot;                 
+##  [3] &quot;Untitled - Woman and Man (1981)&quot;
+##  [4] &quot;Unknown&quot;                        
+##  [5] &quot;Untitled (1971)&quot;                
+##  [6] &quot;Untitled (Unknown)&quot;             
+##  [7] &quot;Unknown (1968)&quot;                 
+##  [8] &quot;Plate&quot;                          
+##  [9] &quot;Untitled (Unknown)&quot;             
+## [10] &quot;Pekin knot sample&quot;</code></pre>
 <p>And finally save the resulting data as a vector of length 10:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> page <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;.iteminfo&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -729,16 +729,16 @@ if you click on the hyperlinked text:
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;.iteminfo&quot;</span>) <span class="sc">%&gt;%</span>   <span class="co"># same nodes</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;h3 a&quot;</span>) <span class="sc">%&gt;%</span>         <span class="co"># as before</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&quot;href&quot;</span>)             <span class="co"># but get href attribute instead of text</span></span></code></pre></div>
-<pre><code>##  [1] &quot;./record/21324?highlight=*:*&quot; 
-##  [2] &quot;./record/99439?highlight=*:*&quot; 
-##  [3] &quot;./record/21073?highlight=*:*&quot; 
-##  [4] &quot;./record/21158?highlight=*:*&quot; 
-##  [5] &quot;./record/21054?highlight=*:*&quot; 
-##  [6] &quot;./record/20721?highlight=*:*&quot; 
-##  [7] &quot;./record/20633?highlight=*:*&quot; 
-##  [8] &quot;./record/22040?highlight=*:*&quot; 
-##  [9] &quot;./record/112501?highlight=*:*&quot;
-## [10] &quot;./record/22479?highlight=*:*&quot;</code></pre>
+<pre><code>##  [1] &quot;./record/21197?highlight=*:*&quot; 
+##  [2] &quot;./record/50508?highlight=*:*&quot; 
+##  [3] &quot;./record/99439?highlight=*:*&quot; 
+##  [4] &quot;./record/50548?highlight=*:*&quot; 
+##  [5] &quot;./record/21836?highlight=*:*&quot; 
+##  [6] &quot;./record/21881?highlight=*:*&quot; 
+##  [7] &quot;./record/53591?highlight=*:*&quot; 
+##  [8] &quot;./record/53718?highlight=*:*&quot; 
+##  [9] &quot;./record/21557?highlight=*:*&quot; 
+## [10] &quot;./record/102730?highlight=*:*&quot;</code></pre>
 <p>These don’t really look like URLs as we know then though. They’re
 relative links.</p>
 <p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;">See the help for
