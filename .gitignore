@@ -3,7 +3,8 @@
 .Rproj.user
 _book
 _bookdown_files
-*.rds
+datasciencebox.rds
+render*.rds
 *.key
 *.docx
 .Rapp.history
