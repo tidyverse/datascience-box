@@ -29,7 +29,12 @@ Once a workspace is set up, instructors can invite students to the workspace via
 Workspaces allow for various permission levels which can be assigned to students, teaching assistants, and instructors.
 Then, each assignment/project in the course maps to an RStudio Cloud project.
 
-```{r rscloud-bigpicture, fig.align="center", echo=FALSE, fig.cap="RStudio Cloud classroom structure"}
+```{r}
+#| label: rscloud-bigpicture
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "RStudio Cloud classroom structure"
+
 include_graphics(path = "images/rscloud-bigpicture.png")
 ```
 
@@ -42,7 +47,12 @@ You can update the information once the space is created, however you can't chan
 For the name,\
 I recommend using something along the lines of Course number - Semester.
 
-```{r rscloud-new-workspace, fig.align="center", echo=FALSE, fig.cap="Creating a new workspace on RStudio Cloud"}
+```{r}
+#| label: rscloud-new-workspace
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Creating a new workspace on RStudio Cloud"
+
 include_graphics(path = "images/rscloud-new-workspace.png")
 ```
 
@@ -51,7 +61,12 @@ You can do this by sending invitations or using a sharing link.
 I recommend using the latter approach for efficiency.
 Once all of your students are in the course (or once drop/add period ends) you can change the settings so that additional members cannot join throughout the semester using the sharing link, and can only be added via an invitation from the instructor.
 
-```{r rscloud-workspace-permissions, fig.align="center", echo=FALSE, fig.cap="Setting workspace permissions"}
+```{r}
+#| label: rscloud-workspace-permissions
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Setting workspace permissions"
+
 include_graphics(path = "images/rscloud-workspace-permissions.png")
 ```
 
@@ -80,7 +95,12 @@ A project in RStudio Cloud is equivalent to an RStudio project.
 If you are an RStudio user, but you don't use projects, I highly recommend considering switching your workflow to include projects.
 You can learn more about them [here](http://r4ds.had.co.nz/workflow-projects.html#rstudio-projects).
 
-```{r rscloud-new-project, fig.align="center", echo=FALSE, fig.cap="A new project in RStudio Cloud is a new project in the RStudio IDE"}
+```{r}
+#| label: rscloud-new-project
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "A new project in RStudio Cloud is a new project in the RStudio IDE"
+
 include_graphics(path = "images/rscloud-new-project.png")
 ```
 
@@ -95,7 +115,12 @@ This default has two advantages:
 When your project is ready to be shared with the students in your course, you can adjust the access level by clicking on the gear icon to reveal the settings menu.
 You should also check the "Make this project an assignment" box so that when a student starts their assignment RStudio Cloud automatically makes a copy of the project for them.
 
-```{r rscloud-project-permissions, fig.align="center", echo=FALSE, fig.cap="Setting project permissions within a workspace"}
+```{r}
+#| label: rscloud-project-permissions
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Setting project permissions within a workspace"
+
 include_graphics(path = "images/rscloud-project-permissions.png")
 ```
 
@@ -106,7 +131,12 @@ You can use this by defining a base project template for the space.
 Simply create a new project and add any packages or files you want projects created in the space to start with.
 After creating your project, select it on the Settings page as the base project template.
 
-```{r rscloud-base-template, fig.align="center", echo=FALSE, fig.cap="Selecting a base project template"}
+```{r}
+#| label: rscloud-base-template
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Selecting a base project template"
+
 include_graphics(path = "images/rscloud-base-template.png")
 ```
 
@@ -120,7 +150,12 @@ Therefore updating the base project will not break projects already created with
 
 It is possible to create (clone) a new project in RStudio Cloud from a GitHub repository, just like in the RStudio IDE.
 
-```{r rscloud-git-project, fig.align="center", echo=FALSE, fig.cap="Creating a new project from GitHub repository"}
+```{r}
+#| label: rscloud-git-project
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Creating a new project from GitHub repository"
+
 include_graphics(path = "images/rscloud-git-project.png")
 ```
 

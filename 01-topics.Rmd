@@ -2,7 +2,15 @@
 
 The course content is organized in three units:
 
-```{r topic-flow, fig.align="center", echo=FALSE, fig.asp=0.3, out.width="100%"}
+```{r}
+#| topic-flow
+#| fig-align: "center"
+#| echo: false
+#| fig-asp: 0.3
+#| out-width: "100%"
+#| fig-alt: |
+#|   Workflow diagram showing five course units described in the following text.
+
 library(DiagrammeR)
 
 hello_border <- "#333333"

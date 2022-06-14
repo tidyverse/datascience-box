@@ -13,7 +13,14 @@ This course is designed with five principles in mind:
 Assuming you like chocolate and strawberries, which of the following images is more likely to make you want to learn to bake a cake?
 I'm guessing the answer is the image on the left: the cake.
 
-```{r cake-ingredients, fig.align="center", echo=FALSE}
+```{r}
+#| labe: cake-ingredients
+#| fig-align: "center"
+#| echo: false
+#| fig-alt: |
+#|   Two pictures side-by-side. The first shows ingredients. The second shows 
+#|   a baked cake.
+
 include_graphics(path = "images/design-cake-ingredients.png")
 ```
 
@@ -23,7 +30,14 @@ Specifically, instead of starting with data structures and functions, we start d
 And not just a toy example, but a complex, multivariate data visualization.
 Of course, we don't want students feeling like...
 
-```{r owl, fig.align="center", echo=FALSE}
+```{r}
+#| label: owl
+#| fig-align: "center"
+#| echo: false
+#| fig-alt: |
+#|   Illustration titled "How to draw an owl". Step 1 is just two circles. 
+#|   Step 2 is a complete owl.
+
 include_graphics(path = "images/design-owl.jpg")
 ```
 

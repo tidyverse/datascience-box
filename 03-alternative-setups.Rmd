@@ -19,7 +19,12 @@ The figure below is a sketch of the architecture of the centralized RStudio serv
 This works well for upper division and graduate level courses as most students are directly affiliated with the department.
 Students taking courses who are not affiliated with the department are issued temporary visitor accounts which expire at the end of the semester.
 
-```{r alt-centralized-server, fig.align="center", echo=FALSE, fig.cap="Centralized RStudio server"}
+```{r}
+#| label: alt-centralized-server
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Centralized RStudio server"
+
 include_graphics(path = "images/alt-centralized-server.png")
 ```
 
@@ -36,7 +41,12 @@ For example, advanced courses can include homework assignments where students ne
 A second approach to running RStudio server involves the construction and hosting of a farm of individualized Docker container instances.
 A sketch of the architecture of the Docker containers is in the figure below, which shows that students authenticate via university login which redirects them to a personal RStudio instance running in a Docker container on either a local or cloud based server.
 
-```{r alt-docker, fig.align="center", echo=FALSE, fig.cap="Dockerized RStudio server"}
+```{r}
+#| label: alt-docker
+#| fig-align: "center"
+#| echo: false
+#| fig-cap: "Dockerized RStudio server"
+
 include_graphics(path = "images/alt-docker.png")
 ```
 
