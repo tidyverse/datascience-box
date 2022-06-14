@@ -29,7 +29,7 @@ They are also of interest to citizens who want to stay informed of how much mone
 In the United States, *"only American citizens (and immigrants with green cards) can contribute to federal politics, but the American divisions of foreign companies can form political action committees (PACs) and collect contributions from their American employees."*[^hw-06-money-in-politics-1]
 
 In this assignment we will scrape and work with data foreign connected PACs that donate to US political campaigns.
-First, we will get data foreign connected PAC contributions in the 2020 election cycle.
+First, we will get data foreign connected PAC contributions in the 2022 election cycle.
 Then, you will use a similar approach to get data such contributions from previous years so that we can examine trends over time.
 
 In order to complete this assignment you will need a Chrome browser with the [Selector Gadget extension](http://selectorgadget.com/) installed.
@@ -88,7 +88,7 @@ Since that means repeating a task many times, let's first write a function that 
 Confirm it works on a few others.
 Then iterate it over pages for all years.
 
-::: {.box}
+::: box
 Complete the following set of steps in the `scrape-pac.R` file in the `scripts` folder of your repository.
 This file already contains some starter code to help you out.
 :::
@@ -101,7 +101,7 @@ This file already contains some starter code to help you out.
     -   clean up the `Country of Origin/Parent Company` variable with `str_squish()`.
     -   add a new column to the data frame for `year`. We will want this information when we ultimately have data from all years, so this is a good time to keep track of it. Our function doesn't take a year argument, but the year is embedded in the URL, so we can extract it out of there, and add it as a new column. Use the `str_sub()` function to extract the last 4 characters from the URL. You will probably want to look at the help for this function to figure out how to specify "last 4 characters".
 
--   Define the URLs for 2020, 2018, and 1998 contributions.
+-   Define the URLs for 2022, 2020, and 2000 contributions.
     Then, test your function using these URLs as inputs.
     Does the function seem to do what you expected it to do?
 
@@ -115,7 +115,7 @@ This file already contains some starter code to help you out.
 
 <div>
 
-Complete the following set of steps in the `hw-05.Rmd` file in your repository.
+Complete the following set of steps in the `hw-06.Rmd` file in your repository.
 
 </div>
 
