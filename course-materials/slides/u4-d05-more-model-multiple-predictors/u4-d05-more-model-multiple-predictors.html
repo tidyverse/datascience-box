@@ -19,9 +19,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # More models with multiple predictors
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -74,10 +80,10 @@ tidy(pp_fit)
 ```
 
 ```
-## # A tibble: 3 x 5
+## # A tibble: 3 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 1 (Intercept)   4.77     0.0579      82.4  0       
 ## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
 ## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
 ```
@@ -88,10 +94,10 @@ tidy(pp_fit)
 
 
 ```
-## # A tibble: 3 x 5
+## # A tibble: 3 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   4.77     0.0579      82.4  0.      
+## 1 (Intercept)   4.77     0.0579      82.4  0       
 ## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
 ## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
 ```
@@ -107,8 +113,8 @@ tidy(pp_fit)
 .panelset[
 .panel[.panel-name[Plot]
 .pull-left-wide[
-<div id="htmlwidget-e314a9658508aa12f815" style="width:100%;height:1483.2px;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e314a9658508aa12f815">{"x":{"url":"u4-d05-more-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c2e3fede5c798441fdae" style="width:100%;height:1483.2px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c2e3fede5c798441fdae">{"x":{"url":"u4-d05-more-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 ]
 ]
 .panel[.panel-name[Code]
@@ -156,7 +162,7 @@ pp %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   artistliving     n
 ##   &lt;chr&gt;        &lt;int&gt;
 ## 1 Deceased      2937
@@ -184,7 +190,7 @@ ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
   geom_histogram(binwidth = 500) + 
   facet_grid(artistliving ~ .) +
   scale_fill_manual(values = c("#E48957", "#071381")) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(x = "Surface area", y = NULL) +
   geom_vline(xintercept = 1000) +
   geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")
@@ -292,10 +298,10 @@ tidy(pp_main_fit)
 ```
 
 ```
-## # A tibble: 3 x 5
+## # A tibble: 3 × 5
 ##   term               estimate std.error statistic  p.value
 ##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)        4.88     0.0424       115.   0.      
+## 1 (Intercept)        4.88     0.0424       115.   0       
 ## 2 Surface            0.000265 0.0000415      6.39 1.85e-10
 ## 3 artistlivingLiving 0.137    0.0970         1.41 1.57e- 1
 ```
@@ -347,7 +353,7 @@ tidy(pp_main_fit) %&gt;%
 ```
 
 ```
-## # A tibble: 3 x 3
+## # A tibble: 3 × 3
 ##   term               estimate exp_estimate
 ##   &lt;chr&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
 ## 1 (Intercept)        4.88           132.  
@@ -397,13 +403,13 @@ tidy(pp_int_fit)
 ```
 
 ```
-## # A tibble: 4 x 5
-##   term                     estimate std.error statistic   p.value
-##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 (Intercept)              4.91     0.0432       114.     0.     
-## 2 Surface                  0.000206 0.0000442      4.65   3.37e-6
-## 3 artistlivingLiving      -0.126    0.119         -1.06   2.89e-1
-## 4 Surface:artistlivingLi…  0.000479 0.000126       3.81   1.39e-4
+## # A tibble: 4 × 5
+##   term                       estimate std.error statistic p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)                 4.91e+0 0.0432       114.   0      
+## 2 Surface                     2.06e-4 0.0000442      4.65 3.37e-6
+## 3 artistlivingLiving         -1.26e-1 0.119         -1.06 2.89e-1
+## 4 Surface:artistlivingLiving  4.79e-4 0.000126       3.81 1.39e-4
 ```
 ]
 
@@ -414,13 +420,13 @@ tidy(pp_int_fit)
 .midi[
 
 ```
-## # A tibble: 4 x 5
-##   term                     estimate std.error statistic   p.value
-##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 (Intercept)              4.91     0.0432       114.     0.     
-## 2 Surface                  0.000206 0.0000442      4.65   3.37e-6
-## 3 artistlivingLiving      -0.126    0.119         -1.06   2.89e-1
-## 4 Surface:artistlivingLi…  0.000479 0.000126       3.81   1.39e-4
+## # A tibble: 4 × 5
+##   term                       estimate std.error statistic p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)                 4.91e+0 0.0432       114.   0      
+## 2 Surface                     2.06e-4 0.0000442      4.65 3.37e-6
+## 3 artistlivingLiving         -1.26e-1 0.119         -1.06 2.89e-1
+## 4 Surface:artistlivingLiving  4.79e-4 0.000126       3.81 1.39e-4
 ```
 ]
 
@@ -533,6 +539,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

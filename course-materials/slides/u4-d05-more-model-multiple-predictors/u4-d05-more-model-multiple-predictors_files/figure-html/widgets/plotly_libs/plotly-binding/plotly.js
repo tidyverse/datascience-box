@@ -74,7 +74,7 @@ HTMLWidgets.widget({
     });
       
       // inject a "control panel" holding selectize/dynamic color widget(s)
-    if (x.selectize || x.highlight.dynamic && !instance.plotly) {
+    if ((x.selectize || x.highlight.dynamic) && !instance.plotly) {
       var flex = document.createElement("div");
       flex.class = "plotly-crosstalk-control-panel";
       flex.style = "display: flex; flex-wrap: wrap";
@@ -159,9 +159,13 @@ HTMLWidgets.widget({
     // if no plot exists yet, create one with a particular configuration
     if (!instance.plotly) {
       
-      var plot = Plotly.plot(graphDiv, x);
+      var plot = Plotly.newPlot(graphDiv, x);
       instance.plotly = true;
       
+    } else if (x.layout.transition) {
+      
+      var plot = Plotly.react(graphDiv, x);
+    
     } else {
       
       // this is essentially equivalent to Plotly.newPlot(), but avoids creating 
@@ -173,7 +177,7 @@ HTMLWidgets.widget({
       // TODO: why is this necessary to get crosstalk working?
       graphDiv.data = undefined;
       graphDiv.layout = undefined;
-      var plot = Plotly.plot(graphDiv, x);
+      var plot = Plotly.newPlot(graphDiv, x);
     }
     
     // Trigger plotly.js calls defined via `plotlyProxy()`

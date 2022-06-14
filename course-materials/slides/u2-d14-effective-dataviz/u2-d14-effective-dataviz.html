@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Tips for effective data visualization
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -446,7 +452,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1) +
-* guides(fill = FALSE)
+* guides(fill = "none")
 ```
 ]
 
@@ -469,7 +475,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
 *   title = "Was Britain right/wrong to vote to leave EU?",
     x = NULL, y = NULL
@@ -496,7 +502,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
     title = "Was Britain right/wrong to vote to leave EU?",
 *   subtitle = "YouGov Survey Results, 2-3 September 2019",
@@ -525,7 +531,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
     title = "Was Britain right/wrong to vote to leave EU?",
     subtitle = "YouGov Survey Results, 2-3 September 2019",
@@ -557,7 +563,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
     nrow = 1,
 *   labeller = label_wrap_gen(width = 12)
   ) + 
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(
     title = "Was Britain right/wrong to vote to leave EU?",
     subtitle = "YouGov Survey Results, 2-3 September 2019",
@@ -598,7 +604,7 @@ class: middle
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1, labeller = label_wrap_gen(width = 12)) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(title = "Was Britain right/wrong to vote to leave EU?",
        subtitle = "YouGov Survey Results, 2-3 September 2019",
        caption = "Source: bit.ly/2lCJZVg",
@@ -640,7 +646,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1, labeller = label_wrap_gen(width = 12)) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(title = "Was Britain right/wrong to vote to leave EU?",
        subtitle = "YouGov Survey Results, 2-3 September 2019",
        caption = "Source: bit.ly/2lCJZVg",
@@ -672,7 +678,7 @@ ggplot(brexit, aes(y = opinion, fill = opinion)) +
 ggplot(brexit, aes(y = opinion, fill = opinion)) +
   geom_bar() +
   facet_wrap(~region, nrow = 1, labeller = label_wrap_gen(width = 12)) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   labs(title = "Was Britain right/wrong to vote to leave EU?",
        subtitle = "YouGov Survey Results, 2-3 September 2019",
        caption = "Source: bit.ly/2lCJZVg",
@@ -743,6 +749,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

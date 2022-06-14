@@ -18,9 +18,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Fitting and interpreting models
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -80,6 +86,8 @@ linear_reg()
 
 ```
 ## Linear Regression Model Specification (regression)
+## 
+## Computational engine: lm
 ```
 
 ---
@@ -114,7 +122,6 @@ linear_reg() %&gt;%
 ```
 ## parsnip model object
 ## 
-## Fit time:  1ms 
 ## 
 ## Call:
 ## stats::lm(formula = Height_in ~ Width_in, data = data)
@@ -132,7 +139,6 @@ linear_reg() %&gt;%
 ```
 ## parsnip model object
 ## 
-## Fit time:  32ms 
 ## 
 ## Call:
 ## stats::lm(formula = Height_in ~ Width_in, data = data)
@@ -159,11 +165,11 @@ linear_reg() %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 5
+## # A tibble: 2 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)    3.62    0.254        14.3 8.82e-45
-## 2 Width_in       0.781   0.00950      82.1 0.
+## 2 Width_in       0.781   0.00950      82.1 0
 ```
 
 .large[
@@ -278,7 +284,7 @@ class: middle
 .small[
 
 ```
-## # A tibble: 3,393 x 3
+## # A tibble: 3,393 × 3
 ##    name      Height_in landsALL
 ##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 L1764-2          37        0
@@ -323,10 +329,10 @@ linear_reg() %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 5
+## # A tibble: 2 × 5
 ##   term              estimate std.error statistic  p.value
 ##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)          22.7      0.328      69.1 0.      
+## 1 (Intercept)          22.7      0.328      69.1 0       
 ## 2 factor(landsALL)1    -5.65     0.532     -10.6 7.97e-26
 ```
 
@@ -354,10 +360,10 @@ linear_reg() %&gt;%
 ```
 
 ```
-## # A tibble: 7 x 5
+## # A tibble: 7 × 5
 ##   term            estimate std.error statistic p.value
 ##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 1 (Intercept)        14.0       10.0     1.40  0.162  
 ## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
 ## 3 school_pntgF       10.2       10.0     1.02  0.309  
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
@@ -372,10 +378,10 @@ linear_reg() %&gt;%
 
 
 ```
-## # A tibble: 7 x 5
+## # A tibble: 7 × 5
 ##   term            estimate std.error statistic p.value
 ##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 1 (Intercept)        14.0       10.0     1.40  0.162  
 ## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
 ## 3 school_pntgF       10.2       10.0     1.02  0.309  
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
@@ -475,7 +481,7 @@ linear_reg() %&gt;%
 .small[
 
 ```
-## # A tibble: 3,393 x 3
+## # A tibble: 3,393 × 3
 ##    name      Height_in school_pntg
 ##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
 ##  1 L1764-2          37 F          
@@ -510,10 +516,10 @@ linear_reg() %&gt;%
 .small[
 
 ```
-## # A tibble: 7 x 5
+## # A tibble: 7 × 5
 ##   term            estimate std.error statistic p.value
 ##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)        14.        10.0     1.40  0.162  
+## 1 (Intercept)        14.0       10.0     1.40  0.162  
 ## 2 school_pntgD/FL     2.33      10.0     0.232 0.816  
 ## 3 school_pntgF       10.2       10.0     1.02  0.309  
 ## 4 school_pntgG        1.65      11.9     0.139 0.889  
@@ -578,6 +584,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

@@ -24,8 +24,6 @@ library(knitr)
 library(openintro)
 library(scales)
 set.seed(1234)
-
-elmhurst_boot <- bootstraps(elmhurst, times = 1000)
 ```
 
 class: middle
@@ -309,10 +307,9 @@ ggplot(elmhurst, aes(x = family_income, y = gift_aid)) +
 Generated assuming there are more students like the ones in the observed sample...
 
 ```{r echo=FALSE, warning=FALSE}
-elmhurst_boot %>% 
-  slice_head(n = 50) %>%
-  hoist(splits, "data") %>% 
-  unnest(data) %>% 
+elmhurst %>%
+  specify(gift_aid ~ family_income) %>%
+  generate(reps = 50, type = "bootstrap") %>%
   ggplot(aes(x = family_income, y = gift_aid)) +
   geom_jitter(alpha = 0.11, width = 30, height = 10) +
   geom_point(data = elmhurst, mapping = aes(x = family_income, y = gift_aid), color = "#8E2C90", size = 2) +
@@ -508,23 +505,21 @@ we could keep going...
 ## Many many samples...
 
 ```{r echo=FALSE}
-elmhurst_models <- elmhurst_boot %>%
-  mutate(
-    model = map(splits, ~ lm(gift_aid ~ family_income, data = .)),
-    coef_info = map(model, tidy)
-  )
+elmhurst_resamples <- elmhurst %>%
+  specify(gift_aid ~ family_income) %>% 
+  generate(reps = 1000, type = "bootstrap")
 
-elmhurst_coefs <- elmhurst_models %>%
-  unnest(coef_info)
+elmhurst_models <- elmhurst_resamples %>%
+  fit()
 
-elmhurst_aug <- elmhurst_models %>%
-  slice_sample(n = 200) %>%
-  mutate(augmented = map(model, augment)) %>%
-  unnest(augmented)
+elmhurst_models_100 <- elmhurst_models %>%
+  filter(replicate <= 100) %>%
+  pivot_wider(names_from = term, values_from  = estimate)
 
-ggplot(elmhurst_aug, aes(x = family_income, y = gift_aid)) +
-  geom_line(aes(y = .fitted, group = id), alpha = 0.5, col = "gray") +
+ggplot(elmhurst, aes(x = family_income, y = gift_aid)) +
   geom_point(color = "#8E2C90") +
+  geom_abline(data = elmhurst_models_100, aes(intercept = intercept, slope = family_income),
+              alpha = 0.3, col = "gray") +
   scale_x_continuous(labels = label_dollar(suffix = "K"), limits = c(0, 275)) + 
   scale_y_continuous(labels = label_dollar(suffix = "K"), limits = c(0, 42)) +
   labs(
@@ -539,9 +534,10 @@ ggplot(elmhurst_aug, aes(x = family_income, y = gift_aid)) +
 ## Slopes of bootstrap samples
 
 ```{r echo=FALSE}
-elmhurst_coefs %>%
-  filter(term == "family_income") %>%
-  ggplot(aes(estimate)) +
+elmhurst_boot_dist <- elmhurst_resamples %>%
+  calculate(stat = "slope")
+
+ggplot(elmhurst_boot_dist, aes(stat)) +
   geom_histogram(binwidth = 0.0025, alpha = 0.7, fill = "gray") +
   labs(title = "Slopes of bootstrap samples")
 ```
@@ -551,53 +547,11 @@ elmhurst_coefs %>%
 ## 95% confidence interval
 
 ```{r echo=FALSE}
-intervals <- int_pctl(elmhurst_models, coef_info) %>%
-  filter(term == "family_income")
+elmhurst_ci <- elmhurst_boot_dist %>%
+  get_ci()
 
-elmhurst_coefs %>%
-  filter(term == "family_income") %>%
-  ggplot(aes(estimate)) +
-  geom_histogram(binwidth = 0.0025, alpha = 0.7, fill = "gray") +
-  labs(title = "Distribution of slopes of bootstrap samples") +
-  geom_segment(
-    aes(
-      x = intervals %>% pull(.lower),
-      xend = intervals %>% pull(.lower),
-      y = 0,
-      yend = 25
-    ),
-    linetype = "dashed"
-  ) +
-  geom_text(
-    aes(x = intervals %>% pull(.lower), y = 30),
-    label = as.character(intervals %>% pull(.lower) %>% round(4)), size = 6
-  ) +
-  geom_segment(
-    aes(
-      x = intervals %>% pull(.upper),
-      xend = intervals %>% pull(.upper),
-      y = 0,
-      yend = 25
-    ),
-    linetype = "dashed"
-  ) +
-  geom_text(
-    aes(x = intervals %>% pull(.upper), y = 30),
-    label = as.character(intervals %>% pull(.upper) %>% round(4)), size = 6
-  ) +
-  geom_segment(
-    aes(
-      x = elmhurst_slope_obs,
-      xend = elmhurst_slope_obs,
-      y = 0,
-      yend = 25
-    ),
-    color = "#8E2C90"
-  ) +
-  geom_text(
-    aes(x = elmhurst_slope_obs, y = 30),
-    label = as.character(elmhurst_slope_obs), size = 6, color = "#8E2C90"
-  )
+visualize(elmhurst_boot_dist) +
+  shade_confidence_interval(endpoints = elmhurst_ci)
 ```
 
 ---
@@ -605,35 +559,7 @@ elmhurst_coefs %>%
 ## Interpreting the slope, take two
 
 ```{r echo=FALSE}
-int_pctl(elmhurst_models, coef_info)
+elmhurst_ci
 ```
 
-**We are 95% confident that** for each additional $1,000 of family income, we would expect students to receive $69.50 to $21.90 less in gift aid, on average.
-
----
-
-## Code
-
-```{r eval=FALSE}
-# set a seed
-set.seed(1234)
-
-# take 1000 bootstrap samples
-elmhurst_boot <- bootstraps(elmhurst, times = 1000)
-
-# for each sample
-# fit a model and save output in model column
-# tidy model output and save in coef_info column 
-elmhurst_models <- elmhurst_boot %>%
-  mutate(
-    model = map(splits, ~ lm(gift_aid ~ family_income, data = .)),
-    coef_info = map(model, tidy)
-  )
-
-# unnest coef_info (for intercept and slope)
-elmhurst_coefs <- elmhurst_models %>%
-  unnest(coef_info)
-
-# calculate 95% (default) percentile interval
-int_pctl(elmhurst_models, coef_info)
-```
+**We are 95% confident that** for each additional $1,000 of family income, we would expect students to receive $`r abs(round(elmhurst_ci$lower_ci * 1000, 2))` to $`r abs(round(elmhurst_ci$upper_ci * 1000, 2))` less in gift aid, on average.

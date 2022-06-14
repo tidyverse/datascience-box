@@ -235,6 +235,7 @@
 
       const contents = panels.map(processPanelItem).filter(o => o !== null)
       const newPanelSet = reflowPanelSet(contents, idx)
+      newPanelSet.classList = panelset.classList
       panelset.parentNode.insertBefore(newPanelSet, panelset)
       panelset.parentNode.removeChild(panelset)
 

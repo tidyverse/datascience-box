@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Grammar of data wrangling
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -165,7 +171,7 @@ select(hotels, lead_time)
 ```
 
 ```
-## # A tibble: 119,390 x 1
+## # A tibble: 119,390 × 1
 ##   lead_time
 ##       &lt;dbl&gt;
 ## 1       342
@@ -245,7 +251,7 @@ select(
 ```
 
 ```
-## # A tibble: 119,390 x 1
+## # A tibble: 119,390 × 1
 ##   lead_time
 ##       &lt;dbl&gt;
 ## 1       342
@@ -276,7 +282,7 @@ select(hotels, lead_time)
 ```
 
 ```
-## # A tibble: 119,390 x 1
+## # A tibble: 119,390 × 1
 ##   lead_time
 ##       &lt;dbl&gt;
 ## 1       342
@@ -304,7 +310,7 @@ select(hotels, hotel, lead_time)
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       342
@@ -336,7 +342,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       342
@@ -360,7 +366,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       737
@@ -400,7 +406,7 @@ In programming, a pipe is a technique for passing information from one process t
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       737
@@ -434,7 +440,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       737
@@ -469,7 +475,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       737
@@ -565,7 +571,7 @@ hotels %&gt;%
 
 
 ```
-## # A tibble: 119,390 x 2
+## # A tibble: 119,390 × 2
 ##   hotel        lead_time
 ##   &lt;chr&gt;            &lt;dbl&gt;
 ## 1 Resort Hotel       342
@@ -589,7 +595,8 @@ ggplot(hotels, aes(x = hotel, fill = deposit_type)) %&gt;%
 ```
 
 ```
-## Error: `mapping` must be created by `aes()`
+## Error in `validate_mapping()`:
+## ! `mapping` must be created by `aes()`
 ## Did you use %&gt;% instead of +?
 ```
 
@@ -675,6 +682,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

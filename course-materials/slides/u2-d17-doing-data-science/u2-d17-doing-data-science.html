@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Doing data science
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -155,14 +161,14 @@ fav_food
 ```
 
 ```
-## # A tibble: 5 x 6
-##   `Student ID` `Full Name`  favourite.food  mealPlan  AGE   SES  
-##          &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
-## 1            1 Sunil Huffm… Strawberry yog… Lunch on… 4     High 
-## 2            2 Barclay Lynn French fries    Lunch on… 5     Midd…
-## 3            3 Jayendra Ly… N/A             Breakfas… 7     Low  
-## 4            4 Leon Rossini Anchovies       Lunch on… 99999 Midd…
-## 5            5 Chidiegwu D… Pizza           Breakfas… five  High
+## # A tibble: 5 × 6
+##   `Student ID` `Full Name`    favourite.food mealPlan AGE   SES  
+##          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;
+## 1            1 Sunil Huffmann Strawberry yo… Lunch o… 4     High 
+## 2            2 Barclay Lynn   French fries   Lunch o… 5     Midd…
+## 3            3 Jayendra Lyne  N/A            Breakfa… 7     Low  
+## 4            4 Leon Rossini   Anchovies      Lunch o… 99999 Midd…
+## 5            5 Chidiegwu Dun… Pizza          Breakfa… five  High
 ```
 
 ---
@@ -178,14 +184,14 @@ fav_food %&gt;% clean_names()
 ```
 
 ```
-## # A tibble: 5 x 6
-##   student_id full_name   favourite_food   meal_plan   age   ses  
-##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
-## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
-## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
-## 3          3 Jayendra L… N/A              Breakfast … 7     Low  
-## 4          4 Leon Rossi… Anchovies        Lunch only  99999 Midd…
-## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+## # A tibble: 5 × 6
+##   student_id full_name       favourite_food meal_plan age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huffmann  Strawberry yo… Lunch on… 4     High 
+## 2          2 Barclay Lynn    French fries   Lunch on… 5     Midd…
+## 3          3 Jayendra Lyne   N/A            Breakfas… 7     Low  
+## 4          4 Leon Rossini    Anchovies      Lunch on… 99999 Midd…
+## 5          5 Chidiegwu Dunk… Pizza          Breakfas… five  High
 ```
 
 ---
@@ -232,7 +238,7 @@ squirrels %&gt;% head()
 ```
 
 ```
-## # A tibble: 6 x 35
+## # A tibble: 6 × 35
 ##    long   lat unique_squirrel_id hectare shift date      
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;    
 ## 1 -74.0  40.8 13A-PM-1014-04     13A     PM    2018-10-14
@@ -247,14 +253,7 @@ squirrels %&gt;% head()
 ## #   combination_of_primary_and_highlight_color &lt;chr&gt;,
 ## #   color_notes &lt;chr&gt;, location &lt;chr&gt;,
 ## #   above_ground_sighter_measurement &lt;chr&gt;,
-## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
-## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;,
-## #   other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
-## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;,
-## #   approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;, runs_from &lt;lgl&gt;,
-## #   other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;,
-## #   community_districts &lt;dbl&gt;, borough_boundaries &lt;dbl&gt;,
-## #   city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;, …
 ```
 
 ---
@@ -268,7 +267,7 @@ squirrels %&gt;% tail()
 ```
 
 ```
-## # A tibble: 6 x 35
+## # A tibble: 6 × 35
 ##    long   lat unique_squirrel_id hectare shift date      
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;    
 ## 1 -74.0  40.8 6D-PM-1020-01      06D     PM    2018-10-20
@@ -283,14 +282,7 @@ squirrels %&gt;% tail()
 ## #   combination_of_primary_and_highlight_color &lt;chr&gt;,
 ## #   color_notes &lt;chr&gt;, location &lt;chr&gt;,
 ## #   above_ground_sighter_measurement &lt;chr&gt;,
-## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;,
-## #   climbing &lt;lgl&gt;, eating &lt;lgl&gt;, foraging &lt;lgl&gt;,
-## #   other_activities &lt;chr&gt;, kuks &lt;lgl&gt;, quaas &lt;lgl&gt;,
-## #   moans &lt;lgl&gt;, tail_flags &lt;lgl&gt;, tail_twitches &lt;lgl&gt;,
-## #   approaches &lt;lgl&gt;, indifferent &lt;lgl&gt;, runs_from &lt;lgl&gt;,
-## #   other_interactions &lt;chr&gt;, zip_codes &lt;dbl&gt;,
-## #   community_districts &lt;dbl&gt;, borough_boundaries &lt;dbl&gt;,
-## #   city_council_districts &lt;dbl&gt;, police_precincts &lt;dbl&gt;
+## #   specific_location &lt;chr&gt;, running &lt;lgl&gt;, chasing &lt;lgl&gt;, …
 ```
 ]
 
@@ -301,7 +293,7 @@ squirrels %&gt;% tail()
 .pull-left[
 
 ```
-## # A tibble: 3,023 x 2
+## # A tibble: 3,023 × 2
 ##     long   lat
 ##    &lt;dbl&gt; &lt;dbl&gt;
 ##  1 -74.0  40.8
@@ -414,7 +406,7 @@ squirrels %&gt;%
 ```
 
 ```
-## # A tibble: 11 x 3
+## # A tibble: 11 × 3
 ##   shift age   other_interactions                                 
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                                              
 ## 1 AM    Adult staring at us                                      
@@ -482,6 +474,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

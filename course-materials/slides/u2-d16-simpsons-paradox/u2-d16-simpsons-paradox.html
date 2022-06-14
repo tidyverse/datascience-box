@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Simpson’s paradox
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -58,7 +64,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ##    admit    gender dept 
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
 ##  1 Admitted Male   A    
@@ -82,7 +88,7 @@ class: middle
 .pull-right[
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender     n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Female  1835
@@ -90,7 +96,7 @@ class: middle
 ```
 
 ```
-## # A tibble: 6 x 2
+## # A tibble: 6 × 2
 ##   dept      n
 ##   &lt;ord&gt; &lt;int&gt;
 ## 1 A       933
@@ -102,7 +108,7 @@ class: middle
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   admit        n
 ##   &lt;fct&gt;    &lt;int&gt;
 ## 1 Rejected  2771
@@ -123,7 +129,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 3
+## # A tibble: 4 × 3
 ##   gender admit        n
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
 ## 1 Female Rejected  1278
@@ -143,7 +149,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 4
+## # A tibble: 4 × 4
 ## # Groups:   gender [2]
 ##   gender admit        n prop_admit
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;      &lt;dbl&gt;
@@ -191,7 +197,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 24 x 4
+## # A tibble: 24 × 4
 ##   dept  gender admit        n
 ##   &lt;ord&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
 ## 1 A     Female Rejected    19
@@ -217,7 +223,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 8
+## # A tibble: 4 × 8
 ##   gender admit        A     B     C     D     E     F
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1 Female Rejected    19     8   391   244   299   317
@@ -271,7 +277,7 @@ ggplot(ucbadmit, aes(y = gender, fill = admit)) +
 .panel[.panel-name[Output]
 
 ```
-## # A tibble: 12 x 5
+## # A tibble: 12 × 5
 ## # Groups:   dept, gender [12]
 ##    dept  gender n_admitted n_applied prop_admit
 ##    &lt;ord&gt; &lt;fct&gt;       &lt;int&gt;     &lt;int&gt;      &lt;dbl&gt;
@@ -322,7 +328,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 8 x 3
+## # A tibble: 8 × 3
 ##       x     y z    
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
 ## 1     2     4 A    
@@ -345,7 +351,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 8 x 3
+## # A tibble: 8 × 3
 ##       x     y z    
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
 ## 1     2     4 A    
@@ -368,7 +374,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 8 x 3
+## # A tibble: 8 × 3
 ##       x     y z    
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
 ## 1     2     4 A    
@@ -391,7 +397,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 8 x 3
+## # A tibble: 8 × 3
 ##       x     y z    
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
 ## 1     2     4 A    
@@ -434,7 +440,7 @@ ucbadmit
 ```
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ##   admit    gender dept 
 ##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
 ## 1 Admitted Male   A    
@@ -454,7 +460,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ## # Groups:   gender [2]
 ##   admit    gender dept 
 ##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
@@ -482,7 +488,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ## # Groups:   gender [2]
 ##   admit    gender dept 
 ##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
@@ -503,7 +509,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ##   admit    gender dept 
 ##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
 ## 1 Admitted Female A    
@@ -530,7 +536,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4,526 x 3
+## # A tibble: 4,526 × 3
 ## # Groups:   gender [2]
 ##   admit    gender dept 
 ##   &lt;fct&gt;    &lt;fct&gt;  &lt;ord&gt;
@@ -551,7 +557,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender     n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Female  1835
@@ -574,7 +580,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 2
+## # A tibble: 4 × 2
 ## # Groups:   gender [2]
 ##   gender prop_admit
 ##   &lt;fct&gt;       &lt;dbl&gt;
@@ -596,7 +602,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 2
+## # A tibble: 4 × 2
 ##   gender prop_admit
 ##   &lt;fct&gt;       &lt;dbl&gt;
 ## 1 Female      0.696
@@ -621,7 +627,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender     n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Female  1835
@@ -636,7 +642,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 2 x 2
+## # A tibble: 2 × 2
 ##   gender     n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Female  1835
@@ -657,7 +663,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 3
+## # A tibble: 4 × 3
 ## # Groups:   gender [2]
 ##   gender admit        n
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
@@ -675,7 +681,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 3
+## # A tibble: 4 × 3
 ##   gender admit        n
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
 ## 1 Female Rejected  1278
@@ -701,7 +707,7 @@ ucbadmit %&gt;%
 ```
 
 ```
-## # A tibble: 4 x 3
+## # A tibble: 4 × 3
 ## # Groups:   gender [2]
 ##   gender admit        n
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
@@ -758,6 +764,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

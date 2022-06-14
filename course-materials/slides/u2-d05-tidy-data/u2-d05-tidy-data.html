@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Tidy data
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -113,7 +119,7 @@ Source: [US Census Fact Finder, General Economic Characteristics, ACS 2017](http
 .pull-left[
 
 ```
-## # A tibble: 87 x 3
+## # A tibble: 87 × 3
 ##   name           height  mass
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
 ## 1 Luke Skywalker    172    77
@@ -128,7 +134,7 @@ Source: [US Census Fact Finder, General Economic Characteristics, ACS 2017](http
 .pull-right[
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   gender    avg_ht
 ##   &lt;chr&gt;      &lt;dbl&gt;
 ## 1 feminine    165.
@@ -210,6 +216,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

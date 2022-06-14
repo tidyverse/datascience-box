@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Science in a Box</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mine Çetinkaya-Rundel" />
+    <meta name="date" content="2022-06-13" />
+    <script src="datasciencebox_files/header-attrs-2.14/header-attrs.js"></script>
+    <link href="datasciencebox_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="datasciencebox_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="datasciencebox_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="datasciencebox_files/viz-1.8.2/viz.js"></script>
+    <link href="datasciencebox_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="datasciencebox_files/grViz-binding-1.0.9/grViz.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Data Science in a Box
+]
+.author[
+### Mine Çetinkaya-Rundel
+]
+.date[
+### 2022-06-13
+]
+
+---
+
+
+# Welcome {.unnumbered}
+
+Placeholder
+
+
+## License {.unnumbered}
+## Acknowledements {.unnumbered}
+
+&lt;!--chapter:end:index.Rmd--&gt;
+
+
+# (PART) Hello \#dsbox! {.unnumbered}
+
+Placeholder
+
+
+## Who is this course for?
+## Where does this course fit in a curriculum?
+## What is in the box?
+## Why R?
+## Why not language X?
+## Why RStudio?
+## Learn more
+
+&lt;!--chapter:end:01-overview.Rmd--&gt;
+
+
+# Design principles {#design-principles}
+
+Placeholder
+
+
+## Start with cake
+## Cherish day one
+## Skip baby steps
+## Hide the veggies
+## Leverage the ecosystem
+## Learn more
+
+&lt;!--chapter:end:01-design-principles.Rmd--&gt;
+
+# Topics {#topics}
+
+The course content is organized in three units:
+
+
+```{=html}
+&lt;div id="htmlwidget-f0c518fc6d7e5c1409d8" style="width:100%;height:201.6px;" class="grViz html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-f0c518fc6d7e5c1409d8"&gt;{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Hello\nworld\", shape = \"hexagon\", penwidth = \"2\", color = \"#333333\", fontsize = \"12\", fontcolor = \"black\", height = \"1\", width = \"1.1\", fixedsize = \"TRUE\", fontname = \"Helvetica\", fillcolor = \"#d8d8d8\", pos = \"2,2!\"] \n  \"2\" [label = \"Exploring\ndata\", shape = \"hexagon\", penwidth = \"2\", color = \"#57707a\", fontsize = \"12\", fontcolor = \"black\", height = \"1\", width = \"1.1\", fixedsize = \"TRUE\", fontname = \"helvetica\", fillcolor = \"#A7D5E8\", pos = \"4,2!\"] \n  \"3\" [label = \"Visualize\", shape = \"circle\", penwidth = \"2\", color = \"#A7D5E8\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"4,3!\"] \n  \"4\" [label = \"Wrangle\", shape = \"circle\", penwidth = \"2\", color = \"#A7D5E8\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"5,1!\"] \n  \"5\" [label = \"Import\", shape = \"circle\", penwidth = \"2\", color = \"#A7D5E8\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"3,1!\"] \n  \"6\" [label = \"Data\nscience\nethics\", shape = \"hexagon\", penwidth = \"2\", color = \"#6e8796\", fontsize = \"12\", fontcolor = \"black\", height = \"1\", width = \"1.1\", fixedsize = \"TRUE\", fontname = \"Helvetica\", fillcolor = \"#b3dcf5\", pos = \"6,2!\"] \n  \"7\" [label = \"Misrepre-\nsentation\", shape = \"circle\", penwidth = \"2\", color = \"#b3dcf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"5,3!\"] \n  \"8\" [label = \"Data\nprivacy\", shape = \"circle\", penwidth = \"2\", color = \"#b3dcf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"7,3!\"] \n  \"9\" [label = \"Algorithmic\nbias\", shape = \"circle\", penwidth = \"2\", color = \"#b3dcf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"6,1!\"] \n  \"10\" [label = \"Making\nrigorous\nconclu-\nsions\", shape = \"hexagon\", penwidth = \"2\", color = \"#1E5C65\", fontsize = \"12\", fontcolor = \"black\", height = \"1\", width = \"1.1\", fixedsize = \"TRUE\", fontname = \"Helvetica\", fillcolor = \"#b3edf5\", pos = \"8,2!\"] \n  \"11\" [label = \"Model\", shape = \"circle\", penwidth = \"2\", color = \"#b3edf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"8,3!\"] \n  \"12\" [label = \"Predict\", shape = \"circle\", penwidth = \"2\", color = \"#b3edf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"9,1!\"] \n  \"13\" [label = \"Infer\", shape = \"circle\", penwidth = \"2\", color = \"#b3edf5\", fontsize = \"10\", fontcolor = \"gray50\", width = \"0.75\", fixedsize = \"true\", fontname = \"Helvetica\", fillcolor = \"#FFFFFF\", pos = \"7,1!\"] \n  \"14\" [label = \"Looking\nfurther\", shape = \"hexagon\", penwidth = \"2\", color = \"#FFD748\", fontsize = \"12\", fontcolor = \"black\", height = \"1\", width = \"1.1\", fixedsize = \"TRUE\", fontname = \"helvetica\", fillcolor = \"#faebb4\", pos = \"10,2!\"] \n\"1\"-&gt;\"2\" [arrowhead = \"normal\"] \n\"2\"-&gt;\"1\" [arrowhead = \"normal\"] \n\"3\"-&gt;\"2\" [arrowhead = \"none\"] \n\"4\"-&gt;\"2\" [arrowhead = \"none\"] \n\"5\"-&gt;\"2\" [arrowhead = \"none\"] \n\"2\"-&gt;\"6\" [arrowhead = \"normal\"] \n\"6\"-&gt;\"2\" [arrowhead = \"normal\"] \n\"7\"-&gt;\"6\" [arrowhead = \"none\"] \n\"8\"-&gt;\"6\" [arrowhead = \"none\"] \n\"9\"-&gt;\"6\" [arrowhead = \"none\"] \n\"6\"-&gt;\"10\" [arrowhead = \"normal\"] \n\"10\"-&gt;\"6\" [arrowhead = \"normal\"] \n\"11\"-&gt;\"10\" [arrowhead = \"none\"] \n\"12\"-&gt;\"10\" [arrowhead = \"none\"] \n\"13\"-&gt;\"10\" [arrowhead = \"none\"] \n\"10\"-&gt;\"14\" [arrowhead = \"normal\"] \n\"14\"-&gt;\"10\" [arrowhead = \"normal\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}&lt;/script&gt;
+```
+
+**Unit 1 - Hello world:** This unit is an introduction to the content, pedagogy, and toolkit of the course.
+
+**Unit 2 - Exploring data:** This unit focuses on data visualization and data wrangling.
+Specifically we cover fundamentals of data and data visualization, confounding variables, and Simpson's paradox as well as the concept of tidy data, data import, data cleaning, and data curation.
+We end the unit with web scraping and introduce the idea of iteration in preparation for the next unit.
+Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown, Git, and GitHub.
+
+**Unit 3 - Data science ethics:** In this unit we discuss misrepresentation of findings, particularly in data visualisations, breaches of data privacy, and algorithmic bias.
+
+**Unit 4 - Making rigorous conclusions:** In this unit we introduce modelling and statistical inference for making data-based conclusions.
+We discuss building, interpreting, and selecting models, visualizing interaction effects, and prediction and model validation.
+Statistical inference is introduced from a simulation based perspective, and the Central Limit Theorem is discussed very briefly to lay the foundation for future coursework in statistics.
+
+**Unit 5 - Looking forward:** In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, and Bayesian inference.
+These are independent modules that educators can choose to include in their introductory data science curriculum depending on how much time they have left in the semester.
+
+&lt;!--chapter:end:01-topics.Rmd--&gt;
+
+# Tech stack {#tech-stack}
+
+This course teaches computing and statistics to undergraduates with no background in either.
+Managing such a course with students from varied backgrounds doing non-trivial computational work is a big technical challenge.
+This page briefly describes the toolkit choices, and the Infrastructure part provides a path forward for educators who are considering using these tools for their own teaching purposes.
+
+While the recommended tech stack for the entirety of course development is tall, only a few of the technologies are student facing:
+
+-   RStudio Cloud: [RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation.
+    See Section \@ref(access-r) for more on this.
+
+-   GitHub: The use of [GitHub](https://github.com/) also goes a long way to help students visualize and understand the git process which also aids in student buy-in.
+    The web interface allows students to easily view diffs (file changes over time) in files they are collaborating on, keep track of commit histories, and search both the current state as well as the entire history of the code base.
+    Within the classroom GitHub can be thought of as an advanced and flexible learning management system (compared to traditional tools like Blackboard or Sakai).
+    See Section \@ref(version-control) for more on this.
+
+-   Piazza: [Piazza](http://piazza.com/) is an easy to use and free Q&amp;A platform that your students might very well be already familiar with from other classes.
+    It is also possible that it's already integrated into your learning management system if you're teaching in a university setting.
+    Students are discouraged from using email for questions and discussions related to content of the course, only emails about personal matters are allowed.
+    Hence most course communication happens on Piazza.
+    Both public (for announcements and general questions) and private (for team communication) channels are used.
+    Note that Piazza is not everyone's first choice, a few options for alternatives used in statistics and data science courses can be found [on this Twitter thread](https://twitter.com/minebocek/status/1292499540105404416).
+
+&lt;!--chapter:end:01-tech-stack.Rmd--&gt;
+
+# Community {#community}
+
+Do you like what's in the box?
+Do you have questions?
+Is something you need missing?
+Want to exchange ideas with others teaching similar courses?
+
+We now have a `dsbox` Slack channel, you can join [here](https://join.slack.com/t/dsboxworkspace/shared_invite/zt-vvjh8ovb-dCy31PATijOrdaz9oVGvVQ).[^community-1]
+The Slack channel is a place for discussion on using these or similar materials in data science courses.
+Please make sure to review the [Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) before joining.
+
+Other great venues for questions are the [RStudio Community under Teaching](https://community.rstudio.com/c/teaching) or [#rstats](https://twitter.com/search?q=%23rstats) Twitter.
+
+Additionally, we would love to hear from you if you are using these resources.
+Please take just a few minutes to fill out [this Google form](https://forms.gle/AjqXStdFq42TTV9LA).
+All fields are optional, but the more information you provide, the more data we will have to assess the reach and impact of this project.
+
+[^community-1]: If the link has expired, please email me at [cetinkaya.mine\@gmail.com](mailto:cetinkaya.mine@gmail.com){.email} to request a new one.
+
+&lt;!--chapter:end:01-community.Rmd--&gt;
+
+
+# (PART) Course content {.unnumbered}
+
+Placeholder
+
+
+## Slides, videos, and application exercises
+
+&lt;!--chapter:end:02-hello-world.Rmd--&gt;
+
+
+# Exploring data {#exploring-data}
+
+Placeholder
+
+
+## Slides, videos, and application exercises
+### Visualising data
+### Wrangling and tidying data
+### Importing and recoding data
+### Communicating data science results effectively
+### Web scraping and programming
+## Labs
+## Homework assignments
+
+&lt;!--chapter:end:02-exploring-data.Rmd--&gt;
+
+
+# Data science ethics {#ethics}
+
+Placeholder
+
+
+## Slides, videos, and application exercises
+## Labs
+
+&lt;!--chapter:end:02-ethics.Rmd--&gt;
+
+
+# Making rigorous conclusions {#making-rigorous-conclusions}
+
+Placeholder
+
+
+## Slides, videos, and application exercises
+### Modelling data
+### Classification and model building
+### Model validation
+### Uncertainty quantification
+## Labs
+## Homework assignments
+
+&lt;!--chapter:end:02-making-rigorous-conclusions.Rmd--&gt;
+
+
+# Looking further {#looking-forward}
+
+Placeholder
+
+
+## Slides, videos, and application exercises
+## Labs
+## Homework assignments
+
+&lt;!--chapter:end:02-looking-further.Rmd--&gt;
+
+
+# Interactive tutorials {#interactive-tutorials}
+
+Placeholder
+
+
+
+&lt;!--chapter:end:02-interactive-tutorials.Rmd--&gt;
+
+
+# Project {#project}
+
+Placeholder
+
+
+## TL;DR
+## May be too long, but please do read
+## Data
+### Deliverables
+#### Proposal
+#### Presentation
+#### Executive summary
+#### Repo organization
+### Tips
+### Marking
+#### Criteria
+#### Team peer evaluation
+
+&lt;!--chapter:end:02-project.Rmd--&gt;
+
+# Exams {#exams}
+
+I don't think the best assessment method for this curriculum is an exam, but sometimes a take home exam can be an incredible motivator for students without stifling their creativity.
+I've provided two sample take home exams.
+You probably wouldn't want to use them verbatim as exams, since they're now publicly available.
+But they might give you some idea about how to structure take home exams, how to write directions to reduce issues around plagiarism while still encouraging students to search for resources, etc.
+
+::: {.exam}
+**Exam 1**
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-01/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-01)
+:::
+
+::: {.exam}
+**Exam 2**
+
+[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-02/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-02)
+:::
+
+&lt;!--chapter:end:02-exams.Rmd--&gt;
+
+
+# (PART) Infrastructure {.unnumbered}
+
+Placeholder
+
+
+## Setting up your course in RStudio Cloud
+## Projects
+### Access
+## Base project template
+## Git integration
+## Troubleshooting
+## Limits
+### Memory &amp; CPU
+### Other limits
+## Learn more
+
+&lt;!--chapter:end:03-access-r.Rmd--&gt;
+
+
+# Version control {#version-control}
+
+Placeholder
+
+
+## Git
+## GitHub
+## ghclass
+## Learn more
+
+&lt;!--chapter:end:03-version-control.Rmd--&gt;
+
+# Discussion {#discussion}
+
+My recommended tool for course discussion is [Piazza](http://piazza.com/).
+
+I have, in the past, used Slack for course communication as well.
+Slack has the advantage of being real-life feeling as well as being the communication tool of choice for many data science teams.
+However it doesn't work well for lasting class discussions as threading and searchability are poor.
+Additionally, the instructor does not have the option to edit student questions, which can be frustrating if they have not formatted their code appropriately.
+Similar tools like Discord and MS Teams have similar advantages when it comes to real-life discussions and similar disadvantages when it comes to threading and searchability.
+
+Other options are GitHub issues and GitHub Discussions, especially for courses using version control.
+
+&lt;!--chapter:end:03-discussion.Rmd--&gt;
+
+# Sharing {#sharing}
+
+A nifty tool for building your course website is blogdown.
+
+Perhaps the most useful aspect of blogdown in this setting is that your slides, assignments, etc. written in R Markdown can be automatically rendered, so you don't need to separately knit those documents.
+
+If you would like to build your course website with blogdown, you can use [this course website](http://introds.org/) as an example, source code [here](https://github.com/ids-s1-20/website).
+
+[This webinar](https://resources.rstudio.com/webinars/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown) by Alison Hill and Desirée De Leon is also very useful for options for sharing your course materials with students.
+
+&lt;!--chapter:end:03-sharing.Rmd--&gt;
+
+
+# Alternative setups {#alternative-setups}
+
+Placeholder
+
+
+## Centralized RStudio server
+## Dockerized RStudio server
+## Learn more
+
+&lt;!--chapter:end:03-alternative-setups.Rmd--&gt;
+
+
+# (PART) Pedagogy {.unnumbered}
+
+Placeholder
+
+
+## Course design
+## Teaching the tidyverse
+
+&lt;!--chapter:end:04-pedagogy.Rmd--&gt;
+
+
+# Schedule {#schedule}
+
+Placeholder
+
+
+## 11-week schedule
+## 15-week schedule
+
+&lt;!--chapter:end:04-schedule.Rmd--&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

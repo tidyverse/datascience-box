@@ -19,6 +19,10 @@ output:
 library(tidyverse)
 ```
 
+```{r}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 class: middle
 
 # Tidytext analysis
@@ -92,7 +96,7 @@ class: middle
 
 .midi[
 ```{r message=FALSE}
-listening <- read_csv("data/listening.csv")
+listening <- read_csv(here::here("course-materials/slides/u2-d11-text-analysis", "data/listening.csv"))
 listening
 ```
 ]
@@ -287,7 +291,7 @@ artist_albums <- tribble(
 )
 
 sheeran <- artist_albums %>%
-  add_genius(artist, album, "album")
+  add_genius(artist, album, type = "lyrics")
 ```
 
 ---

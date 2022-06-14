@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Inference overview
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -30,7 +36,7 @@ layout: true
   
 &lt;div class="my-footer"&gt;
 &lt;span&gt;
-&lt;a href="https://introds.org" target="_blank"&gt;introds.org&lt;/a&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
 &lt;/span&gt;
 &lt;/div&gt; 
 
@@ -235,19 +241,19 @@ glimpse(ncbirths)
 ```
 ## Rows: 1,000
 ## Columns: 13
-## $ fage           &lt;int&gt; NA, NA, 19, 21, NA, NA, 18, 17, NA, 20,…
-## $ mage           &lt;int&gt; 13, 14, 15, 15, 15, 15, 15, 15, 16, 16,…
-## $ mature         &lt;fct&gt; younger mom, younger mom, younger mom, …
-## $ weeks          &lt;int&gt; 39, 42, 37, 41, 39, 38, 37, 35, 38, 37,…
-## $ premie         &lt;fct&gt; full term, full term, full term, full t…
-## $ visits         &lt;int&gt; 10, 15, 11, 6, 9, 19, 12, 5, 9, 13, 9, …
-## $ marital        &lt;fct&gt; not married, not married, not married, …
-## $ gained         &lt;int&gt; 38, 20, 38, 34, 27, 22, 76, 15, NA, 52,…
-## $ weight         &lt;dbl&gt; 7.63, 7.88, 6.63, 8.00, 6.38, 5.38, 8.4…
-## $ lowbirthweight &lt;fct&gt; not low, not low, not low, not low, not…
-## $ gender         &lt;fct&gt; male, male, female, male, female, male,…
-## $ habit          &lt;fct&gt; nonsmoker, nonsmoker, nonsmoker, nonsmo…
-## $ whitemom       &lt;fct&gt; not white, not white, white, white, not…
+## $ fage           &lt;int&gt; NA, NA, 19, 21, NA, NA, 18, 17, NA, 20, …
+## $ mage           &lt;int&gt; 13, 14, 15, 15, 15, 15, 15, 15, 16, 16, …
+## $ mature         &lt;fct&gt; younger mom, younger mom, younger mom, y…
+## $ weeks          &lt;int&gt; 39, 42, 37, 41, 39, 38, 37, 35, 38, 37, …
+## $ premie         &lt;fct&gt; full term, full term, full term, full te…
+## $ visits         &lt;int&gt; 10, 15, 11, 6, 9, 19, 12, 5, 9, 13, 9, 8…
+## $ marital        &lt;fct&gt; not married, not married, not married, n…
+## $ gained         &lt;int&gt; 38, 20, 38, 34, 27, 22, 76, 15, NA, 52, …
+## $ weight         &lt;dbl&gt; 7.63, 7.88, 6.63, 8.00, 6.38, 5.38, 8.44…
+## $ lowbirthweight &lt;fct&gt; not low, not low, not low, not low, not …
+## $ gender         &lt;fct&gt; male, male, female, male, female, male, …
+## $ habit          &lt;fct&gt; nonsmoker, nonsmoker, nonsmoker, nonsmok…
+## $ whitemom       &lt;fct&gt; not white, not white, white, white, not …
 ```
 
 ---
@@ -258,7 +264,7 @@ glimpse(ncbirths)
 
 
 ```
-## # A tibble: 1 x 7
+## # A tibble: 1 × 7
 ##     min  xbar   med     s    q1    q3   max
 ##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1    20  38.3    39  2.93    37    40    45
@@ -361,7 +367,7 @@ boot_means %&gt;%
 ```
 
 ```
-## # A tibble: 1 x 2
+## # A tibble: 1 × 2
 ##   lower upper
 ##   &lt;dbl&gt; &lt;dbl&gt;
 ## 1  38.2  38.5
@@ -444,7 +450,7 @@ boot_means_shifted %&gt;%
 ```
 
 ```
-## # A tibble: 1 x 1
+## # A tibble: 1 × 1
 ##   p_value
 ##     &lt;dbl&gt;
 ## 1       0
@@ -520,6 +526,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

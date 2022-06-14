@@ -9,16 +9,22 @@
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <link rel="stylesheet" href="/Users/mine/Desktop/RStudio/datascience-box/course-materials/slides/xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="/Users/mine/Desktop/RStudio/datascience-box/course-materials/slides/slides.css" type="text/css" />
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Welcome!
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -38,7 +44,7 @@ layout: true
 
 
 ```
-## [1] '0.22'
+## [1] '0.24'
 ```
 
 class: middle
@@ -153,7 +159,7 @@ class: middle
 &lt;img src="img/data-science-cycle/data-science-cycle.006.png" width="90%" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ```
-## # A tibble: 5 x 2
+## # A tibble: 5 × 2
 ##   date             season
 ##   &lt;chr&gt;            &lt;chr&gt; 
 ## 1 23 January 2017  winter
@@ -325,6 +331,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

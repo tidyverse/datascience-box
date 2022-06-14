@@ -139,11 +139,11 @@ bechdel90_13 %>%
 ```
 
     ## # A tibble: 3 × 4
-    ##   title         budget_2013 domgross_2013  year
-    ##   <chr>               <int>         <dbl> <int>
-    ## 1 Paranormal A…      505595     121251476  2007
-    ## 2 The Blair Wi…      839077     196538593  1999
-    ## 3 El Mariachi         11622       3388636  1992
+    ##   title                  budget_2013 domgross_2013  year
+    ##   <chr>                        <int>         <dbl> <int>
+    ## 1 Paranormal Activity         505595     121251476  2007
+    ## 2 The Blair Witch Proje…      839077     196538593  1999
+    ## 3 El Mariachi                  11622       3388636  1992
 
 Zooming in on the movies with `roi < ___` provides a better view of how
 the medians across the categories compare:

@@ -701,11 +701,11 @@ investment?</p>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(roi <span class="sc">&gt;</span> <span class="dv">400</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, budget_2013, domgross_2013, year)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
-##   title         budget_2013 domgross_2013  year
-##   &lt;chr&gt;               &lt;int&gt;         &lt;dbl&gt; &lt;int&gt;
-## 1 Paranormal A…      505595     121251476  2007
-## 2 The Blair Wi…      839077     196538593  1999
-## 3 El Mariachi         11622       3388636  1992</code></pre>
+##   title                  budget_2013 domgross_2013  year
+##   &lt;chr&gt;                        &lt;int&gt;         &lt;dbl&gt; &lt;int&gt;
+## 1 Paranormal Activity         505595     121251476  2007
+## 2 The Blair Witch Proje…      839077     196538593  1999
+## 3 El Mariachi                  11622       3388636  1992</code></pre>
 <p>Zooming in on the movies with <code>roi &lt; ___</code> provides a
 better view of how the medians across the categories compare:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> bechdel90_13, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> clean_test, <span class="at">y =</span> roi, <span class="at">color =</span> binary)) <span class="sc">+</span></span>

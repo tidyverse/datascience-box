@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Data classes
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -392,7 +398,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 4
+## # A tibble: 119,390 × 4
 ##   arrival_date_year arrival_date_month arrival_date_week_number
 ##               &lt;dbl&gt; &lt;chr&gt;                                 &lt;dbl&gt;
 ## 1              2015 July                                     27
@@ -422,7 +428,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 33
+## # A tibble: 119,390 × 33
 ##   arrival_date hotel       is_canceled lead_time arrival_date_ye…
 ##   &lt;glue&gt;       &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
 ## 1 2015 July 1  Resort Hot…           0       342             2015
@@ -446,7 +452,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 793 x 2
+## # A tibble: 793 × 2
 ##   arrival_date       n
 ##   &lt;glue&gt;         &lt;int&gt;
 ## 1 2015 August 1    110
@@ -505,7 +511,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 119,390 x 33
+## # A tibble: 119,390 × 33
 ##   arrival_date hotel       is_canceled lead_time arrival_date_ye…
 ##   &lt;date&gt;       &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
 ## 1 2015-07-01   Resort Hot…           0       342             2015
@@ -529,7 +535,7 @@ hotels %&gt;%
 ```
 
 ```
-## # A tibble: 793 x 2
+## # A tibble: 793 × 2
 ##   arrival_date     n
 ##   &lt;date&gt;       &lt;int&gt;
 ## 1 2015-07-01     122
@@ -623,6 +629,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

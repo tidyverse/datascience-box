@@ -16,9 +16,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Importing data
+]
+.subtitle[
 ## <br><br> Data Science in a Box
+]
+.author[
 ### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
 
 ---
 
@@ -84,24 +90,22 @@ nobel
 ```
 
 ```
-## # A tibble: 935 x 26
-##      id firstname  surname   year category affiliation      city 
-##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;
-## 1     1 Wilhelm C… Röntgen   1901 Physics  Munich Universi… Muni…
-## 2     2 Hendrik A. Lorentz   1902 Physics  Leiden Universi… Leid…
-## 3     3 Pieter     Zeeman    1902 Physics  Amsterdam Unive… Amst…
-## 4     4 Henri      Becquer…  1903 Physics  École Polytechn… Paris
-## 5     5 Pierre     Curie     1903 Physics  École municipal… Paris
-## 6     6 Marie      Curie     1903 Physics  &lt;NA&gt;             &lt;NA&gt; 
+## # A tibble: 935 × 26
+##      id firstname      surname    year category affiliation city 
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;
+## 1     1 Wilhelm Conrad Röntgen    1901 Physics  Munich Uni… Muni…
+## 2     2 Hendrik A.     Lorentz    1902 Physics  Leiden Uni… Leid…
+## 3     3 Pieter         Zeeman     1902 Physics  Amsterdam … Amst…
+## 4     4 Henri          Becquerel  1903 Physics  École Poly… Paris
+## 5     5 Pierre         Curie      1903 Physics  École muni… Paris
+## 6     6 Marie          Curie      1903 Physics  &lt;NA&gt;        &lt;NA&gt; 
 ## # … with 929 more rows, and 19 more variables: country &lt;chr&gt;,
 ## #   born_date &lt;date&gt;, died_date &lt;date&gt;, gender &lt;chr&gt;,
 ## #   born_city &lt;chr&gt;, born_country &lt;chr&gt;,
 ## #   born_country_code &lt;chr&gt;, died_city &lt;chr&gt;,
 ## #   died_country &lt;chr&gt;, died_country_code &lt;chr&gt;,
 ## #   overall_motivation &lt;chr&gt;, share &lt;dbl&gt;, motivation &lt;chr&gt;,
-## #   born_country_original &lt;chr&gt;, born_city_original &lt;chr&gt;,
-## #   died_country_original &lt;chr&gt;, died_city_original &lt;chr&gt;,
-## #   city_original &lt;chr&gt;, country_original &lt;chr&gt;
+## #   born_country_original &lt;chr&gt;, born_city_original &lt;chr&gt;, …
 ```
 
 ---
@@ -134,7 +138,7 @@ read_csv("data/df.csv")
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##       x y    
 ##   &lt;dbl&gt; &lt;chr&gt;
 ## 1     1 a    
@@ -270,7 +274,7 @@ read_csv("data/df-na.csv")
 
 
 ```
-## # A tibble: 9 x 3
+## # A tibble: 9 × 3
 ##   x     y              z     
 ##   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; 
 ## 1 1     a              hi    
@@ -301,7 +305,7 @@ read_csv("data/df-na.csv",
 .pull-right[
 
 ```
-## # A tibble: 9 x 3
+## # A tibble: 9 × 3
 ##       x y     z     
 ##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 ## 1     1 a     hi    
@@ -329,13 +333,11 @@ read_csv("data/df-na.csv", col_types = list(col_double(),
 
 
 ```
-## Warning: 1 parsing failure.
-## row col expected actual             file
-##   6   x a double      . 'data/df-na.csv'
+## Warning: One or more parsing issues, see `problems()` for details
 ```
 
 ```
-## # A tibble: 9 x 3
+## # A tibble: 9 × 3
 ##       x y              z     
 ##   &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; 
 ## 1     1 a              hi    
@@ -382,17 +384,17 @@ read_csv("data/df-na.csv")
 ```
 
 ```
-## 
+## Rows: 9 Columns: 3
 ## ── Column specification ─────────────────────────────────────────
-## cols(
-##   x = col_character(),
-##   y = col_character(),
-##   z = col_character()
-## )
+## Delimiter: ","
+## chr (3): x, y, z
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ```
-## # A tibble: 9 x 3
+## # A tibble: 9 × 3
 ##   x     y              z     
 ##   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; 
 ## 1 1     a              hi    
@@ -424,14 +426,14 @@ fav_food
 ```
 
 ```
-## # A tibble: 5 x 6
-##   `Student ID` `Full Name`  favourite.food  mealPlan  AGE   SES  
-##          &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
-## 1            1 Sunil Huffm… Strawberry yog… Lunch on… 4     High 
-## 2            2 Barclay Lynn French fries    Lunch on… 5     Midd…
-## 3            3 Jayendra Ly… N/A             Breakfas… 7     Low  
-## 4            4 Leon Rossini Anchovies       Lunch on… 99999 Midd…
-## 5            5 Chidiegwu D… Pizza           Breakfas… five  High
+## # A tibble: 5 × 6
+##   `Student ID` `Full Name`    favourite.food mealPlan AGE   SES  
+##          &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;
+## 1            1 Sunil Huffmann Strawberry yo… Lunch o… 4     High 
+## 2            2 Barclay Lynn   French fries   Lunch o… 5     Midd…
+## 3            3 Jayendra Lyne  N/A            Breakfa… 7     Low  
+## 4            4 Leon Rossini   Anchovies      Lunch o… 99999 Midd…
+## 5            5 Chidiegwu Dun… Pizza          Breakfa… five  High
 ```
 
 ---
@@ -451,14 +453,14 @@ fav_food
 ```
 
 ```
-## # A tibble: 5 x 6
-##   student_id full_name   favourite_food   meal_plan   age   ses  
-##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
-## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
-## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
-## 3          3 Jayendra L… N/A              Breakfast … 7     Low  
-## 4          4 Leon Rossi… Anchovies        Lunch only  99999 Midd…
-## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+## # A tibble: 5 × 6
+##   student_id full_name       favourite_food meal_plan age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huffmann  Strawberry yo… Lunch on… 4     High 
+## 2          2 Barclay Lynn    French fries   Lunch on… 5     Midd…
+## 3          3 Jayendra Lyne   N/A            Breakfas… 7     Low  
+## 4          4 Leon Rossini    Anchovies      Lunch on… 99999 Midd…
+## 5          5 Chidiegwu Dunk… Pizza          Breakfas… five  High
 ```
 
 ---
@@ -479,14 +481,14 @@ fav_food
 ```
 
 ```
-## # A tibble: 5 x 6
-##   student_id full_name   favourite_food   meal_plan   age   ses  
-##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
-## 1          1 Sunil Huff… Strawberry yogh… Lunch only  4     High 
-## 2          2 Barclay Ly… French fries     Lunch only  5     Midd…
-## 3          3 Jayendra L… &lt;NA&gt;             Breakfast … 7     Low  
-## 4          4 Leon Rossi… Anchovies        Lunch only  &lt;NA&gt;  Midd…
-## 5          5 Chidiegwu … Pizza            Breakfast … five  High
+## # A tibble: 5 × 6
+##   student_id full_name       favourite_food meal_plan age   ses  
+##        &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;
+## 1          1 Sunil Huffmann  Strawberry yo… Lunch on… 4     High 
+## 2          2 Barclay Lynn    French fries   Lunch on… 5     Midd…
+## 3          3 Jayendra Lyne   &lt;NA&gt;           Breakfas… 7     Low  
+## 4          4 Leon Rossini    Anchovies      Lunch on… &lt;NA&gt;  Midd…
+## 5          5 Chidiegwu Dunk… Pizza          Breakfas… five  High
 ```
 
 ---
@@ -536,7 +538,7 @@ fav_food %&gt;%
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   ses        n
 ##   &lt;chr&gt;  &lt;int&gt;
 ## 1 High       2
@@ -563,7 +565,7 @@ fav_food %&gt;%
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   ses        n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Low        1
@@ -590,14 +592,14 @@ fav_food
 ```
 
 ```
-## # A tibble: 5 x 6
-##   student_id full_name   favourite_food   meal_plan     age ses  
-##        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;       &lt;dbl&gt; &lt;fct&gt;
-## 1          1 Sunil Huff… Strawberry yogh… Lunch only      4 High 
-## 2          2 Barclay Ly… French fries     Lunch only      5 Midd…
-## 3          3 Jayendra L… &lt;NA&gt;             Breakfast …     7 Low  
-## 4          4 Leon Rossi… Anchovies        Lunch only     NA Midd…
-## 5          5 Chidiegwu … Pizza            Breakfast …     5 High
+## # A tibble: 5 × 6
+##   student_id full_name       favourite_food meal_plan   age ses  
+##        &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt; &lt;fct&gt;
+## 1          1 Sunil Huffmann  Strawberry yo… Lunch on…     4 High 
+## 2          2 Barclay Lynn    French fries   Lunch on…     5 Midd…
+## 3          3 Jayendra Lyne   &lt;NA&gt;           Breakfas…     7 Low  
+## 4          4 Leon Rossini    Anchovies      Lunch on…    NA Midd…
+## 5          5 Chidiegwu Dunk… Pizza          Breakfas…     5 High
 ```
 
 ---
@@ -624,7 +626,7 @@ fav_food_clean %&gt;%
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   ses        n
 ##   &lt;chr&gt;  &lt;int&gt;
 ## 1 High       2
@@ -660,7 +662,7 @@ fav_food_clean %&gt;%
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   ses        n
 ##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Low        1
@@ -701,7 +703,7 @@ class: middle
 .pull-left[
 
 ```
-## # A tibble: 9 x 2
+## # A tibble: 9 × 2
 ##   id      n    
 ##   &lt;chr&gt;   &lt;chr&gt;
 ## 1 Brand 1 n    
@@ -716,7 +718,7 @@ class: middle
 .pull-right[
 
 ```
-## # A tibble: 7 x 3
+## # A tibble: 7 × 3
 ##   brand      id     n
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Brand 1  1234     8
@@ -776,6 +778,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
