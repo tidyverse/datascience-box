@@ -1,4 +1,10 @@
-/* custom environments */
+/*-- scss:defaults --*/
+
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+
+$link-color: #4f7c8d;
+
+/*-- scss:rules --*/
 
 .application-exercise {
   padding: 1em 1em 1em 4em;
@@ -6,8 +12,9 @@
   margin-left: 10px;
   border: 1pt solid #a8a8a8;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("application-exercise.png");
+  background-image: url("style/icons/application-exercise.png");
 }
+
 .application-exercise:before {
   content: "Application exercise: ";
   clear: right;
@@ -37,7 +44,7 @@
   margin-left: 5px;
   border: 1pt solid #d8d8d8;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("book.png");
+  background-image: url("style/icons/book.png");
 }
 .reading:before {
   content: "Reading: ";
@@ -56,7 +63,7 @@
   margin-left: 10px;
   border: 1pt solid #80D4E6;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("slide-deck.png");
+  background-image: url("style/icons/slide-deck.png");
 }
 
 .source {
@@ -78,7 +85,7 @@
   margin-left: 10px;
   border: 1pt dotted #a8a8a8;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("microphone.png");
+  background-image: url("style/icons/microphone.png");
 }
 
 .video {
@@ -101,7 +108,7 @@
   margin-left: 10px;
   border: 1pt solid #FFD748;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("lab.png");
+  background-image: url("style/icons/lab.png");
 }
 
 .homework{
@@ -110,7 +117,7 @@
   margin-left: 10px;
   border: 1pt solid #F26BAA;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("hw.png");
+  background-image: url("style/icons/hw.png");
 }
 
 .instructions {
@@ -146,7 +153,7 @@
   margin-left: 10px;
   border: 1pt solid #d8d8d8;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("tutorial.png");
+  background-image: url("style/icons/tutorial.png");
 }
 
 
@@ -156,7 +163,7 @@
   margin-left: 10px;
   border: 1pt solid #d8d8d8;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("exam.png");
+  background-image: url("style/icons/exam.png");
 }
 
 
@@ -165,7 +172,7 @@
   margin-bottom: 5px;
   margin-left: 5px;
   background: #ffffff 5px center/3em no-repeat;
-  background-image: url("cloud.png");
+  background-image: url("style/icons/cloud.png");
 }
 .rstudio-cloud:before {
   content: "RStudio Cloud: ";
@@ -173,31 +180,4 @@
   display: block;
   font-weight: bold;
   color: #A7D5E8;
-}
-
-/* overwrite bs4_book style */
-
-img.cover {
-  box-shadow: none;
-}
-
-.inline-figure {
-  border: none;
-}
-
-/* overwrite default style */
-
-p.caption {
-  color: #777;
-  margin-top: 10px;
-}
-p code {
-  white-space: inherit;
-}
-pre {
-  word-break: normal;
-  word-wrap: normal;
-}
-pre code {
-  white-space: inherit;
 }
