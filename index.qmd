@@ -1,21 +1,8 @@
 ---
-knit: bookdown::render_book
-site: bookdown::bookdown_site
-title: "Data Science in a Box"
-author: "Mine Çetinkaya-Rundel"
-description: "Data Science in a Box contains the materials required to teach (or learn from) the course described above, all of which are freely-available and open-source."
-date: "`r Sys.Date()`"
-github-repo: rstudio-education/datasciencebox
-twitter-handle: minebocek
-cover-image: dsbox.png
-url: 'https\://datasciencebox.org/'
-documentclass: book
-link-citations: yes
+title: "Welcome"
 ---
 
-# Welcome {.unnumbered}
-
-<img src="dsbox.png" class="cover" width="240" height="240"/> How can we effectively and efficiently teach data science to students with little to no background in computing and statistical thinking?
+How can we effectively and efficiently teach data science to students with little to no background in computing and statistical thinking?
 How can we equip them with the skills and tools for reasoning with various types of data and leave them wanting to learn more?
 This introductory data science course is our (working) answer to this question.
 
@@ -31,7 +18,7 @@ Data Science in a Box contains the materials required to teach (or learn from) t
 They include course materials such as slide decks, lecture and live coding videos, homework assignments, guided labs, sample exams, a final project assignment, as well as materials for instructors such as pedagogical tips, information on computing infrastructure, technology stack, and course logistics.
 
 Majority of the materials linked live in the GitHub repo serving this website.
-You can access the repo [here](https://github.com/rstudio-education/datascience-box).
+You can access the repo at <https://github.com/rstudio-education/datascience-box>.
 
 Please note that Data Science in a Box uses a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
@@ -43,6 +30,6 @@ Visit [here](https://github.com/rstudio-education/datascience-box/blob/master/LI
 
 ## Acknowledements {.unnumbered}
 
-Huge thanks to the \#rstats education community who have made numerous suggestions for this resource, to Lee Suddaby and Zeno Kujawa for converting the homework assignments to learnr tutorials, and to [Müge Çetinkaya](http://muge.fr/) for the hex logo!
+Huge thanks to the #rstats education community who have made numerous suggestions for this resource, to Lee Suddaby and Zeno Kujawa for converting the homework assignments to learnr tutorials, and to [Müge Çetinkaya](http://muge.fr/) for the hex logo!
 
-This website is built with [bookdown](https://bookdown.org/), the lovely icons by [icons8](http://icons8.com/), and none of this would be possible without the [tidyverse](https://tidyverse.org/).
+This website is built with [Quarto](https://quarto.org), the lovely icons by [icons8](http://icons8.com/), and none of this would be possible without the [tidyverse](https://tidyverse.org).
