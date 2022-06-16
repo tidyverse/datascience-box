@@ -8,3 +8,5 @@ render*.rds
 *.key
 *.docx
 .Rapp.history
+
+/.quarto/
