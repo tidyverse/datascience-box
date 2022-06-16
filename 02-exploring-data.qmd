@@ -1,4 +1,6 @@
-# Exploring data {#exploring-data}
+---
+title: "Exploring data"
+---
 
 This unit focuses on data visualization and data wrangling.
 Specifically we cover fundamentals of data and data visualization, confounding variables, and Simpson's paradox as well as the concept of tidy data, data import, data cleaning, and data curation.

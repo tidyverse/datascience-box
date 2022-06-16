@@ -1,4 +1,6 @@
-# Discussion {#discussion}
+---
+title: "Discussion"
+---
 
 My recommended tool for course discussion is [Piazza](http://piazza.com/).
 

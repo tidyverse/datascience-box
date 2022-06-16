@@ -1,6 +1,6 @@
-# (PART) Course content {.unnumbered}
-
-# Hello world {#hello-world}
+---
+title: "Hello world"
+---
 
 I recommend starting the class off right, devoting more of the class time to introducing the course content instead of the course policies.
 And get students doing something with data as quickly as possible!

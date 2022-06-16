@@ -1,4 +1,6 @@
-# Project {#project}
+---
+title: "Project"
+---
 
 The following is a sample project assignment for this curriculum.
 You can find the source code for this assignment write up [here](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/project).
@@ -68,9 +70,9 @@ But you might find something interesting there:
 
 ### Deliverables
 
-1.  Proposal - due [ENTER DUE DATE]
-2.  Presentation - due [ENTER DUE DATE]
-3.  Executive summary - due [ENTER DUE DATE]
+1.  Proposal - due \[ENTER DUE DATE\]
+2.  Presentation - due \[ENTER DUE DATE\]
+3.  Executive summary - due \[ENTER DUE DATE\]
 
 #### Proposal
 

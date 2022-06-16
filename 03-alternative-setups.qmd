@@ -1,4 +1,6 @@
-# Alternative setups {#alternative-setups}
+---
+title: "Alternative setups"
+---
 
 In this section we describe alternative setups for your course.
 
@@ -21,11 +23,11 @@ Students taking courses who are not affiliated with the department are issued te
 
 ```{r}
 #| label: alt-centralized-server
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Centralized RStudio server"
 
-include_graphics(path = "images/alt-centralized-server.png")
+knitr::include_graphics(path = "images/alt-centralized-server.png")
 ```
 
 More modest configurations can be more than adequate (e.g., a mid-to-high end desktop) for the vast majority of use cases, however care should be given when working with larger datasets in a shared environment.
@@ -43,11 +45,11 @@ A sketch of the architecture of the Docker containers is in the figure below, wh
 
 ```{r}
 #| label: alt-docker
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Dockerized RStudio server"
 
-include_graphics(path = "images/alt-docker.png")
+knitr::include_graphics(path = "images/alt-docker.png")
 ```
 
 Docker is a popular and rapidly evolving containerization tool suite that allows users to automate the deployment of software in a repeatable and self-contained way.

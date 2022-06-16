@@ -1,4 +1,6 @@
-# Looking further {#looking-forward}
+---
+title: "Looking further"
+---
 
 In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, machine learning, and Bayesian inference.
 These are independent modules that educators can choose to include in their introductory data science curriculum depending on how much time they have left in the semester.

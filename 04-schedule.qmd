@@ -1,4 +1,6 @@
-# Schedule {#schedule}
+---
+title: "Schedule"
+---
 
 There are a lot of materials in Data Science Course in a Box, which allows instructors to pick and choose what they want depending on the length of the course they're teaching, their audience, and the curriculum within which the course is placed.
 The following are two options for course schedules, one for a 11-week course and the other for a 15-week course.

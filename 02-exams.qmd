@@ -1,4 +1,6 @@
-# Exams {#exams}
+---
+title: "Exams"
+---
 
 I don't think the best assessment method for this curriculum is an exam, but sometimes a take home exam can be an incredible motivator for students without stifling their creativity.
 I've provided two sample take home exams.
@@ -8,11 +10,11 @@ But they might give you some idea about how to structure take home exams, how to
 ::: exam
 **Exam 1**
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-01/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-01)
+[\[Instructions\]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-01/) [\[Source\]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-01)
 :::
 
 ::: exam
 **Exam 2**
 
-[[Instructions]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-02/) [[Source]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-02)
+[\[Instructions\]](https://rstudio-education.github.io/datascience-box/course-materials/exams/exam-02/) [\[Source\]](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/exams/exam-02)
 :::

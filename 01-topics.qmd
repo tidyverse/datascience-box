@@ -1,10 +1,12 @@
-# Topics {#topics}
+---
+title: "Topics"
+---
 
 The course content is organized in three units:
 
 ```{r}
-#| topic-flow
-#| fig-align: "center"
+#| label: topic-flow
+#| fig-align: center
 #| echo: false
 #| fig-asp: 0.3
 #| out-width: "100%"

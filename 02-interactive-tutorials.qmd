@@ -1,7 +1,9 @@
-# Interactive tutorials {#interactive-tutorials}
+---
+title: "Interactive tutorials"
+---
 
 The following interactive tutorials have been built with [**learnr**](https://rstudio.github.io/learnr/publishing.html) and [**gradethis**](https://rstudio-education.github.io/gradethis/).
-They're available on shinyapps.io (linked) as well as distributed with the [**dsbox**](https://rstudio-education.github.io/dsbox/tutorials/index.html) package.[^02-interactive-tutorials-1]
+They're available on shinyapps.io (linked) as well as distributed with the [**dsbox**](https://rstudio-education.github.io/dsbox/tutorials/index.html) package.[^1]
 With the dsbox package installed, you can also run these tutorials in the Tutorials pane of your RStudio window.
 This might be preferable for courses with high enrollment where students need to access the tutorials at the same time.
 
@@ -17,7 +19,7 @@ If you would like to learn about making your own tutorials with learnr, I strong
 
 The goal of this tutorial is not to conduct a thorough analysis of Airbnb listings in Edinburgh, but instead to give you a chance to practice your data visualisation and interpretation skills.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-01-edibnb/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/01-basics)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-01-edibnb/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/01-basics)
 :::
 
 ::: tutorial
@@ -27,7 +29,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Filter data for certain attributes with `filter()`.
 -   Create new variables based on existing variables in the data with `mutate()`.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-02-accidents/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/02-accidents)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-02-accidents/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/02-accidents)
 :::
 
 ::: tutorial
@@ -37,7 +39,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Calculate summary statistics with `summarise()`.
 -   Arrange output of dplyr chains with `arrange()`.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-03-collegegrads/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/03-collegegrads)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-03-collegegrads/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/03-collegegrads)
 :::
 
 ::: tutorial
@@ -47,7 +49,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Develop a question you can answer with the data.
 -   Deepen your understanding of building and interpreting visualisations.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-04-legosales/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/04-legosales)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-04-legosales/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/04-legosales)
 :::
 
 ::: tutorial
@@ -56,7 +58,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Get started with scraping data from the web.
 -   Continue to build on your data cleaning and visualisation skills.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/05-moneyinpolitics)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/05-moneyinpolitics)
 :::
 
 ::: tutorial
@@ -66,7 +68,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Practice modelling and interpreting model results and performance.
 -   Conduct backwards selection for finding the "best" model.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-06-dcbikeshare/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/06-dcbikeshare)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-06-dcbikeshare/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/06-dcbikeshare)
 :::
 
 ::: tutorial
@@ -76,7 +78,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Fit linear models with multiple predictors.
 -   Interpret regression output.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-07-exploregss/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/07-exploregss)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-07-exploregss/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/07-exploregss)
 :::
 
 ::: tutorial
@@ -86,7 +88,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Use bootstrapping to construct confidence intervals.
 -   Interpret of confidence intervals in context of the data.
 
-[[Tutorial]](https://minecr.shinyapps.io/dsbox-08-bootstrapgss/) [[Source]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/08-bootstrapgss)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-08-bootstrapgss/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/08-bootstrapgss)
 :::
 
-[^02-interactive-tutorials-1]: The dsbox package is not yet on CRAN, until then you will need to install from GitHub with `devtools::install_github("rstudio-education/dsbox")`.
+[^1]: The dsbox package is not yet on CRAN, until then you will need to install from GitHub with `devtools::install_github("rstudio-education/dsbox")`.

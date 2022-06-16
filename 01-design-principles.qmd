@@ -1,4 +1,6 @@
-# Design principles {#design-principles}
+---
+title: "Design principles"
+---
 
 This course is designed with five principles in mind:
 
@@ -15,13 +17,13 @@ I'm guessing the answer is the image on the left: the cake.
 
 ```{r}
 #| labe: cake-ingredients
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-alt: |
 #|   Two pictures side-by-side. The first shows ingredients. The second shows 
 #|   a baked cake.
 
-include_graphics(path = "images/design-cake-ingredients.png")
+knitr::include_graphics(path = "images/design-cake-ingredients.png")
 ```
 
 The teaching philosophy of this course builds on this same idea.
@@ -32,13 +34,13 @@ Of course, we don't want students feeling like...
 
 ```{r}
 #| label: owl
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-alt: |
 #|   Illustration titled "How to draw an owl". Step 1 is just two circles. 
 #|   Step 2 is a complete owl.
 
-include_graphics(path = "images/design-owl.jpg")
+knitr::include_graphics(path = "images/design-owl.jpg")
 ```
 
 The course starts out slow and emphasizes iteration.

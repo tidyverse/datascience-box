@@ -1,6 +1,6 @@
-# (PART) Infrastructure {.unnumbered}
-
-# Accessing R {#access-r}
+---
+title: "Accessing R"
+---
 
 One of the design principles of this course is "cherish day one" -- get students from nothing to their first meaningful data visualization within the first 10 minutes of the course.
 Achieving this is possible, but requires careful consideration of the computing infrastructure.
@@ -13,7 +13,7 @@ Additionally, since it is a full fledged IDE, it also features integrated help, 
 [RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation.
 The main reason for this choice is reducing friction at first exposure to R.
 Local installation can be difficult to manage, both for the student and the instructor, and can shift the focus away from data science learning at the beginning of the course.
-We discuss in further detail the reasons for avoiding local installation at the beginning of the course in Section \@ref(design-principles).[^03-access-r-1]
+We discuss in further detail the reasons for avoiding local installation at the beginning of the course in [Design Principles](01-design-principles.html).[^1]
 
 When you create an account on RStudio Cloud, you get a workspace of your own, and the projects you create here can be public or private.
 You can also add a new workspace and control its permissions, and the projects you create here can also be public or private.
@@ -31,11 +31,11 @@ Then, each assignment/project in the course maps to an RStudio Cloud project.
 
 ```{r}
 #| label: rscloud-bigpicture
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "RStudio Cloud classroom structure"
 
-include_graphics(path = "images/rscloud-bigpicture.png")
+knitr::include_graphics(path = "images/rscloud-bigpicture.png")
 ```
 
 ## Setting up your course in RStudio Cloud
@@ -49,11 +49,11 @@ I recommend using something along the lines of Course number - Semester.
 
 ```{r}
 #| label: rscloud-new-workspace
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Creating a new workspace on RStudio Cloud"
 
-include_graphics(path = "images/rscloud-new-workspace.png")
+knitr::include_graphics(path = "images/rscloud-new-workspace.png")
 ```
 
 Next step is to invite members to the workspace.
@@ -63,18 +63,18 @@ Once all of your students are in the course (or once drop/add period ends) you c
 
 ```{r}
 #| label: rscloud-workspace-permissions
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Setting workspace permissions"
 
-include_graphics(path = "images/rscloud-workspace-permissions.png")
+knitr::include_graphics(path = "images/rscloud-workspace-permissions.png")
 ```
 
 As highlighted in the figure above, when a workspace is set to accept members via a shared link, the owner can also set a default permission level for those entering the workspace via the sharing link.
 Suggested permission levels and suggestions for mapping to course roles are as follows.
 
 | RStudio Cloud role | Permissions                                      | Course role        |
-|--------------------|--------------------------------------------------|--------------------|
+|------------------|------------------------------------|------------------|
 | Admin              | Manage users, view, edit and manage all projects | Instructor         |
 | Moderator          | View, edit and manage all projects               | Teaching Assistant |
 | Contributor        | Create, edit and manage their own projects       | Student            |
@@ -97,11 +97,11 @@ You can learn more about them [here](http://r4ds.had.co.nz/workflow-projects.htm
 
 ```{r}
 #| label: rscloud-new-project
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "A new project in RStudio Cloud is a new project in the RStudio IDE"
 
-include_graphics(path = "images/rscloud-new-project.png")
+knitr::include_graphics(path = "images/rscloud-new-project.png")
 ```
 
 ### Access
@@ -117,11 +117,11 @@ You should also check the "Make this project an assignment" box so that when a s
 
 ```{r}
 #| label: rscloud-project-permissions
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Setting project permissions within a workspace"
 
-include_graphics(path = "images/rscloud-project-permissions.png")
+knitr::include_graphics(path = "images/rscloud-project-permissions.png")
 ```
 
 ## Base project template
@@ -133,11 +133,11 @@ After creating your project, select it on the Settings page as the base project 
 
 ```{r}
 #| label: rscloud-base-template
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Selecting a base project template"
 
-include_graphics(path = "images/rscloud-base-template.png")
+knitr::include_graphics(path = "images/rscloud-base-template.png")
 ```
 
 Note that a project must be shared with everyone in the space in order to be used as a template; only projects which are viewable by everyone in the space will appear in the templates list.
@@ -152,16 +152,16 @@ It is possible to create (clone) a new project in RStudio Cloud from a GitHub re
 
 ```{r}
 #| label: rscloud-git-project
-#| fig-align: "center"
+#| fig-align: center
 #| echo: false
 #| fig-cap: "Creating a new project from GitHub repository"
 
-include_graphics(path = "images/rscloud-git-project.png")
+knitr::include_graphics(path = "images/rscloud-git-project.png")
 ```
 
 If you have a base project template set up for your workspace, this new project created from GitHub will also have the packages installed in the base project template.
 
-For more on using Git and GitHub in the classroom, see Section \@ref(version-control).
+For more on using Git and GitHub in the classroom, see [Version Control](03-version-control.html).
 
 ## Troubleshooting
 
@@ -196,7 +196,7 @@ To see this all in action and learn more, watch the following RStudio Cloud webi
 -   [Teaching R online with RStudio Cloud](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom) (March 2020)
 -   [RStudio Cloud in the Classroom](https://resources.rstudio.com/webinars/rstudio-cloud-in-the-classroom)
 
-[^03-access-r-1]: Note that as of August 2020 RStudio Cloud offers paid tiers as well, and you will likely need a paid subscription to teach with RStudio Cloud (unless you're teaching a short, small course).
+[^1]: Note that as of August 2020 RStudio Cloud offers paid tiers as well, and you will likely need a paid subscription to teach with RStudio Cloud (unless you're teaching a short, small course).
     Depending on your institution's IT infrastructure and your class size, RStudio Cloud may or may not be the most economically feasible solution for your teaching needs.
-    See Section \@ref(alternative-setups) for suggestions for other setups for providing server access to RStudio for your students.
-    Note that these alternatives generally require system infrastructure expertiose or IT professional time.
+    See [Alternative Setups](03-alternative-setups.html) for suggestions for other setups for providing server access to RStudio for your students.
+    Note that these alternatives generally require system infrastructure expertise or IT professional time.

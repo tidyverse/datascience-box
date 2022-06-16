@@ -1,4 +1,6 @@
-# Sharing {#sharing}
+---
+title: "Sharing"
+---
 
 A nifty tool for building your course website is blogdown.
 
