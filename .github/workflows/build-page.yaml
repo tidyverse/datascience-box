@@ -40,8 +40,7 @@ jobs:
         with:
           cache-version: 2
 
-      - name: Render book to all format
-        # Add any command line argument needed
+      - name: Render page
         run: |
           quarto render
 
