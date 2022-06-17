@@ -27,7 +27,7 @@ You can join the workspace and play around with the sample application exercises
 **Unit 1 - Deck 1: Welcome**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d01-welcome/u1-d01-welcome.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u1-d01-welcome/u1-d01-welcome.html#1)
 :::
 
 ::: source
@@ -63,7 +63,7 @@ You can join the workspace and play around with the sample application exercises
 **Unit 1 - Deck 2: Meet the toolkit - Programming**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d02-toolkit-r/u1-d02-toolkit-r.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u1-d02-toolkit-r/u1-d02-toolkit-r.html#1)
 :::
 
 ::: source
@@ -92,7 +92,7 @@ You can join the workspace and play around with the sample application exercises
 **Unit 1 - Deck 3: Meet the toolkit - Version control and collaboration**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u1-d03-toolkit-git/u1-d03-toolkit-git.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u1-d03-toolkit-git/u1-d03-toolkit-git.html#1)
 :::
 
 ::: source

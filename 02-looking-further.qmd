@@ -12,7 +12,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 1: Text analysis**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d01-text-analysis/u5-d01-text-analysis.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d01-text-analysis/u5-d01-text-analysis.html#1)
 :::
 
 ::: source
@@ -28,7 +28,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 2: Comparing texts**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d02-comparing-texts/u5-d02-comparing-texts.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d02-comparing-texts/u5-d02-comparing-texts.html#1)
 :::
 
 ::: source
@@ -44,7 +44,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 3: Interactive web apps**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d03-interactive-web-app/u5-d03-interactive-web-app.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d03-interactive-web-app/u5-d03-interactive-web-app.html#1)
 :::
 
 ::: source
@@ -60,7 +60,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 4: Machine learning**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d04-machine-learning/u5-d04-machine-learning.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d04-machine-learning/u5-d04-machine-learning.html#1)
 :::
 
 ::: source
@@ -76,7 +76,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 5: Interactive data visualisation**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d05-shiny-1/u5-d05-shiny-1.pdf)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d05-shiny-1/u5-d05-shiny-1.pdf)
 :::
 :::
 
@@ -84,7 +84,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 6: Interactive data visualisation and reporting**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d05-shiny-2/u5-d05-shiny-2.pdf)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d05-shiny-2/u5-d05-shiny-2.pdf)
 :::
 :::
 
@@ -92,7 +92,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 **Unit 5 - Deck 7: Bayesian inference**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u5-d07-bayes-inf/u5-d07-bayes-inf.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u5-d07-bayes-inf/u5-d07-bayes-inf.html#1)
 :::
 
 ::: source

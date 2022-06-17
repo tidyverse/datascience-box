@@ -19,7 +19,7 @@ You can join the workspace and play around with the sample application exercises
 **Unit 4 - Deck 1: The language of models**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d01-language-of-models/u4-d01-language-of-models.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d01-language-of-models/u4-d01-language-of-models.html#1)
 :::
 
 ::: source
@@ -35,7 +35,7 @@ You can join the workspace and play around with the sample application exercises
 **Unit 4 - Deck 2: Fitting and interpreting models**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d02-fitting-interpreting-models/u4-d02-fitting-interpreting-models.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d02-fitting-interpreting-models/u4-d02-fitting-interpreting-models.html#1)
 :::
 
 ::: source
@@ -55,7 +55,7 @@ IMS :: [Chp 7 - Linear regression with a single predictor](https://openintro-ims
 **Unit 4 - Deck 3: Modelling nonlinear relationships**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d03-modeling-nonlinear-relationships/u4-d03-modeling-nonlinear-relationships.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d03-modeling-nonlinear-relationships/u4-d03-modeling-nonlinear-relationships.html#1)
 :::
 
 ::: source
@@ -71,7 +71,7 @@ IMS :: [Chp 7 - Linear regression with a single predictor](https://openintro-ims
 **Unit 4 - Deck 4: Models with multiple predictors**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d04-model-multiple-predictors/u4-d04-model-multiple-predictors.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d04-model-multiple-predictors/u4-d04-model-multiple-predictors.html#1)
 :::
 
 ::: source
@@ -91,7 +91,7 @@ IMS :: [Chp 8 - Linear regression with multiple predictors](https://openintro-im
 **Unit 4 - Deck 5: More models with multiple predictors**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d05-more-model-multiple-predictors/u4-d05-more-model-multiple-predictors.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d05-more-model-multiple-predictors/u4-d05-more-model-multiple-predictors.html#1)
 :::
 
 ::: source
@@ -109,7 +109,7 @@ IMS :: [Chp 8 - Linear regression with multiple predictors](https://openintro-im
 **Unit 4 - Deck 6: Logistic regression**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d06-logistic-reg/u4-d06-logistic-reg.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d06-logistic-reg/u4-d06-logistic-reg.html#1)
 :::
 
 ::: source
@@ -129,7 +129,7 @@ IMS :: [Chp 9 - Logistic regression](https://openintro-ims.netlify.app/model-log
 **Unit 4 - Deck 7: Prediction and overfitting**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d07-prediction-overfitting/u4-d07-prediction-overfitting.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d07-prediction-overfitting/u4-d07-prediction-overfitting.html#1)
 :::
 
 ::: source
@@ -149,7 +149,7 @@ tidymodels :: [Build a model](https://www.tidymodels.org/start/models/)
 **Unit 4 - Deck 8: Feature engineering**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d08-feature-engineering/u4-d08-feature-engineering.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d08-feature-engineering/u4-d08-feature-engineering.html#1)
 :::
 
 ::: source
@@ -171,7 +171,7 @@ tidymodels :: [Preprocess your data with recipes](https://www.tidymodels.org/sta
 **Unit 4 - Deck 9: Cross validation**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d09-cross-validation/u4-d09-cross-validation.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d09-cross-validation/u4-d09-cross-validation.html#1)
 :::
 
 ::: source
@@ -217,7 +217,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 **Unit 4 - Deck 10: Quantifying uncertainty**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d10-quantify-uncertainty/u4-d10-quantify-uncertainty.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d10-quantify-uncertainty/u4-d10-quantify-uncertainty.html#1)
 :::
 
 ::: source
@@ -233,7 +233,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 **Unit 4 - Deck 11: Bootstrapping**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d11-bootstrap/u4-d11-bootstrap.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d11-bootstrap/u4-d11-bootstrap.html#1)
 :::
 
 ::: source
@@ -253,7 +253,7 @@ IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.
 **Unit 4 - Deck 12: Hypothesis testing**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d12-hypothesis-testing/u4-d12-hypothesis-testing.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d12-hypothesis-testing/u4-d12-hypothesis-testing.html#1)
 :::
 
 ::: source
@@ -269,7 +269,7 @@ IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.
 **Unit 4 - Deck 13: Inference overview**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u4-d13-inference-overview/u4-d13-inference-overview.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u4-d13-inference-overview/u4-d13-inference-overview.html#1)
 :::
 
 ::: source

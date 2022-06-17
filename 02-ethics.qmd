@@ -11,7 +11,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 **Unit 3 - Deck 1: Misrepresentation**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d01-misrepresentation/u3-d01-misrepresentation.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u3-d01-misrepresentation/u3-d01-misrepresentation.html#1)
 :::
 
 ::: source
@@ -35,7 +35,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 **Unit 3 - Deck 2: Data privacy**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d02-privacy/u3-d02-privacy.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u3-d02-privacy/u3-d02-privacy.html#1)
 :::
 
 ::: source
@@ -59,7 +59,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 **Unit 3 - Deck 3: Algorithmic bias**
 
 ::: slides
-[Slides](https://rstudio-education.github.io/datascience-box/course-materials/slides/u3-d03-algorithmic-bias/u3-d03-algorithmic-bias.html#1)
+[Slides](https://datasciencebox.org/course-materials/_slides/u3-d03-algorithmic-bias/u3-d03-algorithmic-bias.html#1)
 :::
 
 ::: source
