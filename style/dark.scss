@@ -27,3 +27,83 @@ $input-bg: #242424;
 .layout-example {
   background: $gray-700;
 }
+
+.application-exercise {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #a8a8a8;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/application-exercise.png");
+}
+
+.reading {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border: 1pt solid #d8d8d8;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/book.png");
+}
+
+.slide-deck {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #80D4E6;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/slide-deck.png");
+}
+
+.guest-lecture {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt dotted #a8a8a8;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/microphone.png");
+}
+
+.lab{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #FFD748;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/lab.png");
+}
+
+.homework{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #F26BAA;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/hw.png");
+}
+
+.tutorial{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #d8d8d8;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/tutorial.png");
+}
+
+.exam{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #d8d8d8;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/exam.png");
+}
+
+.rstudio-cloud {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  background: #303030 5px center/3em no-repeat;
+  background-image: url("style/icons/cloud.png");
+}
