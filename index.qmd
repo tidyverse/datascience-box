@@ -2,6 +2,8 @@
 title: "Welcome"
 ---
 
+![](images/dsbox.png){style="float: right;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right" width="250"}
+
 How can we effectively and efficiently teach data science to students with little to no background in computing and statistical thinking?
 How can we equip them with the skills and tools for reasoning with various types of data and leave them wanting to learn more?
 This introductory data science course is our (working) answer to this question.
