@@ -3,5 +3,5 @@ title: "Course design"
 editor: visual
 ---
 
-Want some resources for learning more about teaching with Data Science in a Box or need a 10 or 15-week term schedule?
+Want some resources for learning more about teaching with Data Science in a Box or need a 11 or 15-week term schedule?
 You've come to the right place.
