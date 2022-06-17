@@ -1,7 +1,2 @@
-_course-materials/**.R
-_course-materials/**.Rmd
-_course-materials/application-exercises/ae-09-feat-eng-cv/theoffice.Rmd
-_course-materials/hw-instructions/hw-02/hw-02-airbnb-edi.Rmd
-course-materials/slides/u2-d12-data-import/u2-d12-data-import.Rmd
-_course-materials/starters/lab/lab-08-uoe-art/lab-08.Rmd
-_course-materials/hw-instructions/hw-06/scripts/scrape-pac.R
+course-materials/
+_site/
