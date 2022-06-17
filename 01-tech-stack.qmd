@@ -1,0 +1,24 @@
+---
+title: "Tech stack"
+---
+
+This course teaches computing and statistics to undergraduates with no background in either.
+Managing such a course with students from varied backgrounds doing non-trivial computational work is a big technical challenge.
+This page briefly describes the toolkit choices, and the Infrastructure part provides a path forward for educators who are considering using these tools for their own teaching purposes.
+
+While the recommended tech stack for the entirety of course development is tall, only a few of the technologies are student facing:
+
+-   RStudio Cloud: [RStudio Cloud](https://rstudio.cloud/) is a managed cloud instance of the RStudio IDE. We recommend having students access RStudio via RStudio Cloud as opposed to using a local installation.
+    See [Accessing R](03-access-r.html) for more on this.
+
+-   GitHub: The use of [GitHub](https://github.com/) also goes a long way to help students visualize and understand the git process which also aids in student buy-in.
+    The web interface allows students to easily view diffs (file changes over time) in files they are collaborating on, keep track of commit histories, and search both the current state as well as the entire history of the code base.
+    Within the classroom GitHub can be thought of as an advanced and flexible learning management system (compared to traditional tools like Blackboard or Sakai).
+    See [Version Control](03-version-control.html) for more on this.
+
+-   Piazza: [Piazza](http://piazza.com/) is an easy to use and free Q&A platform that your students might very well be already familiar with from other classes.
+    It is also possible that it's already integrated into your learning management system if you're teaching in a university setting.
+    Students are discouraged from using email for questions and discussions related to content of the course, only emails about personal matters are allowed.
+    Hence most course communication happens on Piazza.
+    Both public (for announcements and general questions) and private (for team communication) channels are used.
+    Note that Piazza is not everyone's first choice, a few options for alternatives used in statistics and data science courses can be found [on this Twitter thread](https://twitter.com/minebocek/status/1292499540105404416).

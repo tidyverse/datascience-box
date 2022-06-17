@@ -1,0 +1,11 @@
+---
+title: "Sharing"
+---
+
+A nifty tool for building your course website is blogdown.
+
+Perhaps the most useful aspect of blogdown in this setting is that your slides, assignments, etc. written in R Markdown can be automatically rendered, so you don't need to separately knit those documents.
+
+If you would like to build your course website with blogdown, you can use [this course website](http://introds.org/) as an example, source code [here](https://github.com/ids-s1-20/website).
+
+[This webinar](https://resources.rstudio.com/webinars/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown) by Alison Hill and Desirée De Leon is also very useful for options for sharing your course materials with students.

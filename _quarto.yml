@@ -1,0 +1,90 @@
+project:
+  type: website
+  resources:
+    - "images/twitter-card.png"
+    - "_course-materials"
+    
+website:
+  page-navigation: true
+  title: "Data Science in a Box"
+  author: "Mine Çetinkaya-Rundel"
+  description: "Data Science in a Box contains the materials required to teach (or learn from) the course described above, all of which are freely-available and open-source."
+  date: now
+  site-url: "https://datasciencebox.org/"
+  
+  repo-url: https://github.com/rstudio-education/datascience-box
+  repo-actions: [edit, issue]
+
+  opengraph: true
+  twitter-card:
+    creator: "@minebocek"
+    image: "/images/twitter-card.png"
+
+  page-footer:
+    left: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+    background: "#A7D5E8"
+
+  center:
+    - text: "License"
+      href: LICENSE.md
+    - text: "Code of Conduct"
+      href: CODE_OF_CONDUCT.md
+
+  sidebar:
+    background: "#A7D5E8"
+    logo: "images/dsbox.png"
+    pinned: true
+    align: center
+    tools:
+      - icon: github
+        href: https://github.com/rstudio-education/datascience-box
+        text: GitHub
+      - icon: cloud-fill
+        href: https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK
+        text: RStudio Cloud
+    style: docked
+    contents:
+      - href: index.qmd
+      - section: "Hello #dsbox!"
+        contents:
+          - href: 01-overview.qmd
+          - href: 01-design-principles.qmd
+          - href: 01-topics.qmd
+          - href: 01-tech-stack.qmd
+          - href: 01-community.qmd
+      - section: "Course content"
+        contents:
+          - href: 02-hello-world.qmd
+          - href: 02-exploring-data.qmd
+          - href: 02-ethics.qmd
+          - href: 02-making-rigorous-conclusions.qmd
+          - href: 02-looking-further.qmd
+          - href: 02-interactive-tutorials.qmd
+          - href: 02-project.qmd
+          - href: 02-exams.qmd
+      - section: "Infrastructure"
+        contents:
+          - href: 03-access-r.qmd
+          - href: 03-version-control.qmd
+          - href: 03-discussion.qmd
+          - href: 03-sharing.qmd
+          - href: 03-alternative-setups.qmd
+      - section: "Course design"
+        contents:
+          - href: 04-pedagogy.qmd
+          - href: 04-schedule.qmd
+
+format:
+  html:
+    theme:
+      light: [cosmo, style/dsbox.scss]
+      dark: [cosmo, style/dsbox.scss, style/dark.scss]
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    mainfont: "Atkinson Hyperlegible"
+    include-in-header: "style/fontawesome.html"
+
+freeze: auto
+
+editor: visual

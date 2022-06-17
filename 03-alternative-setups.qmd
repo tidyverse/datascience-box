@@ -1,0 +1,85 @@
+---
+title: "Alternative setups"
+---
+
+In this section we describe alternative setups for your course.
+
+In a course at this level students should access the RStudio IDE through a centralized RStudio server instance, which allows us to provide students with uniform computing environments.
+
+It should be noted that the goal isn't to completely dissuade students from downloading and installing R and RStudio locally, we just don't want it to be a prerequisite for getting started.
+Teaching personal setup is best done progressively throughout a semester, usually via one-on-one interactions during office hours or after class.
+The goal is that all students will be able to continue using R even if they no longer have access to departmental resources.
+
+If you prefer to not use RStudio Cloud, you might consider one of the following approaches.
+
+## Centralized RStudio server
+
+One approach that might work particularly well for higher level courses that require a shared infrastructure and higher end computational resources is running academically licensed RStudio Server Pro on a powerful server (e.g. 32 cores, 512 GB RAM).
+If this server is in the department, instructors can be given direct control over all aspects of the computing environment.
+
+The figure below is a sketch of the architecture of the centralized RStudio server approach, which shows that students connect to a single RStudio server instance via a departmental login.
+This works well for upper division and graduate level courses as most students are directly affiliated with the department.
+Students taking courses who are not affiliated with the department are issued temporary visitor accounts which expire at the end of the semester.
+
+```{r}
+#| label: alt-centralized-server
+#| fig-align: center
+#| echo: false
+#| fig-cap: "Centralized RStudio server"
+
+knitr::include_graphics(path = "images/alt-centralized-server.png")
+```
+
+More modest configurations can be more than adequate (e.g., a mid-to-high end desktop) for the vast majority of use cases, however care should be given when working with larger datasets in a shared environment.
+An alternative approach is to use a virtualized hardware in the cloud (e.g. EC2, Azure, etc.).
+
+The primary benefit of running and managing the server in-house comes down to control - as needed the instructor(s) are able to install and update software, change configurations, restart or kill sessions, and monitor all aspects of the system.
+This does increase the demands on the instructor and any involved IT staff, but we have found the benefits to far outweigh the costs.
+One other unforeseen benefit to a centralized approach is that it makes it possible to present large scale analytic tasks that would not be possible on a traditional desktop or laptop.
+For example, advanced courses can include homework assignments where students need to process a dataset that is on the order of several hundred gigabytes in size, which would not be possible if they were required to use their own system.
+
+## Dockerized RStudio server
+
+A second approach to running RStudio server involves the construction and hosting of a farm of individualized Docker container instances.
+A sketch of the architecture of the Docker containers is in the figure below, which shows that students authenticate via university login which redirects them to a personal RStudio instance running in a Docker container on either a local or cloud based server.
+
+```{r}
+#| label: alt-docker
+#| fig-align: center
+#| echo: false
+#| fig-cap: "Dockerized RStudio server"
+
+knitr::include_graphics(path = "images/alt-docker.png")
+```
+
+Docker is a popular and rapidly evolving containerization tool suite that allows users to automate the deployment of software in a repeatable and self-contained way.
+Each container wraps a portion of the file system in such a way that all of the code, runtimes, tools, and libraries needed for a piece of software are available, meaning that software will always run in exactly the same way regardless of the environment in which it is being run.
+As such, Docker is a powerful tool for reproducible computational research, since every Dockerfile transparently and clearly defines exactly what software and which version is being used for any particular computation task.
+
+An additional advantage of Docker containers is that they are similar to virtual machines in that they are sandboxed from one another.
+By mapping each student to a single container we are able to keep all student processes segregated and enforce strict CPU, memory, and disk usage quotas to avoid accidental disruption of the work of one another.
+
+However Docker containers are generally lighter weight than virtual machines, in terms of system resources used.
+This makes it feasible to run a large number of containers on a single system at the same time.
+Since most RStudio usage (particularly by our introductory students) is intermittent, we have found that it is possible to run more than 100 RStudio containers concurrently on a single server.
+Servers can be run locally or on a cloud-based service.
+The cost for the latter can be defrayed by the credits many services offer for academic use.
+
+Further details of a containerized RStudio server approach implemented at Duke can be found at [here](https://github.com/mccahill/docker-rstudio).
+This repository contains a README which explains how the large-scale container farm is set up and also contains the Dockerfiles that are used to create the individual containers.
+
+Implementing the infrastructure solutions discussed above can be overwhelming and time consuming.
+We encourage faculty interested in adopting these tools to partner with their departmental and/or university IT professionals.
+Additionally, building these partnerships can lead to collaborations that benefit the entire university.
+
+## Learn more
+
+If you would like to learn more about computing infrastructure for statistics and data science courses, we recommend the following paper.
+
+> Çetinkaya-Rundel, M., & Rundel, C.
+> (2018).
+> Infrastructure and tools for teaching computing throughout the statistical curriculum.
+> *The American Statistician*, 72(1), 58-65.
+> [doi.org/10.1080/00031305.2017.1397549](https://doi.org/10.1080/00031305.2017.1397549)
+
+A freely available version of the paper can be found [here](https://peerj.com/preprints/3181/).

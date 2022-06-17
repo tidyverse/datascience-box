@@ -1,0 +1,30 @@
+---
+title: "Pedagogy"
+---
+
+## Course design
+
+The following resources describe the pedagogy used in designing and teaching a course with the materials provided in this resources.
+
+> Mine Çetinkaya-Rundel & Victoria Ellison.
+> A fresh look at introductory data science, *Journal of Statistics Education*.
+> [doi.org/10.1080/10691898.2020.1804497](https://doi.org/10.1080/10691898.2020.1804497).
+
+> Talk: The art and science of teaching data science [\[Slides\]](https://speakerdeck.com/minecr/the-art-and-science-of-teaching-data-science-university-of-glasgow)
+
+> Talk: Data Science in a Box [\[Slides\]](https://speakerdeck.com/minecr/data-science-in-a-box) [\[Video\]](https://www.youtube.com/watch?v=tYGLYdeFJMc)
+
+> Talk: Let them eat cake (first)!
+> [\[Slides\]](https://speakerdeck.com/minecr/let-them-eat-cake-first) [\[Video\]](https://www.youtube.com/embed/RsVOrpXAPXo?start=1009)
+
+## Teaching the tidyverse
+
+The following four part blog post series offers recommendations and tips for teaching the tidyverse in 2020.
+
+> [Part 1: Getting started](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-1-getting-started/)
+
+> [Part 2: Data visualisation](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-2-data-visualisation/)
+
+> [Part 3: Data wrangling and tidying](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-3-data-wrangling-and-tidying/)
+
+> [Part 4: When to purrr?](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-4-when-to-purrr/)

@@ -8,3 +8,8 @@ render*.rds
 *.key
 *.docx
 .Rapp.history
+
+/.quarto/
+.Rdata
+.httr-oauth
+.DS_Store

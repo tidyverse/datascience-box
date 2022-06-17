@@ -1,0 +1,211 @@
+---
+title: "Topics"
+---
+
+The course content is organized in three units:
+
+```{r}
+#| label: topic-flow
+#| fig-align: center
+#| echo: false
+#| fig-asp: 0.3
+#| out-width: "100%"
+#| fig-alt: |
+#|   Workflow diagram showing five course units described in the following text.
+
+library(DiagrammeR)
+
+hello_border <- "#333333"
+hello_fill   <- "#d8d8d8"
+explore_border <- "#57707a"
+explore_fill   <- "#A7D5E8"
+ethics_border  <- "#6e8796"
+ethics_fill    <- "#b3dcf5"
+rigor_border   <- "#1E5C65"
+rigor_fill     <- "#b3edf5"
+further_border <- "#FFD748"
+further_fill   <- "#faebb4"
+
+topic_flow <- create_graph() %>%
+  # Hello world ----
+  add_node(
+    label = "Hello\nworld",
+    node_aes = node_aes(
+      x = 2, y = 2,
+      shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
+      fontsize = 12, fontcolor = "black",
+      color = hello_border, penwidth = 2, fillcolor = hello_fill
+    )
+  ) %>%
+  # Exploring data ----
+  add_node(
+    label = "Exploring\ndata",
+    node_aes = node_aes(
+      x = 4, y = 2,
+      shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
+      fontname = "helvetica", fontsize = 12, fontcolor = "black",
+      color = explore_border, penwidth = 2, fillcolor = explore_fill
+    )
+  ) %>%
+  add_edge(
+    from = "Hello\nworld", to = "Exploring\ndata",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_edge(
+    from = "Exploring\ndata", to = "Hello\nworld",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_node(
+    label = "Visualize",
+    node_aes = node_aes(
+      x = 4, y = 3,
+      fontsize = 10, width = 0.75,
+      color = explore_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Wrangle",
+    node_aes = node_aes(
+      x = 5, y = 1,
+      fontsize = 10, width = 0.75,
+      color = explore_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Import",
+    node_aes = node_aes(
+      x = 3, y = 1,
+      fontsize = 10, width = 0.75,
+      color = explore_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_edge(from = "Visualize", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Wrangle", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Import", to = "Exploring\ndata", edge_aes = edge_aes(arrowhead = "none")) %>%
+  # Data science ethics ----
+  add_node(
+    label = "Data\nscience\nethics",
+    node_aes = node_aes(
+      x = 6, y = 2,
+      shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
+      fontsize = 12, fontcolor = "black",
+      color = ethics_border, penwidth = 2, fillcolor = ethics_fill
+    )
+  ) %>%
+  add_edge(
+    from = "Exploring\ndata", to = "Data\nscience\nethics",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_edge(
+    from = "Data\nscience\nethics", to = "Exploring\ndata",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_node(
+    label = "Misrepre-\nsentation",
+    node_aes = node_aes(
+      x = 5, y = 3,
+      fontsize = 10, width = 0.75,
+      color = ethics_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Data\nprivacy",
+    node_aes = node_aes(
+      x = 7, y = 3,
+      fontsize = 10, width = 0.75,
+      color = ethics_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Algorithmic\nbias",
+    node_aes = node_aes(
+      x = 6, y = 1,
+      fontsize = 10, width = 0.75,
+      color = ethics_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_edge(from = "Misrepre-\nsentation", to = "Data\nscience\nethics", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Data\nprivacy", to = "Data\nscience\nethics", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Algorithmic\nbias", to = "Data\nscience\nethics", edge_aes = edge_aes(arrowhead = "none")) %>%
+  # Making rigorous conclusions ----
+  add_node(
+    label = "Making\nrigorous\nconclu-\nsions",
+    node_aes = node_aes(
+      x = 8, y = 2,
+      shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
+      fontsize = 12, fontcolor = "black",
+      color = rigor_border, penwidth = 2, fillcolor = rigor_fill
+    )
+  ) %>%
+  add_edge(
+    from = "Data\nscience\nethics", to = "Making\nrigorous\nconclu-\nsions",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_edge(
+    from = "Making\nrigorous\nconclu-\nsions", to = "Data\nscience\nethics",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_node(
+    label = "Model",
+    node_aes = node_aes(
+      x = 8, y = 3,
+      fontsize = 10, width = 0.75,
+      color = rigor_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Predict",
+    node_aes = node_aes(
+      x = 9, y = 1,
+      fontsize = 10, width = 0.75,
+      color = rigor_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_node(
+    label = "Infer",
+    node_aes = node_aes(
+      x = 7, y = 1,
+      fontsize = 10, width = 0.75,
+      color = rigor_fill, penwidth = 2, fillcolor = "white"
+    )
+  ) %>%
+  add_edge(from = "Model", to = "Making\nrigorous\nconclu-\nsions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Predict", to = "Making\nrigorous\nconclu-\nsions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  add_edge(from = "Infer", to = "Making\nrigorous\nconclu-\nsions", edge_aes = edge_aes(arrowhead = "none")) %>%
+  # Looking further ----
+  add_node(
+    label = "Looking\nfurther",
+    node_aes = node_aes(
+      x = 10, y = 2,
+      shape = "hexagon", fixedsize = TRUE, height = 1, width = 1.1,
+      fontname = "helvetica", fontsize = 12, fontcolor = "black",
+      color = further_border, penwidth = 2, fillcolor = further_fill
+    )
+  ) %>%
+  add_edge(
+    from = "Making\nrigorous\nconclu-\nsions", to = "Looking\nfurther",
+    edge_aes = edge_aes(arrowhead = "normal")
+  ) %>%
+  add_edge(
+    to = "Making\nrigorous\nconclu-\nsions", from = "Looking\nfurther",
+    edge_aes = edge_aes(arrowhead = "normal")
+  )
+
+render_graph(topic_flow)
+```
+
+**Unit 1 - Hello world:** This unit is an introduction to the content, pedagogy, and toolkit of the course.
+
+**Unit 2 - Exploring data:** This unit focuses on data visualization and data wrangling.
+Specifically we cover fundamentals of data and data visualization, confounding variables, and Simpson's paradox as well as the concept of tidy data, data import, data cleaning, and data curation.
+We end the unit with web scraping and introduce the idea of iteration in preparation for the next unit.
+Also in this unit students are introduced to the toolkit: R, RStudio, R Markdown, Git, and GitHub.
+
+**Unit 3 - Data science ethics:** In this unit we discuss misrepresentation of findings, particularly in data visualisations, breaches of data privacy, and algorithmic bias.
+
+**Unit 4 - Making rigorous conclusions:** In this unit we introduce modelling and statistical inference for making data-based conclusions.
+We discuss building, interpreting, and selecting models, visualizing interaction effects, and prediction and model validation.
+Statistical inference is introduced from a simulation based perspective, and the Central Limit Theorem is discussed very briefly to lay the foundation for future coursework in statistics.
+
+**Unit 5 - Looking forward:** In the last unit we present a series of modules such as interactive reporting and visualization with Shiny, text analysis, and Bayesian inference.
+These are independent modules that educators can choose to include in their introductory data science curriculum depending on how much time they have left in the semester.

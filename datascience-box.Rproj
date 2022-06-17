@@ -12,8 +12,6 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-BuildType: Website
-
 MarkdownWrap: Sentence
 MarkdownReferences: Document
 MarkdownCanonical: Yes

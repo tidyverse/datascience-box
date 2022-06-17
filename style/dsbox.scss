@@ -1,0 +1,183 @@
+/*-- scss:defaults --*/
+
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+
+$link-color: #4f7c8d;
+
+/*-- scss:rules --*/
+
+.application-exercise {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #a8a8a8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/application-exercise.png");
+}
+
+.application-exercise:before {
+  content: "Application exercise: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #80D4E6;
+}
+
+
+.slides {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.slides:before {
+  content: "\f108";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+
+.reading {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/book.png");
+}
+.reading:before {
+  content: "Reading: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #1E5C65;
+}
+.reading ul li {
+  list-style-type: square;
+}
+
+.slide-deck {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #80D4E6;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/slide-deck.png");
+}
+
+.source {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.source:before {
+  content: "\f1c9";
+  font-family: FontAwesome;
+  color: #a8a8a8;
+  left: 5px;
+  position: absolute;
+}
+
+.guest-lecture {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt dotted #a8a8a8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/microphone.png");
+}
+
+.video {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.video:before {
+  content: "\f16a";
+  font-family: FontAwesome;
+  color: #c4302b;
+  left: 5px;
+  position: absolute;
+}
+
+
+.lab{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #FFD748;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/lab.png");
+}
+
+.homework{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #F26BAA;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/hw.png");
+}
+
+.instructions {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.instructions:before {
+  content: "\f15c";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+.starter {
+  padding: 0em 1em 0em 2em;
+  position: relative;
+  font-size: 0.9em;
+}
+.starter:before {
+  content: "\f09b";
+  font-family: FontAwesome;
+  color: #444B54;
+  left: 5px;
+  position: absolute;
+}
+
+
+.tutorial{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/tutorial.png");
+}
+
+
+.exam{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  border: 1pt solid #d8d8d8;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/exam.png");
+}
+
+
+.rstudio-cloud {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  background: #ffffff 5px center/3em no-repeat;
+  background-image: url("style/icons/cloud.png");
+}
+.rstudio-cloud:before {
+  content: "RStudio Cloud: ";
+  clear: right;
+  display: block;
+  font-weight: bold;
+  color: #A7D5E8;
+}

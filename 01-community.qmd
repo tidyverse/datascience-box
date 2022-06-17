@@ -1,0 +1,18 @@
+# Community {#community}
+
+Do you like what's in the box?
+Do you have questions?
+Is something you need missing?
+Want to exchange ideas with others teaching similar courses?
+
+We now have a `dsbox` Slack channel, you can join [here](https://join.slack.com/t/dsboxworkspace/shared_invite/zt-vvjh8ovb-dCy31PATijOrdaz9oVGvVQ).[^01-community-1]
+The Slack channel is a place for discussion on using these or similar materials in data science courses.
+Please make sure to review the [Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) before joining.
+
+Other great venues for questions are the [RStudio Community under Teaching](https://community.rstudio.com/c/teaching) or [#rstats](https://twitter.com/search?q=%23rstats) Twitter.
+
+Additionally, we would love to hear from you if you are using these resources.
+Please take just a few minutes to fill out [this Google form](https://forms.gle/AjqXStdFq42TTV9LA).
+All fields are optional, but the more information you provide, the more data we will have to assess the reach and impact of this project.
+
+[^01-community-1]: If the link has expired, please email me at [cetinkaya.mine\@gmail.com](mailto:cetinkaya.mine@gmail.com){.email} to request a new one.
