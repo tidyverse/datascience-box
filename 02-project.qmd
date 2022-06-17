@@ -137,7 +137,7 @@ The presentation line-up will be generated randomly.
 The grading scheme for the presentation is as follows:
 
 | Total                                                                                                                                                                                                          | 50 pts |
-|-------------------------------------------------------------|-----------|
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | Time management: Did the team divide the time well amongst themselves or got cut off going over time?                                                                                                          | 4 pts  |
 | Content: Is the research question well designed and is the data being used relevant to the research question?                                                                                                  | 5 pts  |
 | Professionalism: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?                                    | 5 pts  |
