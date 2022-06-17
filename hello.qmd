@@ -1,0 +1,13 @@
+---
+title: "Hello #dsbox!"
+editor: visual
+---
+
+Hello!
+And welcome!
+
+There is a little bit of something for everyone (who wants to teach/learn) data science in this box.
+
+If you are an educator we recommend consuming the content in the order presented here: first familiarize yourself with the design principles, course syllabus, and the tech stack, then browse the course content, and then review the details of the computing infrastructure and pedagogy of the course.
+
+If you are a learner, you might consider jumping straight into the course content.

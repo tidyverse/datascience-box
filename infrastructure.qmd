@@ -1,0 +1,12 @@
+---
+title: "Computational infrastructure"
+editor: visual
+---
+
+One of the design principles of this course is "cherish day one" -- get students from nothing to their first meaningful data visualization within the first 10 minutes of the course.
+Achieving this is possible, but requires careful consideration of the computing infrastructure.
+This section outlines how one can set up their course to run on RStudio Cloud, use GitHub for not only version control and collaboration but also as the learning management system for the course, and build their course materials with packages from the `*down` universe (**rmarkdown**, **blogdown**, **xaringan**, etc.).
+Lastly, the alternative setups section describes other approaches to setting up the computing infrastructure that can be just as efficient and effective as the ones described in the main choices for the course, and discusses pros and cons.
+
+Want some resources for learning more about teaching with Data Science in a Box or need a 10 or 15-week term schedule?
+You've come to the right place.

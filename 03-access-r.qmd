@@ -2,11 +2,6 @@
 title: "Accessing R"
 ---
 
-One of the design principles of this course is "cherish day one" -- get students from nothing to their first meaningful data visualization within the first 10 minutes of the course.
-Achieving this is possible, but requires careful consideration of the computing infrastructure.
-This section outlines how one can set up their course to run on RStudio Cloud, use GitHub for not only version control and collaboration but also as the learning management system for the course, and build their course materials with packages from the `*down` universe (**rmarkdown**, **blogdown**, **xaringan**, etc.).
-Lastly, the alternative setups section describes other approaches to setting up the computing infrastructure that can be just as efficient and effective as the ones described in the main choices for the course, and discusses pros and cons.
-
 The RStudio IDE includes a viewable environment, a file browser, data viewer, and a plotting pane, which makes it less intimidating than the bare R shell.
 Additionally, since it is a full fledged IDE, it also features integrated help, syntax highlighting, and context-aware tab completion, which are all powerful tools that help flatten the learning curve.
 
@@ -74,7 +69,7 @@ As highlighted in the figure above, when a workspace is set to accept members vi
 Suggested permission levels and suggestions for mapping to course roles are as follows.
 
 | RStudio Cloud role | Permissions                                      | Course role        |
-|------------------|------------------------------------|------------------|
+|------------------|-----------------------------------|------------------|
 | Admin              | Manage users, view, edit and manage all projects | Instructor         |
 | Moderator          | View, edit and manage all projects               | Teaching Assistant |
 | Contributor        | Create, edit and manage their own projects       | Student            |

@@ -1,0 +1,8 @@
+---
+title: "Course content"
+editor: visual
+---
+
+The course content is organized in five units: Hello world, Exploring data, Data science ethics, Making rigorous conclusions, and Looking further.
+For each unit numerous slide decks, homework and lab assignments, and application exercises are provided.
+Also provided are interactive tutorials, exams, and project assignment.

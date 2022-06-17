@@ -23,56 +23,82 @@ website:
   page-footer:
     left: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
     background: "#A7D5E8"
-
-  center:
+    right:
     - text: "License"
       href: LICENSE.md
     - text: "Code of Conduct"
       href: CODE_OF_CONDUCT.md
 
-  sidebar:
+  navbar:
     background: "#A7D5E8"
     logo: "images/dsbox.png"
-    pinned: true
     align: center
-    tools:
+    title: false
+    collapse-below: lg
+ 
+    right:
       - icon: github
         href: https://github.com/rstudio-education/datascience-box
-        text: GitHub
+        aria-label: GitHub
       - icon: cloud-fill
         href: https://rstudio.cloud/spaces/1655/join?access_code=5rdjusfIYF5iI0Gum2vNsBDLdtdnIEELBkf2EivK
-        text: RStudio Cloud
-    style: docked
-    contents:
-      - href: index.qmd
-      - section: "Hello #dsbox!"
-        contents:
-          - href: 01-overview.qmd
-          - href: 01-design-principles.qmd
-          - href: 01-topics.qmd
-          - href: 01-tech-stack.qmd
-          - href: 01-community.qmd
-      - section: "Course content"
-        contents:
-          - href: 02-hello-world.qmd
-          - href: 02-exploring-data.qmd
-          - href: 02-ethics.qmd
-          - href: 02-making-rigorous-conclusions.qmd
-          - href: 02-looking-further.qmd
-          - href: 02-interactive-tutorials.qmd
-          - href: 02-project.qmd
-          - href: 02-exams.qmd
-      - section: "Infrastructure"
-        contents:
-          - href: 03-access-r.qmd
-          - href: 03-version-control.qmd
-          - href: 03-discussion.qmd
-          - href: 03-sharing.qmd
-          - href: 03-alternative-setups.qmd
-      - section: "Course design"
-        contents:
-          - href: 04-pedagogy.qmd
-          - href: 04-schedule.qmd
+        aria-label: RStudio Cloud
+
+    left:
+      - text: "Overview"
+        href: index.qmd
+      - text: "Hello #dsbox!"
+        href: hello.qmd
+      - text: "Content"
+        href: content.qmd
+      - text: "Infrastructure"
+        href: infrastructure.qmd
+      - text: "Design"
+        href: design.qmd
+
+  sidebar:
+    - id: hello-dsbox
+      title: "Hello #dsbox!"
+      style: "docked"
+      collapse-level: 2
+      align: left
+      contents:
+        - href: hello.qmd
+        - href: 01-overview.qmd
+        - href: 01-design-principles.qmd
+        - href: 01-topics.qmd
+        - href: 01-tech-stack.qmd
+        - href: 01-community.qmd
+
+    - id: content
+      title: "Content"
+      contents:
+        - href: content.qmd
+        - href: 02-hello-world.qmd
+        - href: 02-exploring-data.qmd
+        - href: 02-ethics.qmd
+        - href: 02-making-rigorous-conclusions.qmd
+        - href: 02-looking-further.qmd
+        - href: 02-interactive-tutorials.qmd
+        - href: 02-project.qmd
+        - href: 02-exams.qmd
+
+    - id: infrastructure
+      title: "Infrastructure"
+      contents:
+        - href: infrastructure.qmd
+        - href: 03-access-r.qmd
+        - href: 03-version-control.qmd
+        - href: 03-discussion.qmd
+        - href: 03-sharing.qmd
+        - href: 03-alternative-setups.qmd
+
+    - id: design
+      align: left
+      contents:
+        - href: design.qmd
+        - href: 04-pedagogy.qmd
+        - href: 04-schedule.qmd
 
 format:
   html:
