@@ -59,7 +59,7 @@ website:
   sidebar:
     - id: hello-dsbox
       title: "Hello #dsbox!"
-      style: "docked"
+      style: "floating"
       collapse-level: 2
       align: left
       contents:
