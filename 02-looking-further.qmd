@@ -108,7 +108,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 Fitting and interpreting simple linear regression models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-13/lab-13-work-on-projects.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-13/lab-13-work-on-projects.html)
 :::
 
 ::: source
@@ -122,7 +122,7 @@ Fitting and interpreting simple linear regression models
 Fitting and interpreting simple linear regression models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-14/lab-14-collaborating-on-github.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-14/lab-14-collaborating-on-github.html)
 :::
 
 ::: source
@@ -138,7 +138,7 @@ Fitting and interpreting simple linear regression models
 Model validation and inference
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-10/hw-10-wrap-up.html)
+[Instructions](https://datasciencebox.org/course-materials/hw-instructions/hw-10/hw-10-wrap-up.html)
 :::
 
 ::: source

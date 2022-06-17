@@ -285,7 +285,7 @@ IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.
 Fitting and interpreting simple linear regression models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-10/lab-10-slr-course-evals.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-10/lab-10-slr-course-evals.html)
 :::
 
 ::: source
@@ -303,7 +303,7 @@ Fitting and interpreting simple linear regression models
 Fitting and interpreting multiple linear regression models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-11/lab-11-mlr-course-evals.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-11/lab-11-mlr-course-evals.html)
 :::
 
 ::: source
@@ -321,7 +321,7 @@ Fitting and interpreting multiple linear regression models
 Constructing confidence intervals, conducting hypothesis tests, and interpreting results in context of the data
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-12/lab-12-inference-smoking.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-12/lab-12-inference-smoking.html)
 :::
 
 ::: source
@@ -341,7 +341,7 @@ Constructing confidence intervals, conducting hypothesis tests, and interpreting
 Exploratory data analysis and fitting and interpreting models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-07/hw-07-bike-rentals-dc.html)
+[Instructions](https://datasciencebox.org/course-materials/hw-instructions/hw-07/hw-07-bike-rentals-dc.html)
 :::
 
 ::: source
@@ -359,7 +359,7 @@ Exploratory data analysis and fitting and interpreting models
 Fitting and interpreting models
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-08/hw-08-exploring-gss.html)
+[Instructions](https://datasciencebox.org/course-materials/hw-instructions/hw-08/hw-08-exploring-gss.html)
 :::
 
 ::: source
@@ -377,7 +377,7 @@ Fitting and interpreting models
 Model validation and inference
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/hw-instructions/hw-09/hw-09-modeling-gss.html)
+[Instructions](https://datasciencebox.org/course-materials/hw-instructions/hw-09/hw-09-modeling-gss.html)
 :::
 
 ::: source

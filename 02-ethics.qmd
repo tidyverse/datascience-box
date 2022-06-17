@@ -111,7 +111,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 Improving data visualisations to better convey the right message
 
 ::: instructions
-[Instructions](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-09/lab-09-better-viz.html)
+[Instructions](https://datasciencebox.org/course-materials/lab-instructions/lab-09/lab-09-better-viz.html)
 :::
 
 ::: source
