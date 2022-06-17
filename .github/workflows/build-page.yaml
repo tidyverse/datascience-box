@@ -1,10 +1,12 @@
 on:
   push:
     branches: main
+    paths-ignore: 
+      - '_course-materials/**'
   pull_request:
     branches: main
-  paths-ignore: 
-    - '_course-materials/**'  
+    paths-ignore: 
+      - '_course-materials/**'
   # to be able to trigger a manual build
   workflow_dispatch:
   schedule:
