@@ -2,7 +2,7 @@ project:
   type: website
   resources:
     - "images/twitter-card.png"
-    - "_course-materials"
+    - "course-materials/_slides/"
     
 website:
   page-navigation: true
