@@ -10,3 +10,6 @@ render*.rds
 .Rapp.history
 
 /.quarto/
+.Rdata
+.httr-oauth
+.DS_Store
