@@ -45,7 +45,7 @@ You can join the workspace and play around with the sample application exercises
 > **Option 1 - UN Votes**
 >
 > ::: source
-> [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-01a-un-votes/unvotes.Rmd)
+> [Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-01a-un-votes/unvotes.qmd)
 > :::
 >
 > ::: video
@@ -55,7 +55,7 @@ You can join the workspace and play around with the sample application exercises
 > **Option 2 - COVID-19**
 >
 > ::: source
-> [Source](https://github.com/rstudio-education/datascience-box/blob/master/course-materials/application-exercises/ae-01b-covid/covid.Rmd)
+> [Source](https://github.com/rstudio-education/datascience-box/blob/master/course-materials/application-exercises/ae-01b-covid/covid.qmd)
 > :::
 :::
 
@@ -84,7 +84,7 @@ You can join the workspace and play around with the sample application exercises
 **Bechdel + R Markdown**
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/bechdel.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-02-bechdel-rmarkdown/bechdel.qmd)
 :::
 :::
 

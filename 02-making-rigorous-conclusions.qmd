@@ -191,7 +191,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 **The Office + Feature engineering, Pt. 1**
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-feat-eng-cv/theoffice.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-feat-eng-cv/theoffice.qmd)
 :::
 
 ::: video
@@ -203,7 +203,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 **The Office + Cross validation, Pt. 2**
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-feat-eng-cv/theoffice.Rmd)
+[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/application-exercises/ae-09-feat-eng-cv/theoffice.qmd)
 :::
 
 ::: video
