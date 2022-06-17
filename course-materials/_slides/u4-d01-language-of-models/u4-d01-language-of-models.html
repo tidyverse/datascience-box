@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>The language of models</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# The language of models
+]
+.subtitle[
+## <br><br> Data Science in a Box
+]
+.author[
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# What is a model?
+
+---
+
+## Modelling
+
+- Use models to explain the relationship between variables and to make predictions
+- For now we will focus on **linear** models (but remember there are *many* *many* other types of models too!)
+
+.pull-left[
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: middle
+
+# Data: Paris Paintings
+
+---
+
+## Paris Paintings
+
+
+```r
+pp &lt;- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
+```
+
+- Source: Printed catalogues of 28 auction sales in Paris, 1764 - 1780
+- Data curators Sandra van Ginhoven and Hilary Coe Cronheim (who were PhD students in the Duke Art, Law, and Markets Initiative at the time of putting together this dataset) translated and tabulated the catalogues
+- 3393 paintings, their prices, and descriptive details from sales catalogues over 60 variables
+
+---
+
+## Auctions today
+
+.center[
+&lt;iframe width="840" height="473" src="https://www.youtube.com/embed/apaE1Q7r4so" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+---
+
+## Auctions back in the day
+
+&lt;img src="img/old-auction.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.small[
+Pierre-Antoine de Machy, Public Sale at the Hôtel Bullion, Musée Carnavalet, Paris (18th century)
+]
+]
+
+---
+
+## Paris auction market
+
+&lt;img src="img/auction-trend-paris.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.small[
+Plot credit: Sandra van Ginhoven
+]
+]
+
+---
+
+## Départ pour la chasse
+
+&lt;img src="img/depart-pour-la-chasse.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Auction catalog text
+
+.pull-left[
+&lt;img src="img/auction-catalogue.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+.small[
+Two paintings very rich in composition, of a beautiful execution, and whose merit is very remarkable, each 17 inches 3 lines high, 23 inches wide; the first, painted on wood, comes from the Cabinet of Madame la Comtesse de Verrue; it represents a departure for the hunt: it shows in the front a child on a white horse, a man who gives the horn to gather the dogs, a falconer and other figures nicely distributed across the width of the painting; two horses drinking from a fountain; on the right in the corner a lovely country house topped by a terrace, on which people are at the table, others who play instruments; trees and fabriques pleasantly enrich the background.
+]
+]
+
+---
+
+&lt;img src="img/painting1.png" width="60%" style="display: block; margin: auto;" /&gt;&lt;img src="img/painting2.png" width="60%" style="display: block; margin: auto;" /&gt;&lt;img src="img/painting3.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+pp %&gt;%
+  filter(name == "R1777-89a") %&gt;%
+  glimpse()
+```
+
+.small[
+.pull-left[
+
+```
+## Rows: 1
+## Columns: 61
+## $ name              &lt;chr&gt; "R1777-89a"
+## $ sale              &lt;chr&gt; "R1777"
+## $ lot               &lt;chr&gt; "89"
+## $ position          &lt;dbl&gt; 0.3755274
+## $ dealer            &lt;chr&gt; "R"
+## $ year              &lt;dbl&gt; 1777
+## $ origin_author     &lt;chr&gt; "D/FL"
+## $ origin_cat        &lt;chr&gt; "D/FL"
+## $ school_pntg       &lt;chr&gt; "D/FL"
+## $ diff_origin       &lt;dbl&gt; 0
+## $ logprice          &lt;dbl&gt; 8.575462
+## $ price             &lt;dbl&gt; 5300
+## $ count             &lt;dbl&gt; 1
+## $ subject           &lt;chr&gt; "D\x8epart pour la chasse"
+## $ authorstandard    &lt;chr&gt; "Wouwerman, Philips"
+## $ artistliving      &lt;dbl&gt; 0
+## $ authorstyle       &lt;chr&gt; NA
+## $ author            &lt;chr&gt; "Philippe Wouwermans"
+## $ winningbidder     &lt;chr&gt; "Langlier, Jacques for Poullain, Anto…
+## $ winningbiddertype &lt;chr&gt; "DC"
+## $ endbuyer          &lt;chr&gt; "C"
+...
+```
+]
+.pull-right[
+
+```
+...
+## $ Interm            &lt;dbl&gt; 1
+## $ type_intermed     &lt;chr&gt; "D"
+## $ Height_in         &lt;dbl&gt; 17.25
+## $ Width_in          &lt;dbl&gt; 23
+## $ Surface_Rect      &lt;dbl&gt; 396.75
+## $ Diam_in           &lt;dbl&gt; NA
+## $ Surface_Rnd       &lt;dbl&gt; NA
+## $ Shape             &lt;chr&gt; "squ_rect"
+## $ Surface           &lt;dbl&gt; 396.75
+## $ material          &lt;chr&gt; "bois"
+## $ mat               &lt;chr&gt; "b"
+## $ materialCat       &lt;chr&gt; "wood"
+## $ quantity          &lt;dbl&gt; 1
+## $ nfigures          &lt;dbl&gt; 0
+## $ engraved          &lt;dbl&gt; 0
+## $ original          &lt;dbl&gt; 0
+## $ prevcoll          &lt;dbl&gt; 1
+## $ othartist         &lt;dbl&gt; 0
+## $ paired            &lt;dbl&gt; 1
+## $ figures           &lt;dbl&gt; 0
+## $ finished          &lt;dbl&gt; 0
+...
+```
+]
+]
+
+
+---
+
+class: middle
+
+# Modeling the relationship between variables
+
+---
+
+## Heights
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Height_in)) +
+  geom_histogram(binwidth = 5) +
+  labs(x = "Height, in inches", y = NULL)
+```
+
+&lt;img src="u4-d01-language-of-models_files/figure-html/height-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Widths
+
+.small[
+
+```r
+ggplot(data = pp, aes(x = Width_in)) +
+  geom_histogram(binwidth = 5) +
+  labs(x = "Width, in inches", y = NULL)
+```
+
+&lt;img src="u4-d01-language-of-models_files/figure-html/width-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Models as functions
+
+- We can represent relationships between variables using **functions**
+- A function is a mathematical concept: the relationship between an output and one or more inputs
+  - Plug in the inputs and receive back the output
+  - Example: The formula `\(y = 3x + 7\)` is a function with input `\(x\)` and output `\(y\)`. If `\(x\)` is `\(5\)`, `\(y\)` is `\(22\)`, `\(y = 3 \times 5 + 7 = 22\)`
+
+---
+
+## Height as a function of width
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  )
+```
+
+```
+## Warning: Removed 258 rows containing non-finite values
+## (stat_smooth).
+```
+
+```
+## Warning: Removed 258 rows containing missing values (geom_point).
+```
+]
+]
+
+---
+
+## ... without the measure of uncertainty
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm", 
+*             se = FALSE) +
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  )
+```
+]
+]
+
+---
+
+## ... with different cosmetic choices
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE,
+*             color = "#8E2C90", linetype = "dashed", size = 3) +
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  )
+```
+]
+]
+
+---
+
+## Other smoothing methods: gam
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+* geom_smooth(method = "gam",
+              se = FALSE, color = "#8E2C90") + 
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  )
+```
+]
+]
+
+---
+
+## Other smoothing methods: loess
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
+  geom_point() +
+* geom_smooth(method = "loess",
+              se = FALSE, color = "#8E2C90") + 
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  )
+```
+]
+]
+
+---
+
+## Vocabulary
+
+- **Response variable:** Variable whose behavior or variation you are trying to understand, on the y-axis
+
+--
+- **Explanatory variables:** Other variables that you want to use to explain the variation in the response, on the x-axis
+
+--
+- **Predicted value:** Output of the **model function**
+  - The model function gives the typical (expected) value of the response variable *conditioning* on the explanatory variables
+  
+--
+- **Residuals:** A measure of how far each case is from its predicted value (based on a particular model)
+  - Residual = Observed value - Predicted value
+  - Tells how far above/below the expected value each case is
+
+---
+
+## Residuals
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+.small[
+
+```r
+ht_wt_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(Height_in ~ Width_in, data = pp)
+
+ht_wt_fit_tidy &lt;- tidy(ht_wt_fit$fit) 
+ht_wt_fit_aug  &lt;- augment(ht_wt_fit$fit) %&gt;%
+  mutate(res_cat = ifelse(.resid &gt; 0, TRUE, FALSE))
+
+ggplot(data = ht_wt_fit_aug) +
+  geom_point(aes(x = Width_in, y = Height_in, color = res_cat)) +
+  geom_line(aes(x = Width_in, y = .fitted), size = 0.75, color = "#8E2C90") + 
+  labs(
+    title = "Height vs. width of paintings",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)"
+  ) +
+  guides(color = "none") +
+  scale_color_manual(values = c("#260b27", "#e6b0e7")) +
+  geom_text(aes(x = 0, y = 150), label = "Positive residual", color = "#e6b0e7", hjust = 0, size = 8) +
+  geom_text(aes(x = 150, y = 25), label = "Negative residual", color = "#260b27", hjust = 0, size = 8)
+```
+]
+]
+]
+
+---
+
+.question[
+The plot below displays the relationship between height and width of paintings. The only difference from the previous plots is that it uses a smaller alpha value, making the points somewhat transparent. What feature is apparent in this plot that was not (as) apparent in the previous plots? What might be the reason for this feature?
+]
+
+&lt;img src="u4-d01-language-of-models_files/figure-html/height-width-plot-alpha-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Landscape paintings
+
+- Landscape painting is the depiction in art of landscapes – natural scenery such as mountains, valleys, trees, rivers, and forests, especially where the main subject is a wide view – with its elements arranged into a coherent
+composition.&lt;sup&gt;1&lt;/sup&gt;
+  - Landscape paintings tend to be wider than they are long.
+- Portrait painting is a genre in painting, where the intent is to depict a human subject.&lt;sup&gt;2&lt;/sup&gt;
+  - Portrait paintings tend to be longer than they are wide.
+
+.footnote[
+[1] Source: Wikipedia, [Landscape painting](https://en.wikipedia.org/wiki/Landscape_painting)
+
+[2] Source: Wikipedia, [Portait painting](https://en.wikipedia.org/wiki/Portrait_painting)
+]
+
+---
+
+## Multiple explanatory variables
+
+.panelset[
+.panel[.panel-name[Plot]
+.pull-left-narrow[
+.question[
+How, if at all, does the relationship between width and height of paintings vary by whether or not they have any landscape elements?
+]
+]
+.pull-right-wide[
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Height vs. width of paintings, by landscape features",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)",
+    color = "landscape"
+  ) +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Extending regression lines
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="u4-d01-language-of-models_files/figure-html/unnamed-chunk-20-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+```r
+ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE,
+*             fullrange = TRUE) +
+  labs(
+    title = "Height vs. width of paintings, by landscape features",
+    subtitle = "Paris auctions, 1764 - 1780",
+    x = "Width (inches)",
+    y = "Height (inches)",
+    color = "landscape"
+  ) +
+  scale_color_manual(values = c("#E48957", "#071381"))
+```
+]
+]
+
+---
+
+## Models - upsides and downsides
+
+- Models can sometimes reveal patterns that are not evident in a graph of the data. This is a great advantage of modeling over simple visual inspection of data. 
+- There is a real risk, however, that a model is imposing structure that is not really there on the scatter of data, just as people imagine animal shapes in the stars. A skeptical approach is always warranted.
+
+---
+
+## Variation around the model...
+
+is just as important as the model, if not more!  
+
+*Statistics is the explanation of variation in the context of what remains unexplained.*
+
+- The scatter suggests that there might be other factors that account for large parts of painting-to-painting variability, or perhaps just that randomness plays a big role.
+- Adding more explanatory variables to a model can sometimes usefully reduce the size of the scatter around the model. (We'll talk more about this later.)
+
+---
+
+## How do we use models?
+
+- Explanation: Characterize the relationship between `\(y\)` and `\(x\)` via *slopes* for numerical explanatory variables or *differences* for categorical explanatory variables
+- Prediction: Plug in `\(x\)`, get the predicted `\(y\)`
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

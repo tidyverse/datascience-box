@@ -1,0 +1,18 @@
+{
+  "hash": "95aa5a5373e5fcd2119c618268450c6f",
+  "result": {
+    "markdown": "---\ntitle: \"Comparing texts\"\nsubtitle: \"<br><br> Data Science in a Box\"\nauthor: \"[datasciencebox.org](https://datasciencebox.org/)\"\noutput:\n  xaringan::moon_reader:\n    css: [\"../xaringan-themer.css\", \"../slides.css\"]\n    lib_dir: libs\n    anchor_sections: FALSE\n    nature:\n      ratio: \"16:9\"\n      highlightLines: true\n      highlightStyle: solarized-light\n      countIncrementalSlides: false\n---\n\n\n\n\nlayout: true\n  \n<div class=\"my-footer\">\n<span>\n<a href=\"https://datasciencebox.org\" target=\"_blank\">datasciencebox.org</a>\n</span>\n</div> \n\n---\n\n\n## What is a document about?\n\n- Term frequency\n- Inverse document frequency\n\n\n$$idf(\\text{term}) = \\ln{\\left(\\frac{n_{\\text{documents}}}{n_{\\text{documents containing term}}}\\right)}$$\n\n\ntf-idf is about comparing **documents** within a **collection**\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../../site_libs/font-awesome/css/all.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/font-awesome/css/v4-shims.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/panelset/panelset.css\" rel=\"stylesheet\" />\n<script src=\"../../../site_libs/panelset/panelset.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

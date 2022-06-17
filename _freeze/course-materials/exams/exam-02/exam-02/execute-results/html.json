@@ -1,0 +1,14 @@
+{
+  "hash": "2579663029753ddb0f4c13b474928786",
+  "result": {
+    "markdown": "---\ntitle: \"SAMPLE TAKE HOME EXAM - STUDENT TEMPLATE\"\nauthor: \"[ENTER NAME HERE]\"\ndate: \"Due: [DUE DATE HERE]\"\noutput: \n  github_document: \n    fig_height: 4\n    fig_width: 7\n---\n\n\n\n\n## Academic Honesty Statement\n\nI, ____________, hereby state that I have not communicated with or gained information in any way from my classmates or anyone other than the Professor or TA during this exam, and that all work is my own.\n\n## Load packages\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# load required packages here\n```\n:::\n\n\n## Questions \n\n### Question 1\n\n[Enter code and/or narrative here.]\n\n### Question 2\n\n[Enter code and/or narrative here.]\n\n### Question 3\n\n[Enter code and/or narrative here.]\n\n...\n\n[Add headers for subsequent questions as needed.]\n\n### Extra Credit\n\n[Enter code and narrative here.]\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

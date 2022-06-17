@@ -1,0 +1,46 @@
+---
+title: "Nobel winners"
+author: "Mine Çetinkaya-Rundel"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+
+library(tidyverse)
+```
+
+Let's first load the data:
+
+```{r}
+#| label: label-me-1
+#| eval: false
+
+nobel <- ___(___)
+```
+
+Then let's split the data into two:
+
+```{r}
+#| label: label-me-2
+#| eval: false
+
+# stem laureates
+___ <- nobel %>%
+  filter(___)
+
+# non-steam laureates
+___ <- nobel %>%
+  filter(___)
+```
+
+And finally write out the data:
+
+```{r}
+#| label: label-me-3
+
+# add code for writing out the two data frames here
+```

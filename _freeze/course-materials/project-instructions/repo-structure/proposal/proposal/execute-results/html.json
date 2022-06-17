@@ -1,0 +1,14 @@
+{
+  "hash": "d256a23edc683b92e893b12f69becef1",
+  "result": {
+    "markdown": "---\ntitle: \"Project proposal\"\nauthor: \"Team name\"\noutput: github_document\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(broom)\n```\n:::\n\n\n## 1. Introduction\n\n\n\n## 2. Data\n\n\n\n## 3. Data analysis plan\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

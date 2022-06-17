@@ -1,0 +1,14 @@
+{
+  "hash": "602dc58b52fcd38161bcf1b6f5999d7b",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 08 - University of Edinburgh Art Collection\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n### Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \nlibrary(skimr)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Remove eval = FALSE or set it to TRUE once data is ready to be loaded\nuoe_art <- read_csv(\"data/uoe-art.csv\")\n```\n:::\n\n\n### Exercise 9\n\n\n::: {.cell}\n\n```{.r .cell-code}\nuoe_art <- uoe_art %>%\n  separate(title, into = c(\"title\", \"date\"), sep = \"\\\\(\") %>%\n  mutate(year = str_remove(date, \"\\\\)\") %>% as.numeric()) %>%\n  select(title, artist, year, ___)\n```\n\n::: {.cell-output .cell-output-error}\n```\nError: <text>:4:32: unexpected input\n3:   mutate(year = str_remove(date, \"\\\\)\") %>% as.numeric()) %>%\n4:   select(title, artist, year, __\n                                  ^\n```\n:::\n:::\n\n\n### Exercise 10\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 11\n\n...\n\nAdd exercise headings as needed.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

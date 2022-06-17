@@ -1,0 +1,16 @@
+{
+  "hash": "b157679a58c0d272a8031de98128439d",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 01 - Hello R\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n## Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \nlibrary(datasauRus)\n```\n:::\n\n\n## Exercises\n\n### Exercise 1\n\nRemove this text, and add your answer for Exercise 1 here.\n\n### Exercise 2\n\nThe answers for this Exercise are given for you below.\nBut you should clean up some of the narrative so that it only includes what you want to turn in.\n\nFirst let's plot the data in the dino dataset:\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndino_data <- datasaurus_dozen %>%\n  filter(dataset == \"dino\")\n\nggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n  geom_point()\n```\n\n::: {.cell-output-display}\n![](lab-01_files/figure-html/plot-dino-1.png){width=576}\n:::\n:::\n\n\nAnd next calculate the correlation between `x` and `y` in this dataset:\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndino_data %>%\n  summarize(r = cor(x, y))\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 1 × 1\n        r\n    <dbl>\n1 -0.0645\n```\n:::\n:::\n\n\n### Exercise 3\n\nAdd code and narrative as needed.\nNote that the R chunks are labelled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.\nTo finish, clean up the narrative by removing these instructions.\n\nBlah blah blah...\n\n\n::: {.cell}\n\n:::\n\n\nI'm some text, you should replace me with more meaningful text...\n\n\n::: {.cell}\n\n:::\n\n\n### Exercise 4\n\nAdd code and narrative as needed.\nNote that two R chunks are given but they are not labeled.\nUse the convention from above to name them appropriately.\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n\n### Exercise 5\n\nAdd code and narrative as needed.\nTo add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.\n",
+    "supporting": [
+      "lab-01_files/figure-html"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

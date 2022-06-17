@@ -1,0 +1,95 @@
+---
+title: "Visualizing Starwars characters"
+author: "Mine Çetinkaya-Rundel"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+```
+
+1.  Glimpse at the starwars data frame.
+
+```{r}
+#| label: glimpse-starwars
+
+glimpse(starwars)
+```
+
+2.  Modify the following plot to change the color of all points to `"pink"`.
+
+```{r}
+#| label: scatterplot
+
+ggplot(starwars, 
+       aes(x = height, y = mass, color = gender, size = birth_year)) +
+  geom_point(color = "pink")
+```
+
+3.  Add labels for title, x and y axes, and size of points. Uncomment to see the effect.
+
+```{r}
+#| label: scatterplot-labels
+
+ggplot(starwars, 
+       aes(x = height, y = mass, color = gender, size = birth_year)) +
+  geom_point(color = "#30509C") +
+  labs(
+    #title = "___",
+    #x = "___", 
+    #y = "___",
+    #___
+    )
+```
+
+4.  Pick a single numerical variable and make a histogram of it. Select a reasonable binwidth for it.
+
+(A little bit of starter code is provided below, and the code chunk is set to not be evaluated with `eval: false` because the current code in there is not valid code and hence the document wouldn't knit. Once you replace the code with valid code, set the chunk option to `eval: true`, or remove the `eval` option altogether since it's set to `true` by default.)
+
+```{r}
+#| label: histogram
+#| eval: false
+
+ggplot(starwars, aes(___)) +
+  geom___
+```
+
+5.  Pick a numerical variable and a categorical variable and make a visualization (you pick the type!) to visualization the relationship between the two variables. Along with your code and output, provide an interpretation of the visualization.
+
+```{r}
+#| label: num-cat
+
+```
+
+Interpretation goes here...
+
+6.  Pick a single categorical variable from the data set and make a bar plot of its distribution.
+
+```{r}
+#| label: barplot
+
+```
+
+7.  Pick two categorical variables and make a visualization to visualize the relationship between the two variables. Along with your code and output, provide an interpretation of the visualization.
+
+```{r}
+#| label: cat-cat
+
+```
+
+Interpretation goes here...
+
+8.  Pick two numerical variables and two categorical variables and make a visualization that incorporates all of them and provide an interpretation with your answer.
+
+(This time no starter code is provided, you're on your own!)
+
+```{r}
+#| label: multi
+
+```
+
+Interpretation goes here...

@@ -1,0 +1,14 @@
+{
+  "hash": "5b1c624ad867c2e74961cd34e78815eb",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 07 - Simpson's paradox\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n### Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \nlibrary(mosaicData) \n```\n:::\n\n\n### Exercise 1\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 2\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 3\n\n...\n\nAdd exercise headings as needed.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,2 @@
+execute:
+  freeze: true  # never re-render during project render

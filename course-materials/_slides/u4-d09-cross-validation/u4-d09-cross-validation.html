@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Cross validation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Cross validation
+]
+.subtitle[
+## <br><br> Data Science in a Box
+]
+.author[
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Data and exploration
+
+---
+
+background-image: url("img/the-office.jpeg")
+class: middle
+
+---
+
+## Data
+
+
+```r
+office_ratings &lt;- read_csv("data/office_ratings.csv")
+office_ratings
+```
+
+```
+## # A tibble: 188 × 6
+##   season episode title         imdb_rating total_votes air_date  
+##    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt; &lt;date&gt;    
+## 1      1       1 Pilot                 7.6        3706 2005-03-24
+## 2      1       2 Diversity Day         8.3        3566 2005-03-29
+## 3      1       3 Health Care           7.9        2983 2005-04-05
+## 4      1       4 The Alliance          8.1        2886 2005-04-12
+## 5      1       5 Basketball            8.4        3179 2005-04-19
+## 6      1       6 Hot Girl              7.8        2852 2005-04-26
+## # … with 182 more rows
+```
+
+.footnote[
+.small[
+Source: The data come from [data.world](https://data.world/anujjain7/the-office-imdb-ratings-dataset), by way of [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-17/readme.md). 
+]
+]
+
+---
+
+## IMDB ratings
+
+.panelset[
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Code&lt;/div&gt;
+
+```r
+ggplot(office_ratings, aes(x = imdb_rating)) +
+  geom_histogram(binwidth = 0.25) +
+  labs(
+    title = "The Office ratings",
+    x = "IMDB Rating"
+  )
+```
+
+
+
+&lt;/div&gt;
+
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Plot&lt;/div&gt;
+
+&lt;img src="u4-d09-cross-validation_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+]
+
+---
+
+## IMDB ratings vs. number of votes
+
+.panelset[
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Code&lt;/div&gt;
+
+```r
+ggplot(office_ratings, aes(x = total_votes, y = imdb_rating, color = season)) +
+  geom_jitter(alpha = 0.7) +
+  labs(
+    title = "The Office ratings",
+    x = "Total votes",
+    y = "IMDB Rating",
+    color = "Season"
+  )
+```
+
+
+
+&lt;/div&gt;
+
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Plot&lt;/div&gt;
+
+&lt;img src="u4-d09-cross-validation_files/figure-html/unnamed-chunk-4-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+]
+
+---
+
+## Outliers
+
+.panelset[
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Code&lt;/div&gt;
+
+```r
+ggplot(office_ratings, aes(x = total_votes, y = imdb_rating)) +
+  geom_jitter() +
+  gghighlight(total_votes &gt; 4000, label_key = title) +
+  labs(
+    title = "The Office ratings",
+    x = "Total votes",
+    y = "IMDB Rating"
+  )
+```
+
+
+
+&lt;/div&gt;
+
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Plot&lt;/div&gt;
+
+&lt;img src="u4-d09-cross-validation_files/figure-html/unnamed-chunk-5-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+]
+
+.footnote[
+.small[
+If you like the [Dinner Party](https://www.imdb.com/title/tt1031477/) episode, I highly recommend this ["oral history"](https://www.rollingstone.com/tv/tv-features/that-one-night-the-oral-history-of-the-greatest-office-episode-ever-629472/) of the episode published on Rolling Stone magazine.
+]
+]
+
+---
+
+## IMDB ratings vs. seasons
+
+.panelset[
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Code&lt;/div&gt;
+
+```r
+ggplot(office_ratings, aes(x = factor(season), y = imdb_rating, color = season)) +
+  geom_boxplot() +
+  geom_jitter() +
+  guides(color = "none") +
+  labs(
+    title = "The Office ratings",
+    x = "Season",
+    y = "IMDB Rating"
+  )
+```
+
+
+
+&lt;/div&gt;
+
+&lt;div class="panel"&gt;
+&lt;div class="panel-name"&gt;Plot&lt;/div&gt;
+
+&lt;img src="u4-d09-cross-validation_files/figure-html/unnamed-chunk-6-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+]
+
+---
+
+class: middle
+
+# Modeling
+
+---
+
+## Train / test
+
+- Create an initial split
+
+
+```r
+set.seed(1122)
+office_split &lt;- initial_split(office_ratings) # prop = 3/4 by default
+```
+
+--
+.pull-left[
+- Save training data
+
+```r
+office_train &lt;- training(office_split)
+dim(office_train)
+```
+
+```
+## [1] 141   6
+```
+]
+
+--
+.pull-right[
+- Save testing data
+
+```r
+office_test  &lt;- testing(office_split)
+dim(office_test)
+```
+
+```
+## [1] 47  6
+```
+]
+
+---
+
+## Specify model
+
+
+```r
+office_mod &lt;- linear_reg() %&gt;%
+  set_engine("lm")
+
+office_mod
+```
+
+```
+## Linear Regression Model Specification (regression)
+## 
+## Computational engine: lm
+```
+
+---
+
+## Build recipe
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+office_rec &lt;- recipe(imdb_rating ~ ., data = office_train) %&gt;%
+  # title isn't a predictor, but keep around to ID
+  update_role(title, new_role = "ID") %&gt;%
+  # extract month of air_date
+  step_date(air_date, features = "month") %&gt;%
+  step_rm(air_date) %&gt;%
+  # make dummy variables of month 
+  step_dummy(contains("month")) %&gt;%
+  # remove zero variance predictors
+  step_zv(all_predictors())
+```
+]
+.panel[.panel-name[Output]
+.small[
+
+```r
+office_rec
+```
+
+```
+## Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##         ID          1
+##    outcome          1
+##  predictor          4
+## 
+## Operations:
+## 
+## Date features from air_date
+## Variables removed air_date
+## Dummy variables from contains("month")
+## Zero variance filter on all_predictors()
+```
+]
+]
+]
+
+---
+
+## Build workflow
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+office_wflow &lt;- workflow() %&gt;%
+  add_model(office_mod) %&gt;%
+  add_recipe(office_rec)
+```
+]
+.panel[.panel-name[Output]
+.small[
+
+```r
+office_wflow
+```
+
+```
+## ══ Workflow ═════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: linear_reg()
+## 
+## ── Preprocessor ─────────────────────────────────────────────────
+## 4 Recipe Steps
+## 
+## • step_date()
+## • step_rm()
+## • step_dummy()
+## • step_zv()
+## 
+## ── Model ────────────────────────────────────────────────────────
+## Linear Regression Model Specification (regression)
+## 
+## Computational engine: lm
+```
+]
+]
+]
+
+---
+
+## Fit model
+
+.panelset[
+.panel[.panel-name[Code]
+
+```r
+office_fit &lt;- office_wflow %&gt;%
+  fit(data = office_train)
+```
+]
+.panel[.panel-name[Output]
+.small[
+
+```r
+tidy(office_fit) %&gt;%
+  print(n = 12)
+```
+
+```
+## # A tibble: 12 × 5
+##    term                estimate std.error statistic  p.value
+##    &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 (Intercept)         7.23     0.205        35.4   3.14e-68
+##  2 season             -0.0499   0.0157       -3.18  1.86e- 3
+##  3 episode             0.0353   0.0101        3.50  6.44e- 4
+##  4 total_votes         0.000352 0.0000448     7.85  1.39e-12
+##  5 air_date_month_Feb  0.0242   0.147         0.165 8.69e- 1
+##  6 air_date_month_Mar -0.145    0.144        -1.01  3.16e- 1
+##  7 air_date_month_Apr -0.106    0.140        -0.759 4.49e- 1
+##  8 air_date_month_May  0.0575   0.175         0.329 7.43e- 1
+##  9 air_date_month_Sep  0.440    0.191         2.30  2.30e- 2
+## 10 air_date_month_Oct  0.321    0.150         2.13  3.50e- 2
+## 11 air_date_month_Nov  0.237    0.138         1.72  8.81e- 2
+## 12 air_date_month_Dec  0.443    0.190         2.34  2.09e- 2
+```
+]
+]
+]
+
+---
+
+class: middle
+
+# Evaluate model
+
+---
+
+## Make predictions for training data
+
+
+```r
+office_train_pred &lt;- predict(office_fit, office_train) %&gt;%
+  bind_cols(office_train %&gt;% select(imdb_rating, title))
+
+office_train_pred
+```
+
+```
+## # A tibble: 141 × 3
+##   .pred imdb_rating title            
+##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;            
+## 1  7.90         8.1 Garden Party     
+## 2  8.43         7.9 The Chump        
+## 3  7.81         7.1 Here Comes Treble
+## 4  7.94         6.7 Get the Girl     
+## 5  7.92         7.9 Tallahassee      
+## 6  8.29         7.7 The Inner Circle 
+## # … with 135 more rows
+```
+
+---
+
+## R-squared
+
+Percentage of variability in the IMDB ratings explained by the model
+
+
+```r
+rsq(office_train_pred, truth = imdb_rating, estimate = .pred)
+```
+
+```
+## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rsq     standard       0.500
+```
+
+--
+
+.question[
+Are models with high or low `\(R^2\)` more preferable?
+]
+
+---
+
+## RMSE
+
+An alternative model performance statistic: **root mean square error**
+
+$$ RMSE = \sqrt{\frac{\sum_{i = 1}^n (y_i - \hat{y}_i)^2}{n}} $$
+
+--
+
+
+```r
+rmse(office_train_pred, truth = imdb_rating, estimate = .pred)
+```
+
+```
+## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard       0.373
+```
+
+--
+
+.question[
+Are models with high or low RMSE are more preferable?
+]
+
+---
+
+## Interpreting RMSE
+
+.question[
+Is this RMSE considered low or high?
+]
+
+
+```r
+rmse(office_train_pred, truth = imdb_rating, estimate = .pred)
+```
+
+```
+## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard       0.373
+```
+
+--
+
+
+```r
+office_train %&gt;%
+  summarise(min = min(imdb_rating), max = max(imdb_rating))
+```
+
+```
+## # A tibble: 1 × 2
+##     min   max
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1   6.7   9.7
+```
+
+---
+
+class: middle
+
+.hand[
+.light-blue[
+but, really, who cares about predictions on .pink[training] data?
+]
+]
+
+---
+
+## Make predictions for testing data
+
+
+```r
+office_test_pred &lt;- predict(office_fit, office_test) %&gt;%
+  bind_cols(office_test %&gt;% select(imdb_rating, title))
+
+office_test_pred
+```
+
+```
+## # A tibble: 47 × 3
+##   .pred imdb_rating title          
+##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;          
+## 1  8.52         8.4 Office Olympics
+## 2  8.54         8.6 The Client     
+## 3  8.90         8.8 Christmas Party
+## 4  8.71         9   The Injury     
+## 5  8.50         8.2 Boys and Girls 
+## 6  8.46         8.4 Dwight's Speech
+## # … with 41 more rows
+```
+
+---
+
+## Evaluate performance on testing data
+
+- RMSE of model fit to testing data
+
+
+```r
+rmse(office_test_pred, truth = imdb_rating, estimate = .pred)
+```
+
+```
+## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard       0.386
+```
+
+- `\(R^2\)` of model fit to testing data
+
+
+```r
+rsq(office_test_pred, truth = imdb_rating, estimate = .pred)
+```
+
+```
+## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rsq     standard       0.556
+```
+
+---
+
+## Training vs. testing
+
+&lt;br&gt;
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; metric &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; train &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; test &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; comparison &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; RMSE &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.373 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.386 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RMSE lower for training &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; R-squared &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.500 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.556 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; R-squared higher for training &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Evaluating performance on training data
+
+-  The training set does not have the capacity to be a good arbiter of performance.
+
+--
+- It is not an independent piece of information; predicting the training set can only reflect what the model already knows.
+
+--
+- Suppose you give a class a test, then give them the answers, then provide the same test. The student scores on the second test do not accurately reflect what they know about the subject; these scores would probably be higher than their results on the first test.
+
+.footnote[
+.small[
+Source: [tidymodels.org](https://www.tidymodels.org/start/resampling/)
+]
+]
+
+---
+
+class: middle
+
+# Cross validation
+
+---
+
+## Cross validation
+
+More specifically, **v-fold cross validation**:
+
+- Shuffle your data v partitions
+- Use 1 partition for validation, and the remaining v-1 partitions for training
+- Repeat v times
+
+.footnote[
+.small[
+You might also heard of this referred to as k-fold cross validation.
+]
+]
+
+---
+
+## Cross validation
+
+&lt;img src="img/cross-validation.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Split data into folds
+
+.pull-left[
+
+```r
+set.seed(345)
+
+folds &lt;- vfold_cv(office_train, v = 5)
+folds
+```
+
+```
+## #  5-fold cross-validation 
+## # A tibble: 5 × 2
+##   splits           id   
+##   &lt;list&gt;           &lt;chr&gt;
+## 1 &lt;split [112/29]&gt; Fold1
+## 2 &lt;split [113/28]&gt; Fold2
+## 3 &lt;split [113/28]&gt; Fold3
+## 4 &lt;split [113/28]&gt; Fold4
+## 5 &lt;split [113/28]&gt; Fold5
+```
+]
+.pull-right[
+&lt;img src="img/cross-validation.png" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Fit resamples
+
+.pull-left[
+
+```r
+set.seed(456)
+
+office_fit_rs &lt;- office_wflow %&gt;%
+  fit_resamples(folds)
+
+office_fit_rs
+```
+
+```
+## # Resampling results
+## # 5-fold cross-validation 
+## # A tibble: 5 × 4
+##   splits           id    .metrics         .notes          
+##   &lt;list&gt;           &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+## 1 &lt;split [112/29]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+## 2 &lt;split [113/28]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+## 3 &lt;split [113/28]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+## 4 &lt;split [113/28]&gt; Fold4 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+## 5 &lt;split [113/28]&gt; Fold5 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+```
+]
+.pull-right[
+&lt;img src="img/cross-validation-animated.gif" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Collect CV metrics
+
+
+```r
+collect_metrics(office_fit_rs)
+```
+
+```
+## # A tibble: 2 × 6
+##   .metric .estimator  mean     n std_err .config             
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+## 1 rmse    standard   0.403     5  0.0336 Preprocessor1_Model1
+## 2 rsq     standard   0.413     5  0.0727 Preprocessor1_Model1
+```
+
+---
+
+## Deeper look into CV metrics
+
+.panelset[
+.panel[.panel-name[Raw]
+
+```r
+collect_metrics(office_fit_rs, summarize = FALSE) %&gt;%
+  print(n = 10)
+```
+
+```
+## # A tibble: 10 × 5
+##    id    .metric .estimator .estimate .config             
+##    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+##  1 Fold1 rmse    standard       0.430 Preprocessor1_Model1
+##  2 Fold1 rsq     standard       0.134 Preprocessor1_Model1
+##  3 Fold2 rmse    standard       0.368 Preprocessor1_Model1
+##  4 Fold2 rsq     standard       0.496 Preprocessor1_Model1
+##  5 Fold3 rmse    standard       0.452 Preprocessor1_Model1
+##  6 Fold3 rsq     standard       0.501 Preprocessor1_Model1
+##  7 Fold4 rmse    standard       0.289 Preprocessor1_Model1
+##  8 Fold4 rsq     standard       0.529 Preprocessor1_Model1
+##  9 Fold5 rmse    standard       0.475 Preprocessor1_Model1
+## 10 Fold5 rsq     standard       0.403 Preprocessor1_Model1
+```
+]
+.panel[.panel-name[Tidy]
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Fold &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; RMSE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; R-squared &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.430 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.368 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.496 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.452 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.501 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.289 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.529 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.475 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.403 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+
+---
+
+## How does RMSE compare to y?
+
+- Cross validation RMSE stats
+
+
+```
+## # A tibble: 1 × 6
+##     min   max  mean   med     sd    IQR
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 0.289 0.475 0.403 0.430 0.0751 0.0841
+```
+
+- Training data IMDB score stats
+
+
+```
+## # A tibble: 1 × 6
+##     min   max  mean   med    sd   IQR
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1   6.7   9.7  8.24   8.2 0.530 0.600
+```
+
+---
+
+## What's next?
+
+&lt;img src="img/post-cv-testing.png" width="100%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

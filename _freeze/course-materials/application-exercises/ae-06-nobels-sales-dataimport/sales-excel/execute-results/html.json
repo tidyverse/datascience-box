@@ -1,0 +1,16 @@
+{
+  "hash": "d0b31aac8ebaaa2e9880435eebfb0cb9",
+  "result": {
+    "markdown": "---\ntitle: \"Sales\"\nauthor: \"Mine Çetinkaya-Rundel\"\nformat: html\neditor: visual\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(readxl)\n```\n:::\n\n\n-   Read in the Excel file called `sales.xlsx` from the `data-raw/` folder such that it looks like the following.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](images/sales-1.png){width=20%}\n:::\n:::\n\n::: {.cell}\n\n:::\n\n\n-   **Stretch goal:** Manipulate the sales data such such that it looks like the following.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](images/sales-2.png){width=25%}\n:::\n:::\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "sales-excel_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

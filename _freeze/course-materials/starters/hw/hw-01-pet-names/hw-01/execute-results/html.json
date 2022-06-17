@@ -1,0 +1,14 @@
+{
+  "hash": "ff077fd99399d5b3e37f7693dad1c829",
+  "result": {
+    "markdown": "---\ntitle: \"HW 01 - Pet names\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n## Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(openintro)\n```\n:::\n\n\n## Exercises\n\n### Exercise 1\n\nThere are \\_\\_\\_ pets in the dataset.\n\n### Exercise 2\n\nRemove this text, and add your answer for Exercise 2 here.\n\n### Exercise 3\n\nRemove this text, and add your answer for Exercise 3 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nseattlepets %>%\n  count(animal_name, sort = TRUE)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 13,930 × 2\n   animal_name     n\n   <chr>       <int>\n 1 <NA>          483\n 2 Lucy          439\n 3 Charlie       387\n 4 Luna          355\n 5 Bella         331\n 6 Max           270\n 7 Daisy         261\n 8 Molly         240\n 9 Jack          232\n10 Lily          232\n# … with 13,920 more rows\n```\n:::\n:::\n\n\n### Exercise 4\n\nRemove this text, and add your answer for Exercise 4 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# remove this comment and add the code for Exercise 4 here\n```\n:::\n\n\n### Exercise 5\n\nRemove this text, and add your answer for Exercise 5 here.\n\n### Exercise 6\n\nRemove this text, and add your answer for Exercise 6 here.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

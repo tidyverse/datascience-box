@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data classes</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="datasciencebox.org" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Data classes
+]
+.subtitle[
+## <br><br> Data Science in a Box
+]
+.author[
+### <a href="https://datasciencebox.org/">datasciencebox.org</a>
+]
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# Data classes
+
+------------------------------------------------------------------------
+
+## Data classes
+
+We talked about *types* so far, next we'll introduce the concept of *classes*
+
+-   Vectors are like Lego building blocks
+
+| \- We stick them together to build more complicated constructs, e.g. *representations of data*                                                                                                                                                                  |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \- The **class** attribute relates to the S3 class of an object which determines its behaviour - You don't need to worry about what S3 classes really mean, but you can read more about it [here](https://adv-r.hadley.nz/s3.html#s3-classes) if you're curious |
+
+-   Examples: factors, dates, and data frames
+
+------------------------------------------------------------------------
+
+## Factors
+
+R uses factors to handle categorical variables, variables that have a fixed and known set of possible values
+
+
+```r
+x &lt;- factor(c("BS", "MS", "PhD", "MS"))
+x
+```
+
+```
+## [1] BS  MS  PhD MS 
+## Levels: BS MS PhD
+```
+
+--
+
+.pull-left\[\] .pull-right\[\]
+
+------------------------------------------------------------------------
+
+## More on factors
+
+We can think of factors like character (level labels) and an integer (level numbers) glued together
+
+
+```r
+glimpse(x)
+```
+
+```
+##  Factor w/ 3 levels "BS","MS","PhD": 1 2 3 2
+```
+
+```r
+as.integer(x)
+```
+
+```
+## [1] 1 2 3 2
+```
+
+------------------------------------------------------------------------
+
+## Dates
+
+
+```r
+y &lt;- as.Date("2020-01-01")
+y
+```
+
+```
+## [1] "2020-01-01"
+```
+
+```r
+typeof(y)
+```
+
+```
+## [1] "double"
+```
+
+```r
+class(y)
+```
+
+```
+## [1] "Date"
+```
+
+------------------------------------------------------------------------
+
+## More on dates
+
+We can think of dates like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
+
+
+```r
+as.integer(y)
+```
+
+```
+## [1] 18262
+```
+
+```r
+as.integer(y) / 365 # roughly 50 yrs
+```
+
+```
+## [1] 50.03288
+```
+
+------------------------------------------------------------------------
+
+## Data frames
+
+We can think of data frames like like vectors of equal length glued together
+
+
+```r
+df &lt;- data.frame(x = 1:2, y = 3:4)
+df
+```
+
+```
+##   x y
+## 1 1 3
+## 2 2 4
+```
+
+.pull-left\[\] .pull-right\[\]
+
+------------------------------------------------------------------------
+
+## Lists
+
+Lists are a generic vector container vectors of any type can go in them
+
+
+```r
+l &lt;- list(
+  x = 1:4,
+  y = c("hi", "hello", "jello"),
+  z = c(TRUE, FALSE)
+)
+l
+```
+
+```
+## $x
+## [1] 1 2 3 4
+## 
+## $y
+## [1] "hi"    "hello" "jello"
+## 
+## $z
+## [1]  TRUE FALSE
+```
+
+------------------------------------------------------------------------
+
+## Lists and data frames
+
+-   A data frame is a special list containing vectors of equal length
+-   When we use the `pull()` function, we extract a vector from the data frame
+
+
+```r
+df
+```
+
+```
+##   x y
+## 1 1 3
+## 2 2 4
+```
+
+```r
+df %&gt;%
+  pull(y)
+```
+
+```
+## [1] 3 4
+```
+
+------------------------------------------------------------------------
+
+class: middle
+
+# Working with factors
+
+------------------------------------------------------------------------
+
+
+
+## Read data in as character strings
+
+
+```r
+glimpse(cat_lovers)
+```
+
+```
+## Rows: 60
+## Columns: 3
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Will…
+## $ number_of_cats &lt;chr&gt; "0", "0", "1", "3", "3", "2", "1", "1", …
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", …
+```
+
+------------------------------------------------------------------------
+
+## But coerce when plotting
+
+
+```r
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+&lt;img src="u2-d11-data-classes_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+------------------------------------------------------------------------
+
+## Use forcats to manipulate factors
+
+
+```r
+cat_lovers %&gt;%
+* mutate(handedness = fct_infreq(handedness)) %&gt;%
+  ggplot(mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+&lt;img src="u2-d11-data-classes_files/figure-html/unnamed-chunk-12-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+------------------------------------------------------------------------
+
+## Come for the functionality
+
+.pull-left\[ ... stay for the logo\] .pull-right\[\]
+
+.pull-left-wide\[ - Factors are useful when you have true categorical data and you want to override the ordering of character vectors to improve display - They are also useful in modeling scenarios - The **forcats** package provides a suite of useful tools that solve common problems with factors\]
+
+------------------------------------------------------------------------
+
+.small\[ .your-turn\[ \### .hand\[Your turn!\]
+\]\]
+
+&lt;img src="u2-d11-data-classes_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+------------------------------------------------------------------------
+
+class: middle
+
+# Working with dates
+
+------------------------------------------------------------------------
+
+## Make a date
+
+.pull-left\[\] .pull-right\[ - **lubridate** is the tidyverse-friendly package that makes dealing with dates a little easier - It's not one of the *core* tidyverse packages, hence it's installed with `install.packages("tidyverse)` but it's not loaded with it, and needs to be explicitly loaded with `library(lubridate)`\]
+
+------------------------------------------------------------------------
+
+class: middle
+
+.hand\[.light-blue\[ we're just going to scratch the surface of working with dates in R here...\]\]
+
+------------------------------------------------------------------------
+
+.question\[ Calculate and visualise the number of bookings on any given arrival date.\]
+
+
+```r
+hotels %&gt;%
+  select(starts_with("arrival_"))
+```
+
+```
+## # A tibble: 119,390 × 4
+##   arrival_date_year arrival_date_month arrival_date_week_number
+##               &lt;dbl&gt; &lt;chr&gt;                                 &lt;dbl&gt;
+## 1              2015 July                                     27
+## 2              2015 July                                     27
+## 3              2015 July                                     27
+## 4              2015 July                                     27
+## 5              2015 July                                     27
+## 6              2015 July                                     27
+## # … with 119,384 more rows, and 1 more variable:
+## #   arrival_date_day_of_month &lt;dbl&gt;
+```
+
+------------------------------------------------------------------------
+
+## Step 1. Construct dates
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 2. Count bookings per date
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 3. Visualise bookings per date
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+.hand\[zooming in a bit...\]
+
+.question\[ Why does the plot start with August when we know our data start in July?
+And why does 10 August come after 1 August?\]
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 1. *REVISED* Construct dates "as dates"
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 2. Count bookings per date
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 3a. Visualise bookings per date
+
+.midi\[\]
+
+------------------------------------------------------------------------
+
+## Step 3b. Visualise using a smooth curve
+
+.midi\[\]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

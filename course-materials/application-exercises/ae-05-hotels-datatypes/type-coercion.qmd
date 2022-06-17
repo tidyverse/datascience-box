@@ -1,0 +1,84 @@
+---
+title: "Type coercion"
+author: "Mine Çetinkaya-Rundel"
+format: html
+editor: visual
+---
+
+-   `c(1, 1L, "C")`
+
+```{r}
+c(1, 1L, "C")
+```
+
+```{r}
+1
+1L
+"C"
+```
+
+```{r}
+#typeof(c(1, 1L, "C"))
+```
+
+-   `c(1L / 0, "A")`
+
+```{r}
+c(1L / 0, "A")
+```
+
+```{r}
+typeof(1L)
+typeof(0)
+typeof(1L/0)
+typeof("A")
+```
+
+```{r}
+#typeof(c(1L / 0, "A"))
+```
+
+-   `c(1:3, 5)`
+
+```{r}
+c(1:3, 5)
+```
+
+```{r}
+typeof(1:3)
+typeof(5)
+```
+
+```{r}
+#typeof(c(1:3, 5))
+```
+
+-   `c(3, "3+")`
+
+```{r}
+c(3, "3+")
+```
+
+```{r}
+typeof(3)
+typeof("3+")
+```
+
+```{r}
+#typeof(c(3, "3+"))
+```
+
+-   `c(NA, TRUE)`
+
+```{r}
+c(NA, TRUE)
+```
+
+```{r}
+typeof(NA)
+typeof(TRUE)
+```
+
+```{r}
+#typeof(c(NA, TRUE))
+```

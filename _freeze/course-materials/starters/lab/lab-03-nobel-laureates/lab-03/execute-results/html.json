@@ -1,0 +1,14 @@
+{
+  "hash": "39b41a113bf70eb012cc30c697799182",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 03 - Nobel laureates\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n### Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nnobel <- read_csv(\"data/nobel.csv\")\n```\n:::\n\n\n## Exercises\n\n### Exercise 1\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 2\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 3\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 4\n\n...\n\n### Exercise 5\n\n...\n\n### Exercise 6\n\n...\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,129 @@
+---
+title: "Bechdel"
+author: "Mine Çetinkaya-Rundel"
+format: html
+editor: visual
+---
+
+In this mini analysis we work with the data used in the FiveThirtyEight story titled ["The Dollar-And-Cents Case Against Hollywood's Exclusion of Women"](https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/).
+Your task is to fill in the blanks denoted by `___`.
+
+## Data and packages
+
+We start with loading the packages we'll use.
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+
+library(fivethirtyeight)
+library(tidyverse)
+```
+
+The dataset contains information on `r nrow(bechdel)` movies released between `r min(bechdel$year)` and `r max(bechdel$year)`.
+However we'll focus our analysis on movies released between 1990 and 2013.
+
+```{r}
+bechdel90_13 <- bechdel %>% 
+  filter(between(year, 1990, 2013))
+```
+
+There are `___` such movies.
+
+The financial variables we'll focus on are the following:
+
+-   `budget_2013`: Budget in 2013 inflation adjusted dollars
+-   `domgross_2013`: Domestic gross (US) in 2013 inflation adjusted dollars
+-   `intgross_2013`: Total International (i.e., worldwide) gross in 2013 inflation adjusted dollars
+
+And we'll also use the `binary` and `clean_test` variables for **grouping**.
+
+## Analysis
+
+Let's take a look at how median budget and gross vary by whether the movie passed the Bechdel test, which is stored in the `binary` variable.
+
+```{r}
+bechdel90_13 %>%
+  group_by(binary) %>%
+  summarise(
+    med_budget = median(budget_2013),
+    med_domgross = median(domgross_2013, na.rm = TRUE),
+    med_intgross = median(intgross_2013, na.rm = TRUE)
+    )
+```
+
+Next, let's take a look at how median budget and gross vary by a more detailed indicator of the Bechdel test result.
+This information is stored in the `clean_test` variable, which takes on the following values:
+
+-   `ok` = passes test
+-   `dubious`
+-   `men` = women only talk about men
+-   `notalk` = women don't talk to each other
+-   `nowomen` = fewer than two women
+
+```{r}
+bechdel90_13 %>%
+  #group_by(___) %>%
+  summarise(
+    med_budget = median(budget_2013),
+    med_domgross = median(domgross_2013, na.rm = TRUE),
+    med_intgross = median(intgross_2013, na.rm = TRUE)
+    )
+```
+
+In order to evaluate how return on investment varies among movies that pass and fail the Bechdel test, we'll first create a new variable called `roi` as the ratio of the gross to budget.
+
+```{r}
+bechdel90_13 <- bechdel90_13 %>%
+  mutate(roi = (intgross_2013 + domgross_2013) / budget_2013)
+```
+
+Let's see which movies have the highest return on investment.
+
+```{r}
+bechdel90_13 %>%
+  arrange(desc(roi)) %>% 
+  select(title, roi, year)
+```
+
+Below is a visualization of the return on investment by test result, however it's difficult to see the distributions due to a few extreme observations.
+
+```{r}
+#| warning: false
+
+ggplot(data = bechdel90_13, 
+       mapping = aes(x = clean_test, y = roi, color = binary)) +
+  geom_boxplot() +
+  labs(
+    title = "Return on investment vs. Bechdel test result",
+    x = "Detailed Bechdel result",
+    y = "___",
+    color = "Binary Bechdel result"
+    )
+```
+
+What are those movies with *very* high returns on investment?
+
+```{r}
+bechdel90_13 %>%
+  filter(roi > 400) %>%
+  select(title, budget_2013, domgross_2013, year)
+```
+
+Zooming in on the movies with `roi < ___` provides a better view of how the medians across the categories compare:
+
+```{r}
+#| warning: false
+
+ggplot(data = bechdel90_13, mapping = aes(x = clean_test, y = roi, color = binary)) +
+  geom_boxplot() +
+  labs(
+    title = "Return on investment vs. Bechdel test result",
+    subtitle = "___", # Something about zooming in to a certain level
+    x = "Detailed Bechdel result",
+    y = "Return on investment",
+    color = "Binary Bechdel result"
+    ) +
+  coord_cartesian(ylim = c(0, 15))
+```

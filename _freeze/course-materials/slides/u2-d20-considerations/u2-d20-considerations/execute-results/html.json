@@ -1,0 +1,18 @@
+{
+  "hash": "0649aae994779b97ff85dd2213fc0b17",
+  "result": {
+    "markdown": "---\ntitle: \"Web scraping considerations\"\nsubtitle: \"<br><br> Data Science in a Box\"\nauthor: \"[datasciencebox.org](https://datasciencebox.org/)\"\noutput:\n  xaringan::moon_reader:\n    css: [\"../xaringan-themer.css\", \"../slides.css\"]\n    lib_dir: libs\n    anchor_sections: FALSE\n    nature:\n      ratio: \"16:9\"\n      highlightLines: true\n      highlightStyle: solarized-light\n      countIncrementalSlides: false\n---\n\n\n\n\nlayout: true\n  \n<div class=\"my-footer\">\n<span>\n<a href=\"https://datasciencebox.org\" target=\"_blank\">datasciencebox.org</a>\n</span>\n</div> \n\n---\n\n::: {.cell layout-align=\"center\"}\n\n:::\n\n\nclass: middle\n\n# Ethics\n\n\n---\n\n## \"Can you?\" vs \"Should you?\"\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](img/ok-cupid-1.png){fig-align='center' width=60%}\n:::\n:::\n\n.footnote[.small[\nSource: Brian Resnick, [Researchers just released profile data on 70,000 OkCupid users without permission](https://www.vox.com/2016/5/12/11666116/70000-okcupid-users-data-release), Vox.\n]]\n\n---\n\n\n## \"Can you?\" vs \"Should you?\"\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](img/ok-cupid-2.png){fig-align='center' width=70%}\n:::\n:::\n\n---\n\nclass: middle\n\n# Challenges\n\n---\n\n\n## Unreliable formatting at the source\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](img/unreliable-formatting.png){fig-align='center' width=70%}\n:::\n:::\n\n---\n\n## Data broken into many pages\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](img/many-pages.png){fig-align='center' width=70%}\n:::\n:::\n\n---\n\n\nclass: middle\n\n# Workflow\n\n\n---\n\n## Screen scraping vs. APIs\n\nTwo different scenarios for web scraping:\n\n- Screen scraping: extract data from source code of website, with html parser (easy) or regular expression matching (less easy)\n\n- Web APIs (application programming interface): website offers a set of structured http requests that return JSON or XML files\n\n---\n\n\n## A new R workflow\n\n- When working in an R Markdown document, your analysis is re-run each time you knit\n\n- If web scraping in an R Markdown document, you'd be re-scraping the data each time you knit, which is undesirable (and not *nice*)!\n\n- An alternative workflow: \n  - Use an R script to save your code \n  - Saving interim data scraped using the code in the script as CSV or RDS files\n  - Use the saved data in your analysis in your R Markdown document\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../../site_libs/font-awesome/css/all.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/font-awesome/css/v4-shims.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/panelset/panelset.css\" rel=\"stylesheet\" />\n<script src=\"../../../site_libs/panelset/panelset.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

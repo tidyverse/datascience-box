@@ -1,0 +1,14 @@
+{
+  "hash": "94b26c7c3042dbd1f616be18533cef36",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 10 - Grading the professor, Pt. 1\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n### Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \nlibrary(tidymodels)\nlibrary(openintro)\n```\n:::\n\n\n### Exercise 1\n\nRemove this text, and add your answer for Exercise 1 here.\nAdd code chunks as needed.\nDon't forget to label your code chunk.\nDo not use spaces in code chunk labels.\n\n### Exercise 2\n\n...\n\nAdd exercise headings as needed.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

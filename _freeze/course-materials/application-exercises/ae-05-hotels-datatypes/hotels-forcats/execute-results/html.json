@@ -1,0 +1,16 @@
+{
+  "hash": "0fe0d0f2e9bed706ee4542086b372f29",
+  "result": {
+    "markdown": "---\ntitle: \"Hotel bookings - factors\"\nauthor: \"Mine Çetinkaya-Rundel\"\nformat: html\neditor: visual\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(skimr)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# From TidyTuesday: https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-11/readme.md\nhotels <- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv\")\n```\n:::\n\n\nFirst, knit the document and view the following visualisation.\nHow are the months ordered?\nWhat would be a better order?\nThen, reorder the months on the x-axis (levels of `arrival_date_month`) in a way that makes more sense.\nYou will want to use a function from the **forcats** package, see <https://forcats.tidyverse.org/reference/index.html> for inspiration and help.\n\n**Stretch goal:** If you finish the above task before time is up, change the y-axis label so the values are shown with dollar signs, e.g. \\$80 instead of 80.\nYou will want to use a function from the **scales** package, see <https://scales.r-lib.org/reference/index.html> for inspiration and help.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhotels %>%\n  group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month\n  summarise(mean_adr = mean(adr)) %>%       # calculate mean adr for each group\n  ggplot(aes(\n    x = arrival_date_month,                 # x-axis = arrival_date_month\n    y = mean_adr,                           # y-axis = mean_adr calculated above\n    group = hotel,                          # group lines by hotel type\n    color = hotel)                          # and color by hotel type\n    ) +\n  geom_line() +                             # use lines to represent data\n  theme_minimal() +                         # use a minimal theme\n  labs(\n    x = \"Arrival month\",                 # customize labels\n    y = \"Mean ADR (average daily rate)\",\n    title = \"Comparison of resort and city hotel prices across months\",\n    subtitle = \"Resort hotel prices soar in the summer while ciry hotel prices remain relatively constant throughout the year\",\n    color = \"Hotel type\"\n    )\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n`summarise()` has grouped output by 'hotel'. You can override using the\n`.groups` argument.\n```\n:::\n\n::: {.cell-output-display}\n![](hotels-forcats_files/figure-html/plot-1.png){width=960}\n:::\n:::\n",
+    "supporting": [
+      "hotels-forcats_files/figure-html"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,227 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
+
+.panelset {
+  width: 100%;
+  position: relative;
+  --panel-tabs-border-bottom: #ddd;
+  --panel-tabs-sideways-max-width: 25%;
+  --panel-tab-foreground: currentColor;
+  --panel-tab-background: unset;
+  --panel-tab-active-foreground: currentColor;
+  --panel-tab-active-background: unset;
+  --panel-tab-hover-foreground: currentColor;
+  --panel-tab-hover-background: unset;
+  --panel-tab-active-border-color: currentColor;
+  --panel-tab-hover-border-color: currentColor;
+  --panel-tab-inactive-opacity: 0.5;
+  --panel-tab-font-family: inherit;
+}
+
+.panelset * {
+  box-sizing: border-box;
+}
+
+.panelset .panel-tabs {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+          align-items: center;
+  overflow-y: visible;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0 2px 0;
+  box-shadow: inset 0 -2px 0px var(--panel-tabs-border-bottom);
+}
+
+.panelset .panel-tabs * {
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.panelset .panel-tabs .panel-tab {
+  min-height: 50px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  padding: 0.5em 1em;
+  font-family: var(--panel-tab-font-family);
+  opacity: var(--panel-tab-inactive-opacity);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: var(--panel-tab-foreground);
+  background-color: var(--panel-tab-background);
+  list-style: none;
+  z-index: 5;
+}
+
+.panelset .panel-tabs .panel-tab > a {
+  color: currentColor;
+  text-decoration: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.panelset .panel-tabs .panel-tab > a:focus {
+  outline: none;
+  text-decoration: none;
+  border: none;
+}
+
+.panelset .panel-tabs .panel-tab > a:hover {
+  text-decoration: none;
+  border: none;
+}
+
+.panelset .panel-tabs .panel-tab:hover {
+  border-bottom-color: var(--panel-tab-hover-border-color);
+  color: var(--panel-tab-hover-foreground);
+  background-color: var(--panel-tab-hover-background);
+  opacity: 1;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.panelset .panel-tabs .panel-tab:focus {
+  outline: none;
+  color: var(--panel-tab-hover-foreground);
+  border-bottom-color: var(--panel-tab-hover-border-color);
+  background-color: var(--panel-tab-hover-background);
+}
+
+.panelset .panel-tabs .panel-tab.panel-tab-active {
+  border-top-color: var(--panel-tab-active-border-color);
+  color: var(--panel-tab-active-foreground);
+  background-color: var(--panel-tab-active-background);
+  opacity: 1;
+}
+
+.panelset .panel {
+  display: none;
+}
+
+.panelset .panel-active {
+  display: block;
+}
+
+/* ---- Sideways Panelset ---- */
+
+@media (min-width: 480px) {
+  .panelset.sideways {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .panelset.sideways .panel-tabs {
+    box-shadow: none;
+    flex-direction: column;
+    align-items: start;
+    margin: 0;
+    margin-right: 1em;
+    border-right: 2px solid var(--panel-tabs-border-bottom);
+    max-width: var(--panel-tabs-sideways-max-width);
+  }
+
+  .panelset.sideways .panel {
+    max-width: calc(100% - var(--panel-tabs-sideways-max-width) - 1em);
+  }
+
+  .panelset.sideways .panel-tabs .panel-tab {
+    border-top: unset;
+    border-bottom: unset;
+    padding-left: 0;
+  }
+
+  .panelset.sideways.right {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .panelset.sideways.right {
+  	text-align: inherit;
+  }
+
+  .panelset.sideways.right .panel-tabs {
+    align-items: end;
+    margin-right: 0;
+    margin-left: 1em;
+    border-right: unset;
+    border-left: 2px solid var(--panel-tabs-border-bottom);
+  }
+
+  .panelset.sideways.right .panel-tabs .panel-tab {
+    padding-left: 1em;
+    width: 100%;
+  }
+
+  .panelset.sideways.right .panel-tabs .panel-tab a {
+    text-align: right;
+  }
+}
+
+/*
+  This next part repeats the same CSS inside the @media query above but with
+  remarkjs-specific classes to ensure that sideways panelsets are always used.
+  In the future, we could use @container queries instead once they're availble.
+*/
+
+.remark-container .panelset.sideways {
+  display: flex;
+  flex-direction: row;
+}
+
+.remark-container .panelset.sideways .panel-tabs {
+  box-shadow: none;
+  flex-direction: column;
+  align-items: start;
+  margin: 0;
+  margin-right: 1em;
+  border-right: 2px solid var(--panel-tabs-border-bottom);
+  max-width: var(--panel-tabs-sideways-max-width);
+}
+
+.remark-container .panelset.sideways .panel {
+  max-width: calc(100% - var(--panel-tabs-sideways-max-width) - 1em);
+}
+
+.remark-container .panelset.sideways .panel-tabs .panel-tab {
+  border-top: unset;
+  border-bottom: unset;
+  padding-left: 0;
+}
+
+.remark-container .panelset.sideways.right {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.remark-container .panelset.sideways.right {
+	text-align: inherit;
+}
+
+.remark-container .panelset.sideways.right .panel-tabs {
+  align-items: end;
+  margin-right: 0;
+  margin-left: 1em;
+  border-right: unset;
+  border-left: 2px solid var(--panel-tabs-border-bottom);
+}
+
+.remark-container .panelset.sideways.right .panel-tabs .panel-tab {
+  padding-left: 1em;
+  width: 100%;
+}
+
+.remark-container .panelset.sideways.right .panel-tabs .panel-tab a {
+  text-align: right;
+}

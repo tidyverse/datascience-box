@@ -1,0 +1,14 @@
+{
+  "hash": "27d29189ab814fe287644aa3fb37ae4c",
+  "result": {
+    "markdown": "---\ntitle: \"Lab 02 - Plastic waste\"\nauthor: \"Insert your name here\"\ndate: \"Insert date here\"\noutput: github_document\n---\n\n\n## Load packages and data\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse) \n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nplastic_waste <- read_csv(\"data/plastic-waste.csv\")\n```\n:::\n\n\n## Exercises\n\n### Exercise 1\n\nRemove this text, and add your answer for Exercise 1 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 2\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 3\n\nRemove this text, and add your answer for Exercise 3 here.\n\n### Exercise 4\n\nRemove this text, and add your answer for Exercise 4 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 5\n\nRemove this text, and add your answer for Exercise 5 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 6\n\nRemove this text, and add your answer for Exercise 6 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 7\n\nRemove this text, and add your answer for Exercise 7 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n\n\n### Exercise 8\n\nRemove this text, and add your answer for Exercise 8 here.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# insert code here\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

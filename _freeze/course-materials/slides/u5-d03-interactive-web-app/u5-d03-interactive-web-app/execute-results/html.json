@@ -1,0 +1,18 @@
+{
+  "hash": "cdae0ca8a65fc696c2c3c66d26a5579e",
+  "result": {
+    "markdown": "---\ntitle: \"Interactive web apps\"\nsubtitle: \"<br><br> Data Science in a Box\"\nauthor: \"[datasciencebox.org](https://datasciencebox.org/)\"\noutput:\n  xaringan::moon_reader:\n    css: [\"../xaringan-themer.css\", \"../slides.css\"]\n    lib_dir: libs\n    anchor_sections: FALSE\n    nature:\n      ratio: \"16:9\"\n      highlightLines: true\n      highlightStyle: solarized-light\n      countIncrementalSlides: false\n---\n\n\n\n\nlayout: true\n  \n<div class=\"my-footer\">\n<span>\n<a href=\"https://datasciencebox.org\" target=\"_blank\">datasciencebox.org</a>\n</span>\n</div> \n\n---\n\n\n## Shiny\n\n.pull-left[\n- Shiny is an R package that makes it easy to build interactive web apps straight from R\n- You can host standalone apps on a webpage or embed them in R Markdown documents or build dashboards\n- You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript actions\n- Learn more at [shiny.rstudio.com](https://shiny.rstudio.com/)\n]\n.pull-right[\n\n::: {.cell layout-align=\"left\"}\n::: {.cell-output-display}\n![](img/shiny.png){fig-align='left' width=60%}\n:::\n:::\n\n]\n\n\n---\n\n## High level view\n\n- Every Shiny app has a webpage that the user visits, and behind this webpage there is a computer that serves this webpage by running R\n\n- When running your app locally, the computer serving your app is your computer\n\n- When your app is deployed, the computer serving your app is a web server\n\n---\n\n\n.center[\n[minecr.shinyapps.io/fm-speeches-covid19-simple](https://minecr.shinyapps.io/fm-speeches-covid19-simple/)\n]\n\n.center[\n<iframe width=\"1000\" height=\"500\" src=\"https://minecr.shinyapps.io/fm-speeches-covid19-simple/\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>  \n]\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../../site_libs/font-awesome/css/all.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/font-awesome/css/v4-shims.css\" rel=\"stylesheet\" />\n<link href=\"../../../site_libs/panelset/panelset.css\" rel=\"stylesheet\" />\n<script src=\"../../../site_libs/panelset/panelset.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

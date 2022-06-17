@@ -1,0 +1,16 @@
+{
+  "hash": "d3a11cbda9ccd5d8eda2f57bbccdce96",
+  "result": {
+    "markdown": "---\ntitle: \"Nobel winners\"\nauthor: \"Mine Çetinkaya-Rundel\"\nformat: html\neditor: visual\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n\nLet's first load the data:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nnobel <- ___(___)\n```\n:::\n\n\nThen let's split the data into two:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# stem laureates\n___ <- nobel %>%\n  filter(___)\n\n# non-steam laureates\n___ <- nobel %>%\n  filter(___)\n```\n:::\n\n\nAnd finally write out the data:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# add code for writing out the two data frames here\n```\n:::\n",
+    "supporting": [
+      "nobels-csv_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
