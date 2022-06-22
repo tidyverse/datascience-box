@@ -29,7 +29,7 @@ Students often develop elaborate workflows to avoid these types of issues but th
 
 It is super important to encourage students to **commit early and often** to reduce the size of each change.
 Finally, in the early stages of learning git it is useful to engineer situations in which students encounter problems while they are in the classroom so that the professor and teaching assistants are present to troubleshoot and walk them through the process in person.
-A sample activity for resolving merge conflicts is provided in the course materials [here](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-06/lab-06-ugly-charts.html).
+A sample activity for resolving merge conflicts is provided in the course materials [here](https://datasciencebox.org/course-materials/lab-instructions/lab-03/lab-03-nobel-laureates.html#merge-conflict-activity).
 
 ## GitHub
 
