@@ -31,7 +31,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d01-welcome)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u1-d01-welcome)
 :::
 
 ::: video
@@ -67,7 +67,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d02-toolkit-r)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u1-d02-toolkit-r)
 :::
 
 ::: video
@@ -96,7 +96,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u1-d03-toolkit-git)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u1-d03-toolkit-git)
 :::
 
 ::: video

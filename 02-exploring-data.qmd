@@ -24,7 +24,7 @@ You can join the workspace and play around with the application exercises.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d01-data-viz)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d01-data-viz)
 :::
 
 ::: video
@@ -40,7 +40,7 @@ You can join the workspace and play around with the application exercises.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d02-ggplot2)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d02-ggplot2)
 :::
 
 ::: video
@@ -60,7 +60,7 @@ R4DS :: [Chp 3 - Data visualization](https://r4ds.had.co.nz/data-visualisation.h
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d03-viz-num)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d03-viz-num)
 :::
 
 ::: video
@@ -80,7 +80,7 @@ IMS :: [Chp 4 - Exploring numerical data](https://openintro-ims.netlify.app/expl
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d04-viz-cat)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d04-viz-cat)
 :::
 
 ::: video
@@ -114,7 +114,7 @@ IMS :: [Chp 5 - Exploring categorical data](https://openintro-ims.netlify.app/ex
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d05-tidy-data)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d05-tidy-data)
 :::
 
 ::: video
@@ -134,7 +134,7 @@ JSS :: [Tidy data](https://www.jstatsoft.org/article/view/v059i10)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d06-grammar-wrangle)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d06-grammar-wrangle)
 :::
 
 ::: video
@@ -150,7 +150,7 @@ JSS :: [Tidy data](https://www.jstatsoft.org/article/view/v059i10)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d07-single-df)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d07-single-df)
 :::
 
 ::: video
@@ -170,7 +170,7 @@ R4DS :: [Chp 5 - Data transformation](https://r4ds.had.co.nz/transform.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d08-multi-df)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d08-multi-df)
 :::
 
 ::: video
@@ -190,7 +190,7 @@ R4DS :: [Chp 13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d09-tidying)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d09-tidying)
 :::
 
 ::: video
@@ -224,7 +224,7 @@ R4DS :: [Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d10-data-types)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d10-data-types)
 :::
 
 ::: video
@@ -240,7 +240,7 @@ R4DS :: [Chp 12 - Tidy data](https://r4ds.had.co.nz/tidy-data.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d11-data-classes)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d11-data-classes)
 :::
 
 ::: video
@@ -260,7 +260,7 @@ R4DS :: [Chp 15 - Factors](https://r4ds.had.co.nz/factors.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d12-data-import)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d12-data-import)
 :::
 
 ::: video
@@ -280,7 +280,7 @@ R4DS :: [Chp 11 - Data import](https://r4ds.had.co.nz/data-import.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d13-data-recode)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d13-data-recode)
 :::
 
 ::: video
@@ -334,7 +334,7 @@ R4DS :: [Sec 16.1 - 16.3 - Dates and times](https://r4ds.had.co.nz/dates-and-tim
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d14-effective-dataviz)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d14-effective-dataviz)
 :::
 
 ::: video
@@ -366,7 +366,7 @@ IMS :: [Chp 6 - Applications: Explore](https://openintro-ims.netlify.app/explore
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d15-studies-confounding)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d15-studies-confounding)
 :::
 
 ::: video
@@ -386,7 +386,7 @@ IMS :: [Chp 2 - Study design](https://openintro-ims.netlify.app/data-design.html
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d16-simpsons-paradox)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d16-simpsons-paradox)
 :::
 
 ::: video
@@ -402,7 +402,7 @@ IMS :: [Chp 2 - Study design](https://openintro-ims.netlify.app/data-design.html
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d17-doing-data-science)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d17-doing-data-science)
 :::
 
 ::: video
@@ -424,7 +424,7 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d18-web-scrape)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d18-web-scrape)
 :::
 
 ::: video
@@ -440,7 +440,7 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d19-top-250-imdb)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d19-top-250-imdb)
 :::
 
 ::: video
@@ -456,7 +456,7 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d20-considerations)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d20-considerations)
 :::
 
 ::: video
@@ -484,7 +484,7 @@ R4DS :: [Chp 7 - Exploratory data analysis](https://r4ds.had.co.nz/exploratory-d
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d21-functions)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d21-functions)
 :::
 
 ::: video
@@ -504,7 +504,7 @@ R4DS :: [Chp 19 - Functions](https://r4ds.had.co.nz/functions.html)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u2-d22-iteration)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u2-d22-iteration)
 :::
 
 ::: video

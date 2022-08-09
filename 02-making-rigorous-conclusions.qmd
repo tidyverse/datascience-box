@@ -23,7 +23,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d01-language-of-models)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d01-language-of-models)
 :::
 
 ::: video
@@ -39,7 +39,7 @@ You can join the workspace and play around with the sample application exercises
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d02-fitting-interpreting-models)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d02-fitting-interpreting-models)
 :::
 
 ::: video
@@ -59,7 +59,7 @@ IMS :: [Chp 7 - Linear regression with a single predictor](https://openintro-ims
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d03-modeling-nonlinear-relationships)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d03-modeling-nonlinear-relationships)
 :::
 
 ::: video
@@ -75,7 +75,7 @@ IMS :: [Chp 7 - Linear regression with a single predictor](https://openintro-ims
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d04-model-multiple-predictors)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d04-model-multiple-predictors)
 :::
 
 ::: video
@@ -95,7 +95,7 @@ IMS :: [Chp 8 - Linear regression with multiple predictors](https://openintro-im
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d05-more-model-multiple-predictors)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d05-more-model-multiple-predictors)
 :::
 
 ::: video
@@ -113,7 +113,7 @@ IMS :: [Chp 8 - Linear regression with multiple predictors](https://openintro-im
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d06-logistic-reg)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d06-logistic-reg)
 :::
 
 ::: video
@@ -133,7 +133,7 @@ IMS :: [Chp 9 - Logistic regression](https://openintro-ims.netlify.app/model-log
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d07-prediction-overfitting)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d07-prediction-overfitting)
 :::
 
 ::: video
@@ -153,7 +153,7 @@ tidymodels :: [Build a model](https://www.tidymodels.org/start/models/)
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d08-feature-engineering)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d08-feature-engineering)
 :::
 
 ::: video
@@ -175,7 +175,7 @@ tidymodels :: [Preprocess your data with recipes](https://www.tidymodels.org/sta
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d09-cross-validation)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d09-cross-validation)
 :::
 
 ::: video
@@ -221,7 +221,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d10-quantify-uncertainty)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d10-quantify-uncertainty)
 :::
 
 ::: video
@@ -237,7 +237,7 @@ tidymodels :: [Evaluate your model with resampling](https://www.tidymodels.org/s
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d11-bootstrap)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d11-bootstrap)
 :::
 
 ::: video
@@ -257,7 +257,7 @@ IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d12-hypothesis-testing)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d12-hypothesis-testing)
 :::
 
 ::: reading
@@ -273,7 +273,7 @@ IMS :: [Chp 12 - Confidence intervals with bootstrapping](https://openintro-ims.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u4-d13-inference-overview)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u4-d13-inference-overview)
 :::
 :::
 

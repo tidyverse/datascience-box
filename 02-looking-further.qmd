@@ -16,7 +16,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d01-text-analysis)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u5-d01-text-analysis)
 :::
 
 ::: video
@@ -32,7 +32,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d02-comparing-texts)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u5-d02-comparing-texts)
 :::
 
 ::: video
@@ -48,7 +48,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d03-interactive-web-app)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u5-d03-interactive-web-app)
 :::
 
 ::: video
@@ -64,7 +64,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d04-machine-learning)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u5-d04-machine-learning)
 :::
 
 ::: video
@@ -96,7 +96,7 @@ Note that the slides in this unit are a bit more sparse than the others, and muc
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u5-d07-bayes-inf)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u5-d07-bayes-inf)
 :::
 :::
 

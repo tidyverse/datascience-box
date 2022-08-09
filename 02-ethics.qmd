@@ -15,7 +15,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d01-misrepresentation)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u3-d01-misrepresentation)
 :::
 
 ::: video
@@ -39,7 +39,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d02-privacy)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u3-d02-privacy)
 :::
 
 ::: video
@@ -63,7 +63,7 @@ Course lectures are supplemented with "guest lectures" from domain experts.
 :::
 
 ::: source
-[Source](https://github.com/rstudio-education/datascience-box/tree/master/course-materials/slides/u3-d03-algorithmic-bias)
+[Source](https://github.com/rstudio-education/datascience-box/tree/main/course-materials/_slides/u3-d03-algorithmic-bias)
 :::
 
 ::: video
