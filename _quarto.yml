@@ -13,7 +13,7 @@ website:
   repo-url: https://github.com/rstudio-education/datascience-box
   repo-actions: [edit, issue]
 
-  opengraph: true
+  open-graph: true
   twitter-card:
     creator: "@minebocek"
     image: "/images/twitter-card.png"
