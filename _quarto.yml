@@ -8,7 +8,6 @@ website:
   page-navigation: true
   title: "Data Science in a Box"
   description: "Data Science in a Box contains the materials required to teach (or learn from) the course described above, all of which are freely-available and open-source."
-  date: now
   site-url: "https://datasciencebox.org/"
   
   repo-url: https://github.com/rstudio-education/datascience-box
