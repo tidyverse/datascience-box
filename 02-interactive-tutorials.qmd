@@ -39,7 +39,7 @@ The goal of this tutorial is not to conduct a thorough analysis of Airbnb listin
 -   Calculate summary statistics with `summarise()`.
 -   Arrange output of dplyr chains with `arrange()`.
 
-[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-03-collegegrads/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/03-collegegrads)
+[\[Tutorial\]](https://minecr.shinyapps.io/dsbox-03-collegemajors/) [\[Source\]](https://github.com/rstudio-education/dsbox/tree/main/inst/tutorials/03-collegemajors)
 :::
 
 ::: tutorial
