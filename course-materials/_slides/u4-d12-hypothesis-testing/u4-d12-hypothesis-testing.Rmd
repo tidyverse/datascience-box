@@ -643,7 +643,7 @@ yawn %>%
 - Calculate the sample statistic of interest (difference in propotions)
     - Since the explanatory variable is categorical, specify the order in which the subtraction should occur for the calculation of the sample statistic, $(\hat{p}_{treatment} - \hat{p}_{control})$.
     
-```{r eval=FALSE}
+````r
 {{null_dist <- yawn %>% }}
   specify(response = outcome, explanatory = group, 
           success = "yawn") %>%
@@ -651,7 +651,7 @@ yawn %>%
   generate(100, type = "permute") %>%
   calculate(stat = "diff in props", 
             order = c("treatment", "control"))
-```
+````
 ]
 
 ---

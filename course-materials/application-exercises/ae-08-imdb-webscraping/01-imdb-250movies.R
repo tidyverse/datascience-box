@@ -7,37 +7,37 @@ library(rvest)
 
 # Read html page ---------------------------------------------------------------
 
-page <- read_html("___")
+#page <- read_html("___")
 
 # Titles -----------------------------------------------------------------------
 
-titles <- page %>%
-  html_nodes("___") %>%
-  html_text()
+#titles <- page %>%
+#  html_nodes("___") %>%
+#  html_text()
 
 # Years-------------------------------------------------------------------------
 
-years <- page %>%
-  html_nodes("___") %>%
-  html_text() %>%
-  str_remove("___") %>%
-  str_remove("___") %>%
-  as.numeric()
+#years <- page %>%
+#  html_nodes("___") %>%
+#  html_text() %>%
+#  str_remove("___") %>%
+#  str_remove("___") %>%
+#  as.numeric()
 
 # Scores -----------------------------------------------------------------------
 
-ratings <- page %>%
-  html_nodes("___") %>%
-  ___ %>%
-  ___
+#ratings <- page %>%
+#  html_nodes("___") %>%
+#  ___ %>%
+#  ___
 
 # Put it all in a data frame ---------------------------------------------------
 
-imdb_top_250 <- tibble(
-  title = ___,
-  rating = ___,
-  year = ___
-)
+#imdb_top_250 <- tibble(
+#  title = ___,
+#  rating = ___,
+#  year = ___
+#)
 
 # Add rank ---------------------------------------------------------------------
 

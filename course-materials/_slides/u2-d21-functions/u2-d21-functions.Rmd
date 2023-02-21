@@ -538,11 +538,11 @@ class: middle
 .pull-left-wide[
 - They take input(s) defined in the function definition
 
-```{r eval=FALSE}
+````r
 function([inputs separated by commas]){
   # what to do with those inputs
 }
-```
+````
 
 - By default they return the last value computed in the function
 

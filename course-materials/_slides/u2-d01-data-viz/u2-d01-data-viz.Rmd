@@ -223,12 +223,12 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 - Plots are constructed in layers
 - Structure of the code for plots can be summarized as
 
-```{r eval = FALSE}
+````r
 ggplot(data = [dataset], 
        mapping = aes(x = [x-variable], y = [y-variable])) +
    geom_xxx() +
    other options
-```
+````
 
 - The ggplot2 package comes with the tidyverse
 
