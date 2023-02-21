@@ -14,4 +14,4 @@ LaTeX: pdfLaTeX
 
 MarkdownWrap: Sentence
 MarkdownReferences: Document
-MarkdownCanonical: Yes
+MarkdownCanonical: No
