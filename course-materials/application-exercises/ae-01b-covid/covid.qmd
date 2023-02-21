@@ -93,7 +93,7 @@ country_data <- coronavirus %>%
   mutate(
     days_elapsed = as.numeric(date - min(date)),
     end_date     = if_else(date == max(date), TRUE, FALSE),
-    end_label    = if_else(end_date, country, NULL)
+    end_label    = if_else(end_date, country, NA)
   ) %>%
   # ungroup
   ungroup()
