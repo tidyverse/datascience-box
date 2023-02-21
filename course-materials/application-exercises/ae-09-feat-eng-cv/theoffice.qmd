@@ -129,7 +129,9 @@ set.seed(1122)
 
 #### Old model
 
-```{r}
+TO DO: See what `___` is.
+
+````r
 #| label: old-model
 #| error: true
 
@@ -155,4 +157,4 @@ office_fit_old <- office_wflow_old %>%
 tidy(office_fit_old)
 
 ___
-```
+````

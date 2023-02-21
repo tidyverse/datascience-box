@@ -138,10 +138,12 @@ names(edibnb_badnames)
 
 ... but R doesn't allow spaces in variable names
 
-```{r error=TRUE}
+````r
 ggplot(edibnb_badnames, aes(x = Number of bathrooms, y = Price)) +
   geom_point()
-```
+````
+
+TO DO: Add error: true
 
 ---
 
