@@ -77,7 +77,7 @@ So, in this course, instead of teaching students the basics of regular expressio
 ## Leverage the ecosystem
 
 The course materials make heavy use of the tidyverse for data visualization and data wrangling.
-However, until recently, there was a gap in the R ecosystem for doing basic statistical inference using a syntax that follows [tidyverse design principles](https://principles.tidyverse.org/).
+However, until recently, there was a gap in the R ecosystem for doing basic statistical inference using a syntax that follows [tidyverse design principles](https://design.tidyverse.org/).
 This prompted the developments of [**infer**](http://infer.netlify.com), a package for performing statistical inference using an expressive statistical grammar that coheres with the tidyverse design framework.
 Using infer to introduce statistical inference makes the transition from the first to the second unit of the course much smoother, and the development of the package as a collaboration between like-minded educators is a great example of leveraging an existing ecosystem to provide a smoother learning experience for students.
 
