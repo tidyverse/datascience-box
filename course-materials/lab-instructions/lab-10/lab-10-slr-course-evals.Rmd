@@ -6,7 +6,7 @@ output:
     tufte_variant: "envisioned"
     highlight: pygments
     css: ../lab.css
-link-citations: yes
+link-citations: true
 ---
 
 ```{r include=FALSE}

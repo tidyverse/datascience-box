@@ -6,7 +6,7 @@ output:
     css: ../hw.css
     tufte_variant: "envisioned"
     highlight: pygments
-link-citations: yes
+link-citations: true
 ---
 
 ```{r include = FALSE}
@@ -181,10 +181,11 @@ knitr::include_graphics("img/ready-to-push.png")
 
 This will prompt a dialogue box where you first need to enter your user name, and then your password.
 This might feel cumbersome.
-Bear with me... I *will* teach you how to save your password so you don't have to enter it every time.
+Bear with me...
+I *will* teach you how to save your password so you don't have to enter it every time.
 But for this one assignment you'll have to manually enter each time you push in order to gain some experience with it.
 
-**Thought exercise:** Which of the above steps (updating the YAML, committing, and pushing) needs to talk to GitHub?[^hw-01-pet-names-1]
+**Thought exercise:** Which of the above steps (updating the YAML, committing, and pushing) needs to talk to GitHub?[^1]
 
 # Packages
 
@@ -349,4 +350,4 @@ ggplot(comb_name_props, aes(x = cat_prop, y = dog_prop)) +
 
 🧶 ✅ ⬆️ *Now is a good time to commit and push your changes to GitHub with an appropriate commit message. Commit and push all changed files so that your Git pane is cleared up afterwards. Make sure that your last push to the repo comes before the deadline. You should confirm that what you committed and pushed are indeed in your repo that we will see by visiting your repo on GitHub.*
 
-[^hw-01-pet-names-1]: Only pushing requires talking to GitHub, this is why you're asked for your password at that point.
+[^1]: Only pushing requires talking to GitHub, this is why you're asked for your password at that point.

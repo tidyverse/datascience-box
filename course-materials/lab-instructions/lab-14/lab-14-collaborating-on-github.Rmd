@@ -6,7 +6,7 @@ output:
     tufte_variant: "envisioned"
     highlight: pygments
     toc: yes
-link-citations: yes
+link-citations: true
 ---
 
 ```{r setup, include=FALSE}
