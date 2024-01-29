@@ -21,3 +21,12 @@ See https://github.com/DataTables/DataTablesSrc/issues/160
 table.dataTable {
   display: table;
 }
+
+
+/*
+When DTOutput(fill = TRUE), it receives a .html-fill-item class (via htmltools::bindFillRole()), which effectively amounts to `flex: 1 1 auto`. That's mostly fine, but the case where `fillContainer=TRUE`+`height:auto`+`flex-basis:auto` and the container (e.g., a bslib::card()) doesn't have a defined height is a bit problematic since the table wants to fit the parent but the parent wants to fit the table, which results pretty small table height (maybe because there is a minimum height somewhere?). It seems better in this case to impose a 400px height default for the table, which we can do by setting `flex-basis` to 400px (the table is still allowed to grow/shrink when the container has an opinionated height).
+*/
+
+.html-fill-container > .html-fill-item.datatables {
+  flex-basis: 400px;
+}
