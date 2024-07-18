@@ -153,12 +153,12 @@ knitr::include_graphics("img/ga-dph-declining-bars.jpg")
 ## Graph detective
 
 .center[
-<iframe width="900" height="450" src="https://livefreeordichotomize.com/2020/05/17/graph-detective/" frameborder="0"></iframe>  
+<iframe width="900" height="450" src="https://livefreeordichotomize.com/posts/2020-05-17-graph-detective/" frameborder="0"></iframe>  
 ]
 
 .footnote[
 .midi[
-Lucy D'Agostino McGowan. [Graph detective](https://livefreeordichotomize.com/2020/05/17/graph-detective/). Live Free or Dichotomize. 17 May 2020.
+Lucy D'Agostino McGowan. [Graph detective](https://livefreeordichotomize.com/posts/2020-05-17-graph-detective/). Live Free or Dichotomize. 17 May 2020.
 ]
 ]
 
@@ -255,7 +255,7 @@ ggplot(catalan, aes(y = fct_rev(response), x = rate, color = response, group = r
   geom_point() +
   geom_segment(aes(x = 0, xend = rate, 
                    y = fct_rev(response), yend = fct_rev(response)),
-               size = 1) +
+               linewidth = 1) +
   scale_color_manual(values = c("#5C8AA9", "#9D303A", "gray")) +
   scale_x_continuous(labels = label_percent(scale = 1)) +
   guides(color = "none") +
@@ -285,7 +285,7 @@ catalan <- catalan %>%
 ggplot(catalan, aes(y = fct_rev(response), x = rate, color = response, group = response)) +
   geom_segment(aes(x = low, xend = high, 
                    y = fct_rev(response), yend = fct_rev(response)),
-               size = 0.8, color = "black") +
+               linewidth = 0.8, color = "black") +
   geom_point(size = 3) +
   scale_color_manual(values = c("#5C8AA9", "#9D303A", "gray")) +
   scale_x_continuous(labels = label_percent(scale = 1)) +
