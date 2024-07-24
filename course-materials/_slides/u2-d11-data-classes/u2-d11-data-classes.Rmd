@@ -1,46 +1,26 @@
----
-title: "Data classes"
-subtitle: "<br><br> Data Science in a Box"
-author: "[datasciencebox.org](https://datasciencebox.org/)"
-output:
-  xaringan::moon_reader:
-    css: ["../xaringan-themer.css", "../slides.css"]
-    lib_dir: libs
-    nature:
-      ratio: "16:9"
-      highlightLines: true
-      highlightStyle: solarized-light
-      countIncrementalSlides: false
----
-
-```{r child = "../setup.Rmd"}
-```
-
-```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(DT)
-library(scales)
-```
-
 class: middle
 
 # Data classes
 
-------------------------------------------------------------------------
+---
 
 ## Data classes
 
 We talked about *types* so far, next we'll introduce the concept of *classes*
 
--   Vectors are like Lego building blocks
+- Vectors are like Lego building blocks
 
-| \- We stick them together to build more complicated constructs, e.g. *representations of data*                                                                                                                                                                  |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \- The **class** attribute relates to the S3 class of an object which determines its behaviour - You don't need to worry about what S3 classes really mean, but you can read more about it [here](https://adv-r.hadley.nz/s3.html#s3-classes) if you're curious |
+--
+- We stick them together to build more complicated constructs, e.g. *representations of data*
 
--   Examples: factors, dates, and data frames
+--
+- The **class** attribute relates to the S3 class of an object which determines its behaviour
+  - You don't need to worry about what S3 classes really mean, but you can read more about it [here](https://adv-r.hadley.nz/s3.html#s3-classes) if you're curious
 
-------------------------------------------------------------------------
+--
+- Examples: factors, dates, and data frames
+  
+---
 
 ## Factors
 
@@ -53,9 +33,19 @@ x
 
 --
 
-.pull-left\[\] .pull-right\[\]
+.pull-left[
+```{r}
+typeof(x)
+```
+]
+.pull-right[
+```{r}
+class(x)
+```
+]
 
-------------------------------------------------------------------------
+
+---
 
 ## More on factors
 
@@ -66,7 +56,7 @@ glimpse(x)
 as.integer(x)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Dates
 
@@ -77,7 +67,7 @@ typeof(y)
 class(y)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## More on dates
 
@@ -88,7 +78,7 @@ as.integer(y)
 as.integer(y) / 365 # roughly 50 yrs
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Data frames
 
@@ -99,9 +89,18 @@ df <- data.frame(x = 1:2, y = 3:4)
 df
 ```
 
-.pull-left\[\] .pull-right\[\]
+.pull-left[
+```{r}
+typeof(df)
+```
+]
+.pull-right[
+```{r}
+class(df)
+```
+]
 
-------------------------------------------------------------------------
+---
 
 ## Lists
 
@@ -116,12 +115,12 @@ l <- list(
 l
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Lists and data frames
 
--   A data frame is a special list containing vectors of equal length
--   When we use the `pull()` function, we extract a vector from the data frame
+- A data frame is a special list containing vectors of equal length
+- When we use the `pull()` function, we extract a vector from the data frame
 
 ```{r}
 df
@@ -130,13 +129,14 @@ df %>%
   pull(y)
 ```
 
-------------------------------------------------------------------------
+
+---
 
 class: middle
 
 # Working with factors
 
-------------------------------------------------------------------------
+---
 
 ```{r include=FALSE}
 cat_lovers <- read_csv("data/cat-lovers.csv")
@@ -148,7 +148,7 @@ cat_lovers <- read_csv("data/cat-lovers.csv")
 glimpse(cat_lovers)
 ```
 
-------------------------------------------------------------------------
+---
 
 ## But coerce when plotting
 
@@ -157,7 +157,7 @@ ggplot(cat_lovers, mapping = aes(x = handedness)) +
   geom_bar()
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Use forcats to manipulate factors
 
@@ -168,18 +168,36 @@ cat_lovers %>%
   geom_bar()
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Come for the functionality
 
-.pull-left\[ ... stay for the logo\] .pull-right\[\]
+.pull-left[
+... stay for the logo
+]
+.pull-right[
+```{r echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/forcats-part-of-tidyverse.png")
+```
+]
 
-.pull-left-wide\[ - Factors are useful when you have true categorical data and you want to override the ordering of character vectors to improve display - They are also useful in modeling scenarios - The **forcats** package provides a suite of useful tools that solve common problems with factors\]
+.pull-left-wide[
+- Factors are useful when you have true categorical data and you want to override the ordering of character vectors to improve display
+- They are also useful in modeling scenarios
+- The **forcats** package provides a suite of useful tools that solve common problems with factors
+]
 
-------------------------------------------------------------------------
+---
 
-.small\[ .your-turn\[ \### .hand\[Your turn!\]
-\]\]
+.small[
+.your-turn[
+### .hand[Your turn!]
+
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 05 - Hotels + Data types` > `hotels-forcats.Rmd` > knit
+- Recreate the x-axis of the following plot. 
+- **Stertch goal:** Recreate the y-axis.
+]
+]
 
 ```{r echo=FALSE, out.width="90%", fig.asp=0.4}
 if (!file.exists("data/hotels")) {
@@ -208,80 +226,158 @@ hotels %>%
   scale_x_discrete(guide = guide_axis(check.overlap = TRUE))
 ```
 
-------------------------------------------------------------------------
+---
 
 class: middle
 
 # Working with dates
 
-------------------------------------------------------------------------
+---
 
 ## Make a date
 
-.pull-left\[\] .pull-right\[ - **lubridate** is the tidyverse-friendly package that makes dealing with dates a little easier - It's not one of the *core* tidyverse packages, hence it's installed with `install.packages("tidyverse)` but it's not loaded with it, and needs to be explicitly loaded with `library(lubridate)`\]
+.pull-left[
+```{r echo=FALSE, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/lubridate-not-part-of-tidyverse.png")
+```
+]
+.pull-right[
+- **lubridate** is the tidyverse-friendly package that makes dealing with dates a little easier
+- It's not one of the *core* tidyverse packages, hence it's installed with `install.packages("tidyverse)` but it's not loaded with it, and needs to be explicitly loaded with `library(lubridate)`
+]
 
-------------------------------------------------------------------------
+---
 
 class: middle
 
-.hand\[.light-blue\[ we're just going to scratch the surface of working with dates in R here...\]\]
+.hand[.light-blue[
+we're just going to scratch the surface of working with dates in R here...
+]]
 
-------------------------------------------------------------------------
+---
 
-.question\[ Calculate and visualise the number of bookings on any given arrival date.\]
+.question[
+Calculate and visualise the number of bookings on any given arrival date.
+]
 
 ```{r}
 hotels %>%
   select(starts_with("arrival_"))
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Step 1. Construct dates
 
-.midi\[\]
+.midi[
+```{r output.lines=7}
+library(glue)
 
-------------------------------------------------------------------------
+hotels %>%
+  mutate(
+    arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}") #<<
+    ) %>% 
+  relocate(arrival_date)
+```
+]
+
+---
 
 ## Step 2. Count bookings per date
 
-.midi\[\]
+.midi[
+```{r}
+hotels %>%
+  mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
+  count(arrival_date)
+```
+]
 
-------------------------------------------------------------------------
+---
 
 ## Step 3. Visualise bookings per date
 
-.midi\[\]
+.midi[
+```{r out.width="80%", fig.asp = 0.4}
+hotels %>%
+  mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
+  count(arrival_date) %>%
+  ggplot(aes(x = arrival_date, y = n, group = 1)) +
+  geom_line()
+```
+]
 
-------------------------------------------------------------------------
+---
 
-.hand\[zooming in a bit...\]
+.hand[zooming in a bit...]
 
-.question\[ Why does the plot start with August when we know our data start in July?
-And why does 10 August come after 1 August?\]
+.question[
+Why does the plot start with August when we know our data start in July? And why does 10 August come after 1 August?
+]
 
-.midi\[\]
+.midi[
+```{r out.width="80%", echo=FALSE, fig.asp = 0.4}
+hotels %>%
+  mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
+  count(arrival_date) %>%
+  slice(1:7) %>%
+  ggplot(aes(x = arrival_date, y = n, group = 1)) +
+  geom_line()
+```
+]
 
-------------------------------------------------------------------------
+---
 
 ## Step 1. *REVISED* Construct dates "as dates"
 
-.midi\[\]
+.midi[
+```{r output.lines=7}
+library(lubridate)
 
-------------------------------------------------------------------------
+hotels %>%
+  mutate(
+    arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) #<<
+    ) %>% 
+  relocate(arrival_date)
+```
+]
+
+---
 
 ## Step 2. Count bookings per date
 
-.midi\[\]
+.midi[
+```{r}
+hotels %>%
+  mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
+  count(arrival_date)
+```
+]
 
-------------------------------------------------------------------------
+---
 
 ## Step 3a. Visualise bookings per date
 
-.midi\[\]
+.midi[
+```{r out.width="80%", fig.asp = 0.4}
+hotels %>%
+  mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
+  count(arrival_date) %>%
+  ggplot(aes(x = arrival_date, y = n, group = 1)) +
+  geom_line()
+```
+]
 
-------------------------------------------------------------------------
+---
 
 ## Step 3b. Visualise using a smooth curve
 
-.midi\[\]
+.midi[
+```{r out.width="80%", fig.asp = 0.4, message = FALSE}
+hotels %>%
+  mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
+  count(arrival_date) %>%
+  ggplot(aes(x = arrival_date, y = n, group = 1)) +
+  geom_smooth() #<<
+```
+]
