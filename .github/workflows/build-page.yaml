@@ -21,7 +21,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/install-quarto@v1
@@ -33,8 +33,6 @@ jobs:
 
       - name: Set up renv
         uses: r-lib/actions/setup-renv@v2
-        with:
-          cache-version: 2
 
       - name: Render page
         run: |
