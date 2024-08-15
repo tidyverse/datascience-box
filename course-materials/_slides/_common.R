@@ -1,6 +1,3 @@
-```{r}
-#| label: setup
-#| include: false
 # R options
 options(
   htmltools.dir.version = FALSE,
@@ -57,4 +54,3 @@ knitr::knit_hooks$set(output = function(x, options) {
   x <- paste(c(x, ""), collapse = "\n")
   hook_output(x, options)
 })
-```
