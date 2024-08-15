@@ -42,9 +42,9 @@
     "renv": {
       "Package": "renv",
       "Version": "1.0.7",
+      "OS_type": NA,
+      "Repository": "CRAN",
       "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "397b7b2a265bc5a7a06852524dabae20",
       "Requirements": []
     }
   }
